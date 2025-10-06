@@ -1,0 +1,44 @@
+site_name: Digital Twin IoT
+site_description: "Documentation for IoTwin the Digital Twin IoT Simulation Platform"
+site_author: "Christian Fleischmann"
+repo_url: https://github.com/Bearlyuseful/IoTwin
+repo_name: Bearlyuseful/IoTwin
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - toc.integrate
+    - search.suggest
+    - content.tabs.link
+    - content.code.copy
+  palette:
+    scheme: slate
+    primary: blue
+    accent: teal
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - def_list
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+
+nav:
+  - Home: index.md
+  - Developer Guide:
+      - Build Instructions: dev/build_instructions.md
+      - Coding Guidelines: dev/coding_guidelines.md
+      - Architecture Overview: dev/architecture_overview.md
+  - API Reference: api/index.html
+  - Architecture Decisions:
+      - ADR 0001: adr/0001-choice-of-documentation.md
+      - ADR 0002: adr/0002-grpc-communication-layer.md
+  - Roadmap:
+      - 2025 Q4: roadmap/2025_q4.md
