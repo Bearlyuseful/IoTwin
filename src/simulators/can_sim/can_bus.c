@@ -1,5 +1,5 @@
 #include "can_bus.h"
-#include "../../common/common.h"
+#include "../../common/log.h"
 
 bool can_init(void) {
   log_info("CAN bus initialized");
