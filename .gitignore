@@ -4,6 +4,7 @@ out/
 bin/
 lib/
 CMakeFiles/
+docs/api/
 _deps/
 CMakeCache.txt
 cmake_install.cmake

@@ -35,18 +35,18 @@ cd build
 Linux/macOS
 
 ```bash 
-cmake .. -DCMAKE_BUILD_TYPE=elease
+cmake ..
 ```
 
 Windows
 ```bash
-cmake .. -G
+cmake -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ..
 ```
 
 ### 4. Build
 
 ```bash 
-cmake --build . --config Release
+cmake --build .
 ```
 
 ### 5. Run 

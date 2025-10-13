@@ -1,6 +1,5 @@
 # ---- Catch2 setup ----
 include(FetchContent)
-# ---- Catch2 setup ----
 FetchContent_Declare(
     catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
@@ -13,13 +12,11 @@ add_executable(test_can_sim
     test_can_sim.cpp
 )
 
-# include headers from C modules
 target_include_directories(test_can_sim PRIVATE
     ${PROJECT_SOURCE_DIR}/src/common
     ${PROJECT_SOURCE_DIR}/src/simulators/can_sim
 )
 
-# link with C libraries
 target_link_libraries(test_can_sim PRIVATE
     can_sim
     common
