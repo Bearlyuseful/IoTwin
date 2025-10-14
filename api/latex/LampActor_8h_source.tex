@@ -1,0 +1,44 @@
+\doxysection{Lamp\+Actor.\+h}
+\hypertarget{LampActor_8h_source}{}\label{LampActor_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Systems/LampActor.h@{src/ue/IoTwin/Source/IoTwin/Systems/LampActor.h}}
+\mbox{\hyperlink{LampActor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalDeviceComponent_8h}{ElectricalDeviceComponent.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{LightEmitterComponent_8h}{LightEmitterComponent.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}LampActor.generated.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ UCLASS()}
+\DoxyCodeLine{00013\ class\ IOTWIN\_API\ \mbox{\hyperlink{classALampActor}{ALampActor}}\ :\ public\ AActor}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classALampActor}{ALampActor}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Called\ when\ the\ game\ starts\ or\ when\ spawned}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnConstruction(\textcolor{keyword}{const}\ FTransform\&\ Transform)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00027\ \ \ \ \ USceneComponent*\ Root;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ "{}Lamp"{})}
+\DoxyCodeLine{00030\ \ \ \ \ UElectricalPortComponent*\ Port;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ "{}Lamp"{})}
+\DoxyCodeLine{00033\ \ \ \ \ UElectricalDeviceComponent*\ Device;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ "{}Lamp"{})}
+\DoxyCodeLine{00036\ \ \ \ \ ULightEmitterComponent*\ Light;}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \};}
+
+\end{DoxyCode}

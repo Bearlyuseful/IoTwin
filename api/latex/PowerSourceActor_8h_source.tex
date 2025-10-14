@@ -1,0 +1,32 @@
+\doxysection{Power\+Source\+Actor.\+h}
+\hypertarget{PowerSourceActor_8h_source}{}\label{PowerSourceActor_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Systems/PowerSourceActor.h@{src/ue/IoTwin/Source/IoTwin/Systems/PowerSourceActor.h}}
+\mbox{\hyperlink{PowerSourceActor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}PowerSourceActor.generated.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ UCLASS()}
+\DoxyCodeLine{00011\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAPowerSourceActor}{APowerSourceActor}}\ :\ public\ AActor}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classAPowerSourceActor}{APowerSourceActor}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ UPROPERTY(VisibleAnywhere)}
+\DoxyCodeLine{00020\ \ \ \ \ UElectricalPortComponent*\ Port;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ protected:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ Called\ when\ the\ game\ starts\ or\ when\ spawned}}
+\DoxyCodeLine{00024\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ BeginPlay()\ override;}
+\DoxyCodeLine{00025\ \ \ \ \ }
+\DoxyCodeLine{00026\ \};}
+
+\end{DoxyCode}

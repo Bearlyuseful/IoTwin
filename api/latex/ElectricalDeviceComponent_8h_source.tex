@@ -1,0 +1,39 @@
+\doxysection{Electrical\+Device\+Component.\+h}
+\hypertarget{ElectricalDeviceComponent_8h_source}{}\label{ElectricalDeviceComponent_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Systems/ElectricalDeviceComponent.h@{src/ue/IoTwin/Source/IoTwin/Systems/ElectricalDeviceComponent.h}}
+\mbox{\hyperlink{ElectricalDeviceComponent_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Components/ActorComponent.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}ElectricalDeviceComponent.generated.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ UCLASS(ClassGroup=(Electric),\ meta=(BlueprintSpawnableComponent))}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }IOTWIN\_API\ UElectricalDeviceComponent\ :\ \textcolor{keyword}{public}\ UActorComponent}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ public:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ component's\ properties}}
+\DoxyCodeLine{00018\ \ \ \ \ UElectricalDeviceComponent();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ protected:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Called\ when\ the\ game\ starts}}
+\DoxyCodeLine{00022\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ BeginPlay()\ override;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ public:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Called\ every\ frame}}
+\DoxyCodeLine{00026\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ TickComponent(\textcolor{keywordtype}{float}\ DeltaTime,\ ELevelTick\ TickType,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FActorComponentTickFunction*\ ThisTickFunction)\ override;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite)}
+\DoxyCodeLine{00030\ \ \ \ \ UElectricalPortComponent*\ InputPort;}
+\DoxyCodeLine{00031\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite)}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ bIsPowered\ =\ false;}
+\DoxyCodeLine{00033\ \};}
+
+\end{DoxyCode}

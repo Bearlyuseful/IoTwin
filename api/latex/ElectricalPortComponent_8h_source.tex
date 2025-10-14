@@ -1,0 +1,42 @@
+\doxysection{Electrical\+Port\+Component.\+h}
+\hypertarget{ElectricalPortComponent_8h_source}{}\label{ElectricalPortComponent_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Systems/ElectricalPortComponent.h@{src/ue/IoTwin/Source/IoTwin/Systems/ElectricalPortComponent.h}}
+\mbox{\hyperlink{ElectricalPortComponent_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{PowerInterface_8h}{PowerInterface.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Components/SceneComponent.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}ElectricalPortComponent.generated.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ UCLASS(ClassGroup=(Electric),\ meta=(BlueprintSpawnableComponent))}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }IOTWIN\_API\ UElectricalPortComponent\ :\ \textcolor{keyword}{public}\ USceneComponent,\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classIPowerInterface}{IPowerInterface}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ public:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ component's\ properties}}
+\DoxyCodeLine{00018\ \ \ \ \ UElectricalPortComponent();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ virtual\ \textcolor{keywordtype}{bool}\ HasPower\_Implementation()\ const\ override;}
+\DoxyCodeLine{00022\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ ConnectTo\_Implementation(const\ TScriptInterface<\mbox{\hyperlink{classIPowerInterface}{IPowerInterface}}>\&\ other)\ override;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category="{}Connection"{},\ meta=(ExposeOnSpawn=true))}
+\DoxyCodeLine{00025\ \ \ \ \ TObjectPtr<UElectricalPortComponent>\ ConnectedPort;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ setPowerSource(\textcolor{keywordtype}{bool}\ bPowered);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ private:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ bHasPower\ =\ false;}
+\DoxyCodeLine{00031\ \ \ \ \ TScriptInterface<\mbox{\hyperlink{classIPowerInterface}{IPowerInterface}}>\ ConnectedDeviceNext;}
+\DoxyCodeLine{00032\ \ \ \ \ TScriptInterface<\mbox{\hyperlink{classIPowerInterface}{IPowerInterface}}>\ ConnectedDevicePrevious;}
+\DoxyCodeLine{00033\ \ \ \ \ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \};}
+
+\end{DoxyCode}
