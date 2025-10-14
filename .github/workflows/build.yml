@@ -4,25 +4,40 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up CMake
         run: cmake -S . -B build
-      - name: Build
+
+      - name: Build project
         run: cmake --build build --config Release
+
       - name: Run tests
         run: ctest --test-dir build
 
-      - name: Generate Docs
+      # ---- Docs section ----
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y doxygen graphviz
+          pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-git-revision-date-localized-plugin
+
+      - name: Generate Doxygen API docs
         run: doxygen doxygen/Doxyfile
 
-      - name: Deploy Docs
+      - name: Build MkDocs site
+        run: mkdocs build
+
+      - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/api
+          publish_dir: ./site
