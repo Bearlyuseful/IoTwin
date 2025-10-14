@@ -1,7 +1,6 @@
 # ADR 0001: Choice of Documentation System
 
 **Date:** 2025-10-07  
-**Status:** Accepted  
 **Context:**  
 The project requires long-term maintainable documentation combining developer guides, architecture decisions, and auto-generated API references.
 
