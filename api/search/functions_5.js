@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_0',['main',['../test__can__sim_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'test_can_sim.c']]]
+  ['log_5finfo_0',['log_info',['../log_8c.html#a00ab4d4c0b970dca7ecbce08c912d828',1,'log_info(const char *msg):&#160;log.c'],['../log_8h.html#a00ab4d4c0b970dca7ecbce08c912d828',1,'log_info(const char *msg):&#160;log.c']]]
 ];

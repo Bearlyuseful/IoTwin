@@ -13,23 +13,23 @@
       
       
       
-        <link rel="prev" href="../../api/">
+      
+        <link rel="next" href="dev/build_instructions/">
       
       
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
       
-        <title>ADR 0001 - Digital Twin IoT</title>
+        <title>Digital Twin IoT</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.2a3383ac.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adr-0001-choice-of-documentation-system" class="md-skip">
+        <a href="#iotwin" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Digital Twin IoT" class="md-header__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
+    <a href="." title="Digital Twin IoT" class="md-header__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR 0001
+              Home
             
           </span>
         </div>
@@ -191,9 +191,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
         
   
   
@@ -214,7 +216,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../dev/build_instructions/" class="md-tabs__link">
+        <a href="dev/build_instructions/" class="md-tabs__link">
           
   
   
@@ -232,7 +234,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../api/" class="md-tabs__link">
+      <a href="api/" class="md-tabs__link">
         
   
   
@@ -249,13 +251,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="adr/0001-choice-of-documentation/" class="md-tabs__link">
           
   
   
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../roadmap/2025_q4.md" class="md-tabs__link">
+        <a href="roadmap/2025_q4.md" class="md-tabs__link">
           
   
   
@@ -311,7 +311,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Digital Twin IoT" class="md-nav__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
+    <a href="." title="Digital Twin IoT" class="md-nav__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -338,10 +338,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
         
   
   
@@ -352,6 +374,62 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 Goals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Getting Started
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Further Documentation
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -404,7 +482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dev/build_instructions/" class="md-nav__link">
+      <a href="dev/build_instructions/" class="md-nav__link">
         
   
   
@@ -427,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dev/coding_guidelines.md" class="md-nav__link">
+      <a href="dev/coding_guidelines.md" class="md-nav__link">
         
   
   
@@ -450,7 +528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dev/architecture_overview.md" class="md-nav__link">
+      <a href="dev/architecture_overview.md" class="md-nav__link">
         
   
   
@@ -480,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
+      <a href="api/" class="md-nav__link">
         
   
   
@@ -499,29 +577,24 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -534,7 +607,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Architecture Decisions
@@ -545,19 +618,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="adr/0001-choice-of-documentation/" class="md-nav__link">
         
   
   
@@ -568,7 +632,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -581,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../0002-grpc-communication-layer.md" class="md-nav__link">
+      <a href="adr/0002-grpc-communication-layer.md" class="md-nav__link">
         
   
   
@@ -652,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../roadmap/2025_q4.md" class="md-nav__link">
+      <a href="roadmap/2025_q4.md" class="md-nav__link">
         
   
   
@@ -694,17 +757,48 @@
   
 
 
-<h1 id="adr-0001-choice-of-documentation-system">ADR 0001: Choice of Documentation System<a class="headerlink" href="#adr-0001-choice-of-documentation-system" title="Permanent link">&para;</a></h1>
-<p><strong>Date:</strong> 2025-10-07<br />
-<strong>Context:</strong><br />
-The project requires long-term maintainable documentation combining developer guides, architecture decisions, and auto-generated API references.</p>
-<p><strong>Decision:</strong><br />
-Use MkDocs + Material for the general documentation and Doxygen for API docs.
-ADRs will be written in Markdown under <code>docs/adr/</code>.</p>
-<p><strong>Consequences:</strong><br />
-- Single source of truth (Markdown in Git)
-- Fully static deployable site
-- Version-controlled documentation with minimal tooling overhead</p>
+<h1 id="iotwin">IoTwin<a class="headerlink" href="#iotwin" title="Permanent link">&para;</a></h1>
+<p><strong>IoTwin</strong> is a modular open-source platform for <strong>digital twin simulation</strong>, <strong>visualization</strong>, and <strong>IoT system integration</strong>.<br />
+Its goal is to bridge <strong>physical embedded systems</strong> and <strong>virtual simulations</strong> within a unified environment suitable for research, testing, and real-world development.</p>
+<hr />
+<h2 id="overview">💡 Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>IoTwin consists of two main components:</p>
+<ol>
+<li><strong>IoTwin Core (Backend + Simulators)</strong>  </li>
+<li>Written in C++ with a modular architecture  </li>
+<li>Provides simulation logic for electrical systems, sensors, and communication modules  </li>
+<li>
+<p>Built using CMake for cross-platform compatibility  </p>
+</li>
+<li>
+<p><strong>IoTwin Visualizer (Unreal Engine Project)</strong>  </p>
+</li>
+<li>Provides real-time visualization of simulated devices and environments  </li>
+<li>Supports interactive scenarios and rule-based simulations  </li>
+<li>Useful for training, validation, and system analysis  </li>
+</ol>
+<hr />
+<h2 id="goals">🧭 Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Provide a <strong>flexible development and testing environment</strong> for embedded and IoT systems  </li>
+<li>Enable <strong>digital twin modeling</strong> for realistic device behavior  </li>
+<li>Ensure <strong>extensibility</strong>, allowing new modules, devices, and visualizations to be added easily  </li>
+</ul>
+<hr />
+<h2 id="getting-started">🚀 Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Follow the <a href="build_instructions.md">Build Instructions</a> to set up your system.</li>
+<li>Build and run the <strong>IoTwin Core</strong> simulator.  </li>
+<li>Open the <strong>IoTwin Visualizer</strong> in Unreal Engine to view and interact with simulations.</li>
+</ol>
+<hr />
+<h2 id="further-documentation">📖 Further Documentation<a class="headerlink" href="#further-documentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="build_instructions.md">Build Instructions</a></li>
+<li><a href="modules.md">Module Development Guide</a> <em>(coming soon)</em></li>
+<li><a href="simulation_config.md">Simulation Configuration</a> <em>(coming soon)</em></li>
+</ul>
+<hr />
 
 
 
@@ -755,10 +849,10 @@ ADRs will be written in Markdown under <code>docs/adr/</code>.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.integrate", "search.suggest", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "toc.integrate", "search.suggest", "content.tabs.link", "content.code.copy"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>

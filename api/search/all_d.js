@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setup_0',['setUp',['../test__can__sim_8c.html#a95c834d6178047ce9e1bce7cbfea2836',1,'test_can_sim.c']]]
+  ['tick_0',['Tick',['../classAElectricalDevice.html#af360935b409f610e07a3dd900b5942ea',1,'AElectricalDevice']]]
 ];

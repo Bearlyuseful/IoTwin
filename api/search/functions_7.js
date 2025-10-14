@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setup_0',['setUp',['../test__can__sim_8c.html#a95c834d6178047ce9e1bce7cbfea2836',1,'test_can_sim.c']]]
+  ['onconstruction_0',['onconstruction',['../classAElectricalCableActor.html#a3a880086aa16f27ea49d33120753be5e',1,'AElectricalCableActor::OnConstruction()'],['../classALampActor.html#a6f6acd897f1c24390e4e7dda07b752a3',1,'ALampActor::OnConstruction()']]]
 ];
