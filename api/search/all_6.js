@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['haspower_0',['HasPower',['../classIPowerInterface.html#a99d37409fe285d0f088c0528eaf316da',1,'IPowerInterface']]]
+  ['gm_5fsimulation_2ecpp_0',['GM_Simulation.cpp',['../GM__Simulation_8cpp.html',1,'']]],
+  ['gm_5fsimulation_2eh_1',['GM_Simulation.h',['../GM__Simulation_8h.html',1,'']]]
 ];

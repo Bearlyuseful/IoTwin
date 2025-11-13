@@ -1,0 +1,29 @@
+\doxysection{socket\+Client.\+h}
+\hypertarget{socketClient_8h_source}{}\label{socketClient_8h_source}\index{src/common/socketClient.h@{src/common/socketClient.h}}
+\mbox{\hyperlink{socketClient_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SOCKET\_CLIENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SOCKET\_CLIENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <sys/types.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00010\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structsimulator__t_a819ef8d5a3c442dc29207477fb6c5d70}{socket\_fd}};}
+\DoxyCodeLine{00011\ \ \ pthread\_t\ \mbox{\hyperlink{structsimulator__t_a1236c09e31b82b7892b6a2d65e35ee31}{receive\_thread}};}
+\DoxyCodeLine{00012\ \ \ pthread\_t\ \mbox{\hyperlink{structsimulator__t_aa83a2150029c5d1cbf9e719db140de90}{send\_thread}};}
+\DoxyCodeLine{00013\ \ \ pthread\_t\ \mbox{\hyperlink{structsimulator__t_a76de0035d94407a324f0dee598e0952a}{logic\_thread}};}
+\DoxyCodeLine{00014\ \}\ \mbox{\hyperlink{structsimulator__t}{simulator\_t}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{socketClient_8h_ad17bad0fd900794dbc197237327e7803}{create\_socket}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ ip,\ uint16\_t\ port);}
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{socketClient_8h_aa9662aa07be1b5a1a78019fd0ae505dc}{connect\_simulator}}(\mbox{\hyperlink{structsimulator__t}{simulator\_t}}*\ sim);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00023\ }
+
+\end{DoxyCode}

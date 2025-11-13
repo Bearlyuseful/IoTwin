@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tick_0',['Tick',['../classAElectricalDevice.html#af360935b409f610e07a3dd900b5942ea',1,'AElectricalDevice']]]
+  ['receive_5fthread_0',['receive_thread',['../canSimulator_8c.html#afb69c6139804f79a09ce83d4796cc297',1,'receive_thread(void *arg):&#160;canSimulator.c'],['../canSimulator_8h.html#afb69c6139804f79a09ce83d4796cc297',1,'receive_thread(void *arg):&#160;canSimulator.c']]]
 ];

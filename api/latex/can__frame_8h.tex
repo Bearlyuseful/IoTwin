@@ -1,0 +1,52 @@
+\doxysection{src/simulators/can\+\_\+sim/can\+\_\+frame.h File Reference}
+\hypertarget{can__frame_8h}{}\label{can__frame_8h}\index{src/simulators/can\_sim/can\_frame.h@{src/simulators/can\_sim/can\_frame.h}}
+
+
+Defines the data structures for standard and extended CAN frames.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCanStandardFrame}{Can\+Standard\+Frame}}
+\begin{DoxyCompactList}\small\item\em Represents a standard CAN frame (11-\/bit Identifier) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCanExtendedFrame}{Can\+Extended\+Frame}}
+\begin{DoxyCompactList}\small\item\em Represents an extended CAN Frame (29-\/bit Identifier) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCanFrame}{Can\+Frame}}
+\begin{DoxyCompactList}\small\item\em Generic CAN frame container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}{Can\+Frame\+Type}} \{ \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92ad5962ff25acf9958205dbf7195386a40}{CAN\+\_\+\+FRAME\+\_\+\+STANDARD}}
+, \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92add2a0d944c6adf2238abb261f5f37624}{CAN\+\_\+\+FRAME\+\_\+\+EXTENDED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Specifies whether the CAN frame is standard or extended. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the data structures for standard and extended CAN frames. 
+
+This header contains bit-\/accurate representations of standard(11-\/bit ID) and extended (29-\/bit ID) CAN frames as defined by ISO 11898-\/1. 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}\label{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92} 
+\index{can\_frame.h@{can\_frame.h}!CanFrameType@{CanFrameType}}
+\index{CanFrameType@{CanFrameType}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{CanFrameType}{CanFrameType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}{Can\+Frame\+Type}}}
+
+
+
+Specifies whether the CAN frame is standard or extended. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAN\_FRAME\_STANDARD@{CAN\_FRAME\_STANDARD}!can\_frame.h@{can\_frame.h}}\index{can\_frame.h@{can\_frame.h}!CAN\_FRAME\_STANDARD@{CAN\_FRAME\_STANDARD}}}\Hypertarget{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92ad5962ff25acf9958205dbf7195386a40}\label{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92ad5962ff25acf9958205dbf7195386a40} 
+CAN\+\_\+\+FRAME\+\_\+\+STANDARD&11-\/bit identifier frame. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAN\_FRAME\_EXTENDED@{CAN\_FRAME\_EXTENDED}!can\_frame.h@{can\_frame.h}}\index{can\_frame.h@{can\_frame.h}!CAN\_FRAME\_EXTENDED@{CAN\_FRAME\_EXTENDED}}}\Hypertarget{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92add2a0d944c6adf2238abb261f5f37624}\label{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92add2a0d944c6adf2238abb261f5f37624} 
+CAN\+\_\+\+FRAME\+\_\+\+EXTENDED&29-\/bit identifier frame. \\
+\hline
+
+\end{DoxyEnumFields}

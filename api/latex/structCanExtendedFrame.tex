@@ -1,0 +1,137 @@
+\doxysection{Can\+Extended\+Frame Struct Reference}
+\hypertarget{structCanExtendedFrame}{}\label{structCanExtendedFrame}\index{CanExtendedFrame@{CanExtendedFrame}}
+
+
+Represents an extended CAN Frame (29-\/bit Identifier)  
+
+
+
+
+{\ttfamily \#include $<$can\+\_\+frame.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_aed9d1642b1c8e29ca2b5ee34a174d5b2}{start\+\_\+of\+\_\+frame}}\+: 1
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_a2f2c3d17ecfd96f4d711fb54cb851735}{identifier\+\_\+base}}\+: 11
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_a332cb456ec9b467bcaf0c26ec74c9ca9}{srr}}\+: 1
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_ad0fb29179d864d10aed968b6952648ea}{identifier\+\_\+ext}}\+: 18
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_a701e42939a4b802f3536aff0b3e4b7f3}{rtr}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_a3295e5a1a43c0b6327af17cacf46dc23}{r1}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_a2fc405aaaf18f557744cbc81662d0363}{r0}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_ad889017b7a199caf20a076290d823e8d}{dlc}}\+: 4
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_ae63fb1b12587485ef9e1337450d4c174}{data}} \mbox{[}8\mbox{]}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_adffa7c73d7bd0dd18bb215c9747ef521}{crc}}\+: 15
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_a78ed43b4d23f2c743ee3773a6b325621}{crc\+\_\+delimiter}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_aa1f4ecfb52fdf4ab7344d21ea0111252}{ack\+\_\+slot}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_aa3f04c271df1c82a355ab9153314350f}{ack\+\_\+delimiter}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanExtendedFrame_aa8d7e7a345c14f169b7e202b04f93c6d}{eof}}\+: 7
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an extended CAN Frame (29-\/bit Identifier) 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCanExtendedFrame_aa3f04c271df1c82a355ab9153314350f}\label{structCanExtendedFrame_aa3f04c271df1c82a355ab9153314350f} 
+\index{CanExtendedFrame@{CanExtendedFrame}!ack\_delimiter@{ack\_delimiter}}
+\index{ack\_delimiter@{ack\_delimiter}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{ack\_delimiter}{ack\_delimiter}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::ack\+\_\+delimiter}
+
+ACK delimiter. \Hypertarget{structCanExtendedFrame_aa1f4ecfb52fdf4ab7344d21ea0111252}\label{structCanExtendedFrame_aa1f4ecfb52fdf4ab7344d21ea0111252} 
+\index{CanExtendedFrame@{CanExtendedFrame}!ack\_slot@{ack\_slot}}
+\index{ack\_slot@{ack\_slot}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{ack\_slot}{ack\_slot}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::ack\+\_\+slot}
+
+ACK slot bit. \Hypertarget{structCanExtendedFrame_adffa7c73d7bd0dd18bb215c9747ef521}\label{structCanExtendedFrame_adffa7c73d7bd0dd18bb215c9747ef521} 
+\index{CanExtendedFrame@{CanExtendedFrame}!crc@{crc}}
+\index{crc@{crc}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{crc}{crc}}
+{\footnotesize\ttfamily uint16\+\_\+t Can\+Extended\+Frame\+::crc}
+
+CRC sequence (15 bits). \Hypertarget{structCanExtendedFrame_a78ed43b4d23f2c743ee3773a6b325621}\label{structCanExtendedFrame_a78ed43b4d23f2c743ee3773a6b325621} 
+\index{CanExtendedFrame@{CanExtendedFrame}!crc\_delimiter@{crc\_delimiter}}
+\index{crc\_delimiter@{crc\_delimiter}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{crc\_delimiter}{crc\_delimiter}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::crc\+\_\+delimiter}
+
+CRC delimiter (recessive). \Hypertarget{structCanExtendedFrame_ae63fb1b12587485ef9e1337450d4c174}\label{structCanExtendedFrame_ae63fb1b12587485ef9e1337450d4c174} 
+\index{CanExtendedFrame@{CanExtendedFrame}!data@{data}}
+\index{data@{data}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::data\mbox{[}8\mbox{]}}
+
+Data field (0–8 bytes). \Hypertarget{structCanExtendedFrame_ad889017b7a199caf20a076290d823e8d}\label{structCanExtendedFrame_ad889017b7a199caf20a076290d823e8d} 
+\index{CanExtendedFrame@{CanExtendedFrame}!dlc@{dlc}}
+\index{dlc@{dlc}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{dlc}{dlc}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::dlc}
+
+Data Length Code (0–8). \Hypertarget{structCanExtendedFrame_aa8d7e7a345c14f169b7e202b04f93c6d}\label{structCanExtendedFrame_aa8d7e7a345c14f169b7e202b04f93c6d} 
+\index{CanExtendedFrame@{CanExtendedFrame}!eof@{eof}}
+\index{eof@{eof}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{eof}{eof}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::eof}
+
+End of frame (all recessive bits). \Hypertarget{structCanExtendedFrame_a2f2c3d17ecfd96f4d711fb54cb851735}\label{structCanExtendedFrame_a2f2c3d17ecfd96f4d711fb54cb851735} 
+\index{CanExtendedFrame@{CanExtendedFrame}!identifier\_base@{identifier\_base}}
+\index{identifier\_base@{identifier\_base}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{identifier\_base}{identifier\_base}}
+{\footnotesize\ttfamily uint16\+\_\+t Can\+Extended\+Frame\+::identifier\+\_\+base}
+
+Base identifier (first 11 bits). \Hypertarget{structCanExtendedFrame_ad0fb29179d864d10aed968b6952648ea}\label{structCanExtendedFrame_ad0fb29179d864d10aed968b6952648ea} 
+\index{CanExtendedFrame@{CanExtendedFrame}!identifier\_ext@{identifier\_ext}}
+\index{identifier\_ext@{identifier\_ext}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{identifier\_ext}{identifier\_ext}}
+{\footnotesize\ttfamily uint32\+\_\+t Can\+Extended\+Frame\+::identifier\+\_\+ext}
+
+Extended identifier (additional 18 bits). \Hypertarget{structCanExtendedFrame_a2fc405aaaf18f557744cbc81662d0363}\label{structCanExtendedFrame_a2fc405aaaf18f557744cbc81662d0363} 
+\index{CanExtendedFrame@{CanExtendedFrame}!r0@{r0}}
+\index{r0@{r0}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{r0}{r0}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::r0}
+
+Reserved bit. \Hypertarget{structCanExtendedFrame_a3295e5a1a43c0b6327af17cacf46dc23}\label{structCanExtendedFrame_a3295e5a1a43c0b6327af17cacf46dc23} 
+\index{CanExtendedFrame@{CanExtendedFrame}!r1@{r1}}
+\index{r1@{r1}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{r1}{r1}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::r1}
+
+Reserved bit. \Hypertarget{structCanExtendedFrame_a701e42939a4b802f3536aff0b3e4b7f3}\label{structCanExtendedFrame_a701e42939a4b802f3536aff0b3e4b7f3} 
+\index{CanExtendedFrame@{CanExtendedFrame}!rtr@{rtr}}
+\index{rtr@{rtr}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{rtr}{rtr}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::rtr}
+
+Remote Transmission Request flag. \Hypertarget{structCanExtendedFrame_a332cb456ec9b467bcaf0c26ec74c9ca9}\label{structCanExtendedFrame_a332cb456ec9b467bcaf0c26ec74c9ca9} 
+\index{CanExtendedFrame@{CanExtendedFrame}!srr@{srr}}
+\index{srr@{srr}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{srr}{srr}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::srr}
+
+Substitute Remote Request bit (recessive). \Hypertarget{structCanExtendedFrame_aed9d1642b1c8e29ca2b5ee34a174d5b2}\label{structCanExtendedFrame_aed9d1642b1c8e29ca2b5ee34a174d5b2} 
+\index{CanExtendedFrame@{CanExtendedFrame}!start\_of\_frame@{start\_of\_frame}}
+\index{start\_of\_frame@{start\_of\_frame}!CanExtendedFrame@{CanExtendedFrame}}
+\doxysubsubsection{\texorpdfstring{start\_of\_frame}{start\_of\_frame}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Extended\+Frame\+::start\+\_\+of\+\_\+frame}
+
+Start of frame (dominant bit, always 0). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/simulators/can\+\_\+sim/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}}\end{DoxyCompactItemize}

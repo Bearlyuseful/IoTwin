@@ -1,0 +1,49 @@
+\doxysection{simulator\+\_\+t Struct Reference}
+\hypertarget{structsimulator__t}{}\label{structsimulator__t}\index{simulator\_t@{simulator\_t}}
+
+
+{\ttfamily \#include $<$socket\+Client.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structsimulator__t_a819ef8d5a3c442dc29207477fb6c5d70}{socket\+\_\+fd}}
+\item 
+pthread\+\_\+t \mbox{\hyperlink{structsimulator__t_a1236c09e31b82b7892b6a2d65e35ee31}{receive\+\_\+thread}}
+\item 
+pthread\+\_\+t \mbox{\hyperlink{structsimulator__t_aa83a2150029c5d1cbf9e719db140de90}{send\+\_\+thread}}
+\item 
+pthread\+\_\+t \mbox{\hyperlink{structsimulator__t_a76de0035d94407a324f0dee598e0952a}{logic\+\_\+thread}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structsimulator__t_a76de0035d94407a324f0dee598e0952a}\label{structsimulator__t_a76de0035d94407a324f0dee598e0952a} 
+\index{simulator\_t@{simulator\_t}!logic\_thread@{logic\_thread}}
+\index{logic\_thread@{logic\_thread}!simulator\_t@{simulator\_t}}
+\doxysubsubsection{\texorpdfstring{logic\_thread}{logic\_thread}}
+{\footnotesize\ttfamily pthread\+\_\+t simulator\+\_\+t\+::logic\+\_\+thread}
+
+\Hypertarget{structsimulator__t_a1236c09e31b82b7892b6a2d65e35ee31}\label{structsimulator__t_a1236c09e31b82b7892b6a2d65e35ee31} 
+\index{simulator\_t@{simulator\_t}!receive\_thread@{receive\_thread}}
+\index{receive\_thread@{receive\_thread}!simulator\_t@{simulator\_t}}
+\doxysubsubsection{\texorpdfstring{receive\_thread}{receive\_thread}}
+{\footnotesize\ttfamily pthread\+\_\+t simulator\+\_\+t\+::receive\+\_\+thread}
+
+\Hypertarget{structsimulator__t_aa83a2150029c5d1cbf9e719db140de90}\label{structsimulator__t_aa83a2150029c5d1cbf9e719db140de90} 
+\index{simulator\_t@{simulator\_t}!send\_thread@{send\_thread}}
+\index{send\_thread@{send\_thread}!simulator\_t@{simulator\_t}}
+\doxysubsubsection{\texorpdfstring{send\_thread}{send\_thread}}
+{\footnotesize\ttfamily pthread\+\_\+t simulator\+\_\+t\+::send\+\_\+thread}
+
+\Hypertarget{structsimulator__t_a819ef8d5a3c442dc29207477fb6c5d70}\label{structsimulator__t_a819ef8d5a3c442dc29207477fb6c5d70} 
+\index{simulator\_t@{simulator\_t}!socket\_fd@{socket\_fd}}
+\index{socket\_fd@{socket\_fd}!simulator\_t@{simulator\_t}}
+\doxysubsubsection{\texorpdfstring{socket\_fd}{socket\_fd}}
+{\footnotesize\ttfamily int simulator\+\_\+t\+::socket\+\_\+fd}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/common/\mbox{\hyperlink{socketClient_8h}{socket\+Client.\+h}}\end{DoxyCompactItemize}

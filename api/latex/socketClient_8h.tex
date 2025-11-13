@@ -1,0 +1,47 @@
+\doxysection{src/common/socket\+Client.h File Reference}
+\hypertarget{socketClient_8h}{}\label{socketClient_8h}\index{src/common/socketClient.h@{src/common/socketClient.h}}
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsimulator__t}{simulator\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{socketClient_8h_ad17bad0fd900794dbc197237327e7803}{create\+\_\+socket}} (const char \texorpdfstring{$\ast$}{*}ip, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Function to generate a client socket. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{socketClient_8h_aa9662aa07be1b5a1a78019fd0ae505dc}{connect\+\_\+simulator}} (\mbox{\hyperlink{structsimulator__t}{simulator\+\_\+t}} \texorpdfstring{$\ast$}{*}sim)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{socketClient_8h_aa9662aa07be1b5a1a78019fd0ae505dc}\label{socketClient_8h_aa9662aa07be1b5a1a78019fd0ae505dc} 
+\index{socketClient.h@{socketClient.h}!connect\_simulator@{connect\_simulator}}
+\index{connect\_simulator@{connect\_simulator}!socketClient.h@{socketClient.h}}
+\doxysubsubsection{\texorpdfstring{connect\_simulator()}{connect\_simulator()}}
+{\footnotesize\ttfamily int connect\+\_\+simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsimulator__t}{simulator\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{sim }\end{DoxyParamCaption})}
+
+\Hypertarget{socketClient_8h_ad17bad0fd900794dbc197237327e7803}\label{socketClient_8h_ad17bad0fd900794dbc197237327e7803} 
+\index{socketClient.h@{socketClient.h}!create\_socket@{create\_socket}}
+\index{create\_socket@{create\_socket}!socketClient.h@{socketClient.h}}
+\doxysubsubsection{\texorpdfstring{create\_socket()}{create\_socket()}}
+{\footnotesize\ttfamily int create\+\_\+socket (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{ip,  }\item[{uint16\+\_\+t}]{port }\end{DoxyParamCaption})}
+
+
+
+Function to generate a client socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & IP-\/\+Address of the server to connect to \\
+\hline
+{\em port} & Port on the server to connect to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status from socket creation 
+\end{DoxyReturn}

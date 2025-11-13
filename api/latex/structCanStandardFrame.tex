@@ -1,0 +1,113 @@
+\doxysection{Can\+Standard\+Frame Struct Reference}
+\hypertarget{structCanStandardFrame}{}\label{structCanStandardFrame}\index{CanStandardFrame@{CanStandardFrame}}
+
+
+Represents a standard CAN frame (11-\/bit Identifier)  
+
+
+
+
+{\ttfamily \#include $<$can\+\_\+frame.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_af1b98092c5d73c90c49ebcedaf31f485}{start\+\_\+of\+\_\+frame}}\+: 1
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a5ae840463a3c721eeeac9de135c26d6b}{identifier}}\+: 11
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a1f89f7c60bd8c3badd44fc99415e31da}{rtr}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a4065e81f68a439a67422a60a0d31297a}{ide}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a9b117b255bd8c0a0b4c28192994fea90}{dlc}}\+: 4
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a5496b798d2dec63f73340c95bd3df7fc}{data}} \mbox{[}8\mbox{]}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structCanStandardFrame_ae5893a6ea92d4a7af087222dfb6f80f0}{crc}}\+: 15
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_aa06afebe90b37ac99905a4c66db42a95}{crc\+\_\+delimiter}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a6b17eca8ee3ec4d88481777caf819601}{ack\+\_\+slot}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_aee4768439bbdc047866bba902fe2b98a}{ack\+\_\+delimiter}}\+: 1
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanStandardFrame_a0255bb3924ecfed88b3f70419f144f49}{eof}}\+: 7
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a standard CAN frame (11-\/bit Identifier) 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCanStandardFrame_aee4768439bbdc047866bba902fe2b98a}\label{structCanStandardFrame_aee4768439bbdc047866bba902fe2b98a} 
+\index{CanStandardFrame@{CanStandardFrame}!ack\_delimiter@{ack\_delimiter}}
+\index{ack\_delimiter@{ack\_delimiter}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{ack\_delimiter}{ack\_delimiter}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::ack\+\_\+delimiter}
+
+ACK delimiter bit (recessive). \Hypertarget{structCanStandardFrame_a6b17eca8ee3ec4d88481777caf819601}\label{structCanStandardFrame_a6b17eca8ee3ec4d88481777caf819601} 
+\index{CanStandardFrame@{CanStandardFrame}!ack\_slot@{ack\_slot}}
+\index{ack\_slot@{ack\_slot}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{ack\_slot}{ack\_slot}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::ack\+\_\+slot}
+
+ACK slot bit (dominant = received OK). \Hypertarget{structCanStandardFrame_ae5893a6ea92d4a7af087222dfb6f80f0}\label{structCanStandardFrame_ae5893a6ea92d4a7af087222dfb6f80f0} 
+\index{CanStandardFrame@{CanStandardFrame}!crc@{crc}}
+\index{crc@{crc}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{crc}{crc}}
+{\footnotesize\ttfamily uint16\+\_\+t Can\+Standard\+Frame\+::crc}
+
+CRC sequence (15 bits). \Hypertarget{structCanStandardFrame_aa06afebe90b37ac99905a4c66db42a95}\label{structCanStandardFrame_aa06afebe90b37ac99905a4c66db42a95} 
+\index{CanStandardFrame@{CanStandardFrame}!crc\_delimiter@{crc\_delimiter}}
+\index{crc\_delimiter@{crc\_delimiter}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{crc\_delimiter}{crc\_delimiter}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::crc\+\_\+delimiter}
+
+CRC delimiter (recessive bit). \Hypertarget{structCanStandardFrame_a5496b798d2dec63f73340c95bd3df7fc}\label{structCanStandardFrame_a5496b798d2dec63f73340c95bd3df7fc} 
+\index{CanStandardFrame@{CanStandardFrame}!data@{data}}
+\index{data@{data}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::data\mbox{[}8\mbox{]}}
+
+Data field (0-\/8 bytes). \Hypertarget{structCanStandardFrame_a9b117b255bd8c0a0b4c28192994fea90}\label{structCanStandardFrame_a9b117b255bd8c0a0b4c28192994fea90} 
+\index{CanStandardFrame@{CanStandardFrame}!dlc@{dlc}}
+\index{dlc@{dlc}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{dlc}{dlc}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::dlc}
+
+Data Length Code (0-\/8). \Hypertarget{structCanStandardFrame_a0255bb3924ecfed88b3f70419f144f49}\label{structCanStandardFrame_a0255bb3924ecfed88b3f70419f144f49} 
+\index{CanStandardFrame@{CanStandardFrame}!eof@{eof}}
+\index{eof@{eof}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{eof}{eof}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::eof}
+
+\Hypertarget{structCanStandardFrame_a4065e81f68a439a67422a60a0d31297a}\label{structCanStandardFrame_a4065e81f68a439a67422a60a0d31297a} 
+\index{CanStandardFrame@{CanStandardFrame}!ide@{ide}}
+\index{ide@{ide}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{ide}{ide}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::ide}
+
+Identifier Extension bit (0 = Standard frame). \Hypertarget{structCanStandardFrame_a5ae840463a3c721eeeac9de135c26d6b}\label{structCanStandardFrame_a5ae840463a3c721eeeac9de135c26d6b} 
+\index{CanStandardFrame@{CanStandardFrame}!identifier@{identifier}}
+\index{identifier@{identifier}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{identifier}{identifier}}
+{\footnotesize\ttfamily uint16\+\_\+t Can\+Standard\+Frame\+::identifier}
+
+11-\/bit message identifier. \Hypertarget{structCanStandardFrame_a1f89f7c60bd8c3badd44fc99415e31da}\label{structCanStandardFrame_a1f89f7c60bd8c3badd44fc99415e31da} 
+\index{CanStandardFrame@{CanStandardFrame}!rtr@{rtr}}
+\index{rtr@{rtr}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{rtr}{rtr}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::rtr}
+
+Remote Transmission Request flag. \Hypertarget{structCanStandardFrame_af1b98092c5d73c90c49ebcedaf31f485}\label{structCanStandardFrame_af1b98092c5d73c90c49ebcedaf31f485} 
+\index{CanStandardFrame@{CanStandardFrame}!start\_of\_frame@{start\_of\_frame}}
+\index{start\_of\_frame@{start\_of\_frame}!CanStandardFrame@{CanStandardFrame}}
+\doxysubsubsection{\texorpdfstring{start\_of\_frame}{start\_of\_frame}}
+{\footnotesize\ttfamily uint8\+\_\+t Can\+Standard\+Frame\+::start\+\_\+of\+\_\+frame}
+
+Start of frame (dominant bit, always 0). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/simulators/can\+\_\+sim/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}}\end{DoxyCompactItemize}
