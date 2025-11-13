@@ -8,6 +8,13 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+/**
+ * @brief Function to generate a client socket
+ *
+ * @param ip IP-Address of the server to connect to 
+ * @param port Port on the server to connect to 
+ * @return Status from socket creation
+ */
 int create_socket(const char* ip, uint16_t port){
   int sock = socket(AF_INET, SOCK_STREAM, 0);
   if(sock == -1){
@@ -28,4 +35,5 @@ int create_socket(const char* ip, uint16_t port){
   }
   return sock;
 }
+
 

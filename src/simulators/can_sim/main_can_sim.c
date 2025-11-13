@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 int main() {
     printf("CAN Simulator Test\n");
 

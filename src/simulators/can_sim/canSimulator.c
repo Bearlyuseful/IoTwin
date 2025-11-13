@@ -24,7 +24,7 @@ void* send_thread(void* arg) {
   simulator_t* sim = (simulator_t*)arg;
   
   while(1) {
-    char message[] = "CAN_MESSAGE";
+    char message[] = "CAN_MESSAGE\n";
     write(sim->socket_fd, message, strlen(message));
     sleep(1);
   }
