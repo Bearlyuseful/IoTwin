@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['can_5fbit_5ftiming_5fdefault_5fsample_5fpoint_0',['CAN_BIT_TIMING_DEFAULT_SAMPLE_POINT',['../can__bit__timing_8h.html#ac8829832c3718c1a9d5be8e3504d4302',1,'can_bit_timing.h']]],
-  ['can_5fbus_5fbuffer_5fsize_1',['CAN_BUS_BUFFER_SIZE',['../can__bus_8h.html#a201cb13d11026e9f8cf1402670bfd094',1,'can_bus.h']]],
-  ['can_5feff_5fmask_2',['CAN_EFF_MASK',['../can__frame_8h.html#a83b943dca61d0aad5b07ec01c3317572',1,'can_frame.h']]],
-  ['can_5fframe_5ftext_5fmax_3',['CAN_FRAME_TEXT_MAX',['../can__frame_8h.html#a07bb70e1eb62d64b3eca316b9b301536',1,'can_frame.h']]],
-  ['can_5fmax_5fdlen_4',['CAN_MAX_DLEN',['../can__frame_8h.html#af64b4fdfe44fc19065702d1eedb9ab43',1,'can_frame.h']]],
-  ['can_5fsff_5fmask_5',['CAN_SFF_MASK',['../can__frame_8h.html#afe4fc3f9cab58aeeb463861289e8ce93',1,'can_frame.h']]],
-  ['command_5ftimeout_5fms_6',['COMMAND_TIMEOUT_MS',['../main__serial__bridge_8c.html#aaccae77dd0ec9bf8de503250665c7185',1,'main_serial_bridge.c']]],
-  ['core_5fvectors_7',['CORE_VECTORS',['../startup_8c.html#a3d8fd21cb72d524df68ebc6de1fecf33',1,'startup.c']]]
+  ['bitrate_5fcount_0',['BITRATE_COUNT',['../slcan_8c.html#a5e2442ebcf7309c9db160a0e5cf315b6',1,'slcan.c']]],
+  ['board_5ffdcan_5fclock_5fhz_1',['BOARD_FDCAN_CLOCK_HZ',['../board_8h.html#a28317e6b7e9aa6552ea186c8157ecf5a',1,'board.h']]],
+  ['board_5fpclk_5fhz_2',['BOARD_PCLK_HZ',['../board_8h.html#a91a70b0e00a458f4757c309ec068f42e',1,'board.h']]],
+  ['board_5fsysclk_5fhz_3',['BOARD_SYSCLK_HZ',['../board_8h.html#ad29bfbd9ccafdae6b91d5c274b2b685e',1,'board.h']]],
+  ['bus_5fpoll_5fms_4',['BUS_POLL_MS',['../main__serial__bridge_8c.html#a9f53552ef20c284ad18bd49f4859cacc',1,'main_serial_bridge.c']]],
+  ['bus_5fserver_5fdefault_5fport_5',['BUS_SERVER_DEFAULT_PORT',['../bus__server_8h.html#ad0847debb1fd581c6ce7344e734ce4ef',1,'bus_server.h']]],
+  ['bus_5fserver_5fmax_5fclients_6',['BUS_SERVER_MAX_CLIENTS',['../bus__server_8h.html#a30a1dcd77f4603b9b1be5cedac0174c3',1,'bus_server.h']]]
 ];

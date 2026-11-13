@@ -1,0 +1,79 @@
+\doxysection{Client Struct Reference}
+\hypertarget{structClient}{}\label{structClient}\index{Client@{Client}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} \mbox{\hyperlink{structClient_a400a3b63f787ae901582063ffcdcb871}{socket}}
+\item 
+\mbox{\hyperlink{structLineReader}{Line\+Reader}} \mbox{\hyperlink{structClient_acc71ae32b95c79846dd382bd4d7bac33}{reader}}
+\item 
+\mbox{\hyperlink{structIsoTpLink}{Iso\+Tp\+Link}} \mbox{\hyperlink{structClient_aa26582638e96cfe287e6daa179453a81}{link}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structClient_accdea550ec252c411f1b1bd614b43469}{rx\+\_\+buffer}} \mbox{[}\mbox{\hyperlink{isotp_8h_a8919503e7a32cc6b187807a6ba9484a2}{ISOTP\+\_\+\+MAX\+\_\+\+LENGTH}}\mbox{]}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structClient_a25103db6c1f53cd39048e8b1ebc6796f}{timeout\+\_\+ms}}
+\item 
+bool \mbox{\hyperlink{structClient_a08b03c5d223cc24875e10b9e0fd6414a}{connection\+\_\+lost}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structClient_a49e357bde7a920baa3d2dbfdd6117ca4}{session}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structClient_a0fd96d740e1afc4b4aecefbd0079b0a0}{last\+\_\+request\+\_\+ms}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structClient_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structClient_a08b03c5d223cc24875e10b9e0fd6414a}\index{Client@{Client}!connection\_lost@{connection\_lost}}
+\index{connection\_lost@{connection\_lost}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{connection\_lost}{connection\_lost}}
+{\footnotesize\ttfamily \label{structClient_a08b03c5d223cc24875e10b9e0fd6414a} 
+bool Client\+::connection\+\_\+lost}
+
+\Hypertarget{structClient_a0fd96d740e1afc4b4aecefbd0079b0a0}\index{Client@{Client}!last\_request\_ms@{last\_request\_ms}}
+\index{last\_request\_ms@{last\_request\_ms}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{last\_request\_ms}{last\_request\_ms}}
+{\footnotesize\ttfamily \label{structClient_a0fd96d740e1afc4b4aecefbd0079b0a0} 
+uint64\+\_\+t Client\+::last\+\_\+request\+\_\+ms}
+
+\Hypertarget{structClient_aa26582638e96cfe287e6daa179453a81}\index{Client@{Client}!link@{link}}
+\index{link@{link}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{link}{link}}
+{\footnotesize\ttfamily \label{structClient_aa26582638e96cfe287e6daa179453a81} 
+\mbox{\hyperlink{structIsoTpLink}{Iso\+Tp\+Link}} Client\+::link}
+
+\Hypertarget{structClient_acc71ae32b95c79846dd382bd4d7bac33}\index{Client@{Client}!reader@{reader}}
+\index{reader@{reader}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{reader}{reader}}
+{\footnotesize\ttfamily \label{structClient_acc71ae32b95c79846dd382bd4d7bac33} 
+\mbox{\hyperlink{structLineReader}{Line\+Reader}} Client\+::reader}
+
+\Hypertarget{structClient_accdea550ec252c411f1b1bd614b43469}\index{Client@{Client}!rx\_buffer@{rx\_buffer}}
+\index{rx\_buffer@{rx\_buffer}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{rx\_buffer}{rx\_buffer}}
+{\footnotesize\ttfamily \label{structClient_accdea550ec252c411f1b1bd614b43469} 
+uint8\+\_\+t Client\+::rx\+\_\+buffer\mbox{[}\mbox{\hyperlink{isotp_8h_a8919503e7a32cc6b187807a6ba9484a2}{ISOTP\+\_\+\+MAX\+\_\+\+LENGTH}}\mbox{]}}
+
+\Hypertarget{structClient_a49e357bde7a920baa3d2dbfdd6117ca4}\index{Client@{Client}!session@{session}}
+\index{session@{session}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{session}{session}}
+{\footnotesize\ttfamily \label{structClient_a49e357bde7a920baa3d2dbfdd6117ca4} 
+uint8\+\_\+t Client\+::session}
+
+\Hypertarget{structClient_a400a3b63f787ae901582063ffcdcb871}\index{Client@{Client}!socket@{socket}}
+\index{socket@{socket}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{socket}{socket}}
+{\footnotesize\ttfamily \label{structClient_a400a3b63f787ae901582063ffcdcb871} 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} Client\+::socket}
+
+\Hypertarget{structClient_a25103db6c1f53cd39048e8b1ebc6796f}\index{Client@{Client}!timeout\_ms@{timeout\_ms}}
+\index{timeout\_ms@{timeout\_ms}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{timeout\_ms}{timeout\_ms}}
+{\footnotesize\ttfamily \label{structClient_a25103db6c1f53cd39048e8b1ebc6796f} 
+uint32\+\_\+t Client\+::timeout\+\_\+ms}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+apps/uds\+\_\+client/\mbox{\hyperlink{main__uds__client_8c}{main\+\_\+uds\+\_\+client.\+c}}\end{DoxyCompactItemize}

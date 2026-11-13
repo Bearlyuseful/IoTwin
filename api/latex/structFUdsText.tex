@@ -1,0 +1,47 @@
+\doxysection{FUds\+Text Struct Reference}
+\hypertarget{structFUdsText}{}\label{structFUdsText}\index{FUdsText@{FUdsText}}
+
+
+{\ttfamily \#include $<$Uds\+Text.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static FString \mbox{\hyperlink{structFUdsText_af0686554d39c302486fdefeeec8f4b7a}{Describe}} (const TArray$<$ uint8 $>$ \&Data)
+\item 
+static FString \mbox{\hyperlink{structFUdsText_a8e145c36eaf669066bec1eaa7a7e1a49}{Service\+Name}} (uint8 Sid)
+\item 
+static FString \mbox{\hyperlink{structFUdsText_a14439db1f3ed81dceb802699b579fea1}{Nrc\+Name}} (uint8 Nrc)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Describes ISO-\/\+TP frames with UDS payload for the schematic message log. 
+
+\label{doc-func-members}
+\Hypertarget{structFUdsText_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structFUdsText_af0686554d39c302486fdefeeec8f4b7a}\index{FUdsText@{FUdsText}!Describe@{Describe}}
+\index{Describe@{Describe}!FUdsText@{FUdsText}}
+\doxysubsubsection{\texorpdfstring{Describe()}{Describe()}}
+{\footnotesize\ttfamily \label{structFUdsText_af0686554d39c302486fdefeeec8f4b7a} 
+FString FUds\+Text\+::\+Describe (\begin{DoxyParamCaption}\item[{const TArray$<$ uint8 $>$ \&}]{Data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+"{}\+SF Read\+Data\+By\+Identifier F190"{}, "{}\+SF +\+Diagnostic\+Session\+Control extended"{}, "{}\+SF NRC Write\+Data\+By\+Identifier\+: service\+Not\+Supported\+In\+Active\+Session"{}, "{}\+FF 20 bytes +\+Read\+Data\+By\+Identifier F190"{}, "{}\+CF 1"{}, "{}\+FC continue"{}. \Hypertarget{structFUdsText_a14439db1f3ed81dceb802699b579fea1}\index{FUdsText@{FUdsText}!NrcName@{NrcName}}
+\index{NrcName@{NrcName}!FUdsText@{FUdsText}}
+\doxysubsubsection{\texorpdfstring{NrcName()}{NrcName()}}
+{\footnotesize\ttfamily \label{structFUdsText_a14439db1f3ed81dceb802699b579fea1} 
+FString FUds\+Text\+::\+Nrc\+Name (\begin{DoxyParamCaption}\item[{uint8}]{Nrc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{structFUdsText_a8e145c36eaf669066bec1eaa7a7e1a49}\index{FUdsText@{FUdsText}!ServiceName@{ServiceName}}
+\index{ServiceName@{ServiceName}!FUdsText@{FUdsText}}
+\doxysubsubsection{\texorpdfstring{ServiceName()}{ServiceName()}}
+{\footnotesize\ttfamily \label{structFUdsText_a8e145c36eaf669066bec1eaa7a7e1a49} 
+FString FUds\+Text\+::\+Service\+Name (\begin{DoxyParamCaption}\item[{uint8}]{Sid}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{UdsText_8h}{Uds\+Text.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{UdsText_8cpp}{Uds\+Text.\+cpp}}\end{DoxyCompactItemize}

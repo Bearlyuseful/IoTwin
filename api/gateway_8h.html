@@ -99,6 +99,7 @@ $(function(){initNavTree('gateway_8h.html','',''); });
 <code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="can__frame_8h_source.html">can_frame.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="slcan_8h_source.html">slcan.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="uds_8h_source.html">uds.h</a>&quot;</code><br />
 </div>
 <p><a href="gateway_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -118,6 +119,18 @@ Macros</h2></td></tr>
 <tr class="memitem:abe8f68e0b641bc3eb441f4fe5164ec70" id="r_abe8f68e0b641bc3eb441f4fe5164ec70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe8f68e0b641bc3eb441f4fe5164ec70">GATEWAY_DEFAULT_BITRATE</a>&#160;&#160;&#160;500000u</td></tr>
 <tr class="memitem:af5db41017dc83b482397d4ab2a9ad1e3" id="r_af5db41017dc83b482397d4ab2a9ad1e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5db41017dc83b482397d4ab2a9ad1e3">GATEWAY_ECHO_SLOTS</a>&#160;&#160;&#160;8u</td></tr>
 <tr class="memitem:a5ea28e61a31c44bb1dad4276689a3d24" id="r_a5ea28e61a31c44bb1dad4276689a3d24"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ea28e61a31c44bb1dad4276689a3d24">GATEWAY_BLINK_PERIOD_MS</a>&#160;&#160;&#160;500u</td></tr>
+<tr id="define-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Diagnostics (see docs/dev/diagnostics.md)</div></td></tr>
+<tr class="memitem:a7a0a02d24a6f9ee539fab7fb2f9b9bce" id="r_a7a0a02d24a6f9ee539fab7fb2f9b9bce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a0a02d24a6f9ee539fab7fb2f9b9bce">GATEWAY_DIAG_REQUEST_ID</a>&#160;&#160;&#160;0x7E1u</td></tr>
+<tr class="memitem:a9105c90c6d5ff2c6750eb1ff2e0c7132" id="r_a9105c90c6d5ff2c6750eb1ff2e0c7132"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9105c90c6d5ff2c6750eb1ff2e0c7132">GATEWAY_DIAG_RESPONSE_ID</a>&#160;&#160;&#160;0x7E9u</td></tr>
+<tr class="memitem:af6e55c356bdde1319435b485df29f62f" id="r_af6e55c356bdde1319435b485df29f62f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6e55c356bdde1319435b485df29f62f">GATEWAY_DTC_BUS_OFF</a>&#160;&#160;&#160;0xC07388u</td></tr>
+<tr class="memitem:ad8dd5beb539a31972a04e97c5a2282a8" id="r_ad8dd5beb539a31972a04e97c5a2282a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8dd5beb539a31972a04e97c5a2282a8">GATEWAY_DTC_COUNT</a>&#160;&#160;&#160;1u</td></tr>
+<tr class="memitem:a2348a819d34d1669f83ba73817a4d75e" id="r_a2348a819d34d1669f83ba73817a4d75e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2348a819d34d1669f83ba73817a4d75e">GATEWAY_DID_LAMP</a>&#160;&#160;&#160;0x0100u</td></tr>
+<tr class="memitem:aea73af4bf896fb5a472d36050eb7271c" id="r_aea73af4bf896fb5a472d36050eb7271c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea73af4bf896fb5a472d36050eb7271c">GATEWAY_DID_SWITCH</a>&#160;&#160;&#160;0x0101u</td></tr>
+<tr class="memitem:ab92dd60123e273c234d1ae177e132c8e" id="r_ab92dd60123e273c234d1ae177e132c8e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab92dd60123e273c234d1ae177e132c8e">GATEWAY_DID_CAN_ERRORS</a>&#160;&#160;&#160;0x0200u</td></tr>
+<tr class="memitem:aa01f0c39d3d8cd227139e7a08aeeef48" id="r_aa01f0c39d3d8cd227139e7a08aeeef48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa01f0c39d3d8cd227139e7a08aeeef48">GATEWAY_DID_COUNTERS</a>&#160;&#160;&#160;0x0201u</td></tr>
+<tr class="memitem:a047d602019ec46ec6ead0897e03e09e1" id="r_a047d602019ec46ec6ead0897e03e09e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a047d602019ec46ec6ead0897e03e09e1">GATEWAY_DID_UPTIME</a>&#160;&#160;&#160;0x0202u</td></tr>
+<tr class="memitem:ab908842b58963e48ce9b7a5e9e838db3" id="r_ab908842b58963e48ce9b7a5e9e838db3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab908842b58963e48ce9b7a5e9e838db3">GATEWAY_DID_CHANNEL</a>&#160;&#160;&#160;0x0203u</td></tr>
+<tr class="memitem:ab72ee14093b69a3c2d415753bf8d3468" id="r_ab72ee14093b69a3c2d415753bf8d3468"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab72ee14093b69a3c2d415753bf8d3468">GATEWAY_RESET_DELAY_MS</a>&#160;&#160;&#160;50u</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -150,13 +163,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a2d4dbaaa3bee9c4c6f4529328dfaa998" id="r_a2d4dbaaa3bee9c4c6f4529328dfaa998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d4dbaaa3bee9c4c6f4529328dfaa998">gateway_on_rx_overrun</a> (<a class="el" href="structGateway.html">Gateway</a> *gateway)</td></tr>
 <tr class="memdesc:a2d4dbaaa3bee9c4c6f4529328dfaa998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver dropped frames because its receive queue was full.  <br /></td></tr>
 <tr class="memitem:a8be8bdc7e33addbc49bd6295b77aa191" id="r_a8be8bdc7e33addbc49bd6295b77aa191"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8be8bdc7e33addbc49bd6295b77aa191">gateway_tick</a> (<a class="el" href="structGateway.html">Gateway</a> *gateway, uint32_t now_ms)</td></tr>
-<tr class="memdesc:a8be8bdc7e33addbc49bd6295b77aa191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic call with the current time; blinks the LED while the channel is closed.  <br /></td></tr>
+<tr class="memdesc:a8be8bdc7e33addbc49bd6295b77aa191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic call (every millisecond) with the current time: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Application logic of the <a class="el" href="classIoTwin.html">IoTwin</a> CAN gateway firmware (hardware independent). </p>
 <p>The board is two things at once:</p><ul>
 <li>an SLCAN adapter: frames from the serial link are sent on the CAN bus, frames received from CAN are reported on the serial link;</li>
-<li>a small CAN node: the user button is a wall switch (SWITCH_STATE 0x200) and the LED shows the lamp command (LAMP_CMD 0x100).</li>
+<li>a small CAN node: the user button is a wall switch (SWITCH_STATE 0x200) and the LED shows the lamp command (LAMP_CMD 0x100);</li>
+<li>a UDS server (requests 0x7E1 or functional 0x7DF, responses 0x7E9) for testers on the serial side or on the CAN bus; responses go to both.</li>
 </ul>
 <p>In internal loopback mode the controller receives its own frames. They are matched against the transmitted ones and not reported a second time, so the virtual bus does not see echoes.</p>
 <p>All hardware access goes through <a class="el" href="structGatewayIo.html" title="Hardware interface (implemented by the board, faked in tests).">GatewayIo</a>, so this file is unit tested on the host with fake I/O. </p>
@@ -183,6 +197,153 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define GATEWAY_DEFAULT_BITRATE&#160;&#160;&#160;500000u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a0a02d24a6f9ee539fab7fb2f9b9bce" name="a7a0a02d24a6f9ee539fab7fb2f9b9bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a0a02d24a6f9ee539fab7fb2f9b9bce">&#9670;&#160;</a></span>GATEWAY_DIAG_REQUEST_ID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DIAG_REQUEST_ID&#160;&#160;&#160;0x7E1u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9105c90c6d5ff2c6750eb1ff2e0c7132" name="a9105c90c6d5ff2c6750eb1ff2e0c7132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9105c90c6d5ff2c6750eb1ff2e0c7132">&#9670;&#160;</a></span>GATEWAY_DIAG_RESPONSE_ID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DIAG_RESPONSE_ID&#160;&#160;&#160;0x7E9u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab92dd60123e273c234d1ae177e132c8e" name="ab92dd60123e273c234d1ae177e132c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92dd60123e273c234d1ae177e132c8e">&#9670;&#160;</a></span>GATEWAY_DID_CAN_ERRORS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_CAN_ERRORS&#160;&#160;&#160;0x0200u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>TEC, REC, state (0 active, 1 warning, 2 passive, 3 bus off) </p>
+
+</div>
+</div>
+<a id="ab908842b58963e48ce9b7a5e9e838db3" name="ab908842b58963e48ce9b7a5e9e838db3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab908842b58963e48ce9b7a5e9e838db3">&#9670;&#160;</a></span>GATEWAY_DID_CHANNEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_CHANNEL&#160;&#160;&#160;0x0203u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>open, mode (0 normal, 1 loopback, 2 listen), uint32 bitrate </p>
+
+</div>
+</div>
+<a id="aa01f0c39d3d8cd227139e7a08aeeef48" name="aa01f0c39d3d8cd227139e7a08aeeef48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa01f0c39d3d8cd227139e7a08aeeef48">&#9670;&#160;</a></span>GATEWAY_DID_COUNTERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_COUNTERS&#160;&#160;&#160;0x0201u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>uint32 frames to CAN, from CAN, echoes </p>
+
+</div>
+</div>
+<a id="a2348a819d34d1669f83ba73817a4d75e" name="a2348a819d34d1669f83ba73817a4d75e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2348a819d34d1669f83ba73817a4d75e">&#9670;&#160;</a></span>GATEWAY_DID_LAMP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_LAMP&#160;&#160;&#160;0x0100u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>1 byte, last LAMP_CMD </p>
+
+</div>
+</div>
+<a id="aea73af4bf896fb5a472d36050eb7271c" name="aea73af4bf896fb5a472d36050eb7271c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea73af4bf896fb5a472d36050eb7271c">&#9670;&#160;</a></span>GATEWAY_DID_SWITCH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_SWITCH&#160;&#160;&#160;0x0101u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>1 byte, wall switch (button) </p>
+
+</div>
+</div>
+<a id="a047d602019ec46ec6ead0897e03e09e1" name="a047d602019ec46ec6ead0897e03e09e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a047d602019ec46ec6ead0897e03e09e1">&#9670;&#160;</a></span>GATEWAY_DID_UPTIME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_UPTIME&#160;&#160;&#160;0x0202u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>uint32 ms </p>
+
+</div>
+</div>
+<a id="af6e55c356bdde1319435b485df29f62f" name="af6e55c356bdde1319435b485df29f62f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6e55c356bdde1319435b485df29f62f">&#9670;&#160;</a></span>GATEWAY_DTC_BUS_OFF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DTC_BUS_OFF&#160;&#160;&#160;0xC07388u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>U0073-88 control module communication bus off </p>
+
+</div>
+</div>
+<a id="ad8dd5beb539a31972a04e97c5a2282a8" name="ad8dd5beb539a31972a04e97c5a2282a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dd5beb539a31972a04e97c5a2282a8">&#9670;&#160;</a></span>GATEWAY_DTC_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DTC_COUNT&#160;&#160;&#160;1u</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -228,6 +389,21 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab72ee14093b69a3c2d415753bf8d3468" name="ab72ee14093b69a3c2d415753bf8d3468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab72ee14093b69a3c2d415753bf8d3468">&#9670;&#160;</a></span>GATEWAY_RESET_DELAY_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_RESET_DELAY_MS&#160;&#160;&#160;50u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>lets the ECUReset response leave UART and CAN </p>
 
 </div>
 </div>
@@ -410,7 +586,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Periodic call with the current time; blinks the LED while the channel is closed. </p>
+<p>Periodic call (every millisecond) with the current time: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed. </p>
 
 </div>
 </div>

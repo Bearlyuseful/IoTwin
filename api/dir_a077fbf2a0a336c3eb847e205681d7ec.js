@@ -10,5 +10,7 @@ var dir_a077fbf2a0a336c3eb847e205681d7ec =
     [ "SchematicRenderer.cpp", "SchematicRenderer_8cpp.html", null ],
     [ "SchematicRenderer.h", "SchematicRenderer_8h.html", "SchematicRenderer_8h" ],
     [ "SystemDescription.cpp", "SystemDescription_8cpp.html", null ],
-    [ "SystemDescription.h", "SystemDescription_8h.html", "SystemDescription_8h" ]
+    [ "SystemDescription.h", "SystemDescription_8h.html", "SystemDescription_8h" ],
+    [ "UdsText.cpp", "UdsText_8cpp.html", null ],
+    [ "UdsText.h", "UdsText_8h.html", "UdsText_8h" ]
 ];

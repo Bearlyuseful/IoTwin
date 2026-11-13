@@ -115,6 +115,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae5ac04aeeaed877ccb82771214a639f6" id="r_ae5ac04aeeaed877ccb82771214a639f6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5ac04aeeaed877ccb82771214a639f6">tx_frames</a></td></tr>
 <tr class="memitem:a45b9a95732bacd411ebf59bf3de02092" id="r_a45b9a95732bacd411ebf59bf3de02092"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45b9a95732bacd411ebf59bf3de02092">rx_frames</a></td></tr>
 <tr class="memitem:ad4d2b2047232ea8aaf2d25ec0217d4ab" id="r_ad4d2b2047232ea8aaf2d25ec0217d4ab"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4d2b2047232ea8aaf2d25ec0217d4ab">echoes</a></td></tr>
+<tr class="memitem:a40195ff1ec63604bbabdfea043ac7826" id="r_a40195ff1ec63604bbabdfea043ac7826"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUdsServer.html">UdsServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40195ff1ec63604bbabdfea043ac7826">uds</a></td></tr>
+<tr class="memitem:a21a777c15b573b20a879f0710fc95aa5" id="r_a21a777c15b573b20a879f0710fc95aa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUdsDtc.html">UdsDtc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21a777c15b573b20a879f0710fc95aa5">dtcs</a> [<a class="el" href="gateway_8h.html#ad8dd5beb539a31972a04e97c5a2282a8">GATEWAY_DTC_COUNT</a>]</td></tr>
+<tr class="memitem:a1b4995096b389749282db25f448873fb" id="r_a1b4995096b389749282db25f448873fb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b4995096b389749282db25f448873fb">now_ms</a></td></tr>
+<tr class="memitem:aff81ad4f60114dcdedce772996748b8f" id="r_aff81ad4f60114dcdedce772996748b8f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff81ad4f60114dcdedce772996748b8f">reset_scheduled</a></td></tr>
+<tr class="memitem:a1397816a0f34eae1aeb3994332f521c1" id="r_a1397816a0f34eae1aeb3994332f521c1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1397816a0f34eae1aeb3994332f521c1">reset_due_ms</a></td></tr>
+<tr class="memitem:a78c24e58aa2a17e441c6cafdbc58279a" id="r_a78c24e58aa2a17e441c6cafdbc58279a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78c24e58aa2a17e441c6cafdbc58279a">soft_resets</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structGateway.html" title="Gateway state.">Gateway</a> state. </p>
@@ -127,6 +133,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">uint32_t Gateway::bitrate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21a777c15b573b20a879f0710fc95aa5" name="a21a777c15b573b20a879f0710fc95aa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a777c15b573b20a879f0710fc95aa5">&#9670;&#160;</a></span>dtcs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUdsDtc.html">UdsDtc</a> Gateway::dtcs[<a class="el" href="gateway_8h.html#ad8dd5beb539a31972a04e97c5a2282a8">GATEWAY_DTC_COUNT</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -262,6 +282,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1b4995096b389749282db25f448873fb" name="a1b4995096b389749282db25f448873fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b4995096b389749282db25f448873fb">&#9670;&#160;</a></span>now_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Gateway::now_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Time of the last tick. </p>
+
+</div>
+</div>
 <a id="a576e5425a73342206a139c54a175ca97" name="a576e5425a73342206a139c54a175ca97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a576e5425a73342206a139c54a175ca97">&#9670;&#160;</a></span>open</h2>
 
@@ -290,6 +325,35 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1397816a0f34eae1aeb3994332f521c1" name="a1397816a0f34eae1aeb3994332f521c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1397816a0f34eae1aeb3994332f521c1">&#9670;&#160;</a></span>reset_due_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Gateway::reset_due_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff81ad4f60114dcdedce772996748b8f" name="aff81ad4f60114dcdedce772996748b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff81ad4f60114dcdedce772996748b8f">&#9670;&#160;</a></span>reset_scheduled</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Gateway::reset_scheduled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ECUReset hard: restart at reset_due_ms. </p>
+
+</div>
+</div>
 <a id="a45b9a95732bacd411ebf59bf3de02092" name="a45b9a95732bacd411ebf59bf3de02092"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45b9a95732bacd411ebf59bf3de02092">&#9670;&#160;</a></span>rx_frames</h2>
 
@@ -302,6 +366,20 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Frames received from the CAN controller (incl. echoes). </p>
+
+</div>
+</div>
+<a id="a78c24e58aa2a17e441c6cafdbc58279a" name="a78c24e58aa2a17e441c6cafdbc58279a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78c24e58aa2a17e441c6cafdbc58279a">&#9670;&#160;</a></span>soft_resets</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Gateway::soft_resets</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -347,6 +425,20 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Frames handed to the CAN controller. </p>
+
+</div>
+</div>
+<a id="a40195ff1ec63604bbabdfea043ac7826" name="a40195ff1ec63604bbabdfea043ac7826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40195ff1ec63604bbabdfea043ac7826">&#9670;&#160;</a></span>uds</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUdsServer.html">UdsServer</a> Gateway::uds</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -14,6 +14,10 @@ ECU state.
 \item 
 bool \mbox{\hyperlink{structLightEcu_a69bf377f8868877cfe89b18400dddd1d}{lamp\+\_\+on}}
 \item 
+bool \mbox{\hyperlink{structLightEcu_a2418ed2ef6034ea21ae2ef358b7437bb}{switch\+\_\+on}}
+\item 
+bool \mbox{\hyperlink{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}{output\+\_\+inhibit}}
+\item 
 uint32\+\_\+t \mbox{\hyperlink{structLightEcu_ac81f06dd52e63e688580150be0e9cac0}{cycle\+\_\+ms}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{structLightEcu_a03303065311638e2df54c46092d30864}{blink\+\_\+period\+\_\+ms}}
@@ -70,13 +74,25 @@ Time of the last LAMP\+\_\+\+CMD. \Hypertarget{structLightEcu_a20c6979600f3bcb2e
 {\footnotesize\ttfamily \label{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5} 
 uint64\+\_\+t Light\+Ecu\+::last\+\_\+toggle\+\_\+ms}
 
-Time of the last blink toggle. \Hypertarget{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0}\index{LightEcu@{LightEcu}!started@{started}}
+Time of the last blink toggle. \Hypertarget{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}\index{LightEcu@{LightEcu}!output\_inhibit@{output\_inhibit}}
+\index{output\_inhibit@{output\_inhibit}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{output\_inhibit}{output\_inhibit}}
+{\footnotesize\ttfamily \label{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6} 
+bool Light\+Ecu\+::output\+\_\+inhibit}
+
+Output switched off by a protection (e.\+g. short circuit). \Hypertarget{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0}\index{LightEcu@{LightEcu}!started@{started}}
 \index{started@{started}!LightEcu@{LightEcu}}
 \doxysubsubsection{\texorpdfstring{started}{started}}
 {\footnotesize\ttfamily \label{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0} 
 bool Light\+Ecu\+::started}
 
-First step executed. 
+First step executed. \Hypertarget{structLightEcu_a2418ed2ef6034ea21ae2ef358b7437bb}\index{LightEcu@{LightEcu}!switch\_on@{switch\_on}}
+\index{switch\_on@{switch\_on}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{switch\_on}{switch\_on}}
+{\footnotesize\ttfamily \label{structLightEcu_a2418ed2ef6034ea21ae2ef358b7437bb} 
+bool Light\+Ecu\+::switch\+\_\+on}
+
+Last position reported by SWITCH\+\_\+\+STATE. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

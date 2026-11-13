@@ -44,27 +44,28 @@
 \DoxyCodeLine{00040\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemMessage_ae31d6ee218457d68cf5600a028ddabe4}{Name}};}
 \DoxyCodeLine{00041\ \ \ \ \ TArray<FString>\ \mbox{\hyperlink{structFSystemMessage_af60ce5973853489978a1adfb9f5b5214}{Producers}};}
 \DoxyCodeLine{00042\ \ \ \ \ TArray<FString>\ \mbox{\hyperlink{structFSystemMessage_a14dd9fe56abf023f34cb017837ee9943}{Consumers}};}
-\DoxyCodeLine{00043\ \};}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFSystemDescription}{FSystemDescription}}}
-\DoxyCodeLine{00046\ \{}
-\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFSystemDescription_a771e7646aea7291335b31f0f1652c1ab}{LoadFromFile}}(\textcolor{keyword}{const}\ FString\&\ Path,\ FString\&\ OutError);}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFSystemDescription_a18aa490c4a49f8df109c362f724af281}{LoadFromString}}(\textcolor{keyword}{const}\ FString\&\ Json,\ \textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{BaseDirectory}},\ FString\&\ OutError);}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemNode}{FSystemNode}}*\ \mbox{\hyperlink{classFSystemDescription_a9ed232013429b62ee64d118cb9db76c3}{FindNode}}(\textcolor{keyword}{const}\ FString\&\ NodeId)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemMessage}{FSystemMessage}}*\ \mbox{\hyperlink{classFSystemDescription_a816825db146544f3a3171d84783afb6f}{FindMessage}}(\textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}})\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00055\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_ab25c34371ae1023dec5d3148aad44f42}{ResolvePath}}(\textcolor{keyword}{const}\ FString\&\ Relative)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a74b208b2e74c463a143f40a75d780609}{Id}};}
-\DoxyCodeLine{00058\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}};}
-\DoxyCodeLine{00059\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a27606d353da05f84d90f4fad569a5a17}{Description}};}
-\DoxyCodeLine{00060\ \ \ \ \ TArray<FSystemNode>\ \mbox{\hyperlink{classFSystemDescription_ab7bd5cc6aa28517bf281a4314daa0f88}{Nodes}};}
-\DoxyCodeLine{00061\ \ \ \ \ TArray<FSystemBus>\ \mbox{\hyperlink{classFSystemDescription_a8d064f7ac1dbd33913de21b53903c2c6}{Buses}};}
-\DoxyCodeLine{00062\ \ \ \ \ TArray<FSystemLink>\ \mbox{\hyperlink{classFSystemDescription_af399acec59d4bf53a584bbc516ad9580}{Links}};}
-\DoxyCodeLine{00063\ \ \ \ \ TArray<FSystemMessage>\ \mbox{\hyperlink{classFSystemDescription_ab76c46e62f73b1b6973007386214c752}{Messages}};}
-\DoxyCodeLine{00064\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{BaseDirectory}};}
-\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00044\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemMessage_a6bf1e50749f4bf4c52b15c2f9a38ee7b}{Protocol}};}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFSystemDescription}{FSystemDescription}}}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFSystemDescription_a771e7646aea7291335b31f0f1652c1ab}{LoadFromFile}}(\textcolor{keyword}{const}\ FString\&\ Path,\ FString\&\ OutError);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFSystemDescription_a18aa490c4a49f8df109c362f724af281}{LoadFromString}}(\textcolor{keyword}{const}\ FString\&\ Json,\ \textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{BaseDirectory}},\ FString\&\ OutError);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemNode}{FSystemNode}}*\ \mbox{\hyperlink{classFSystemDescription_a9ed232013429b62ee64d118cb9db76c3}{FindNode}}(\textcolor{keyword}{const}\ FString\&\ NodeId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemMessage}{FSystemMessage}}*\ \mbox{\hyperlink{classFSystemDescription_a816825db146544f3a3171d84783afb6f}{FindMessage}}(\textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_ab25c34371ae1023dec5d3148aad44f42}{ResolvePath}}(\textcolor{keyword}{const}\ FString\&\ Relative)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a74b208b2e74c463a143f40a75d780609}{Id}};}
+\DoxyCodeLine{00060\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}};}
+\DoxyCodeLine{00061\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a27606d353da05f84d90f4fad569a5a17}{Description}};}
+\DoxyCodeLine{00062\ \ \ \ \ TArray<FSystemNode>\ \mbox{\hyperlink{classFSystemDescription_ab7bd5cc6aa28517bf281a4314daa0f88}{Nodes}};}
+\DoxyCodeLine{00063\ \ \ \ \ TArray<FSystemBus>\ \mbox{\hyperlink{classFSystemDescription_a8d064f7ac1dbd33913de21b53903c2c6}{Buses}};}
+\DoxyCodeLine{00064\ \ \ \ \ TArray<FSystemLink>\ \mbox{\hyperlink{classFSystemDescription_af399acec59d4bf53a584bbc516ad9580}{Links}};}
+\DoxyCodeLine{00065\ \ \ \ \ TArray<FSystemMessage>\ \mbox{\hyperlink{classFSystemDescription_ab76c46e62f73b1b6973007386214c752}{Messages}};}
+\DoxyCodeLine{00066\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{BaseDirectory}};}
+\DoxyCodeLine{00067\ \};}
 
 \end{DoxyCode}

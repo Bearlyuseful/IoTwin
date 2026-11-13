@@ -6,5 +6,7 @@ var structGatewayIo =
     [ "can_stop", "structGatewayIo.html#ae467a6410407578ccfc2c3e1350e7c3f", null ],
     [ "context", "structGatewayIo.html#af34ecbc044828591c68b10a51199707d", null ],
     [ "led_set", "structGatewayIo.html#ad0a71227d1f0d8e9ed1af902237b34ba", null ],
-    [ "serial_write", "structGatewayIo.html#ac1aeded1b64d24d7f027edd983f2c9ab", null ]
+    [ "serial_write", "structGatewayIo.html#ac1aeded1b64d24d7f027edd983f2c9ab", null ],
+    [ "system_reset", "structGatewayIo.html#ab99a1574b73cace1286852d887e4117a", null ],
+    [ "unique_id", "structGatewayIo.html#a5dda457906e8444de07286a6d1b0a32d", null ]
 ];

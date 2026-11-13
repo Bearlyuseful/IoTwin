@@ -1,0 +1,140 @@
+\doxysection{apps/uds\+\_\+client/main\+\_\+uds\+\_\+client.c File Reference}
+\hypertarget{main__uds__client_8c}{}\label{main__uds__client_8c}\index{apps/uds\_client/main\_uds\_client.c@{apps/uds\_client/main\_uds\_client.c}}
+
+
+uds\+\_\+client\+: UDS tester (ISO 14229 over ISO-\/\+TP) for nodes on iotwin-\/bus.  
+
+
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include "{}cli.\+h"{}}\newline
+{\ttfamily \#include "{}isotp.\+h"{}}\newline
+{\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
+{\ttfamily \#include "{}net.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
+{\ttfamily \#include "{}uds.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structClient}{Client}}
+\item 
+struct \mbox{\hyperlink{structDidInfo}{Did\+Info}}
+\item 
+struct \mbox{\hyperlink{structDtcInfo}{Dtc\+Info}}
+\item 
+struct \mbox{\hyperlink{structInputQueue}{Input\+Queue}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main__uds__client_8c_aee636dcee16cce6de674508a781e9d41}{DEFAULT\+\_\+\+TIMEOUT\+\_\+\+MS}}~1000
+\item 
+\#define \mbox{\hyperlink{main__uds__client_8c_a07fcbfccc075d53d48c9dc62de8f241b}{TESTER\+\_\+\+PRESENT\+\_\+\+INTERVAL\+\_\+\+MS}}~2000
+\item 
+\#define \mbox{\hyperlink{main__uds__client_8c_a377c10ddb1999e7e32f9e11499e13734}{SEND\+\_\+\+TIMEOUT\+\_\+\+MS}}~200
+\item 
+\#define \mbox{\hyperlink{main__uds__client_8c_a09886d6ba96e67553bf3c49ed8ade975}{MAX\+\_\+\+TOKENS}}~32
+\item 
+\#define \mbox{\hyperlink{main__uds__client_8c_a7d257fbf180c2ff3a0cf6fc4dbb37e8e}{INPUT\+\_\+\+SLOTS}}~8
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444eda}{Value\+Format}} \{ \mbox{\hyperlink{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaa1c40f820c8bbd9dbcf53d83bbbc7298c}{FORMAT\+\_\+\+TEXT}}
+, \mbox{\hyperlink{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaab82da0d82ac5ce71ebfac179edd585b5}{FORMAT\+\_\+\+UNSIGNED}}
+, \mbox{\hyperlink{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaadfb5ea3ea3f4da2bf443f550d7606d55}{FORMAT\+\_\+\+SESSION}}
+, \mbox{\hyperlink{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaad2b29d18c55335d2225d91cdd7e1a114}{FORMAT\+\_\+\+HEX}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main__uds__client_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+uds\+\_\+client\+: UDS tester (ISO 14229 over ISO-\/\+TP) for nodes on iotwin-\/bus. 
+
+One-\/shot\+: uds\+\_\+client scan uds\+\_\+client --target gateway read 0200 0201 uds\+\_\+client session extended + write 0103 012C Interactive\+: uds\+\_\+client (commands from stdin; Tester\+Present keeps a non-\/default session alive)
+
+Single threaded except for the stdin reader in interactive mode\+: all bus traffic is handled by the main thread. 
+
+\label{doc-define-members}
+\Hypertarget{main__uds__client_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main__uds__client_8c_aee636dcee16cce6de674508a781e9d41}\index{main\_uds\_client.c@{main\_uds\_client.c}!DEFAULT\_TIMEOUT\_MS@{DEFAULT\_TIMEOUT\_MS}}
+\index{DEFAULT\_TIMEOUT\_MS@{DEFAULT\_TIMEOUT\_MS}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_TIMEOUT\_MS}{DEFAULT\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_aee636dcee16cce6de674508a781e9d41} 
+\#define DEFAULT\+\_\+\+TIMEOUT\+\_\+\+MS~1000}
+
+\Hypertarget{main__uds__client_8c_a7d257fbf180c2ff3a0cf6fc4dbb37e8e}\index{main\_uds\_client.c@{main\_uds\_client.c}!INPUT\_SLOTS@{INPUT\_SLOTS}}
+\index{INPUT\_SLOTS@{INPUT\_SLOTS}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{INPUT\_SLOTS}{INPUT\_SLOTS}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_a7d257fbf180c2ff3a0cf6fc4dbb37e8e} 
+\#define INPUT\+\_\+\+SLOTS~8}
+
+\Hypertarget{main__uds__client_8c_a09886d6ba96e67553bf3c49ed8ade975}\index{main\_uds\_client.c@{main\_uds\_client.c}!MAX\_TOKENS@{MAX\_TOKENS}}
+\index{MAX\_TOKENS@{MAX\_TOKENS}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_TOKENS}{MAX\_TOKENS}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_a09886d6ba96e67553bf3c49ed8ade975} 
+\#define MAX\+\_\+\+TOKENS~32}
+
+\Hypertarget{main__uds__client_8c_a377c10ddb1999e7e32f9e11499e13734}\index{main\_uds\_client.c@{main\_uds\_client.c}!SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}}
+\index{SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{SEND\_TIMEOUT\_MS}{SEND\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_a377c10ddb1999e7e32f9e11499e13734} 
+\#define SEND\+\_\+\+TIMEOUT\+\_\+\+MS~200}
+
+\Hypertarget{main__uds__client_8c_a07fcbfccc075d53d48c9dc62de8f241b}\index{main\_uds\_client.c@{main\_uds\_client.c}!TESTER\_PRESENT\_INTERVAL\_MS@{TESTER\_PRESENT\_INTERVAL\_MS}}
+\index{TESTER\_PRESENT\_INTERVAL\_MS@{TESTER\_PRESENT\_INTERVAL\_MS}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{TESTER\_PRESENT\_INTERVAL\_MS}{TESTER\_PRESENT\_INTERVAL\_MS}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_a07fcbfccc075d53d48c9dc62de8f241b} 
+\#define TESTER\+\_\+\+PRESENT\+\_\+\+INTERVAL\+\_\+\+MS~2000}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{main__uds__client_8c_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444eda}\index{main\_uds\_client.c@{main\_uds\_client.c}!ValueFormat@{ValueFormat}}
+\index{ValueFormat@{ValueFormat}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{ValueFormat}{ValueFormat}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444eda} 
+enum \mbox{\hyperlink{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444eda}{Value\+Format}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FORMAT\_TEXT@{FORMAT\_TEXT}!main\_uds\_client.c@{main\_uds\_client.c}}\index{main\_uds\_client.c@{main\_uds\_client.c}!FORMAT\_TEXT@{FORMAT\_TEXT}}}\Hypertarget{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaa1c40f820c8bbd9dbcf53d83bbbc7298c}\label{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaa1c40f820c8bbd9dbcf53d83bbbc7298c} 
+FORMAT\+\_\+\+TEXT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FORMAT\_UNSIGNED@{FORMAT\_UNSIGNED}!main\_uds\_client.c@{main\_uds\_client.c}}\index{main\_uds\_client.c@{main\_uds\_client.c}!FORMAT\_UNSIGNED@{FORMAT\_UNSIGNED}}}\Hypertarget{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaab82da0d82ac5ce71ebfac179edd585b5}\label{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaab82da0d82ac5ce71ebfac179edd585b5} 
+FORMAT\+\_\+\+UNSIGNED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FORMAT\_SESSION@{FORMAT\_SESSION}!main\_uds\_client.c@{main\_uds\_client.c}}\index{main\_uds\_client.c@{main\_uds\_client.c}!FORMAT\_SESSION@{FORMAT\_SESSION}}}\Hypertarget{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaadfb5ea3ea3f4da2bf443f550d7606d55}\label{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaadfb5ea3ea3f4da2bf443f550d7606d55} 
+FORMAT\+\_\+\+SESSION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FORMAT\_HEX@{FORMAT\_HEX}!main\_uds\_client.c@{main\_uds\_client.c}}\index{main\_uds\_client.c@{main\_uds\_client.c}!FORMAT\_HEX@{FORMAT\_HEX}}}\Hypertarget{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaad2b29d18c55335d2225d91cdd7e1a114}\label{main__uds__client_8c_ad9484262ec04b56e52ce8df1e7444edaad2b29d18c55335d2225d91cdd7e1a114} 
+FORMAT\+\_\+\+HEX&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{main__uds__client_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main__uds__client_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{main\_uds\_client.c@{main\_uds\_client.c}!main@{main}}
+\index{main@{main}!main\_uds\_client.c@{main\_uds\_client.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main__uds__client_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+

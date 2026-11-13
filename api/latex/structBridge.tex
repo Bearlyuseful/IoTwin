@@ -21,6 +21,10 @@ uint64\+\_\+t \mbox{\hyperlink{structBridge_a6afca03532661822a61c7cc4650bee39}{a
 \item 
 uint64\+\_\+t \mbox{\hyperlink{structBridge_acd9e2c80936c73968b8f5309682cf56f}{dropped\+\_\+offline}}
 \item 
+uint32\+\_\+t \mbox{\hyperlink{structBridge_af31f2c58101db7326ab8199831956647}{consecutive\+\_\+errors}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structBridge_ac246d938c5c0179bdcbd431f87a32b40}{recoveries}}
+\item 
 int \mbox{\hyperlink{structBridge_af93c08b05bedf5c44ac750a8a8e9a350}{can\+\_\+fd}}
 \item 
 \mbox{\hyperlink{structLineReader}{Line\+Reader}} \mbox{\hyperlink{structBridge_aaef1a318ed494f0ef9f37b1c183072bf}{reader}}
@@ -58,7 +62,13 @@ uint64\+\_\+t Bridge\+::adapter\+\_\+errors}
 {\footnotesize\ttfamily \label{structBridge_af93c08b05bedf5c44ac750a8a8e9a350} 
 int Bridge\+::can\+\_\+fd}
 
-\Hypertarget{structBridge_acd9e2c80936c73968b8f5309682cf56f}\index{Bridge@{Bridge}!dropped\_offline@{dropped\_offline}}
+\Hypertarget{structBridge_af31f2c58101db7326ab8199831956647}\index{Bridge@{Bridge}!consecutive\_errors@{consecutive\_errors}}
+\index{consecutive\_errors@{consecutive\_errors}!Bridge@{Bridge}}
+\doxysubsubsection{\texorpdfstring{consecutive\_errors}{consecutive\_errors}}
+{\footnotesize\ttfamily \label{structBridge_af31f2c58101db7326ab8199831956647} 
+uint32\+\_\+t Bridge\+::consecutive\+\_\+errors}
+
+BEL answers since the last acknowledged frame. \Hypertarget{structBridge_acd9e2c80936c73968b8f5309682cf56f}\index{Bridge@{Bridge}!dropped\_offline@{dropped\_offline}}
 \index{dropped\_offline@{dropped\_offline}!Bridge@{Bridge}}
 \doxysubsubsection{\texorpdfstring{dropped\_offline}{dropped\_offline}}
 {\footnotesize\ttfamily \label{structBridge_acd9e2c80936c73968b8f5309682cf56f} 
@@ -87,6 +97,12 @@ uint64\+\_\+t Bridge\+::frames\+\_\+to\+\_\+bus}
 \doxysubsubsection{\texorpdfstring{reader}{reader}}
 {\footnotesize\ttfamily \label{structBridge_aaef1a318ed494f0ef9f37b1c183072bf} 
 \mbox{\hyperlink{structLineReader}{Line\+Reader}} Bridge\+::reader}
+
+\Hypertarget{structBridge_ac246d938c5c0179bdcbd431f87a32b40}\index{Bridge@{Bridge}!recoveries@{recoveries}}
+\index{recoveries@{recoveries}!Bridge@{Bridge}}
+\doxysubsubsection{\texorpdfstring{recoveries}{recoveries}}
+{\footnotesize\ttfamily \label{structBridge_ac246d938c5c0179bdcbd431f87a32b40} 
+uint64\+\_\+t Bridge\+::recoveries}
 
 \Hypertarget{structBridge_a1b2fdb3f1e6d1258f1b169cbe3bf6c5c}\index{Bridge@{Bridge}!serial@{serial}}
 \index{serial@{serial}!Bridge@{Bridge}}

@@ -11,6 +11,7 @@ var searchData=
   ['open_8',['open',['../structGateway.html#a576e5425a73342206a139c54a175ca97',1,'Gateway']]],
   ['options_9',['Options',['../structOptions.html',1,'']]],
   ['options_10',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
-  ['overflows_11',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
-  ['overruns_12',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
+  ['output_5finhibit_11',['output_inhibit',['../structLightEcu.html#a5de29a874ebf7f6f7ed198f13df44be6',1,'LightEcu']]],
+  ['overflows_12',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
+  ['overruns_13',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
 ];

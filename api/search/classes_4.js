@@ -19,5 +19,6 @@ var searchData=
   ['fsystemdescription_16',['FSystemDescription',['../classFSystemDescription.html',1,'']]],
   ['fsystemlink_17',['FSystemLink',['../structFSystemLink.html',1,'']]],
   ['fsystemmessage_18',['FSystemMessage',['../structFSystemMessage.html',1,'']]],
-  ['fsystemnode_19',['FSystemNode',['../structFSystemNode.html',1,'']]]
+  ['fsystemnode_19',['FSystemNode',['../structFSystemNode.html',1,'']]],
+  ['fudstext_20',['FUdsText',['../structFUdsText.html',1,'']]]
 ];

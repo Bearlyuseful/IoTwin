@@ -771,6 +771,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#diagnostics-uds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostics (UDS)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#code-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -816,6 +827,34 @@
     
   
     CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagnostics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagnostics (UDS)
   
 
     
@@ -1307,6 +1346,17 @@ same syntax in both directions.</p>
 </table>
 <p>Any terminal works for experiments (115200 8N1, send CR): <code>V</code>, <code>S6</code>, <code>l</code>,
 <code>t100101</code> → LD4 on.</p>
+<h2 id="diagnostics-uds">Diagnostics (UDS)<a class="headerlink" href="#diagnostics-uds" title="Permanent link">&para;</a></h2>
+<p>The firmware is a UDS server on <code>0x7E1 -&gt; 0x7E9</code> (and functional <code>0x7DF</code>):
+identification incl. the STM32 unique id, CAN error counters and frame
+counters, uptime, DTC <code>U0073-88</code> for bus off, soft and hard ECUReset. The
+same server code (<code>libs/can/uds.c</code>, <code>isotp.c</code>) is unit tested on the host.
+Details: <a href="../diagnostics/">Diagnostics (UDS)</a>.</p>
+<div class="highlight"><pre><span></span><code>uds_client<span class="w"> </span>--target<span class="w"> </span>gateway<span class="w"> </span>scan
+uds_client<span class="w"> </span>--target<span class="w"> </span>gateway<span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="m">0200</span><span class="w"> </span><span class="m">0201</span><span class="w"> </span><span class="m">0202</span>
+</code></pre></div>
+<p><code>serial_bridge</code> configures the adapter again when it rejects frames after a
+reset of the board (UDS hard reset, reset button, power).</p>
 <h2 id="code-structure">Code structure<a class="headerlink" href="#code-structure" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

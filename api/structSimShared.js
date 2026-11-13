@@ -1,6 +1,8 @@
 var structSimShared =
 [
     [ "connected", "structSimShared.html#a481ba48180eb778f5a3b21a88a0e7a46", null ],
+    [ "diag", "structSimShared.html#ac933636d0bd3496e7b536c108ca46562", null ],
+    [ "diag_queue", "structSimShared.html#a3a7bb69e86314ba6a9a2285cbad85318", null ],
     [ "ecu", "structSimShared.html#a2b3ce84f7ad03a76776d8c345e9f6091", null ],
     [ "frames_received", "structSimShared.html#aa4cc28f35034cb6b880545d18d89077c", null ],
     [ "frames_sent", "structSimShared.html#ab0bcc8729de458f28bc2e21297114a54", null ],

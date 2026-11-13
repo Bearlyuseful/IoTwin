@@ -17,7 +17,7 @@ var searchData=
   ['define_5flog_5fcategory_14',['DEFINE_LOG_CATEGORY',['../IoTwin_8cpp.html#aba3835a8ff6b0566427a793b315e4045',1,'DEFINE_LOG_CATEGORY(LogIoTwin):&#160;IoTwin.cpp'],['../IoTwin_8cpp.html#a8ad306c458dc7e3af5ed5764aec03640',1,'DEFINE_LOG_CATEGORY(LogIoTwinBus):&#160;IoTwin.cpp']]],
   ['deinitialize_15',['Deinitialize',['../classUIoTwinBusSubsystem.html#a77eeb521187d6f71690f83a4a950731e',1,'UIoTwinBusSubsystem::Deinitialize()'],['../classUIoTwinSchematicSubsystem.html#ae3c9b74eaa11939dd6e9b04dac401f55',1,'UIoTwinSchematicSubsystem::Deinitialize()']]],
   ['dequeueline_16',['DequeueLine',['../classFIoTwinBusConnection.html#a536a74e23a13384e24b84e6230f76dff',1,'FIoTwinBusConnection']]],
-  ['describe_17',['Describe',['../classFCanDatabase.html#a56a5255a41911e9fa79fcaa8975b100b',1,'FCanDatabase::Describe()'],['../classUIoTwinSchematicSubsystem.html#a180dc3f13a6548d64d0492d08069df8b',1,'UIoTwinSchematicSubsystem::Describe()']]],
+  ['describe_17',['Describe',['../classFCanDatabase.html#a56a5255a41911e9fa79fcaa8975b100b',1,'FCanDatabase::Describe()'],['../classUIoTwinSchematicSubsystem.html#a180dc3f13a6548d64d0492d08069df8b',1,'UIoTwinSchematicSubsystem::Describe()'],['../structFUdsText.html#af0686554d39c302486fdefeeec8f4b7a',1,'FUdsText::Describe()']]],
   ['draw_18',['Draw',['../classFSchematicRenderer.html#a094210e0916d3b078d3e68b5c080fe49',1,'FSchematicRenderer']]],
   ['drawhud_19',['DrawHUD',['../classAIoTwinHUD.html#ad605a66b09f39aa68c32cc05ca1c52a9',1,'AIoTwinHUD']]]
 ];

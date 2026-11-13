@@ -1,6 +1,8 @@
 var gateway_8c =
 [
+    [ "IOTWIN_FIRMWARE_VERSION", "gateway_8c.html#aa347c34248a567aadeb4eee093a5dd39", null ],
     [ "SERIAL_REPLY", "gateway_8c.html#a21271d6f9809fc3b6cc2599e53a545b1", null ],
+    [ "SPARE_PART_NUMBER", "gateway_8c.html#ab78bcb0e192f08716e20bf15882aa749", null ],
     [ "VERSION_REPLY", "gateway_8c.html#a11a96c83096a2287769e3b5701ede44b", null ],
     [ "gateway_init", "gateway_8c.html#ab91ea63374822e9774faec6e3722a279", null ],
     [ "gateway_on_button", "gateway_8c.html#af40f9bf19ba615758dc5d24d17831cce", null ],

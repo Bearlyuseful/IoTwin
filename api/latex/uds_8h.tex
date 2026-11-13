@@ -1,0 +1,649 @@
+\doxysection{libs/can/uds.h File Reference}
+\hypertarget{uds_8h}{}\label{uds_8h}\index{libs/can/uds.h@{libs/can/uds.h}}
+
+
+Unified Diagnostic Services (ISO 14229-\/1) server on top of ISO-\/\+TP.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include "{}isotp.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}}
+\begin{DoxyCompactList}\small\item\em One diagnostic trouble code\+: 24-\/bit code and status byte. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structUdsServerHandlers}{Uds\+Server\+Handlers}}
+\begin{DoxyCompactList}\small\item\em Application callbacks. All are optional. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}}
+\begin{DoxyCompactList}\small\item\em Server configuration. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structUdsServer}{Uds\+Server}}
+\begin{DoxyCompactList}\small\item\em Server state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uds_8h_a4c25330fc891f6d160786892af6b3fe6}{UDS\+\_\+\+FUNCTIONAL\+\_\+\+ID}}~0x7\+DFu
+\begin{DoxyCompactList}\small\item\em Functional (broadcast) request id of \doxylink{classIoTwin}{Io\+Twin}, as in OBD. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{uds_8h_ae0697c8915ed2e83f36c2b8dbd683779}{UDS\+\_\+\+MAX\+\_\+\+REQUEST}}~256u
+\item 
+\#define \mbox{\hyperlink{uds_8h_af340deb274e5a528ed94d4e806ce4cad}{UDS\+\_\+\+MAX\+\_\+\+RESPONSE}}~512u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a5c5be1eae9f3bbcce25e26863a03c7c1}{UDS\+\_\+\+MAX\+\_\+\+DIDS\+\_\+\+PER\+\_\+\+REQUEST}}~8u
+\item 
+\#define \mbox{\hyperlink{uds_8h_ac24cf71d2e521f53ff6488e195fda60e}{UDS\+\_\+\+DEFAULT\+\_\+\+P2\+\_\+\+MS}}~50u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a98a73257c619d11bf5cfabcad7e09fb7}{UDS\+\_\+\+DEFAULT\+\_\+\+P2\+\_\+\+STAR\+\_\+\+MS}}~5000u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a487ae07e04e87b9b663a12bf9299d2ed}{UDS\+\_\+\+DEFAULT\+\_\+\+S3\+\_\+\+MS}}~5000u
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Service identifiers}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uds_8h_ae54d52079035e39b13db396e004be607}{UDS\+\_\+\+SID\+\_\+\+DIAGNOSTIC\+\_\+\+SESSION\+\_\+\+CONTROL}}~0x10u
+\item 
+\#define \mbox{\hyperlink{uds_8h_af2c20b63e187d80e37994e1833fb99e5}{UDS\+\_\+\+SID\+\_\+\+ECU\+\_\+\+RESET}}~0x11u
+\item 
+\#define \mbox{\hyperlink{uds_8h_aaa7ee600199f574de254799842ff4cd0}{UDS\+\_\+\+SID\+\_\+\+CLEAR\+\_\+\+DIAGNOSTIC\+\_\+\+INFORMATION}}~0x14u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a87a2ad209df2a3ff68f90163d1110522}{UDS\+\_\+\+SID\+\_\+\+READ\+\_\+\+DTC\+\_\+\+INFORMATION}}~0x19u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a77d9d847e9a550106f971e5a44f028af}{UDS\+\_\+\+SID\+\_\+\+READ\+\_\+\+DATA\+\_\+\+BY\+\_\+\+IDENTIFIER}}~0x22u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a2c5a8e1ec10c9e5393aa5cdd9ce9ae2e}{UDS\+\_\+\+SID\+\_\+\+WRITE\+\_\+\+DATA\+\_\+\+BY\+\_\+\+IDENTIFIER}}~0x2\+Eu
+\item 
+\#define \mbox{\hyperlink{uds_8h_a3090ccc7df209a8d54938b9ea6ae5e32}{UDS\+\_\+\+SID\+\_\+\+TESTER\+\_\+\+PRESENT}}~0x3\+Eu
+\item 
+\#define \mbox{\hyperlink{uds_8h_a6c770e14783206e97b033047d4d5ba49}{UDS\+\_\+\+SID\+\_\+\+NEGATIVE\+\_\+\+RESPONSE}}~0x7\+Fu
+\item 
+\#define \mbox{\hyperlink{uds_8h_a6c57ba03375f1278fd2203640f045b28}{UDS\+\_\+\+POSITIVE\+\_\+\+RESPONSE\+\_\+\+OFFSET}}~0x40u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a522718cbdf4244412ddb96acf2acd0bf}{UDS\+\_\+\+SUPPRESS\+\_\+\+POSITIVE\+\_\+\+RESPONSE}}~0x80u
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Negative response codes}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uds_8h_ad92376fad6d94fdcd1ee69ea581549d7}{UDS\+\_\+\+NRC\+\_\+\+GENERAL\+\_\+\+REJECT}}~0x10u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a8031f947f45b0441bda6654b0bfe13c7}{UDS\+\_\+\+NRC\+\_\+\+SERVICE\+\_\+\+NOT\+\_\+\+SUPPORTED}}~0x11u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a5175d4cb0ac5edb35a479c3e29646dd8}{UDS\+\_\+\+NRC\+\_\+\+SUBFUNCTION\+\_\+\+NOT\+\_\+\+SUPPORTED}}~0x12u
+\item 
+\#define \mbox{\hyperlink{uds_8h_af5e9d4dc5e7a8527befee8191bfb687f}{UDS\+\_\+\+NRC\+\_\+\+INCORRECT\+\_\+\+LENGTH}}~0x13u
+\item 
+\#define \mbox{\hyperlink{uds_8h_aad6d9c54ff1b21e263bcbbfe44beb091}{UDS\+\_\+\+NRC\+\_\+\+RESPONSE\+\_\+\+TOO\+\_\+\+LONG}}~0x14u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a0e19f76495a557010aa6ac8ed22b594e}{UDS\+\_\+\+NRC\+\_\+\+BUSY\+\_\+\+REPEAT\+\_\+\+REQUEST}}~0x21u
+\item 
+\#define \mbox{\hyperlink{uds_8h_af64b8ee5ba3f4d67e829042dbf194fb6}{UDS\+\_\+\+NRC\+\_\+\+CONDITIONS\+\_\+\+NOT\+\_\+\+CORRECT}}~0x22u
+\item 
+\#define \mbox{\hyperlink{uds_8h_ac80d0a68815b56e73c6f64cb7b76d322}{UDS\+\_\+\+NRC\+\_\+\+REQUEST\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}~0x31u
+\item 
+\#define \mbox{\hyperlink{uds_8h_afa5fdcbde242af6c2c0942b985d28e51}{UDS\+\_\+\+NRC\+\_\+\+SECURITY\+\_\+\+ACCESS\+\_\+\+DENIED}}~0x33u
+\item 
+\#define \mbox{\hyperlink{uds_8h_ade0bda053dea2708815e17e243c7e06d}{UDS\+\_\+\+NRC\+\_\+\+RESPONSE\+\_\+\+PENDING}}~0x78u
+\item 
+\#define \mbox{\hyperlink{uds_8h_aedcb06993821f9cff2b92fdca2c73fb9}{UDS\+\_\+\+NRC\+\_\+\+SUBFUNCTION\+\_\+\+NOT\+\_\+\+SUPPORTED\+\_\+\+IN\+\_\+\+SESSION}}~0x7\+Eu
+\item 
+\#define \mbox{\hyperlink{uds_8h_a91661e49680a040ebe2aed4b8fe38e1f}{UDS\+\_\+\+NRC\+\_\+\+SERVICE\+\_\+\+NOT\+\_\+\+SUPPORTED\+\_\+\+IN\+\_\+\+SESSION}}~0x7\+Fu
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ ECUReset types}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uds_8h_a7f1dac8e719fbb309e6b59068ea07b28}{UDS\+\_\+\+RESET\+\_\+\+HARD}}~0x01u
+\item 
+\#define \mbox{\hyperlink{uds_8h_ad9ad412f7ae66ff5870e3b7b9b0f4c7d}{UDS\+\_\+\+RESET\+\_\+\+SOFT}}~0x03u
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ DTC status bits (ISO 14229-\/1 annex D)}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uds_8h_a8216bfcc6adce3e6a79a5bedd3276d77}{UDS\+\_\+\+DTC\+\_\+\+TEST\+\_\+\+FAILED}}~0x01u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a68cd3242012e1546a20fde3e280d5973}{UDS\+\_\+\+DTC\+\_\+\+TEST\+\_\+\+FAILED\+\_\+\+THIS\+\_\+\+CYCLE}}~0x02u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a6dba947aa84b84150f03bc740f71f93a}{UDS\+\_\+\+DTC\+\_\+\+PENDING}}~0x04u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a23ecdcd9df1527a310e3f454e4a1107b}{UDS\+\_\+\+DTC\+\_\+\+CONFIRMED}}~0x08u
+\item 
+\#define \mbox{\hyperlink{uds_8h_afbe88960dd9b9557443069317964a48d}{UDS\+\_\+\+DTC\+\_\+\+NOT\+\_\+\+COMPLETED\+\_\+\+SINCE\+\_\+\+CLEAR}}~0x10u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a78517d92337ef90246a3460a32f128ab}{UDS\+\_\+\+DTC\+\_\+\+FAILED\+\_\+\+SINCE\+\_\+\+CLEAR}}~0x20u
+\item 
+\#define \mbox{\hyperlink{uds_8h_aaedaa2cf58afa21eebc507ddf29dcaec}{UDS\+\_\+\+DTC\+\_\+\+NOT\+\_\+\+COMPLETED\+\_\+\+THIS\+\_\+\+CYCLE}}~0x40u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a6dda8e784e92a51e1232dbcccdd7656f}{UDS\+\_\+\+DTC\+\_\+\+WARNING\+\_\+\+INDICATOR}}~0x80u
+\item 
+\#define \mbox{\hyperlink{uds_8h_a3e4a74290811dc11240343250146c370}{UDS\+\_\+\+DTC\+\_\+\+STATUS\+\_\+\+AVAILABILITY}}~0x7\+Fu
+\item 
+\#define \mbox{\hyperlink{uds_8h_ac750abf044063a9f35391e8dac890ea7}{UDS\+\_\+\+DTC\+\_\+\+FORMAT\+\_\+\+ISO14229}}~0x01u
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Standard data identifiers}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uds_8h_a227120552bc9db50e0c1b4b2c3f2976b}{UDS\+\_\+\+DID\+\_\+\+ACTIVE\+\_\+\+SESSION}}~0x\+F186u
+\item 
+\#define \mbox{\hyperlink{uds_8h_ae13207b2e15ba9776af51ea8aacf4899}{UDS\+\_\+\+DID\+\_\+\+SPARE\+\_\+\+PART\+\_\+\+NUMBER}}~0x\+F187u
+\item 
+\#define \mbox{\hyperlink{uds_8h_aa56c414eb6ab666695c8af8395771152}{UDS\+\_\+\+DID\+\_\+\+SOFTWARE\+\_\+\+VERSION}}~0x\+F189u
+\item 
+\#define \mbox{\hyperlink{uds_8h_adcf0c5d6f1c933c225471baf5d1d28e3}{UDS\+\_\+\+DID\+\_\+\+SERIAL\+\_\+\+NUMBER}}~0x\+F18\+Cu
+\item 
+\#define \mbox{\hyperlink{uds_8h_ad05dbe82a0cc80dda439a3dda216891a}{UDS\+\_\+\+DID\+\_\+\+VIN}}~0x\+F190u
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} \{ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5a19d6bd4dd8bf8da8eb66f6431ab0bb3e}{UDS\+\_\+\+SESSION\+\_\+\+DEFAULT}} = 0x01
+, \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5add82a1cab4e4dc289ab9fade1dfd75a0}{UDS\+\_\+\+SESSION\+\_\+\+PROGRAMMING}} = 0x02
+, \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5a1e6e996ab47d4a8ef7862bc28b7d26b5}{UDS\+\_\+\+SESSION\+\_\+\+EXTENDED}} = 0x03
+ \}
+\begin{DoxyCompactList}\small\item\em Diagnostic sessions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{uds_8h_ae720773f124fbc9e4dce8a295868611d}{uds\+\_\+server\+\_\+default\+\_\+config}} (\mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}config, uint32\+\_\+t request\+\_\+id, uint32\+\_\+t response\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Defaults\+: functional id 0x7\+DF, P2 50 ms, P2\texorpdfstring{$\ast$}{*} 5 s, S3 5 s, standard ids. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8h_a124fca5f3fb151771c54384adbbb71e7}{uds\+\_\+server\+\_\+init}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, const \mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}config)
+\item 
+bool \mbox{\hyperlink{uds_8h_a8bdc2d03cde7939685bb1ed03b6a260d}{uds\+\_\+server\+\_\+on\+\_\+frame}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t now\+\_\+us)
+\begin{DoxyCompactList}\small\item\em Hands a received CAN frame to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8h_afb06f74a8fc52911cd26b16144fdb2f2}{uds\+\_\+server\+\_\+poll}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, uint64\+\_\+t now\+\_\+us)
+\begin{DoxyCompactList}\small\item\em Drives ISO-\/\+TP, executes pending resets and checks the S3 timeout. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{uds_8h_afa4fd3f7d9d89b7711130fd0bbc990d7}{uds\+\_\+server\+\_\+process}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}request, size\+\_\+t length, bool functional, uint8\+\_\+t \texorpdfstring{$\ast$}{*}response, size\+\_\+t capacity, uint64\+\_\+t now\+\_\+us)
+\begin{DoxyCompactList}\small\item\em Processes one request without transport (used internally, public for tests). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} \mbox{\hyperlink{uds_8h_a02c4c54121bcf8f056610e21d7682d19}{uds\+\_\+server\+\_\+session}} (const \mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server)
+\item 
+void \mbox{\hyperlink{uds_8h_aef312b0df8e3b732d3c796a2d8e8b475}{uds\+\_\+dtc\+\_\+init}} (\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}dtc, uint32\+\_\+t code)
+\begin{DoxyCompactList}\small\item\em Initial DTC\+: test not completed since clear and this cycle (status 0x50). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8h_a548803cfa527f1a81527599814cb83d8}{uds\+\_\+dtc\+\_\+report}} (\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}dtc, bool failed)
+\begin{DoxyCompactList}\small\item\em Result of a monitor\+: updates the status bits for a failed or passed test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8h_a0f489e27ed9704610a5f8314d4c30345}{uds\+\_\+dtc\+\_\+start\+\_\+operation\+\_\+cycle}} (\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}dtc)
+\begin{DoxyCompactList}\small\item\em New operation cycle (e.\+g. after a reset)\+: clears the "{}this cycle"{} results. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8h_a9fb478f2691cac9dcb079344e308e880}{uds\+\_\+server\+\_\+find\+\_\+dtc}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, uint32\+\_\+t code)
+\begin{DoxyCompactList}\small\item\em DTC of the server\textquotesingle{}s table with the given code, NULL if unknown. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Text helpers (testers, logging)}\par
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8h_a9a420d53a896e7cb9289c6e7df9240ba}{uds\+\_\+service\+\_\+name}} (uint8\+\_\+t sid)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8h_a86ec49e2ccc0c6c15e48fc7c6b618dcb}{uds\+\_\+nrc\+\_\+name}} (uint8\+\_\+t nrc)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8h_a60c5ebb45419d05b1f3238e3a6f7154d}{uds\+\_\+session\+\_\+name}} (uint8\+\_\+t session)
+\item 
+void \mbox{\hyperlink{uds_8h_a86d07d478b4c674d7c4dc5ff2fddca70}{uds\+\_\+format\+\_\+dtc}} (uint32\+\_\+t code, char \texorpdfstring{$\ast$}{*}out, size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Formats a DTC like "{}\+B1001-\/11"{}; {\ttfamily capacity} must be at least 9. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{uds_8h_a4e36379a1642d8c4ade9e2036a62fd61}{uds\+\_\+parse\+\_\+dtc}} (const char \texorpdfstring{$\ast$}{*}text, uint32\+\_\+t \texorpdfstring{$\ast$}{*}code)
+\begin{DoxyCompactList}\small\item\em Parses "{}\+B1001-\/11"{}, "{}\+B1001"{} (failure type 00) or 6 hex digits ("{}900111"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+Unified Diagnostic Services (ISO 14229-\/1) server on top of ISO-\/\+TP. 
+
+Supported services (requests without the transport header)\+:
+
+10 ss Diagnostic\+Session\+Control default (01) and extended (03) session 11 rr ECUReset hard (01) and soft (03) reset via callback 14 gg gg gg Clear\+Diagnostic\+Information all DTCs (FFFFFF) or a single DTC 19 01 mm Read\+DTCInformation number of DTCs matching a status mask 19 02 mm DTCs matching a status mask 19 0A all supported DTCs 22 dd dd .. Read\+Data\+By\+Identifier up to UDS\+\_\+\+MAX\+\_\+\+DIDS\+\_\+\+PER\+\_\+\+REQUEST identifiers 2E dd dd .. Write\+Data\+By\+Identifier extended session only 3E 00 Tester\+Present keeps a non-\/default session alive
+
+The suppress\+Pos\+Rsp\+Msg\+Indication\+Bit (0x80 in the sub-\/function) is honoured for 10, 11 and 3E. Requests arrive physically (request\+\_\+id, ISO-\/\+TP, up to UDS\+\_\+\+MAX\+\_\+\+REQUEST bytes) or functionally (functional\+\_\+id, single frames only); for functional requests the NRCs 11, 12, 31, 7E and 7F are not sent. Without a request for s3\+\_\+ms the server falls back to the default session.
+
+Data identifiers and resets are handled by the application through callbacks; DTCs live in an array owned by the application and are updated with \doxylink{uds_8h_a548803cfa527f1a81527599814cb83d8}{uds\+\_\+dtc\+\_\+report()}. Portable C without heap use (host and firmware). 
+
+\label{doc-define-members}
+\Hypertarget{uds_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{uds_8h_ac24cf71d2e521f53ff6488e195fda60e}\index{uds.h@{uds.h}!UDS\_DEFAULT\_P2\_MS@{UDS\_DEFAULT\_P2\_MS}}
+\index{UDS\_DEFAULT\_P2\_MS@{UDS\_DEFAULT\_P2\_MS}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DEFAULT\_P2\_MS}{UDS\_DEFAULT\_P2\_MS}}
+{\footnotesize\ttfamily \label{uds_8h_ac24cf71d2e521f53ff6488e195fda60e} 
+\#define UDS\+\_\+\+DEFAULT\+\_\+\+P2\+\_\+\+MS~50u}
+
+\Hypertarget{uds_8h_a98a73257c619d11bf5cfabcad7e09fb7}\index{uds.h@{uds.h}!UDS\_DEFAULT\_P2\_STAR\_MS@{UDS\_DEFAULT\_P2\_STAR\_MS}}
+\index{UDS\_DEFAULT\_P2\_STAR\_MS@{UDS\_DEFAULT\_P2\_STAR\_MS}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DEFAULT\_P2\_STAR\_MS}{UDS\_DEFAULT\_P2\_STAR\_MS}}
+{\footnotesize\ttfamily \label{uds_8h_a98a73257c619d11bf5cfabcad7e09fb7} 
+\#define UDS\+\_\+\+DEFAULT\+\_\+\+P2\+\_\+\+STAR\+\_\+\+MS~5000u}
+
+\Hypertarget{uds_8h_a487ae07e04e87b9b663a12bf9299d2ed}\index{uds.h@{uds.h}!UDS\_DEFAULT\_S3\_MS@{UDS\_DEFAULT\_S3\_MS}}
+\index{UDS\_DEFAULT\_S3\_MS@{UDS\_DEFAULT\_S3\_MS}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DEFAULT\_S3\_MS}{UDS\_DEFAULT\_S3\_MS}}
+{\footnotesize\ttfamily \label{uds_8h_a487ae07e04e87b9b663a12bf9299d2ed} 
+\#define UDS\+\_\+\+DEFAULT\+\_\+\+S3\+\_\+\+MS~5000u}
+
+\Hypertarget{uds_8h_a227120552bc9db50e0c1b4b2c3f2976b}\index{uds.h@{uds.h}!UDS\_DID\_ACTIVE\_SESSION@{UDS\_DID\_ACTIVE\_SESSION}}
+\index{UDS\_DID\_ACTIVE\_SESSION@{UDS\_DID\_ACTIVE\_SESSION}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DID\_ACTIVE\_SESSION}{UDS\_DID\_ACTIVE\_SESSION}}
+{\footnotesize\ttfamily \label{uds_8h_a227120552bc9db50e0c1b4b2c3f2976b} 
+\#define UDS\+\_\+\+DID\+\_\+\+ACTIVE\+\_\+\+SESSION~0x\+F186u}
+
+\Hypertarget{uds_8h_adcf0c5d6f1c933c225471baf5d1d28e3}\index{uds.h@{uds.h}!UDS\_DID\_SERIAL\_NUMBER@{UDS\_DID\_SERIAL\_NUMBER}}
+\index{UDS\_DID\_SERIAL\_NUMBER@{UDS\_DID\_SERIAL\_NUMBER}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DID\_SERIAL\_NUMBER}{UDS\_DID\_SERIAL\_NUMBER}}
+{\footnotesize\ttfamily \label{uds_8h_adcf0c5d6f1c933c225471baf5d1d28e3} 
+\#define UDS\+\_\+\+DID\+\_\+\+SERIAL\+\_\+\+NUMBER~0x\+F18\+Cu}
+
+\Hypertarget{uds_8h_aa56c414eb6ab666695c8af8395771152}\index{uds.h@{uds.h}!UDS\_DID\_SOFTWARE\_VERSION@{UDS\_DID\_SOFTWARE\_VERSION}}
+\index{UDS\_DID\_SOFTWARE\_VERSION@{UDS\_DID\_SOFTWARE\_VERSION}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DID\_SOFTWARE\_VERSION}{UDS\_DID\_SOFTWARE\_VERSION}}
+{\footnotesize\ttfamily \label{uds_8h_aa56c414eb6ab666695c8af8395771152} 
+\#define UDS\+\_\+\+DID\+\_\+\+SOFTWARE\+\_\+\+VERSION~0x\+F189u}
+
+\Hypertarget{uds_8h_ae13207b2e15ba9776af51ea8aacf4899}\index{uds.h@{uds.h}!UDS\_DID\_SPARE\_PART\_NUMBER@{UDS\_DID\_SPARE\_PART\_NUMBER}}
+\index{UDS\_DID\_SPARE\_PART\_NUMBER@{UDS\_DID\_SPARE\_PART\_NUMBER}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DID\_SPARE\_PART\_NUMBER}{UDS\_DID\_SPARE\_PART\_NUMBER}}
+{\footnotesize\ttfamily \label{uds_8h_ae13207b2e15ba9776af51ea8aacf4899} 
+\#define UDS\+\_\+\+DID\+\_\+\+SPARE\+\_\+\+PART\+\_\+\+NUMBER~0x\+F187u}
+
+\Hypertarget{uds_8h_ad05dbe82a0cc80dda439a3dda216891a}\index{uds.h@{uds.h}!UDS\_DID\_VIN@{UDS\_DID\_VIN}}
+\index{UDS\_DID\_VIN@{UDS\_DID\_VIN}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DID\_VIN}{UDS\_DID\_VIN}}
+{\footnotesize\ttfamily \label{uds_8h_ad05dbe82a0cc80dda439a3dda216891a} 
+\#define UDS\+\_\+\+DID\+\_\+\+VIN~0x\+F190u}
+
+\Hypertarget{uds_8h_a23ecdcd9df1527a310e3f454e4a1107b}\index{uds.h@{uds.h}!UDS\_DTC\_CONFIRMED@{UDS\_DTC\_CONFIRMED}}
+\index{UDS\_DTC\_CONFIRMED@{UDS\_DTC\_CONFIRMED}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_CONFIRMED}{UDS\_DTC\_CONFIRMED}}
+{\footnotesize\ttfamily \label{uds_8h_a23ecdcd9df1527a310e3f454e4a1107b} 
+\#define UDS\+\_\+\+DTC\+\_\+\+CONFIRMED~0x08u}
+
+\Hypertarget{uds_8h_a78517d92337ef90246a3460a32f128ab}\index{uds.h@{uds.h}!UDS\_DTC\_FAILED\_SINCE\_CLEAR@{UDS\_DTC\_FAILED\_SINCE\_CLEAR}}
+\index{UDS\_DTC\_FAILED\_SINCE\_CLEAR@{UDS\_DTC\_FAILED\_SINCE\_CLEAR}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_FAILED\_SINCE\_CLEAR}{UDS\_DTC\_FAILED\_SINCE\_CLEAR}}
+{\footnotesize\ttfamily \label{uds_8h_a78517d92337ef90246a3460a32f128ab} 
+\#define UDS\+\_\+\+DTC\+\_\+\+FAILED\+\_\+\+SINCE\+\_\+\+CLEAR~0x20u}
+
+\Hypertarget{uds_8h_ac750abf044063a9f35391e8dac890ea7}\index{uds.h@{uds.h}!UDS\_DTC\_FORMAT\_ISO14229@{UDS\_DTC\_FORMAT\_ISO14229}}
+\index{UDS\_DTC\_FORMAT\_ISO14229@{UDS\_DTC\_FORMAT\_ISO14229}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_FORMAT\_ISO14229}{UDS\_DTC\_FORMAT\_ISO14229}}
+{\footnotesize\ttfamily \label{uds_8h_ac750abf044063a9f35391e8dac890ea7} 
+\#define UDS\+\_\+\+DTC\+\_\+\+FORMAT\+\_\+\+ISO14229~0x01u}
+
+DTCFormat\+Identifier ISO\+\_\+14229-\/1\+\_\+\+DTCFormat. \Hypertarget{uds_8h_afbe88960dd9b9557443069317964a48d}\index{uds.h@{uds.h}!UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR@{UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR}}
+\index{UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR@{UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR}{UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR}}
+{\footnotesize\ttfamily \label{uds_8h_afbe88960dd9b9557443069317964a48d} 
+\#define UDS\+\_\+\+DTC\+\_\+\+NOT\+\_\+\+COMPLETED\+\_\+\+SINCE\+\_\+\+CLEAR~0x10u}
+
+\Hypertarget{uds_8h_aaedaa2cf58afa21eebc507ddf29dcaec}\index{uds.h@{uds.h}!UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE@{UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE}}
+\index{UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE@{UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE}{UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE}}
+{\footnotesize\ttfamily \label{uds_8h_aaedaa2cf58afa21eebc507ddf29dcaec} 
+\#define UDS\+\_\+\+DTC\+\_\+\+NOT\+\_\+\+COMPLETED\+\_\+\+THIS\+\_\+\+CYCLE~0x40u}
+
+\Hypertarget{uds_8h_a6dba947aa84b84150f03bc740f71f93a}\index{uds.h@{uds.h}!UDS\_DTC\_PENDING@{UDS\_DTC\_PENDING}}
+\index{UDS\_DTC\_PENDING@{UDS\_DTC\_PENDING}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_PENDING}{UDS\_DTC\_PENDING}}
+{\footnotesize\ttfamily \label{uds_8h_a6dba947aa84b84150f03bc740f71f93a} 
+\#define UDS\+\_\+\+DTC\+\_\+\+PENDING~0x04u}
+
+\Hypertarget{uds_8h_a3e4a74290811dc11240343250146c370}\index{uds.h@{uds.h}!UDS\_DTC\_STATUS\_AVAILABILITY@{UDS\_DTC\_STATUS\_AVAILABILITY}}
+\index{UDS\_DTC\_STATUS\_AVAILABILITY@{UDS\_DTC\_STATUS\_AVAILABILITY}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_STATUS\_AVAILABILITY}{UDS\_DTC\_STATUS\_AVAILABILITY}}
+{\footnotesize\ttfamily \label{uds_8h_a3e4a74290811dc11240343250146c370} 
+\#define UDS\+\_\+\+DTC\+\_\+\+STATUS\+\_\+\+AVAILABILITY~0x7\+Fu}
+
+Status bits this implementation maintains. \Hypertarget{uds_8h_a8216bfcc6adce3e6a79a5bedd3276d77}\index{uds.h@{uds.h}!UDS\_DTC\_TEST\_FAILED@{UDS\_DTC\_TEST\_FAILED}}
+\index{UDS\_DTC\_TEST\_FAILED@{UDS\_DTC\_TEST\_FAILED}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_TEST\_FAILED}{UDS\_DTC\_TEST\_FAILED}}
+{\footnotesize\ttfamily \label{uds_8h_a8216bfcc6adce3e6a79a5bedd3276d77} 
+\#define UDS\+\_\+\+DTC\+\_\+\+TEST\+\_\+\+FAILED~0x01u}
+
+\Hypertarget{uds_8h_a68cd3242012e1546a20fde3e280d5973}\index{uds.h@{uds.h}!UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE@{UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE}}
+\index{UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE@{UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE}{UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE}}
+{\footnotesize\ttfamily \label{uds_8h_a68cd3242012e1546a20fde3e280d5973} 
+\#define UDS\+\_\+\+DTC\+\_\+\+TEST\+\_\+\+FAILED\+\_\+\+THIS\+\_\+\+CYCLE~0x02u}
+
+\Hypertarget{uds_8h_a6dda8e784e92a51e1232dbcccdd7656f}\index{uds.h@{uds.h}!UDS\_DTC\_WARNING\_INDICATOR@{UDS\_DTC\_WARNING\_INDICATOR}}
+\index{UDS\_DTC\_WARNING\_INDICATOR@{UDS\_DTC\_WARNING\_INDICATOR}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_DTC\_WARNING\_INDICATOR}{UDS\_DTC\_WARNING\_INDICATOR}}
+{\footnotesize\ttfamily \label{uds_8h_a6dda8e784e92a51e1232dbcccdd7656f} 
+\#define UDS\+\_\+\+DTC\+\_\+\+WARNING\+\_\+\+INDICATOR~0x80u}
+
+\Hypertarget{uds_8h_a4c25330fc891f6d160786892af6b3fe6}\index{uds.h@{uds.h}!UDS\_FUNCTIONAL\_ID@{UDS\_FUNCTIONAL\_ID}}
+\index{UDS\_FUNCTIONAL\_ID@{UDS\_FUNCTIONAL\_ID}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_FUNCTIONAL\_ID}{UDS\_FUNCTIONAL\_ID}}
+{\footnotesize\ttfamily \label{uds_8h_a4c25330fc891f6d160786892af6b3fe6} 
+\#define UDS\+\_\+\+FUNCTIONAL\+\_\+\+ID~0x7\+DFu}
+
+
+
+Functional (broadcast) request id of \doxylink{classIoTwin}{Io\+Twin}, as in OBD. 
+
+\Hypertarget{uds_8h_a5c5be1eae9f3bbcce25e26863a03c7c1}\index{uds.h@{uds.h}!UDS\_MAX\_DIDS\_PER\_REQUEST@{UDS\_MAX\_DIDS\_PER\_REQUEST}}
+\index{UDS\_MAX\_DIDS\_PER\_REQUEST@{UDS\_MAX\_DIDS\_PER\_REQUEST}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_MAX\_DIDS\_PER\_REQUEST}{UDS\_MAX\_DIDS\_PER\_REQUEST}}
+{\footnotesize\ttfamily \label{uds_8h_a5c5be1eae9f3bbcce25e26863a03c7c1} 
+\#define UDS\+\_\+\+MAX\+\_\+\+DIDS\+\_\+\+PER\+\_\+\+REQUEST~8u}
+
+\Hypertarget{uds_8h_ae0697c8915ed2e83f36c2b8dbd683779}\index{uds.h@{uds.h}!UDS\_MAX\_REQUEST@{UDS\_MAX\_REQUEST}}
+\index{UDS\_MAX\_REQUEST@{UDS\_MAX\_REQUEST}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_MAX\_REQUEST}{UDS\_MAX\_REQUEST}}
+{\footnotesize\ttfamily \label{uds_8h_ae0697c8915ed2e83f36c2b8dbd683779} 
+\#define UDS\+\_\+\+MAX\+\_\+\+REQUEST~256u}
+
+\Hypertarget{uds_8h_af340deb274e5a528ed94d4e806ce4cad}\index{uds.h@{uds.h}!UDS\_MAX\_RESPONSE@{UDS\_MAX\_RESPONSE}}
+\index{UDS\_MAX\_RESPONSE@{UDS\_MAX\_RESPONSE}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_MAX\_RESPONSE}{UDS\_MAX\_RESPONSE}}
+{\footnotesize\ttfamily \label{uds_8h_af340deb274e5a528ed94d4e806ce4cad} 
+\#define UDS\+\_\+\+MAX\+\_\+\+RESPONSE~512u}
+
+\Hypertarget{uds_8h_a0e19f76495a557010aa6ac8ed22b594e}\index{uds.h@{uds.h}!UDS\_NRC\_BUSY\_REPEAT\_REQUEST@{UDS\_NRC\_BUSY\_REPEAT\_REQUEST}}
+\index{UDS\_NRC\_BUSY\_REPEAT\_REQUEST@{UDS\_NRC\_BUSY\_REPEAT\_REQUEST}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_BUSY\_REPEAT\_REQUEST}{UDS\_NRC\_BUSY\_REPEAT\_REQUEST}}
+{\footnotesize\ttfamily \label{uds_8h_a0e19f76495a557010aa6ac8ed22b594e} 
+\#define UDS\+\_\+\+NRC\+\_\+\+BUSY\+\_\+\+REPEAT\+\_\+\+REQUEST~0x21u}
+
+\Hypertarget{uds_8h_af64b8ee5ba3f4d67e829042dbf194fb6}\index{uds.h@{uds.h}!UDS\_NRC\_CONDITIONS\_NOT\_CORRECT@{UDS\_NRC\_CONDITIONS\_NOT\_CORRECT}}
+\index{UDS\_NRC\_CONDITIONS\_NOT\_CORRECT@{UDS\_NRC\_CONDITIONS\_NOT\_CORRECT}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_CONDITIONS\_NOT\_CORRECT}{UDS\_NRC\_CONDITIONS\_NOT\_CORRECT}}
+{\footnotesize\ttfamily \label{uds_8h_af64b8ee5ba3f4d67e829042dbf194fb6} 
+\#define UDS\+\_\+\+NRC\+\_\+\+CONDITIONS\+\_\+\+NOT\+\_\+\+CORRECT~0x22u}
+
+\Hypertarget{uds_8h_ad92376fad6d94fdcd1ee69ea581549d7}\index{uds.h@{uds.h}!UDS\_NRC\_GENERAL\_REJECT@{UDS\_NRC\_GENERAL\_REJECT}}
+\index{UDS\_NRC\_GENERAL\_REJECT@{UDS\_NRC\_GENERAL\_REJECT}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_GENERAL\_REJECT}{UDS\_NRC\_GENERAL\_REJECT}}
+{\footnotesize\ttfamily \label{uds_8h_ad92376fad6d94fdcd1ee69ea581549d7} 
+\#define UDS\+\_\+\+NRC\+\_\+\+GENERAL\+\_\+\+REJECT~0x10u}
+
+\Hypertarget{uds_8h_af5e9d4dc5e7a8527befee8191bfb687f}\index{uds.h@{uds.h}!UDS\_NRC\_INCORRECT\_LENGTH@{UDS\_NRC\_INCORRECT\_LENGTH}}
+\index{UDS\_NRC\_INCORRECT\_LENGTH@{UDS\_NRC\_INCORRECT\_LENGTH}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_INCORRECT\_LENGTH}{UDS\_NRC\_INCORRECT\_LENGTH}}
+{\footnotesize\ttfamily \label{uds_8h_af5e9d4dc5e7a8527befee8191bfb687f} 
+\#define UDS\+\_\+\+NRC\+\_\+\+INCORRECT\+\_\+\+LENGTH~0x13u}
+
+\Hypertarget{uds_8h_ac80d0a68815b56e73c6f64cb7b76d322}\index{uds.h@{uds.h}!UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE@{UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE}}
+\index{UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE@{UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE}{UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE}}
+{\footnotesize\ttfamily \label{uds_8h_ac80d0a68815b56e73c6f64cb7b76d322} 
+\#define UDS\+\_\+\+NRC\+\_\+\+REQUEST\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE~0x31u}
+
+\Hypertarget{uds_8h_ade0bda053dea2708815e17e243c7e06d}\index{uds.h@{uds.h}!UDS\_NRC\_RESPONSE\_PENDING@{UDS\_NRC\_RESPONSE\_PENDING}}
+\index{UDS\_NRC\_RESPONSE\_PENDING@{UDS\_NRC\_RESPONSE\_PENDING}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_RESPONSE\_PENDING}{UDS\_NRC\_RESPONSE\_PENDING}}
+{\footnotesize\ttfamily \label{uds_8h_ade0bda053dea2708815e17e243c7e06d} 
+\#define UDS\+\_\+\+NRC\+\_\+\+RESPONSE\+\_\+\+PENDING~0x78u}
+
+\Hypertarget{uds_8h_aad6d9c54ff1b21e263bcbbfe44beb091}\index{uds.h@{uds.h}!UDS\_NRC\_RESPONSE\_TOO\_LONG@{UDS\_NRC\_RESPONSE\_TOO\_LONG}}
+\index{UDS\_NRC\_RESPONSE\_TOO\_LONG@{UDS\_NRC\_RESPONSE\_TOO\_LONG}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_RESPONSE\_TOO\_LONG}{UDS\_NRC\_RESPONSE\_TOO\_LONG}}
+{\footnotesize\ttfamily \label{uds_8h_aad6d9c54ff1b21e263bcbbfe44beb091} 
+\#define UDS\+\_\+\+NRC\+\_\+\+RESPONSE\+\_\+\+TOO\+\_\+\+LONG~0x14u}
+
+\Hypertarget{uds_8h_afa5fdcbde242af6c2c0942b985d28e51}\index{uds.h@{uds.h}!UDS\_NRC\_SECURITY\_ACCESS\_DENIED@{UDS\_NRC\_SECURITY\_ACCESS\_DENIED}}
+\index{UDS\_NRC\_SECURITY\_ACCESS\_DENIED@{UDS\_NRC\_SECURITY\_ACCESS\_DENIED}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_SECURITY\_ACCESS\_DENIED}{UDS\_NRC\_SECURITY\_ACCESS\_DENIED}}
+{\footnotesize\ttfamily \label{uds_8h_afa5fdcbde242af6c2c0942b985d28e51} 
+\#define UDS\+\_\+\+NRC\+\_\+\+SECURITY\+\_\+\+ACCESS\+\_\+\+DENIED~0x33u}
+
+\Hypertarget{uds_8h_a8031f947f45b0441bda6654b0bfe13c7}\index{uds.h@{uds.h}!UDS\_NRC\_SERVICE\_NOT\_SUPPORTED@{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED}}
+\index{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED@{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED}{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED}}
+{\footnotesize\ttfamily \label{uds_8h_a8031f947f45b0441bda6654b0bfe13c7} 
+\#define UDS\+\_\+\+NRC\+\_\+\+SERVICE\+\_\+\+NOT\+\_\+\+SUPPORTED~0x11u}
+
+\Hypertarget{uds_8h_a91661e49680a040ebe2aed4b8fe38e1f}\index{uds.h@{uds.h}!UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION@{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION}}
+\index{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION@{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION}{UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION}}
+{\footnotesize\ttfamily \label{uds_8h_a91661e49680a040ebe2aed4b8fe38e1f} 
+\#define UDS\+\_\+\+NRC\+\_\+\+SERVICE\+\_\+\+NOT\+\_\+\+SUPPORTED\+\_\+\+IN\+\_\+\+SESSION~0x7\+Fu}
+
+\Hypertarget{uds_8h_a5175d4cb0ac5edb35a479c3e29646dd8}\index{uds.h@{uds.h}!UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED@{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED}}
+\index{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED@{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED}{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED}}
+{\footnotesize\ttfamily \label{uds_8h_a5175d4cb0ac5edb35a479c3e29646dd8} 
+\#define UDS\+\_\+\+NRC\+\_\+\+SUBFUNCTION\+\_\+\+NOT\+\_\+\+SUPPORTED~0x12u}
+
+\Hypertarget{uds_8h_aedcb06993821f9cff2b92fdca2c73fb9}\index{uds.h@{uds.h}!UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION@{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION}}
+\index{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION@{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION}{UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION}}
+{\footnotesize\ttfamily \label{uds_8h_aedcb06993821f9cff2b92fdca2c73fb9} 
+\#define UDS\+\_\+\+NRC\+\_\+\+SUBFUNCTION\+\_\+\+NOT\+\_\+\+SUPPORTED\+\_\+\+IN\+\_\+\+SESSION~0x7\+Eu}
+
+\Hypertarget{uds_8h_a6c57ba03375f1278fd2203640f045b28}\index{uds.h@{uds.h}!UDS\_POSITIVE\_RESPONSE\_OFFSET@{UDS\_POSITIVE\_RESPONSE\_OFFSET}}
+\index{UDS\_POSITIVE\_RESPONSE\_OFFSET@{UDS\_POSITIVE\_RESPONSE\_OFFSET}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_POSITIVE\_RESPONSE\_OFFSET}{UDS\_POSITIVE\_RESPONSE\_OFFSET}}
+{\footnotesize\ttfamily \label{uds_8h_a6c57ba03375f1278fd2203640f045b28} 
+\#define UDS\+\_\+\+POSITIVE\+\_\+\+RESPONSE\+\_\+\+OFFSET~0x40u}
+
+\Hypertarget{uds_8h_a7f1dac8e719fbb309e6b59068ea07b28}\index{uds.h@{uds.h}!UDS\_RESET\_HARD@{UDS\_RESET\_HARD}}
+\index{UDS\_RESET\_HARD@{UDS\_RESET\_HARD}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_RESET\_HARD}{UDS\_RESET\_HARD}}
+{\footnotesize\ttfamily \label{uds_8h_a7f1dac8e719fbb309e6b59068ea07b28} 
+\#define UDS\+\_\+\+RESET\+\_\+\+HARD~0x01u}
+
+\Hypertarget{uds_8h_ad9ad412f7ae66ff5870e3b7b9b0f4c7d}\index{uds.h@{uds.h}!UDS\_RESET\_SOFT@{UDS\_RESET\_SOFT}}
+\index{UDS\_RESET\_SOFT@{UDS\_RESET\_SOFT}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_RESET\_SOFT}{UDS\_RESET\_SOFT}}
+{\footnotesize\ttfamily \label{uds_8h_ad9ad412f7ae66ff5870e3b7b9b0f4c7d} 
+\#define UDS\+\_\+\+RESET\+\_\+\+SOFT~0x03u}
+
+\Hypertarget{uds_8h_aaa7ee600199f574de254799842ff4cd0}\index{uds.h@{uds.h}!UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION@{UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION}}
+\index{UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION@{UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION}{UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION}}
+{\footnotesize\ttfamily \label{uds_8h_aaa7ee600199f574de254799842ff4cd0} 
+\#define UDS\+\_\+\+SID\+\_\+\+CLEAR\+\_\+\+DIAGNOSTIC\+\_\+\+INFORMATION~0x14u}
+
+\Hypertarget{uds_8h_ae54d52079035e39b13db396e004be607}\index{uds.h@{uds.h}!UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL@{UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL}}
+\index{UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL@{UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL}{UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL}}
+{\footnotesize\ttfamily \label{uds_8h_ae54d52079035e39b13db396e004be607} 
+\#define UDS\+\_\+\+SID\+\_\+\+DIAGNOSTIC\+\_\+\+SESSION\+\_\+\+CONTROL~0x10u}
+
+\Hypertarget{uds_8h_af2c20b63e187d80e37994e1833fb99e5}\index{uds.h@{uds.h}!UDS\_SID\_ECU\_RESET@{UDS\_SID\_ECU\_RESET}}
+\index{UDS\_SID\_ECU\_RESET@{UDS\_SID\_ECU\_RESET}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_ECU\_RESET}{UDS\_SID\_ECU\_RESET}}
+{\footnotesize\ttfamily \label{uds_8h_af2c20b63e187d80e37994e1833fb99e5} 
+\#define UDS\+\_\+\+SID\+\_\+\+ECU\+\_\+\+RESET~0x11u}
+
+\Hypertarget{uds_8h_a6c770e14783206e97b033047d4d5ba49}\index{uds.h@{uds.h}!UDS\_SID\_NEGATIVE\_RESPONSE@{UDS\_SID\_NEGATIVE\_RESPONSE}}
+\index{UDS\_SID\_NEGATIVE\_RESPONSE@{UDS\_SID\_NEGATIVE\_RESPONSE}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_NEGATIVE\_RESPONSE}{UDS\_SID\_NEGATIVE\_RESPONSE}}
+{\footnotesize\ttfamily \label{uds_8h_a6c770e14783206e97b033047d4d5ba49} 
+\#define UDS\+\_\+\+SID\+\_\+\+NEGATIVE\+\_\+\+RESPONSE~0x7\+Fu}
+
+\Hypertarget{uds_8h_a77d9d847e9a550106f971e5a44f028af}\index{uds.h@{uds.h}!UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER@{UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER}}
+\index{UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER@{UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER}{UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER}}
+{\footnotesize\ttfamily \label{uds_8h_a77d9d847e9a550106f971e5a44f028af} 
+\#define UDS\+\_\+\+SID\+\_\+\+READ\+\_\+\+DATA\+\_\+\+BY\+\_\+\+IDENTIFIER~0x22u}
+
+\Hypertarget{uds_8h_a87a2ad209df2a3ff68f90163d1110522}\index{uds.h@{uds.h}!UDS\_SID\_READ\_DTC\_INFORMATION@{UDS\_SID\_READ\_DTC\_INFORMATION}}
+\index{UDS\_SID\_READ\_DTC\_INFORMATION@{UDS\_SID\_READ\_DTC\_INFORMATION}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_READ\_DTC\_INFORMATION}{UDS\_SID\_READ\_DTC\_INFORMATION}}
+{\footnotesize\ttfamily \label{uds_8h_a87a2ad209df2a3ff68f90163d1110522} 
+\#define UDS\+\_\+\+SID\+\_\+\+READ\+\_\+\+DTC\+\_\+\+INFORMATION~0x19u}
+
+\Hypertarget{uds_8h_a3090ccc7df209a8d54938b9ea6ae5e32}\index{uds.h@{uds.h}!UDS\_SID\_TESTER\_PRESENT@{UDS\_SID\_TESTER\_PRESENT}}
+\index{UDS\_SID\_TESTER\_PRESENT@{UDS\_SID\_TESTER\_PRESENT}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_TESTER\_PRESENT}{UDS\_SID\_TESTER\_PRESENT}}
+{\footnotesize\ttfamily \label{uds_8h_a3090ccc7df209a8d54938b9ea6ae5e32} 
+\#define UDS\+\_\+\+SID\+\_\+\+TESTER\+\_\+\+PRESENT~0x3\+Eu}
+
+\Hypertarget{uds_8h_a2c5a8e1ec10c9e5393aa5cdd9ce9ae2e}\index{uds.h@{uds.h}!UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER@{UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER}}
+\index{UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER@{UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER}{UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER}}
+{\footnotesize\ttfamily \label{uds_8h_a2c5a8e1ec10c9e5393aa5cdd9ce9ae2e} 
+\#define UDS\+\_\+\+SID\+\_\+\+WRITE\+\_\+\+DATA\+\_\+\+BY\+\_\+\+IDENTIFIER~0x2\+Eu}
+
+\Hypertarget{uds_8h_a522718cbdf4244412ddb96acf2acd0bf}\index{uds.h@{uds.h}!UDS\_SUPPRESS\_POSITIVE\_RESPONSE@{UDS\_SUPPRESS\_POSITIVE\_RESPONSE}}
+\index{UDS\_SUPPRESS\_POSITIVE\_RESPONSE@{UDS\_SUPPRESS\_POSITIVE\_RESPONSE}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UDS\_SUPPRESS\_POSITIVE\_RESPONSE}{UDS\_SUPPRESS\_POSITIVE\_RESPONSE}}
+{\footnotesize\ttfamily \label{uds_8h_a522718cbdf4244412ddb96acf2acd0bf} 
+\#define UDS\+\_\+\+SUPPRESS\+\_\+\+POSITIVE\+\_\+\+RESPONSE~0x80u}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{uds_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{uds_8h_a14c292a934c57255f398625b3498b8e5}\index{uds.h@{uds.h}!UdsSession@{UdsSession}}
+\index{UdsSession@{UdsSession}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{UdsSession}{UdsSession}}
+{\footnotesize\ttfamily \label{uds_8h_a14c292a934c57255f398625b3498b8e5} 
+enum \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}}}
+
+
+
+Diagnostic sessions. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UDS\_SESSION\_DEFAULT@{UDS\_SESSION\_DEFAULT}!uds.h@{uds.h}}\index{uds.h@{uds.h}!UDS\_SESSION\_DEFAULT@{UDS\_SESSION\_DEFAULT}}}\Hypertarget{uds_8h_a14c292a934c57255f398625b3498b8e5a19d6bd4dd8bf8da8eb66f6431ab0bb3e}\label{uds_8h_a14c292a934c57255f398625b3498b8e5a19d6bd4dd8bf8da8eb66f6431ab0bb3e} 
+UDS\+\_\+\+SESSION\+\_\+\+DEFAULT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UDS\_SESSION\_PROGRAMMING@{UDS\_SESSION\_PROGRAMMING}!uds.h@{uds.h}}\index{uds.h@{uds.h}!UDS\_SESSION\_PROGRAMMING@{UDS\_SESSION\_PROGRAMMING}}}\Hypertarget{uds_8h_a14c292a934c57255f398625b3498b8e5add82a1cab4e4dc289ab9fade1dfd75a0}\label{uds_8h_a14c292a934c57255f398625b3498b8e5add82a1cab4e4dc289ab9fade1dfd75a0} 
+UDS\+\_\+\+SESSION\+\_\+\+PROGRAMMING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UDS\_SESSION\_EXTENDED@{UDS\_SESSION\_EXTENDED}!uds.h@{uds.h}}\index{uds.h@{uds.h}!UDS\_SESSION\_EXTENDED@{UDS\_SESSION\_EXTENDED}}}\Hypertarget{uds_8h_a14c292a934c57255f398625b3498b8e5a1e6e996ab47d4a8ef7862bc28b7d26b5}\label{uds_8h_a14c292a934c57255f398625b3498b8e5a1e6e996ab47d4a8ef7862bc28b7d26b5} 
+UDS\+\_\+\+SESSION\+\_\+\+EXTENDED&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{uds_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{uds_8h_aef312b0df8e3b732d3c796a2d8e8b475}\index{uds.h@{uds.h}!uds\_dtc\_init@{uds\_dtc\_init}}
+\index{uds\_dtc\_init@{uds\_dtc\_init}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_dtc\_init()}{uds\_dtc\_init()}}
+{\footnotesize\ttfamily \label{uds_8h_aef312b0df8e3b732d3c796a2d8e8b475} 
+void uds\+\_\+dtc\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}}]{dtc}{, }\item[{uint32\+\_\+t}]{code}{}\end{DoxyParamCaption})}
+
+
+
+Initial DTC\+: test not completed since clear and this cycle (status 0x50). 
+
+\Hypertarget{uds_8h_a548803cfa527f1a81527599814cb83d8}\index{uds.h@{uds.h}!uds\_dtc\_report@{uds\_dtc\_report}}
+\index{uds\_dtc\_report@{uds\_dtc\_report}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_dtc\_report()}{uds\_dtc\_report()}}
+{\footnotesize\ttfamily \label{uds_8h_a548803cfa527f1a81527599814cb83d8} 
+void uds\+\_\+dtc\+\_\+report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}}]{dtc}{, }\item[{bool}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Result of a monitor\+: updates the status bits for a failed or passed test. 
+
+\Hypertarget{uds_8h_a0f489e27ed9704610a5f8314d4c30345}\index{uds.h@{uds.h}!uds\_dtc\_start\_operation\_cycle@{uds\_dtc\_start\_operation\_cycle}}
+\index{uds\_dtc\_start\_operation\_cycle@{uds\_dtc\_start\_operation\_cycle}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_dtc\_start\_operation\_cycle()}{uds\_dtc\_start\_operation\_cycle()}}
+{\footnotesize\ttfamily \label{uds_8h_a0f489e27ed9704610a5f8314d4c30345} 
+void uds\+\_\+dtc\+\_\+start\+\_\+operation\+\_\+cycle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}}]{dtc}{}\end{DoxyParamCaption})}
+
+
+
+New operation cycle (e.\+g. after a reset)\+: clears the "{}this cycle"{} results. 
+
+\Hypertarget{uds_8h_a86d07d478b4c674d7c4dc5ff2fddca70}\index{uds.h@{uds.h}!uds\_format\_dtc@{uds\_format\_dtc}}
+\index{uds\_format\_dtc@{uds\_format\_dtc}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_format\_dtc()}{uds\_format\_dtc()}}
+{\footnotesize\ttfamily \label{uds_8h_a86d07d478b4c674d7c4dc5ff2fddca70} 
+void uds\+\_\+format\+\_\+dtc (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{code}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})}
+
+
+
+Formats a DTC like "{}\+B1001-\/11"{}; {\ttfamily capacity} must be at least 9. 
+
+\Hypertarget{uds_8h_a86ec49e2ccc0c6c15e48fc7c6b618dcb}\index{uds.h@{uds.h}!uds\_nrc\_name@{uds\_nrc\_name}}
+\index{uds\_nrc\_name@{uds\_nrc\_name}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_nrc\_name()}{uds\_nrc\_name()}}
+{\footnotesize\ttfamily \label{uds_8h_a86ec49e2ccc0c6c15e48fc7c6b618dcb} 
+const char \texorpdfstring{$\ast$}{*} uds\+\_\+nrc\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{nrc}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8h_a4e36379a1642d8c4ade9e2036a62fd61}\index{uds.h@{uds.h}!uds\_parse\_dtc@{uds\_parse\_dtc}}
+\index{uds\_parse\_dtc@{uds\_parse\_dtc}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_parse\_dtc()}{uds\_parse\_dtc()}}
+{\footnotesize\ttfamily \label{uds_8h_a4e36379a1642d8c4ade9e2036a62fd61} 
+bool uds\+\_\+parse\+\_\+dtc (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{code}{}\end{DoxyParamCaption})}
+
+
+
+Parses "{}\+B1001-\/11"{}, "{}\+B1001"{} (failure type 00) or 6 hex digits ("{}900111"{}). 
+
+\Hypertarget{uds_8h_ae720773f124fbc9e4dce8a295868611d}\index{uds.h@{uds.h}!uds\_server\_default\_config@{uds\_server\_default\_config}}
+\index{uds\_server\_default\_config@{uds\_server\_default\_config}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_default\_config()}{uds\_server\_default\_config()}}
+{\footnotesize\ttfamily \label{uds_8h_ae720773f124fbc9e4dce8a295868611d} 
+void uds\+\_\+server\+\_\+default\+\_\+config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{uint32\+\_\+t}]{request\+\_\+id}{, }\item[{uint32\+\_\+t}]{response\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Defaults\+: functional id 0x7\+DF, P2 50 ms, P2\texorpdfstring{$\ast$}{*} 5 s, S3 5 s, standard ids. 
+
+\Hypertarget{uds_8h_a9fb478f2691cac9dcb079344e308e880}\index{uds.h@{uds.h}!uds\_server\_find\_dtc@{uds\_server\_find\_dtc}}
+\index{uds\_server\_find\_dtc@{uds\_server\_find\_dtc}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_find\_dtc()}{uds\_server\_find\_dtc()}}
+{\footnotesize\ttfamily \label{uds_8h_a9fb478f2691cac9dcb079344e308e880} 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*} uds\+\_\+server\+\_\+find\+\_\+dtc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{uint32\+\_\+t}]{code}{}\end{DoxyParamCaption})}
+
+
+
+DTC of the server\textquotesingle{}s table with the given code, NULL if unknown. 
+
+\Hypertarget{uds_8h_a124fca5f3fb151771c54384adbbb71e7}\index{uds.h@{uds.h}!uds\_server\_init@{uds\_server\_init}}
+\index{uds\_server\_init@{uds\_server\_init}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_init()}{uds\_server\_init()}}
+{\footnotesize\ttfamily \label{uds_8h_a124fca5f3fb151771c54384adbbb71e7} 
+void uds\+\_\+server\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{const \mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8h_a8bdc2d03cde7939685bb1ed03b6a260d}\index{uds.h@{uds.h}!uds\_server\_on\_frame@{uds\_server\_on\_frame}}
+\index{uds\_server\_on\_frame@{uds\_server\_on\_frame}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_on\_frame()}{uds\_server\_on\_frame()}}
+{\footnotesize\ttfamily \label{uds_8h_a8bdc2d03cde7939685bb1ed03b6a260d} 
+bool uds\+\_\+server\+\_\+on\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t}]{now\+\_\+us}{}\end{DoxyParamCaption})}
+
+
+
+Hands a received CAN frame to the server. 
+
+\begin{DoxyReturn}{Returns}
+true if the frame was addressed to the server (physical or functional). 
+\end{DoxyReturn}
+\Hypertarget{uds_8h_afb06f74a8fc52911cd26b16144fdb2f2}\index{uds.h@{uds.h}!uds\_server\_poll@{uds\_server\_poll}}
+\index{uds\_server\_poll@{uds\_server\_poll}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_poll()}{uds\_server\_poll()}}
+{\footnotesize\ttfamily \label{uds_8h_afb06f74a8fc52911cd26b16144fdb2f2} 
+void uds\+\_\+server\+\_\+poll (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{uint64\+\_\+t}]{now\+\_\+us}{}\end{DoxyParamCaption})}
+
+
+
+Drives ISO-\/\+TP, executes pending resets and checks the S3 timeout. 
+
+\Hypertarget{uds_8h_afa4fd3f7d9d89b7711130fd0bbc990d7}\index{uds.h@{uds.h}!uds\_server\_process@{uds\_server\_process}}
+\index{uds\_server\_process@{uds\_server\_process}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_process()}{uds\_server\_process()}}
+{\footnotesize\ttfamily \label{uds_8h_afa4fd3f7d9d89b7711130fd0bbc990d7} 
+size\+\_\+t uds\+\_\+server\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{request}{, }\item[{size\+\_\+t}]{length}{, }\item[{bool}]{functional}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{response}{, }\item[{size\+\_\+t}]{capacity}{, }\item[{uint64\+\_\+t}]{now\+\_\+us}{}\end{DoxyParamCaption})}
+
+
+
+Processes one request without transport (used internally, public for tests). 
+
+\begin{DoxyReturn}{Returns}
+Length of the response in {\ttfamily response}, 0 = no response (suppressed). 
+\end{DoxyReturn}
+\Hypertarget{uds_8h_a02c4c54121bcf8f056610e21d7682d19}\index{uds.h@{uds.h}!uds\_server\_session@{uds\_server\_session}}
+\index{uds\_server\_session@{uds\_server\_session}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_session()}{uds\_server\_session()}}
+{\footnotesize\ttfamily \label{uds_8h_a02c4c54121bcf8f056610e21d7682d19} 
+\mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} uds\+\_\+server\+\_\+session (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8h_a9a420d53a896e7cb9289c6e7df9240ba}\index{uds.h@{uds.h}!uds\_service\_name@{uds\_service\_name}}
+\index{uds\_service\_name@{uds\_service\_name}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_service\_name()}{uds\_service\_name()}}
+{\footnotesize\ttfamily \label{uds_8h_a9a420d53a896e7cb9289c6e7df9240ba} 
+const char \texorpdfstring{$\ast$}{*} uds\+\_\+service\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{sid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8h_a60c5ebb45419d05b1f3238e3a6f7154d}\index{uds.h@{uds.h}!uds\_session\_name@{uds\_session\_name}}
+\index{uds\_session\_name@{uds\_session\_name}!uds.h@{uds.h}}
+\doxysubsubsection{\texorpdfstring{uds\_session\_name()}{uds\_session\_name()}}
+{\footnotesize\ttfamily \label{uds_8h_a60c5ebb45419d05b1f3238e3a6f7154d} 
+const char \texorpdfstring{$\ast$}{*} uds\+\_\+session\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{session}{}\end{DoxyParamCaption})}
+

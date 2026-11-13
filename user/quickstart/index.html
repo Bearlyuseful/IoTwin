@@ -781,6 +781,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dev/diagnostics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagnostics (UDS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../dev/component_database/" class="md-nav__link">
         
   
@@ -1096,6 +1124,9 @@ lamp relay  (Visualizer) &lt;--100#01-- iotwin-bus &lt;-- can_sim (light ECU)
 <li>In the visualizer click the wall switch (or press <strong>SPACE</strong>).
    Press <strong>TAB</strong> for the 2D schematic: nodes, CAN bus and USB link with every
    message decoded at its sender; click a node for its details.</li>
+<li>Diagnose the ECU like a workshop tester: <code>uds_client scan</code>, then type
+   <code>fault short on</code> in the CAN-Sim window and run <code>uds_client dtc</code>
+   (see <a href="../../dev/diagnostics/">Diagnostics</a>).</li>
 </ol>
 <p>Three windows open:</p>
 <table>

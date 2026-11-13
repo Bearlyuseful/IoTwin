@@ -10,6 +10,7 @@ Application logic of the \doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware (
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
 {\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
 {\ttfamily \#include "{}slcan.\+h"{}}\newline
+{\ttfamily \#include "{}uds.\+h"{}}\newline
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,6 +33,32 @@ struct \mbox{\hyperlink{structGateway}{Gateway}}
 \item 
 \#define \mbox{\hyperlink{gateway_8h_a5ea28e61a31c44bb1dad4276689a3d24}{GATEWAY\+\_\+\+BLINK\+\_\+\+PERIOD\+\_\+\+MS}}~500u
 \end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Diagnostics (see docs/dev/diagnostics.md)}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a7a0a02d24a6f9ee539fab7fb2f9b9bce}{GATEWAY\+\_\+\+DIAG\+\_\+\+REQUEST\+\_\+\+ID}}~0x7\+E1u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a9105c90c6d5ff2c6750eb1ff2e0c7132}{GATEWAY\+\_\+\+DIAG\+\_\+\+RESPONSE\+\_\+\+ID}}~0x7\+E9u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_af6e55c356bdde1319435b485df29f62f}{GATEWAY\+\_\+\+DTC\+\_\+\+BUS\+\_\+\+OFF}}~0x\+C07388u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8}{GATEWAY\+\_\+\+DTC\+\_\+\+COUNT}}~1u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a2348a819d34d1669f83ba73817a4d75e}{GATEWAY\+\_\+\+DID\+\_\+\+LAMP}}~0x0100u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_aea73af4bf896fb5a472d36050eb7271c}{GATEWAY\+\_\+\+DID\+\_\+\+SWITCH}}~0x0101u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_ab92dd60123e273c234d1ae177e132c8e}{GATEWAY\+\_\+\+DID\+\_\+\+CAN\+\_\+\+ERRORS}}~0x0200u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_aa01f0c39d3d8cd227139e7a08aeeef48}{GATEWAY\+\_\+\+DID\+\_\+\+COUNTERS}}~0x0201u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a047d602019ec46ec6ead0897e03e09e1}{GATEWAY\+\_\+\+DID\+\_\+\+UPTIME}}~0x0202u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_ab908842b58963e48ce9b7a5e9e838db3}{GATEWAY\+\_\+\+DID\+\_\+\+CHANNEL}}~0x0203u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_ab72ee14093b69a3c2d415753bf8d3468}{GATEWAY\+\_\+\+RESET\+\_\+\+DELAY\+\_\+\+MS}}~50u
+\end{DoxyCompactItemize}
+\end{Indent}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,7 +91,7 @@ void \mbox{\hyperlink{gateway_8h_af40f9bf19ba615758dc5d24d17831cce}{gateway\+\_\
 void \mbox{\hyperlink{gateway_8h_a2d4dbaaa3bee9c4c6f4529328dfaa998}{gateway\+\_\+on\+\_\+rx\+\_\+overrun}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway)
 \begin{DoxyCompactList}\small\item\em Driver dropped frames because its receive queue was full. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{gateway_8h_a8be8bdc7e33addbc49bd6295b77aa191}{gateway\+\_\+tick}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, uint32\+\_\+t now\+\_\+ms)
-\begin{DoxyCompactList}\small\item\em Periodic call with the current time; blinks the LED while the channel is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Periodic call (every millisecond) with the current time\+: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -73,7 +100,8 @@ Application logic of the \doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware (
 The board is two things at once\+:
 \begin{DoxyItemize}
 \item an SLCAN adapter\+: frames from the serial link are sent on the CAN bus, frames received from CAN are reported on the serial link;
-\item a small CAN node\+: the user button is a wall switch (SWITCH\+\_\+\+STATE 0x200) and the LED shows the lamp command (LAMP\+\_\+\+CMD 0x100).
+\item a small CAN node\+: the user button is a wall switch (SWITCH\+\_\+\+STATE 0x200) and the LED shows the lamp command (LAMP\+\_\+\+CMD 0x100);
+\item a UDS server (requests 0x7\+E1 or functional 0x7\+DF, responses 0x7\+E9) for testers on the serial side or on the CAN bus; responses go to both.
 \end{DoxyItemize}
 
 In internal loopback mode the controller receives its own frames. They are matched against the transmitted ones and not reported a second time, so the virtual bus does not see echoes.
@@ -95,6 +123,66 @@ All hardware access goes through \doxylink{structGatewayIo}{Gateway\+Io}, so thi
 {\footnotesize\ttfamily \label{gateway_8h_abe8f68e0b641bc3eb441f4fe5164ec70} 
 \#define GATEWAY\+\_\+\+DEFAULT\+\_\+\+BITRATE~500000u}
 
+\Hypertarget{gateway_8h_a7a0a02d24a6f9ee539fab7fb2f9b9bce}\index{gateway.h@{gateway.h}!GATEWAY\_DIAG\_REQUEST\_ID@{GATEWAY\_DIAG\_REQUEST\_ID}}
+\index{GATEWAY\_DIAG\_REQUEST\_ID@{GATEWAY\_DIAG\_REQUEST\_ID}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DIAG\_REQUEST\_ID}{GATEWAY\_DIAG\_REQUEST\_ID}}
+{\footnotesize\ttfamily \label{gateway_8h_a7a0a02d24a6f9ee539fab7fb2f9b9bce} 
+\#define GATEWAY\+\_\+\+DIAG\+\_\+\+REQUEST\+\_\+\+ID~0x7\+E1u}
+
+\Hypertarget{gateway_8h_a9105c90c6d5ff2c6750eb1ff2e0c7132}\index{gateway.h@{gateway.h}!GATEWAY\_DIAG\_RESPONSE\_ID@{GATEWAY\_DIAG\_RESPONSE\_ID}}
+\index{GATEWAY\_DIAG\_RESPONSE\_ID@{GATEWAY\_DIAG\_RESPONSE\_ID}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DIAG\_RESPONSE\_ID}{GATEWAY\_DIAG\_RESPONSE\_ID}}
+{\footnotesize\ttfamily \label{gateway_8h_a9105c90c6d5ff2c6750eb1ff2e0c7132} 
+\#define GATEWAY\+\_\+\+DIAG\+\_\+\+RESPONSE\+\_\+\+ID~0x7\+E9u}
+
+\Hypertarget{gateway_8h_ab92dd60123e273c234d1ae177e132c8e}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_CAN\_ERRORS@{GATEWAY\_DID\_CAN\_ERRORS}}
+\index{GATEWAY\_DID\_CAN\_ERRORS@{GATEWAY\_DID\_CAN\_ERRORS}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_CAN\_ERRORS}{GATEWAY\_DID\_CAN\_ERRORS}}
+{\footnotesize\ttfamily \label{gateway_8h_ab92dd60123e273c234d1ae177e132c8e} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+CAN\+\_\+\+ERRORS~0x0200u}
+
+TEC, REC, state (0 active, 1 warning, 2 passive, 3 bus off) \Hypertarget{gateway_8h_ab908842b58963e48ce9b7a5e9e838db3}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_CHANNEL@{GATEWAY\_DID\_CHANNEL}}
+\index{GATEWAY\_DID\_CHANNEL@{GATEWAY\_DID\_CHANNEL}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_CHANNEL}{GATEWAY\_DID\_CHANNEL}}
+{\footnotesize\ttfamily \label{gateway_8h_ab908842b58963e48ce9b7a5e9e838db3} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+CHANNEL~0x0203u}
+
+open, mode (0 normal, 1 loopback, 2 listen), uint32 bitrate \Hypertarget{gateway_8h_aa01f0c39d3d8cd227139e7a08aeeef48}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_COUNTERS@{GATEWAY\_DID\_COUNTERS}}
+\index{GATEWAY\_DID\_COUNTERS@{GATEWAY\_DID\_COUNTERS}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_COUNTERS}{GATEWAY\_DID\_COUNTERS}}
+{\footnotesize\ttfamily \label{gateway_8h_aa01f0c39d3d8cd227139e7a08aeeef48} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+COUNTERS~0x0201u}
+
+uint32 frames to CAN, from CAN, echoes \Hypertarget{gateway_8h_a2348a819d34d1669f83ba73817a4d75e}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_LAMP@{GATEWAY\_DID\_LAMP}}
+\index{GATEWAY\_DID\_LAMP@{GATEWAY\_DID\_LAMP}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_LAMP}{GATEWAY\_DID\_LAMP}}
+{\footnotesize\ttfamily \label{gateway_8h_a2348a819d34d1669f83ba73817a4d75e} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+LAMP~0x0100u}
+
+1 byte, last LAMP\+\_\+\+CMD \Hypertarget{gateway_8h_aea73af4bf896fb5a472d36050eb7271c}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_SWITCH@{GATEWAY\_DID\_SWITCH}}
+\index{GATEWAY\_DID\_SWITCH@{GATEWAY\_DID\_SWITCH}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_SWITCH}{GATEWAY\_DID\_SWITCH}}
+{\footnotesize\ttfamily \label{gateway_8h_aea73af4bf896fb5a472d36050eb7271c} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+SWITCH~0x0101u}
+
+1 byte, wall switch (button) \Hypertarget{gateway_8h_a047d602019ec46ec6ead0897e03e09e1}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_UPTIME@{GATEWAY\_DID\_UPTIME}}
+\index{GATEWAY\_DID\_UPTIME@{GATEWAY\_DID\_UPTIME}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_UPTIME}{GATEWAY\_DID\_UPTIME}}
+{\footnotesize\ttfamily \label{gateway_8h_a047d602019ec46ec6ead0897e03e09e1} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+UPTIME~0x0202u}
+
+uint32 ms \Hypertarget{gateway_8h_af6e55c356bdde1319435b485df29f62f}\index{gateway.h@{gateway.h}!GATEWAY\_DTC\_BUS\_OFF@{GATEWAY\_DTC\_BUS\_OFF}}
+\index{GATEWAY\_DTC\_BUS\_OFF@{GATEWAY\_DTC\_BUS\_OFF}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DTC\_BUS\_OFF}{GATEWAY\_DTC\_BUS\_OFF}}
+{\footnotesize\ttfamily \label{gateway_8h_af6e55c356bdde1319435b485df29f62f} 
+\#define GATEWAY\+\_\+\+DTC\+\_\+\+BUS\+\_\+\+OFF~0x\+C07388u}
+
+U0073-\/88 control module communication bus off \Hypertarget{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8}\index{gateway.h@{gateway.h}!GATEWAY\_DTC\_COUNT@{GATEWAY\_DTC\_COUNT}}
+\index{GATEWAY\_DTC\_COUNT@{GATEWAY\_DTC\_COUNT}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DTC\_COUNT}{GATEWAY\_DTC\_COUNT}}
+{\footnotesize\ttfamily \label{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8} 
+\#define GATEWAY\+\_\+\+DTC\+\_\+\+COUNT~1u}
+
 \Hypertarget{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}\index{gateway.h@{gateway.h}!GATEWAY\_ECHO\_SLOTS@{GATEWAY\_ECHO\_SLOTS}}
 \index{GATEWAY\_ECHO\_SLOTS@{GATEWAY\_ECHO\_SLOTS}!gateway.h@{gateway.h}}
 \doxysubsubsection{\texorpdfstring{GATEWAY\_ECHO\_SLOTS}{GATEWAY\_ECHO\_SLOTS}}
@@ -113,7 +201,13 @@ All hardware access goes through \doxylink{structGatewayIo}{Gateway\+Io}, so thi
 {\footnotesize\ttfamily \label{gateway_8h_a02ccfa1fed6f144cd6c3874c28f9d09c} 
 \#define GATEWAY\+\_\+\+ID\+\_\+\+SWITCH\+\_\+\+STATE~0x200u}
 
+\Hypertarget{gateway_8h_ab72ee14093b69a3c2d415753bf8d3468}\index{gateway.h@{gateway.h}!GATEWAY\_RESET\_DELAY\_MS@{GATEWAY\_RESET\_DELAY\_MS}}
+\index{GATEWAY\_RESET\_DELAY\_MS@{GATEWAY\_RESET\_DELAY\_MS}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_RESET\_DELAY\_MS}{GATEWAY\_RESET\_DELAY\_MS}}
+{\footnotesize\ttfamily \label{gateway_8h_ab72ee14093b69a3c2d415753bf8d3468} 
+\#define GATEWAY\+\_\+\+RESET\+\_\+\+DELAY\+\_\+\+MS~50u}
 
+lets the ECUReset response leave UART and CAN 
 
 \label{doc-enum-members}
 \Hypertarget{gateway_8h_doc-enum-members}
@@ -235,5 +329,5 @@ void gateway\+\_\+tick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGa
 
 
 
-Periodic call with the current time; blinks the LED while the channel is closed. 
+Periodic call (every millisecond) with the current time\+: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed. 
 

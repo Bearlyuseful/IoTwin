@@ -16,6 +16,7 @@ can\+\_\+sim\+: simulated light control ECU on the \doxylink{classIoTwin}{Io\+Tw
 {\ttfamily \#include "{}cli.\+h"{}}\newline
 {\ttfamily \#include "{}cycle\+\_\+timer.\+h"{}}\newline
 {\ttfamily \#include "{}light\+\_\+ecu.\+h"{}}\newline
+{\ttfamily \#include "{}light\+\_\+ecu\+\_\+diag.\+h"{}}\newline
 {\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
 {\ttfamily \#include "{}log.\+h"{}}\newline
 {\ttfamily \#include "{}net.\+h"{}}\newline
@@ -34,6 +35,8 @@ struct \mbox{\hyperlink{structSimShared}{Sim\+Shared}}
 \#define \mbox{\hyperlink{main__can__sim_8c_a14445f86300d5faa6a4ebad02e496c09}{RECONNECT\+\_\+\+INTERVAL\+\_\+\+MS}}~1000
 \item 
 \#define \mbox{\hyperlink{main__can__sim_8c_a377c10ddb1999e7e32f9e11499e13734}{SEND\+\_\+\+TIMEOUT\+\_\+\+MS}}~50
+\item 
+\#define \mbox{\hyperlink{main__can__sim_8c_aa8fc9e28d180bbfc92ca0515b7613a98}{IOTWIN\+\_\+\+VERSION}}~"{}dev"{}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -51,11 +54,19 @@ Threads\+:
 \item console thread\+: reads commands from stdin (not real-\/time)
 \end{DoxyItemize}
 
-The control loop never blocks on the network while connected\+: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline. 
+The control loop never blocks on the network while connected\+: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline.
+
+Diagnostics\+: UDS server on 0x7\+E0/0x7\+E8 (functional 0x7\+DF), faults can be injected on the console (see \doxylink{light__ecu__diag_8h}{light\+\_\+ecu\+\_\+diag.\+h}, docs/dev/diagnostics.\+md). 
 
 \label{doc-define-members}
 \Hypertarget{main__can__sim_8c_doc-define-members}
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{main__can__sim_8c_aa8fc9e28d180bbfc92ca0515b7613a98}\index{main\_can\_sim.c@{main\_can\_sim.c}!IOTWIN\_VERSION@{IOTWIN\_VERSION}}
+\index{IOTWIN\_VERSION@{IOTWIN\_VERSION}!main\_can\_sim.c@{main\_can\_sim.c}}
+\doxysubsubsection{\texorpdfstring{IOTWIN\_VERSION}{IOTWIN\_VERSION}}
+{\footnotesize\ttfamily \label{main__can__sim_8c_aa8fc9e28d180bbfc92ca0515b7613a98} 
+\#define IOTWIN\+\_\+\+VERSION~"{}dev"{}}
+
 \Hypertarget{main__can__sim_8c_a14445f86300d5faa6a4ebad02e496c09}\index{main\_can\_sim.c@{main\_can\_sim.c}!RECONNECT\_INTERVAL\_MS@{RECONNECT\_INTERVAL\_MS}}
 \index{RECONNECT\_INTERVAL\_MS@{RECONNECT\_INTERVAL\_MS}!main\_can\_sim.c@{main\_can\_sim.c}}
 \doxysubsubsection{\texorpdfstring{RECONNECT\_INTERVAL\_MS}{RECONNECT\_INTERVAL\_MS}}

@@ -100,6 +100,8 @@ $(function(){initNavTree('structLightEcu.html','','structLightEcu-members'); });
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a69bf377f8868877cfe89b18400dddd1d" id="r_a69bf377f8868877cfe89b18400dddd1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69bf377f8868877cfe89b18400dddd1d">lamp_on</a></td></tr>
+<tr class="memitem:a2418ed2ef6034ea21ae2ef358b7437bb" id="r_a2418ed2ef6034ea21ae2ef358b7437bb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2418ed2ef6034ea21ae2ef358b7437bb">switch_on</a></td></tr>
+<tr class="memitem:a5de29a874ebf7f6f7ed198f13df44be6" id="r_a5de29a874ebf7f6f7ed198f13df44be6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5de29a874ebf7f6f7ed198f13df44be6">output_inhibit</a></td></tr>
 <tr class="memitem:ac81f06dd52e63e688580150be0e9cac0" id="r_ac81f06dd52e63e688580150be0e9cac0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac81f06dd52e63e688580150be0e9cac0">cycle_ms</a></td></tr>
 <tr class="memitem:a03303065311638e2df54c46092d30864" id="r_a03303065311638e2df54c46092d30864"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03303065311638e2df54c46092d30864">blink_period_ms</a></td></tr>
 <tr class="memitem:a586b43ec34ea02c87c55bd5a72ccf5e0" id="r_a586b43ec34ea02c87c55bd5a72ccf5e0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a586b43ec34ea02c87c55bd5a72ccf5e0">last_send_ms</a></td></tr>
@@ -200,6 +202,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5de29a874ebf7f6f7ed198f13df44be6" name="a5de29a874ebf7f6f7ed198f13df44be6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de29a874ebf7f6f7ed198f13df44be6">&#9670;&#160;</a></span>output_inhibit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LightEcu::output_inhibit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Output switched off by a protection (e.g. short circuit). </p>
+
+</div>
+</div>
 <a id="a2daad4c84d5329da21825b09a8b86ec0" name="a2daad4c84d5329da21825b09a8b86ec0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2daad4c84d5329da21825b09a8b86ec0">&#9670;&#160;</a></span>started</h2>
 
@@ -212,6 +229,21 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>First step executed. </p>
+
+</div>
+</div>
+<a id="a2418ed2ef6034ea21ae2ef358b7437bb" name="a2418ed2ef6034ea21ae2ef358b7437bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2418ed2ef6034ea21ae2ef358b7437bb">&#9670;&#160;</a></span>switch_on</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LightEcu::switch_on</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Last position reported by SWITCH_STATE. </p>
 
 </div>
 </div>

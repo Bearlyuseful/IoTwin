@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['pal_5fns_5fper_5fms_0',['PAL_NS_PER_MS',['../pal__time_8h.html#ae594119f01261f993570723459cbca73',1,'pal_time.h']]],
-  ['pal_5fns_5fper_5fsec_1',['PAL_NS_PER_SEC',['../pal__time_8h.html#aaa104b0955ffbc88d9dc31e3b96bdfbb',1,'pal_time.h']]]
+  ['max_5fperiod_5fms_0',['MAX_PERIOD_MS',['../light__ecu__diag_8c.html#a096d0660feb339fc1bdfb9b311452934',1,'light_ecu_diag.c']]],
+  ['max_5ftokens_1',['MAX_TOKENS',['../main__uds__client_8c.html#a09886d6ba96e67553bf3c49ed8ade975',1,'main_uds_client.c']]],
+  ['min_5fperiod_5fms_2',['MIN_PERIOD_MS',['../light__ecu__diag_8c.html#a8c0c78e25cf789295f7c17d42a3e271b',1,'light_ecu_diag.c']]]
 ];

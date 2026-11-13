@@ -43,6 +43,18 @@ uint32\+\_\+t \mbox{\hyperlink{structGateway_ae5ac04aeeaed877ccb82771214a639f6}{
 uint32\+\_\+t \mbox{\hyperlink{structGateway_a45b9a95732bacd411ebf59bf3de02092}{rx\+\_\+frames}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab}{echoes}}
+\item 
+\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \mbox{\hyperlink{structGateway_a40195ff1ec63604bbabdfea043ac7826}{uds}}
+\item 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \mbox{\hyperlink{structGateway_a21a777c15b573b20a879f0710fc95aa5}{dtcs}} \mbox{[}\mbox{\hyperlink{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8}{GATEWAY\+\_\+\+DTC\+\_\+\+COUNT}}\mbox{]}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_a1b4995096b389749282db25f448873fb}{now\+\_\+ms}}
+\item 
+bool \mbox{\hyperlink{structGateway_aff81ad4f60114dcdedce772996748b8f}{reset\+\_\+scheduled}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_a1397816a0f34eae1aeb3994332f521c1}{reset\+\_\+due\+\_\+ms}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_a78c24e58aa2a17e441c6cafdbc58279a}{soft\+\_\+resets}}
 \end{DoxyCompactItemize}
 
 
@@ -57,6 +69,12 @@ uint32\+\_\+t \mbox{\hyperlink{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab}{
 \doxysubsubsection{\texorpdfstring{bitrate}{bitrate}}
 {\footnotesize\ttfamily \label{structGateway_ae6742b551812a2673af34c49a29f249e} 
 uint32\+\_\+t Gateway\+::bitrate}
+
+\Hypertarget{structGateway_a21a777c15b573b20a879f0710fc95aa5}\index{Gateway@{Gateway}!dtcs@{dtcs}}
+\index{dtcs@{dtcs}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{dtcs}{dtcs}}
+{\footnotesize\ttfamily \label{structGateway_a21a777c15b573b20a879f0710fc95aa5} 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} Gateway\+::dtcs\mbox{[}\mbox{\hyperlink{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8}{GATEWAY\+\_\+\+DTC\+\_\+\+COUNT}}\mbox{]}}
 
 \Hypertarget{structGateway_a2551b8be41edec487904bc24a223b54c}\index{Gateway@{Gateway}!echo@{echo}}
 \index{echo@{echo}!Gateway@{Gateway}}
@@ -112,7 +130,13 @@ bool Gateway\+::led\+\_\+on}
 {\footnotesize\ttfamily \label{structGateway_af477dbcf02493a11f38c52f5f79fe32f} 
 \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}} Gateway\+::mode}
 
-\Hypertarget{structGateway_a576e5425a73342206a139c54a175ca97}\index{Gateway@{Gateway}!open@{open}}
+\Hypertarget{structGateway_a1b4995096b389749282db25f448873fb}\index{Gateway@{Gateway}!now\_ms@{now\_ms}}
+\index{now\_ms@{now\_ms}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{now\_ms}{now\_ms}}
+{\footnotesize\ttfamily \label{structGateway_a1b4995096b389749282db25f448873fb} 
+uint32\+\_\+t Gateway\+::now\+\_\+ms}
+
+Time of the last tick. \Hypertarget{structGateway_a576e5425a73342206a139c54a175ca97}\index{Gateway@{Gateway}!open@{open}}
 \index{open@{open}!Gateway@{Gateway}}
 \doxysubsubsection{\texorpdfstring{open}{open}}
 {\footnotesize\ttfamily \label{structGateway_a576e5425a73342206a139c54a175ca97} 
@@ -124,13 +148,31 @@ bool Gateway\+::open}
 {\footnotesize\ttfamily \label{structGateway_a7b14fb9ecd0682dd7fa5b68d26291340} 
 \mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} Gateway\+::reader}
 
-\Hypertarget{structGateway_a45b9a95732bacd411ebf59bf3de02092}\index{Gateway@{Gateway}!rx\_frames@{rx\_frames}}
+\Hypertarget{structGateway_a1397816a0f34eae1aeb3994332f521c1}\index{Gateway@{Gateway}!reset\_due\_ms@{reset\_due\_ms}}
+\index{reset\_due\_ms@{reset\_due\_ms}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{reset\_due\_ms}{reset\_due\_ms}}
+{\footnotesize\ttfamily \label{structGateway_a1397816a0f34eae1aeb3994332f521c1} 
+uint32\+\_\+t Gateway\+::reset\+\_\+due\+\_\+ms}
+
+\Hypertarget{structGateway_aff81ad4f60114dcdedce772996748b8f}\index{Gateway@{Gateway}!reset\_scheduled@{reset\_scheduled}}
+\index{reset\_scheduled@{reset\_scheduled}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{reset\_scheduled}{reset\_scheduled}}
+{\footnotesize\ttfamily \label{structGateway_aff81ad4f60114dcdedce772996748b8f} 
+bool Gateway\+::reset\+\_\+scheduled}
+
+ECUReset hard\+: restart at reset\+\_\+due\+\_\+ms. \Hypertarget{structGateway_a45b9a95732bacd411ebf59bf3de02092}\index{Gateway@{Gateway}!rx\_frames@{rx\_frames}}
 \index{rx\_frames@{rx\_frames}!Gateway@{Gateway}}
 \doxysubsubsection{\texorpdfstring{rx\_frames}{rx\_frames}}
 {\footnotesize\ttfamily \label{structGateway_a45b9a95732bacd411ebf59bf3de02092} 
 uint32\+\_\+t Gateway\+::rx\+\_\+frames}
 
-Frames received from the CAN controller (incl. echoes). \Hypertarget{structGateway_ab304f07aeda9f0d34da3ea718632eac3}\index{Gateway@{Gateway}!sticky\_flags@{sticky\_flags}}
+Frames received from the CAN controller (incl. echoes). \Hypertarget{structGateway_a78c24e58aa2a17e441c6cafdbc58279a}\index{Gateway@{Gateway}!soft\_resets@{soft\_resets}}
+\index{soft\_resets@{soft\_resets}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{soft\_resets}{soft\_resets}}
+{\footnotesize\ttfamily \label{structGateway_a78c24e58aa2a17e441c6cafdbc58279a} 
+uint32\+\_\+t Gateway\+::soft\+\_\+resets}
+
+\Hypertarget{structGateway_ab304f07aeda9f0d34da3ea718632eac3}\index{Gateway@{Gateway}!sticky\_flags@{sticky\_flags}}
 \index{sticky\_flags@{sticky\_flags}!Gateway@{Gateway}}
 \doxysubsubsection{\texorpdfstring{sticky\_flags}{sticky\_flags}}
 {\footnotesize\ttfamily \label{structGateway_ab304f07aeda9f0d34da3ea718632eac3} 
@@ -148,7 +190,13 @@ State of the local wall switch (button). \Hypertarget{structGateway_ae5ac04aeeae
 {\footnotesize\ttfamily \label{structGateway_ae5ac04aeeaed877ccb82771214a639f6} 
 uint32\+\_\+t Gateway\+::tx\+\_\+frames}
 
-Frames handed to the CAN controller. 
+Frames handed to the CAN controller. \Hypertarget{structGateway_a40195ff1ec63604bbabdfea043ac7826}\index{Gateway@{Gateway}!uds@{uds}}
+\index{uds@{uds}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{uds}{uds}}
+{\footnotesize\ttfamily \label{structGateway_a40195ff1ec63604bbabdfea043ac7826} 
+\mbox{\hyperlink{structUdsServer}{Uds\+Server}} Gateway\+::uds}
+
+
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

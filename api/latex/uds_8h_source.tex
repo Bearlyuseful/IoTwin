@@ -1,0 +1,153 @@
+\doxysection{uds.\+h}
+\hypertarget{uds_8h_source}{}\label{uds_8h_source}\index{libs/can/uds.h@{libs/can/uds.h}}
+\mbox{\hyperlink{uds_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_UDS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_UDS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{isotp_8h}{isotp.h}}"{}}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ UDS\_SID\_DIAGNOSTIC\_SESSION\_CONTROL\ 0x10u}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ UDS\_SID\_ECU\_RESET\ 0x11u}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ UDS\_SID\_CLEAR\_DIAGNOSTIC\_INFORMATION\ 0x14u}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ UDS\_SID\_READ\_DTC\_INFORMATION\ 0x19u}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ UDS\_SID\_READ\_DATA\_BY\_IDENTIFIER\ 0x22u}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ UDS\_SID\_WRITE\_DATA\_BY\_IDENTIFIER\ 0x2Eu}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ UDS\_SID\_TESTER\_PRESENT\ 0x3Eu}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ UDS\_SID\_NEGATIVE\_RESPONSE\ 0x7Fu}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ UDS\_POSITIVE\_RESPONSE\_OFFSET\ 0x40u}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ UDS\_SUPPRESS\_POSITIVE\_RESPONSE\ 0x80u}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_GENERAL\_REJECT\ 0x10u}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\ 0x11u}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\ 0x12u}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_INCORRECT\_LENGTH\ 0x13u}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_RESPONSE\_TOO\_LONG\ 0x14u}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_BUSY\_REPEAT\_REQUEST\ 0x21u}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_CONDITIONS\_NOT\_CORRECT\ 0x22u}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_REQUEST\_OUT\_OF\_RANGE\ 0x31u}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_SECURITY\_ACCESS\_DENIED\ 0x33u}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_RESPONSE\_PENDING\ 0x78u}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_SUBFUNCTION\_NOT\_SUPPORTED\_IN\_SESSION\ 0x7Eu}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ UDS\_NRC\_SERVICE\_NOT\_SUPPORTED\_IN\_SESSION\ 0x7Fu}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00074\ \ \ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5a19d6bd4dd8bf8da8eb66f6431ab0bb3e}{UDS\_SESSION\_DEFAULT}}\ =\ 0x01,}
+\DoxyCodeLine{00075\ \ \ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5add82a1cab4e4dc289ab9fade1dfd75a0}{UDS\_SESSION\_PROGRAMMING}}\ =\ 0x02,}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5a1e6e996ab47d4a8ef7862bc28b7d26b5}{UDS\_SESSION\_EXTENDED}}\ =\ 0x03}
+\DoxyCodeLine{00077\ \}\ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{UdsSession}};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ UDS\_RESET\_HARD\ 0x01u}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ UDS\_RESET\_SOFT\ 0x03u}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_TEST\_FAILED\ 0x01u}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_TEST\_FAILED\_THIS\_CYCLE\ 0x02u}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_PENDING\ 0x04u}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_CONFIRMED\ 0x08u}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_NOT\_COMPLETED\_SINCE\_CLEAR\ 0x10u}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_FAILED\_SINCE\_CLEAR\ 0x20u}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_NOT\_COMPLETED\_THIS\_CYCLE\ 0x40u}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_WARNING\_INDICATOR\ 0x80u}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_STATUS\_AVAILABILITY\ 0x7Fu}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ UDS\_DTC\_FORMAT\_ISO14229\ 0x01u}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ UDS\_DID\_ACTIVE\_SESSION\ 0xF186u}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ UDS\_DID\_SPARE\_PART\_NUMBER\ 0xF187u}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ UDS\_DID\_SOFTWARE\_VERSION\ 0xF189u}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ UDS\_DID\_SERIAL\_NUMBER\ 0xF18Cu}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ UDS\_DID\_VIN\ 0xF190u}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ UDS\_FUNCTIONAL\_ID\ 0x7DFu}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ UDS\_MAX\_REQUEST\ 256u}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ UDS\_MAX\_RESPONSE\ 512u}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ UDS\_MAX\_DIDS\_PER\_REQUEST\ 8u}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ UDS\_DEFAULT\_P2\_MS\ 50u}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ UDS\_DEFAULT\_P2\_STAR\_MS\ 5000u}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ UDS\_DEFAULT\_S3\_MS\ 5000u}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00122\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsDtc_a46d5a7e468e1e3cb39e9cf02036429b0}{code}};}
+\DoxyCodeLine{00123\ \ \ uint8\_t\ \mbox{\hyperlink{structUdsDtc_ad47c4fd34e7567832ad9dd1d3f72cfb6}{status}};}
+\DoxyCodeLine{00124\ \}\ \mbox{\hyperlink{structUdsDtc}{UdsDtc}};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00133\ \ \ int\ (*\mbox{\hyperlink{structUdsServerHandlers_ac4725be6ef914ba816dfbe409b8ae90f}{read\_did}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}},\ uint16\_t\ did,\ uint8\_t*\ out,\ \textcolor{keywordtype}{size\_t}\ capacity);}
+\DoxyCodeLine{00138\ \ \ uint8\_t\ (*\mbox{\hyperlink{structUdsServerHandlers_aac15e249f1c72f2f26902f880ca77c0a}{write\_did}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}},\ uint16\_t\ did,\ \textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00140\ \ \ void\ (*\mbox{\hyperlink{structUdsServerHandlers_a04ee09f2e700138a2f2688e410930d40}{reset}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}},\ uint8\_t\ reset\_type);}
+\DoxyCodeLine{00142\ \ \ void\ (*\mbox{\hyperlink{structUdsServerHandlers_abb2b5e56b38b92ae6fdf397799af93ac}{session\_changed}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}},\ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{UdsSession}}\ session);}
+\DoxyCodeLine{00143\ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}};}
+\DoxyCodeLine{00144\ \}\ \mbox{\hyperlink{structUdsServerHandlers}{UdsServerHandlers}};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00147\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00148\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsServerConfig_a490fe6bac93145018747ff2329dbbf1c}{request\_id}};\ \ \ \ }
+\DoxyCodeLine{00149\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsServerConfig_a5414e122fb94d699a5e3ad978019452a}{response\_id}};\ \ \ }
+\DoxyCodeLine{00150\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsServerConfig_ad308c3dc123e5afbc7d4f872b73ba22f}{functional\_id}};\ }
+\DoxyCodeLine{00151\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structUdsServerConfig_a88232a490fda5d8f802635f81a8ad452}{extended\_id}};}
+\DoxyCodeLine{00152\ \ \ uint16\_t\ \mbox{\hyperlink{structUdsServerConfig_a09aca233144b9a2f9b17b53cead6ea6c}{p2\_ms}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00153\ \ \ uint16\_t\ \mbox{\hyperlink{structUdsServerConfig_a0f5fcddb093c2c4b88d961d466179d1a}{p2\_star\_ms}};\ \ \ \ }
+\DoxyCodeLine{00154\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsServerConfig_acaab6c85fec144f0557ff2510a818ec9}{s3\_ms}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00155\ \ \ bool\ (*\mbox{\hyperlink{structUdsServerConfig_aa84a02599eb2789ae59c6b6a5e3084d7}{send}})(\textcolor{keywordtype}{void}*\ context,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structUdsServerConfig_ac95a095385699f200fedcd75ebd76ad7}{send\_context}};}
+\DoxyCodeLine{00157\ \ \ \mbox{\hyperlink{structUdsServerHandlers}{UdsServerHandlers}}\ \mbox{\hyperlink{structUdsServerConfig_a8629e68902b22d18a16aa8f5b9e225e9}{handlers}};}
+\DoxyCodeLine{00158\ \ \ \mbox{\hyperlink{structUdsDtc}{UdsDtc}}*\ \mbox{\hyperlink{structUdsServerConfig_a5cbe904b2b14f0477222716c62c9ccef}{dtcs}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00159\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structUdsServerConfig_add0f97a300963fd3c7fbd287b5b5d4c2}{dtc\_count}};}
+\DoxyCodeLine{00160\ \}\ \mbox{\hyperlink{structUdsServerConfig}{UdsServerConfig}};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00163\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00164\ \ \ \mbox{\hyperlink{structUdsServerConfig}{UdsServerConfig}}\ \mbox{\hyperlink{structUdsServer_afb53c2c6e657cd1df6329d838bfa2a44}{config}};}
+\DoxyCodeLine{00165\ \ \ \mbox{\hyperlink{structIsoTpLink}{IsoTpLink}}\ \mbox{\hyperlink{structUdsServer_a99bf6bf0af3e157e72b78825e01ed26b}{link}};}
+\DoxyCodeLine{00166\ \ \ uint8\_t\ \mbox{\hyperlink{structUdsServer_a6336ec6f293f00ce57f150e34cb6007f}{request}}[\mbox{\hyperlink{uds_8h_ae0697c8915ed2e83f36c2b8dbd683779}{UDS\_MAX\_REQUEST}}];}
+\DoxyCodeLine{00167\ \ \ uint8\_t\ \mbox{\hyperlink{structUdsServer_ad1182067334a58d256963e61b91adecd}{response}}[\mbox{\hyperlink{uds_8h_af340deb274e5a528ed94d4e806ce4cad}{UDS\_MAX\_RESPONSE}}];}
+\DoxyCodeLine{00168\ \ \ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{UdsSession}}\ \mbox{\hyperlink{structUdsServer_a5d2e8012e9d6529aa909b4930a5a843e}{session}};}
+\DoxyCodeLine{00169\ \ \ uint64\_t\ \mbox{\hyperlink{structUdsServer_a774cedd86067929078977af2fadbcd79}{last\_request\_us}};}
+\DoxyCodeLine{00170\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structUdsServer_aaee52ebd8394e9065d34fd2724d9f76d}{reset\_pending}};}
+\DoxyCodeLine{00171\ \ \ uint8\_t\ \mbox{\hyperlink{structUdsServer_a07bd209b1d0cc684d2986cbefea5e995}{reset\_type}};}
+\DoxyCodeLine{00172\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsServer_a9477b8b1d66e22e7ec7cd63fd03a8ea0}{requests}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00173\ \ \ uint32\_t\ \mbox{\hyperlink{structUdsServer_aaeaf5a26bf14592e12f139e200a5f8c9}{negative\_responses}};\ }
+\DoxyCodeLine{00174\ \}\ \mbox{\hyperlink{structUdsServer}{UdsServer}};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00177\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_ae720773f124fbc9e4dce8a295868611d}{uds\_server\_default\_config}}(\mbox{\hyperlink{structUdsServerConfig}{UdsServerConfig}}*\ config,\ uint32\_t\ request\_id,\ uint32\_t\ response\_id);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_a124fca5f3fb151771c54384adbbb71e7}{uds\_server\_init}}(\mbox{\hyperlink{structUdsServer}{UdsServer}}*\ server,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structUdsServerConfig}{UdsServerConfig}}*\ config);}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00185\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{uds_8h_a8bdc2d03cde7939685bb1ed03b6a260d}{uds\_server\_on\_frame}}(\mbox{\hyperlink{structUdsServer}{UdsServer}}*\ server,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ uint64\_t\ now\_us);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00188\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_afb06f74a8fc52911cd26b16144fdb2f2}{uds\_server\_poll}}(\mbox{\hyperlink{structUdsServer}{UdsServer}}*\ server,\ uint64\_t\ now\_us);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00194\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{uds_8h_afa4fd3f7d9d89b7711130fd0bbc990d7}{uds\_server\_process}}(\mbox{\hyperlink{structUdsServer}{UdsServer}}*\ server,\ \textcolor{keyword}{const}\ uint8\_t*\ request,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{bool}\ functional,}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t*\ response,\ \textcolor{keywordtype}{size\_t}\ capacity,\ uint64\_t\ now\_us);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{UdsSession}}\ \mbox{\hyperlink{uds_8h_a02c4c54121bcf8f056610e21d7682d19}{uds\_server\_session}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structUdsServer}{UdsServer}}*\ server);}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00200\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_aef312b0df8e3b732d3c796a2d8e8b475}{uds\_dtc\_init}}(\mbox{\hyperlink{structUdsDtc}{UdsDtc}}*\ dtc,\ uint32\_t\ code);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00203\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_a548803cfa527f1a81527599814cb83d8}{uds\_dtc\_report}}(\mbox{\hyperlink{structUdsDtc}{UdsDtc}}*\ dtc,\ \textcolor{keywordtype}{bool}\ failed);}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00206\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_a0f489e27ed9704610a5f8314d4c30345}{uds\_dtc\_start\_operation\_cycle}}(\mbox{\hyperlink{structUdsDtc}{UdsDtc}}*\ dtc);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00209\ \mbox{\hyperlink{structUdsDtc}{UdsDtc}}*\ \mbox{\hyperlink{uds_8h_a9fb478f2691cac9dcb079344e308e880}{uds\_server\_find\_dtc}}(\mbox{\hyperlink{structUdsServer}{UdsServer}}*\ server,\ uint32\_t\ code);}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00213\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{uds_8h_a9a420d53a896e7cb9289c6e7df9240ba}{uds\_service\_name}}(uint8\_t\ sid);}
+\DoxyCodeLine{00214\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{uds_8h_a86ec49e2ccc0c6c15e48fc7c6b618dcb}{uds\_nrc\_name}}(uint8\_t\ nrc);}
+\DoxyCodeLine{00215\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{uds_8h_a60c5ebb45419d05b1f3238e3a6f7154d}{uds\_session\_name}}(uint8\_t\ session);}
+\DoxyCodeLine{00217\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uds_8h_a86d07d478b4c674d7c4dc5ff2fddca70}{uds\_format\_dtc}}(uint32\_t\ code,\ \textcolor{keywordtype}{char}*\ out,\ \textcolor{keywordtype}{size\_t}\ capacity);}
+\DoxyCodeLine{00219\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{uds_8h_a4e36379a1642d8c4ade9e2036a62fd61}{uds\_parse\_dtc}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ uint32\_t*\ code);}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00223\ \}}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_UDS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

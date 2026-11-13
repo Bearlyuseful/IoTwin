@@ -8,6 +8,10 @@
 \#define \mbox{\hyperlink{gateway_8c_a11a96c83096a2287769e3b5701ede44b}{VERSION\+\_\+\+REPLY}}~"{}V0100\textbackslash{}r"{}     /\texorpdfstring{$\ast$}{*} hardware 01, software 00 \texorpdfstring{$\ast$}{*}/
 \item 
 \#define \mbox{\hyperlink{gateway_8c_a21271d6f9809fc3b6cc2599e53a545b1}{SERIAL\+\_\+\+REPLY}}~"{}NG0\+B1\textbackslash{}r"{}
+\item 
+\#define \mbox{\hyperlink{gateway_8c_ab78bcb0e192f08716e20bf15882aa749}{SPARE\+\_\+\+PART\+\_\+\+NUMBER}}~"{}NUCLEO-\/G0\+B1\+RE-\/GW"{}
+\item 
+\#define \mbox{\hyperlink{gateway_8c_aa347c34248a567aadeb4eee093a5dd39}{IOTWIN\+\_\+\+FIRMWARE\+\_\+\+VERSION}}~"{}dev"{}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -23,17 +27,29 @@ void \mbox{\hyperlink{gateway_8c_af40f9bf19ba615758dc5d24d17831cce}{gateway\+\_\
 void \mbox{\hyperlink{gateway_8c_a2d4dbaaa3bee9c4c6f4529328dfaa998}{gateway\+\_\+on\+\_\+rx\+\_\+overrun}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway)
 \begin{DoxyCompactList}\small\item\em Driver dropped frames because its receive queue was full. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{gateway_8c_a8be8bdc7e33addbc49bd6295b77aa191}{gateway\+\_\+tick}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, uint32\+\_\+t now\+\_\+ms)
-\begin{DoxyCompactList}\small\item\em Periodic call with the current time; blinks the LED while the channel is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Periodic call (every millisecond) with the current time\+: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \label{doc-define-members}
 \Hypertarget{gateway_8c_doc-define-members}
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{gateway_8c_aa347c34248a567aadeb4eee093a5dd39}\index{gateway.c@{gateway.c}!IOTWIN\_FIRMWARE\_VERSION@{IOTWIN\_FIRMWARE\_VERSION}}
+\index{IOTWIN\_FIRMWARE\_VERSION@{IOTWIN\_FIRMWARE\_VERSION}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{IOTWIN\_FIRMWARE\_VERSION}{IOTWIN\_FIRMWARE\_VERSION}}
+{\footnotesize\ttfamily \label{gateway_8c_aa347c34248a567aadeb4eee093a5dd39} 
+\#define IOTWIN\+\_\+\+FIRMWARE\+\_\+\+VERSION~"{}dev"{}}
+
 \Hypertarget{gateway_8c_a21271d6f9809fc3b6cc2599e53a545b1}\index{gateway.c@{gateway.c}!SERIAL\_REPLY@{SERIAL\_REPLY}}
 \index{SERIAL\_REPLY@{SERIAL\_REPLY}!gateway.c@{gateway.c}}
 \doxysubsubsection{\texorpdfstring{SERIAL\_REPLY}{SERIAL\_REPLY}}
 {\footnotesize\ttfamily \label{gateway_8c_a21271d6f9809fc3b6cc2599e53a545b1} 
 \#define SERIAL\+\_\+\+REPLY~"{}NG0\+B1\textbackslash{}r"{}}
+
+\Hypertarget{gateway_8c_ab78bcb0e192f08716e20bf15882aa749}\index{gateway.c@{gateway.c}!SPARE\_PART\_NUMBER@{SPARE\_PART\_NUMBER}}
+\index{SPARE\_PART\_NUMBER@{SPARE\_PART\_NUMBER}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{SPARE\_PART\_NUMBER}{SPARE\_PART\_NUMBER}}
+{\footnotesize\ttfamily \label{gateway_8c_ab78bcb0e192f08716e20bf15882aa749} 
+\#define SPARE\+\_\+\+PART\+\_\+\+NUMBER~"{}NUCLEO-\/G0\+B1\+RE-\/GW"{}}
 
 \Hypertarget{gateway_8c_a11a96c83096a2287769e3b5701ede44b}\index{gateway.c@{gateway.c}!VERSION\_REPLY@{VERSION\_REPLY}}
 \index{VERSION\_REPLY@{VERSION\_REPLY}!gateway.c@{gateway.c}}
@@ -100,5 +116,5 @@ void gateway\+\_\+tick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGa
 
 
 
-Periodic call with the current time; blinks the LED while the channel is closed. 
+Periodic call (every millisecond) with the current time\+: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed. 
 

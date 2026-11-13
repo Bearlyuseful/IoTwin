@@ -864,6 +864,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../dev/diagnostics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagnostics (UDS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../dev/component_database/" class="md-nav__link">
         
   
@@ -1233,9 +1261,9 @@ digital-twin features.</p>
 <td>❌ needs PREEMPT_RT hardware</td>
 </tr>
 <tr>
-<td>DBC, ISO-TP</td>
+<td>DBC, ISO-TP, UDS</td>
 <td>step 5</td>
-<td>✅ DBC reader + <code>can_monitor</code>, ISO-TP library; UDS services open</td>
+<td>✅ DBC reader + <code>can_monitor</code>, ISO-TP, UDS server in ECU and gateway, <code>uds_client</code> (<a href="../dev/diagnostics/">Diagnostics</a>)</td>
 </tr>
 <tr>
 <td>Scenarios, more devices, extensions</td>
@@ -1271,8 +1299,8 @@ bus messages and status, and can switch from there into the <strong>3D</strong> 
 </tr>
 <tr>
 <td>C</td>
-<td><strong>UDS diagnostics</strong></td>
-<td>on top of ISO-TP: server in ECU and gateway, client tool</td>
+<td><strong>UDS diagnostics</strong> ✅</td>
+<td>on top of ISO-TP: server in ECU and gateway, <code>uds_client</code>, injectable faults as DTCs (<a href="../dev/diagnostics/">Diagnostics</a>); open: SecurityAccess, RoutineControl, flashing</td>
 </tr>
 <tr>
 <td>D</td>
@@ -1335,7 +1363,7 @@ bus messages and status, and can switch from there into the <strong>3D</strong> 
 </tr>
 <tr>
 <td>5</td>
-<td><strong>Protocols on CAN</strong> (DBC ✅, ISO-TP ✅, UDS open)</td>
+<td><strong>Protocols on CAN</strong> ✅ (DBC, ISO-TP, UDS)</td>
 <td>M–L</td>
 <td>builds on 3 and 4</td>
 </tr>

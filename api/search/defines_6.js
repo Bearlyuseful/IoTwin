@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['init_5ftimeout_5floops_0',['INIT_TIMEOUT_LOOPS',['../fdcan_8c.html#ad759606c5be03877d487461053da40fe',1,'fdcan.c']]],
-  ['iotwin_5fprintf_5fformat_1',['IOTWIN_PRINTF_FORMAT',['../log_8h.html#a632a3e364fe8b1a3ea16b971f2c5ca36',1,'log.h']]],
-  ['isotp_5fmax_5flength_2',['ISOTP_MAX_LENGTH',['../isotp_8h.html#a8919503e7a32cc6b187807a6ba9484a2',1,'isotp.h']]]
+  ['gateway_5fblink_5fperiod_5fms_0',['GATEWAY_BLINK_PERIOD_MS',['../gateway_8h.html#a5ea28e61a31c44bb1dad4276689a3d24',1,'gateway.h']]],
+  ['gateway_5fdefault_5fbitrate_1',['GATEWAY_DEFAULT_BITRATE',['../gateway_8h.html#abe8f68e0b641bc3eb441f4fe5164ec70',1,'gateway.h']]],
+  ['gateway_5fdiag_5frequest_5fid_2',['GATEWAY_DIAG_REQUEST_ID',['../gateway_8h.html#a7a0a02d24a6f9ee539fab7fb2f9b9bce',1,'gateway.h']]],
+  ['gateway_5fdiag_5fresponse_5fid_3',['GATEWAY_DIAG_RESPONSE_ID',['../gateway_8h.html#a9105c90c6d5ff2c6750eb1ff2e0c7132',1,'gateway.h']]],
+  ['gateway_5fdid_5fcan_5ferrors_4',['GATEWAY_DID_CAN_ERRORS',['../gateway_8h.html#ab92dd60123e273c234d1ae177e132c8e',1,'gateway.h']]],
+  ['gateway_5fdid_5fchannel_5',['GATEWAY_DID_CHANNEL',['../gateway_8h.html#ab908842b58963e48ce9b7a5e9e838db3',1,'gateway.h']]],
+  ['gateway_5fdid_5fcounters_6',['GATEWAY_DID_COUNTERS',['../gateway_8h.html#aa01f0c39d3d8cd227139e7a08aeeef48',1,'gateway.h']]],
+  ['gateway_5fdid_5flamp_7',['GATEWAY_DID_LAMP',['../gateway_8h.html#a2348a819d34d1669f83ba73817a4d75e',1,'gateway.h']]],
+  ['gateway_5fdid_5fswitch_8',['GATEWAY_DID_SWITCH',['../gateway_8h.html#aea73af4bf896fb5a472d36050eb7271c',1,'gateway.h']]],
+  ['gateway_5fdid_5fuptime_9',['GATEWAY_DID_UPTIME',['../gateway_8h.html#a047d602019ec46ec6ead0897e03e09e1',1,'gateway.h']]],
+  ['gateway_5fdtc_5fbus_5foff_10',['GATEWAY_DTC_BUS_OFF',['../gateway_8h.html#af6e55c356bdde1319435b485df29f62f',1,'gateway.h']]],
+  ['gateway_5fdtc_5fcount_11',['GATEWAY_DTC_COUNT',['../gateway_8h.html#ad8dd5beb539a31972a04e97c5a2282a8',1,'gateway.h']]],
+  ['gateway_5fecho_5fslots_12',['GATEWAY_ECHO_SLOTS',['../gateway_8h.html#af5db41017dc83b482397d4ab2a9ad1e3',1,'gateway.h']]],
+  ['gateway_5fid_5flamp_5fcmd_13',['GATEWAY_ID_LAMP_CMD',['../gateway_8h.html#a2e5feaead2af596856d6bf859814cc06',1,'gateway.h']]],
+  ['gateway_5fid_5fswitch_5fstate_14',['GATEWAY_ID_SWITCH_STATE',['../gateway_8h.html#a02ccfa1fed6f144cd6c3874c28f9d09c',1,'gateway.h']]],
+  ['gateway_5freset_5fdelay_5fms_15',['GATEWAY_RESET_DELAY_MS',['../gateway_8h.html#ab72ee14093b69a3c2d415753bf8d3468',1,'gateway.h']]]
 ];

@@ -6,8 +6,10 @@ var light__ecu_8h =
     [ "LIGHT_ECU_ID_SWITCH_STATE", "light__ecu_8h.html#aea742e162f722145b33dfd4c75581d49", null ],
     [ "light_ecu_init", "light__ecu_8h.html#a2cae1fbb1accbf1ed00f65a1815306fd", null ],
     [ "light_ecu_on_frame", "light__ecu_8h.html#a7f762142d5a7d2c34cd11b72bd265239", null ],
+    [ "light_ecu_output", "light__ecu_8h.html#afa5413786f818389645994e5c9acd1c7", null ],
     [ "light_ecu_request_send", "light__ecu_8h.html#ab8cb4fd55e4b2ba439a0c73e0a5575bc", null ],
     [ "light_ecu_set_blink", "light__ecu_8h.html#a87747d99d86faf11f561793a602efe9e", null ],
     [ "light_ecu_set_lamp", "light__ecu_8h.html#a62eb9fd4971ac3eb69e0f6d436172d1a", null ],
+    [ "light_ecu_set_output_inhibit", "light__ecu_8h.html#a960ee4c117db171fed12d742e4ce9591", null ],
     [ "light_ecu_step", "light__ecu_8h.html#adf2109604c377e8c13357c9b848f18de", null ]
 ];

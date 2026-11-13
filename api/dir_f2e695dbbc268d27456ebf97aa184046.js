@@ -13,5 +13,7 @@ var dir_f2e695dbbc268d27456ebf97aa184046 =
     [ "isotp.c", "isotp_8c.html", "isotp_8c" ],
     [ "isotp.h", "isotp_8h.html", "isotp_8h" ],
     [ "slcan.c", "slcan_8c.html", "slcan_8c" ],
-    [ "slcan.h", "slcan_8h.html", "slcan_8h" ]
+    [ "slcan.h", "slcan_8h.html", "slcan_8h" ],
+    [ "uds.c", "uds_8c.html", "uds_8c" ],
+    [ "uds.h", "uds_8h.html", "uds_8h" ]
 ];

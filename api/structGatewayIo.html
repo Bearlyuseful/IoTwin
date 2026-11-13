@@ -105,6 +105,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a95ef5812185be8f5d60995c14456e91b" id="r_a95ef5812185be8f5d60995c14456e91b"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95ef5812185be8f5d60995c14456e91b">can_send</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, const <a class="el" href="structCanFrame.html">CanFrame</a> *frame)</td></tr>
 <tr class="memitem:a7fb34ee7e645ab9d5266b607d1aac768" id="r_a7fb34ee7e645ab9d5266b607d1aac768"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fb34ee7e645ab9d5266b607d1aac768">can_status</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, <a class="el" href="structGatewayCanStatus.html">GatewayCanStatus</a> *status)</td></tr>
 <tr class="memitem:ad0a71227d1f0d8e9ed1af902237b34ba" id="r_ad0a71227d1f0d8e9ed1af902237b34ba"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0a71227d1f0d8e9ed1af902237b34ba">led_set</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, bool on)</td></tr>
+<tr class="memitem:ab99a1574b73cace1286852d887e4117a" id="r_ab99a1574b73cace1286852d887e4117a"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab99a1574b73cace1286852d887e4117a">system_reset</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>)</td></tr>
+<tr class="memitem:a5dda457906e8444de07286a6d1b0a32d" id="r_a5dda457906e8444de07286a6d1b0a32d"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dda457906e8444de07286a6d1b0a32d">unique_id</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, uint8_t out[12])</td></tr>
 <tr class="memitem:af34ecbc044828591c68b10a51199707d" id="r_af34ecbc044828591c68b10a51199707d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -205,6 +207,36 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab99a1574b73cace1286852d887e4117a" name="ab99a1574b73cace1286852d887e4117a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99a1574b73cace1286852d887e4117a">&#9670;&#160;</a></span>system_reset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* GatewayIo::system_reset) (void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Optional: restarts the MCU (UDS ECUReset hard). </p>
+
+</div>
+</div>
+<a id="a5dda457906e8444de07286a6d1b0a32d" name="a5dda457906e8444de07286a6d1b0a32d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dda457906e8444de07286a6d1b0a32d">&#9670;&#160;</a></span>unique_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* GatewayIo::unique_id) (void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, uint8_t out[12])</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Optional: 96-bit unique device id (UDS serial number F18C). </p>
 
 </div>
 </div>

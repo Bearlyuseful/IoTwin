@@ -1,0 +1,71 @@
+\doxysection{light\+\_\+ecu\+\_\+diag.\+h}
+\hypertarget{light__ecu__diag_8h_source}{}\label{light__ecu__diag_8h_source}\index{apps/can\_sim/light\_ecu\_diag.h@{apps/can\_sim/light\_ecu\_diag.h}}
+\mbox{\hyperlink{light__ecu__diag_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_LIGHT\_ECU\_DIAG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_LIGHT\_ECU\_DIAG\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{light__ecu_8h}{light\_ecu.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{uds_8h}{uds.h}}"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DIAG\_REQUEST\_ID\ 0x7E0u}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DIAG\_RESPONSE\_ID\ 0x7E8u}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DTC\_LAMP\_SHORT\ 0x900111u\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DTC\_LAMP\_OPEN\ 0x900113u\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DTC\_SUPPLY\_LOW\ 0x900216u\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DTC\_COUNT\ 3u}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DID\_LAMP\_OUTPUT\ 0x0100u\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DID\_SWITCH\_INPUT\ 0x0101u\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DID\_CYCLE\_TIME\ 0x0102u\ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DID\_BLINK\_PERIOD\ 0x0103u\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE\ 0x0104u\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_SUPPLY\_NORMAL\_MV\ 12600u}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_SUPPLY\_LOW\_MV\ 9800u}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3a9afdf1f10064fae532fc89a29d32af}{LIGHT\_FAULT\_LAMP\_SHORT}}\ =\ 0x01,}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3bad532c9c0af0871233584aa8e74db8}{LIGHT\_FAULT\_LAMP\_OPEN}}\ =\ 0x02,}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a713e8ad2e23c8370bcc3e8b8ad7d709f}{LIGHT\_FAULT\_SUPPLY\_LOW}}\ =\ 0x04}
+\DoxyCodeLine{00058\ \}\ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{LightEcuFault}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{structLightEcu}{LightEcu}}*\ \mbox{\hyperlink{structLightEcuDiag_aa8396abc1905a2aa797884f736724168}{ecu}};}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{structUdsServer}{UdsServer}}\ \mbox{\hyperlink{structLightEcuDiag_ac8df1499493ce0505f2b46f81af7f510}{uds}};}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{structUdsDtc}{UdsDtc}}\ \mbox{\hyperlink{structLightEcuDiag_adb9d2e5625de28ed4c88543ab5c549ee}{dtcs}}[\mbox{\hyperlink{light__ecu__diag_8h_a674fc59f7962cd85b1fca4fd208b50cb}{LIGHT\_ECU\_DTC\_COUNT}}];}
+\DoxyCodeLine{00064\ \ \ uint8\_t\ \mbox{\hyperlink{structLightEcuDiag_a170ef980d33f2c2c33eef0de92215f56}{faults}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ uint32\_t\ \mbox{\hyperlink{structLightEcuDiag_a5c3d8cb270a1375b6fdd8a90021c7134}{resets}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structLightEcuDiag_a7f2efd7b6c943d2db6e1f6104af4e3f4}{software\_version}};}
+\DoxyCodeLine{00067\ \}\ \mbox{\hyperlink{structLightEcuDiag}{LightEcuDiag}};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu__diag_8h_a81273acaebc69d616c3ec4a9b3e3c581}{light\_ecu\_diag\_init}}(\mbox{\hyperlink{structLightEcuDiag}{LightEcuDiag}}*\ diag,\ \mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keywordtype}{bool}\ (*send)(\textcolor{keywordtype}{void}*\ context,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame),}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ send\_context,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ software\_version);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu__diag_8h_a159894dac8f27a22e9976c89c8334d45}{light\_ecu\_diag\_on\_frame}}(\mbox{\hyperlink{structLightEcuDiag}{LightEcuDiag}}*\ diag,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ uint64\_t\ now\_ms);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu__diag_8h_ab09c523c51fe78fbf3e486c7908e07d8}{light\_ecu\_diag\_step}}(\mbox{\hyperlink{structLightEcuDiag}{LightEcuDiag}}*\ diag,\ uint64\_t\ now\_ms);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu__diag_8h_a8d1e567e049a58bead09b10a3c521679}{light\_ecu\_diag\_set\_fault}}(\mbox{\hyperlink{structLightEcuDiag}{LightEcuDiag}}*\ diag,\ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{LightEcuFault}}\ fault,\ \textcolor{keywordtype}{bool}\ active);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu__diag_8h_add9b0003c398d0a18c0f77108b304b61}{light\_ecu\_fault\_from\_name}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{LightEcuFault}}*\ fault);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{light__ecu__diag_8h_a5ee115823122f152e1ba4b19669938b2}{light\_ecu\_fault\_name}}(\mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{LightEcuFault}}\ fault);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_LIGHT\_ECU\_DIAG\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

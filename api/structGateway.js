@@ -1,6 +1,7 @@
 var structGateway =
 [
     [ "bitrate", "structGateway.html#ae6742b551812a2673af34c49a29f249e", null ],
+    [ "dtcs", "structGateway.html#a21a777c15b573b20a879f0710fc95aa5", null ],
     [ "echo", "structGateway.html#a2551b8be41edec487904bc24a223b54c", null ],
     [ "echo_count", "structGateway.html#a69b61475b216b2e9ef9cd8835cbfaf31", null ],
     [ "echo_head", "structGateway.html#a5284f67aa628f147e9ee9d2b241c4baa", null ],
@@ -10,10 +11,15 @@ var structGateway =
     [ "last_blink_ms", "structGateway.html#a29a1374049b479fd9605bfc26f0cb954", null ],
     [ "led_on", "structGateway.html#a0761bcd2966eb407561fa2fc726948c2", null ],
     [ "mode", "structGateway.html#af477dbcf02493a11f38c52f5f79fe32f", null ],
+    [ "now_ms", "structGateway.html#a1b4995096b389749282db25f448873fb", null ],
     [ "open", "structGateway.html#a576e5425a73342206a139c54a175ca97", null ],
     [ "reader", "structGateway.html#a7b14fb9ecd0682dd7fa5b68d26291340", null ],
+    [ "reset_due_ms", "structGateway.html#a1397816a0f34eae1aeb3994332f521c1", null ],
+    [ "reset_scheduled", "structGateway.html#aff81ad4f60114dcdedce772996748b8f", null ],
     [ "rx_frames", "structGateway.html#a45b9a95732bacd411ebf59bf3de02092", null ],
+    [ "soft_resets", "structGateway.html#a78c24e58aa2a17e441c6cafdbc58279a", null ],
     [ "sticky_flags", "structGateway.html#ab304f07aeda9f0d34da3ea718632eac3", null ],
     [ "switch_on", "structGateway.html#a934f79073e899297c3fddd1e6ce248b6", null ],
-    [ "tx_frames", "structGateway.html#ae5ac04aeeaed877ccb82771214a639f6", null ]
+    [ "tx_frames", "structGateway.html#ae5ac04aeeaed877ccb82771214a639f6", null ],
+    [ "uds", "structGateway.html#a40195ff1ec63604bbabdfea043ac7826", null ]
 ];

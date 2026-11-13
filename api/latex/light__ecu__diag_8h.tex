@@ -1,0 +1,274 @@
+\doxysection{apps/can\+\_\+sim/light\+\_\+ecu\+\_\+diag.h File Reference}
+\hypertarget{light__ecu__diag_8h}{}\label{light__ecu__diag_8h}\index{apps/can\_sim/light\_ecu\_diag.h@{apps/can\_sim/light\_ecu\_diag.h}}
+
+
+UDS diagnostics of the simulated light ECU (see docs/dev/diagnostics.\+md).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include "{}light\+\_\+ecu.\+h"{}}\newline
+{\ttfamily \#include "{}uds.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a77fd6f9589c4a98790b7ae50b3bd4dca}{LIGHT\+\_\+\+ECU\+\_\+\+DIAG\+\_\+\+REQUEST\+\_\+\+ID}}~0x7\+E0u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a54dea7c75b16df5ed535b07e893342c2}{LIGHT\+\_\+\+ECU\+\_\+\+DIAG\+\_\+\+RESPONSE\+\_\+\+ID}}~0x7\+E8u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a073b49b5a119d0dbb036844a3f72582f}{LIGHT\+\_\+\+ECU\+\_\+\+SUPPLY\+\_\+\+NORMAL\+\_\+\+MV}}~12600u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a35efab25a0d66f16f20e4156050d36fa}{LIGHT\+\_\+\+ECU\+\_\+\+SUPPLY\+\_\+\+LOW\+\_\+\+MV}}~9800u
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ DTCs}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_aa3d17eb2825bb92f9cc657f55200dc18}{LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+LAMP\+\_\+\+SHORT}}~0x900111u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a5e3c7365e8b22a35aa5f9ec0f2e26696}{LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+LAMP\+\_\+\+OPEN}}~0x900113u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a1a9da9b06e1e62e7ccc0b24bc292e1ee}{LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+SUPPLY\+\_\+\+LOW}}~0x900216u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a674fc59f7962cd85b1fca4fd208b50cb}{LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+COUNT}}~3u
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Data identifiers (besides F186, F187, F189, F18C, F190)}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a1a41ccbd13fabfaee1eaa46d4adb30fa}{LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+LAMP\+\_\+\+OUTPUT}}~0x0100u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_ad6a77c1d0746bb3cf60dd367edd7a833}{LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+SWITCH\+\_\+\+INPUT}}~0x0101u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a67a17df5ccba49a6ec5117b2aa87a236}{LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+CYCLE\+\_\+\+TIME}}~0x0102u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a7dc4dae68bf68efac0aa760312a1224a}{LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+BLINK\+\_\+\+PERIOD}}~0x0103u
+\item 
+\#define \mbox{\hyperlink{light__ecu__diag_8h_a71336c0c9dbe2ea759816e1be44f5d20}{LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+SUPPLY\+\_\+\+VOLTAGE}}~0x0104u
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}} \{ \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3a9afdf1f10064fae532fc89a29d32af}{LIGHT\+\_\+\+FAULT\+\_\+\+LAMP\+\_\+\+SHORT}} = 0x01
+, \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3bad532c9c0af0871233584aa8e74db8}{LIGHT\+\_\+\+FAULT\+\_\+\+LAMP\+\_\+\+OPEN}} = 0x02
+, \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a713e8ad2e23c8370bcc3e8b8ad7d709f}{LIGHT\+\_\+\+FAULT\+\_\+\+SUPPLY\+\_\+\+LOW}} = 0x04
+ \}
+\begin{DoxyCompactList}\small\item\em Injectable faults (bit mask). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{light__ecu__diag_8h_a81273acaebc69d616c3ec4a9b3e3c581}{light\+\_\+ecu\+\_\+diag\+\_\+init}} (\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}diag, \mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, bool(\texorpdfstring{$\ast$}{*}send)(void \texorpdfstring{$\ast$}{*}context, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame), void \texorpdfstring{$\ast$}{*}send\+\_\+context, const char \texorpdfstring{$\ast$}{*}software\+\_\+version)
+\begin{DoxyCompactList}\small\item\em Initialises diagnostics for {\ttfamily ecu}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{light__ecu__diag_8h_a159894dac8f27a22e9976c89c8334d45}{light\+\_\+ecu\+\_\+diag\+\_\+on\+\_\+frame}} (\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}diag, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t now\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Hands a received frame to the UDS server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu__diag_8h_ab09c523c51fe78fbf3e486c7908e07d8}{light\+\_\+ecu\+\_\+diag\+\_\+step}} (\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}diag, uint64\+\_\+t now\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Runs the fault monitors and the UDS timers; call every control step before \doxylink{light__ecu_8c_adf2109604c377e8c13357c9b848f18de}{light\+\_\+ecu\+\_\+step()}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu__diag_8h_a8d1e567e049a58bead09b10a3c521679}{light\+\_\+ecu\+\_\+diag\+\_\+set\+\_\+fault}} (\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}diag, \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}} fault, bool active)
+\begin{DoxyCompactList}\small\item\em Activates or removes an injected fault. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{light__ecu__diag_8h_add9b0003c398d0a18c0f77108b304b61}{light\+\_\+ecu\+\_\+fault\+\_\+from\+\_\+name}} (const char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}} \texorpdfstring{$\ast$}{*}fault)
+\begin{DoxyCompactList}\small\item\em Parses "{}short"{}, "{}open"{} or "{}supply"{}. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{light__ecu__diag_8h_a5ee115823122f152e1ba4b19669938b2}{light\+\_\+ecu\+\_\+fault\+\_\+name}} (\mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}} fault)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+UDS diagnostics of the simulated light ECU (see docs/dev/diagnostics.\+md). 
+
+Addressing\+: requests on 0x7\+E0 (and functional 0x7\+DF), responses on 0x7\+E8.
+
+Faults can be injected (console command "{}fault"{}); monitors turn them into DTCs the way a real ECU would\+:
+\begin{DoxyItemize}
+\item lamp output short to ground (B1001-\/11)\+: the ECU switches the output off,
+\item lamp output open circuit (B1001-\/13)\+: only detectable while the lamp is on,
+\item supply voltage low (B1002-\/16).
+\end{DoxyItemize}
+
+Free of I/O and threads, unit tested on the host. 
+
+\label{doc-define-members}
+\Hypertarget{light__ecu__diag_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{light__ecu__diag_8h_a77fd6f9589c4a98790b7ae50b3bd4dca}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DIAG\_REQUEST\_ID@{LIGHT\_ECU\_DIAG\_REQUEST\_ID}}
+\index{LIGHT\_ECU\_DIAG\_REQUEST\_ID@{LIGHT\_ECU\_DIAG\_REQUEST\_ID}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DIAG\_REQUEST\_ID}{LIGHT\_ECU\_DIAG\_REQUEST\_ID}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a77fd6f9589c4a98790b7ae50b3bd4dca} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DIAG\+\_\+\+REQUEST\+\_\+\+ID~0x7\+E0u}
+
+\Hypertarget{light__ecu__diag_8h_a54dea7c75b16df5ed535b07e893342c2}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DIAG\_RESPONSE\_ID@{LIGHT\_ECU\_DIAG\_RESPONSE\_ID}}
+\index{LIGHT\_ECU\_DIAG\_RESPONSE\_ID@{LIGHT\_ECU\_DIAG\_RESPONSE\_ID}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DIAG\_RESPONSE\_ID}{LIGHT\_ECU\_DIAG\_RESPONSE\_ID}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a54dea7c75b16df5ed535b07e893342c2} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DIAG\+\_\+\+RESPONSE\+\_\+\+ID~0x7\+E8u}
+
+\Hypertarget{light__ecu__diag_8h_a7dc4dae68bf68efac0aa760312a1224a}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DID\_BLINK\_PERIOD@{LIGHT\_ECU\_DID\_BLINK\_PERIOD}}
+\index{LIGHT\_ECU\_DID\_BLINK\_PERIOD@{LIGHT\_ECU\_DID\_BLINK\_PERIOD}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DID\_BLINK\_PERIOD}{LIGHT\_ECU\_DID\_BLINK\_PERIOD}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a7dc4dae68bf68efac0aa760312a1224a} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+BLINK\+\_\+\+PERIOD~0x0103u}
+
+uint16 ms, 0 = not blinking (read/write) \Hypertarget{light__ecu__diag_8h_a67a17df5ccba49a6ec5117b2aa87a236}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DID\_CYCLE\_TIME@{LIGHT\_ECU\_DID\_CYCLE\_TIME}}
+\index{LIGHT\_ECU\_DID\_CYCLE\_TIME@{LIGHT\_ECU\_DID\_CYCLE\_TIME}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DID\_CYCLE\_TIME}{LIGHT\_ECU\_DID\_CYCLE\_TIME}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a67a17df5ccba49a6ec5117b2aa87a236} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+CYCLE\+\_\+\+TIME~0x0102u}
+
+uint16 ms, LAMP\+\_\+\+CMD cycle, 0 = off (read/write) \Hypertarget{light__ecu__diag_8h_a1a41ccbd13fabfaee1eaa46d4adb30fa}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DID\_LAMP\_OUTPUT@{LIGHT\_ECU\_DID\_LAMP\_OUTPUT}}
+\index{LIGHT\_ECU\_DID\_LAMP\_OUTPUT@{LIGHT\_ECU\_DID\_LAMP\_OUTPUT}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DID\_LAMP\_OUTPUT}{LIGHT\_ECU\_DID\_LAMP\_OUTPUT}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a1a41ccbd13fabfaee1eaa46d4adb30fa} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+LAMP\+\_\+\+OUTPUT~0x0100u}
+
+1 byte, output state (read) \Hypertarget{light__ecu__diag_8h_a71336c0c9dbe2ea759816e1be44f5d20}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE@{LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE}}
+\index{LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE@{LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE}{LIGHT\_ECU\_DID\_SUPPLY\_VOLTAGE}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a71336c0c9dbe2ea759816e1be44f5d20} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+SUPPLY\+\_\+\+VOLTAGE~0x0104u}
+
+uint16 mV, simulated supply (read) \Hypertarget{light__ecu__diag_8h_ad6a77c1d0746bb3cf60dd367edd7a833}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DID\_SWITCH\_INPUT@{LIGHT\_ECU\_DID\_SWITCH\_INPUT}}
+\index{LIGHT\_ECU\_DID\_SWITCH\_INPUT@{LIGHT\_ECU\_DID\_SWITCH\_INPUT}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DID\_SWITCH\_INPUT}{LIGHT\_ECU\_DID\_SWITCH\_INPUT}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_ad6a77c1d0746bb3cf60dd367edd7a833} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DID\+\_\+\+SWITCH\+\_\+\+INPUT~0x0101u}
+
+1 byte, last SWITCH\+\_\+\+STATE (read) \Hypertarget{light__ecu__diag_8h_a674fc59f7962cd85b1fca4fd208b50cb}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DTC\_COUNT@{LIGHT\_ECU\_DTC\_COUNT}}
+\index{LIGHT\_ECU\_DTC\_COUNT@{LIGHT\_ECU\_DTC\_COUNT}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DTC\_COUNT}{LIGHT\_ECU\_DTC\_COUNT}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a674fc59f7962cd85b1fca4fd208b50cb} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+COUNT~3u}
+
+\Hypertarget{light__ecu__diag_8h_a5e3c7365e8b22a35aa5f9ec0f2e26696}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DTC\_LAMP\_OPEN@{LIGHT\_ECU\_DTC\_LAMP\_OPEN}}
+\index{LIGHT\_ECU\_DTC\_LAMP\_OPEN@{LIGHT\_ECU\_DTC\_LAMP\_OPEN}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DTC\_LAMP\_OPEN}{LIGHT\_ECU\_DTC\_LAMP\_OPEN}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a5e3c7365e8b22a35aa5f9ec0f2e26696} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+LAMP\+\_\+\+OPEN~0x900113u}
+
+B1001-\/13 lamp output open circuit \Hypertarget{light__ecu__diag_8h_aa3d17eb2825bb92f9cc657f55200dc18}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DTC\_LAMP\_SHORT@{LIGHT\_ECU\_DTC\_LAMP\_SHORT}}
+\index{LIGHT\_ECU\_DTC\_LAMP\_SHORT@{LIGHT\_ECU\_DTC\_LAMP\_SHORT}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DTC\_LAMP\_SHORT}{LIGHT\_ECU\_DTC\_LAMP\_SHORT}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_aa3d17eb2825bb92f9cc657f55200dc18} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+LAMP\+\_\+\+SHORT~0x900111u}
+
+B1001-\/11 lamp output short to ground \Hypertarget{light__ecu__diag_8h_a1a9da9b06e1e62e7ccc0b24bc292e1ee}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_DTC\_SUPPLY\_LOW@{LIGHT\_ECU\_DTC\_SUPPLY\_LOW}}
+\index{LIGHT\_ECU\_DTC\_SUPPLY\_LOW@{LIGHT\_ECU\_DTC\_SUPPLY\_LOW}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DTC\_SUPPLY\_LOW}{LIGHT\_ECU\_DTC\_SUPPLY\_LOW}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a1a9da9b06e1e62e7ccc0b24bc292e1ee} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+SUPPLY\+\_\+\+LOW~0x900216u}
+
+B1002-\/16 supply voltage below threshold \Hypertarget{light__ecu__diag_8h_a35efab25a0d66f16f20e4156050d36fa}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_SUPPLY\_LOW\_MV@{LIGHT\_ECU\_SUPPLY\_LOW\_MV}}
+\index{LIGHT\_ECU\_SUPPLY\_LOW\_MV@{LIGHT\_ECU\_SUPPLY\_LOW\_MV}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_SUPPLY\_LOW\_MV}{LIGHT\_ECU\_SUPPLY\_LOW\_MV}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a35efab25a0d66f16f20e4156050d36fa} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+SUPPLY\+\_\+\+LOW\+\_\+\+MV~9800u}
+
+\Hypertarget{light__ecu__diag_8h_a073b49b5a119d0dbb036844a3f72582f}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_ECU\_SUPPLY\_NORMAL\_MV@{LIGHT\_ECU\_SUPPLY\_NORMAL\_MV}}
+\index{LIGHT\_ECU\_SUPPLY\_NORMAL\_MV@{LIGHT\_ECU\_SUPPLY\_NORMAL\_MV}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_SUPPLY\_NORMAL\_MV}{LIGHT\_ECU\_SUPPLY\_NORMAL\_MV}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a073b49b5a119d0dbb036844a3f72582f} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+SUPPLY\+\_\+\+NORMAL\+\_\+\+MV~12600u}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{light__ecu__diag_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LightEcuFault@{LightEcuFault}}
+\index{LightEcuFault@{LightEcuFault}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{LightEcuFault}{LightEcuFault}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715} 
+enum \mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}}}
+
+
+
+Injectable faults (bit mask). 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LIGHT\_FAULT\_LAMP\_SHORT@{LIGHT\_FAULT\_LAMP\_SHORT}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_FAULT\_LAMP\_SHORT@{LIGHT\_FAULT\_LAMP\_SHORT}}}\Hypertarget{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3a9afdf1f10064fae532fc89a29d32af}\label{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3a9afdf1f10064fae532fc89a29d32af} 
+LIGHT\+\_\+\+FAULT\+\_\+\+LAMP\+\_\+\+SHORT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LIGHT\_FAULT\_LAMP\_OPEN@{LIGHT\_FAULT\_LAMP\_OPEN}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_FAULT\_LAMP\_OPEN@{LIGHT\_FAULT\_LAMP\_OPEN}}}\Hypertarget{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3bad532c9c0af0871233584aa8e74db8}\label{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a3bad532c9c0af0871233584aa8e74db8} 
+LIGHT\+\_\+\+FAULT\+\_\+\+LAMP\+\_\+\+OPEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LIGHT\_FAULT\_SUPPLY\_LOW@{LIGHT\_FAULT\_SUPPLY\_LOW}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!LIGHT\_FAULT\_SUPPLY\_LOW@{LIGHT\_FAULT\_SUPPLY\_LOW}}}\Hypertarget{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a713e8ad2e23c8370bcc3e8b8ad7d709f}\label{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715a713e8ad2e23c8370bcc3e8b8ad7d709f} 
+LIGHT\+\_\+\+FAULT\+\_\+\+SUPPLY\+\_\+\+LOW&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{light__ecu__diag_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{light__ecu__diag_8h_a81273acaebc69d616c3ec4a9b3e3c581}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!light\_ecu\_diag\_init@{light\_ecu\_diag\_init}}
+\index{light\_ecu\_diag\_init@{light\_ecu\_diag\_init}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_diag\_init()}{light\_ecu\_diag\_init()}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a81273acaebc69d616c3ec4a9b3e3c581} 
+void light\+\_\+ecu\+\_\+diag\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}}]{diag}{, }\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{bool(\texorpdfstring{$\ast$}{*}}]{send~}{)(void \texorpdfstring{$\ast$}{*}context, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame), }\item[{void \texorpdfstring{$\ast$}{*}}]{send\+\_\+context}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{software\+\_\+version}{}\end{DoxyParamCaption})}
+
+
+
+Initialises diagnostics for {\ttfamily ecu}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em send} & CAN transmit function for the responses. \\
+\hline
+{\em software\+\_\+version} & Reported in DID F189. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{light__ecu__diag_8h_a159894dac8f27a22e9976c89c8334d45}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!light\_ecu\_diag\_on\_frame@{light\_ecu\_diag\_on\_frame}}
+\index{light\_ecu\_diag\_on\_frame@{light\_ecu\_diag\_on\_frame}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_diag\_on\_frame()}{light\_ecu\_diag\_on\_frame()}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a159894dac8f27a22e9976c89c8334d45} 
+bool light\+\_\+ecu\+\_\+diag\+\_\+on\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}}]{diag}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t}]{now\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Hands a received frame to the UDS server. 
+
+\begin{DoxyReturn}{Returns}
+true if it was a diagnostic request. 
+\end{DoxyReturn}
+\Hypertarget{light__ecu__diag_8h_a8d1e567e049a58bead09b10a3c521679}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!light\_ecu\_diag\_set\_fault@{light\_ecu\_diag\_set\_fault}}
+\index{light\_ecu\_diag\_set\_fault@{light\_ecu\_diag\_set\_fault}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_diag\_set\_fault()}{light\_ecu\_diag\_set\_fault()}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a8d1e567e049a58bead09b10a3c521679} 
+void light\+\_\+ecu\+\_\+diag\+\_\+set\+\_\+fault (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}}]{diag}{, }\item[{\mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}}}]{fault}{, }\item[{bool}]{active}{}\end{DoxyParamCaption})}
+
+
+
+Activates or removes an injected fault. 
+
+\Hypertarget{light__ecu__diag_8h_ab09c523c51fe78fbf3e486c7908e07d8}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!light\_ecu\_diag\_step@{light\_ecu\_diag\_step}}
+\index{light\_ecu\_diag\_step@{light\_ecu\_diag\_step}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_diag\_step()}{light\_ecu\_diag\_step()}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_ab09c523c51fe78fbf3e486c7908e07d8} 
+void light\+\_\+ecu\+\_\+diag\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcuDiag}{Light\+Ecu\+Diag}} \texorpdfstring{$\ast$}{*}}]{diag}{, }\item[{uint64\+\_\+t}]{now\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Runs the fault monitors and the UDS timers; call every control step before \doxylink{light__ecu_8c_adf2109604c377e8c13357c9b848f18de}{light\+\_\+ecu\+\_\+step()}. 
+
+\Hypertarget{light__ecu__diag_8h_add9b0003c398d0a18c0f77108b304b61}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!light\_ecu\_fault\_from\_name@{light\_ecu\_fault\_from\_name}}
+\index{light\_ecu\_fault\_from\_name@{light\_ecu\_fault\_from\_name}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_fault\_from\_name()}{light\_ecu\_fault\_from\_name()}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_add9b0003c398d0a18c0f77108b304b61} 
+bool light\+\_\+ecu\+\_\+fault\+\_\+from\+\_\+name (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{\mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}} \texorpdfstring{$\ast$}{*}}]{fault}{}\end{DoxyParamCaption})}
+
+
+
+Parses "{}short"{}, "{}open"{} or "{}supply"{}. 
+
+\Hypertarget{light__ecu__diag_8h_a5ee115823122f152e1ba4b19669938b2}\index{light\_ecu\_diag.h@{light\_ecu\_diag.h}!light\_ecu\_fault\_name@{light\_ecu\_fault\_name}}
+\index{light\_ecu\_fault\_name@{light\_ecu\_fault\_name}!light\_ecu\_diag.h@{light\_ecu\_diag.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_fault\_name()}{light\_ecu\_fault\_name()}}
+{\footnotesize\ttfamily \label{light__ecu__diag_8h_a5ee115823122f152e1ba4b19669938b2} 
+const char \texorpdfstring{$\ast$}{*} light\+\_\+ecu\+\_\+fault\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault}}}]{fault}{}\end{DoxyParamCaption})}
+

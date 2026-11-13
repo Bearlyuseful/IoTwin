@@ -98,6 +98,8 @@ $(function(){initNavTree('gateway_8c.html','',''); });
 Macros</h2></td></tr>
 <tr class="memitem:a11a96c83096a2287769e3b5701ede44b" id="r_a11a96c83096a2287769e3b5701ede44b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11a96c83096a2287769e3b5701ede44b">VERSION_REPLY</a>&#160;&#160;&#160;&quot;V0100\r&quot;     /* hardware 01, software 00 */</td></tr>
 <tr class="memitem:a21271d6f9809fc3b6cc2599e53a545b1" id="r_a21271d6f9809fc3b6cc2599e53a545b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21271d6f9809fc3b6cc2599e53a545b1">SERIAL_REPLY</a>&#160;&#160;&#160;&quot;NG0B1\r&quot;</td></tr>
+<tr class="memitem:ab78bcb0e192f08716e20bf15882aa749" id="r_ab78bcb0e192f08716e20bf15882aa749"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab78bcb0e192f08716e20bf15882aa749">SPARE_PART_NUMBER</a>&#160;&#160;&#160;&quot;NUCLEO-G0B1RE-GW&quot;</td></tr>
+<tr class="memitem:aa347c34248a567aadeb4eee093a5dd39" id="r_aa347c34248a567aadeb4eee093a5dd39"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa347c34248a567aadeb4eee093a5dd39">IOTWIN_FIRMWARE_VERSION</a>&#160;&#160;&#160;&quot;dev&quot;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -111,9 +113,23 @@ Functions</h2></td></tr>
 <tr class="memitem:a2d4dbaaa3bee9c4c6f4529328dfaa998" id="r_a2d4dbaaa3bee9c4c6f4529328dfaa998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d4dbaaa3bee9c4c6f4529328dfaa998">gateway_on_rx_overrun</a> (<a class="el" href="structGateway.html">Gateway</a> *gateway)</td></tr>
 <tr class="memdesc:a2d4dbaaa3bee9c4c6f4529328dfaa998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver dropped frames because its receive queue was full.  <br /></td></tr>
 <tr class="memitem:a8be8bdc7e33addbc49bd6295b77aa191" id="r_a8be8bdc7e33addbc49bd6295b77aa191"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8be8bdc7e33addbc49bd6295b77aa191">gateway_tick</a> (<a class="el" href="structGateway.html">Gateway</a> *gateway, uint32_t now_ms)</td></tr>
-<tr class="memdesc:a8be8bdc7e33addbc49bd6295b77aa191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic call with the current time; blinks the LED while the channel is closed.  <br /></td></tr>
+<tr class="memdesc:a8be8bdc7e33addbc49bd6295b77aa191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic call (every millisecond) with the current time: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="aa347c34248a567aadeb4eee093a5dd39" name="aa347c34248a567aadeb4eee093a5dd39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa347c34248a567aadeb4eee093a5dd39">&#9670;&#160;</a></span>IOTWIN_FIRMWARE_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IOTWIN_FIRMWARE_VERSION&#160;&#160;&#160;&quot;dev&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a21271d6f9809fc3b6cc2599e53a545b1" name="a21271d6f9809fc3b6cc2599e53a545b1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21271d6f9809fc3b6cc2599e53a545b1">&#9670;&#160;</a></span>SERIAL_REPLY</h2>
 
@@ -122,6 +138,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define SERIAL_REPLY&#160;&#160;&#160;&quot;NG0B1\r&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab78bcb0e192f08716e20bf15882aa749" name="ab78bcb0e192f08716e20bf15882aa749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab78bcb0e192f08716e20bf15882aa749">&#9670;&#160;</a></span>SPARE_PART_NUMBER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SPARE_PART_NUMBER&#160;&#160;&#160;&quot;NUCLEO-G0B1RE-GW&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -272,7 +302,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Periodic call with the current time; blinks the LED while the channel is closed. </p>
+<p>Periodic call (every millisecond) with the current time: diagnostics timers and monitors, delayed reset, LED heartbeat while the channel is closed. </p>
 
 </div>
 </div>

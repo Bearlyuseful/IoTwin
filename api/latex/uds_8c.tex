@@ -1,0 +1,178 @@
+\doxysection{libs/can/uds.c File Reference}
+\hypertarget{uds_8c}{}\label{uds_8c}\index{libs/can/uds.c@{libs/can/uds.c}}
+{\ttfamily \#include "{}uds.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{uds_8c_aef312b0df8e3b732d3c796a2d8e8b475}{uds\+\_\+dtc\+\_\+init}} (\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}dtc, uint32\+\_\+t code)
+\begin{DoxyCompactList}\small\item\em Initial DTC\+: test not completed since clear and this cycle (status 0x50). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8c_a548803cfa527f1a81527599814cb83d8}{uds\+\_\+dtc\+\_\+report}} (\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}dtc, bool failed)
+\begin{DoxyCompactList}\small\item\em Result of a monitor\+: updates the status bits for a failed or passed test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8c_a0f489e27ed9704610a5f8314d4c30345}{uds\+\_\+dtc\+\_\+start\+\_\+operation\+\_\+cycle}} (\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}dtc)
+\begin{DoxyCompactList}\small\item\em New operation cycle (e.\+g. after a reset)\+: clears the "{}this cycle"{} results. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8c_a9fb478f2691cac9dcb079344e308e880}{uds\+\_\+server\+\_\+find\+\_\+dtc}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, uint32\+\_\+t code)
+\begin{DoxyCompactList}\small\item\em DTC of the server\textquotesingle{}s table with the given code, NULL if unknown. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8c_ae720773f124fbc9e4dce8a295868611d}{uds\+\_\+server\+\_\+default\+\_\+config}} (\mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}config, uint32\+\_\+t request\+\_\+id, uint32\+\_\+t response\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Defaults\+: functional id 0x7\+DF, P2 50 ms, P2\texorpdfstring{$\ast$}{*} 5 s, S3 5 s, standard ids. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8c_a124fca5f3fb151771c54384adbbb71e7}{uds\+\_\+server\+\_\+init}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, const \mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}config)
+\item 
+\mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} \mbox{\hyperlink{uds_8c_a02c4c54121bcf8f056610e21d7682d19}{uds\+\_\+server\+\_\+session}} (const \mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server)
+\item 
+size\+\_\+t \mbox{\hyperlink{uds_8c_afa4fd3f7d9d89b7711130fd0bbc990d7}{uds\+\_\+server\+\_\+process}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}request, size\+\_\+t length, bool functional, uint8\+\_\+t \texorpdfstring{$\ast$}{*}response, size\+\_\+t capacity, uint64\+\_\+t now\+\_\+us)
+\begin{DoxyCompactList}\small\item\em Processes one request without transport (used internally, public for tests). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{uds_8c_a8bdc2d03cde7939685bb1ed03b6a260d}{uds\+\_\+server\+\_\+on\+\_\+frame}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t now\+\_\+us)
+\begin{DoxyCompactList}\small\item\em Hands a received CAN frame to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uds_8c_afb06f74a8fc52911cd26b16144fdb2f2}{uds\+\_\+server\+\_\+poll}} (\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}server, uint64\+\_\+t now\+\_\+us)
+\begin{DoxyCompactList}\small\item\em Drives ISO-\/\+TP, executes pending resets and checks the S3 timeout. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8c_a9a420d53a896e7cb9289c6e7df9240ba}{uds\+\_\+service\+\_\+name}} (uint8\+\_\+t sid)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8c_a86ec49e2ccc0c6c15e48fc7c6b618dcb}{uds\+\_\+nrc\+\_\+name}} (uint8\+\_\+t nrc)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{uds_8c_a60c5ebb45419d05b1f3238e3a6f7154d}{uds\+\_\+session\+\_\+name}} (uint8\+\_\+t session)
+\item 
+void \mbox{\hyperlink{uds_8c_a86d07d478b4c674d7c4dc5ff2fddca70}{uds\+\_\+format\+\_\+dtc}} (uint32\+\_\+t code, char \texorpdfstring{$\ast$}{*}out, size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Formats a DTC like "{}\+B1001-\/11"{}; {\ttfamily capacity} must be at least 9. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{uds_8c_a4e36379a1642d8c4ade9e2036a62fd61}{uds\+\_\+parse\+\_\+dtc}} (const char \texorpdfstring{$\ast$}{*}text, uint32\+\_\+t \texorpdfstring{$\ast$}{*}code)
+\begin{DoxyCompactList}\small\item\em Parses "{}\+B1001-\/11"{}, "{}\+B1001"{} (failure type 00) or 6 hex digits ("{}900111"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{uds_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{uds_8c_aef312b0df8e3b732d3c796a2d8e8b475}\index{uds.c@{uds.c}!uds\_dtc\_init@{uds\_dtc\_init}}
+\index{uds\_dtc\_init@{uds\_dtc\_init}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_dtc\_init()}{uds\_dtc\_init()}}
+{\footnotesize\ttfamily \label{uds_8c_aef312b0df8e3b732d3c796a2d8e8b475} 
+void uds\+\_\+dtc\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}}]{dtc}{, }\item[{uint32\+\_\+t}]{code}{}\end{DoxyParamCaption})}
+
+
+
+Initial DTC\+: test not completed since clear and this cycle (status 0x50). 
+
+\Hypertarget{uds_8c_a548803cfa527f1a81527599814cb83d8}\index{uds.c@{uds.c}!uds\_dtc\_report@{uds\_dtc\_report}}
+\index{uds\_dtc\_report@{uds\_dtc\_report}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_dtc\_report()}{uds\_dtc\_report()}}
+{\footnotesize\ttfamily \label{uds_8c_a548803cfa527f1a81527599814cb83d8} 
+void uds\+\_\+dtc\+\_\+report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}}]{dtc}{, }\item[{bool}]{failed}{}\end{DoxyParamCaption})}
+
+
+
+Result of a monitor\+: updates the status bits for a failed or passed test. 
+
+\Hypertarget{uds_8c_a0f489e27ed9704610a5f8314d4c30345}\index{uds.c@{uds.c}!uds\_dtc\_start\_operation\_cycle@{uds\_dtc\_start\_operation\_cycle}}
+\index{uds\_dtc\_start\_operation\_cycle@{uds\_dtc\_start\_operation\_cycle}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_dtc\_start\_operation\_cycle()}{uds\_dtc\_start\_operation\_cycle()}}
+{\footnotesize\ttfamily \label{uds_8c_a0f489e27ed9704610a5f8314d4c30345} 
+void uds\+\_\+dtc\+\_\+start\+\_\+operation\+\_\+cycle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*}}]{dtc}{}\end{DoxyParamCaption})}
+
+
+
+New operation cycle (e.\+g. after a reset)\+: clears the "{}this cycle"{} results. 
+
+\Hypertarget{uds_8c_a86d07d478b4c674d7c4dc5ff2fddca70}\index{uds.c@{uds.c}!uds\_format\_dtc@{uds\_format\_dtc}}
+\index{uds\_format\_dtc@{uds\_format\_dtc}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_format\_dtc()}{uds\_format\_dtc()}}
+{\footnotesize\ttfamily \label{uds_8c_a86d07d478b4c674d7c4dc5ff2fddca70} 
+void uds\+\_\+format\+\_\+dtc (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{code}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})}
+
+
+
+Formats a DTC like "{}\+B1001-\/11"{}; {\ttfamily capacity} must be at least 9. 
+
+\Hypertarget{uds_8c_a86ec49e2ccc0c6c15e48fc7c6b618dcb}\index{uds.c@{uds.c}!uds\_nrc\_name@{uds\_nrc\_name}}
+\index{uds\_nrc\_name@{uds\_nrc\_name}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_nrc\_name()}{uds\_nrc\_name()}}
+{\footnotesize\ttfamily \label{uds_8c_a86ec49e2ccc0c6c15e48fc7c6b618dcb} 
+const char \texorpdfstring{$\ast$}{*} uds\+\_\+nrc\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{nrc}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8c_a4e36379a1642d8c4ade9e2036a62fd61}\index{uds.c@{uds.c}!uds\_parse\_dtc@{uds\_parse\_dtc}}
+\index{uds\_parse\_dtc@{uds\_parse\_dtc}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_parse\_dtc()}{uds\_parse\_dtc()}}
+{\footnotesize\ttfamily \label{uds_8c_a4e36379a1642d8c4ade9e2036a62fd61} 
+bool uds\+\_\+parse\+\_\+dtc (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{code}{}\end{DoxyParamCaption})}
+
+
+
+Parses "{}\+B1001-\/11"{}, "{}\+B1001"{} (failure type 00) or 6 hex digits ("{}900111"{}). 
+
+\Hypertarget{uds_8c_ae720773f124fbc9e4dce8a295868611d}\index{uds.c@{uds.c}!uds\_server\_default\_config@{uds\_server\_default\_config}}
+\index{uds\_server\_default\_config@{uds\_server\_default\_config}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_default\_config()}{uds\_server\_default\_config()}}
+{\footnotesize\ttfamily \label{uds_8c_ae720773f124fbc9e4dce8a295868611d} 
+void uds\+\_\+server\+\_\+default\+\_\+config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{uint32\+\_\+t}]{request\+\_\+id}{, }\item[{uint32\+\_\+t}]{response\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Defaults\+: functional id 0x7\+DF, P2 50 ms, P2\texorpdfstring{$\ast$}{*} 5 s, S3 5 s, standard ids. 
+
+\Hypertarget{uds_8c_a9fb478f2691cac9dcb079344e308e880}\index{uds.c@{uds.c}!uds\_server\_find\_dtc@{uds\_server\_find\_dtc}}
+\index{uds\_server\_find\_dtc@{uds\_server\_find\_dtc}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_find\_dtc()}{uds\_server\_find\_dtc()}}
+{\footnotesize\ttfamily \label{uds_8c_a9fb478f2691cac9dcb079344e308e880} 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*} uds\+\_\+server\+\_\+find\+\_\+dtc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{uint32\+\_\+t}]{code}{}\end{DoxyParamCaption})}
+
+
+
+DTC of the server\textquotesingle{}s table with the given code, NULL if unknown. 
+
+\Hypertarget{uds_8c_a124fca5f3fb151771c54384adbbb71e7}\index{uds.c@{uds.c}!uds\_server\_init@{uds\_server\_init}}
+\index{uds\_server\_init@{uds\_server\_init}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_init()}{uds\_server\_init()}}
+{\footnotesize\ttfamily \label{uds_8c_a124fca5f3fb151771c54384adbbb71e7} 
+void uds\+\_\+server\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{const \mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8c_a8bdc2d03cde7939685bb1ed03b6a260d}\index{uds.c@{uds.c}!uds\_server\_on\_frame@{uds\_server\_on\_frame}}
+\index{uds\_server\_on\_frame@{uds\_server\_on\_frame}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_on\_frame()}{uds\_server\_on\_frame()}}
+{\footnotesize\ttfamily \label{uds_8c_a8bdc2d03cde7939685bb1ed03b6a260d} 
+bool uds\+\_\+server\+\_\+on\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t}]{now\+\_\+us}{}\end{DoxyParamCaption})}
+
+
+
+Hands a received CAN frame to the server. 
+
+\begin{DoxyReturn}{Returns}
+true if the frame was addressed to the server (physical or functional). 
+\end{DoxyReturn}
+\Hypertarget{uds_8c_afb06f74a8fc52911cd26b16144fdb2f2}\index{uds.c@{uds.c}!uds\_server\_poll@{uds\_server\_poll}}
+\index{uds\_server\_poll@{uds\_server\_poll}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_poll()}{uds\_server\_poll()}}
+{\footnotesize\ttfamily \label{uds_8c_afb06f74a8fc52911cd26b16144fdb2f2} 
+void uds\+\_\+server\+\_\+poll (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{uint64\+\_\+t}]{now\+\_\+us}{}\end{DoxyParamCaption})}
+
+
+
+Drives ISO-\/\+TP, executes pending resets and checks the S3 timeout. 
+
+\Hypertarget{uds_8c_afa4fd3f7d9d89b7711130fd0bbc990d7}\index{uds.c@{uds.c}!uds\_server\_process@{uds\_server\_process}}
+\index{uds\_server\_process@{uds\_server\_process}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_process()}{uds\_server\_process()}}
+{\footnotesize\ttfamily \label{uds_8c_afa4fd3f7d9d89b7711130fd0bbc990d7} 
+size\+\_\+t uds\+\_\+server\+\_\+process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{request}{, }\item[{size\+\_\+t}]{length}{, }\item[{bool}]{functional}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{response}{, }\item[{size\+\_\+t}]{capacity}{, }\item[{uint64\+\_\+t}]{now\+\_\+us}{}\end{DoxyParamCaption})}
+
+
+
+Processes one request without transport (used internally, public for tests). 
+
+\begin{DoxyReturn}{Returns}
+Length of the response in {\ttfamily response}, 0 = no response (suppressed). 
+\end{DoxyReturn}
+\Hypertarget{uds_8c_a02c4c54121bcf8f056610e21d7682d19}\index{uds.c@{uds.c}!uds\_server\_session@{uds\_server\_session}}
+\index{uds\_server\_session@{uds\_server\_session}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_server\_session()}{uds\_server\_session()}}
+{\footnotesize\ttfamily \label{uds_8c_a02c4c54121bcf8f056610e21d7682d19} 
+\mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} uds\+\_\+server\+\_\+session (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structUdsServer}{Uds\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8c_a9a420d53a896e7cb9289c6e7df9240ba}\index{uds.c@{uds.c}!uds\_service\_name@{uds\_service\_name}}
+\index{uds\_service\_name@{uds\_service\_name}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_service\_name()}{uds\_service\_name()}}
+{\footnotesize\ttfamily \label{uds_8c_a9a420d53a896e7cb9289c6e7df9240ba} 
+const char \texorpdfstring{$\ast$}{*} uds\+\_\+service\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{sid}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uds_8c_a60c5ebb45419d05b1f3238e3a6f7154d}\index{uds.c@{uds.c}!uds\_session\_name@{uds\_session\_name}}
+\index{uds\_session\_name@{uds\_session\_name}!uds.c@{uds.c}}
+\doxysubsubsection{\texorpdfstring{uds\_session\_name()}{uds\_session\_name()}}
+{\footnotesize\ttfamily \label{uds_8c_a60c5ebb45419d05b1f3238e3a6f7154d} 
+const char \texorpdfstring{$\ast$}{*} uds\+\_\+session\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{session}{}\end{DoxyParamCaption})}
+

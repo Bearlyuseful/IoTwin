@@ -16,7 +16,7 @@
         <link rel="prev" href="../firmware/">
       
       
-        <link rel="next" href="../component_database/">
+        <link rel="next" href="../diagnostics/">
       
       
         
@@ -766,6 +766,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#uds-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UDS diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#socketcan-bridge-linux" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -780,6 +791,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagnostics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagnostics (UDS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1188,6 +1227,13 @@ so it runs on the host and on a microcontroller alike.</p>
 </code></pre></div>
 <p>Tests (<code>tests/test_isotp.cpp</code>) run two links against each other on a simulated
 bus with simulated time.</p>
+<h2 id="uds-diagnostics">UDS diagnostics<a class="headerlink" href="#uds-diagnostics" title="Permanent link">&para;</a></h2>
+<p>The UDS server (<code>libs/can/uds.c</code>) and the tester <code>uds_client</code> build on this
+ISO-TP layer; services, identifiers and trouble codes of the light ECU and
+the gateway are described in <a href="../diagnostics/">Diagnostics (UDS)</a>.</p>
+<div class="highlight"><pre><span></span><code>uds_client<span class="w"> </span>scan
+uds_client<span class="w"> </span>--target<span class="w"> </span>gateway<span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="m">0200</span>
+</code></pre></div>
 <h2 id="socketcan-bridge-linux">SocketCAN bridge (Linux)<a class="headerlink" href="#socketcan-bridge-linux" title="Permanent link">&para;</a></h2>
 <p><code>socketcan_bridge</code> connects a Linux CAN interface to iotwin-bus. With it the
 standard can-utils, USB-CAN adapters or a real CAN bus join the virtual bus:</p>

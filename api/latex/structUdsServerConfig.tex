@@ -1,0 +1,123 @@
+\doxysection{Uds\+Server\+Config Struct Reference}
+\hypertarget{structUdsServerConfig}{}\label{structUdsServerConfig}\index{UdsServerConfig@{UdsServerConfig}}
+
+
+Server configuration.  
+
+
+
+
+{\ttfamily \#include $<$uds.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structUdsServerConfig_a490fe6bac93145018747ff2329dbbf1c}{request\+\_\+id}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structUdsServerConfig_a5414e122fb94d699a5e3ad978019452a}{response\+\_\+id}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structUdsServerConfig_ad308c3dc123e5afbc7d4f872b73ba22f}{functional\+\_\+id}}
+\item 
+bool \mbox{\hyperlink{structUdsServerConfig_a88232a490fda5d8f802635f81a8ad452}{extended\+\_\+id}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structUdsServerConfig_a09aca233144b9a2f9b17b53cead6ea6c}{p2\+\_\+ms}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structUdsServerConfig_a0f5fcddb093c2c4b88d961d466179d1a}{p2\+\_\+star\+\_\+ms}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structUdsServerConfig_acaab6c85fec144f0557ff2510a818ec9}{s3\+\_\+ms}}
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerConfig_aa84a02599eb2789ae59c6b6a5e3084d7}{send}} )(void \texorpdfstring{$\ast$}{*}context, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerConfig_ac95a095385699f200fedcd75ebd76ad7}{send\+\_\+context}}
+\item 
+\mbox{\hyperlink{structUdsServerHandlers}{Uds\+Server\+Handlers}} \mbox{\hyperlink{structUdsServerConfig_a8629e68902b22d18a16aa8f5b9e225e9}{handlers}}
+\item 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerConfig_a5cbe904b2b14f0477222716c62c9ccef}{dtcs}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structUdsServerConfig_add0f97a300963fd3c7fbd287b5b5d4c2}{dtc\+\_\+count}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Server configuration. 
+
+\label{doc-variable-members}
+\Hypertarget{structUdsServerConfig_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structUdsServerConfig_add0f97a300963fd3c7fbd287b5b5d4c2}\index{UdsServerConfig@{UdsServerConfig}!dtc\_count@{dtc\_count}}
+\index{dtc\_count@{dtc\_count}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{dtc\_count}{dtc\_count}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_add0f97a300963fd3c7fbd287b5b5d4c2} 
+size\+\_\+t Uds\+Server\+Config\+::dtc\+\_\+count}
+
+\Hypertarget{structUdsServerConfig_a5cbe904b2b14f0477222716c62c9ccef}\index{UdsServerConfig@{UdsServerConfig}!dtcs@{dtcs}}
+\index{dtcs@{dtcs}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{dtcs}{dtcs}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a5cbe904b2b14f0477222716c62c9ccef} 
+\mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}}\texorpdfstring{$\ast$}{*} Uds\+Server\+Config\+::dtcs}
+
+Application owned DTC table (may be NULL). \Hypertarget{structUdsServerConfig_a88232a490fda5d8f802635f81a8ad452}\index{UdsServerConfig@{UdsServerConfig}!extended\_id@{extended\_id}}
+\index{extended\_id@{extended\_id}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{extended\_id}{extended\_id}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a88232a490fda5d8f802635f81a8ad452} 
+bool Uds\+Server\+Config\+::extended\+\_\+id}
+
+\Hypertarget{structUdsServerConfig_ad308c3dc123e5afbc7d4f872b73ba22f}\index{UdsServerConfig@{UdsServerConfig}!functional\_id@{functional\_id}}
+\index{functional\_id@{functional\_id}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{functional\_id}{functional\_id}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_ad308c3dc123e5afbc7d4f872b73ba22f} 
+uint32\+\_\+t Uds\+Server\+Config\+::functional\+\_\+id}
+
+Functional request id, 0 = not used. \Hypertarget{structUdsServerConfig_a8629e68902b22d18a16aa8f5b9e225e9}\index{UdsServerConfig@{UdsServerConfig}!handlers@{handlers}}
+\index{handlers@{handlers}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{handlers}{handlers}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a8629e68902b22d18a16aa8f5b9e225e9} 
+\mbox{\hyperlink{structUdsServerHandlers}{Uds\+Server\+Handlers}} Uds\+Server\+Config\+::handlers}
+
+\Hypertarget{structUdsServerConfig_a09aca233144b9a2f9b17b53cead6ea6c}\index{UdsServerConfig@{UdsServerConfig}!p2\_ms@{p2\_ms}}
+\index{p2\_ms@{p2\_ms}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{p2\_ms}{p2\_ms}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a09aca233144b9a2f9b17b53cead6ea6c} 
+uint16\+\_\+t Uds\+Server\+Config\+::p2\+\_\+ms}
+
+Reported in the session response. \Hypertarget{structUdsServerConfig_a0f5fcddb093c2c4b88d961d466179d1a}\index{UdsServerConfig@{UdsServerConfig}!p2\_star\_ms@{p2\_star\_ms}}
+\index{p2\_star\_ms@{p2\_star\_ms}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{p2\_star\_ms}{p2\_star\_ms}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a0f5fcddb093c2c4b88d961d466179d1a} 
+uint16\+\_\+t Uds\+Server\+Config\+::p2\+\_\+star\+\_\+ms}
+
+Reported in the session response (10 ms resolution). \Hypertarget{structUdsServerConfig_a490fe6bac93145018747ff2329dbbf1c}\index{UdsServerConfig@{UdsServerConfig}!request\_id@{request\_id}}
+\index{request\_id@{request\_id}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{request\_id}{request\_id}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a490fe6bac93145018747ff2329dbbf1c} 
+uint32\+\_\+t Uds\+Server\+Config\+::request\+\_\+id}
+
+Physical request id (tester -\/\texorpdfstring{$>$}{>} server). \Hypertarget{structUdsServerConfig_a5414e122fb94d699a5e3ad978019452a}\index{UdsServerConfig@{UdsServerConfig}!response\_id@{response\_id}}
+\index{response\_id@{response\_id}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{response\_id}{response\_id}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_a5414e122fb94d699a5e3ad978019452a} 
+uint32\+\_\+t Uds\+Server\+Config\+::response\+\_\+id}
+
+Response id (server -\/\texorpdfstring{$>$}{>} tester). \Hypertarget{structUdsServerConfig_acaab6c85fec144f0557ff2510a818ec9}\index{UdsServerConfig@{UdsServerConfig}!s3\_ms@{s3\_ms}}
+\index{s3\_ms@{s3\_ms}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{s3\_ms}{s3\_ms}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_acaab6c85fec144f0557ff2510a818ec9} 
+uint32\+\_\+t Uds\+Server\+Config\+::s3\+\_\+ms}
+
+Session timeout without requests. \Hypertarget{structUdsServerConfig_aa84a02599eb2789ae59c6b6a5e3084d7}\index{UdsServerConfig@{UdsServerConfig}!send@{send}}
+\index{send@{send}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{send}{send}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_aa84a02599eb2789ae59c6b6a5e3084d7} 
+bool(\texorpdfstring{$\ast$}{*} Uds\+Server\+Config\+::send) (void \texorpdfstring{$\ast$}{*}context, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)}
+
+CAN driver, false = queue full. \Hypertarget{structUdsServerConfig_ac95a095385699f200fedcd75ebd76ad7}\index{UdsServerConfig@{UdsServerConfig}!send\_context@{send\_context}}
+\index{send\_context@{send\_context}!UdsServerConfig@{UdsServerConfig}}
+\doxysubsubsection{\texorpdfstring{send\_context}{send\_context}}
+{\footnotesize\ttfamily \label{structUdsServerConfig_ac95a095385699f200fedcd75ebd76ad7} 
+void\texorpdfstring{$\ast$}{*} Uds\+Server\+Config\+::send\+\_\+context}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/can/\mbox{\hyperlink{uds_8h}{uds.\+h}}\end{DoxyCompactItemize}

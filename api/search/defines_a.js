@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['ram_5frx_5ffifo0_0',['RAM_RX_FIFO0',['../fdcan_8c.html#a1398c0b2eb80d9e5bae4a93c7819553a',1,'fdcan.c']]],
-  ['ram_5fsize_1',['RAM_SIZE',['../fdcan_8c.html#ab82dd208a7e716e09a3f8c229bfe78d7',1,'fdcan.c']]],
-  ['ram_5ftx_5fbuffers_2',['RAM_TX_BUFFERS',['../fdcan_8c.html#a3084170fe79aa36c03252348a8a9c868',1,'fdcan.c']]],
-  ['reconnect_5finterval_5fms_3',['RECONNECT_INTERVAL_MS',['../main__can__sim_8c.html#a14445f86300d5faa6a4ebad02e496c09',1,'main_can_sim.c']]],
-  ['retry_5finterval_5fms_4',['RETRY_INTERVAL_MS',['../main__serial__bridge_8c.html#a2a7a0b5f8a93ef53544dd65a1392c693',1,'RETRY_INTERVAL_MS:&#160;main_serial_bridge.c'],['../main__socketcan__bridge_8c.html#a2a7a0b5f8a93ef53544dd65a1392c693',1,'RETRY_INTERVAL_MS:&#160;main_socketcan_bridge.c']]],
-  ['rx_5fqueue_5fsize_5',['RX_QUEUE_SIZE',['../fdcan_8c.html#a0616225f8714515d1139d62323d2fb60',1,'fdcan.c']]],
-  ['rx_5fsize_6',['RX_SIZE',['../uart_8c.html#aaa981e599aa044183d4c19a576cdc8a9',1,'uart.c']]]
+  ['native_5fpoll_0',['native_poll',['../net_8c.html#aae4e1b99f353c8eaa8dd3108c7624f54',1,'net.c']]],
+  ['net_5finvalid_5fsocket_1',['NET_INVALID_SOCKET',['../net_8h.html#a2ba97a0c892b071feb44689e0ec09564',1,'net.h']]],
+  ['net_5fpoll_5ferr_2',['NET_POLL_ERR',['../net_8h.html#aa8fe7d5ad2f189e39079d1c6b6c4aff4',1,'net.h']]],
+  ['net_5fpoll_5fhup_3',['NET_POLL_HUP',['../net_8h.html#a7a866a9bf691c5695df68d27b44efdc5',1,'net.h']]],
+  ['net_5fpoll_5fin_4',['NET_POLL_IN',['../net_8h.html#ada391427cc944dc22a1317914d75fce1',1,'net.h']]],
+  ['net_5fpoll_5fmax_5',['NET_POLL_MAX',['../net_8h.html#ad90656fe59525c5701265ae4f4fb746c',1,'net.h']]],
+  ['net_5fpoll_5fout_6',['NET_POLL_OUT',['../net_8h.html#a55016a5bc8ec49a2b5b3db73a23e743f',1,'net.h']]],
+  ['net_5frecv_5fclosed_7',['NET_RECV_CLOSED',['../net_8h.html#aecd11948b2d2007153ce7938f4822e16',1,'net.h']]],
+  ['net_5frecv_5ferror_8',['NET_RECV_ERROR',['../net_8h.html#a144985aa24b48a6163301b25eebf7cdf',1,'net.h']]],
+  ['net_5frecv_5fwould_5fblock_9',['NET_RECV_WOULD_BLOCK',['../net_8h.html#ad0d31dc8ab290a6630fe9f57bd08351c',1,'net.h']]],
+  ['net_5fsend_5fflags_10',['NET_SEND_FLAGS',['../net_8c.html#aff7376acd46777fdb8fed17c0ec4adbe',1,'net.c']]]
 ];

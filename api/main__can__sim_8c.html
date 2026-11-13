@@ -105,6 +105,7 @@ $(function(){initNavTree('main__can__sim_8c.html','',''); });
 <code>#include &quot;<a class="el" href="cli_8h_source.html">cli.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cycle__timer_8h_source.html">cycle_timer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="light__ecu_8h_source.html">light_ecu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="light__ecu__diag_8h_source.html">light_ecu_diag.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="line__reader_8h_source.html">line_reader.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="log_8h_source.html">log.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="net_8h_source.html">net.h</a>&quot;</code><br />
@@ -120,6 +121,7 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a14445f86300d5faa6a4ebad02e496c09" id="r_a14445f86300d5faa6a4ebad02e496c09"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14445f86300d5faa6a4ebad02e496c09">RECONNECT_INTERVAL_MS</a>&#160;&#160;&#160;1000</td></tr>
 <tr class="memitem:a377c10ddb1999e7e32f9e11499e13734" id="r_a377c10ddb1999e7e32f9e11499e13734"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a377c10ddb1999e7e32f9e11499e13734">SEND_TIMEOUT_MS</a>&#160;&#160;&#160;50</td></tr>
+<tr class="memitem:aa8fc9e28d180bbfc92ca0515b7613a98" id="r_aa8fc9e28d180bbfc92ca0515b7613a98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8fc9e28d180bbfc92ca0515b7613a98">IOTWIN_VERSION</a>&#160;&#160;&#160;&quot;dev&quot;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -131,8 +133,23 @@ Functions</h2></td></tr>
 <li>main thread: cyclic control loop (optionally real-time), owns the socket</li>
 <li>console thread: reads commands from stdin (not real-time)</li>
 </ul>
-<p>The control loop never blocks on the network while connected: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline. </p>
+<p>The control loop never blocks on the network while connected: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline.</p>
+<p>Diagnostics: UDS server on 0x7E0/0x7E8 (functional 0x7DF), faults can be injected on the console (see <a class="el" href="light__ecu__diag_8h.html" title="UDS diagnostics of the simulated light ECU (see docs/dev/diagnostics.md).">light_ecu_diag.h</a>, docs/dev/diagnostics.md). </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="aa8fc9e28d180bbfc92ca0515b7613a98" name="aa8fc9e28d180bbfc92ca0515b7613a98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8fc9e28d180bbfc92ca0515b7613a98">&#9670;&#160;</a></span>IOTWIN_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IOTWIN_VERSION&#160;&#160;&#160;&quot;dev&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a14445f86300d5faa6a4ebad02e496c09" name="a14445f86300d5faa6a4ebad02e496c09"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a14445f86300d5faa6a4ebad02e496c09">&#9670;&#160;</a></span>RECONNECT_INTERVAL_MS</h2>
 

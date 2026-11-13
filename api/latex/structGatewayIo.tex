@@ -24,6 +24,10 @@ void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a7fb34ee7e645ab
 \item 
 void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba}{led\+\_\+set}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, bool on)
 \item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ab99a1574b73cace1286852d887e4117a}{system\+\_\+reset}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a5dda457906e8444de07286a6d1b0a32d}{unique\+\_\+id}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, uint8\+\_\+t out\mbox{[}12\mbox{]})
+\item 
 void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}
 \end{DoxyCompactItemize}
 
@@ -76,7 +80,19 @@ void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::led\+\_\+set) (void \texorpdfstri
 {\footnotesize\ttfamily \label{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab} 
 void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::serial\+\_\+write) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)}
 
+\Hypertarget{structGatewayIo_ab99a1574b73cace1286852d887e4117a}\index{GatewayIo@{GatewayIo}!system\_reset@{system\_reset}}
+\index{system\_reset@{system\_reset}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{system\_reset}{system\_reset}}
+{\footnotesize\ttfamily \label{structGatewayIo_ab99a1574b73cace1286852d887e4117a} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::system\+\_\+reset) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})}
 
+Optional\+: restarts the MCU (UDS ECUReset hard). \Hypertarget{structGatewayIo_a5dda457906e8444de07286a6d1b0a32d}\index{GatewayIo@{GatewayIo}!unique\_id@{unique\_id}}
+\index{unique\_id@{unique\_id}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{unique\_id}{unique\_id}}
+{\footnotesize\ttfamily \label{structGatewayIo_a5dda457906e8444de07286a6d1b0a32d} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::unique\+\_\+id) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, uint8\+\_\+t out\mbox{[}12\mbox{]})}
+
+Optional\+: 96-\/bit unique device id (UDS serial number F18C). 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

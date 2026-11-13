@@ -1,0 +1,107 @@
+\doxysection{Uds\+Server Struct Reference}
+\hypertarget{structUdsServer}{}\label{structUdsServer}\index{UdsServer@{UdsServer}}
+
+
+Server state.  
+
+
+
+
+{\ttfamily \#include $<$uds.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} \mbox{\hyperlink{structUdsServer_afb53c2c6e657cd1df6329d838bfa2a44}{config}}
+\item 
+\mbox{\hyperlink{structIsoTpLink}{Iso\+Tp\+Link}} \mbox{\hyperlink{structUdsServer_a99bf6bf0af3e157e72b78825e01ed26b}{link}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structUdsServer_a6336ec6f293f00ce57f150e34cb6007f}{request}} \mbox{[}\mbox{\hyperlink{uds_8h_ae0697c8915ed2e83f36c2b8dbd683779}{UDS\+\_\+\+MAX\+\_\+\+REQUEST}}\mbox{]}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structUdsServer_ad1182067334a58d256963e61b91adecd}{response}} \mbox{[}\mbox{\hyperlink{uds_8h_af340deb274e5a528ed94d4e806ce4cad}{UDS\+\_\+\+MAX\+\_\+\+RESPONSE}}\mbox{]}
+\item 
+\mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} \mbox{\hyperlink{structUdsServer_a5d2e8012e9d6529aa909b4930a5a843e}{session}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structUdsServer_a774cedd86067929078977af2fadbcd79}{last\+\_\+request\+\_\+us}}
+\item 
+bool \mbox{\hyperlink{structUdsServer_aaee52ebd8394e9065d34fd2724d9f76d}{reset\+\_\+pending}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structUdsServer_a07bd209b1d0cc684d2986cbefea5e995}{reset\+\_\+type}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structUdsServer_a9477b8b1d66e22e7ec7cd63fd03a8ea0}{requests}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structUdsServer_aaeaf5a26bf14592e12f139e200a5f8c9}{negative\+\_\+responses}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Server state. 
+
+\label{doc-variable-members}
+\Hypertarget{structUdsServer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structUdsServer_afb53c2c6e657cd1df6329d838bfa2a44}\index{UdsServer@{UdsServer}!config@{config}}
+\index{config@{config}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{structUdsServer_afb53c2c6e657cd1df6329d838bfa2a44} 
+\mbox{\hyperlink{structUdsServerConfig}{Uds\+Server\+Config}} Uds\+Server\+::config}
+
+\Hypertarget{structUdsServer_a774cedd86067929078977af2fadbcd79}\index{UdsServer@{UdsServer}!last\_request\_us@{last\_request\_us}}
+\index{last\_request\_us@{last\_request\_us}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{last\_request\_us}{last\_request\_us}}
+{\footnotesize\ttfamily \label{structUdsServer_a774cedd86067929078977af2fadbcd79} 
+uint64\+\_\+t Uds\+Server\+::last\+\_\+request\+\_\+us}
+
+\Hypertarget{structUdsServer_a99bf6bf0af3e157e72b78825e01ed26b}\index{UdsServer@{UdsServer}!link@{link}}
+\index{link@{link}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{link}{link}}
+{\footnotesize\ttfamily \label{structUdsServer_a99bf6bf0af3e157e72b78825e01ed26b} 
+\mbox{\hyperlink{structIsoTpLink}{Iso\+Tp\+Link}} Uds\+Server\+::link}
+
+\Hypertarget{structUdsServer_aaeaf5a26bf14592e12f139e200a5f8c9}\index{UdsServer@{UdsServer}!negative\_responses@{negative\_responses}}
+\index{negative\_responses@{negative\_responses}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{negative\_responses}{negative\_responses}}
+{\footnotesize\ttfamily \label{structUdsServer_aaeaf5a26bf14592e12f139e200a5f8c9} 
+uint32\+\_\+t Uds\+Server\+::negative\+\_\+responses}
+
+Negative responses sent. \Hypertarget{structUdsServer_a6336ec6f293f00ce57f150e34cb6007f}\index{UdsServer@{UdsServer}!request@{request}}
+\index{request@{request}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{request}{request}}
+{\footnotesize\ttfamily \label{structUdsServer_a6336ec6f293f00ce57f150e34cb6007f} 
+uint8\+\_\+t Uds\+Server\+::request\mbox{[}\mbox{\hyperlink{uds_8h_ae0697c8915ed2e83f36c2b8dbd683779}{UDS\+\_\+\+MAX\+\_\+\+REQUEST}}\mbox{]}}
+
+\Hypertarget{structUdsServer_a9477b8b1d66e22e7ec7cd63fd03a8ea0}\index{UdsServer@{UdsServer}!requests@{requests}}
+\index{requests@{requests}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{requests}{requests}}
+{\footnotesize\ttfamily \label{structUdsServer_a9477b8b1d66e22e7ec7cd63fd03a8ea0} 
+uint32\+\_\+t Uds\+Server\+::requests}
+
+Requests processed. \Hypertarget{structUdsServer_aaee52ebd8394e9065d34fd2724d9f76d}\index{UdsServer@{UdsServer}!reset\_pending@{reset\_pending}}
+\index{reset\_pending@{reset\_pending}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{reset\_pending}{reset\_pending}}
+{\footnotesize\ttfamily \label{structUdsServer_aaee52ebd8394e9065d34fd2724d9f76d} 
+bool Uds\+Server\+::reset\+\_\+pending}
+
+\Hypertarget{structUdsServer_a07bd209b1d0cc684d2986cbefea5e995}\index{UdsServer@{UdsServer}!reset\_type@{reset\_type}}
+\index{reset\_type@{reset\_type}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{reset\_type}{reset\_type}}
+{\footnotesize\ttfamily \label{structUdsServer_a07bd209b1d0cc684d2986cbefea5e995} 
+uint8\+\_\+t Uds\+Server\+::reset\+\_\+type}
+
+\Hypertarget{structUdsServer_ad1182067334a58d256963e61b91adecd}\index{UdsServer@{UdsServer}!response@{response}}
+\index{response@{response}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{response}{response}}
+{\footnotesize\ttfamily \label{structUdsServer_ad1182067334a58d256963e61b91adecd} 
+uint8\+\_\+t Uds\+Server\+::response\mbox{[}\mbox{\hyperlink{uds_8h_af340deb274e5a528ed94d4e806ce4cad}{UDS\+\_\+\+MAX\+\_\+\+RESPONSE}}\mbox{]}}
+
+\Hypertarget{structUdsServer_a5d2e8012e9d6529aa909b4930a5a843e}\index{UdsServer@{UdsServer}!session@{session}}
+\index{session@{session}!UdsServer@{UdsServer}}
+\doxysubsubsection{\texorpdfstring{session}{session}}
+{\footnotesize\ttfamily \label{structUdsServer_a5d2e8012e9d6529aa909b4930a5a843e} 
+\mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} Uds\+Server\+::session}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/can/\mbox{\hyperlink{uds_8h}{uds.\+h}}\end{DoxyCompactItemize}

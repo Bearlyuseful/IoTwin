@@ -1,0 +1,89 @@
+\doxysection{Uds\+Server\+Handlers Struct Reference}
+\hypertarget{structUdsServerHandlers}{}\label{structUdsServerHandlers}\index{UdsServerHandlers@{UdsServerHandlers}}
+
+
+Application callbacks. All are optional.  
+
+
+
+
+{\ttfamily \#include $<$uds.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerHandlers_ac4725be6ef914ba816dfbe409b8ae90f}{read\+\_\+did}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, uint16\+\_\+t did, uint8\+\_\+t \texorpdfstring{$\ast$}{*}out, size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Reads a data identifier into {\ttfamily out}. \end{DoxyCompactList}\item 
+uint8\+\_\+t(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerHandlers_aac15e249f1c72f2f26902f880ca77c0a}{write\+\_\+did}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, uint16\+\_\+t did, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Writes a data identifier (only called in the extended session). \end{DoxyCompactList}\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerHandlers_a04ee09f2e700138a2f2688e410930d40}{reset}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, uint8\+\_\+t reset\+\_\+type)
+\begin{DoxyCompactList}\small\item\em ECUReset, called once the positive response has been transmitted. \end{DoxyCompactList}\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerHandlers_abb2b5e56b38b92ae6fdf397799af93ac}{session\+\_\+changed}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} session)
+\begin{DoxyCompactList}\small\item\em The active session changed (request or S3 timeout). \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Application callbacks. All are optional. 
+
+\label{doc-variable-members}
+\Hypertarget{structUdsServerHandlers_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}\index{UdsServerHandlers@{UdsServerHandlers}!context@{context}}
+\index{context@{context}!UdsServerHandlers@{UdsServerHandlers}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \label{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837} 
+void\texorpdfstring{$\ast$}{*} Uds\+Server\+Handlers\+::context}
+
+\Hypertarget{structUdsServerHandlers_ac4725be6ef914ba816dfbe409b8ae90f}\index{UdsServerHandlers@{UdsServerHandlers}!read\_did@{read\_did}}
+\index{read\_did@{read\_did}!UdsServerHandlers@{UdsServerHandlers}}
+\doxysubsubsection{\texorpdfstring{read\_did}{read\_did}}
+{\footnotesize\ttfamily \label{structUdsServerHandlers_ac4725be6ef914ba816dfbe409b8ae90f} 
+int(\texorpdfstring{$\ast$}{*} Uds\+Server\+Handlers\+::read\+\_\+did) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, uint16\+\_\+t did, uint8\+\_\+t \texorpdfstring{$\ast$}{*}out, size\+\_\+t capacity)}
+
+
+
+Reads a data identifier into {\ttfamily out}. 
+
+\begin{DoxyReturn}{Returns}
+Number of bytes written, or the negated NRC (e.\+g. -\/UDS\+\_\+\+NRC\+\_\+\+REQUEST\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE for an unknown identifier, -\/UDS\+\_\+\+NRC\+\_\+\+RESPONSE\+\_\+\+TOO\+\_\+\+LONG if {\ttfamily capacity} is too small). 
+\end{DoxyReturn}
+\Hypertarget{structUdsServerHandlers_a04ee09f2e700138a2f2688e410930d40}\index{UdsServerHandlers@{UdsServerHandlers}!reset@{reset}}
+\index{reset@{reset}!UdsServerHandlers@{UdsServerHandlers}}
+\doxysubsubsection{\texorpdfstring{reset}{reset}}
+{\footnotesize\ttfamily \label{structUdsServerHandlers_a04ee09f2e700138a2f2688e410930d40} 
+void(\texorpdfstring{$\ast$}{*} Uds\+Server\+Handlers\+::reset) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, uint8\+\_\+t reset\+\_\+type)}
+
+
+
+ECUReset, called once the positive response has been transmitted. 
+
+\Hypertarget{structUdsServerHandlers_abb2b5e56b38b92ae6fdf397799af93ac}\index{UdsServerHandlers@{UdsServerHandlers}!session\_changed@{session\_changed}}
+\index{session\_changed@{session\_changed}!UdsServerHandlers@{UdsServerHandlers}}
+\doxysubsubsection{\texorpdfstring{session\_changed}{session\_changed}}
+{\footnotesize\ttfamily \label{structUdsServerHandlers_abb2b5e56b38b92ae6fdf397799af93ac} 
+void(\texorpdfstring{$\ast$}{*} Uds\+Server\+Handlers\+::session\+\_\+changed) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, \mbox{\hyperlink{uds_8h_a14c292a934c57255f398625b3498b8e5}{Uds\+Session}} session)}
+
+
+
+The active session changed (request or S3 timeout). 
+
+\Hypertarget{structUdsServerHandlers_aac15e249f1c72f2f26902f880ca77c0a}\index{UdsServerHandlers@{UdsServerHandlers}!write\_did@{write\_did}}
+\index{write\_did@{write\_did}!UdsServerHandlers@{UdsServerHandlers}}
+\doxysubsubsection{\texorpdfstring{write\_did}{write\_did}}
+{\footnotesize\ttfamily \label{structUdsServerHandlers_aac15e249f1c72f2f26902f880ca77c0a} 
+uint8\+\_\+t(\texorpdfstring{$\ast$}{*} Uds\+Server\+Handlers\+::write\+\_\+did) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structUdsServerHandlers_af8c76ffbb43056d0ff534625b9d3c837}{context}}, uint16\+\_\+t did, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)}
+
+
+
+Writes a data identifier (only called in the extended session). 
+
+\begin{DoxyReturn}{Returns}
+0 on success or the NRC. NULL = Write\+Data\+By\+Identifier not supported. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/can/\mbox{\hyperlink{uds_8h}{uds.\+h}}\end{DoxyCompactItemize}
