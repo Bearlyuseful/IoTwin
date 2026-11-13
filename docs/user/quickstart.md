@@ -21,6 +21,9 @@ lamp relay  (Visualizer) <--100#01-- iotwin-bus <-- can_sim (light ECU)
 4. Diagnose the ECU like a workshop tester: `uds_client scan`, then type
    `fault short on` in the CAN-Sim window and run `uds_client dtc`
    (see [Diagnostics](../dev/diagnostics.md)).
+5. Disturb the bus and watch the reaction: `can_scenario -e "bus drop 50"`
+   loses every second frame, `can_scenario -e "bus clear"` ends it; ready-made
+   test scripts are in `data/scenarios` (see [Scenarios](../dev/scenarios.md)).
 
 Three windows open:
 

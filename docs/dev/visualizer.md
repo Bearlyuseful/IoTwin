@@ -48,7 +48,13 @@ schematic of the system:
   rate, message log;
 - click a node for details: description, messages it sends/receives, links
   and the characteristics from the component database (unverified values
-  are marked).
+  are marked);
+- diagnostic frames (`"protocol": "uds"` in the system description) are
+  decoded as ISO-TP/UDS, e.g. `DIAG_ECU_REQ SF ReadDataByIdentifier F190`;
+- faults injected into the bus (see [Scenarios](scenarios.md)) turn the bus
+  red with the active faults and the number of lost and delayed frames. The
+  visualizer asks iotwin-bus with `!status` once per second and registers as
+  `visualizer` (`NodeName` in `[/Script/IoTwin.IoTwinBusSubsystem]`).
 
 | Class                        | Role                                                                 |
 |------------------------------|----------------------------------------------------------------------|

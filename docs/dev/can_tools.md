@@ -66,6 +66,13 @@ if (isotp_receive(&link, &length)) { /* rx_buffer holds a complete message */ }
 Tests (`tests/test_isotp.cpp`) run two links against each other on a simulated
 bus with simulated time.
 
+## Recording and replay
+
+`can_monitor --log FILE` records every frame in the `candump -L` format,
+`can_replay FILE` plays it back with the original timing (`--speed`, `--loop`,
+`--filter`). Logs of a real bus recorded with can-utils work too. Details and
+scripted scenarios with fault injection: [Scenarios and Faults](scenarios.md).
+
 ## UDS diagnostics
 
 The UDS server (`libs/can/uds.c`) and the tester `uds_client` build on this

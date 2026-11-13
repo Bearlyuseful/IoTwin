@@ -1,0 +1,8 @@
+name Lost SWITCH_STATE frames: the lamp does not react
+bus seed 1
+bus drop 100 200                                # every SWITCH_STATE frame is lost
+send 200#01
+expect-not 100#01 for 800
+bus clear
+send 200#01
+expect 100#01 within 300

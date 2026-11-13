@@ -1,0 +1,13 @@
+name Short circuit of the lamp output becomes DTC B1001-11
+send 200#01
+expect 100#01 within 300
+bench ecu fault short on                        # test bench: short to ground
+expect 100#00 within 300                        # protection switches the output off
+uds ecu 220100 expect 62010000                  # output really off
+uds ecu 190209 expect 59027F9001112F            # failed and confirmed
+bench ecu fault short off
+expect 100#01 within 300                        # switch is still on: lamp back
+uds ecu 190209 expect 59027F9001112E            # confirmed until cleared
+uds ecu 14FFFFFF expect 54
+wait 50
+uds ecu 190209 expect 59027F                    # memory empty

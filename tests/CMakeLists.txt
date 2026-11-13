@@ -21,6 +21,7 @@ add_executable(iotwin_tests
     test_dbc.cpp
     test_isotp.cpp
     test_uds.cpp
+    test_scenario.cpp
     test_slcan.cpp
     test_line_reader.cpp
     test_light_ecu.cpp
@@ -37,6 +38,7 @@ add_executable(iotwin_tests
 target_link_libraries(iotwin_tests PRIVATE
     iotwin_bus_server
     iotwin_light_ecu
+    iotwin_scenario
     iotwin_gateway_logic
     iotwin_bridge_core
     iotwin_serial
@@ -53,7 +55,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     target_compile_definitions(iotwin_tests PRIVATE SOCKETCAN_BRIDGE_PATH="$<TARGET_FILE:socketcan_bridge>")
 endif()
 # The end-to-end test starts the real serial_bridge executable.
-add_dependencies(iotwin_tests serial_bridge)
+add_dependencies(iotwin_tests serial_bridge iotwin-bus can_sim can_scenario)
 target_compile_definitions(iotwin_tests PRIVATE
     SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>"
     IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/data/dbc/iotwin.dbc"
@@ -64,6 +66,11 @@ find_package(Python3 COMPONENTS Interpreter)
 if(Python3_Interpreter_FOUND)
     add_test(NAME data_validation
              COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tools/validate_data.py ${PROJECT_SOURCE_DIR}/data)
+    # Scenario scripts against a real iotwin-bus and can_sim (fresh processes per scenario).
+    add_test(NAME scenarios
+             COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tools/run_scenarios.py
+                     --bin $<TARGET_FILE_DIR:iotwin-bus> ${PROJECT_SOURCE_DIR}/data/scenarios/light-demo)
+    set_tests_properties(scenarios PROPERTIES TIMEOUT 180)
 else()
     message(STATUS "Python 3 not found - data validation test disabled")
 endif()

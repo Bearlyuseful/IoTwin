@@ -507,7 +507,9 @@ void FSchematicRenderer::DrawBuses() const
 			continue;
 		}
 		const bool bLive = Definition == LiveBus && bConnected;
-		const FLinearColor Color = bLive ? Hex(Palette::Live) : Hex(Palette::BusIdle);
+		const FIoTwinBusStatus Status = (bLive && Bus) ? Bus->GetBusStatus() : FIoTwinBusStatus();
+		const bool bFaulty = Status.bValid && Status.HasFaults();
+		const FLinearColor Color = bFaulty ? Hex(Palette::Error) : bLive ? Hex(Palette::Live) : Hex(Palette::BusIdle);
 
 		for (const TPair<FString, FNodeSlot>& Pair : Slots)
 		{
@@ -542,6 +544,12 @@ void FSchematicRenderer::DrawBuses() const
 				bConnected ? TEXT("live") : TEXT("offline - start iotwin-bus"));
 		}
 		Text(Transport, FVector2D(Slot.X0, LabelY + LineHeight(0.72f)), bLive ? Hex(Palette::Dim) : Hex(Palette::Error, 0.85f), 0.62f);
+		if (bFaulty)
+		{
+			const FString Faults = FString::Printf(TEXT("INJECTED FAULT: %s    (%lld frames lost, %lld delayed)"),
+				*Status.DescribeFaults(), Status.FramesDropped, Status.FramesDelayed);
+			Text(Faults, FVector2D(Slot.X0, LabelY + LineHeight(0.72f) + LineHeight(0.62f) + 2.0f), Hex(Palette::Error), 0.66f);
+		}
 	}
 }
 

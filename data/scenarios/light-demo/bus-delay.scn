@@ -1,0 +1,8 @@
+name Bus delay adds to the reaction time in both directions
+bus delay 250
+send 200#01
+expect-not 100#01 for 400                       # 250 ms to the ECU and 250 ms back
+expect 100#01 within 500
+bus clear
+send 200#00
+expect 100#00 within 800                        # frames still delayed keep their order

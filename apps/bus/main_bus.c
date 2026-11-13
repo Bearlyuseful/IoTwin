@@ -95,8 +95,10 @@ int main(int argc, char** argv) {
   }
 
   BusServerStats stats = bus_server_get_stats(server);
-  log_info("iotwin-bus stopping: %llu frames routed, %llu rejected, %llu connections",
+  log_info("iotwin-bus stopping: %llu frames routed, %llu rejected, %llu dropped and %llu delayed by "
+           "injected faults, %llu connections",
            (unsigned long long)stats.frames_routed, (unsigned long long)stats.frames_rejected,
+           (unsigned long long)stats.frames_dropped, (unsigned long long)stats.frames_delayed,
            (unsigned long long)stats.clients_accepted);
   bus_server_destroy(server);
   return exit_code;

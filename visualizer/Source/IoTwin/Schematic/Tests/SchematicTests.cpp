@@ -1,6 +1,7 @@
 // IoTwin - automation tests for the schematic view model (DBC, system description, components).
 // Run: UnrealEditor-Cmd IoTwin.uproject -ExecCmds="Automation RunTests IoTwin;Quit" -unattended -nullrhi
 
+#include "Bus/BusStatus.h"
 #include "Engine/GameInstance.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/Paths.h"
@@ -221,6 +222,35 @@ bool FIoTwinUdsTextTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("reset"), FUdsText::Describe({0x02, 0x11, 0x01}), FString(TEXT("SF ECUReset hard")));
 	TestEqual(TEXT("DTCs"), FUdsText::Describe({0x03, 0x19, 0x02, 0x09}), FString(TEXT("SF ReadDTCInformation 02")));
 	TestEqual(TEXT("invalid"), FUdsText::Describe({0x09, 0x22}), FString(TEXT("SF (invalid length)")));
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FIoTwinBusStatusTest, "IoTwin.Bus.Status",
+	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+
+bool FIoTwinBusStatusTest::RunTest(const FString& Parameters)
+{
+	FIoTwinBusStatus Status;
+	TestTrue(TEXT("parses"), FIoTwinBusStatus::Parse(
+		TEXT("!status nodes=3 routed=120 dropped=4 delayed=9 drop=100.0%(filtered) delay=250 jitter=50 silence=1200"), Status));
+	TestTrue(TEXT("valid"), Status.bValid);
+	TestEqual(TEXT("nodes"), Status.Nodes, 3);
+	TestEqual(TEXT("dropped"), Status.FramesDropped, int64(4));
+	TestTrue(TEXT("filtered"), Status.bDropFiltered);
+	TestEqual(TEXT("drop"), Status.DropPercent, 100.0f);
+	TestEqual(TEXT("silence"), Status.SilenceMs, 1200);
+	TestTrue(TEXT("faults"), Status.HasFaults());
+	TestEqual(TEXT("text"), Status.DescribeFaults(), FString(TEXT("drop 100 % (filtered), delay 250 +-50 ms, silent 1.2 s")));
+
+	FIoTwinBusStatus Clean;
+	TestTrue(TEXT("no faults"), FIoTwinBusStatus::Parse(
+		TEXT("!status nodes=2 routed=0 dropped=0 delayed=0 drop=0.0% delay=0 jitter=0 silence=0"), Clean));
+	TestFalse(TEXT("clean"), Clean.HasFaults());
+	TestTrue(TEXT("empty text"), Clean.DescribeFaults().IsEmpty());
+
+	FIoTwinBusStatus Ignored;
+	TestFalse(TEXT("other line"), FIoTwinBusStatus::Parse(TEXT("!ok"), Ignored));
+	TestFalse(TEXT("frame"), FIoTwinBusStatus::Parse(TEXT("100#01"), Ignored));
 	return true;
 }
 

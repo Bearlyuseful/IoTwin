@@ -1,7 +1,7 @@
 add_library(iotwin_bus_server STATIC bus_server.c bus_server.h)
 target_include_directories(iotwin_bus_server PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(iotwin_bus_server
-    PUBLIC iotwin_can iotwin_net iotwin_logger
+    PUBLIC iotwin_can iotwin_net iotwin_logger iotwin_platform
     PRIVATE iotwin_compile_options
 )
 

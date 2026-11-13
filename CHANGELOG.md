@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+### Scenarios and faults
+- `iotwin-bus` fault injection of the medium, controlled with `!fault`
+  lines: frame loss (optionally by id, reproducible with a seed), delay
+  with jitter (no reordering), silence; `!status` with counters.
+- Test bench channel: `@<node> <command>` reaches only registered nodes;
+  `can_sim` registers as `ecu` and runs e.g. `fault short on`.
+- `can_monitor --log` records in candump -L format, `can_replay` plays such
+  logs (also from can-utils) with the original timing, speed factor, loop
+  and id filter.
+- `can_scenario` runs scripts with `send`, `expect`, `expect-not`, `wait`,
+  `bench`, `bus`, `uds`; seven scenarios of the light demo run as CTest
+  `scenarios` (fresh bus and ECU each, Linux and Windows).
+- Visualizer: the schematic shows injected bus faults (red bus, fault text,
+  lost and delayed frames); it registers on the bus as `visualizer`.
+
 ### UDS diagnostics
 - `libs/can/uds`: ISO 14229-1 server on ISO-TP, portable C without heap (host
   and STM32): session control, ECU reset, read/write data by identifier,
