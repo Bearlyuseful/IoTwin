@@ -1,7 +1,6 @@
 # Roadmap
 
-Status: November 2026 - v0.1.0 released, steps 0-3 implemented on `feature/firmware`
-(hardware test on the NUCLEO-G0B1RE pending).
+Status: November 2026 - v0.1.0 released, steps 0-3 implemented and verified on a NUCLEO-G0B1RE
 
 This roadmap merges the two earlier plans - the MVP plan of October 2025 and the
 post-MVP plan of March 2026 (virtual CAN bus → serial bridge → STM32 CAN
