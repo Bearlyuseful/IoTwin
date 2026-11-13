@@ -82,6 +82,16 @@ root (`visualizer/..`) and the package root. Command line:
 
 ![Schematic view](../images/schematic.png)
 
+## Dimming and power
+
+The **mouse wheel** dims the lamp: the visualizer sends `DIMMER_CMD` (0x201)
+in 10 % steps, starting from the brightness in the last `LAMP_CMD`. The power
+source reads that brightness from `LAMP_CMD` byte 1 (`LevelByteIndex`), its
+port carries it as `SupplyLevel`, and the lamp's light intensity and bulb
+colour follow `UElectricalDeviceComponent::PowerLevel`. The HUD shows the
+brightness and the ECU's measured current and supply voltage from
+`LAMP_STATUS` (0x101), plus fuse, overcurrent or short circuit.
+
 ## Electrical model (`Source/IoTwin/Systems`)
 
 - `UElectricalPortComponent`: wiring is a symmetric list of ports stored on

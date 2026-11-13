@@ -1,4 +1,4 @@
-﻿// IoTwin - lamp: port -> device -> light, with a visible bulb.
+// IoTwin - lamp: port -> device -> light, with a visible bulb.
 
 #include "LampActor.h"
 
@@ -67,6 +67,7 @@ void ALampActor::BeginPlay()
 	if (Device)
 	{
 		Device->OnPoweredChanged.AddDynamic(this, &ALampActor::HandlePoweredChanged);
+		Device->OnPowerLevelChanged.AddDynamic(this, &ALampActor::HandlePowerLevelChanged);
 		HandlePoweredChanged(Device->bIsPowered);
 	}
 }
@@ -75,6 +76,12 @@ void ALampActor::HandlePoweredChanged(bool bPowered)
 {
 	if (BulbMaterial)
 	{
-		BulbMaterial->SetVectorParameterValue(TEXT("Color"), bPowered ? BulbOnColor : BulbOffColor);
+		const float Level = (bPowered && Device) ? Device->PowerLevel : 0.0f;
+		BulbMaterial->SetVectorParameterValue(TEXT("Color"), FMath::Lerp(BulbOffColor, BulbOnColor, bPowered ? FMath::Max(Level, 0.15f) : 0.0f));
 	}
+}
+
+void ALampActor::HandlePowerLevelChanged(float Level)
+{
+	HandlePoweredChanged(Device && Device->bIsPowered);
 }

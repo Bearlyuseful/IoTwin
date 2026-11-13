@@ -42,8 +42,10 @@ existing nodes (visualizer, `serial_bridge`) are not affected.
 
 | Id    | Name           | Sender               | Payload                               |
 |-------|----------------|----------------------|---------------------------------------|
-| `100` | `LAMP_CMD`     | `can_sim` (light ECU)| `data[0]` bit 0: 1 = relay closed, lamp on |
+| `100` | `LAMP_CMD`     | `can_sim` (light ECU)| `data[0]` bit 0: 1 = lamp on; `data[1]`: brightness 0..100 % |
+| `101` | `LAMP_STATUS`  | `can_sim` (light ECU)| current, supply voltage, duty, flags ([Power](power.md#lamp_status-0x101)) |
 | `200` | `SWITCH_STATE` | Visualizer wall switch | `data[0]` bit 0: 1 = switch on       |
+| `201` | `DIMMER_CMD`   | Visualizer (mouse wheel) | `data[0]`: brightness 0..100 %    |
 
 The ECU sends `LAMP_CMD` on every change and cyclically (default every
 500 ms), so a node that connects later learns the state within one cycle.

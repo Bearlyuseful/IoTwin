@@ -42,7 +42,7 @@ Order of work:
 | B | **Bus / schematic view in Unreal** ✅ (first version) | 2D view of nodes, buses and live messages, switch to 3D ([Visualizer](dev/visualizer.md#schematic-view-sourceiotwinschematic)); open: generated from circuit diagrams, wireless traffic, jump to the matching 3D object |
 | C | **UDS diagnostics** ✅ | on top of ISO-TP: server in ECU and gateway, `uds_client`, injectable faults as DTCs ([Diagnostics](dev/diagnostics.md)); open: SecurityAccess, RoutineControl, flashing |
 | D | **Scenarios and faults** ✅ | record/replay (candump format), scripted scenarios as tests, bus faults (loss, delay, silence), test bench faults in the ECU ([Scenarios and Faults](dev/scenarios.md)); faults shown in the schematic view; open: per-node bus-off and error frames |
-| E | **More devices and electrical model** | dimmer, sensors, fan/motor; load, current, fuse |
+| E | **More devices and electrical model** ✅ (dimmer, current, fuse) | dimmable lamp with PWM (also on the NUCLEO LED), electrical model of the output with supply, fuse and smart switch, `LAMP_STATUS` ([Power and Dimming](dev/power.md)); open: sensors, fan/motor |
 | F | **Real bus and real time** | transceiver + second node, PREEMPT_RT measurements (needs hardware) |
 
 Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup.

@@ -115,6 +115,14 @@ same syntax in both directions.
 Any terminal works for experiments (115200 8N1, send CR): `V`, `S6`, `l`,
 `t100101` → LD4 on.
 
+## LED dimming (PWM)
+
+LD4 (PA5) runs on TIM2 channel 1 (AF2) at 1 kHz. The LED shows the lamp:
+off, or on with the brightness of `LAMP_CMD` byte 1 (100 % if the frame has
+only one byte). `board_led_measure_percent()` samples the pin for about 5 ms
+as a self test; UDS DID `0204` reports commanded and measured brightness
+(see [Power and Dimming](power.md)).
+
 ## Diagnostics (UDS)
 
 The firmware is a UDS server on `0x7E1 -> 0x7E9` (and functional `0x7DF`):

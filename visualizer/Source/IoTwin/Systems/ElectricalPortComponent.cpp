@@ -1,4 +1,4 @@
-﻿// IoTwin - electrical connection point of a device.
+// IoTwin - electrical connection point of a device.
 
 #include "ElectricalPortComponent.h"
 
@@ -45,6 +45,32 @@ bool UElectricalPortComponent::HasPower_Implementation() const
 		}
 	}
 	return false;
+}
+
+float UElectricalPortComponent::GetSupplyLevel() const
+{
+	TArray<const UElectricalPortComponent*, TInlineAllocator<16>> Pending;
+	TSet<const UElectricalPortComponent*, DefaultKeyFuncs<const UElectricalPortComponent*>, TInlineSetAllocator<16>> Visited;
+	Pending.Add(this);
+	Visited.Add(this);
+	float Level = 0.0f;
+	while (Pending.Num() > 0)
+	{
+		const UElectricalPortComponent* Port = Pending.Pop(EAllowShrinking::No);
+		if (Port->bSupplying)
+		{
+			Level = FMath::Max(Level, FMath::Clamp(Port->SupplyLevel, 0.0f, 1.0f));
+		}
+		for (const TObjectPtr<UElectricalPortComponent>& Next : Port->Connections)
+		{
+			if (Next && !Visited.Contains(Next.Get()))
+			{
+				Visited.Add(Next.Get());
+				Pending.Add(Next.Get());
+			}
+		}
+	}
+	return Level;
 }
 
 void UElectricalPortComponent::ConnectTo_Implementation(const TScriptInterface<IPowerInterface>& other)

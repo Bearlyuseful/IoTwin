@@ -15,7 +15,9 @@ Double-click start-demo.bat. Three windows open:
 
 In the visualizer click the wall switch (or press SPACE): the switch sends
 CAN frame 200#01, the ECU answers with 100#01, the relay closes and the lamp
-turns on.
+turns on. The mouse wheel dims the lamp; the HUD shows the current the ECU
+measures. In the CAN-Sim window "fault overload on" makes the fuse blow after
+about two seconds, "fuse replace" repairs it.
 
 Press TAB to switch between the 3D scene and the 2D schematic: nodes, CAN bus
 and USB link of the system with every message decoded at its sender. Click a

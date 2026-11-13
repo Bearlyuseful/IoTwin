@@ -91,6 +91,9 @@ one typed on its console:
 | `fault short on/off` | lamp output short to ground: output switched off, DTC `B1001-11` |
 | `fault open on/off` | open load: DTC `B1001-13` while the lamp is on |
 | `fault supply on/off` | supply voltage low: DTC `B1002-16` |
+| `fault overload on/off` | bulb with three times the power: DTC `B1001-19`, the fuse blows (`B1003-13`) |
+| `fuse replace` | put in a new lamp fuse |
+| `dim <0..100>` | brightness |
 | `fault clear` | remove all injected faults |
 | `lamp on/off/toggle`, `blink <ms>/off` | operate the ECU directly |
 
@@ -124,6 +127,8 @@ IoTwin logs can be played on a real bus with `canplayer`:
 | `frame-loss` | lost `SWITCH_STATE`: the lamp does not react |
 | `bus-delay` | 250 ms delay adds up in both directions |
 | `bus-silence` | silent bus: nothing arrives, the ECU continues afterwards |
+| `dimmer` | `DIMMER_CMD` -> brightness in `LAMP_CMD`, duty and current in `LAMP_STATUS` |
+| `overload-fuse` | overload: overcurrent DTC, fuse blows, replaced fuse brings the lamp back |
 
 `tools/run_scenarios.py` starts a fresh `iotwin-bus` (free port) and `can_sim`
 for every scenario, so faults, DTCs and settings never leak into the next one:

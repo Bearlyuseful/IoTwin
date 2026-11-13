@@ -44,6 +44,7 @@ nav:
       - CAN Tools (DBC, ISO-TP, SocketCAN): dev/can_tools.md
       - Diagnostics (UDS): dev/diagnostics.md
       - Scenarios and Faults: dev/scenarios.md
+      - Power and Dimming: dev/power.md
       - Component Database: dev/component_database.md
       - Packaging: dev/packaging.md
   - API Reference: api/index.html

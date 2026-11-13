@@ -1,4 +1,4 @@
-﻿// IoTwin - point light that shines while its device is powered.
+// IoTwin - point light that shines while its device is powered.
 
 #include "LightEmitterComponent.h"
 
@@ -12,18 +12,18 @@ void ULightEmitterComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	const bool bOn = Device != nullptr && Device->bIsPowered;
-	if (!bApplied || bOn != bLastOn)
+	const float Level = (Device != nullptr && Device->bIsPowered) ? Device->PowerLevel : 0.0f;
+	if (!bApplied || !FMath::IsNearlyEqual(Level, LastLevel))
 	{
-		Apply(bOn);
+		Apply(Level);
 	}
 }
 
-void ULightEmitterComponent::Apply(bool bOn)
+void ULightEmitterComponent::Apply(float Level)
 {
-	// Only touch the render state on changes.
+	// Only touch the render state on changes. Brightness follows the dimming level.
 	bApplied = true;
-	bLastOn = bOn;
-	SetVisibility(bOn);
-	SetIntensity(bOn ? PoweredIntensity : 0.0f);
+	LastLevel = Level;
+	SetVisibility(Level > 0.0f);
+	SetIntensity(PoweredIntensity * Level);
 }

@@ -112,7 +112,10 @@ void AIoTwinHUD::DrawSimulationPanel()
 	Switch = FindDisplayedActor<AWallSwitchActor>(GetWorld());
 
 	const int32 TrafficLines = Bus ? Bus->GetRecentTraffic().Num() : 0;
-	const float PanelHeight = LineHeight * (8.5f + TrafficLines) + 24.0f;
+	// LAMP_STATUS (0x101) of the light ECU: current, supply voltage, duty, flags.
+	FCanFrame Status;
+	const bool bHaveStatus = Bus && Bus->GetLastFrame(0x101, false, Status) && Status.Data.Num() >= 6;
+	const float PanelHeight = LineHeight * (9.5f + (bHaveStatus ? 1.0f : 0.0f) + TrafficLines) + 24.0f;
 	DrawRect(FLinearColor(0.0f, 0.0f, 0.0f, 0.72f), Left, 20.0f, 255.0f, PanelHeight);
 
 	float Y = 30.0f;
@@ -138,14 +141,36 @@ void AIoTwinHUD::DrawSimulationPanel()
 	}
 	if (Lamp)
 	{
-		DrawLine(FString::Printf(TEXT("Lamp:  %s"), Lamp->IsOn() ? TEXT("ON") : TEXT("OFF")),
+		DrawLine(Lamp->IsOn() ? FString::Printf(TEXT("Lamp:  ON  %d %%"), FMath::RoundToInt(Lamp->Device->PowerLevel * 100.0f))
+		                      : FString(TEXT("Lamp:  OFF")),
 			Lamp->IsOn() ? GoodColor : DimColor, Y);
 	}
 	if (Switch)
 	{
 		DrawLine(FString::Printf(TEXT("Switch: %s"), Switch->IsOn() ? TEXT("ON") : TEXT("OFF")), TextColor, Y);
 	}
+	if (bHaveStatus)
+	{
+		const int32 CurrentMa = Status.Data[0] | (Status.Data[1] << 8);
+		const int32 SupplyMv = Status.Data[2] | (Status.Data[3] << 8);
+		const uint8 Flags = Status.Data[5];
+		FString Power = FString::Printf(TEXT("ECU output: %.2f A  %.2f V"), CurrentMa / 1000.0f, SupplyMv / 1000.0f);
+		if (Flags & 0x01)
+		{
+			Power += TEXT("  FUSE BLOWN");
+		}
+		else if (Flags & 0x04)
+		{
+			Power += TEXT("  SHORT");
+		}
+		else if (Flags & 0x02)
+		{
+			Power += TEXT("  OVERCURRENT");
+		}
+		DrawLine(Power, (Flags != 0) ? BadColor : TextColor, Y);
+	}
 	DrawLine(TEXT("Click the wall switch or press SPACE"), DimColor, Y);
+	DrawLine(TEXT("Mouse wheel dims the lamp"), DimColor, Y);
 	if (UIoTwinSchematicSubsystem::Get(this))
 	{
 		AddHitBox(FVector2D(Left, Y), FVector2D(255.0f, LineHeight), SchematicButton, /*bConsumesInput=*/true, 10);

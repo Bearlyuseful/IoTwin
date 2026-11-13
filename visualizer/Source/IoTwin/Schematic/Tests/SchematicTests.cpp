@@ -166,8 +166,11 @@ bool FIoTwinSchematicRepositoryDataTest::RunTest(const FString& Parameters)
 	TestNotNull(TEXT("MCU in component database"), Schematic->GetComponents().Find(TEXT("st.stm32g0b1ret6")));
 
 	FString MessageName;
-	TestEqual(TEXT("DBC decode"), Schematic->Describe(FCanFrame::MakeData(0x100, {0x01}), &MessageName),
-		FString(TEXT("LAMP_CMD LampOn=1 (On)")));
+	TestEqual(TEXT("DBC decode"), Schematic->Describe(FCanFrame::MakeData(0x100, {0x01, 0x3C}), &MessageName),
+		FString(TEXT("LAMP_CMD LampOn=1 (On) LampLevel=60 %")));
+	// LAMP_STATUS: 1.819 A, 12.509 V, 100 %, no flags (Intel byte order, factor 0.001)
+	TestEqual(TEXT("LAMP_STATUS"), Schematic->Describe(FCanFrame::MakeData(0x101, {0x1B, 0x07, 0xDD, 0x30, 0x64, 0x00})),
+		FString(TEXT("LAMP_STATUS LampCurrent=1.819 A SupplyVoltage=12.509 V OutputDuty=100 % FuseBlown=0 (OK) Overcurrent=0 (No) ShortShutdown=0 (No)")));
 	TestEqual(TEXT("message name"), MessageName, FString(TEXT("LAMP_CMD")));
 
 	// Producer attribution: received SWITCH_STATE comes from the gateway, sent ones from the visualizer.
@@ -178,13 +181,13 @@ bool FIoTwinSchematicRepositoryDataTest::RunTest(const FString& Parameters)
 	const TArray<FString> ExpectedConsumers = {TEXT("visualizer"), TEXT("gateway")};
 	TestTrue(TEXT("consumers"), Schematic->GetConsumers(TEXT("LAMP_CMD"), TEXT("ecu")) == ExpectedConsumers);
 
-	Schematic->RecordFrame(FCanFrame::MakeData(0x100, {0x01}), false, 100.0);
+	Schematic->RecordFrame(FCanFrame::MakeData(0x100, {0x01, 0x64}), false, 100.0);
 	Schematic->RecordFrame(FCanFrame::MakeData(0x200, {0x01}), false, 100.5);
 	Schematic->RecordFrame(FCanFrame::MakeData(0x7FF, {0x00}), false, 101.0);
 	TestEqual(TEXT("total"), Schematic->GetTotalFrames(), 3);
 	TestEqual(TEXT("log"), Schematic->GetLog().Num(), 3);
 	const FSchematicNodeActivity* Ecu = Schematic->FindActivity(TEXT("ecu"));
-	TestTrue(TEXT("ecu activity"), Ecu && Ecu->FrameCount == 1 && Ecu->LastMessage == TEXT("LAMP_CMD LampOn=1 (On)"));
+	TestTrue(TEXT("ecu activity"), Ecu && Ecu->FrameCount == 1 && Ecu->LastMessage == TEXT("LAMP_CMD LampOn=1 (On) LampLevel=100 %"));
 	const FSchematicNodeActivity* Gateway = Schematic->FindActivity(TEXT("gateway"));
 	TestTrue(TEXT("gateway activity"), Gateway && Gateway->FrameCount == 1);
 	TestTrue(TEXT("unknown frame is logged unattributed"), Schematic->GetLog().Last().NodeId.IsEmpty());

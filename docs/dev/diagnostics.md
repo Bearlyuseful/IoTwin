@@ -62,7 +62,10 @@ runs in `can_sim` and on the STM32.
 | 0101 | switch input (last SWITCH_STATE)| 1 byte         | read       |
 | 0102 | LAMP_CMD cycle time             | uint16 ms, 0 = off | read / write (0 or 50..60000) |
 | 0103 | blink period                    | uint16 ms, 0 = off | read / write (0 or 50..60000) |
-| 0104 | supply voltage (simulated)      | uint16 mV      | read       |
+| 0104 | supply voltage (measured)       | uint16 mV      | read       |
+| 0105 | brightness                      | 1 byte %       | read / write (0..100) |
+| 0106 | lamp current                    | uint16 mA      | read       |
+| 0107 | fuse: blown, heat in % of melting | 2 bytes      | read       |
 
 ### Faults and trouble codes
 
@@ -74,6 +77,10 @@ the way a real ECU does:
 | `fault short on`    | output switched off (short circuit protection) | `B1001-11` | always              |
 | `fault open on`     | none visible (lamp would stay dark)            | `B1001-13` | only while the lamp is on |
 | `fault supply on`   | DID 0104 drops to 9800 mV                      | `B1002-16` | always              |
+| `fault overload on` | 3x current; the 3 A fuse blows after about 2 s | `B1001-19`, `B1003-13` | while the lamp is on |
+
+The faults act on an electrical model of the output (see [Power and Dimming](power.md));
+the monitors only see measured current and voltage. `fuse replace` puts in a new fuse.
 
 `dtc` on the console shows the ECU's own view. A removed fault leaves the
 DTC confirmed until it is cleared (`uds_client clear`). An ECUReset keeps the
@@ -99,6 +106,7 @@ SLCAN) or from a tester on a real CAN bus; responses go to both sides.
 | 0201 | uint32 frames to CAN, from CAN, loopback echoes          |
 | 0202 | uint32 uptime in ms                                     |
 | 0203 | channel open, mode (0 normal, 1 loopback, 2 listen), uint32 bitrate |
+| 0204 | LED brightness: commanded %, measured % (pin sampling) |
 
 DTC `U0073-88` (communication bus off) is monitored while the channel is
 open and not in listen mode.

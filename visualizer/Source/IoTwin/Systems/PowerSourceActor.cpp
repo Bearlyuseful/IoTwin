@@ -1,8 +1,9 @@
-﻿// IoTwin - power supply with an output relay, optionally controlled via CAN.
+// IoTwin - power supply with an output relay, optionally controlled via CAN.
 
 #include "PowerSourceActor.h"
 
 #include "Bus/CanSignalComponent.h"
+#include "Bus/IoTwinBusSubsystem.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
 #include "IoTwin.h"
@@ -45,6 +46,19 @@ void APowerSourceActor::BeginPlay()
 	if (bControlledByCan && RelayControl)
 	{
 		RelayControl->OnValueChanged.AddDynamic(this, &APowerSourceActor::HandleRelaySignal);
+		// Dimming: the brightness travels in the same frame as the relay bit.
+		if (LevelByteIndex >= 0 && FCanFrame::ParseId(RelayControl->CanId, RelayControl->bExtendedId, RelayFrameId))
+		{
+			if (UIoTwinBusSubsystem* Bus = UIoTwinBusSubsystem::Get(this))
+			{
+				Bus->OnFrameReceived.AddDynamic(this, &APowerSourceActor::HandleBusFrame);
+				FCanFrame Last;
+				if (Bus->GetLastFrame(RelayFrameId, RelayControl->bExtendedId, Last))
+				{
+					HandleBusFrame(Last);
+				}
+			}
+		}
 		SetOutputEnabled(RelayControl->HasValue() && RelayControl->GetValue());
 		UE_LOG(LogIoTwin, Log, TEXT("%s: relay controlled by CAN %s"), *GetName(), *RelayControl->Describe());
 	}
@@ -70,6 +84,17 @@ void APowerSourceActor::SetOutputEnabled(bool bEnabled)
 void APowerSourceActor::HandleRelaySignal(bool bClosed)
 {
 	SetOutputEnabled(bClosed);
+}
+
+void APowerSourceActor::HandleBusFrame(const FCanFrame& Frame)
+{
+	if (Frame.Id != RelayFrameId || Frame.bExtended != RelayControl->bExtendedId || Frame.bRemote)
+	{
+		return;
+	}
+	// Frames without the brightness byte (older senders) mean full brightness.
+	const float Level = Frame.Data.IsValidIndex(LevelByteIndex) ? FMath::Clamp(Frame.Data[LevelByteIndex], 0, 100) / 100.0f : 1.0f;
+	Port->SupplyLevel = Level;
 }
 
 void APowerSourceActor::UpdateHousing()
