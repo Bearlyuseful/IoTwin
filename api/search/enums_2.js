@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loglevel_0',['LogLevel',['../log_8h.html#aca1fd1d8935433e6ba2e3918214e07f9',1,'log.h']]]
+  ['ecansignaldirection_0',['ECanSignalDirection',['../CanSignalComponent_8h.html#a4c933bb48cd6507bbbe3faad1187d601',1,'CanSignalComponent.h']]]
 ];

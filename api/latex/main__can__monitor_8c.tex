@@ -1,0 +1,44 @@
+\doxysection{src/tools/can\+\_\+monitor/main\+\_\+can\+\_\+monitor.c File Reference}
+\hypertarget{main__can__monitor_8c}{}\label{main__can__monitor_8c}\index{src/tools/can\_monitor/main\_can\_monitor.c@{src/tools/can\_monitor/main\_can\_monitor.c}}
+
+
+can\+\_\+monitor\+: prints the traffic of iotwin-\/bus, decoded with a DBC file.  
+
+
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include "{}cli.\+h"{}}\newline
+{\ttfamily \#include "{}dbc.\+h"{}}\newline
+{\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
+{\ttfamily \#include "{}net.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structMonitor}{Monitor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main__can__monitor_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+can\+\_\+monitor\+: prints the traffic of iotwin-\/bus, decoded with a DBC file. 
+
+17\+:21\+:22.\+229 200\#01 SWITCH\+\_\+\+STATE Switch\+On=1 (On) 17\+:21\+:22.\+239 100\#01 LAMP\+\_\+\+CMD Lamp\+On=1 (On) 
+
+\label{doc-func-members}
+\Hypertarget{main__can__monitor_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main__can__monitor_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{main\_can\_monitor.c@{main\_can\_monitor.c}!main@{main}}
+\index{main@{main}!main\_can\_monitor.c@{main\_can\_monitor.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main__can__monitor_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+

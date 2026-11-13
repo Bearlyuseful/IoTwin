@@ -488,15 +488,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#order" class="md-nav__link">
+  <a href="#next-phase-agreed-november-2026" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Order
+        Next phase (agreed November 2026)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Order">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-of-the-post-mvp-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Order of the post-MVP steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Order of the post-MVP steps">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -825,6 +836,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../dev/can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../dev/packaging/" class="md-nav__link">
         
   
@@ -1128,13 +1167,76 @@ digital-twin features.</p>
 <td>✅ FDCAN driver, internal loopback; ⚠️ real bus needs a transceiver + second node</td>
 </tr>
 <tr>
+<td>SocketCAN bridge</td>
+<td>step 4</td>
+<td>✅ <code>socketcan_bridge</code> (<a href="../dev/can_tools/">CAN Tools</a>); live test needs <code>vcan0</code></td>
+</tr>
+<tr>
+<td>Real-time measurements on PREEMPT_RT</td>
+<td>step 4</td>
+<td>❌ needs PREEMPT_RT hardware</td>
+</tr>
+<tr>
+<td>DBC, ISO-TP</td>
+<td>step 5</td>
+<td>✅ DBC reader + <code>can_monitor</code>, ISO-TP library; UDS services open</td>
+</tr>
+<tr>
 <td>Scenarios, more devices, extensions</td>
 <td>Oct 2025 outlook</td>
 <td>❌</td>
 </tr>
 </tbody>
 </table>
-<h2 id="order">Order<a class="headerlink" href="#order" title="Permanent link">&para;</a></h2>
+<h2 id="next-phase-agreed-november-2026">Next phase (agreed November 2026)<a class="headerlink" href="#next-phase-agreed-november-2026" title="Permanent link">&para;</a></h2>
+<p>The long-term goal is a digital twin that is built from engineering data:
+circuit diagrams and network descriptions (incl. wireless links) describe
+the physical setup, the visualizer shows it as a <strong>2D schematic</strong> with live
+bus messages and status, and can switch from there into the <strong>3D</strong> scene.</p>
+<p>Order of work:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><strong>Component database</strong></td>
+<td>parts and their characteristics for simulation, first entry: NUCLEO-G0B1RE; plus a system description (instances, connections, buses)</td>
+</tr>
+<tr>
+<td>B</td>
+<td><strong>Bus / schematic view in Unreal</strong></td>
+<td>2D view of nodes, buses and live messages, switch to 3D; later generated from circuit diagrams incl. wireless traffic</td>
+</tr>
+<tr>
+<td>C</td>
+<td><strong>UDS diagnostics</strong></td>
+<td>on top of ISO-TP: server in ECU and gateway, client tool</td>
+</tr>
+<tr>
+<td>D</td>
+<td><strong>Scenarios and faults</strong></td>
+<td>record/replay, scripted scenarios, fault injection (loss, delay, bus-off)</td>
+</tr>
+<tr>
+<td>E</td>
+<td><strong>More devices and electrical model</strong></td>
+<td>dimmer, sensors, fan/motor; load, current, fuse</td>
+</tr>
+<tr>
+<td>F</td>
+<td><strong>Real bus and real time</strong></td>
+<td>transceiver + second node, PREEMPT_RT measurements (needs hardware)</td>
+</tr>
+</tbody>
+</table>
+<p>Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup.</p>
+<h2 id="order-of-the-post-mvp-steps">Order of the post-MVP steps<a class="headerlink" href="#order-of-the-post-mvp-steps" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1171,13 +1273,13 @@ digital-twin features.</p>
 </tr>
 <tr>
 <td>4</td>
-<td><strong>Real-time Linux and SocketCAN</strong></td>
+<td><strong>Real-time Linux and SocketCAN</strong> (SocketCAN ✅, RT measurement open)</td>
 <td>M</td>
 <td>can run in parallel to 3</td>
 </tr>
 <tr>
 <td>5</td>
-<td><strong>Protocols on CAN</strong> (optional)</td>
+<td><strong>Protocols on CAN</strong> (DBC ✅, ISO-TP ✅, UDS open)</td>
 <td>M–L</td>
 <td>builds on 3 and 4</td>
 </tr>

@@ -32,14 +32,14 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
+        [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
@@ -53,8 +53,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "CanFrameTests_8cpp.html",
-"cli_8c.html#a4546ee1fd7fdbb417afccff6efe2ac43",
-"slcan_8h.html#a8b72da6e1892fae75e12f923b2495eaa"
+"classUCanFrameLibrary.html",
+"main__bus_8c.html#a3c04138a5bfe5d72780bb7e82a18e627",
+"structDbcSignal.html#a1c5293eb08bd2fe5e794e90a42b44b70"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

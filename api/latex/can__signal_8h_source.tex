@@ -1,0 +1,48 @@
+\doxysection{can\+\_\+signal.\+h}
+\hypertarget{can__signal_8h_source}{}\label{can__signal_8h_source}\index{src/core/can/can\_signal.h@{src/core/can/can\_signal.h}}
+\mbox{\hyperlink{can__signal_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_CAN\_SIGNAL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_CAN\_SIGNAL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecabcd53dacc51b995a4a050e7770e41939}{CAN\_BYTE\_ORDER\_MOTOROLA}}\ =\ 0,\ }
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecab1239860ea3815959d5ae7d8ea73582f}{CAN\_BYTE\_ORDER\_INTEL}}\ =\ 1\ \ \ \ \ }
+\DoxyCodeLine{00030\ \}\ \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ec}{CanByteOrder}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00034\ \ \ uint16\_t\ \mbox{\hyperlink{structCanSignal_ac8bcd3364daf502a87301b7649542a6e}{start\_bit}};}
+\DoxyCodeLine{00035\ \ \ uint8\_t\ \mbox{\hyperlink{structCanSignal_a440766abe86616f54c3425e7d30739c9}{length}};\ }
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ec}{CanByteOrder}}\ \mbox{\hyperlink{structCanSignal_addc0b4e1c6dc6a05091b08ea83a2f4c5}{byte\_order}};}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structCanSignal_a0219ff18f22905243ab508ea64e15576}{is\_signed}};\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structCanSignal_ace0e48f991d2a995145c147eec5fd18e}{factor}};}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structCanSignal_a36ad6156fc1db4773620f288cf568cb7}{offset}};}
+\DoxyCodeLine{00040\ \}\ \mbox{\hyperlink{structCanSignal}{CanSignal}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__signal_8h_afdf8014450fd7f6f1999f2fb2f7fa02e}{can\_signal\_layout\_valid}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanSignal}{CanSignal}}*\ signal);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ uint64\_t\ \mbox{\hyperlink{can__signal_8h_a765ce608299b74e8782a2978f929db7b}{can\_signal\_extract\_raw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanSignal}{CanSignal}}*\ signal,\ \textcolor{keyword}{const}\ uint8\_t\ data[8]);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{can__signal_8h_a76e0dd2fb2ef705e41f1007d43386c66}{can\_signal\_insert\_raw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanSignal}{CanSignal}}*\ signal,\ uint8\_t\ data[8],\ uint64\_t\ raw);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ int64\_t\ \mbox{\hyperlink{can__signal_8h_afa94ec375cb5b342b83af24874e40d63}{can\_signal\_raw\_to\_int}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanSignal}{CanSignal}}*\ signal,\ uint64\_t\ raw);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{can__signal_8h_a61096893d22c6fb3583ebb1b68953d94}{can\_signal\_decode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanSignal}{CanSignal}}*\ signal,\ \textcolor{keyword}{const}\ uint8\_t\ data[8]);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__signal_8h_aa2f9bd0ae432fc7d916cbddf94fc2a64}{can\_signal\_encode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanSignal}{CanSignal}}*\ signal,\ uint8\_t\ data[8],\ \textcolor{keywordtype}{double}\ physical);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_CAN\_SIGNAL\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

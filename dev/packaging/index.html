@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../firmware/">
+        <link rel="prev" href="../can_tools/">
       
       
         <link rel="next" href="../../api/">
@@ -664,6 +664,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1069,11 +1097,9 @@ and pull request and uploads the binaries as artifacts. The visualizer is not
 built in CI: GitHub-hosted runners have no Unreal Engine installation, so
 releases are packaged locally with the script above.</p>
 <h2 id="repository-size">Repository size<a class="headerlink" href="#repository-size" title="Permanent link">&para;</a></h2>
-<p><code>.uasset</code>/<code>.umap</code> files are stored directly in Git today. Before larger
-content is added, they should move to Git LFS:</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>lfs<span class="w"> </span>install
-git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">"*.uasset"</span><span class="w"> </span><span class="s2">"*.umap"</span>
-</code></pre></div>
+<p><code>.uasset</code>/<code>.umap</code> files are stored with Git LFS (see <code>.gitattributes</code>).
+Install Git LFS before cloning (<code>git lfs install</code>), otherwise the Unreal
+project only contains pointer files.</p>
 
 
 

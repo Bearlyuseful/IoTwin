@@ -17,7 +17,10 @@ var searchData=
   ['slcan_5fput_5fhex_14',['slcan_put_hex',['../slcan_8c.html#a50789257f41b87b1054579961eb96122',1,'slcan_put_hex(char *out, uint32_t value, unsigned digits):&#160;slcan.c'],['../slcan_8h.html#a50789257f41b87b1054579961eb96122',1,'slcan_put_hex(char *out, uint32_t value, unsigned digits):&#160;slcan.c']]],
   ['slcan_5freader_5ffeed_15',['slcan_reader_feed',['../slcan_8c.html#ad1497a9e559dd4d78ecb16d583df1fab',1,'slcan_reader_feed(SlcanReader *reader, const char *data, size_t length, SlcanLineCallback callback, void *user_data):&#160;slcan.c'],['../slcan_8h.html#ad1497a9e559dd4d78ecb16d583df1fab',1,'slcan_reader_feed(SlcanReader *reader, const char *data, size_t length, SlcanLineCallback callback, void *user_data):&#160;slcan.c']]],
   ['slcan_5freader_5finit_16',['slcan_reader_init',['../slcan_8c.html#a04bc784d26583ecb01dbf94dc134f316',1,'slcan_reader_init(SlcanReader *reader):&#160;slcan.c'],['../slcan_8h.html#a04bc784d26583ecb01dbf94dc134f316',1,'slcan_reader_init(SlcanReader *reader):&#160;slcan.c']]],
-  ['start_17',['Start',['../classFIoTwinBusConnection.html#a5b1c6c538b7ae6f399ad414e5d8d1810',1,'FIoTwinBusConnection']]],
-  ['startplay_18',['StartPlay',['../classAGM__Simulation.html#a829db21849456c7e13f88f1adf826627',1,'AGM_Simulation']]],
-  ['stop_19',['Stop',['../classFIoTwinBusConnection.html#ac022699d54d5a1dc0392556d32f0069f',1,'FIoTwinBusConnection']]]
+  ['socketcan_5ffrom_5fframe_17',['socketcan_from_frame',['../socketcan_8c.html#a7639fa365e598eb7b4d120392225f072',1,'socketcan_from_frame(const CanFrame *in, struct can_frame *out):&#160;socketcan.c'],['../socketcan_8h.html#a7639fa365e598eb7b4d120392225f072',1,'socketcan_from_frame(const CanFrame *in, struct can_frame *out):&#160;socketcan.c']]],
+  ['socketcan_5fopen_18',['socketcan_open',['../socketcan_8c.html#aaa4db6b3cba04380c1d07993046e9781',1,'socketcan_open(const char *interface_name):&#160;socketcan.c'],['../socketcan_8h.html#aaa4db6b3cba04380c1d07993046e9781',1,'socketcan_open(const char *interface_name):&#160;socketcan.c']]],
+  ['socketcan_5fto_5fframe_19',['socketcan_to_frame',['../socketcan_8c.html#ad32dd07bc389b1f087e298d5532e323b',1,'socketcan_to_frame(const struct can_frame *in, CanFrame *out):&#160;socketcan.c'],['../socketcan_8h.html#ad32dd07bc389b1f087e298d5532e323b',1,'socketcan_to_frame(const struct can_frame *in, CanFrame *out):&#160;socketcan.c']]],
+  ['start_20',['Start',['../classFIoTwinBusConnection.html#a5b1c6c538b7ae6f399ad414e5d8d1810',1,'FIoTwinBusConnection']]],
+  ['startplay_21',['StartPlay',['../classAGM__Simulation.html#a829db21849456c7e13f88f1adf826627',1,'AGM_Simulation']]],
+  ['stop_22',['Stop',['../classFIoTwinBusConnection.html#ac022699d54d5a1dc0392556d32f0069f',1,'FIoTwinBusConnection']]]
 ];

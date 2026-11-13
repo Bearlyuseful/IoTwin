@@ -3,6 +3,9 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{src/bridges/serial\+\_\+bridge/\mbox{\hyperlink{bridge__core_8c}{bridge\+\_\+core.\+c}} }{\pageref{bridge__core_8c}}{}
 \item\contentsline{section}{src/bridges/serial\+\_\+bridge/\mbox{\hyperlink{bridge__core_8h}{bridge\+\_\+core.\+h}} \\*Translation between an SLCAN adapter (serial) and iotwin-\/bus (TCP text lines) }{\pageref{bridge__core_8h}}{}
 \item\contentsline{section}{src/bridges/serial\+\_\+bridge/\mbox{\hyperlink{main__serial__bridge_8c}{main\+\_\+serial\+\_\+bridge.\+c}} \\*Serial\+\_\+bridge\+: connects an SLCAN adapter (e.\+g. the \doxylink{classIoTwin}{Io\+Twin} STM32 gateway) to iotwin-\/bus }{\pageref{main__serial__bridge_8c}}{}
+\item\contentsline{section}{src/bridges/socketcan\+\_\+bridge/\mbox{\hyperlink{main__socketcan__bridge_8c}{main\+\_\+socketcan\+\_\+bridge.\+c}} \\*Socketcan\+\_\+bridge\+: connects a Linux CAN interface (vcan0, can0, USB adapter) to iotwin-\/bus }{\pageref{main__socketcan__bridge_8c}}{}
+\item\contentsline{section}{src/bridges/socketcan\+\_\+bridge/\mbox{\hyperlink{socketcan_8c}{socketcan.\+c}} }{\pageref{socketcan_8c}}{}
+\item\contentsline{section}{src/bridges/socketcan\+\_\+bridge/\mbox{\hyperlink{socketcan_8h}{socketcan.\+h}} \\*Linux Socket\+CAN raw sockets and conversion to/from \doxylink{structCanFrame}{Can\+Frame} (Linux only) }{\pageref{socketcan_8h}}{}
 \item\contentsline{section}{src/bus/\mbox{\hyperlink{bus__server_8c}{bus\+\_\+server.\+c}} }{\pageref{bus__server_8c}}{}
 \item\contentsline{section}{src/bus/\mbox{\hyperlink{bus__server_8h}{bus\+\_\+server.\+h}} \\*Virtual CAN bus over TCP }{\pageref{bus__server_8h}}{}
 \item\contentsline{section}{src/bus/\mbox{\hyperlink{main__bus_8c}{main\+\_\+bus.\+c}} \\*Iotwin-\/bus\+: virtual CAN bus server (command line front end) }{\pageref{main__bus_8c}}{}
@@ -18,6 +21,12 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__bus_8h}{can\+\_\+bus.\+h}} \\*Thread-\/safe FIFO of CAN frames\+: the local view of a node on the bus }{\pageref{can__bus_8h}}{}
 \item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__frame_8c}{can\+\_\+frame.\+c}} }{\pageref{can__frame_8c}}{}
 \item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}} \\*Message-\/level model of classic CAN frames and their text encoding }{\pageref{can__frame_8h}}{}
+\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__signal_8c}{can\+\_\+signal.\+c}} }{\pageref{can__signal_8c}}{}
+\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__signal_8h}{can\+\_\+signal.\+h}} \\*Encoding and decoding of signals inside a CAN payload (DBC semantics) }{\pageref{can__signal_8h}}{}
+\item\contentsline{section}{src/core/can/\mbox{\hyperlink{dbc_8c}{dbc.\+c}} }{\pageref{dbc_8c}}{}
+\item\contentsline{section}{src/core/can/\mbox{\hyperlink{dbc_8h}{dbc.\+h}} \\*Reader for the DBC subset needed to name CAN traffic }{\pageref{dbc_8h}}{}
+\item\contentsline{section}{src/core/can/\mbox{\hyperlink{isotp_8c}{isotp.\+c}} }{\pageref{isotp_8c}}{}
+\item\contentsline{section}{src/core/can/\mbox{\hyperlink{isotp_8h}{isotp.\+h}} \\*ISO-\/\+TP (ISO 15765-\/2) transport protocol for classic CAN, normal addressing }{\pageref{isotp_8h}}{}
 \item\contentsline{section}{src/core/can/\mbox{\hyperlink{slcan_8c}{slcan.\+c}} }{\pageref{slcan_8c}}{}
 \item\contentsline{section}{src/core/can/\mbox{\hyperlink{slcan_8h}{slcan.\+h}} \\*SLCAN (Lawicel CAN232/\+CANUSB) ASCII protocol used on serial links }{\pageref{slcan_8h}}{}
 \item\contentsline{section}{src/core/logger/\mbox{\hyperlink{log_8c}{log.\+c}} }{\pageref{log_8c}}{}
@@ -33,6 +42,7 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{src/simulators/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8c}{light\+\_\+ecu.\+c}} }{\pageref{light__ecu_8c}}{}
 \item\contentsline{section}{src/simulators/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8h}{light\+\_\+ecu.\+h}} \\*Simulated light control unit (the demo ECU of can\+\_\+sim) }{\pageref{light__ecu_8h}}{}
 \item\contentsline{section}{src/simulators/can\+\_\+sim/\mbox{\hyperlink{main__can__sim_8c}{main\+\_\+can\+\_\+sim.\+c}} \\*Can\+\_\+sim\+: simulated light control ECU on the \doxylink{classIoTwin}{Io\+Twin} CAN bus }{\pageref{main__can__sim_8c}}{}
+\item\contentsline{section}{src/tools/can\+\_\+monitor/\mbox{\hyperlink{main__can__monitor_8c}{main\+\_\+can\+\_\+monitor.\+c}} \\*Can\+\_\+monitor\+: prints the traffic of iotwin-\/bus, decoded with a DBC file }{\pageref{main__can__monitor_8c}}{}
 \item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\mbox{\hyperlink{IoTwin_8Target_8cs}{Io\+Twin.\+Target.\+cs}} }{\pageref{IoTwin_8Target_8cs}}{}
 \item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\mbox{\hyperlink{IoTwinEditor_8Target_8cs}{Io\+Twin\+Editor.\+Target.\+cs}} }{\pageref{IoTwinEditor_8Target_8cs}}{}
 \item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8Build_8cs}{Io\+Twin.\+Build.\+cs}} }{\pageref{IoTwin_8Build_8cs}}{}
