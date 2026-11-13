@@ -9,7 +9,9 @@
  *  - an SLCAN adapter: frames from the serial link are sent on the CAN bus,
  *    frames received from CAN are reported on the serial link;
  *  - a small CAN node: the user button is a wall switch (SWITCH_STATE 0x200)
- *    and the LED shows the lamp command (LAMP_CMD 0x100).
+ *    and the LED shows the lamp command (LAMP_CMD 0x100);
+ *  - a UDS server (requests 0x7E1 or functional 0x7DF, responses 0x7E9) for
+ *    testers on the serial side or on the CAN bus; responses go to both.
  *
  * In internal loopback mode the controller receives its own frames. They are
  * matched against the transmitted ones and not reported a second time, so the
@@ -25,6 +27,7 @@
 
 #include "can_frame.h"
 #include "slcan.h"
+#include "uds.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,6 +38,21 @@ extern "C" {
 #define GATEWAY_DEFAULT_BITRATE 500000u
 #define GATEWAY_ECHO_SLOTS 8u
 #define GATEWAY_BLINK_PERIOD_MS 500u
+
+/** @name Diagnostics (see docs/dev/diagnostics.md) */
+/**@{*/
+#define GATEWAY_DIAG_REQUEST_ID 0x7E1u
+#define GATEWAY_DIAG_RESPONSE_ID 0x7E9u
+#define GATEWAY_DTC_BUS_OFF 0xC07388u    /**< U0073-88 control module communication bus off */
+#define GATEWAY_DTC_COUNT 1u
+#define GATEWAY_DID_LAMP 0x0100u         /**< 1 byte, last LAMP_CMD */
+#define GATEWAY_DID_SWITCH 0x0101u       /**< 1 byte, wall switch (button) */
+#define GATEWAY_DID_CAN_ERRORS 0x0200u   /**< TEC, REC, state (0 active, 1 warning, 2 passive, 3 bus off) */
+#define GATEWAY_DID_COUNTERS 0x0201u     /**< uint32 frames to CAN, from CAN, echoes */
+#define GATEWAY_DID_UPTIME 0x0202u       /**< uint32 ms */
+#define GATEWAY_DID_CHANNEL 0x0203u      /**< open, mode (0 normal, 1 loopback, 2 listen), uint32 bitrate */
+#define GATEWAY_RESET_DELAY_MS 50u       /**< lets the ECUReset response leave UART and CAN */
+/**@}*/
 
 /** @brief Operating modes of the CAN controller. */
 typedef enum {
@@ -61,6 +79,10 @@ typedef struct {
   bool (*can_send)(void* context, const CanFrame* frame);
   void (*can_status)(void* context, GatewayCanStatus* status);
   void (*led_set)(void* context, bool on);
+  /** Optional: restarts the MCU (UDS ECUReset hard). */
+  void (*system_reset)(void* context);
+  /** Optional: 96-bit unique device id (UDS serial number F18C). */
+  void (*unique_id)(void* context, uint8_t out[12]);
   void* context;
 } GatewayIo;
 
@@ -95,6 +117,13 @@ typedef struct {
   uint32_t tx_frames;   /**< Frames handed to the CAN controller. */
   uint32_t rx_frames;   /**< Frames received from the CAN controller (incl. echoes). */
   uint32_t echoes;      /**< Loopback echoes recognised and suppressed. */
+
+  UdsServer uds;
+  UdsDtc dtcs[GATEWAY_DTC_COUNT];
+  uint32_t now_ms;         /**< Time of the last tick. */
+  bool reset_scheduled;    /**< ECUReset hard: restart at reset_due_ms. */
+  uint32_t reset_due_ms;
+  uint32_t soft_resets;
 } Gateway;
 
 void gateway_init(Gateway* gateway, const GatewayIo* io);
@@ -111,7 +140,10 @@ void gateway_on_button(Gateway* gateway);
 /** @brief Driver dropped frames because its receive queue was full. */
 void gateway_on_rx_overrun(Gateway* gateway);
 
-/** @brief Periodic call with the current time; blinks the LED while the channel is closed. */
+/**
+ * @brief Periodic call (every millisecond) with the current time: diagnostics timers and
+ *        monitors, delayed reset, LED heartbeat while the channel is closed.
+ */
 void gateway_tick(Gateway* gateway, uint32_t now_ms);
 
 #ifdef __cplusplus

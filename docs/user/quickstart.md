@@ -18,6 +18,9 @@ lamp relay  (Visualizer) <--100#01-- iotwin-bus <-- can_sim (light ECU)
 3. In the visualizer click the wall switch (or press **SPACE**).
    Press **TAB** for the 2D schematic: nodes, CAN bus and USB link with every
    message decoded at its sender; click a node for its details.
+4. Diagnose the ECU like a workshop tester: `uds_client scan`, then type
+   `fault short on` in the CAN-Sim window and run `uds_client dtc`
+   (see [Diagnostics](../dev/diagnostics.md)).
 
 Three windows open:
 

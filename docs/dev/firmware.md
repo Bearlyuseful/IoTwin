@@ -115,6 +115,22 @@ same syntax in both directions.
 Any terminal works for experiments (115200 8N1, send CR): `V`, `S6`, `l`,
 `t100101` → LD4 on.
 
+## Diagnostics (UDS)
+
+The firmware is a UDS server on `0x7E1 -> 0x7E9` (and functional `0x7DF`):
+identification incl. the STM32 unique id, CAN error counters and frame
+counters, uptime, DTC `U0073-88` for bus off, soft and hard ECUReset. The
+same server code (`libs/can/uds.c`, `isotp.c`) is unit tested on the host.
+Details: [Diagnostics (UDS)](diagnostics.md).
+
+```bash
+uds_client --target gateway scan
+uds_client --target gateway read 0200 0201 0202
+```
+
+`serial_bridge` configures the adapter again when it rejects frames after a
+reset of the board (UDS hard reset, reset button, power).
+
 ## Code structure
 
 | Path | Content |

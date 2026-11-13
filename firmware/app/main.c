@@ -3,7 +3,8 @@
  * @brief IoTwin CAN gateway firmware for the NUCLEO-G0B1RE.
  *
  * SLCAN over the ST-LINK virtual COM port (115200 8N1) <-> FDCAN1, plus a
- * local node: user button = wall switch (0x200), LED = lamp command (0x100).
+ * local node: user button = wall switch (0x200), LED = lamp command (0x100),
+ * and a UDS server (0x7E1 -> 0x7E9).
  */
 
 #include "board.h"
@@ -60,6 +61,19 @@ static void io_led_set(void* context, bool on) {
   board_led_set(on);
 }
 
+static void io_system_reset(void* context) {
+  (void)context;
+  NVIC_SystemReset();
+}
+
+static void io_unique_id(void* context, uint8_t out[12]) {
+  (void)context;
+  const volatile uint8_t* uid = (const volatile uint8_t*)UID_BASE; /* 96-bit unique device id */
+  for (size_t i = 0; i < 12; i++) {
+    out[i] = uid[i];
+  }
+}
+
 /* Reports a press once the button level was stable for DEBOUNCE_MS. */
 static bool button_pressed_event(void) {
   static bool stable = false;
@@ -88,6 +102,8 @@ int main(void) {
       .can_send = io_can_send,
       .can_status = io_can_status,
       .led_set = io_led_set,
+      .system_reset = io_system_reset,
+      .unique_id = io_unique_id,
       .context = 0,
   };
   gateway_init(&g_gateway, &io);

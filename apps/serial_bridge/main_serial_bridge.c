@@ -27,6 +27,9 @@
 #define BUS_POLL_MS 5
 #define COMMAND_TIMEOUT_MS 500
 #define SEND_TIMEOUT_MS 100
+/* Frames rejected in a row before the adapter is configured again: after a reset
+ * of the board (button, power, UDS ECUReset) its CAN channel is closed. */
+#define ADAPTER_RECOVERY_ERRORS 2
 
 typedef struct {
   const char* serial_name;
@@ -48,6 +51,8 @@ typedef struct {
   uint64_t frames_to_adapter;
   uint64_t adapter_errors;
   uint64_t dropped_offline;
+  uint32_t consecutive_errors; /**< BEL answers since the last acknowledged frame. */
+  uint64_t recoveries;
 } Bridge;
 
 static volatile sig_atomic_t g_stop = 0;
@@ -78,10 +83,12 @@ static void log_statistics_reply(const char* line, size_t length) {
 static void on_adapter_line(const char* line, size_t length, void* user_data) {
   Bridge* bridge = (Bridge*)user_data;
   if (length == 0 || (length == 1 && (line[0] == 'z' || line[0] == 'Z'))) {
+    bridge->consecutive_errors = 0;
     return; /* ok / transmit acknowledged */
   }
   if (length == 1 && line[0] == '\a') {
     bridge->adapter_errors++;
+    bridge->consecutive_errors++;
     log_warn("adapter answered with an error (BEL)");
     return;
   }
@@ -156,6 +163,7 @@ static bool configure_adapter(Bridge* bridge) {
     log_error("adapter could not open the CAN channel");
     return false;
   }
+  bridge->consecutive_errors = 0;
   static const char* const mode_names[] = {"normal", "loopback", "listen-only"};
   log_info("adapter channel open: %u bit/s, %s mode", (unsigned)bridge->options.bitrate,
            mode_names[bridge->options.mode]);
@@ -298,6 +306,7 @@ int main(int argc, char** argv) {
   bool serial_reported = false;
   bool bus_reported = false;
   uint64_t next_stats = pal_time_monotonic_ms() + bridge.options.stats_interval_s * 1000ull;
+  uint64_t next_recovery = 0;
 
   while (!g_stop) {
     const uint64_t now = pal_time_monotonic_ms();
@@ -352,6 +361,17 @@ int main(int argc, char** argv) {
       }
     }
 
+    /* --- adapter recovery (in listen mode rejected frames are expected) --- */
+    if (bridge.serial != NULL && bridge.options.mode != BRIDGE_MODE_LISTEN &&
+        bridge.consecutive_errors >= ADAPTER_RECOVERY_ERRORS && now >= next_recovery) {
+      next_recovery = now + RETRY_INTERVAL_MS;
+      bridge.recoveries++;
+      log_warn("adapter rejects frames (channel closed, board reset?), configuring it again");
+      if (!configure_adapter(&bridge)) {
+        close_serial(&bridge);
+      }
+    }
+
     /* --- bus -> adapter --- */
     if (bridge.bus != NET_INVALID_SOCKET) {
       NetPollFd entry = {bridge.bus, NET_POLL_IN, 0};
@@ -382,9 +402,10 @@ int main(int argc, char** argv) {
     if (bridge.options.stats_interval_s > 0 && now >= next_stats) {
       next_stats = now + bridge.options.stats_interval_s * 1000ull;
       log_info("bridge: %llu frames adapter->bus, %llu bus->adapter, %llu dropped while offline, "
-               "%llu adapter errors",
+               "%llu adapter errors, %llu recoveries",
                (unsigned long long)bridge.frames_to_bus, (unsigned long long)bridge.frames_to_adapter,
-               (unsigned long long)bridge.dropped_offline, (unsigned long long)bridge.adapter_errors);
+               (unsigned long long)bridge.dropped_offline, (unsigned long long)bridge.adapter_errors,
+               (unsigned long long)bridge.recoveries);
       if (bridge.serial != NULL) {
         serial_write_all(bridge.serial, "Q\r", 2);
       }

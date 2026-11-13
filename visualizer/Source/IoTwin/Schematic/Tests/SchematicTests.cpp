@@ -8,6 +8,7 @@
 #include "Schematic/ComponentCatalog.h"
 #include "Schematic/IoTwinSchematicSubsystem.h"
 #include "Schematic/SystemDescription.h"
+#include "Schematic/UdsText.h"
 #include "UObject/Package.h"
 
 #if WITH_DEV_AUTOMATION_TESTS
@@ -188,12 +189,38 @@ bool FIoTwinSchematicRepositoryDataTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("unknown frame is logged unattributed"), Schematic->GetLog().Last().NodeId.IsEmpty());
 	TestEqual(TEXT("pulses for attributed frames"), Schematic->GetPulses().Num(), 2);
 
+	// Diagnostics are decoded as UDS over ISO-TP and attributed to tester and ECU.
+	TestEqual(TEXT("UDS request"), Schematic->Describe(FCanFrame::MakeData(0x7E0, {0x03, 0x22, 0xF1, 0x90, 0xCC, 0xCC, 0xCC, 0xCC})),
+		FString(TEXT("DIAG_ECU_REQ SF ReadDataByIdentifier F190")));
+	TestEqual(TEXT("UDS requester"), Schematic->GuessProducer(TEXT("DIAG_ECU_REQ"), false), FString(TEXT("tester")));
+	TestEqual(TEXT("UDS responder"), Schematic->GuessProducer(TEXT("DIAG_ECU_RESP"), false), FString(TEXT("ecu")));
+
 	for (int32 Index = 0; Index < 40; ++Index)
 	{
 		Schematic->RecordFrame(FCanFrame::MakeData(0x100, {0x00}), false, 102.0 + Index * 0.01);
 	}
 	TestEqual(TEXT("log is bounded"), Schematic->GetLog().Num(), UIoTwinSchematicSubsystem::MaxLogEntries);
 	TestTrue(TEXT("pulses are bounded"), Schematic->GetPulses().Num() <= UIoTwinSchematicSubsystem::MaxPulses);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FIoTwinUdsTextTest, "IoTwin.Schematic.UdsText",
+	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+
+bool FIoTwinUdsTextTest::RunTest(const FString& Parameters)
+{
+	TestEqual(TEXT("request"), FUdsText::Describe({0x03, 0x22, 0xF1, 0x90}), FString(TEXT("SF ReadDataByIdentifier F190")));
+	TestEqual(TEXT("session"), FUdsText::Describe({0x06, 0x50, 0x03, 0x00, 0x32, 0x01, 0xF4}),
+		FString(TEXT("SF +DiagnosticSessionControl extended")));
+	TestEqual(TEXT("negative"), FUdsText::Describe({0x03, 0x7F, 0x2E, 0x7F}),
+		FString(TEXT("SF NRC WriteDataByIdentifier: serviceNotSupportedInActiveSession")));
+	TestEqual(TEXT("first frame"), FUdsText::Describe({0x10, 0x14, 0x62, 0xF1, 0x90, 0x49, 0x4F, 0x54}),
+		FString(TEXT("FF 20 bytes +ReadDataByIdentifier F190")));
+	TestEqual(TEXT("consecutive"), FUdsText::Describe({0x21, 0x41}), FString(TEXT("CF 1")));
+	TestEqual(TEXT("flow control"), FUdsText::Describe({0x30, 0x00, 0x00}), FString(TEXT("FC continue")));
+	TestEqual(TEXT("reset"), FUdsText::Describe({0x02, 0x11, 0x01}), FString(TEXT("SF ECUReset hard")));
+	TestEqual(TEXT("DTCs"), FUdsText::Describe({0x03, 0x19, 0x02, 0x09}), FString(TEXT("SF ReadDTCInformation 02")));
+	TestEqual(TEXT("invalid"), FUdsText::Describe({0x09, 0x22}), FString(TEXT("SF (invalid length)")));
 	return true;
 }
 

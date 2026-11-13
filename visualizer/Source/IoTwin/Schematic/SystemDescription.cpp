@@ -118,6 +118,7 @@ bool FSystemDescription::LoadFromString(const FString& Json, const FString& InBa
 			Message.Name = StringField(Object, TEXT("name"));
 			Message.Producers = StringArray(Object, TEXT("producers"));
 			Message.Consumers = StringArray(Object, TEXT("consumers"));
+			Message.Protocol = StringField(Object, TEXT("protocol"));
 		}
 	}
 

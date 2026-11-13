@@ -66,6 +66,17 @@ if (isotp_receive(&link, &length)) { /* rx_buffer holds a complete message */ }
 Tests (`tests/test_isotp.cpp`) run two links against each other on a simulated
 bus with simulated time.
 
+## UDS diagnostics
+
+The UDS server (`libs/can/uds.c`) and the tester `uds_client` build on this
+ISO-TP layer; services, identifiers and trouble codes of the light ECU and
+the gateway are described in [Diagnostics (UDS)](diagnostics.md).
+
+```bash
+uds_client scan
+uds_client --target gateway read 0200
+```
+
 ## SocketCAN bridge (Linux)
 
 `socketcan_bridge` connects a Linux CAN interface to iotwin-bus. With it the

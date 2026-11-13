@@ -69,6 +69,11 @@
         "additionalProperties": false,
         "properties": {
           "name": { "type": "string", "description": "message name in the bus DBC" },
+          "protocol": {
+            "type": "string",
+            "enum": ["uds"],
+            "description": "higher protocol carried in the frames (uds = UDS over ISO-TP), lets tools decode them"
+          },
           "producers": { "type": "array", "items": { "type": "string" } },
           "consumers": { "type": "array", "items": { "type": "string" } }
         }
