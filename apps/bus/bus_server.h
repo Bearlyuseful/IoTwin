@@ -10,6 +10,14 @@
  * forwarded to all other nodes - like a broadcast on a physical CAN bus.
  * Invalid lines are counted and dropped. See docs/dev/protocol.md.
  *
+ * Besides frames, clients may send
+ *  - control commands "!name ecu", "!testbench on", "!status" and the fault
+ *    injection of the medium: "!fault drop 10 200/7FF", "!fault delay 50 10",
+ *    "!fault silence 2000", "!fault seed 1", "!fault clear"; the server answers
+ *    the sender with "!ok", "!error ..." or "!status ...";
+ *  - test bench lines "@<target> <command>", forwarded only to nodes that sent
+ *    "!testbench on" (e.g. can_sim executes "@ecu fault short on").
+ *
  * The server is single threaded: call bus_server_poll() in a loop.
  * bus_server_port(), bus_server_client_count() and bus_server_get_stats()
  * may be called from other threads.
@@ -25,6 +33,7 @@ extern "C" {
 
 #define BUS_SERVER_DEFAULT_PORT 8080
 #define BUS_SERVER_MAX_CLIENTS 64
+#define BUS_SERVER_MAX_PENDING 4096 /**< Frames held back by the "delay" fault. */
 
 /** @brief Server configuration. */
 typedef struct {
@@ -39,6 +48,8 @@ typedef struct {
 typedef struct {
   uint64_t frames_routed;      /**< Valid frames received and forwarded. */
   uint64_t frames_rejected;    /**< Lines that were not valid frames. */
+  uint64_t frames_dropped;     /**< Valid frames lost by an injected fault (drop, silence). */
+  uint64_t frames_delayed;     /**< Valid frames held back by an injected delay. */
   uint64_t clients_accepted;   /**< Connections accepted in total. */
 } BusServerStats;
 

@@ -1,0 +1,9 @@
+name Wall switch controls the lamp
+# SWITCH_STATE (0x200) from a wall switch, the light ECU answers with LAMP_CMD (0x100).
+expect 100#00 within 1000          # cyclic state while the switch is off
+send 200#01
+expect 100#01 within 300
+send 200#00
+expect 100#00 within 300
+send 200#01
+expect 100#01 within 300

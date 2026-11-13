@@ -1,0 +1,12 @@
+name LAMP_CMD is repeated every 500 ms and can be switched to on-change only
+expect 100#* within 700
+expect 100#* within 700
+expect 100#* within 700
+uds ecu 1003                         # extended session
+uds ecu 2E01020000                   # cycle time 0 = only on change
+wait 600
+expect-not 100#* for 1200
+send 200#01                          # a change is still reported
+expect 100#01 within 300
+uds ecu 2E010201F4                   # back to 500 ms
+expect 100#01 within 700

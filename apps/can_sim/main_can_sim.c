@@ -12,6 +12,10 @@
  *
  * Diagnostics: UDS server on 0x7E0/0x7E8 (functional 0x7DF), faults can be
  * injected on the console (see light_ecu_diag.h, docs/dev/diagnostics.md).
+ *
+ * Test bench: the simulator registers on the bus as "--name" (default "ecu")
+ * and executes test bench lines "@ecu <console command>" sent by can_scenario
+ * (see docs/dev/scenarios.md).
  */
 
 #include <pthread.h>
@@ -48,6 +52,7 @@ typedef struct {
   uint32_t blink_ms;
   uint32_t stats_interval_s;
   bool interactive;
+  const char* name;
   PalRtConfig rt;
 } SimOptions;
 
@@ -61,6 +66,7 @@ typedef struct {
   atomic_bool connected;
   atomic_uint_fast64_t frames_sent;
   atomic_uint_fast64_t frames_received;
+  const char* name; /* node name on the bus, target of test bench lines */
 } SimShared;
 
 static volatile sig_atomic_t g_stop = 0;
@@ -79,7 +85,7 @@ static void print_console_help(void) {
          "  lamp on|off|toggle   set the lamp command\n"
          "  blink <ms>|off       let the ECU blink the lamp\n"
          "  send <frame>         put any frame on the bus, e.g. send 123#DEADBEEF\n"
-         "  fault <f> on|off     inject a fault: short | open | supply\n"
+         "  fault <f> on|off     inject a fault: short | open | supply (fault clear: all off)\n"
          "  dtc                  show the trouble codes of the ECU\n"
          "  status               show the current state\n"
          "  help                 show this help\n"
@@ -145,6 +151,13 @@ static void handle_command(SimShared* shared, char* line) {
     } else if (!can_bus_send(&shared->tx_queue, &frame)) {
       printf("send queue full, frame dropped\n");
     }
+  } else if (strcmp(command, "fault") == 0 && argument != NULL && strcmp(argument, "clear") == 0) {
+    pthread_mutex_lock(&shared->lock);
+    light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_LAMP_SHORT, false);
+    light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_LAMP_OPEN, false);
+    light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_SUPPLY_LOW, false);
+    pthread_mutex_unlock(&shared->lock);
+    log_info("all injected faults removed");
   } else if (strcmp(command, "fault") == 0 && argument != NULL) {
     char* state = strchr(argument, ' ');
     LightEcuFault fault;
@@ -210,8 +223,37 @@ static void* console_thread(void* argument) {
 /* Network                                                                    */
 /* ------------------------------------------------------------------------- */
 
+/* "@<target> <console command>" from a test bench (can_scenario). */
+static void on_testbench_line(SimShared* shared, const char* line, size_t length) {
+  char text[256];
+  if (length >= sizeof(text)) {
+    log_warn("test bench line too long, ignored");
+    return;
+  }
+  memcpy(text, line + 1, length - 1);
+  text[length - 1] = '\0';
+  char* command = strchr(text, ' ');
+  if (command == NULL) {
+    return;
+  }
+  *command++ = '\0';
+  if (strcmp(text, shared->name) != 0 && strcmp(text, "*") != 0) {
+    return; /* for another node */
+  }
+  log_info("test bench: %s", command);
+  handle_command(shared, command);
+}
+
 static void on_line(const char* line, size_t length, void* user_data) {
   SimShared* shared = (SimShared*)user_data;
+  if (length > 0 && line[0] == '!') {
+    log_debug("bus: %.*s", (int)length, line); /* answer to our registration */
+    return;
+  }
+  if (length > 0 && line[0] == '@') {
+    on_testbench_line(shared, line, length);
+    return;
+  }
   CanFrame frame;
   if (!can_frame_from_text(line, length, &frame)) {
     log_warn("ignoring invalid line from bus: '%.*s'", (int)(length > 40 ? 40 : length), line);
@@ -257,6 +299,7 @@ static void print_usage(const char* program) {
          "  --blink-ms N          start blinking with this toggle period\n"
          "  --stats N             log loop timing statistics every N seconds\n"
          "  --no-console          do not read commands from stdin\n"
+         "  --name NAME           node name on the bus for test bench commands (default ecu)\n"
          "%s"
          "  --help                show this help\n",
          program, LIGHT_ECU_DEFAULT_CYCLE_MS, cli_common_usage());
@@ -270,6 +313,7 @@ static int parse_options(int argc, char** argv, SimOptions* options) {
   options->blink_ms = 0;
   options->stats_interval_s = 0;
   options->interactive = true;
+  options->name = "ecu";
   pal_rt_default_config(&options->rt);
 
   for (int i = 1; i < argc; i++) {
@@ -308,6 +352,10 @@ static int parse_options(int argc, char** argv, SimOptions* options) {
       i++;
     } else if (strcmp(option, "--no-console") == 0) {
       options->interactive = false;
+    } else if (strcmp(option, "--name") == 0 && value_text && value_text[0] != '\0' &&
+               strchr(value_text, ' ') == NULL) {
+      options->name = value_text;
+      i++;
     } else {
       fprintf(stderr, "Unknown or incomplete option '%s' (see --help)\n", option);
       return 2;
@@ -356,6 +404,7 @@ int main(int argc, char** argv) {
   atomic_init(&shared.connected, false);
   atomic_init(&shared.frames_sent, 0);
   atomic_init(&shared.frames_received, 0);
+  shared.name = options.name;
 
   log_info("can_sim (light ECU) starting, bus %s:%u", options.host, (unsigned)options.port);
 
@@ -393,6 +442,13 @@ int main(int argc, char** argv) {
         atomic_store(&shared.connected, true);
         offline_reported = false;
         log_info("connected to bus %s:%u", options.host, (unsigned)options.port);
+        /* Register for test bench commands (older bus servers just drop these lines). */
+        char registration[96];
+        const int registration_length =
+            snprintf(registration, sizeof(registration), "!name %s\n!testbench on\n", options.name);
+        if (registration_length > 0) {
+          net_send_all(socket, registration, (size_t)registration_length, SEND_TIMEOUT_MS);
+        }
         pthread_mutex_lock(&shared.lock);
         light_ecu_request_send(&shared.ecu);
         pthread_mutex_unlock(&shared.lock);

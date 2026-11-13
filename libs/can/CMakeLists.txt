@@ -5,6 +5,7 @@ add_library(iotwin_can STATIC
     can_bus.c can_bus.h
     can_bit_timing.c can_bit_timing.h
     can_signal.c can_signal.h
+    candump_log.c candump_log.h
     dbc.c dbc.h
     isotp.c isotp.h
     slcan.c slcan.h

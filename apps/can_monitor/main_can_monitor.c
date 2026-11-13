@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include "can_frame.h"
+#include "candump_log.h"
 #include "cli.h"
 #include "dbc.h"
 #include "line_reader.h"
@@ -18,10 +19,9 @@
 #include "net.h"
 #include "pal_time.h"
 
+#include <time.h>
 #ifdef _WIN32
 #include <windows.h>
-#else
-#include <time.h>
 #endif
 
 typedef struct {
@@ -31,6 +31,8 @@ typedef struct {
   CanFrame last[64];
   size_t last_count;
   unsigned long long frames;
+  FILE* log;   /* --log: every frame in candump -L format */
+  bool quiet;  /* --quiet: no console output (recording only) */
 } Monitor;
 
 static volatile sig_atomic_t g_stop = 0;
@@ -56,6 +58,12 @@ static void timestamp(char* out, size_t size) {
 #endif
 }
 
+static uint64_t wall_clock_us(void) {
+  struct timespec now;
+  timespec_get(&now, TIME_UTC);
+  return (uint64_t)now.tv_sec * 1000000u + (uint64_t)now.tv_nsec / 1000u;
+}
+
 /* With --changes: true if the payload differs from the last frame with this id. */
 static bool changed(Monitor* monitor, const CanFrame* frame) {
   for (size_t i = 0; i < monitor->last_count; i++) {
@@ -79,7 +87,14 @@ static void on_line(const char* line, size_t length, void* user_data) {
     return;
   }
   monitor->frames++;
-  if (monitor->changes_only && !changed(monitor, &frame)) {
+  if (monitor->log != NULL) {
+    char entry[CANDUMP_LOG_LINE_MAX];
+    if (candump_log_format(&frame, wall_clock_us(), "iotwin", entry, sizeof(entry)) > 0) {
+      fprintf(monitor->log, "%s\n", entry);
+      fflush(monitor->log);
+    }
+  }
+  if (monitor->quiet || (monitor->changes_only && !changed(monitor, &frame))) {
     return;
   }
   /* "HH:MM:SS.mmm" needs 13 bytes, but GCC's -Wformat-truncation (Release, -Werror)
@@ -104,6 +119,8 @@ static void print_usage(const char* program) {
          "  --host HOST           bus server host (default 127.0.0.1)\n"
          "  --port PORT           bus server port (default 8080)\n"
          "  --changes             only print frames whose payload changed (hides cyclic repeats)\n"
+         "  --log FILE            record every frame in candump -L format (replay: can_replay FILE)\n"
+         "  --quiet               no console output, e.g. with --log\n"
          "%s"
          "  --help                show this help\n",
          program, cli_common_usage());
@@ -113,6 +130,7 @@ int main(int argc, char** argv) {
   const char* host = "127.0.0.1";
   long port = 8080;
   const char* dbc_path = NULL;
+  const char* log_path = NULL;
   Monitor monitor;
   memset(&monitor, 0, sizeof(monitor));
   PalRtConfig rt;
@@ -141,6 +159,11 @@ int main(int argc, char** argv) {
       i++;
     } else if (strcmp(option, "--changes") == 0) {
       monitor.changes_only = true;
+    } else if (strcmp(option, "--log") == 0 && value) {
+      log_path = value;
+      i++;
+    } else if (strcmp(option, "--quiet") == 0) {
+      monitor.quiet = true;
     } else {
       fprintf(stderr, "Unknown or invalid option '%s' (see --help)\n", option);
       return 2;
@@ -155,6 +178,15 @@ int main(int argc, char** argv) {
     }
     monitor.have_dbc = true;
     log_info("DBC %s: %u messages", dbc_path, (unsigned)monitor.dbc.message_count);
+  }
+
+  if (log_path != NULL) {
+    monitor.log = fopen(log_path, "w");
+    if (monitor.log == NULL) {
+      log_error("cannot write %s", log_path);
+      return 1;
+    }
+    log_info("recording to %s", log_path);
   }
 
   signal(SIGINT, on_signal);
@@ -199,6 +231,9 @@ int main(int argc, char** argv) {
   }
 
   log_info("can_monitor stopping after %llu frames", monitor.frames);
+  if (monitor.log != NULL) {
+    fclose(monitor.log);
+  }
   net_close(socket);
   net_cleanup();
   dbc_free(&monitor.dbc);

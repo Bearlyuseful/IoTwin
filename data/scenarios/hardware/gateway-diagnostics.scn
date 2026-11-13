@@ -1,0 +1,14 @@
+name NUCLEO gateway answers diagnostics (needs the board and serial_bridge)
+# Not part of the automatic tests. Run with iotwin-bus and
+#   serial_bridge --serial COM4        (your port)
+#   can_scenario data/scenarios/hardware/gateway-diagnostics.scn
+uds gateway 22F187 expect 62F1874E55434C454F2D4730423152452D4757       # NUCLEO-G0B1RE-GW
+uds gateway 22F18C expect 62F18C*                # 96-bit unique id
+uds gateway 220203 expect 6202030101*            # channel open, loopback mode
+uds gateway 190209 expect 59027F                 # no bus off
+uds gateway 1103 expect 5103                     # soft reset
+uds gateway 220201 expect 620201*
+send 100#01
+wait 200
+uds gateway 220100 expect 62010001               # LED follows LAMP_CMD
+send 100#00
