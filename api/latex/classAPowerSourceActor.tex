@@ -14,11 +14,27 @@ Inheritance diagram for APower\+Source\+Actor\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}{APower\+Source\+Actor}} ()
+\item 
+void \mbox{\hyperlink{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b}{Set\+Output\+Enabled}} (bool b\+Enabled)
+\item 
+bool \mbox{\hyperlink{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}{Is\+Output\+Enabled}} () const
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}{Port}}
+\item 
+UStatic\+Mesh\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a}{Housing}}
+\item 
+TObject\+Ptr$<$ UMaterial\+Interface $>$ \mbox{\hyperlink{classAPowerSourceActor_a31186cc3354eecc502498833ffc4281a}{Housing\+Base\+Material}}
+\item 
+UCan\+Signal\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAPowerSourceActor_a40238d0de62387b2ce509ef50b29627c}{Relay\+Control}}
+\item 
+bool \mbox{\hyperlink{classAPowerSourceActor_a2eec9aaa0a87f837f447303c1338bc6a}{b\+Controlled\+By\+Can}} = false
+\item 
+bool \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{b\+Output\+Enabled}} = true
+\item 
+FOn\+Relay\+Changed \mbox{\hyperlink{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}{On\+Relay\+Changed}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -27,32 +43,86 @@ virtual void \mbox{\hyperlink{classAPowerSourceActor_a8bc4b8989f483e3b803965030e
 \end{DoxyCompactItemize}
 
 
+\label{doc-constructors}
+\Hypertarget{classAPowerSourceActor_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}\label{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448} 
-\index{APowerSourceActor@{APowerSourceActor}!APowerSourceActor@{APowerSourceActor}}
+\Hypertarget{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}\index{APowerSourceActor@{APowerSourceActor}!APowerSourceActor@{APowerSourceActor}}
 \index{APowerSourceActor@{APowerSourceActor}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{APowerSourceActor()}{APowerSourceActor()}}
-{\footnotesize\ttfamily APower\+Source\+Actor\+::\+APower\+Source\+Actor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448} 
+APower\+Source\+Actor\+::\+APower\+Source\+Actor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
+\label{doc-func-members}
+\Hypertarget{classAPowerSourceActor_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929}\label{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929} 
-\index{APowerSourceActor@{APowerSourceActor}!BeginPlay@{BeginPlay}}
+\Hypertarget{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929}\index{APowerSourceActor@{APowerSourceActor}!BeginPlay@{BeginPlay}}
 \index{BeginPlay@{BeginPlay}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{BeginPlay()}{BeginPlay()}}
-{\footnotesize\ttfamily void APower\+Source\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929} 
+void APower\+Source\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}\index{APowerSourceActor@{APowerSourceActor}!IsOutputEnabled@{IsOutputEnabled}}
+\index{IsOutputEnabled@{IsOutputEnabled}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{IsOutputEnabled()}{IsOutputEnabled()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511} 
+bool APower\+Source\+Actor\+::\+Is\+Output\+Enabled (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b}\index{APowerSourceActor@{APowerSourceActor}!SetOutputEnabled@{SetOutputEnabled}}
+\index{SetOutputEnabled@{SetOutputEnabled}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{SetOutputEnabled()}{SetOutputEnabled()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b} 
+void APower\+Source\+Actor\+::\+Set\+Output\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{b\+Enabled}{}\end{DoxyParamCaption})}
 
 
 
+\label{doc-variable-members}
+\Hypertarget{classAPowerSourceActor_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}\label{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908} 
-\index{APowerSourceActor@{APowerSourceActor}!Port@{Port}}
+\Hypertarget{classAPowerSourceActor_a2eec9aaa0a87f837f447303c1338bc6a}\index{APowerSourceActor@{APowerSourceActor}!bControlledByCan@{bControlledByCan}}
+\index{bControlledByCan@{bControlledByCan}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{bControlledByCan}{bControlledByCan}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a2eec9aaa0a87f837f447303c1338bc6a} 
+bool APower\+Source\+Actor\+::b\+Controlled\+By\+Can = false}
+
+If true the output relay follows Relay\+Control; it stays open until a frame arrives. \Hypertarget{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}\index{APowerSourceActor@{APowerSourceActor}!bOutputEnabled@{bOutputEnabled}}
+\index{bOutputEnabled@{bOutputEnabled}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{bOutputEnabled}{bOutputEnabled}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129} 
+bool APower\+Source\+Actor\+::b\+Output\+Enabled = true}
+
+Relay state when not controlled by CAN. \Hypertarget{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a}\index{APowerSourceActor@{APowerSourceActor}!Housing@{Housing}}
+\index{Housing@{Housing}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{Housing}{Housing}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a} 
+UStatic\+Mesh\+Component\texorpdfstring{$\ast$}{*} APower\+Source\+Actor\+::\+Housing}
+
+Housing; its colour shows the relay state (green = closed). \Hypertarget{classAPowerSourceActor_a31186cc3354eecc502498833ffc4281a}\index{APowerSourceActor@{APowerSourceActor}!HousingBaseMaterial@{HousingBaseMaterial}}
+\index{HousingBaseMaterial@{HousingBaseMaterial}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{HousingBaseMaterial}{HousingBaseMaterial}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a31186cc3354eecc502498833ffc4281a} 
+TObject\+Ptr$<$UMaterial\+Interface$>$ APower\+Source\+Actor\+::\+Housing\+Base\+Material}
+
+Material with a "{}\+Color"{} vector parameter used for the housing. \Hypertarget{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}\index{APowerSourceActor@{APowerSourceActor}!OnRelayChanged@{OnRelayChanged}}
+\index{OnRelayChanged@{OnRelayChanged}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{OnRelayChanged}{OnRelayChanged}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969} 
+FOn\+Relay\+Changed APower\+Source\+Actor\+::\+On\+Relay\+Changed}
+
+\Hypertarget{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}\index{APowerSourceActor@{APowerSourceActor}!Port@{Port}}
 \index{Port@{Port}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{Port}{Port}}
-{\footnotesize\ttfamily UElectrical\+Port\+Component\texorpdfstring{$\ast$}{*} APower\+Source\+Actor\+::\+Port}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908} 
+UElectrical\+Port\+Component\texorpdfstring{$\ast$}{*} APower\+Source\+Actor\+::\+Port}
 
+\Hypertarget{classAPowerSourceActor_a40238d0de62387b2ce509ef50b29627c}\index{APowerSourceActor@{APowerSourceActor}!RelayControl@{RelayControl}}
+\index{RelayControl@{RelayControl}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{RelayControl}{RelayControl}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a40238d0de62387b2ce509ef50b29627c} 
+UCan\+Signal\+Component\texorpdfstring{$\ast$}{*} APower\+Source\+Actor\+::\+Relay\+Control}
 
+CAN signal driving the relay when b\+Controlled\+By\+Can is set (default 0x100 byte 0 bit 0). 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

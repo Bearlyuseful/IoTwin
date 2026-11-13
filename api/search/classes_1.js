@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['canextendedframe_0',['CanExtendedFrame',['../structCanExtendedFrame.html',1,'']]],
-  ['canframe_1',['CanFrame',['../structCanFrame.html',1,'']]],
-  ['canstandardframe_2',['CanStandardFrame',['../structCanStandardFrame.html',1,'']]]
+  ['busclient_0',['BusClient',['../structBusClient.html',1,'']]],
+  ['busserver_1',['BusServer',['../structBusServer.html',1,'']]],
+  ['busserverconfig_2',['BusServerConfig',['../structBusServerConfig.html',1,'']]],
+  ['busserverstats_3',['BusServerStats',['../structBusServerStats.html',1,'']]]
 ];

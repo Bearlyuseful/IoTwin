@@ -1,0 +1,87 @@
+\doxysection{src/communication/tcp/line\+\_\+reader.h File Reference}
+\hypertarget{line__reader_8h}{}\label{line__reader_8h}\index{src/communication/tcp/line\_reader.h@{src/communication/tcp/line\_reader.h}}
+
+
+Splits a TCP byte stream into newline terminated lines.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structLineReader}{Line\+Reader}}
+\begin{DoxyCompactList}\small\item\em Reader state (one per connection). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{line__reader_8h_a834ceb4d82b6813573cc48e79812bb86}{LINE\+\_\+\+READER\+\_\+\+MAX\+\_\+\+LINE}}~256
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{Line\+Reader\+Callback}}) (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Called for every complete line; {\ttfamily line} is NUL terminated and valid only during the call. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{line__reader_8h_a4c076075498edf520472da1ee4b314d4}{line\+\_\+reader\+\_\+init}} (\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}reader)
+\item 
+size\+\_\+t \mbox{\hyperlink{line__reader_8h_aab9d5225e9ce25d352d8ba90ab5b0291}{line\+\_\+reader\+\_\+feed}} (\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}reader, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length, \mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{Line\+Reader\+Callback}} callback, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Feeds received bytes into the reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Splits a TCP byte stream into newline terminated lines. 
+
+TCP has no message boundaries\+: one recv() can contain half a line or several lines. The reader buffers partial input, strips a trailing \textquotesingle{}\textbackslash{}r\textquotesingle{} ("{}\textbackslash{}r\textbackslash{}n"{} line endings) and skips empty lines. Lines longer than LINE\+\_\+\+READER\+\_\+\+MAX\+\_\+\+LINE -\/ 1 characters are dropped as a whole. 
+
+\label{doc-define-members}
+\Hypertarget{line__reader_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{line__reader_8h_a834ceb4d82b6813573cc48e79812bb86}\index{line\_reader.h@{line\_reader.h}!LINE\_READER\_MAX\_LINE@{LINE\_READER\_MAX\_LINE}}
+\index{LINE\_READER\_MAX\_LINE@{LINE\_READER\_MAX\_LINE}!line\_reader.h@{line\_reader.h}}
+\doxysubsubsection{\texorpdfstring{LINE\_READER\_MAX\_LINE}{LINE\_READER\_MAX\_LINE}}
+{\footnotesize\ttfamily \label{line__reader_8h_a834ceb4d82b6813573cc48e79812bb86} 
+\#define LINE\+\_\+\+READER\+\_\+\+MAX\+\_\+\+LINE~256}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{line__reader_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}\index{line\_reader.h@{line\_reader.h}!LineReaderCallback@{LineReaderCallback}}
+\index{LineReaderCallback@{LineReaderCallback}!line\_reader.h@{line\_reader.h}}
+\doxysubsubsection{\texorpdfstring{LineReaderCallback}{LineReaderCallback}}
+{\footnotesize\ttfamily \label{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6} 
+typedef void(\texorpdfstring{$\ast$}{*} Line\+Reader\+Callback) (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, void \texorpdfstring{$\ast$}{*}user\+\_\+data)}
+
+
+
+Called for every complete line; {\ttfamily line} is NUL terminated and valid only during the call. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{line__reader_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{line__reader_8h_aab9d5225e9ce25d352d8ba90ab5b0291}\index{line\_reader.h@{line\_reader.h}!line\_reader\_feed@{line\_reader\_feed}}
+\index{line\_reader\_feed@{line\_reader\_feed}!line\_reader.h@{line\_reader.h}}
+\doxysubsubsection{\texorpdfstring{line\_reader\_feed()}{line\_reader\_feed()}}
+{\footnotesize\ttfamily \label{line__reader_8h_aab9d5225e9ce25d352d8ba90ab5b0291} 
+size\+\_\+t line\+\_\+reader\+\_\+feed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{Line\+Reader\+Callback}}}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Feeds received bytes into the reader. 
+
+\begin{DoxyReturn}{Returns}
+Number of lines passed to {\ttfamily callback}. 
+\end{DoxyReturn}
+\Hypertarget{line__reader_8h_a4c076075498edf520472da1ee4b314d4}\index{line\_reader.h@{line\_reader.h}!line\_reader\_init@{line\_reader\_init}}
+\index{line\_reader\_init@{line\_reader\_init}!line\_reader.h@{line\_reader.h}}
+\doxysubsubsection{\texorpdfstring{line\_reader\_init()}{line\_reader\_init()}}
+{\footnotesize\ttfamily \label{line__reader_8h_a4c076075498edf520472da1ee4b314d4} 
+void line\+\_\+reader\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{}\end{DoxyParamCaption})}
+

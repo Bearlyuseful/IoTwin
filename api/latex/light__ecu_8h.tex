@@ -1,0 +1,155 @@
+\doxysection{src/simulators/can\+\_\+sim/light\+\_\+ecu.h File Reference}
+\hypertarget{light__ecu_8h}{}\label{light__ecu_8h}\index{src/simulators/can\_sim/light\_ecu.h@{src/simulators/can\_sim/light\_ecu.h}}
+
+
+Simulated light control unit (the demo ECU of can\+\_\+sim).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structLightEcu}{Light\+Ecu}}
+\begin{DoxyCompactList}\small\item\em ECU state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{light__ecu_8h_a55699f2a4c8c60f6814fa4bdde60e764}{LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+LAMP\+\_\+\+CMD}}~0x100u
+\item 
+\#define \mbox{\hyperlink{light__ecu_8h_aea742e162f722145b33dfd4c75581d49}{LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+SWITCH\+\_\+\+STATE}}~0x200u
+\item 
+\#define \mbox{\hyperlink{light__ecu_8h_abb5ee0d4f5b5ac811c2998c0d4711e92}{LIGHT\+\_\+\+ECU\+\_\+\+DEFAULT\+\_\+\+CYCLE\+\_\+\+MS}}~500u
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{light__ecu_8h_a2cae1fbb1accbf1ed00f65a1815306fd}{light\+\_\+ecu\+\_\+init}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint32\+\_\+t cycle\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Initialises the ECU (lamp off, not blinking). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{light__ecu_8h_a7f762142d5a7d2c34cd11b72bd265239}{light\+\_\+ecu\+\_\+on\+\_\+frame}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Processes a received frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu_8h_a62eb9fd4971ac3eb69e0f6d436172d1a}{light\+\_\+ecu\+\_\+set\+\_\+lamp}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, bool on)
+\begin{DoxyCompactList}\small\item\em Sets the lamp (stops blinking). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu_8h_a87747d99d86faf11f561793a602efe9e}{light\+\_\+ecu\+\_\+set\+\_\+blink}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint32\+\_\+t period\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Starts blinking with the given toggle period; 0 stops blinking. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu_8h_ab8cb4fd55e4b2ba439a0c73e0a5575bc}{light\+\_\+ecu\+\_\+request\+\_\+send}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu)
+\begin{DoxyCompactList}\small\item\em Forces LAMP\+\_\+\+CMD to be sent in the next step (e.\+g. after reconnecting). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{light__ecu_8h_adf2109604c377e8c13357c9b848f18de}{light\+\_\+ecu\+\_\+step}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint64\+\_\+t now\+\_\+ms, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}out, bool \texorpdfstring{$\ast$}{*}state\+\_\+changed)
+\begin{DoxyCompactList}\small\item\em Runs one control step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simulated light control unit (the demo ECU of can\+\_\+sim). 
+
+Signals (see docs/dev/protocol.\+md)\+:
+\begin{DoxyItemize}
+\item 0x200 SWITCH\+\_\+\+STATE (input)\+: data\mbox{[}0\mbox{]} bit 0 = position of the wall switch
+\item 0x100 LAMP\+\_\+\+CMD (output)\+: data\mbox{[}0\mbox{]} bit 0 = lamp relay closed (lamp on)
+\end{DoxyItemize}
+
+The ECU sets the lamp to the switch position, can blink the lamp on its own, and sends LAMP\+\_\+\+CMD on every change plus cyclically, so a node that joins the bus later learns the current state within one cycle.
+
+The logic is free of I/O and time sources so it can be unit tested. 
+
+\label{doc-define-members}
+\Hypertarget{light__ecu_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{light__ecu_8h_abb5ee0d4f5b5ac811c2998c0d4711e92}\index{light\_ecu.h@{light\_ecu.h}!LIGHT\_ECU\_DEFAULT\_CYCLE\_MS@{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS}}
+\index{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS@{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS}{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS}}
+{\footnotesize\ttfamily \label{light__ecu_8h_abb5ee0d4f5b5ac811c2998c0d4711e92} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DEFAULT\+\_\+\+CYCLE\+\_\+\+MS~500u}
+
+\Hypertarget{light__ecu_8h_a55699f2a4c8c60f6814fa4bdde60e764}\index{light\_ecu.h@{light\_ecu.h}!LIGHT\_ECU\_ID\_LAMP\_CMD@{LIGHT\_ECU\_ID\_LAMP\_CMD}}
+\index{LIGHT\_ECU\_ID\_LAMP\_CMD@{LIGHT\_ECU\_ID\_LAMP\_CMD}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_ID\_LAMP\_CMD}{LIGHT\_ECU\_ID\_LAMP\_CMD}}
+{\footnotesize\ttfamily \label{light__ecu_8h_a55699f2a4c8c60f6814fa4bdde60e764} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+LAMP\+\_\+\+CMD~0x100u}
+
+\Hypertarget{light__ecu_8h_aea742e162f722145b33dfd4c75581d49}\index{light\_ecu.h@{light\_ecu.h}!LIGHT\_ECU\_ID\_SWITCH\_STATE@{LIGHT\_ECU\_ID\_SWITCH\_STATE}}
+\index{LIGHT\_ECU\_ID\_SWITCH\_STATE@{LIGHT\_ECU\_ID\_SWITCH\_STATE}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_ID\_SWITCH\_STATE}{LIGHT\_ECU\_ID\_SWITCH\_STATE}}
+{\footnotesize\ttfamily \label{light__ecu_8h_aea742e162f722145b33dfd4c75581d49} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+SWITCH\+\_\+\+STATE~0x200u}
+
+
+
+\label{doc-func-members}
+\Hypertarget{light__ecu_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{light__ecu_8h_a2cae1fbb1accbf1ed00f65a1815306fd}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_init@{light\_ecu\_init}}
+\index{light\_ecu\_init@{light\_ecu\_init}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_init()}{light\_ecu\_init()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_a2cae1fbb1accbf1ed00f65a1815306fd} 
+void light\+\_\+ecu\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{uint32\+\_\+t}]{cycle\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Initialises the ECU (lamp off, not blinking). 
+
+\Hypertarget{light__ecu_8h_a7f762142d5a7d2c34cd11b72bd265239}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_on\_frame@{light\_ecu\_on\_frame}}
+\index{light\_ecu\_on\_frame@{light\_ecu\_on\_frame}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_on\_frame()}{light\_ecu\_on\_frame()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_a7f762142d5a7d2c34cd11b72bd265239} 
+bool light\+\_\+ecu\+\_\+on\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Processes a received frame. 
+
+\begin{DoxyReturn}{Returns}
+true if the frame was a valid SWITCH\+\_\+\+STATE frame. 
+\end{DoxyReturn}
+\Hypertarget{light__ecu_8h_ab8cb4fd55e4b2ba439a0c73e0a5575bc}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_request\_send@{light\_ecu\_request\_send}}
+\index{light\_ecu\_request\_send@{light\_ecu\_request\_send}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_request\_send()}{light\_ecu\_request\_send()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_ab8cb4fd55e4b2ba439a0c73e0a5575bc} 
+void light\+\_\+ecu\+\_\+request\+\_\+send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{}\end{DoxyParamCaption})}
+
+
+
+Forces LAMP\+\_\+\+CMD to be sent in the next step (e.\+g. after reconnecting). 
+
+\Hypertarget{light__ecu_8h_a87747d99d86faf11f561793a602efe9e}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_set\_blink@{light\_ecu\_set\_blink}}
+\index{light\_ecu\_set\_blink@{light\_ecu\_set\_blink}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_set\_blink()}{light\_ecu\_set\_blink()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_a87747d99d86faf11f561793a602efe9e} 
+void light\+\_\+ecu\+\_\+set\+\_\+blink (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{uint32\+\_\+t}]{period\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Starts blinking with the given toggle period; 0 stops blinking. 
+
+\Hypertarget{light__ecu_8h_a62eb9fd4971ac3eb69e0f6d436172d1a}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_set\_lamp@{light\_ecu\_set\_lamp}}
+\index{light\_ecu\_set\_lamp@{light\_ecu\_set\_lamp}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_set\_lamp()}{light\_ecu\_set\_lamp()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_a62eb9fd4971ac3eb69e0f6d436172d1a} 
+void light\+\_\+ecu\+\_\+set\+\_\+lamp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{bool}]{on}{}\end{DoxyParamCaption})}
+
+
+
+Sets the lamp (stops blinking). 
+
+\Hypertarget{light__ecu_8h_adf2109604c377e8c13357c9b848f18de}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_step@{light\_ecu\_step}}
+\index{light\_ecu\_step@{light\_ecu\_step}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_step()}{light\_ecu\_step()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_adf2109604c377e8c13357c9b848f18de} 
+bool light\+\_\+ecu\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{uint64\+\_\+t}]{now\+\_\+ms}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{state\+\_\+changed}{}\end{DoxyParamCaption})}
+
+
+
+Runs one control step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em now\+\_\+ms} & Current monotonic time in milliseconds. \\
+\hline
+{\em out} & Receives the LAMP\+\_\+\+CMD frame if one has to be sent. \\
+\hline
+{\em state\+\_\+changed} & Optional, set to true if the frame reports a new lamp state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if {\ttfamily out} has to be sent. 
+\end{DoxyReturn}

@@ -1,0 +1,94 @@
+\doxysection{Can\+Signal\+Component.\+h}
+\hypertarget{CanSignalComponent_8h_source}{}\label{CanSignalComponent_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Bus/CanSignalComponent.h@{src/ue/IoTwin/Source/IoTwin/Bus/CanSignalComponent.h}}
+\mbox{\hyperlink{CanSignalComponent_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ binds\ a\ single\ bit\ of\ a\ CAN\ frame\ to\ an\ actor.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CanFrame_8h}{Bus/CanFrame.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Components/ActorComponent.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}CanSignalComponent.generated.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUIoTwinBusSubsystem}{UIoTwinBusSubsystem}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ UENUM(BlueprintType)}
+\DoxyCodeLine{00013\ enum\ class\ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}{ECanSignalDirection}}\ :\ uint8}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a5639d3df5aea3d9e78027b843ee3cbb2}{Receive}},}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a6c2958de5e2295b8cb67bac908244879}{Transmit}}}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \mbox{\hyperlink{CanSignalComponent_8h_acb26abc9d42d256490f8da28873239b7}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnCanSignalChanged,\ \textcolor{keywordtype}{bool},\ bNewValue);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ UCLASS(ClassGroup\ =\ (\mbox{\hyperlink{classIoTwin}{IoTwin}}),\ meta\ =\ (BlueprintSpawnableComponent))}
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }IOTWIN\_API\ UCanSignalComponent\ :\ \textcolor{keyword}{public}\ UActorComponent}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ public:}
+\DoxyCodeLine{00033\ \ \ \ \ UCanSignalComponent();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}{ECanSignalDirection}}\ Direction\ =\ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}{ECanSignalDirection}}::\mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a5639d3df5aea3d9e78027b843ee3cbb2}{Receive}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00040\ \ \ \ \ FString\ CanId\ =\ TEXT(\textcolor{stringliteral}{"{}100"{}});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ bExtendedId\ =\ false;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}},\ meta\ =\ (ClampMin\ =\ 0,\ ClampMax\ =\ 7))}
+\DoxyCodeLine{00046\ \ \ \ \ int32\ ByteIndex\ =\ 0;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}},\ meta\ =\ (ClampMin\ =\ 0,\ ClampMax\ =\ 7))}
+\DoxyCodeLine{00049\ \ \ \ \ int32\ BitIndex\ =\ 0;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}},\ meta\ =\ (ClampMin\ =\ 0.0,\ Units\ =\ \textcolor{stringliteral}{"{}s"{}}))}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{float}\ TransmitCycleSeconds\ =\ 0.f;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00057\ \ \ \ \ FOnCanSignalChanged\ OnValueChanged;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ GetValue()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bValue;\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00064\ \ \ \ \ bool\ HasValue()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bHasValue;\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00068\ \ \ \ \ void\ SetValue(\textcolor{keywordtype}{bool}\ bNewValue);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00072\ \ \ \ \ FString\ Describe()\ const;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ Configure(\mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}{ECanSignalDirection}}\ InDirection,\ int32\ InId,\ \textcolor{keywordtype}{bool}\ bInExtendedId\ =\ false,\ int32\ InByteIndex\ =\ 0,\ int32\ InBitIndex\ =\ 0);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ protected:}
+\DoxyCodeLine{00078\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ BeginPlay()\ override;}
+\DoxyCodeLine{00079\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ EndPlay(const\ EEndPlayReason::Type\ EndPlayReason)\ override;}
+\DoxyCodeLine{00080\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ TickComponent(\textcolor{keywordtype}{float}\ DeltaTime,\ ELevelTick\ TickType,\ FActorComponentTickFunction*\ ThisTickFunction)\ override;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ private:}
+\DoxyCodeLine{00083\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ HandleFrame(const\ FCanFrame\&\ Frame);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ HandleConnectionChanged(\textcolor{keywordtype}{bool}\ bConnected);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ Matches(const\ FCanFrame\&\ Frame)\ const;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ ApplyValue(\textcolor{keywordtype}{bool}\ bNewValue);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a6c2958de5e2295b8cb67bac908244879}{Transmit}}();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ UPROPERTY(VisibleInstanceOnly,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ bValue\ =\ false;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ bHasValue\ =\ false;}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ bTransmitPending\ =\ false;}
+\DoxyCodeLine{00099\ \ \ \ \ int32\ ResolvedId\ =\ INDEX\_NONE;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{float}\ TimeSinceTransmit\ =\ 0.f;}
+\DoxyCodeLine{00101\ \ \ \ \ TWeakObjectPtr<UIoTwinBusSubsystem>\ Bus;}
+\DoxyCodeLine{00102\ \};}
+
+\end{DoxyCode}

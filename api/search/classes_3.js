@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['simulator_5ft_0',['simulator_t',['../structsimulator__t.html',1,'']]]
+  ['fcanframe_0',['FCanFrame',['../structFCanFrame.html',1,'']]],
+  ['fiotwinbusconnection_1',['FIoTwinBusConnection',['../classFIoTwinBusConnection.html',1,'']]]
 ];

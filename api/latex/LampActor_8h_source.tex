@@ -2,7 +2,7 @@
 \hypertarget{LampActor_8h_source}{}\label{LampActor_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Systems/LampActor.h@{src/ue/IoTwin/Source/IoTwin/Systems/LampActor.h}}
 \mbox{\hyperlink{LampActor_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ lamp:\ port\ -\/>\ device\ -\/>\ light,\ with\ a\ visible\ bulb.}}
 \DoxyCodeLine{00002\ }
 \DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00004\ }
@@ -13,32 +13,57 @@
 \DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
 \DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}LampActor.generated.h"{}}}
 \DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ UCLASS()}
-\DoxyCodeLine{00013\ class\ IOTWIN\_API\ \mbox{\hyperlink{classALampActor}{ALampActor}}\ :\ public\ AActor}
-\DoxyCodeLine{00014\ \{}
-\DoxyCodeLine{00015\ \ \ \ \ GENERATED\_BODY()}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
-\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classALampActor}{ALampActor}}();}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }UMaterialInstanceDynamic;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }UMaterialInterface;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }UStaticMeshComponent;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ UCLASS()}
+\DoxyCodeLine{00017\ class\ IOTWIN\_API\ \mbox{\hyperlink{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb}{ALampActor}}\ :\ public\ AActor}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ GENERATED\_BODY()}
 \DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Called\ when\ the\ game\ starts\ or\ when\ spawned}}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnConstruction(\textcolor{keyword}{const}\ FTransform\&\ Transform)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb}{ALampActor}}();}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
-\DoxyCodeLine{00027\ \ \ \ \ USceneComponent*\ Root;}
+\DoxyCodeLine{00026\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00027\ \ \ \ \ bool\ \mbox{\hyperlink{classALampActor_a4cb50cf0191a8b1b2e0fec9b628fc729}{IsOn}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classALampActor_a483de8992df3799767c441417aae482c}{Device}}\ \&\&\ \mbox{\hyperlink{classALampActor_a483de8992df3799767c441417aae482c}{Device}}-\/>bIsPowered;\ \}}
 \DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ "{}Lamp"{})}
-\DoxyCodeLine{00030\ \ \ \ \ UElectricalPortComponent*\ Port;}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ "{}Lamp"{})}
-\DoxyCodeLine{00033\ \ \ \ \ UElectricalDeviceComponent*\ Device;}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ "{}Lamp"{})}
-\DoxyCodeLine{00036\ \ \ \ \ ULightEmitterComponent*\ Light;}
-\DoxyCodeLine{00037\ \ \ \ \ }
-\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00029\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnConstruction(\textcolor{keyword}{const}\ FTransform\&\ Transform)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BeginPlay()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00035\ \ \ \ \ USceneComponent*\ \mbox{\hyperlink{classALampActor_a77c3bb4be2c18e12d16a75eae0866fea}{Root}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00038\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classALampActor_aea9c1c4062507d4488f3c3e09e2ca4ec}{Port}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00041\ \ \ \ \ UElectricalDeviceComponent*\ \mbox{\hyperlink{classALampActor_a483de8992df3799767c441417aae482c}{Device}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00044\ \ \ \ \ ULightEmitterComponent*\ \mbox{\hyperlink{classALampActor_ad71ff753af4e93ac58eb25c1404a3e1c}{Light}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00047\ \ \ \ \ UStaticMeshComponent*\ \mbox{\hyperlink{classALampActor_a33f2d5059e631558512346c42f977f9c}{Bulb}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00051\ \ \ \ \ TObjectPtr<UMaterialInterface>\ \mbox{\hyperlink{classALampActor_a3dbeaa4c1a364df41c2c2b084a1f8b95}{BulbBaseMaterial}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00054\ \ \ \ \ FLinearColor\ \mbox{\hyperlink{classALampActor_ab0793e809c489c1fdb5143864a28f3c0}{BulbOnColor}}\ =\ FLinearColor(1.0f,\ 0.85f,\ 0.35f);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Lamp"{}})}
+\DoxyCodeLine{00057\ \ \ \ \ FLinearColor\ \mbox{\hyperlink{classALampActor_a1f3664e1aef8eb8451acc570742a46e5}{BulbOffColor}}\ =\ FLinearColor(0.08f,\ 0.08f,\ 0.08f);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ private:}
+\DoxyCodeLine{00060\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ HandlePoweredChanged(\textcolor{keywordtype}{bool}\ bPowered);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ UPROPERTY(Transient)}
+\DoxyCodeLine{00064\ \ \ \ \ TObjectPtr<UMaterialInstanceDynamic>\ BulbMaterial;}
+\DoxyCodeLine{00065\ \};}
 
 \end{DoxyCode}

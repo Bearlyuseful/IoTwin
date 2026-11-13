@@ -1,0 +1,105 @@
+\doxysection{src/core/platform/pal\+\_\+time.h File Reference}
+\hypertarget{pal__time_8h}{}\label{pal__time_8h}\index{src/core/platform/pal\_time.h@{src/core/platform/pal\_time.h}}
+
+
+Platform abstraction for monotonic time and sleeping.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pal__time_8h_ae594119f01261f993570723459cbca73}{PAL\+\_\+\+NS\+\_\+\+PER\+\_\+\+MS}}~1000000\+ULL
+\item 
+\#define \mbox{\hyperlink{pal__time_8h_aaa104b0955ffbc88d9dc31e3b96bdfbb}{PAL\+\_\+\+NS\+\_\+\+PER\+\_\+\+SEC}}~1000000000\+ULL
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pal__time_8h_a637de23d7b896ecd07a4658830f16e78}{pal\+\_\+time\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em One-\/time process setup (Windows\+: raises the system timer resolution to 1 ms). \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{pal__time_8h_ad1b2eec115780f4babae4c29242a01af}{pal\+\_\+time\+\_\+monotonic\+\_\+ns}} (void)
+\begin{DoxyCompactList}\small\item\em Monotonic clock in nanoseconds (arbitrary epoch, never jumps backwards). \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{pal__time_8h_a1c1326b0c6a59da4826616eaff6d21f5}{pal\+\_\+time\+\_\+monotonic\+\_\+ms}} (void)
+\begin{DoxyCompactList}\small\item\em Monotonic clock in milliseconds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pal__time_8h_a7b8d7cf035e9039dac086741cb13a4d6}{pal\+\_\+sleep\+\_\+ms}} (uint32\+\_\+t ms)
+\begin{DoxyCompactList}\small\item\em Sleeps for at least {\ttfamily ms} milliseconds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pal__time_8h_afefcc1bba94832d661fd702b9b16456e}{pal\+\_\+sleep\+\_\+until\+\_\+ns}} (uint64\+\_\+t deadline\+\_\+ns)
+\begin{DoxyCompactList}\small\item\em Sleeps until the monotonic clock reaches {\ttfamily deadline\+\_\+ns}. Returns immediately if it already passed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Platform abstraction for monotonic time and sleeping. 
+
+On Linux the absolute sleep uses clock\+\_\+nanosleep(\+TIMER\+\_\+\+ABSTIME) on CLOCK\+\_\+\+MONOTONIC, which is what a PREEMPT\+\_\+\+RT system needs for drift-\/free cyclic execution. On Windows the functions are best effort (millisecond timer resolution, no real-\/time guarantees). 
+
+\label{doc-define-members}
+\Hypertarget{pal__time_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pal__time_8h_ae594119f01261f993570723459cbca73}\index{pal\_time.h@{pal\_time.h}!PAL\_NS\_PER\_MS@{PAL\_NS\_PER\_MS}}
+\index{PAL\_NS\_PER\_MS@{PAL\_NS\_PER\_MS}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{PAL\_NS\_PER\_MS}{PAL\_NS\_PER\_MS}}
+{\footnotesize\ttfamily \label{pal__time_8h_ae594119f01261f993570723459cbca73} 
+\#define PAL\+\_\+\+NS\+\_\+\+PER\+\_\+\+MS~1000000\+ULL}
+
+\Hypertarget{pal__time_8h_aaa104b0955ffbc88d9dc31e3b96bdfbb}\index{pal\_time.h@{pal\_time.h}!PAL\_NS\_PER\_SEC@{PAL\_NS\_PER\_SEC}}
+\index{PAL\_NS\_PER\_SEC@{PAL\_NS\_PER\_SEC}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{PAL\_NS\_PER\_SEC}{PAL\_NS\_PER\_SEC}}
+{\footnotesize\ttfamily \label{pal__time_8h_aaa104b0955ffbc88d9dc31e3b96bdfbb} 
+\#define PAL\+\_\+\+NS\+\_\+\+PER\+\_\+\+SEC~1000000000\+ULL}
+
+
+
+\label{doc-func-members}
+\Hypertarget{pal__time_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pal__time_8h_a7b8d7cf035e9039dac086741cb13a4d6}\index{pal\_time.h@{pal\_time.h}!pal\_sleep\_ms@{pal\_sleep\_ms}}
+\index{pal\_sleep\_ms@{pal\_sleep\_ms}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{pal\_sleep\_ms()}{pal\_sleep\_ms()}}
+{\footnotesize\ttfamily \label{pal__time_8h_a7b8d7cf035e9039dac086741cb13a4d6} 
+void pal\+\_\+sleep\+\_\+ms (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{ms}{}\end{DoxyParamCaption})}
+
+
+
+Sleeps for at least {\ttfamily ms} milliseconds. 
+
+\Hypertarget{pal__time_8h_afefcc1bba94832d661fd702b9b16456e}\index{pal\_time.h@{pal\_time.h}!pal\_sleep\_until\_ns@{pal\_sleep\_until\_ns}}
+\index{pal\_sleep\_until\_ns@{pal\_sleep\_until\_ns}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{pal\_sleep\_until\_ns()}{pal\_sleep\_until\_ns()}}
+{\footnotesize\ttfamily \label{pal__time_8h_afefcc1bba94832d661fd702b9b16456e} 
+void pal\+\_\+sleep\+\_\+until\+\_\+ns (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{deadline\+\_\+ns}{}\end{DoxyParamCaption})}
+
+
+
+Sleeps until the monotonic clock reaches {\ttfamily deadline\+\_\+ns}. Returns immediately if it already passed. 
+
+\Hypertarget{pal__time_8h_a637de23d7b896ecd07a4658830f16e78}\index{pal\_time.h@{pal\_time.h}!pal\_time\_init@{pal\_time\_init}}
+\index{pal\_time\_init@{pal\_time\_init}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{pal\_time\_init()}{pal\_time\_init()}}
+{\footnotesize\ttfamily \label{pal__time_8h_a637de23d7b896ecd07a4658830f16e78} 
+void pal\+\_\+time\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+One-\/time process setup (Windows\+: raises the system timer resolution to 1 ms). 
+
+\Hypertarget{pal__time_8h_a1c1326b0c6a59da4826616eaff6d21f5}\index{pal\_time.h@{pal\_time.h}!pal\_time\_monotonic\_ms@{pal\_time\_monotonic\_ms}}
+\index{pal\_time\_monotonic\_ms@{pal\_time\_monotonic\_ms}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{pal\_time\_monotonic\_ms()}{pal\_time\_monotonic\_ms()}}
+{\footnotesize\ttfamily \label{pal__time_8h_a1c1326b0c6a59da4826616eaff6d21f5} 
+uint64\+\_\+t pal\+\_\+time\+\_\+monotonic\+\_\+ms (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Monotonic clock in milliseconds. 
+
+\Hypertarget{pal__time_8h_ad1b2eec115780f4babae4c29242a01af}\index{pal\_time.h@{pal\_time.h}!pal\_time\_monotonic\_ns@{pal\_time\_monotonic\_ns}}
+\index{pal\_time\_monotonic\_ns@{pal\_time\_monotonic\_ns}!pal\_time.h@{pal\_time.h}}
+\doxysubsubsection{\texorpdfstring{pal\_time\_monotonic\_ns()}{pal\_time\_monotonic\_ns()}}
+{\footnotesize\ttfamily \label{pal__time_8h_ad1b2eec115780f4babae4c29242a01af} 
+uint64\+\_\+t pal\+\_\+time\+\_\+monotonic\+\_\+ns (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Monotonic clock in nanoseconds (arbitrary epoch, never jumps backwards). 
+

@@ -1,0 +1,113 @@
+\doxysection{FIo\+Twin\+Bus\+Connection Class Reference}
+\hypertarget{classFIoTwinBusConnection}{}\label{classFIoTwinBusConnection}\index{FIoTwinBusConnection@{FIoTwinBusConnection}}
+
+
+{\ttfamily \#include $<$Io\+Twin\+Bus\+Connection.\+h$>$}
+
+Inheritance diagram for FIo\+Twin\+Bus\+Connection\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFIoTwinBusConnection}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFIoTwinBusConnection_a1daec294f78dd023123525a59c4f02f3}{FIo\+Twin\+Bus\+Connection}} (FString In\+Host, int32 In\+Port)
+\item 
+virtual \mbox{\hyperlink{classFIoTwinBusConnection_a34603192e432ff6b7c2987ac01ffc0cb}{\texorpdfstring{$\sim$}{\string~}\+FIo\+Twin\+Bus\+Connection}} () override
+\item 
+bool \mbox{\hyperlink{classFIoTwinBusConnection_a5b1c6c538b7ae6f399ad414e5d8d1810}{Start}} ()
+\item 
+void \mbox{\hyperlink{classFIoTwinBusConnection_ab2ede2cc9693b0158bf945f292239f46}{Shutdown}} ()
+\item 
+bool \mbox{\hyperlink{classFIoTwinBusConnection_a0f6f2545ac96d52e823823ad8fda2822}{Is\+Connected}} () const
+\item 
+bool \mbox{\hyperlink{classFIoTwinBusConnection_ab716de12d6d35d894bf33dfb730d5351}{Enqueue\+Line}} (const FString \&Line)
+\item 
+bool \mbox{\hyperlink{classFIoTwinBusConnection_a536a74e23a13384e24b84e6230f76dff}{Dequeue\+Line}} (FString \&Out\+Line)
+\item 
+virtual uint32 \mbox{\hyperlink{classFIoTwinBusConnection_a80b5f9af5ae40f56f0c0861c793a0c95}{Run}} () override
+\item 
+virtual void \mbox{\hyperlink{classFIoTwinBusConnection_ac022699d54d5a1dc0392556d32f0069f}{Stop}} () override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Worker thread that keeps a TCP connection to iotwin-\/bus alive and exchanges newline-\/terminated text lines with it.
+
+
+\begin{DoxyItemize}
+\item Reconnects automatically while the bus is not reachable.
+\item Incoming lines are queued for the game thread (Dequeue\+Line).
+\item Outgoing lines are queued by the game thread (Enqueue\+Line) and dropped while disconnected -\/ like frames sent on an unconnected CAN node. 
+\end{DoxyItemize}
+
+\label{doc-constructors}
+\Hypertarget{classFIoTwinBusConnection_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFIoTwinBusConnection_a1daec294f78dd023123525a59c4f02f3}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\index{FIoTwinBusConnection@{FIoTwinBusConnection}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{FIoTwinBusConnection()}{FIoTwinBusConnection()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_a1daec294f78dd023123525a59c4f02f3} 
+FIo\+Twin\+Bus\+Connection\+::\+FIo\+Twin\+Bus\+Connection (\begin{DoxyParamCaption}\item[{FString}]{In\+Host}{, }\item[{int32}]{In\+Port}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFIoTwinBusConnection_a34603192e432ff6b7c2987ac01ffc0cb}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!````~FIoTwinBusConnection@{\texorpdfstring{$\sim$}{\string~}FIoTwinBusConnection}}
+\index{````~FIoTwinBusConnection@{\texorpdfstring{$\sim$}{\string~}FIoTwinBusConnection}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FIoTwinBusConnection()}{\string~FIoTwinBusConnection()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_a34603192e432ff6b7c2987ac01ffc0cb} 
+FIo\+Twin\+Bus\+Connection\+::\texorpdfstring{$\sim$}{\string~}\+FIo\+Twin\+Bus\+Connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classFIoTwinBusConnection_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFIoTwinBusConnection_a536a74e23a13384e24b84e6230f76dff}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!DequeueLine@{DequeueLine}}
+\index{DequeueLine@{DequeueLine}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{DequeueLine()}{DequeueLine()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_a536a74e23a13384e24b84e6230f76dff} 
+bool FIo\+Twin\+Bus\+Connection\+::\+Dequeue\+Line (\begin{DoxyParamCaption}\item[{FString \&}]{Out\+Line}{}\end{DoxyParamCaption})}
+
+Takes the next received line. Game thread only. \Hypertarget{classFIoTwinBusConnection_ab716de12d6d35d894bf33dfb730d5351}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!EnqueueLine@{EnqueueLine}}
+\index{EnqueueLine@{EnqueueLine}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{EnqueueLine()}{EnqueueLine()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_ab716de12d6d35d894bf33dfb730d5351} 
+bool FIo\+Twin\+Bus\+Connection\+::\+Enqueue\+Line (\begin{DoxyParamCaption}\item[{const FString \&}]{Line}{}\end{DoxyParamCaption})}
+
+Queues a line (without newline) for sending. Returns false while disconnected. \Hypertarget{classFIoTwinBusConnection_a0f6f2545ac96d52e823823ad8fda2822}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!IsConnected@{IsConnected}}
+\index{IsConnected@{IsConnected}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{IsConnected()}{IsConnected()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_a0f6f2545ac96d52e823823ad8fda2822} 
+bool FIo\+Twin\+Bus\+Connection\+::\+Is\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classFIoTwinBusConnection_a80b5f9af5ae40f56f0c0861c793a0c95}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!Run@{Run}}
+\index{Run@{Run}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_a80b5f9af5ae40f56f0c0861c793a0c95} 
+uint32 FIo\+Twin\+Bus\+Connection\+::\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classFIoTwinBusConnection_ab2ede2cc9693b0158bf945f292239f46}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!Shutdown@{Shutdown}}
+\index{Shutdown@{Shutdown}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{Shutdown()}{Shutdown()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_ab2ede2cc9693b0158bf945f292239f46} 
+void FIo\+Twin\+Bus\+Connection\+::\+Shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Stops the worker thread and waits for it. \Hypertarget{classFIoTwinBusConnection_a5b1c6c538b7ae6f399ad414e5d8d1810}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!Start@{Start}}
+\index{Start@{Start}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_a5b1c6c538b7ae6f399ad414e5d8d1810} 
+bool FIo\+Twin\+Bus\+Connection\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Starts the worker thread. \Hypertarget{classFIoTwinBusConnection_ac022699d54d5a1dc0392556d32f0069f}\index{FIoTwinBusConnection@{FIoTwinBusConnection}!Stop@{Stop}}
+\index{Stop@{Stop}!FIoTwinBusConnection@{FIoTwinBusConnection}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classFIoTwinBusConnection_ac022699d54d5a1dc0392556d32f0069f} 
+void FIo\+Twin\+Bus\+Connection\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusConnection_8h}{Io\+Twin\+Bus\+Connection.\+h}}\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusConnection_8cpp}{Io\+Twin\+Bus\+Connection.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,39 @@
+\doxysection{line\+\_\+reader.\+h}
+\hypertarget{line__reader_8h_source}{}\label{line__reader_8h_source}\index{src/communication/tcp/line\_reader.h@{src/communication/tcp/line\_reader.h}}
+\mbox{\hyperlink{line__reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_LINE\_READER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_LINE\_READER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ LINE\_READER\_MAX\_LINE\ 256}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{LineReaderCallback}})(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{void}*\ user\_data);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structLineReader_a0d67cbf25a36558b98fe703e92fd3744}{buffer}}[\mbox{\hyperlink{line__reader_8h_a834ceb4d82b6813573cc48e79812bb86}{LINE\_READER\_MAX\_LINE}}];\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structLineReader_a0aaa30c60cd0d5bef363a65161f63113}{length}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLineReader_adde82efe0473809bc547b23e11d97823}{discarding}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ uint64\_t\ \mbox{\hyperlink{structLineReader_a6b2be1f6fa8a26f275917895bae00e39}{dropped\_lines}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \}\ \mbox{\hyperlink{structLineReader}{LineReader}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{line__reader_8h_a4c076075498edf520472da1ee4b314d4}{line\_reader\_init}}(\mbox{\hyperlink{structLineReader}{LineReader}}*\ reader);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{line__reader_8h_aab9d5225e9ce25d352d8ba90ab5b0291}{line\_reader\_feed}}(\mbox{\hyperlink{structLineReader}{LineReader}}*\ reader,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{size\_t}\ length,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{LineReaderCallback}}\ callback,\ \textcolor{keywordtype}{void}*\ user\_data);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00045\ \}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_LINE\_READER\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

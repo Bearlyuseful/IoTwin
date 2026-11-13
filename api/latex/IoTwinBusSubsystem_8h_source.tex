@@ -1,0 +1,78 @@
+\doxysection{Io\+Twin\+Bus\+Subsystem.\+h}
+\hypertarget{IoTwinBusSubsystem_8h_source}{}\label{IoTwinBusSubsystem_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Bus/IoTwinBusSubsystem.h@{src/ue/IoTwin/Source/IoTwin/Bus/IoTwinBusSubsystem.h}}
+\mbox{\hyperlink{IoTwinBusSubsystem_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ game-\/wide\ access\ to\ the\ virtual\ CAN\ bus.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CanFrame_8h}{Bus/CanFrame.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{IoTwinBusConnection_8h}{Bus/IoTwinBusConnection.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Containers/Ticker.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Subsystems/GameInstanceSubsystem.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}IoTwinBusSubsystem.generated.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \mbox{\hyperlink{IoTwinBusSubsystem_8h_a3011630e7645f89ee7830f686c22395c}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnCanFrameReceived,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&,\ Frame);}
+\DoxyCodeLine{00013\ \mbox{\hyperlink{IoTwinBusSubsystem_8h_a3011630e7645f89ee7830f686c22395c}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnBusConnectionChanged,\ \textcolor{keywordtype}{bool},\ bConnected);}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00020\ UCLASS(Config\ =\ Game)}
+\DoxyCodeLine{00021\ class\ IOTWIN\_API\ \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIoTwinBusSubsystem}}\ :\ public\ UGameInstanceSubsystem}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a46ded7bf1f099443cb294d6036b8c6f2}{Initialize}}(FSubsystemCollectionBase\&\ Collection)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a77eeb521187d6f71690f83a4a950731e}{Deinitialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIoTwinBusSubsystem}}*\ \mbox{\hyperlink{classUIoTwinBusSubsystem_ac361ddebc6572d962fdc7f52f3e6840f}{Get}}(\textcolor{keyword}{const}\ UObject*\ WorldContextObject);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a620ae2baf1f54904231180c5ea4e679a}{SendFrame}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a3e1a28b7cb33c5d9487c85022eae6e22}{IsConnected}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00040\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00041\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a7192d00cc2de173c824029ea2aac8425}{GetEndpoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00044\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a22c5feb9488d7d3edd5149bfc238ef57}{GetLastFrame}}(int32\ Id,\ \textcolor{keywordtype}{bool}\ bExtended,\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ OutFrame)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{const}\ TArray<FString>\&\ \mbox{\hyperlink{classUIoTwinBusSubsystem_ac03153ea778e165fc8ddc99d721b1cd0}{GetRecentTraffic}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ RecentTraffic;\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00052\ \ \ \ \ FOnCanFrameReceived\ \mbox{\hyperlink{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481}{OnFrameReceived}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00056\ \ \ \ \ FOnBusConnectionChanged\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e}{OnConnectionChanged}};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00059\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522}{Host}}\ =\ TEXT(\textcolor{stringliteral}{"{}127.0.0.1"{}});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00062\ \ \ \ \ int32\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}{Port}}\ =\ 8080;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a0b6433f9fe7eb282a27f9a4a297377ca}{bEnabled}}\ =\ true;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ private:}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ Tick(\textcolor{keywordtype}{float}\ DeltaSeconds);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ AddTraffic(const\ TCHAR*\ Direction,\ const\ FString\&\ Line);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ static\ int64\ MakeKey(int32\ Id,\ \textcolor{keywordtype}{bool}\ bExtended)}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{static\_cast<}int64\textcolor{keyword}{>}(bExtended)\ <<\ 32)\ |\ \textcolor{keyword}{static\_cast<}uint32\textcolor{keyword}{>}(Id);}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxRecentTraffic\ =\ 10;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxFramesPerTick\ =\ 1024;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ TUniquePtr<FIoTwinBusConnection>\ Connection;}
+\DoxyCodeLine{00080\ \ \ \ \ FTSTicker::FDelegateHandle\ TickHandle;}
+\DoxyCodeLine{00081\ \ \ \ \ TMap<int64,\ FCanFrame>\ LastFrames;}
+\DoxyCodeLine{00082\ \ \ \ \ TArray<FString>\ RecentTraffic;}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ bWasConnected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00084\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,144 @@
+\doxysection{UIo\+Twin\+Bus\+Subsystem Class Reference}
+\hypertarget{classUIoTwinBusSubsystem}{}\label{classUIoTwinBusSubsystem}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+
+
+{\ttfamily \#include $<$Io\+Twin\+Bus\+Subsystem.\+h$>$}
+
+Inheritance diagram for UIo\+Twin\+Bus\+Subsystem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUIoTwinBusSubsystem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinBusSubsystem_a46ded7bf1f099443cb294d6036b8c6f2}{Initialize}} (FSubsystem\+Collection\+Base \&Collection) override
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinBusSubsystem_a77eeb521187d6f71690f83a4a950731e}{Deinitialize}} () override
+\item 
+bool \mbox{\hyperlink{classUIoTwinBusSubsystem_a620ae2baf1f54904231180c5ea4e679a}{Send\+Frame}} (const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame)
+\item 
+bool \mbox{\hyperlink{classUIoTwinBusSubsystem_a3e1a28b7cb33c5d9487c85022eae6e22}{Is\+Connected}} () const
+\item 
+FString \mbox{\hyperlink{classUIoTwinBusSubsystem_a7192d00cc2de173c824029ea2aac8425}{Get\+Endpoint}} () const
+\item 
+bool \mbox{\hyperlink{classUIoTwinBusSubsystem_a22c5feb9488d7d3edd5149bfc238ef57}{Get\+Last\+Frame}} (int32 Id, bool b\+Extended, \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Out\+Frame) const
+\item 
+const TArray$<$ FString $>$ \& \mbox{\hyperlink{classUIoTwinBusSubsystem_ac03153ea778e165fc8ddc99d721b1cd0}{Get\+Recent\+Traffic}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIo\+Twin\+Bus\+Subsystem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUIoTwinBusSubsystem_ac361ddebc6572d962fdc7f52f3e6840f}{Get}} (const UObject \texorpdfstring{$\ast$}{*}World\+Context\+Object)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+FOn\+Can\+Frame\+Received \mbox{\hyperlink{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481}{On\+Frame\+Received}}
+\item 
+FOn\+Bus\+Connection\+Changed \mbox{\hyperlink{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e}{On\+Connection\+Changed}}
+\item 
+FString \mbox{\hyperlink{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522}{Host}} = TEXT("{}127.\+0.\+0.\+1"{})
+\item 
+int32 \mbox{\hyperlink{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}{Port}} = 8080
+\item 
+bool \mbox{\hyperlink{classUIoTwinBusSubsystem_a0b6433f9fe7eb282a27f9a4a297377ca}{b\+Enabled}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Connects the game to iotwin-\/bus and makes the CAN traffic available on the game thread. Configure in Default\+Game.\+ini (\mbox{[}/\+Script/\+Io\+Twin.Io\+Twin\+Bus\+Subsystem\mbox{]}) or per run with -\/Io\+Twin\+Bus\+Host=, -\/Io\+Twin\+Bus\+Port=, -\/Io\+Twin\+Bus\+Disabled. 
+
+\label{doc-func-members}
+\Hypertarget{classUIoTwinBusSubsystem_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUIoTwinBusSubsystem_a77eeb521187d6f71690f83a4a950731e}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Deinitialize@{Deinitialize}}
+\index{Deinitialize@{Deinitialize}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{Deinitialize()}{Deinitialize()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a77eeb521187d6f71690f83a4a950731e} 
+void UIo\+Twin\+Bus\+Subsystem\+::\+Deinitialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinBusSubsystem_ac361ddebc6572d962fdc7f52f3e6840f}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Get@{Get}}
+\index{Get@{Get}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_ac361ddebc6572d962fdc7f52f3e6840f} 
+\mbox{\hyperlink{classUIoTwinBusSubsystem}{UIo\+Twin\+Bus\+Subsystem}} \texorpdfstring{$\ast$}{*} UIo\+Twin\+Bus\+Subsystem\+::\+Get (\begin{DoxyParamCaption}\item[{const UObject \texorpdfstring{$\ast$}{*}}]{World\+Context\+Object}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Convenience accessor, returns nullptr outside of a game world. \Hypertarget{classUIoTwinBusSubsystem_a7192d00cc2de173c824029ea2aac8425}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!GetEndpoint@{GetEndpoint}}
+\index{GetEndpoint@{GetEndpoint}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetEndpoint()}{GetEndpoint()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a7192d00cc2de173c824029ea2aac8425} 
+FString UIo\+Twin\+Bus\+Subsystem\+::\+Get\+Endpoint (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+"{}host\+:port"{} of the bus. \Hypertarget{classUIoTwinBusSubsystem_a22c5feb9488d7d3edd5149bfc238ef57}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!GetLastFrame@{GetLastFrame}}
+\index{GetLastFrame@{GetLastFrame}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetLastFrame()}{GetLastFrame()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a22c5feb9488d7d3edd5149bfc238ef57} 
+bool UIo\+Twin\+Bus\+Subsystem\+::\+Get\+Last\+Frame (\begin{DoxyParamCaption}\item[{int32}]{Id}{, }\item[{bool}]{b\+Extended}{, }\item[{\mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Out\+Frame}{}\end{DoxyParamCaption}) const}
+
+Last frame received with this identifier (current value of a cyclic signal). \Hypertarget{classUIoTwinBusSubsystem_ac03153ea778e165fc8ddc99d721b1cd0}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!GetRecentTraffic@{GetRecentTraffic}}
+\index{GetRecentTraffic@{GetRecentTraffic}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetRecentTraffic()}{GetRecentTraffic()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_ac03153ea778e165fc8ddc99d721b1cd0} 
+const TArray$<$ FString $>$ \& UIo\+Twin\+Bus\+Subsystem\+::\+Get\+Recent\+Traffic (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Most recent traffic, newest last ("{}\+RX 100\#01"{}, "{}\+TX 200\#00"{}). \Hypertarget{classUIoTwinBusSubsystem_a46ded7bf1f099443cb294d6036b8c6f2}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a46ded7bf1f099443cb294d6036b8c6f2} 
+void UIo\+Twin\+Bus\+Subsystem\+::\+Initialize (\begin{DoxyParamCaption}\item[{FSubsystem\+Collection\+Base \&}]{Collection}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinBusSubsystem_a3e1a28b7cb33c5d9487c85022eae6e22}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!IsConnected@{IsConnected}}
+\index{IsConnected@{IsConnected}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{IsConnected()}{IsConnected()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a3e1a28b7cb33c5d9487c85022eae6e22} 
+bool UIo\+Twin\+Bus\+Subsystem\+::\+Is\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classUIoTwinBusSubsystem_a620ae2baf1f54904231180c5ea4e679a}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!SendFrame@{SendFrame}}
+\index{SendFrame@{SendFrame}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{SendFrame()}{SendFrame()}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a620ae2baf1f54904231180c5ea4e679a} 
+bool UIo\+Twin\+Bus\+Subsystem\+::\+Send\+Frame (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Frame}{}\end{DoxyParamCaption})}
+
+Sends a frame to all other nodes. Returns false if invalid or not connected. 
+
+\label{doc-variable-members}
+\Hypertarget{classUIoTwinBusSubsystem_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUIoTwinBusSubsystem_a0b6433f9fe7eb282a27f9a4a297377ca}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!bEnabled@{bEnabled}}
+\index{bEnabled@{bEnabled}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{bEnabled}{bEnabled}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a0b6433f9fe7eb282a27f9a4a297377ca} 
+bool UIo\+Twin\+Bus\+Subsystem\+::b\+Enabled = true}
+
+\Hypertarget{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Host@{Host}}
+\index{Host@{Host}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{Host}{Host}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522} 
+FString UIo\+Twin\+Bus\+Subsystem\+::\+Host = TEXT("{}127.\+0.\+0.\+1"{})}
+
+\Hypertarget{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!OnConnectionChanged@{OnConnectionChanged}}
+\index{OnConnectionChanged@{OnConnectionChanged}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{OnConnectionChanged}{OnConnectionChanged}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e} 
+FOn\+Bus\+Connection\+Changed UIo\+Twin\+Bus\+Subsystem\+::\+On\+Connection\+Changed}
+
+Fired when the connection to the bus is established or lost. \Hypertarget{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!OnFrameReceived@{OnFrameReceived}}
+\index{OnFrameReceived@{OnFrameReceived}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{OnFrameReceived}{OnFrameReceived}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481} 
+FOn\+Can\+Frame\+Received UIo\+Twin\+Bus\+Subsystem\+::\+On\+Frame\+Received}
+
+Fired on the game thread for every frame received from the bus. \Hypertarget{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Port@{Port}}
+\index{Port@{Port}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{Port}{Port}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f} 
+int32 UIo\+Twin\+Bus\+Subsystem\+::\+Port = 8080}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusSubsystem_8h}{Io\+Twin\+Bus\+Subsystem.\+h}}\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusSubsystem_8cpp}{Io\+Twin\+Bus\+Subsystem.\+cpp}}\end{DoxyCompactItemize}

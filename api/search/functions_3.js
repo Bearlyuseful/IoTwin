@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['haspower_0',['HasPower',['../classIPowerInterface.html#a99d37409fe285d0f088c0528eaf316da',1,'IPowerInterface']]]
+  ['declare_5fdynamic_5fmulticast_5fdelegate_5foneparam_0',['DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam',['../CanSignalComponent_8h.html#acb26abc9d42d256490f8da28873239b7',1,'DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCanSignalChanged, bool, bNewValue):&#160;CanSignalComponent.h'],['../IoTwinBusSubsystem_8h.html#a3011630e7645f89ee7830f686c22395c',1,'DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCanFrameReceived, const FCanFrame &amp;, Frame):&#160;IoTwinBusSubsystem.h'],['../IoTwinBusSubsystem_8h.html#a2cd3bf6010b09c8229240b2eb7913f9a',1,'DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBusConnectionChanged, bool, bConnected):&#160;IoTwinBusSubsystem.h'],['../ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e',1,'DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPoweredChanged, bool, bPowered):&#160;ElectricalDeviceComponent.h'],['../PowerSourceActor_8h.html#afa6ff72aca7635cdb03f34cf77d46ee7',1,'DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRelayChanged, bool, bClosed):&#160;PowerSourceActor.h']]],
+  ['declare_5flog_5fcategory_5fextern_1',['DECLARE_LOG_CATEGORY_EXTERN',['../IoTwin_8h.html#a2e80f4e4bdeab9b6c266b36742461d4b',1,'DECLARE_LOG_CATEGORY_EXTERN(LogIoTwin, Log, All):&#160;IoTwin.h'],['../IoTwin_8h.html#a69ebf5b59238e6ac837a7106d79ab3ea',1,'DECLARE_LOG_CATEGORY_EXTERN(LogIoTwinBus, Log, All):&#160;IoTwin.h']]],
+  ['define_5flog_5fcategory_2',['DEFINE_LOG_CATEGORY',['../IoTwin_8cpp.html#aba3835a8ff6b0566427a793b315e4045',1,'DEFINE_LOG_CATEGORY(LogIoTwin):&#160;IoTwin.cpp'],['../IoTwin_8cpp.html#a8ad306c458dc7e3af5ed5764aec03640',1,'DEFINE_LOG_CATEGORY(LogIoTwinBus):&#160;IoTwin.cpp']]],
+  ['deinitialize_3',['Deinitialize',['../classUIoTwinBusSubsystem.html#a77eeb521187d6f71690f83a4a950731e',1,'UIoTwinBusSubsystem']]],
+  ['dequeueline_4',['DequeueLine',['../classFIoTwinBusConnection.html#a536a74e23a13384e24b84e6230f76dff',1,'FIoTwinBusConnection']]],
+  ['drawhud_5',['DrawHUD',['../classAIoTwinHUD.html#ad605a66b09f39aa68c32cc05ca1c52a9',1,'AIoTwinHUD']]]
 ];

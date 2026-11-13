@@ -1,0 +1,51 @@
+\doxysection{Net\+Poll\+Fd Struct Reference}
+\hypertarget{structNetPollFd}{}\label{structNetPollFd}\index{NetPollFd@{NetPollFd}}
+
+
+Entry for \doxylink{net_8c_a2b9beae339774515025e2613a5937cca}{net\+\_\+poll()}.  
+
+
+
+
+{\ttfamily \#include $<$net.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} \mbox{\hyperlink{structNetPollFd_a273fa5b92c8886ba3fb6c35067ec1cb4}{socket}}
+\item 
+int \mbox{\hyperlink{structNetPollFd_a8d17260def323bcf334317030b0b9773}{events}}
+\item 
+int \mbox{\hyperlink{structNetPollFd_a6b3ebb61d16ac2b92a1e81442bd84328}{revents}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entry for \doxylink{net_8c_a2b9beae339774515025e2613a5937cca}{net\+\_\+poll()}. 
+
+\label{doc-variable-members}
+\Hypertarget{structNetPollFd_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structNetPollFd_a8d17260def323bcf334317030b0b9773}\index{NetPollFd@{NetPollFd}!events@{events}}
+\index{events@{events}!NetPollFd@{NetPollFd}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily \label{structNetPollFd_a8d17260def323bcf334317030b0b9773} 
+int Net\+Poll\+Fd\+::events}
+
+Requested NET\+\_\+\+POLL\+\_\+\texorpdfstring{$\ast$}{*} flags. \Hypertarget{structNetPollFd_a6b3ebb61d16ac2b92a1e81442bd84328}\index{NetPollFd@{NetPollFd}!revents@{revents}}
+\index{revents@{revents}!NetPollFd@{NetPollFd}}
+\doxysubsubsection{\texorpdfstring{revents}{revents}}
+{\footnotesize\ttfamily \label{structNetPollFd_a6b3ebb61d16ac2b92a1e81442bd84328} 
+int Net\+Poll\+Fd\+::revents}
+
+Returned NET\+\_\+\+POLL\+\_\+\texorpdfstring{$\ast$}{*} flags. \Hypertarget{structNetPollFd_a273fa5b92c8886ba3fb6c35067ec1cb4}\index{NetPollFd@{NetPollFd}!socket@{socket}}
+\index{socket@{socket}!NetPollFd@{NetPollFd}}
+\doxysubsubsection{\texorpdfstring{socket}{socket}}
+{\footnotesize\ttfamily \label{structNetPollFd_a273fa5b92c8886ba3fb6c35067ec1cb4} 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} Net\+Poll\+Fd\+::socket}
+
+Socket to watch. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/communication/tcp/\mbox{\hyperlink{net_8h}{net.\+h}}\end{DoxyCompactItemize}

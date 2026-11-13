@@ -1,17 +1,189 @@
-\doxysection{src/common/log.h File Reference}
-\hypertarget{log_8h}{}\label{log_8h}\index{src/common/log.h@{src/common/log.h}}
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysection{src/core/logger/log.h File Reference}
+\hypertarget{log_8h}{}\label{log_8h}\index{src/core/logger/log.h@{src/core/logger/log.h}}
+
+
+Small thread-\/safe logger with severity levels and timestamps.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{log_8h_a632a3e364fe8b1a3ea16b971f2c5ca36}{IOTWIN\+\_\+\+PRINTF\+\_\+\+FORMAT}}(fmt\+\_\+index,  args\+\_\+index)
+\item 
+\#define \mbox{\hyperlink{log_8h_aa77e596ef13d2f0f75d0ac9540ed358d}{log\+\_\+debug}}(...)
+\item 
+\#define \mbox{\hyperlink{log_8h_aa1cfe5444875c8eca0ea6f6993977d6d}{log\+\_\+info}}(...)
+\item 
+\#define \mbox{\hyperlink{log_8h_a04af09851c431d178f16b24fa1aac1e9}{log\+\_\+warn}}(...)
+\item 
+\#define \mbox{\hyperlink{log_8h_a6ae72553ea9805dd87a463d6f710364d}{log\+\_\+error}}(...)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \{ \newline
+\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a538b2b6e011479d408ecd2be0f6d6177}{LOG\+\_\+\+LEVEL\+\_\+\+DEBUG}} = 0
+, \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9aedee1e3159bfe7d918b6e29873c5aee4}{LOG\+\_\+\+LEVEL\+\_\+\+INFO}}
+, \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a99c1e5c8e6d557f3993b9ab54a0107f4}{LOG\+\_\+\+LEVEL\+\_\+\+WARN}}
+, \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a5b40f003febbc3b535649d63f4b8a44f}{LOG\+\_\+\+LEVEL\+\_\+\+ERROR}}
+, \newline
+\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9ae24e27e4037b7d172fff40d51825a856}{LOG\+\_\+\+LEVEL\+\_\+\+OFF}}
+ \}
+\begin{DoxyCompactList}\small\item\em Severity levels, ordered from most to least verbose. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{log_8h_a00ab4d4c0b970dca7ecbce08c912d828}{log\+\_\+info}} (const char \texorpdfstring{$\ast$}{*}msg)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{log_8h_a20d53fe4929c9f90f83a10c739b02dfa}{log\+\_\+set\+\_\+level}} (\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} level)
+\begin{DoxyCompactList}\small\item\em Sets the minimum level that is written (default\+: LOG\+\_\+\+LEVEL\+\_\+\+INFO). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \mbox{\hyperlink{log_8h_ae5099953981ab6c18721857fd2f8d6fc}{log\+\_\+get\+\_\+level}} (void)
+\begin{DoxyCompactList}\small\item\em Returns the currently active minimum level. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{log_8h_a556e1a9fa74bea3e6cfebc44995306a6}{log\+\_\+parse\+\_\+level}} (const char \texorpdfstring{$\ast$}{*}text, \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \texorpdfstring{$\ast$}{*}level)
+\begin{DoxyCompactList}\small\item\em Parses "{}debug"{}, "{}info"{}, "{}warn"{}, "{}error"{} or "{}off"{} (case-\/insensitive). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{log_8h_ae71d9715f5a34f2757408d25295f12a4}{log\+\_\+write}} (\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} level, const char \texorpdfstring{$\ast$}{*}fmt,...) \mbox{\hyperlink{log_8h_a632a3e364fe8b1a3ea16b971f2c5ca36}{IOTWIN\+\_\+\+PRINTF\+\_\+\+FORMAT}}(2
+\begin{DoxyCompactList}\small\item\em Writes one printf-\/style formatted line if {\ttfamily level} is enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Function Documentation}
-\Hypertarget{log_8h_a00ab4d4c0b970dca7ecbce08c912d828}\label{log_8h_a00ab4d4c0b970dca7ecbce08c912d828} 
-\index{log.h@{log.h}!log\_info@{log\_info}}
+\doxysubsection{Detailed Description}
+Small thread-\/safe logger with severity levels and timestamps. 
+
+All output goes to stderr so that stdout stays free for program output (e.\+g. the interactive console of a simulator). 
+
+\label{doc-define-members}
+\Hypertarget{log_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{log_8h_a632a3e364fe8b1a3ea16b971f2c5ca36}\index{log.h@{log.h}!IOTWIN\_PRINTF\_FORMAT@{IOTWIN\_PRINTF\_FORMAT}}
+\index{IOTWIN\_PRINTF\_FORMAT@{IOTWIN\_PRINTF\_FORMAT}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{IOTWIN\_PRINTF\_FORMAT}{IOTWIN\_PRINTF\_FORMAT}}
+{\footnotesize\ttfamily \label{log_8h_a632a3e364fe8b1a3ea16b971f2c5ca36} 
+\#define IOTWIN\+\_\+\+PRINTF\+\_\+\+FORMAT(\begin{DoxyParamCaption}\item[{}]{fmt\+\_\+index}{, }\item[{}]{args\+\_\+index}{}\end{DoxyParamCaption})}
+
+\Hypertarget{log_8h_aa77e596ef13d2f0f75d0ac9540ed358d}\index{log.h@{log.h}!log\_debug@{log\_debug}}
+\index{log\_debug@{log\_debug}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_debug}{log\_debug}}
+{\footnotesize\ttfamily \label{log_8h_aa77e596ef13d2f0f75d0ac9540ed358d} 
+\#define log\+\_\+debug(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{log_8c_a3b52b5eca89a8b186bf96d913d302ba8}{log\_write}}(\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a538b2b6e011479d408ecd2be0f6d6177}{LOG\_LEVEL\_DEBUG}},\ \_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{log_8h_a6ae72553ea9805dd87a463d6f710364d}\index{log.h@{log.h}!log\_error@{log\_error}}
+\index{log\_error@{log\_error}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_error}{log\_error}}
+{\footnotesize\ttfamily \label{log_8h_a6ae72553ea9805dd87a463d6f710364d} 
+\#define log\+\_\+error(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{log_8c_a3b52b5eca89a8b186bf96d913d302ba8}{log\_write}}(\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a5b40f003febbc3b535649d63f4b8a44f}{LOG\_LEVEL\_ERROR}},\ \_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{log_8h_aa1cfe5444875c8eca0ea6f6993977d6d}\index{log.h@{log.h}!log\_info@{log\_info}}
 \index{log\_info@{log\_info}!log.h@{log.h}}
-\doxysubsubsection{\texorpdfstring{log\_info()}{log\_info()}}
-{\footnotesize\ttfamily void log\+\_\+info (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{msg }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{log\_info}{log\_info}}
+{\footnotesize\ttfamily \label{log_8h_aa1cfe5444875c8eca0ea6f6993977d6d} 
+\#define log\+\_\+info(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{log_8c_a3b52b5eca89a8b186bf96d913d302ba8}{log\_write}}(\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9aedee1e3159bfe7d918b6e29873c5aee4}{LOG\_LEVEL\_INFO}},\ \_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{log_8h_a04af09851c431d178f16b24fa1aac1e9}\index{log.h@{log.h}!log\_warn@{log\_warn}}
+\index{log\_warn@{log\_warn}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_warn}{log\_warn}}
+{\footnotesize\ttfamily \label{log_8h_a04af09851c431d178f16b24fa1aac1e9} 
+\#define log\+\_\+warn(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{log_8c_a3b52b5eca89a8b186bf96d913d302ba8}{log\_write}}(\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a99c1e5c8e6d557f3993b9ab54a0107f4}{LOG\_LEVEL\_WARN}},\ \_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+
+
+\label{doc-enum-members}
+\Hypertarget{log_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}\index{log.h@{log.h}!LogLevel@{LogLevel}}
+\index{LogLevel@{LogLevel}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{LogLevel}{LogLevel}}
+{\footnotesize\ttfamily \label{log_8h_aca1fd1d8935433e6ba2e3918214e07f9} 
+enum \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}}}
+
+
+
+Severity levels, ordered from most to least verbose. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_LEVEL\_DEBUG@{LOG\_LEVEL\_DEBUG}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_LEVEL\_DEBUG@{LOG\_LEVEL\_DEBUG}}}\Hypertarget{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a538b2b6e011479d408ecd2be0f6d6177}\label{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a538b2b6e011479d408ecd2be0f6d6177} 
+LOG\+\_\+\+LEVEL\+\_\+\+DEBUG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_LEVEL\_INFO@{LOG\_LEVEL\_INFO}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_LEVEL\_INFO@{LOG\_LEVEL\_INFO}}}\Hypertarget{log_8h_aca1fd1d8935433e6ba2e3918214e07f9aedee1e3159bfe7d918b6e29873c5aee4}\label{log_8h_aca1fd1d8935433e6ba2e3918214e07f9aedee1e3159bfe7d918b6e29873c5aee4} 
+LOG\+\_\+\+LEVEL\+\_\+\+INFO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_LEVEL\_WARN@{LOG\_LEVEL\_WARN}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_LEVEL\_WARN@{LOG\_LEVEL\_WARN}}}\Hypertarget{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a99c1e5c8e6d557f3993b9ab54a0107f4}\label{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a99c1e5c8e6d557f3993b9ab54a0107f4} 
+LOG\+\_\+\+LEVEL\+\_\+\+WARN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_LEVEL\_ERROR@{LOG\_LEVEL\_ERROR}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_LEVEL\_ERROR@{LOG\_LEVEL\_ERROR}}}\Hypertarget{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a5b40f003febbc3b535649d63f4b8a44f}\label{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a5b40f003febbc3b535649d63f4b8a44f} 
+LOG\+\_\+\+LEVEL\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_LEVEL\_OFF@{LOG\_LEVEL\_OFF}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_LEVEL\_OFF@{LOG\_LEVEL\_OFF}}}\Hypertarget{log_8h_aca1fd1d8935433e6ba2e3918214e07f9ae24e27e4037b7d172fff40d51825a856}\label{log_8h_aca1fd1d8935433e6ba2e3918214e07f9ae24e27e4037b7d172fff40d51825a856} 
+LOG\+\_\+\+LEVEL\+\_\+\+OFF&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{log_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{log_8h_ae5099953981ab6c18721857fd2f8d6fc}\index{log.h@{log.h}!log\_get\_level@{log\_get\_level}}
+\index{log\_get\_level@{log\_get\_level}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_get\_level()}{log\_get\_level()}}
+{\footnotesize\ttfamily \label{log_8h_ae5099953981ab6c18721857fd2f8d6fc} 
+\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} log\+\_\+get\+\_\+level (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the currently active minimum level. 
+
+\Hypertarget{log_8h_a556e1a9fa74bea3e6cfebc44995306a6}\index{log.h@{log.h}!log\_parse\_level@{log\_parse\_level}}
+\index{log\_parse\_level@{log\_parse\_level}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_parse\_level()}{log\_parse\_level()}}
+{\footnotesize\ttfamily \label{log_8h_a556e1a9fa74bea3e6cfebc44995306a6} 
+bool log\+\_\+parse\+\_\+level (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \texorpdfstring{$\ast$}{*}}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Parses "{}debug"{}, "{}info"{}, "{}warn"{}, "{}error"{} or "{}off"{} (case-\/insensitive). 
+
+\begin{DoxyReturn}{Returns}
+true on success, false if {\ttfamily text} is not a known level. 
+\end{DoxyReturn}
+\Hypertarget{log_8h_a20d53fe4929c9f90f83a10c739b02dfa}\index{log.h@{log.h}!log\_set\_level@{log\_set\_level}}
+\index{log\_set\_level@{log\_set\_level}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_set\_level()}{log\_set\_level()}}
+{\footnotesize\ttfamily \label{log_8h_a20d53fe4929c9f90f83a10c739b02dfa} 
+void log\+\_\+set\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}}}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the minimum level that is written (default\+: LOG\+\_\+\+LEVEL\+\_\+\+INFO). 
+
+\Hypertarget{log_8h_ae71d9715f5a34f2757408d25295f12a4}\index{log.h@{log.h}!log\_write@{log\_write}}
+\index{log\_write@{log\_write}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{log\_write()}{log\_write()}}
+{\footnotesize\ttfamily \label{log_8h_ae71d9715f5a34f2757408d25295f12a4} 
+void log\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}}}]{level}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{fmt}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Writes one printf-\/style formatted line if {\ttfamily level} is enabled. 
 

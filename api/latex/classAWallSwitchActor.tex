@@ -1,0 +1,125 @@
+\doxysection{AWall\+Switch\+Actor Class Reference}
+\hypertarget{classAWallSwitchActor}{}\label{classAWallSwitchActor}\index{AWallSwitchActor@{AWallSwitchActor}}
+
+
+{\ttfamily \#include $<$Wall\+Switch\+Actor.\+h$>$}
+
+Inheritance diagram for AWall\+Switch\+Actor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classAWallSwitchActor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAWallSwitchActor_ae7bf8bdf7613a85b298ee7a54d8e6731}{AWall\+Switch\+Actor}} ()
+\item 
+void \mbox{\hyperlink{classAWallSwitchActor_a3c053d89a036058f9bacac3fef661031}{Toggle}} ()
+\item 
+void \mbox{\hyperlink{classAWallSwitchActor_afac2c77813775dfced32ac3ebb6732c6}{Set\+Switch\+On}} (bool b\+New\+On)
+\item 
+bool \mbox{\hyperlink{classAWallSwitchActor_a6f6fd1438f6199d7b23ae0d4f646a345}{Is\+On}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+UScene\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAWallSwitchActor_a62ed8803f1f9935178d2967bd674cc93}{Root}}
+\item 
+UStatic\+Mesh\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAWallSwitchActor_ab2719744ed2dd21c5bddb714ad1c33ef}{Plate}}
+\item 
+UStatic\+Mesh\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAWallSwitchActor_aab75951279166ce04591136c18973e26}{Rocker}}
+\item 
+UCan\+Signal\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAWallSwitchActor_a4720137c5b03e98a8cc5a372d96a5a2d}{Signal}}
+\item 
+TObject\+Ptr$<$ UMaterial\+Interface $>$ \mbox{\hyperlink{classAWallSwitchActor_a5b9173a09e2386223c48f07c742636d2}{Base\+Material}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classAWallSwitchActor_a5da3e17a1ee591b03ee9e48053e29197}{Begin\+Play}} () override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Digital twin of a wall switch (a sensor input, not part of the power path). Clicking it toggles the position and sends it via Signal (default 0x200 byte 0 bit 0). 
+
+\label{doc-constructors}
+\Hypertarget{classAWallSwitchActor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAWallSwitchActor_ae7bf8bdf7613a85b298ee7a54d8e6731}\index{AWallSwitchActor@{AWallSwitchActor}!AWallSwitchActor@{AWallSwitchActor}}
+\index{AWallSwitchActor@{AWallSwitchActor}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{AWallSwitchActor()}{AWallSwitchActor()}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_ae7bf8bdf7613a85b298ee7a54d8e6731} 
+AWall\+Switch\+Actor\+::\+AWall\+Switch\+Actor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classAWallSwitchActor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAWallSwitchActor_a5da3e17a1ee591b03ee9e48053e29197}\index{AWallSwitchActor@{AWallSwitchActor}!BeginPlay@{BeginPlay}}
+\index{BeginPlay@{BeginPlay}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{BeginPlay()}{BeginPlay()}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_a5da3e17a1ee591b03ee9e48053e29197} 
+void AWall\+Switch\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classAWallSwitchActor_a6f6fd1438f6199d7b23ae0d4f646a345}\index{AWallSwitchActor@{AWallSwitchActor}!IsOn@{IsOn}}
+\index{IsOn@{IsOn}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{IsOn()}{IsOn()}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_a6f6fd1438f6199d7b23ae0d4f646a345} 
+bool AWall\+Switch\+Actor\+::\+Is\+On (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classAWallSwitchActor_afac2c77813775dfced32ac3ebb6732c6}\index{AWallSwitchActor@{AWallSwitchActor}!SetSwitchOn@{SetSwitchOn}}
+\index{SetSwitchOn@{SetSwitchOn}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{SetSwitchOn()}{SetSwitchOn()}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_afac2c77813775dfced32ac3ebb6732c6} 
+void AWall\+Switch\+Actor\+::\+Set\+Switch\+On (\begin{DoxyParamCaption}\item[{bool}]{b\+New\+On}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classAWallSwitchActor_a3c053d89a036058f9bacac3fef661031}\index{AWallSwitchActor@{AWallSwitchActor}!Toggle@{Toggle}}
+\index{Toggle@{Toggle}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{Toggle()}{Toggle()}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_a3c053d89a036058f9bacac3fef661031} 
+void AWall\+Switch\+Actor\+::\+Toggle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classAWallSwitchActor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classAWallSwitchActor_a5b9173a09e2386223c48f07c742636d2}\index{AWallSwitchActor@{AWallSwitchActor}!BaseMaterial@{BaseMaterial}}
+\index{BaseMaterial@{BaseMaterial}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{BaseMaterial}{BaseMaterial}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_a5b9173a09e2386223c48f07c742636d2} 
+TObject\+Ptr$<$UMaterial\+Interface$>$ AWall\+Switch\+Actor\+::\+Base\+Material}
+
+Material with a "{}\+Color"{} vector parameter used for plate and rocker. \Hypertarget{classAWallSwitchActor_ab2719744ed2dd21c5bddb714ad1c33ef}\index{AWallSwitchActor@{AWallSwitchActor}!Plate@{Plate}}
+\index{Plate@{Plate}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{Plate}{Plate}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_ab2719744ed2dd21c5bddb714ad1c33ef} 
+UStatic\+Mesh\+Component\texorpdfstring{$\ast$}{*} AWall\+Switch\+Actor\+::\+Plate}
+
+\Hypertarget{classAWallSwitchActor_aab75951279166ce04591136c18973e26}\index{AWallSwitchActor@{AWallSwitchActor}!Rocker@{Rocker}}
+\index{Rocker@{Rocker}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{Rocker}{Rocker}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_aab75951279166ce04591136c18973e26} 
+UStatic\+Mesh\+Component\texorpdfstring{$\ast$}{*} AWall\+Switch\+Actor\+::\+Rocker}
+
+\Hypertarget{classAWallSwitchActor_a62ed8803f1f9935178d2967bd674cc93}\index{AWallSwitchActor@{AWallSwitchActor}!Root@{Root}}
+\index{Root@{Root}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{Root}{Root}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_a62ed8803f1f9935178d2967bd674cc93} 
+UScene\+Component\texorpdfstring{$\ast$}{*} AWall\+Switch\+Actor\+::\+Root}
+
+\Hypertarget{classAWallSwitchActor_a4720137c5b03e98a8cc5a372d96a5a2d}\index{AWallSwitchActor@{AWallSwitchActor}!Signal@{Signal}}
+\index{Signal@{Signal}!AWallSwitchActor@{AWallSwitchActor}}
+\doxysubsubsection{\texorpdfstring{Signal}{Signal}}
+{\footnotesize\ttfamily \label{classAWallSwitchActor_a4720137c5b03e98a8cc5a372d96a5a2d} 
+UCan\+Signal\+Component\texorpdfstring{$\ast$}{*} AWall\+Switch\+Actor\+::\+Signal}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{WallSwitchActor_8h}{Wall\+Switch\+Actor.\+h}}\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{WallSwitchActor_8cpp}{Wall\+Switch\+Actor.\+cpp}}\end{DoxyCompactItemize}

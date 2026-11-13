@@ -1,2 +1,102 @@
-\doxysection{src/simulators/can\+\_\+sim/can\+\_\+frame.c File Reference}
-\hypertarget{can__frame_8c}{}\label{can__frame_8c}\index{src/simulators/can\_sim/can\_frame.c@{src/simulators/can\_sim/can\_frame.c}}
+\doxysection{src/core/can/can\+\_\+frame.c File Reference}
+\hypertarget{can__frame_8c}{}\label{can__frame_8c}\index{src/core/can/can\_frame.c@{src/core/can/can\_frame.c}}
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{can__frame_8c_a3cba2b615c62825074ad13f0f62c62cd}{can\+\_\+frame\+\_\+clear}} (\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Resets {\ttfamily frame} to a standard data frame with id 0 and no payload. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8c_a5ec36140a3ef5ec7efac0ad5eb5786fc}{can\+\_\+frame\+\_\+is\+\_\+valid}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Checks identifier range and DLC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8c_a8dc82d098613ee8b871998816fb4b7d0}{can\+\_\+frame\+\_\+set}} (\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint32\+\_\+t id, bool extended, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint8\+\_\+t dlc)
+\begin{DoxyCompactList}\small\item\em Initialises a data frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8c_a82d54b7b5fc257c24d92668f9eda6503}{can\+\_\+frame\+\_\+equals}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}a, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}b)
+\begin{DoxyCompactList}\small\item\em Compares two frames (payload bytes beyond dlc are ignored). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{can__frame_8c_af5cbe2fda93c41fd84c9dc2665ffcdcc}{can\+\_\+frame\+\_\+to\+\_\+text}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Encodes {\ttfamily frame} as text (without newline). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8c_aaa5128900ed29b8a0b0a57307dfc916c}{can\+\_\+frame\+\_\+from\+\_\+text}} (const char \texorpdfstring{$\ast$}{*}text, size\+\_\+t length, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Parses one encoded frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{can__frame_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{can__frame_8c_a3cba2b615c62825074ad13f0f62c62cd}\index{can\_frame.c@{can\_frame.c}!can\_frame\_clear@{can\_frame\_clear}}
+\index{can\_frame\_clear@{can\_frame\_clear}!can\_frame.c@{can\_frame.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_clear()}{can\_frame\_clear()}}
+{\footnotesize\ttfamily \label{can__frame_8c_a3cba2b615c62825074ad13f0f62c62cd} 
+void can\+\_\+frame\+\_\+clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Resets {\ttfamily frame} to a standard data frame with id 0 and no payload. 
+
+\Hypertarget{can__frame_8c_a82d54b7b5fc257c24d92668f9eda6503}\index{can\_frame.c@{can\_frame.c}!can\_frame\_equals@{can\_frame\_equals}}
+\index{can\_frame\_equals@{can\_frame\_equals}!can\_frame.c@{can\_frame.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_equals()}{can\_frame\_equals()}}
+{\footnotesize\ttfamily \label{can__frame_8c_a82d54b7b5fc257c24d92668f9eda6503} 
+bool can\+\_\+frame\+\_\+equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Compares two frames (payload bytes beyond dlc are ignored). 
+
+\Hypertarget{can__frame_8c_aaa5128900ed29b8a0b0a57307dfc916c}\index{can\_frame.c@{can\_frame.c}!can\_frame\_from\_text@{can\_frame\_from\_text}}
+\index{can\_frame\_from\_text@{can\_frame\_from\_text}!can\_frame.c@{can\_frame.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_from\_text()}{can\_frame\_from\_text()}}
+{\footnotesize\ttfamily \label{can__frame_8c_aaa5128900ed29b8a0b0a57307dfc916c} 
+bool can\+\_\+frame\+\_\+from\+\_\+text (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Parses one encoded frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Characters of the frame, not necessarily NUL terminated. \\
+\hline
+{\em length} & Number of characters in {\ttfamily text}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success; {\ttfamily frame} is left untouched on failure. 
+\end{DoxyReturn}
+\Hypertarget{can__frame_8c_a5ec36140a3ef5ec7efac0ad5eb5786fc}\index{can\_frame.c@{can\_frame.c}!can\_frame\_is\_valid@{can\_frame\_is\_valid}}
+\index{can\_frame\_is\_valid@{can\_frame\_is\_valid}!can\_frame.c@{can\_frame.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_is\_valid()}{can\_frame\_is\_valid()}}
+{\footnotesize\ttfamily \label{can__frame_8c_a5ec36140a3ef5ec7efac0ad5eb5786fc} 
+bool can\+\_\+frame\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Checks identifier range and DLC. 
+
+\Hypertarget{can__frame_8c_a8dc82d098613ee8b871998816fb4b7d0}\index{can\_frame.c@{can\_frame.c}!can\_frame\_set@{can\_frame\_set}}
+\index{can\_frame\_set@{can\_frame\_set}!can\_frame.c@{can\_frame.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_set()}{can\_frame\_set()}}
+{\footnotesize\ttfamily \label{can__frame_8c_a8dc82d098613ee8b871998816fb4b7d0} 
+bool can\+\_\+frame\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint32\+\_\+t}]{id}{, }\item[{bool}]{extended}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint8\+\_\+t}]{dlc}{}\end{DoxyParamCaption})}
+
+
+
+Initialises a data frame. 
+
+\begin{DoxyReturn}{Returns}
+false (and a cleared frame) if id or dlc are out of range. 
+\end{DoxyReturn}
+\Hypertarget{can__frame_8c_af5cbe2fda93c41fd84c9dc2665ffcdcc}\index{can\_frame.c@{can\_frame.c}!can\_frame\_to\_text@{can\_frame\_to\_text}}
+\index{can\_frame\_to\_text@{can\_frame\_to\_text}!can\_frame.c@{can\_frame.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_to\_text()}{can\_frame\_to\_text()}}
+{\footnotesize\ttfamily \label{can__frame_8c_af5cbe2fda93c41fd84c9dc2665ffcdcc} 
+int can\+\_\+frame\+\_\+to\+\_\+text (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Encodes {\ttfamily frame} as text (without newline). 
+
+\begin{DoxyReturn}{Returns}
+Number of characters written (excluding NUL) or -\/1 if the frame is invalid or the buffer is too small. 
+\end{DoxyReturn}

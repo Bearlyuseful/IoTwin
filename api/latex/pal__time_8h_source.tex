@@ -1,0 +1,34 @@
+\doxysection{pal\+\_\+time.\+h}
+\hypertarget{pal__time_8h_source}{}\label{pal__time_8h_source}\index{src/core/platform/pal\_time.h@{src/core/platform/pal\_time.h}}
+\mbox{\hyperlink{pal__time_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_PAL\_TIME\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_PAL\_TIME\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ PAL\_NS\_PER\_MS\ 1000000ULL}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ PAL\_NS\_PER\_SEC\ 1000000000ULL}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pal__time_8h_a637de23d7b896ecd07a4658830f16e78}{pal\_time\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ uint64\_t\ \mbox{\hyperlink{pal__time_8h_ad1b2eec115780f4babae4c29242a01af}{pal\_time\_monotonic\_ns}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ uint64\_t\ \mbox{\hyperlink{pal__time_8h_a1c1326b0c6a59da4826616eaff6d21f5}{pal\_time\_monotonic\_ms}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pal__time_8h_a7b8d7cf035e9039dac086741cb13a4d6}{pal\_sleep\_ms}}(uint32\_t\ ms);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pal__time_8h_afefcc1bba94832d661fd702b9b16456e}{pal\_sleep\_until\_ns}}(uint64\_t\ deadline\_ns);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_PAL\_TIME\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

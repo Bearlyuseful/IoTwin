@@ -2,7 +2,7 @@
 \hypertarget{structCanFrame}{}\label{structCanFrame}\index{CanFrame@{CanFrame}}
 
 
-Generic CAN frame container.  
+One classic CAN frame (standard or extended identifier).  
 
 
 
@@ -12,50 +12,56 @@ Generic CAN frame container.
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}{Can\+Frame\+Type}} \mbox{\hyperlink{structCanFrame_a1da898fb9f5daeaaded0e6a1dc0c20cc}{type}}
+uint32\+\_\+t \mbox{\hyperlink{structCanFrame_aa850629d26a09531d2f40bd2b30b77f7}{id}}
 \item 
-\begin{tabbing}
-xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
-union \{\\
-\>\mbox{\hyperlink{structCanStandardFrame}{CanStandardFrame}} \mbox{\hyperlink{structCanFrame_a7abd909d93ed48167a2f3c797f54710a}{std}}\\
-\>\mbox{\hyperlink{structCanExtendedFrame}{CanExtendedFrame}} \mbox{\hyperlink{structCanFrame_a98053153d3f257a0f12484bbaa08c5ff}{ext}}\\
-\} \mbox{\hyperlink{structCanFrame_a0cf8b7a6803ceea47260c9e0830a8b85}{frame}}\\
-
-\end{tabbing}\end{DoxyCompactItemize}
+bool \mbox{\hyperlink{structCanFrame_adb8be33b2afccd8e01d490c78fb89596}{extended}}
+\item 
+bool \mbox{\hyperlink{structCanFrame_a837bb392f53185a39b101f1d9ec087e2}{rtr}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanFrame_aa896aaac27a424ba8e46c50e7bdb065d}{dlc}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structCanFrame_a6cba02a9edd71f7001f2993f0d4df58e}{data}} \mbox{[}\mbox{\hyperlink{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}{CAN\+\_\+\+MAX\+\_\+\+DLEN}}\mbox{]}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Generic CAN frame container. 
+One classic CAN frame (standard or extended identifier). 
 
-Allows access to both standard and extended frames via a common union. 
-
+\label{doc-variable-members}
+\Hypertarget{structCanFrame_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{structCanFrame_a98053153d3f257a0f12484bbaa08c5ff}\label{structCanFrame_a98053153d3f257a0f12484bbaa08c5ff} 
-\index{CanFrame@{CanFrame}!ext@{ext}}
-\index{ext@{ext}!CanFrame@{CanFrame}}
-\doxysubsubsection{\texorpdfstring{ext}{ext}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCanExtendedFrame}{Can\+Extended\+Frame}} Can\+Frame\+::ext}
+\Hypertarget{structCanFrame_a6cba02a9edd71f7001f2993f0d4df58e}\index{CanFrame@{CanFrame}!data@{data}}
+\index{data@{data}!CanFrame@{CanFrame}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{structCanFrame_a6cba02a9edd71f7001f2993f0d4df58e} 
+uint8\+\_\+t Can\+Frame\+::data\mbox{[}\mbox{\hyperlink{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}{CAN\+\_\+\+MAX\+\_\+\+DLEN}}\mbox{]}}
 
-Extended CAN frame (29-\/bit). \Hypertarget{structCanFrame_a0cf8b7a6803ceea47260c9e0830a8b85}\label{structCanFrame_a0cf8b7a6803ceea47260c9e0830a8b85} 
-\index{CanFrame@{CanFrame}!frame@{frame}}
-\index{frame@{frame}!CanFrame@{CanFrame}}
-\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
-{\footnotesize\ttfamily union  \{ ... \}  Can\+Frame\+::frame}
+Payload, bytes beyond dlc are zero. \Hypertarget{structCanFrame_aa896aaac27a424ba8e46c50e7bdb065d}\index{CanFrame@{CanFrame}!dlc@{dlc}}
+\index{dlc@{dlc}!CanFrame@{CanFrame}}
+\doxysubsubsection{\texorpdfstring{dlc}{dlc}}
+{\footnotesize\ttfamily \label{structCanFrame_aa896aaac27a424ba8e46c50e7bdb065d} 
+uint8\+\_\+t Can\+Frame\+::dlc}
 
-\Hypertarget{structCanFrame_a7abd909d93ed48167a2f3c797f54710a}\label{structCanFrame_a7abd909d93ed48167a2f3c797f54710a} 
-\index{CanFrame@{CanFrame}!std@{std}}
-\index{std@{std}!CanFrame@{CanFrame}}
-\doxysubsubsection{\texorpdfstring{std}{std}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCanStandardFrame}{Can\+Standard\+Frame}} Can\+Frame\+::std}
+Data length code 0..8. \Hypertarget{structCanFrame_adb8be33b2afccd8e01d490c78fb89596}\index{CanFrame@{CanFrame}!extended@{extended}}
+\index{extended@{extended}!CanFrame@{CanFrame}}
+\doxysubsubsection{\texorpdfstring{extended}{extended}}
+{\footnotesize\ttfamily \label{structCanFrame_adb8be33b2afccd8e01d490c78fb89596} 
+bool Can\+Frame\+::extended}
 
-Standard CAN frame (11-\/bit). \Hypertarget{structCanFrame_a1da898fb9f5daeaaded0e6a1dc0c20cc}\label{structCanFrame_a1da898fb9f5daeaaded0e6a1dc0c20cc} 
-\index{CanFrame@{CanFrame}!type@{type}}
-\index{type@{type}!CanFrame@{CanFrame}}
-\doxysubsubsection{\texorpdfstring{type}{type}}
-{\footnotesize\ttfamily \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}{Can\+Frame\+Type}} Can\+Frame\+::type}
+true = 29-\/bit identifier (IDE bit). \Hypertarget{structCanFrame_aa850629d26a09531d2f40bd2b30b77f7}\index{CanFrame@{CanFrame}!id@{id}}
+\index{id@{id}!CanFrame@{CanFrame}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{structCanFrame_aa850629d26a09531d2f40bd2b30b77f7} 
+uint32\+\_\+t Can\+Frame\+::id}
 
-Indicates the frame type (standard or extended). 
+11-\/bit or 29-\/bit identifier. \Hypertarget{structCanFrame_a837bb392f53185a39b101f1d9ec087e2}\index{CanFrame@{CanFrame}!rtr@{rtr}}
+\index{rtr@{rtr}!CanFrame@{CanFrame}}
+\doxysubsubsection{\texorpdfstring{rtr}{rtr}}
+{\footnotesize\ttfamily \label{structCanFrame_a837bb392f53185a39b101f1d9ec087e2} 
+bool Can\+Frame\+::rtr}
+
+Remote transmission request (no payload). 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/simulators/can\+\_\+sim/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}}\end{DoxyCompactItemize}
+src/core/can/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}}\end{DoxyCompactItemize}

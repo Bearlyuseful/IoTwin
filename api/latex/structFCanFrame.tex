@@ -1,0 +1,141 @@
+\doxysection{FCan\+Frame Struct Reference}
+\hypertarget{structFCanFrame}{}\label{structFCanFrame}\index{FCanFrame@{FCanFrame}}
+
+
+{\ttfamily \#include $<$Can\+Frame.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structFCanFrame_a0eccf472330530f6ae30b5f622f16780}{Is\+Valid}} () const
+\item 
+FString \mbox{\hyperlink{structFCanFrame_aae7a02719d4894c20b5c7607ab5f9437}{To\+String}} () const
+\item 
+bool \mbox{\hyperlink{structFCanFrame_ac58095a4084c23412dec90314e640ab0}{Get\+Bit}} (int32 Byte\+Index, int32 Bit\+Index) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{structFCanFrame_aed9c0eea61d4ac3911b726677c1915b3}{Parse}} (const FString \&Text, \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Out\+Frame)
+\item 
+static bool \mbox{\hyperlink{structFCanFrame_ab320b6aba5a367b7067dd74d9607ef09}{Parse\+Id}} (const FString \&Hex\+Text, bool \mbox{\hyperlink{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}{b\+Extended}}, int32 \&Out\+Id)
+\item 
+static \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \mbox{\hyperlink{structFCanFrame_aeb8b97e9a636fe0e84e0e280081e8587}{Make\+Data}} (int32 \mbox{\hyperlink{structFCanFrame_ad143e63f9548139c01555059a0e60566}{Id}}, TArray$<$ uint8 $>$ \mbox{\hyperlink{structFCanFrame_aaf04cd7a149802a6ee6aa35ad0c4700d}{Data}}, bool \mbox{\hyperlink{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}{b\+Extended}}=false)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32 \mbox{\hyperlink{structFCanFrame_ad143e63f9548139c01555059a0e60566}{Id}} = 0
+\item 
+bool \mbox{\hyperlink{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}{b\+Extended}} = false
+\item 
+bool \mbox{\hyperlink{structFCanFrame_ae176fc67fffeadf9d2f8f3f7e8ae765e}{b\+Remote}} = false
+\item 
+TArray$<$ uint8 $>$ \mbox{\hyperlink{structFCanFrame_aaf04cd7a149802a6ee6aa35ad0c4700d}{Data}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32 \mbox{\hyperlink{structFCanFrame_a7ac87238f3178b0cedb22d8c04991337}{Max\+Data\+Length}} = 8
+\item 
+static constexpr uint32 \mbox{\hyperlink{structFCanFrame_acd850af02fe7a2bec1112efe9d5d5c5a}{Standard\+Id\+Mask}} = 0x7\+FF
+\item 
+static constexpr uint32 \mbox{\hyperlink{structFCanFrame_a9dbbd0f454b9e9b50edd26002b434c13}{Extended\+Id\+Mask}} = 0x1\+FFFFFFF
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+One classic CAN frame as exchanged with iotwin-\/bus. Text form\+: "{}123\#\+DEADBEEF"{} (standard), "{}1\+F334455\#11"{} (extended), "{}123\#\+R"{} (remote). 
+
+\label{doc-func-members}
+\Hypertarget{structFCanFrame_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structFCanFrame_ac58095a4084c23412dec90314e640ab0}\index{FCanFrame@{FCanFrame}!GetBit@{GetBit}}
+\index{GetBit@{GetBit}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{GetBit()}{GetBit()}}
+{\footnotesize\ttfamily \label{structFCanFrame_ac58095a4084c23412dec90314e640ab0} 
+bool FCan\+Frame\+::\+Get\+Bit (\begin{DoxyParamCaption}\item[{int32}]{Byte\+Index}{, }\item[{int32}]{Bit\+Index}{}\end{DoxyParamCaption}) const}
+
+Returns bit Bit\+Index of byte Byte\+Index, false if the byte is not present. \Hypertarget{structFCanFrame_a0eccf472330530f6ae30b5f622f16780}\index{FCanFrame@{FCanFrame}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{structFCanFrame_a0eccf472330530f6ae30b5f622f16780} 
+bool FCan\+Frame\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Identifier range and payload length are valid. \Hypertarget{structFCanFrame_aeb8b97e9a636fe0e84e0e280081e8587}\index{FCanFrame@{FCanFrame}!MakeData@{MakeData}}
+\index{MakeData@{MakeData}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{MakeData()}{MakeData()}}
+{\footnotesize\ttfamily \label{structFCanFrame_aeb8b97e9a636fe0e84e0e280081e8587} 
+\mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} FCan\+Frame\+::\+Make\+Data (\begin{DoxyParamCaption}\item[{int32}]{Id}{, }\item[{TArray$<$ uint8 $>$}]{Data}{, }\item[{bool}]{b\+Extended}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a data frame. \Hypertarget{structFCanFrame_aed9c0eea61d4ac3911b726677c1915b3}\index{FCanFrame@{FCanFrame}!Parse@{Parse}}
+\index{Parse@{Parse}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{structFCanFrame_aed9c0eea61d4ac3911b726677c1915b3} 
+bool FCan\+Frame\+::\+Parse (\begin{DoxyParamCaption}\item[{const FString \&}]{Text}{, }\item[{\mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Out\+Frame}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Parses the text form. Returns false (and leaves Out\+Frame untouched) on malformed input. \Hypertarget{structFCanFrame_ab320b6aba5a367b7067dd74d9607ef09}\index{FCanFrame@{FCanFrame}!ParseId@{ParseId}}
+\index{ParseId@{ParseId}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{ParseId()}{ParseId()}}
+{\footnotesize\ttfamily \label{structFCanFrame_ab320b6aba5a367b7067dd74d9607ef09} 
+bool FCan\+Frame\+::\+Parse\+Id (\begin{DoxyParamCaption}\item[{const FString \&}]{Hex\+Text}{, }\item[{bool}]{b\+Extended}{, }\item[{int32 \&}]{Out\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Parses an identifier written in hex ("{}100"{}, "{}0x1\+F334455"{}). \Hypertarget{structFCanFrame_aae7a02719d4894c20b5c7607ab5f9437}\index{FCanFrame@{FCanFrame}!ToString@{ToString}}
+\index{ToString@{ToString}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{structFCanFrame_aae7a02719d4894c20b5c7607ab5f9437} 
+FString FCan\+Frame\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Encodes the frame ("{}123\#\+DEADBEEF"{}); empty string if the frame is invalid. 
+
+\label{doc-variable-members}
+\Hypertarget{structFCanFrame_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}\index{FCanFrame@{FCanFrame}!bExtended@{bExtended}}
+\index{bExtended@{bExtended}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{bExtended}{bExtended}}
+{\footnotesize\ttfamily \label{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4} 
+bool FCan\+Frame\+::b\+Extended = false}
+
+true = 29-\/bit identifier. \Hypertarget{structFCanFrame_ae176fc67fffeadf9d2f8f3f7e8ae765e}\index{FCanFrame@{FCanFrame}!bRemote@{bRemote}}
+\index{bRemote@{bRemote}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{bRemote}{bRemote}}
+{\footnotesize\ttfamily \label{structFCanFrame_ae176fc67fffeadf9d2f8f3f7e8ae765e} 
+bool FCan\+Frame\+::b\+Remote = false}
+
+Remote transmission request. The length of Data is the requested DLC. \Hypertarget{structFCanFrame_aaf04cd7a149802a6ee6aa35ad0c4700d}\index{FCanFrame@{FCanFrame}!Data@{Data}}
+\index{Data@{Data}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{Data}{Data}}
+{\footnotesize\ttfamily \label{structFCanFrame_aaf04cd7a149802a6ee6aa35ad0c4700d} 
+TArray$<$uint8$>$ FCan\+Frame\+::\+Data}
+
+Payload, 0..8 bytes. \Hypertarget{structFCanFrame_a9dbbd0f454b9e9b50edd26002b434c13}\index{FCanFrame@{FCanFrame}!ExtendedIdMask@{ExtendedIdMask}}
+\index{ExtendedIdMask@{ExtendedIdMask}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{ExtendedIdMask}{ExtendedIdMask}}
+{\footnotesize\ttfamily \label{structFCanFrame_a9dbbd0f454b9e9b50edd26002b434c13} 
+uint32 FCan\+Frame\+::\+Extended\+Id\+Mask = 0x1\+FFFFFFF\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{structFCanFrame_ad143e63f9548139c01555059a0e60566}\index{FCanFrame@{FCanFrame}!Id@{Id}}
+\index{Id@{Id}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily \label{structFCanFrame_ad143e63f9548139c01555059a0e60566} 
+int32 FCan\+Frame\+::\+Id = 0}
+
+11-\/bit (standard) or 29-\/bit (extended) identifier. \Hypertarget{structFCanFrame_a7ac87238f3178b0cedb22d8c04991337}\index{FCanFrame@{FCanFrame}!MaxDataLength@{MaxDataLength}}
+\index{MaxDataLength@{MaxDataLength}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{MaxDataLength}{MaxDataLength}}
+{\footnotesize\ttfamily \label{structFCanFrame_a7ac87238f3178b0cedb22d8c04991337} 
+int32 FCan\+Frame\+::\+Max\+Data\+Length = 8\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{structFCanFrame_acd850af02fe7a2bec1112efe9d5d5c5a}\index{FCanFrame@{FCanFrame}!StandardIdMask@{StandardIdMask}}
+\index{StandardIdMask@{StandardIdMask}!FCanFrame@{FCanFrame}}
+\doxysubsubsection{\texorpdfstring{StandardIdMask}{StandardIdMask}}
+{\footnotesize\ttfamily \label{structFCanFrame_acd850af02fe7a2bec1112efe9d5d5c5a} 
+uint32 FCan\+Frame\+::\+Standard\+Id\+Mask = 0x7\+FF\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8h}{Can\+Frame.\+h}}\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8cpp}{Can\+Frame.\+cpp}}\end{DoxyCompactItemize}

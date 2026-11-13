@@ -1,0 +1,114 @@
+\doxysection{src/core/platform/pal\+\_\+rt.h File Reference}
+\hypertarget{pal__rt_8h}{}\label{pal__rt_8h}\index{src/core/platform/pal\_rt.h@{src/core/platform/pal\_rt.h}}
+
+
+Real-\/time setup of the calling thread.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}}
+\begin{DoxyCompactList}\small\item\em Requested real-\/time settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pal__rt_8h_a68b301ad1931f4f5eeeba6b1f504cd7f}{pal\+\_\+rt\+\_\+default\+\_\+config}} (\mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Fills {\ttfamily config} with "{}no real-\/time settings requested"{}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{pal__rt_8h_a1711097fa0462ad77098a35cd8213e48}{pal\+\_\+rt\+\_\+requested}} (const \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Returns true if {\ttfamily config} requests any real-\/time setting. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{pal__rt_8h_a32cf505dbb2a256d1252dd00e63373fe}{pal\+\_\+rt\+\_\+apply}} (const \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}config, char \texorpdfstring{$\ast$}{*}message, size\+\_\+t message\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Applies {\ttfamily config} to the calling thread. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{pal__rt_8h_a0052555a6217643aa8dae47344dd9913}{pal\+\_\+rt\+\_\+kernel\+\_\+is\+\_\+preempt\+\_\+rt}} (void)
+\begin{DoxyCompactList}\small\item\em True if the running kernel reports PREEMPT\+\_\+\+RT (always false on Windows). \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{pal__rt_8h_aabf37afaebe634fcb476eb5e9bddbf10}{pal\+\_\+platform\+\_\+name}} (void)
+\begin{DoxyCompactList}\small\item\em Name of the platform the binary was built for ("{}\+Linux"{}, "{}\+Windows"{}, ...). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pal__rt_8h_a3c8c3f295206cf66d5c6c8006e11c42e}{pal\+\_\+rt\+\_\+setup\+\_\+and\+\_\+log}} (const \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Applies {\ttfamily config} (if anything is requested) and logs the outcome together with the platform / kernel real-\/time capabilities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Real-\/time setup of the calling thread. 
+
+Linux (reference platform, ideally with a PREEMPT\+\_\+\+RT kernel)\+:
+\begin{DoxyItemize}
+\item SCHED\+\_\+\+FIFO with the requested priority (needs CAP\+\_\+\+SYS\+\_\+\+NICE or an rtprio limit)
+\item CPU pinning via pthread\+\_\+setaffinity\+\_\+np
+\item mlockall() to avoid page faults (needs CAP\+\_\+\+IPC\+\_\+\+LOCK or a memlock limit)
+\end{DoxyItemize}
+
+Windows\+: best effort only. Thread priority and affinity are raised/set, memory locking is not supported and there are no timing guarantees. 
+
+\label{doc-func-members}
+\Hypertarget{pal__rt_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pal__rt_8h_aabf37afaebe634fcb476eb5e9bddbf10}\index{pal\_rt.h@{pal\_rt.h}!pal\_platform\_name@{pal\_platform\_name}}
+\index{pal\_platform\_name@{pal\_platform\_name}!pal\_rt.h@{pal\_rt.h}}
+\doxysubsubsection{\texorpdfstring{pal\_platform\_name()}{pal\_platform\_name()}}
+{\footnotesize\ttfamily \label{pal__rt_8h_aabf37afaebe634fcb476eb5e9bddbf10} 
+const char \texorpdfstring{$\ast$}{*} pal\+\_\+platform\+\_\+name (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Name of the platform the binary was built for ("{}\+Linux"{}, "{}\+Windows"{}, ...). 
+
+\Hypertarget{pal__rt_8h_a32cf505dbb2a256d1252dd00e63373fe}\index{pal\_rt.h@{pal\_rt.h}!pal\_rt\_apply@{pal\_rt\_apply}}
+\index{pal\_rt\_apply@{pal\_rt\_apply}!pal\_rt.h@{pal\_rt.h}}
+\doxysubsubsection{\texorpdfstring{pal\_rt\_apply()}{pal\_rt\_apply()}}
+{\footnotesize\ttfamily \label{pal__rt_8h_a32cf505dbb2a256d1252dd00e63373fe} 
+bool pal\+\_\+rt\+\_\+apply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{message}{, }\item[{size\+\_\+t}]{message\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Applies {\ttfamily config} to the calling thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Receives a human readable summary (applied settings or errors). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if every requested setting was applied. 
+\end{DoxyReturn}
+\Hypertarget{pal__rt_8h_a68b301ad1931f4f5eeeba6b1f504cd7f}\index{pal\_rt.h@{pal\_rt.h}!pal\_rt\_default\_config@{pal\_rt\_default\_config}}
+\index{pal\_rt\_default\_config@{pal\_rt\_default\_config}!pal\_rt.h@{pal\_rt.h}}
+\doxysubsubsection{\texorpdfstring{pal\_rt\_default\_config()}{pal\_rt\_default\_config()}}
+{\footnotesize\ttfamily \label{pal__rt_8h_a68b301ad1931f4f5eeeba6b1f504cd7f} 
+void pal\+\_\+rt\+\_\+default\+\_\+config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Fills {\ttfamily config} with "{}no real-\/time settings requested"{}. 
+
+\Hypertarget{pal__rt_8h_a0052555a6217643aa8dae47344dd9913}\index{pal\_rt.h@{pal\_rt.h}!pal\_rt\_kernel\_is\_preempt\_rt@{pal\_rt\_kernel\_is\_preempt\_rt}}
+\index{pal\_rt\_kernel\_is\_preempt\_rt@{pal\_rt\_kernel\_is\_preempt\_rt}!pal\_rt.h@{pal\_rt.h}}
+\doxysubsubsection{\texorpdfstring{pal\_rt\_kernel\_is\_preempt\_rt()}{pal\_rt\_kernel\_is\_preempt\_rt()}}
+{\footnotesize\ttfamily \label{pal__rt_8h_a0052555a6217643aa8dae47344dd9913} 
+bool pal\+\_\+rt\+\_\+kernel\+\_\+is\+\_\+preempt\+\_\+rt (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+True if the running kernel reports PREEMPT\+\_\+\+RT (always false on Windows). 
+
+\Hypertarget{pal__rt_8h_a1711097fa0462ad77098a35cd8213e48}\index{pal\_rt.h@{pal\_rt.h}!pal\_rt\_requested@{pal\_rt\_requested}}
+\index{pal\_rt\_requested@{pal\_rt\_requested}!pal\_rt.h@{pal\_rt.h}}
+\doxysubsubsection{\texorpdfstring{pal\_rt\_requested()}{pal\_rt\_requested()}}
+{\footnotesize\ttfamily \label{pal__rt_8h_a1711097fa0462ad77098a35cd8213e48} 
+bool pal\+\_\+rt\+\_\+requested (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Returns true if {\ttfamily config} requests any real-\/time setting. 
+
+\Hypertarget{pal__rt_8h_a3c8c3f295206cf66d5c6c8006e11c42e}\index{pal\_rt.h@{pal\_rt.h}!pal\_rt\_setup\_and\_log@{pal\_rt\_setup\_and\_log}}
+\index{pal\_rt\_setup\_and\_log@{pal\_rt\_setup\_and\_log}!pal\_rt.h@{pal\_rt.h}}
+\doxysubsubsection{\texorpdfstring{pal\_rt\_setup\_and\_log()}{pal\_rt\_setup\_and\_log()}}
+{\footnotesize\ttfamily \label{pal__rt_8h_a3c8c3f295206cf66d5c6c8006e11c42e} 
+void pal\+\_\+rt\+\_\+setup\+\_\+and\+\_\+log (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Applies {\ttfamily config} (if anything is requested) and logs the outcome together with the platform / kernel real-\/time capabilities. 
+

@@ -1,0 +1,63 @@
+\doxysection{Can\+Frame.\+h}
+\hypertarget{CanFrame_8h_source}{}\label{CanFrame_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Bus/CanFrame.h@{src/ue/IoTwin/Source/IoTwin/Bus/CanFrame.h}}
+\mbox{\hyperlink{CanFrame_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ CAN\ frame\ model\ shared\ with\ iotwin-\/bus\ (see\ docs/dev/protocol.md).}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Kismet/BlueprintFunctionLibrary.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}CanFrame.generated.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ USTRUCT(BlueprintType)}
+\DoxyCodeLine{00014\ struct\ IOTWIN\_API\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ static\ constexpr\ int32\ \mbox{\hyperlink{structFCanFrame_a7ac87238f3178b0cedb22d8c04991337}{MaxDataLength}}\ =\ 8;}
+\DoxyCodeLine{00019\ \ \ \ \ static\ constexpr\ uint32\ \mbox{\hyperlink{structFCanFrame_acd850af02fe7a2bec1112efe9d5d5c5a}{StandardIdMask}}\ =\ 0x7FF;}
+\DoxyCodeLine{00020\ \ \ \ \ static\ constexpr\ uint32\ \mbox{\hyperlink{structFCanFrame_a9dbbd0f454b9e9b50edd26002b434c13}{ExtendedIdMask}}\ =\ 0x1FFFFFFF;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00024\ \ \ \ \ int32\ \mbox{\hyperlink{structFCanFrame_ad143e63f9548139c01555059a0e60566}{Id}}\ =\ 0;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}{bExtended}}\ =\ false;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_ae176fc67fffeadf9d2f8f3f7e8ae765e}{bRemote}}\ =\ false;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}CAN"{}})}
+\DoxyCodeLine{00036\ \ \ \ \ TArray<uint8>\ \mbox{\hyperlink{structFCanFrame_aaf04cd7a149802a6ee6aa35ad0c4700d}{Data}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_a0eccf472330530f6ae30b5f622f16780}{IsValid}}()\ const;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ FString\ \mbox{\hyperlink{structFCanFrame_aae7a02719d4894c20b5c7607ab5f9437}{ToString}}()\ const;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_ac58095a4084c23412dec90314e640ab0}{GetBit}}(int32\ ByteIndex,\ int32\ BitIndex)\ const;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \ \ static\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_aed9c0eea61d4ac3911b726677c1915b3}{Parse}}(const\ FString\&\ Text,\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ OutFrame);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ static\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_ab320b6aba5a367b7067dd74d9607ef09}{ParseId}}(const\ FString\&\ HexText,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}{bExtended}},\ int32\&\ OutId);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ static\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\ \mbox{\hyperlink{structFCanFrame_aeb8b97e9a636fe0e84e0e280081e8587}{MakeData}}(int32\ \mbox{\hyperlink{structFCanFrame_ad143e63f9548139c01555059a0e60566}{Id}},\ TArray<uint8>\ \mbox{\hyperlink{structFCanFrame_aaf04cd7a149802a6ee6aa35ad0c4700d}{Data}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanFrame_a2f573e72d97cb4e6613aab39967871a4}{bExtended}}\ =\ false);}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ UCLASS()}
+\DoxyCodeLine{00059\ class\ IOTWIN\_API\ \mbox{\hyperlink{classUCanFrameLibrary}{UCanFrameLibrary}}\ :\ public\ UBlueprintFunctionLibrary}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classUCanFrameLibrary_af6e8400f94a36a7437110802c6e949ca}{UFUNCTION}}(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|CAN"{}},\ meta\ =\ (DisplayName\ =\ \textcolor{stringliteral}{"{}To\ String\ (CAN\ Frame)"{}},\ CompactNodeTitle\ =\ \textcolor{stringliteral}{"{}-\/>"{}},\ BlueprintAutocast))}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ FString\ CanFrameToString(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classUCanFrameLibrary_af6e8400f94a36a7437110802c6e949ca}{UFUNCTION}}(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|CAN"{}})}
+\DoxyCodeLine{00070\ \ \ \ \ static\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUCanFrameLibrary_a4110677affad3dd25de5d64bf64283b6}{ParseCanFrame}}(const\ FString\&\ Text,\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classUCanFrameLibrary_af6e8400f94a36a7437110802c6e949ca}{UFUNCTION}}(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|CAN"{}})}
+\DoxyCodeLine{00074\ \ \ \ \ static\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUCanFrameLibrary_a83595c01c3ded5cabd3a178d7a56e58d}{GetCanFrameBit}}(const\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame,\ int32\ ByteIndex,\ int32\ BitIndex);}
+\DoxyCodeLine{00075\ \};}
+
+\end{DoxyCode}

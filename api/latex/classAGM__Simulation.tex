@@ -10,8 +10,107 @@ Inheritance diagram for AGM\+\_\+\+Simulation\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{classAGM__Simulation}
 \end{center}
 \end{figure}
-
-
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8h}{GM\+\_\+\+Simulation.\+h}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classAGM__Simulation_a2eab520c26568f748bf25d4a22d00d57}{AGM\+\_\+\+Simulation}} ()
+\item 
+virtual void \mbox{\hyperlink{classAGM__Simulation_a829db21849456c7e13f88f1adf826627}{Start\+Play}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classAGM__Simulation_a739c440bb49245a78616bea59a6b3d2d}{b\+Spawn\+Demo\+Scene}} = true
+\item 
+FVector \mbox{\hyperlink{classAGM__Simulation_ab1e72a523ed3167c6478296dcea64936}{Demo\+Origin}} = FVector\+::\+Zero\+Vector
+\item 
+FString \mbox{\hyperlink{classAGM__Simulation_ab7f1cc5155a5a2ae1622b31f79d33555}{Relay\+Can\+Id}} = TEXT("{}100"{})
+\item 
+FString \mbox{\hyperlink{classAGM__Simulation_ab0fb7a43acbf972f33ee188ce579d092}{Switch\+Can\+Id}} = TEXT("{}200"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const FName \mbox{\hyperlink{classAGM__Simulation_a947a2d078317f1614db9e4479fd38e9f}{Demo\+Tag}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classAGM__Simulation_a63c096f576a552986cab9913b73a964d}{Handle\+Starting\+New\+Player\+\_\+\+Implementation}} (APlayer\+Controller \texorpdfstring{$\ast$}{*}New\+Player) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Game mode of the \doxylink{classIoTwin}{Io\+Twin} visualizer. Optionally builds the light demo at runtime (so it works in any map, no binary assets needed)\+:
+
+power source with CAN relay (0x100) --cable-\/-\/\texorpdfstring{$>$}{>} lamp, wall switch (0x200)
+
+The scene is driven by can\+\_\+sim through iotwin-\/bus. 
+
+\label{doc-constructors}
+\Hypertarget{classAGM__Simulation_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAGM__Simulation_a2eab520c26568f748bf25d4a22d00d57}\index{AGM\_Simulation@{AGM\_Simulation}!AGM\_Simulation@{AGM\_Simulation}}
+\index{AGM\_Simulation@{AGM\_Simulation}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{AGM\_Simulation()}{AGM\_Simulation()}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_a2eab520c26568f748bf25d4a22d00d57} 
+AGM\+\_\+\+Simulation\+::\+AGM\+\_\+\+Simulation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classAGM__Simulation_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAGM__Simulation_a63c096f576a552986cab9913b73a964d}\index{AGM\_Simulation@{AGM\_Simulation}!HandleStartingNewPlayer\_Implementation@{HandleStartingNewPlayer\_Implementation}}
+\index{HandleStartingNewPlayer\_Implementation@{HandleStartingNewPlayer\_Implementation}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{HandleStartingNewPlayer\_Implementation()}{HandleStartingNewPlayer\_Implementation()}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_a63c096f576a552986cab9913b73a964d} 
+void AGM\+\_\+\+Simulation\+::\+Handle\+Starting\+New\+Player\+\_\+\+Implementation (\begin{DoxyParamCaption}\item[{APlayer\+Controller \texorpdfstring{$\ast$}{*}}]{New\+Player}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classAGM__Simulation_a829db21849456c7e13f88f1adf826627}\index{AGM\_Simulation@{AGM\_Simulation}!StartPlay@{StartPlay}}
+\index{StartPlay@{StartPlay}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{StartPlay()}{StartPlay()}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_a829db21849456c7e13f88f1adf826627} 
+void AGM\+\_\+\+Simulation\+::\+Start\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classAGM__Simulation_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classAGM__Simulation_a739c440bb49245a78616bea59a6b3d2d}\index{AGM\_Simulation@{AGM\_Simulation}!bSpawnDemoScene@{bSpawnDemoScene}}
+\index{bSpawnDemoScene@{bSpawnDemoScene}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{bSpawnDemoScene}{bSpawnDemoScene}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_a739c440bb49245a78616bea59a6b3d2d} 
+bool AGM\+\_\+\+Simulation\+::b\+Spawn\+Demo\+Scene = true}
+
+Build the light demo when play starts. \Hypertarget{classAGM__Simulation_ab1e72a523ed3167c6478296dcea64936}\index{AGM\_Simulation@{AGM\_Simulation}!DemoOrigin@{DemoOrigin}}
+\index{DemoOrigin@{DemoOrigin}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{DemoOrigin}{DemoOrigin}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_ab1e72a523ed3167c6478296dcea64936} 
+FVector AGM\+\_\+\+Simulation\+::\+Demo\+Origin = FVector\+::\+Zero\+Vector}
+
+World location of the demo room. \Hypertarget{classAGM__Simulation_a947a2d078317f1614db9e4479fd38e9f}\index{AGM\_Simulation@{AGM\_Simulation}!DemoTag@{DemoTag}}
+\index{DemoTag@{DemoTag}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{DemoTag}{DemoTag}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_a947a2d078317f1614db9e4479fd38e9f} 
+const FName AGM\+\_\+\+Simulation\+::\+Demo\+Tag\hspace{0.3cm}{\ttfamily [static]}}
+
+Tag of all actors created for the demo. \Hypertarget{classAGM__Simulation_ab7f1cc5155a5a2ae1622b31f79d33555}\index{AGM\_Simulation@{AGM\_Simulation}!RelayCanId@{RelayCanId}}
+\index{RelayCanId@{RelayCanId}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{RelayCanId}{RelayCanId}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_ab7f1cc5155a5a2ae1622b31f79d33555} 
+FString AGM\+\_\+\+Simulation\+::\+Relay\+Can\+Id = TEXT("{}100"{})}
+
+CAN id (hex) of LAMP\+\_\+\+CMD that drives the relay. \Hypertarget{classAGM__Simulation_ab0fb7a43acbf972f33ee188ce579d092}\index{AGM\_Simulation@{AGM\_Simulation}!SwitchCanId@{SwitchCanId}}
+\index{SwitchCanId@{SwitchCanId}!AGM\_Simulation@{AGM\_Simulation}}
+\doxysubsubsection{\texorpdfstring{SwitchCanId}{SwitchCanId}}
+{\footnotesize\ttfamily \label{classAGM__Simulation_ab0fb7a43acbf972f33ee188ce579d092} 
+FString AGM\+\_\+\+Simulation\+::\+Switch\+Can\+Id = TEXT("{}200"{})}
+
+CAN id (hex) of SWITCH\+\_\+\+STATE sent by the wall switch. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8h}{GM\+\_\+\+Simulation.\+h}}\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8cpp}{GM\+\_\+\+Simulation.\+cpp}}\end{DoxyCompactItemize}

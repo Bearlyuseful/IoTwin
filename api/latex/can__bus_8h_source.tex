@@ -1,14 +1,49 @@
 \doxysection{can\+\_\+bus.\+h}
-\hypertarget{can__bus_8h_source}{}\label{can__bus_8h_source}\index{src/simulators/can\_sim/can\_bus.h@{src/simulators/can\_sim/can\_bus.h}}
+\hypertarget{can__bus_8h_source}{}\label{can__bus_8h_source}\index{src/core/can/can\_bus.h@{src/core/can/can\_bus.h}}
 \mbox{\hyperlink{can__bus_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__bus_8h_a45327e2aed4ad85d8fa882e6032fe321}{can\_init}}(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00008\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__bus_8h_a3a1ec4335a890bead2c48278436dcb9c}{can\_send}}(uint32\_t\ \textcolor{keywordtype}{id},\ uint8\_t\ data);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CAN\_BUS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CAN\_BUS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00022\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ CAN\_BUS\_BUFFER\_SIZE\ 32\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{structCanFrame}{CanFrame}}\ \mbox{\hyperlink{structCanBus_ae0f9782f28725267b4f6ee5f0858ac33}{buffer}}[\mbox{\hyperlink{can__bus_8h_a201cb13d11026e9f8cf1402670bfd094}{CAN\_BUS\_BUFFER\_SIZE}}];}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structCanBus_a3ae68d6f16200fde3483e0bebf6f9f09}{head}};\ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structCanBus_a046b9b44aa4148b3a3f67da67072b847}{tail}};\ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structCanBus_a8b4c1d23a0d934d35e1d175836a24fec}{count}};\ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ uint64\_t\ \mbox{\hyperlink{structCanBus_a78cb41c8d272f0fb41e7b3f071a5547f}{dropped}};\ }
+\DoxyCodeLine{00034\ \ \ pthread\_mutex\_t\ \mbox{\hyperlink{structCanBus_a54237b138743c3450480e5025eaa1d65}{lock}};}
+\DoxyCodeLine{00035\ \}\ \mbox{\hyperlink{structCanBus}{CanBus}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__bus_8h_afb69097d292102f7ecd6c5ed50c93c03}{can\_bus\_init}}(\mbox{\hyperlink{structCanBus}{CanBus}}*\ bus);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__bus_8h_a4949c7cfd8ad5f621b4dd9fad9751cd0}{can\_bus\_send}}(\mbox{\hyperlink{structCanBus}{CanBus}}*\ bus,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__bus_8h_a411655e75a7928f35e1219ac6acc41bf}{can\_bus\_receive}}(\mbox{\hyperlink{structCanBus}{CanBus}}*\ bus,\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{can__bus_8h_a1bbee5737f5aabf99d712f2bb926c523}{can\_bus\_count}}(\mbox{\hyperlink{structCanBus}{CanBus}}*\ bus);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ uint64\_t\ \mbox{\hyperlink{can__bus_8h_a2b85d69faccbe8c194b9559b767d17d7}{can\_bus\_dropped}}(\mbox{\hyperlink{structCanBus}{CanBus}}*\ bus);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{can__bus_8h_ab27c8fb222434a27d10e12eb22762aa0}{can\_bus\_destroy}}(\mbox{\hyperlink{structCanBus}{CanBus}}*\ bus);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CAN\_BUS\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

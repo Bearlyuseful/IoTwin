@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['onconstruction_0',['onconstruction',['../classAElectricalCableActor.html#a3a880086aa16f27ea49d33120753be5e',1,'AElectricalCableActor::OnConstruction()'],['../classALampActor.html#a6f6acd897f1c24390e4e7dda07b752a3',1,'ALampActor::OnConstruction()']]]
+  ['handlestartingnewplayer_5fimplementation_0',['HandleStartingNewPlayer_Implementation',['../classAGM__Simulation.html#a63c096f576a552986cab9913b73a964d',1,'AGM_Simulation']]],
+  ['haspower_1',['HasPower',['../classIPowerInterface.html#a99d37409fe285d0f088c0528eaf316da',1,'IPowerInterface']]]
 ];

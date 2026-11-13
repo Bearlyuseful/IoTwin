@@ -1,0 +1,71 @@
+\doxysection{Sim\+Shared Struct Reference}
+\hypertarget{structSimShared}{}\label{structSimShared}\index{SimShared@{SimShared}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+pthread\+\_\+mutex\+\_\+t \mbox{\hyperlink{structSimShared_a875c7673214b76e60b13a1d97311ba26}{lock}}
+\item 
+\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \mbox{\hyperlink{structSimShared_a2b3ce84f7ad03a76776d8c345e9f6091}{ecu}}
+\item 
+\mbox{\hyperlink{structCanBus}{Can\+Bus}} \mbox{\hyperlink{structSimShared_a6d4bad13a4eb7d28ebc8a9f3f43ef81c}{rx\+\_\+queue}}
+\item 
+\mbox{\hyperlink{structCanBus}{Can\+Bus}} \mbox{\hyperlink{structSimShared_a7fbeef5357aaf677d9e90aae7a1e8ce6}{tx\+\_\+queue}}
+\item 
+atomic\+\_\+bool \mbox{\hyperlink{structSimShared_a481ba48180eb778f5a3b21a88a0e7a46}{connected}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structSimShared_ab0bcc8729de458f28bc2e21297114a54}{frames\+\_\+sent}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structSimShared_aa4cc28f35034cb6b880545d18d89077c}{frames\+\_\+received}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structSimShared_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structSimShared_a481ba48180eb778f5a3b21a88a0e7a46}\index{SimShared@{SimShared}!connected@{connected}}
+\index{connected@{connected}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{connected}{connected}}
+{\footnotesize\ttfamily \label{structSimShared_a481ba48180eb778f5a3b21a88a0e7a46} 
+atomic\+\_\+bool Sim\+Shared\+::connected}
+
+\Hypertarget{structSimShared_a2b3ce84f7ad03a76776d8c345e9f6091}\index{SimShared@{SimShared}!ecu@{ecu}}
+\index{ecu@{ecu}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{ecu}{ecu}}
+{\footnotesize\ttfamily \label{structSimShared_a2b3ce84f7ad03a76776d8c345e9f6091} 
+\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} Sim\+Shared\+::ecu}
+
+\Hypertarget{structSimShared_aa4cc28f35034cb6b880545d18d89077c}\index{SimShared@{SimShared}!frames\_received@{frames\_received}}
+\index{frames\_received@{frames\_received}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{frames\_received}{frames\_received}}
+{\footnotesize\ttfamily \label{structSimShared_aa4cc28f35034cb6b880545d18d89077c} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Sim\+Shared\+::frames\+\_\+received}
+
+\Hypertarget{structSimShared_ab0bcc8729de458f28bc2e21297114a54}\index{SimShared@{SimShared}!frames\_sent@{frames\_sent}}
+\index{frames\_sent@{frames\_sent}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{frames\_sent}{frames\_sent}}
+{\footnotesize\ttfamily \label{structSimShared_ab0bcc8729de458f28bc2e21297114a54} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Sim\+Shared\+::frames\+\_\+sent}
+
+\Hypertarget{structSimShared_a875c7673214b76e60b13a1d97311ba26}\index{SimShared@{SimShared}!lock@{lock}}
+\index{lock@{lock}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily \label{structSimShared_a875c7673214b76e60b13a1d97311ba26} 
+pthread\+\_\+mutex\+\_\+t Sim\+Shared\+::lock}
+
+\Hypertarget{structSimShared_a6d4bad13a4eb7d28ebc8a9f3f43ef81c}\index{SimShared@{SimShared}!rx\_queue@{rx\_queue}}
+\index{rx\_queue@{rx\_queue}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{rx\_queue}{rx\_queue}}
+{\footnotesize\ttfamily \label{structSimShared_a6d4bad13a4eb7d28ebc8a9f3f43ef81c} 
+\mbox{\hyperlink{structCanBus}{Can\+Bus}} Sim\+Shared\+::rx\+\_\+queue}
+
+\Hypertarget{structSimShared_a7fbeef5357aaf677d9e90aae7a1e8ce6}\index{SimShared@{SimShared}!tx\_queue@{tx\_queue}}
+\index{tx\_queue@{tx\_queue}!SimShared@{SimShared}}
+\doxysubsubsection{\texorpdfstring{tx\_queue}{tx\_queue}}
+{\footnotesize\ttfamily \label{structSimShared_a7fbeef5357aaf677d9e90aae7a1e8ce6} 
+\mbox{\hyperlink{structCanBus}{Can\+Bus}} Sim\+Shared\+::tx\+\_\+queue}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/simulators/can\+\_\+sim/\mbox{\hyperlink{main__can__sim_8c}{main\+\_\+can\+\_\+sim.\+c}}\end{DoxyCompactItemize}

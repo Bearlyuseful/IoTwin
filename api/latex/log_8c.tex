@@ -1,17 +1,80 @@
-\doxysection{src/common/log.c File Reference}
-\hypertarget{log_8c}{}\label{log_8c}\index{src/common/log.c@{src/common/log.c}}
+\doxysection{src/core/logger/log.c File Reference}
+\hypertarget{log_8c}{}\label{log_8c}\index{src/core/logger/log.c@{src/core/logger/log.c}}
 {\ttfamily \#include "{}log.\+h"{}}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdatomic.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{log_8c_a3024ccd4a9af5109d24e6c57565d74a1}{\+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE}}~200809L
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{log_8c_a00ab4d4c0b970dca7ecbce08c912d828}{log\+\_\+info}} (const char \texorpdfstring{$\ast$}{*}msg)
+void \mbox{\hyperlink{log_8c_a20d53fe4929c9f90f83a10c739b02dfa}{log\+\_\+set\+\_\+level}} (\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} level)
+\begin{DoxyCompactList}\small\item\em Sets the minimum level that is written (default\+: LOG\+\_\+\+LEVEL\+\_\+\+INFO). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \mbox{\hyperlink{log_8c_ae5099953981ab6c18721857fd2f8d6fc}{log\+\_\+get\+\_\+level}} (void)
+\begin{DoxyCompactList}\small\item\em Returns the currently active minimum level. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{log_8c_a556e1a9fa74bea3e6cfebc44995306a6}{log\+\_\+parse\+\_\+level}} (const char \texorpdfstring{$\ast$}{*}text, \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \texorpdfstring{$\ast$}{*}level)
+\begin{DoxyCompactList}\small\item\em Parses "{}debug"{}, "{}info"{}, "{}warn"{}, "{}error"{} or "{}off"{} (case-\/insensitive). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{log_8c_a3b52b5eca89a8b186bf96d913d302ba8}{log\+\_\+write}} (\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} level, const char \texorpdfstring{$\ast$}{*}fmt,...)
 \end{DoxyCompactItemize}
 
 
+\label{doc-define-members}
+\Hypertarget{log_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{log_8c_a3024ccd4a9af5109d24e6c57565d74a1}\index{log.c@{log.c}!\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}}
+\index{\_POSIX\_C\_SOURCE@{\_POSIX\_C\_SOURCE}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_C\_SOURCE}{\_POSIX\_C\_SOURCE}}
+{\footnotesize\ttfamily \label{log_8c_a3024ccd4a9af5109d24e6c57565d74a1} 
+\#define \+\_\+\+POSIX\+\_\+\+C\+\_\+\+SOURCE~200809L}
+
+
+
+\label{doc-func-members}
+\Hypertarget{log_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{log_8c_a00ab4d4c0b970dca7ecbce08c912d828}\label{log_8c_a00ab4d4c0b970dca7ecbce08c912d828} 
-\index{log.c@{log.c}!log\_info@{log\_info}}
-\index{log\_info@{log\_info}!log.c@{log.c}}
-\doxysubsubsection{\texorpdfstring{log\_info()}{log\_info()}}
-{\footnotesize\ttfamily void log\+\_\+info (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{msg }\end{DoxyParamCaption})}
+\Hypertarget{log_8c_ae5099953981ab6c18721857fd2f8d6fc}\index{log.c@{log.c}!log\_get\_level@{log\_get\_level}}
+\index{log\_get\_level@{log\_get\_level}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{log\_get\_level()}{log\_get\_level()}}
+{\footnotesize\ttfamily \label{log_8c_ae5099953981ab6c18721857fd2f8d6fc} 
+\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} log\+\_\+get\+\_\+level (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the currently active minimum level. 
+
+\Hypertarget{log_8c_a556e1a9fa74bea3e6cfebc44995306a6}\index{log.c@{log.c}!log\_parse\_level@{log\_parse\_level}}
+\index{log\_parse\_level@{log\_parse\_level}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{log\_parse\_level()}{log\_parse\_level()}}
+{\footnotesize\ttfamily \label{log_8c_a556e1a9fa74bea3e6cfebc44995306a6} 
+bool log\+\_\+parse\+\_\+level (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}} \texorpdfstring{$\ast$}{*}}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Parses "{}debug"{}, "{}info"{}, "{}warn"{}, "{}error"{} or "{}off"{} (case-\/insensitive). 
+
+\begin{DoxyReturn}{Returns}
+true on success, false if {\ttfamily text} is not a known level. 
+\end{DoxyReturn}
+\Hypertarget{log_8c_a20d53fe4929c9f90f83a10c739b02dfa}\index{log.c@{log.c}!log\_set\_level@{log\_set\_level}}
+\index{log\_set\_level@{log\_set\_level}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{log\_set\_level()}{log\_set\_level()}}
+{\footnotesize\ttfamily \label{log_8c_a20d53fe4929c9f90f83a10c739b02dfa} 
+void log\+\_\+set\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}}}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the minimum level that is written (default\+: LOG\+\_\+\+LEVEL\+\_\+\+INFO). 
+
+\Hypertarget{log_8c_a3b52b5eca89a8b186bf96d913d302ba8}\index{log.c@{log.c}!log\_write@{log\_write}}
+\index{log\_write@{log\_write}!log.c@{log.c}}
+\doxysubsubsection{\texorpdfstring{log\_write()}{log\_write()}}
+{\footnotesize\ttfamily \label{log_8c_a3b52b5eca89a8b186bf96d913d302ba8} 
+void log\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{Log\+Level}}}]{level}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{fmt}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
 

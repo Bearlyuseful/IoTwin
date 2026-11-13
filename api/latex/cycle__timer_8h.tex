@@ -1,0 +1,79 @@
+\doxysection{src/core/platform/cycle\+\_\+timer.h File Reference}
+\hypertarget{cycle__timer_8h}{}\label{cycle__timer_8h}\index{src/core/platform/cycle\_timer.h@{src/core/platform/cycle\_timer.h}}
+
+
+Drift-\/free periodic execution with wake-\/up latency statistics.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCycleStats}{Cycle\+Stats}}
+\begin{DoxyCompactList}\small\item\em Wake-\/up latency statistics of a cycle timer. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCycleTimer}{Cycle\+Timer}}
+\begin{DoxyCompactList}\small\item\em Periodic timer state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cycle__timer_8h_ac0f86283515a7daa77d6a360c0f9b922}{cycle\+\_\+timer\+\_\+start}} (\mbox{\hyperlink{structCycleTimer}{Cycle\+Timer}} \texorpdfstring{$\ast$}{*}timer, uint64\+\_\+t period\+\_\+ns)
+\begin{DoxyCompactList}\small\item\em Starts the timer; the first deadline is one period from now. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{cycle__timer_8h_a6fe398dd485b54a23d59270494c9b27a}{cycle\+\_\+timer\+\_\+wait}} (\mbox{\hyperlink{structCycleTimer}{Cycle\+Timer}} \texorpdfstring{$\ast$}{*}timer)
+\begin{DoxyCompactList}\small\item\em Sleeps until the next deadline and records the wake-\/up latency. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cycle__timer_8h_aafa5fa8deda0e0aa605e7493861ef5ef}{cycle\+\_\+stats\+\_\+reset}} (\mbox{\hyperlink{structCycleStats}{Cycle\+Stats}} \texorpdfstring{$\ast$}{*}stats)
+\begin{DoxyCompactList}\small\item\em Clears the statistics. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{cycle__timer_8h_af6f1b9339b8403d67d0d61c2319ad0cc}{cycle\+\_\+stats\+\_\+mean\+\_\+ns}} (const \mbox{\hyperlink{structCycleStats}{Cycle\+Stats}} \texorpdfstring{$\ast$}{*}stats)
+\begin{DoxyCompactList}\small\item\em Mean wake-\/up latency in nanoseconds (0 if there are no samples). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Drift-\/free periodic execution with wake-\/up latency statistics. 
+
+The timer sleeps until absolute deadlines (start + n \texorpdfstring{$\ast$}{*} period), so the cycle does not drift with the execution time of the loop body. The measured wake-\/up latency (actual wake-\/up minus deadline) is the usual figure of merit for real-\/time systems and makes the difference between a standard and a PREEMPT\+\_\+\+RT kernel visible. 
+
+\label{doc-func-members}
+\Hypertarget{cycle__timer_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{cycle__timer_8h_af6f1b9339b8403d67d0d61c2319ad0cc}\index{cycle\_timer.h@{cycle\_timer.h}!cycle\_stats\_mean\_ns@{cycle\_stats\_mean\_ns}}
+\index{cycle\_stats\_mean\_ns@{cycle\_stats\_mean\_ns}!cycle\_timer.h@{cycle\_timer.h}}
+\doxysubsubsection{\texorpdfstring{cycle\_stats\_mean\_ns()}{cycle\_stats\_mean\_ns()}}
+{\footnotesize\ttfamily \label{cycle__timer_8h_af6f1b9339b8403d67d0d61c2319ad0cc} 
+double cycle\+\_\+stats\+\_\+mean\+\_\+ns (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCycleStats}{Cycle\+Stats}} \texorpdfstring{$\ast$}{*}}]{stats}{}\end{DoxyParamCaption})}
+
+
+
+Mean wake-\/up latency in nanoseconds (0 if there are no samples). 
+
+\Hypertarget{cycle__timer_8h_aafa5fa8deda0e0aa605e7493861ef5ef}\index{cycle\_timer.h@{cycle\_timer.h}!cycle\_stats\_reset@{cycle\_stats\_reset}}
+\index{cycle\_stats\_reset@{cycle\_stats\_reset}!cycle\_timer.h@{cycle\_timer.h}}
+\doxysubsubsection{\texorpdfstring{cycle\_stats\_reset()}{cycle\_stats\_reset()}}
+{\footnotesize\ttfamily \label{cycle__timer_8h_aafa5fa8deda0e0aa605e7493861ef5ef} 
+void cycle\+\_\+stats\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCycleStats}{Cycle\+Stats}} \texorpdfstring{$\ast$}{*}}]{stats}{}\end{DoxyParamCaption})}
+
+
+
+Clears the statistics. 
+
+\Hypertarget{cycle__timer_8h_ac0f86283515a7daa77d6a360c0f9b922}\index{cycle\_timer.h@{cycle\_timer.h}!cycle\_timer\_start@{cycle\_timer\_start}}
+\index{cycle\_timer\_start@{cycle\_timer\_start}!cycle\_timer.h@{cycle\_timer.h}}
+\doxysubsubsection{\texorpdfstring{cycle\_timer\_start()}{cycle\_timer\_start()}}
+{\footnotesize\ttfamily \label{cycle__timer_8h_ac0f86283515a7daa77d6a360c0f9b922} 
+void cycle\+\_\+timer\+\_\+start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCycleTimer}{Cycle\+Timer}} \texorpdfstring{$\ast$}{*}}]{timer}{, }\item[{uint64\+\_\+t}]{period\+\_\+ns}{}\end{DoxyParamCaption})}
+
+
+
+Starts the timer; the first deadline is one period from now. 
+
+\Hypertarget{cycle__timer_8h_a6fe398dd485b54a23d59270494c9b27a}\index{cycle\_timer.h@{cycle\_timer.h}!cycle\_timer\_wait@{cycle\_timer\_wait}}
+\index{cycle\_timer\_wait@{cycle\_timer\_wait}!cycle\_timer.h@{cycle\_timer.h}}
+\doxysubsubsection{\texorpdfstring{cycle\_timer\_wait()}{cycle\_timer\_wait()}}
+{\footnotesize\ttfamily \label{cycle__timer_8h_a6fe398dd485b54a23d59270494c9b27a} 
+uint64\+\_\+t cycle\+\_\+timer\+\_\+wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCycleTimer}{Cycle\+Timer}} \texorpdfstring{$\ast$}{*}}]{timer}{}\end{DoxyParamCaption})}
+
+
+
+Sleeps until the next deadline and records the wake-\/up latency. 
+
+\begin{DoxyReturn}{Returns}
+Number of cycles that were skipped because the loop was too late (0 normally). 
+\end{DoxyReturn}

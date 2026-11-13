@@ -14,6 +14,8 @@ Inheritance diagram for ALamp\+Actor\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb}{ALamp\+Actor}} ()
+\item 
+bool \mbox{\hyperlink{classALampActor_a4cb50cf0191a8b1b2e0fec9b628fc729}{Is\+On}} () const
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -25,56 +27,108 @@ UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAL
 UElectrical\+Device\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classALampActor_a483de8992df3799767c441417aae482c}{Device}}
 \item 
 ULight\+Emitter\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classALampActor_ad71ff753af4e93ac58eb25c1404a3e1c}{Light}}
+\item 
+UStatic\+Mesh\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classALampActor_a33f2d5059e631558512346c42f977f9c}{Bulb}}
+\item 
+TObject\+Ptr$<$ UMaterial\+Interface $>$ \mbox{\hyperlink{classALampActor_a3dbeaa4c1a364df41c2c2b084a1f8b95}{Bulb\+Base\+Material}}
+\item 
+FLinear\+Color \mbox{\hyperlink{classALampActor_ab0793e809c489c1fdb5143864a28f3c0}{Bulb\+On\+Color}} = FLinear\+Color(1.\+0f, 0.\+85f, 0.\+35f)
+\item 
+FLinear\+Color \mbox{\hyperlink{classALampActor_a1f3664e1aef8eb8451acc570742a46e5}{Bulb\+Off\+Color}} = FLinear\+Color(0.\+08f, 0.\+08f, 0.\+08f)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classALampActor_a6f6acd897f1c24390e4e7dda07b752a3}{On\+Construction}} (const FTransform \&Transform) override
+\item 
+virtual void \mbox{\hyperlink{classALampActor_a6150137f23ad87c075e24428fa10b1a1}{Begin\+Play}} () override
 \end{DoxyCompactItemize}
 
 
+\label{doc-constructors}
+\Hypertarget{classALampActor_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb}\label{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb} 
-\index{ALampActor@{ALampActor}!ALampActor@{ALampActor}}
+\Hypertarget{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb}\index{ALampActor@{ALampActor}!ALampActor@{ALampActor}}
 \index{ALampActor@{ALampActor}!ALampActor@{ALampActor}}
 \doxysubsubsection{\texorpdfstring{ALampActor()}{ALampActor()}}
-{\footnotesize\ttfamily ALamp\+Actor\+::\+ALamp\+Actor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classALampActor_a403cd3b0a75faacfcf1daee0ee5495bb} 
+ALamp\+Actor\+::\+ALamp\+Actor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
+\label{doc-func-members}
+\Hypertarget{classALampActor_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classALampActor_a6f6acd897f1c24390e4e7dda07b752a3}\label{classALampActor_a6f6acd897f1c24390e4e7dda07b752a3} 
-\index{ALampActor@{ALampActor}!OnConstruction@{OnConstruction}}
+\Hypertarget{classALampActor_a6150137f23ad87c075e24428fa10b1a1}\index{ALampActor@{ALampActor}!BeginPlay@{BeginPlay}}
+\index{BeginPlay@{BeginPlay}!ALampActor@{ALampActor}}
+\doxysubsubsection{\texorpdfstring{BeginPlay()}{BeginPlay()}}
+{\footnotesize\ttfamily \label{classALampActor_a6150137f23ad87c075e24428fa10b1a1} 
+void ALamp\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classALampActor_a4cb50cf0191a8b1b2e0fec9b628fc729}\index{ALampActor@{ALampActor}!IsOn@{IsOn}}
+\index{IsOn@{IsOn}!ALampActor@{ALampActor}}
+\doxysubsubsection{\texorpdfstring{IsOn()}{IsOn()}}
+{\footnotesize\ttfamily \label{classALampActor_a4cb50cf0191a8b1b2e0fec9b628fc729} 
+bool ALamp\+Actor\+::\+Is\+On (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+true while the lamp is powered. \Hypertarget{classALampActor_a6f6acd897f1c24390e4e7dda07b752a3}\index{ALampActor@{ALampActor}!OnConstruction@{OnConstruction}}
 \index{OnConstruction@{OnConstruction}!ALampActor@{ALampActor}}
 \doxysubsubsection{\texorpdfstring{OnConstruction()}{OnConstruction()}}
-{\footnotesize\ttfamily void ALamp\+Actor\+::\+On\+Construction (\begin{DoxyParamCaption}\item[{const FTransform \&}]{Transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{classALampActor_a6f6acd897f1c24390e4e7dda07b752a3} 
+void ALamp\+Actor\+::\+On\+Construction (\begin{DoxyParamCaption}\item[{const FTransform \&}]{Transform}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
+\label{doc-variable-members}
+\Hypertarget{classALampActor_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classALampActor_a483de8992df3799767c441417aae482c}\label{classALampActor_a483de8992df3799767c441417aae482c} 
-\index{ALampActor@{ALampActor}!Device@{Device}}
+\Hypertarget{classALampActor_a33f2d5059e631558512346c42f977f9c}\index{ALampActor@{ALampActor}!Bulb@{Bulb}}
+\index{Bulb@{Bulb}!ALampActor@{ALampActor}}
+\doxysubsubsection{\texorpdfstring{Bulb}{Bulb}}
+{\footnotesize\ttfamily \label{classALampActor_a33f2d5059e631558512346c42f977f9c} 
+UStatic\+Mesh\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Bulb}
+
+\Hypertarget{classALampActor_a3dbeaa4c1a364df41c2c2b084a1f8b95}\index{ALampActor@{ALampActor}!BulbBaseMaterial@{BulbBaseMaterial}}
+\index{BulbBaseMaterial@{BulbBaseMaterial}!ALampActor@{ALampActor}}
+\doxysubsubsection{\texorpdfstring{BulbBaseMaterial}{BulbBaseMaterial}}
+{\footnotesize\ttfamily \label{classALampActor_a3dbeaa4c1a364df41c2c2b084a1f8b95} 
+TObject\+Ptr$<$UMaterial\+Interface$>$ ALamp\+Actor\+::\+Bulb\+Base\+Material}
+
+Material with a "{}\+Color"{} vector parameter used for the bulb. \Hypertarget{classALampActor_a1f3664e1aef8eb8451acc570742a46e5}\index{ALampActor@{ALampActor}!BulbOffColor@{BulbOffColor}}
+\index{BulbOffColor@{BulbOffColor}!ALampActor@{ALampActor}}
+\doxysubsubsection{\texorpdfstring{BulbOffColor}{BulbOffColor}}
+{\footnotesize\ttfamily \label{classALampActor_a1f3664e1aef8eb8451acc570742a46e5} 
+FLinear\+Color ALamp\+Actor\+::\+Bulb\+Off\+Color = FLinear\+Color(0.\+08f, 0.\+08f, 0.\+08f)}
+
+\Hypertarget{classALampActor_ab0793e809c489c1fdb5143864a28f3c0}\index{ALampActor@{ALampActor}!BulbOnColor@{BulbOnColor}}
+\index{BulbOnColor@{BulbOnColor}!ALampActor@{ALampActor}}
+\doxysubsubsection{\texorpdfstring{BulbOnColor}{BulbOnColor}}
+{\footnotesize\ttfamily \label{classALampActor_ab0793e809c489c1fdb5143864a28f3c0} 
+FLinear\+Color ALamp\+Actor\+::\+Bulb\+On\+Color = FLinear\+Color(1.\+0f, 0.\+85f, 0.\+35f)}
+
+\Hypertarget{classALampActor_a483de8992df3799767c441417aae482c}\index{ALampActor@{ALampActor}!Device@{Device}}
 \index{Device@{Device}!ALampActor@{ALampActor}}
 \doxysubsubsection{\texorpdfstring{Device}{Device}}
-{\footnotesize\ttfamily UElectrical\+Device\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Device}
+{\footnotesize\ttfamily \label{classALampActor_a483de8992df3799767c441417aae482c} 
+UElectrical\+Device\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Device}
 
-\Hypertarget{classALampActor_ad71ff753af4e93ac58eb25c1404a3e1c}\label{classALampActor_ad71ff753af4e93ac58eb25c1404a3e1c} 
-\index{ALampActor@{ALampActor}!Light@{Light}}
+\Hypertarget{classALampActor_ad71ff753af4e93ac58eb25c1404a3e1c}\index{ALampActor@{ALampActor}!Light@{Light}}
 \index{Light@{Light}!ALampActor@{ALampActor}}
 \doxysubsubsection{\texorpdfstring{Light}{Light}}
-{\footnotesize\ttfamily ULight\+Emitter\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Light}
+{\footnotesize\ttfamily \label{classALampActor_ad71ff753af4e93ac58eb25c1404a3e1c} 
+ULight\+Emitter\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Light}
 
-\Hypertarget{classALampActor_aea9c1c4062507d4488f3c3e09e2ca4ec}\label{classALampActor_aea9c1c4062507d4488f3c3e09e2ca4ec} 
-\index{ALampActor@{ALampActor}!Port@{Port}}
+\Hypertarget{classALampActor_aea9c1c4062507d4488f3c3e09e2ca4ec}\index{ALampActor@{ALampActor}!Port@{Port}}
 \index{Port@{Port}!ALampActor@{ALampActor}}
 \doxysubsubsection{\texorpdfstring{Port}{Port}}
-{\footnotesize\ttfamily UElectrical\+Port\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Port}
+{\footnotesize\ttfamily \label{classALampActor_aea9c1c4062507d4488f3c3e09e2ca4ec} 
+UElectrical\+Port\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Port}
 
-\Hypertarget{classALampActor_a77c3bb4be2c18e12d16a75eae0866fea}\label{classALampActor_a77c3bb4be2c18e12d16a75eae0866fea} 
-\index{ALampActor@{ALampActor}!Root@{Root}}
+\Hypertarget{classALampActor_a77c3bb4be2c18e12d16a75eae0866fea}\index{ALampActor@{ALampActor}!Root@{Root}}
 \index{Root@{Root}!ALampActor@{ALampActor}}
 \doxysubsubsection{\texorpdfstring{Root}{Root}}
-{\footnotesize\ttfamily UScene\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Root}
+{\footnotesize\ttfamily \label{classALampActor_a77c3bb4be2c18e12d16a75eae0866fea} 
+UScene\+Component\texorpdfstring{$\ast$}{*} ALamp\+Actor\+::\+Root}
 
 
 

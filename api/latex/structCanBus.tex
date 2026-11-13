@@ -1,0 +1,75 @@
+\doxysection{Can\+Bus Struct Reference}
+\hypertarget{structCanBus}{}\label{structCanBus}\index{CanBus@{CanBus}}
+
+
+Ring buffer state. Use only through the functions below.  
+
+
+
+
+{\ttfamily \#include $<$can\+\_\+bus.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \mbox{\hyperlink{structCanBus_ae0f9782f28725267b4f6ee5f0858ac33}{buffer}} \mbox{[}\mbox{\hyperlink{can__bus_8h_a201cb13d11026e9f8cf1402670bfd094}{CAN\+\_\+\+BUS\+\_\+\+BUFFER\+\_\+\+SIZE}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structCanBus_a3ae68d6f16200fde3483e0bebf6f9f09}{head}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structCanBus_a046b9b44aa4148b3a3f67da67072b847}{tail}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structCanBus_a8b4c1d23a0d934d35e1d175836a24fec}{count}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structCanBus_a78cb41c8d272f0fb41e7b3f071a5547f}{dropped}}
+\item 
+pthread\+\_\+mutex\+\_\+t \mbox{\hyperlink{structCanBus_a54237b138743c3450480e5025eaa1d65}{lock}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Ring buffer state. Use only through the functions below. 
+
+\label{doc-variable-members}
+\Hypertarget{structCanBus_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCanBus_ae0f9782f28725267b4f6ee5f0858ac33}\index{CanBus@{CanBus}!buffer@{buffer}}
+\index{buffer@{buffer}!CanBus@{CanBus}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \label{structCanBus_ae0f9782f28725267b4f6ee5f0858ac33} 
+\mbox{\hyperlink{structCanFrame}{Can\+Frame}} Can\+Bus\+::buffer\mbox{[}\mbox{\hyperlink{can__bus_8h_a201cb13d11026e9f8cf1402670bfd094}{CAN\+\_\+\+BUS\+\_\+\+BUFFER\+\_\+\+SIZE}}\mbox{]}}
+
+\Hypertarget{structCanBus_a8b4c1d23a0d934d35e1d175836a24fec}\index{CanBus@{CanBus}!count@{count}}
+\index{count@{count}!CanBus@{CanBus}}
+\doxysubsubsection{\texorpdfstring{count}{count}}
+{\footnotesize\ttfamily \label{structCanBus_a8b4c1d23a0d934d35e1d175836a24fec} 
+size\+\_\+t Can\+Bus\+::count}
+
+Number of queued frames. \Hypertarget{structCanBus_a78cb41c8d272f0fb41e7b3f071a5547f}\index{CanBus@{CanBus}!dropped@{dropped}}
+\index{dropped@{dropped}!CanBus@{CanBus}}
+\doxysubsubsection{\texorpdfstring{dropped}{dropped}}
+{\footnotesize\ttfamily \label{structCanBus_a78cb41c8d272f0fb41e7b3f071a5547f} 
+uint64\+\_\+t Can\+Bus\+::dropped}
+
+Frames rejected because the FIFO was full. \Hypertarget{structCanBus_a3ae68d6f16200fde3483e0bebf6f9f09}\index{CanBus@{CanBus}!head@{head}}
+\index{head@{head}!CanBus@{CanBus}}
+\doxysubsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily \label{structCanBus_a3ae68d6f16200fde3483e0bebf6f9f09} 
+size\+\_\+t Can\+Bus\+::head}
+
+Index of the oldest frame. \Hypertarget{structCanBus_a54237b138743c3450480e5025eaa1d65}\index{CanBus@{CanBus}!lock@{lock}}
+\index{lock@{lock}!CanBus@{CanBus}}
+\doxysubsubsection{\texorpdfstring{lock}{lock}}
+{\footnotesize\ttfamily \label{structCanBus_a54237b138743c3450480e5025eaa1d65} 
+pthread\+\_\+mutex\+\_\+t Can\+Bus\+::lock}
+
+\Hypertarget{structCanBus_a046b9b44aa4148b3a3f67da67072b847}\index{CanBus@{CanBus}!tail@{tail}}
+\index{tail@{tail}!CanBus@{CanBus}}
+\doxysubsubsection{\texorpdfstring{tail}{tail}}
+{\footnotesize\ttfamily \label{structCanBus_a046b9b44aa4148b3a3f67da67072b847} 
+size\+\_\+t Can\+Bus\+::tail}
+
+Index of the next free slot. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/can/\mbox{\hyperlink{can__bus_8h}{can\+\_\+bus.\+h}}\end{DoxyCompactItemize}

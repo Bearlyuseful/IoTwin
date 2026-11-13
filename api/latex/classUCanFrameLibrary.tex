@@ -1,0 +1,56 @@
+\doxysection{UCan\+Frame\+Library Class Reference}
+\hypertarget{classUCanFrameLibrary}{}\label{classUCanFrameLibrary}\index{UCanFrameLibrary@{UCanFrameLibrary}}
+
+
+{\ttfamily \#include $<$Can\+Frame.\+h$>$}
+
+Inheritance diagram for UCan\+Frame\+Library\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUCanFrameLibrary}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUCanFrameLibrary_af6e8400f94a36a7437110802c6e949ca}{UFUNCTION}} (Blueprint\+Pure, Category="{}Io\+Twin\texorpdfstring{$\vert$}{|}CAN"{}, meta=(Display\+Name="{}To String (CAN Frame)"{}, Compact\+Node\+Title="{}-\/$>$"{}, Blueprint\+Autocast)) static FString Can\+Frame\+To\+String(const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classUCanFrameLibrary_a4110677affad3dd25de5d64bf64283b6}{Parse\+Can\+Frame}} (const FString \&Text, \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame)
+\item 
+static bool \mbox{\hyperlink{classUCanFrameLibrary_a83595c01c3ded5cabd3a178d7a56e58d}{Get\+Can\+Frame\+Bit}} (const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame, int32 Byte\+Index, int32 Bit\+Index)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Blueprint helpers for CAN frames. 
+
+\label{doc-func-members}
+\Hypertarget{classUCanFrameLibrary_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUCanFrameLibrary_a83595c01c3ded5cabd3a178d7a56e58d}\index{UCanFrameLibrary@{UCanFrameLibrary}!GetCanFrameBit@{GetCanFrameBit}}
+\index{GetCanFrameBit@{GetCanFrameBit}!UCanFrameLibrary@{UCanFrameLibrary}}
+\doxysubsubsection{\texorpdfstring{GetCanFrameBit()}{GetCanFrameBit()}}
+{\footnotesize\ttfamily \label{classUCanFrameLibrary_a83595c01c3ded5cabd3a178d7a56e58d} 
+bool UCan\+Frame\+Library\+::\+Get\+Can\+Frame\+Bit (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Frame}{, }\item[{int32}]{Byte\+Index}{, }\item[{int32}]{Bit\+Index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Reads a single bit of the payload. \Hypertarget{classUCanFrameLibrary_a4110677affad3dd25de5d64bf64283b6}\index{UCanFrameLibrary@{UCanFrameLibrary}!ParseCanFrame@{ParseCanFrame}}
+\index{ParseCanFrame@{ParseCanFrame}!UCanFrameLibrary@{UCanFrameLibrary}}
+\doxysubsubsection{\texorpdfstring{ParseCanFrame()}{ParseCanFrame()}}
+{\footnotesize\ttfamily \label{classUCanFrameLibrary_a4110677affad3dd25de5d64bf64283b6} 
+bool UCan\+Frame\+Library\+::\+Parse\+Can\+Frame (\begin{DoxyParamCaption}\item[{const FString \&}]{Text}{, }\item[{\mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Frame}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Parses the bus text format. \Hypertarget{classUCanFrameLibrary_af6e8400f94a36a7437110802c6e949ca}\index{UCanFrameLibrary@{UCanFrameLibrary}!UFUNCTION@{UFUNCTION}}
+\index{UFUNCTION@{UFUNCTION}!UCanFrameLibrary@{UCanFrameLibrary}}
+\doxysubsubsection{\texorpdfstring{UFUNCTION()}{UFUNCTION()}}
+{\footnotesize\ttfamily \label{classUCanFrameLibrary_af6e8400f94a36a7437110802c6e949ca} 
+UCan\+Frame\+Library\+::\+UFUNCTION (\begin{DoxyParamCaption}\item[{Blueprint\+Pure}]{}{, }\item[{Category}]{}{ = {\ttfamily "{}IoTwin\texorpdfstring{$\vert$}{|}CAN"{}}, }\item[{meta}]{}{ = {\ttfamily (DisplayName="{}To~String~(CAN~Frame)"{},~CompactNodeTitle="{}-\/$>$"{},~BlueprintAutocast)}}\end{DoxyParamCaption}) const \&}
+
+Encodes a frame in the bus text format, e.\+g. "{}123\#\+DEADBEEF"{}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8h}{Can\+Frame.\+h}}\item 
+src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8cpp}{Can\+Frame.\+cpp}}\end{DoxyCompactItemize}

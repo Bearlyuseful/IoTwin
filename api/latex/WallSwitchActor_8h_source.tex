@@ -1,0 +1,65 @@
+\doxysection{Wall\+Switch\+Actor.\+h}
+\hypertarget{WallSwitchActor_8h_source}{}\label{WallSwitchActor_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Systems/WallSwitchActor.h@{src/ue/IoTwin/Source/IoTwin/Systems/WallSwitchActor.h}}
+\mbox{\hyperlink{WallSwitchActor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ clickable\ wall\ switch\ that\ reports\ its\ position\ on\ the\ CAN\ bus.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}WallSwitchActor.generated.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }UCanSignalComponent;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }UMaterialInstanceDynamic;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }UMaterialInterface;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }UStaticMeshComponent;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ UCLASS()}
+\DoxyCodeLine{00019\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAWallSwitchActor_ae7bf8bdf7613a85b298ee7a54d8e6731}{AWallSwitchActor}}\ :\ public\ AActor}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classAWallSwitchActor_ae7bf8bdf7613a85b298ee7a54d8e6731}{AWallSwitchActor}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00027\ \ \ \ \ USceneComponent*\ \mbox{\hyperlink{classAWallSwitchActor_a62ed8803f1f9935178d2967bd674cc93}{Root}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00030\ \ \ \ \ UStaticMeshComponent*\ \mbox{\hyperlink{classAWallSwitchActor_ab2719744ed2dd21c5bddb714ad1c33ef}{Plate}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00033\ \ \ \ \ UStaticMeshComponent*\ \mbox{\hyperlink{classAWallSwitchActor_aab75951279166ce04591136c18973e26}{Rocker}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00036\ \ \ \ \ UCanSignalComponent*\ \mbox{\hyperlink{classAWallSwitchActor_a4720137c5b03e98a8cc5a372d96a5a2d}{Signal}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00040\ \ \ \ \ TObjectPtr<UMaterialInterface>\ \mbox{\hyperlink{classAWallSwitchActor_a5b9173a09e2386223c48f07c742636d2}{BaseMaterial}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAWallSwitchActor_a3c053d89a036058f9bacac3fef661031}{Toggle}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAWallSwitchActor_afac2c77813775dfced32ac3ebb6732c6}{SetSwitchOn}}(\textcolor{keywordtype}{bool}\ bNewOn);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Switch"{}})}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAWallSwitchActor_a6f6fd1438f6199d7b23ae0d4f646a345}{IsOn}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bOn;\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BeginPlay()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00055\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00056\ \ \ \ \ void\ HandleClicked(UPrimitiveComponent*\ ClickedComponent,\ FKey\ ButtonPressed);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateVisuals();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ bOn\ =\ false;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ UPROPERTY(Transient)}
+\DoxyCodeLine{00063\ \ \ \ \ TObjectPtr<UMaterialInstanceDynamic>\ RockerMaterial;}
+\DoxyCodeLine{00064\ \};}
+
+\end{DoxyCode}

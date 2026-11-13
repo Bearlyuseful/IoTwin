@@ -1,0 +1,34 @@
+\doxysection{src/communication/tcp/line\+\_\+reader.c File Reference}
+\hypertarget{line__reader_8c}{}\label{line__reader_8c}\index{src/communication/tcp/line\_reader.c@{src/communication/tcp/line\_reader.c}}
+{\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{line__reader_8c_a4c076075498edf520472da1ee4b314d4}{line\+\_\+reader\+\_\+init}} (\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}reader)
+\item 
+size\+\_\+t \mbox{\hyperlink{line__reader_8c_aab9d5225e9ce25d352d8ba90ab5b0291}{line\+\_\+reader\+\_\+feed}} (\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}reader, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length, \mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{Line\+Reader\+Callback}} callback, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Feeds received bytes into the reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{line__reader_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{line__reader_8c_aab9d5225e9ce25d352d8ba90ab5b0291}\index{line\_reader.c@{line\_reader.c}!line\_reader\_feed@{line\_reader\_feed}}
+\index{line\_reader\_feed@{line\_reader\_feed}!line\_reader.c@{line\_reader.c}}
+\doxysubsubsection{\texorpdfstring{line\_reader\_feed()}{line\_reader\_feed()}}
+{\footnotesize\ttfamily \label{line__reader_8c_aab9d5225e9ce25d352d8ba90ab5b0291} 
+size\+\_\+t line\+\_\+reader\+\_\+feed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{line__reader_8h_adfa6ba7d6c7947474cb5313295c9e1a6}{Line\+Reader\+Callback}}}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Feeds received bytes into the reader. 
+
+\begin{DoxyReturn}{Returns}
+Number of lines passed to {\ttfamily callback}. 
+\end{DoxyReturn}
+\Hypertarget{line__reader_8c_a4c076075498edf520472da1ee4b314d4}\index{line\_reader.c@{line\_reader.c}!line\_reader\_init@{line\_reader\_init}}
+\index{line\_reader\_init@{line\_reader\_init}!line\_reader.c@{line\_reader.c}}
+\doxysubsubsection{\texorpdfstring{line\_reader\_init()}{line\_reader\_init()}}
+{\footnotesize\ttfamily \label{line__reader_8c_a4c076075498edf520472da1ee4b314d4} 
+void line\+\_\+reader\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLineReader}{Line\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{}\end{DoxyParamCaption})}
+

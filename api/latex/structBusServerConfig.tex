@@ -1,0 +1,67 @@
+\doxysection{Bus\+Server\+Config Struct Reference}
+\hypertarget{structBusServerConfig}{}\label{structBusServerConfig}\index{BusServerConfig@{BusServerConfig}}
+
+
+Server configuration.  
+
+
+
+
+{\ttfamily \#include $<$bus\+\_\+server.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structBusServerConfig_a0dac1f838a3d2359881e00e08eb071bc}{bind\+\_\+address}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structBusServerConfig_ad8c847ff8691a7174b721e76c8a65b6e}{port}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structBusServerConfig_aeafec274535cb89520365e1bb5794beb}{max\+\_\+clients}}
+\item 
+bool \mbox{\hyperlink{structBusServerConfig_a6fe5cb73bae4d810cee062f8d391d7c8}{echo}}
+\item 
+bool \mbox{\hyperlink{structBusServerConfig_ab9aaa40e0fc060322ec0b1754f6c4a74}{log\+\_\+frames}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Server configuration. 
+
+\label{doc-variable-members}
+\Hypertarget{structBusServerConfig_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structBusServerConfig_a0dac1f838a3d2359881e00e08eb071bc}\index{BusServerConfig@{BusServerConfig}!bind\_address@{bind\_address}}
+\index{bind\_address@{bind\_address}!BusServerConfig@{BusServerConfig}}
+\doxysubsubsection{\texorpdfstring{bind\_address}{bind\_address}}
+{\footnotesize\ttfamily \label{structBusServerConfig_a0dac1f838a3d2359881e00e08eb071bc} 
+const char\texorpdfstring{$\ast$}{*} Bus\+Server\+Config\+::bind\+\_\+address}
+
+Interface to listen on (default "{}127.\+0.\+0.\+1"{}). \Hypertarget{structBusServerConfig_a6fe5cb73bae4d810cee062f8d391d7c8}\index{BusServerConfig@{BusServerConfig}!echo@{echo}}
+\index{echo@{echo}!BusServerConfig@{BusServerConfig}}
+\doxysubsubsection{\texorpdfstring{echo}{echo}}
+{\footnotesize\ttfamily \label{structBusServerConfig_a6fe5cb73bae4d810cee062f8d391d7c8} 
+bool Bus\+Server\+Config\+::echo}
+
+Also send frames back to their sender (default false). \Hypertarget{structBusServerConfig_ab9aaa40e0fc060322ec0b1754f6c4a74}\index{BusServerConfig@{BusServerConfig}!log\_frames@{log\_frames}}
+\index{log\_frames@{log\_frames}!BusServerConfig@{BusServerConfig}}
+\doxysubsubsection{\texorpdfstring{log\_frames}{log\_frames}}
+{\footnotesize\ttfamily \label{structBusServerConfig_ab9aaa40e0fc060322ec0b1754f6c4a74} 
+bool Bus\+Server\+Config\+::log\+\_\+frames}
+
+Log every routed frame at INFO level (default false). \Hypertarget{structBusServerConfig_aeafec274535cb89520365e1bb5794beb}\index{BusServerConfig@{BusServerConfig}!max\_clients@{max\_clients}}
+\index{max\_clients@{max\_clients}!BusServerConfig@{BusServerConfig}}
+\doxysubsubsection{\texorpdfstring{max\_clients}{max\_clients}}
+{\footnotesize\ttfamily \label{structBusServerConfig_aeafec274535cb89520365e1bb5794beb} 
+size\+\_\+t Bus\+Server\+Config\+::max\+\_\+clients}
+
+Connection limit, 1..BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS (default 32). \Hypertarget{structBusServerConfig_ad8c847ff8691a7174b721e76c8a65b6e}\index{BusServerConfig@{BusServerConfig}!port@{port}}
+\index{port@{port}!BusServerConfig@{BusServerConfig}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily \label{structBusServerConfig_ad8c847ff8691a7174b721e76c8a65b6e} 
+uint16\+\_\+t Bus\+Server\+Config\+::port}
+
+TCP port, 0 = let the OS choose (default 8080). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/bus/\mbox{\hyperlink{bus__server_8h}{bus\+\_\+server.\+h}}\end{DoxyCompactItemize}

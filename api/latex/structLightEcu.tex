@@ -1,0 +1,83 @@
+\doxysection{Light\+Ecu Struct Reference}
+\hypertarget{structLightEcu}{}\label{structLightEcu}\index{LightEcu@{LightEcu}}
+
+
+ECU state.  
+
+
+
+
+{\ttfamily \#include $<$light\+\_\+ecu.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structLightEcu_a69bf377f8868877cfe89b18400dddd1d}{lamp\+\_\+on}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structLightEcu_ac81f06dd52e63e688580150be0e9cac0}{cycle\+\_\+ms}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structLightEcu_a03303065311638e2df54c46092d30864}{blink\+\_\+period\+\_\+ms}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structLightEcu_a586b43ec34ea02c87c55bd5a72ccf5e0}{last\+\_\+send\+\_\+ms}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5}{last\+\_\+toggle\+\_\+ms}}
+\item 
+bool \mbox{\hyperlink{structLightEcu_a7712dea6d676285b53546cce940e143f}{dirty}}
+\item 
+bool \mbox{\hyperlink{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0}{started}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ECU state. 
+
+\label{doc-variable-members}
+\Hypertarget{structLightEcu_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structLightEcu_a03303065311638e2df54c46092d30864}\index{LightEcu@{LightEcu}!blink\_period\_ms@{blink\_period\_ms}}
+\index{blink\_period\_ms@{blink\_period\_ms}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{blink\_period\_ms}{blink\_period\_ms}}
+{\footnotesize\ttfamily \label{structLightEcu_a03303065311638e2df54c46092d30864} 
+uint32\+\_\+t Light\+Ecu\+::blink\+\_\+period\+\_\+ms}
+
+Toggle period while blinking, 0 = not blinking. \Hypertarget{structLightEcu_ac81f06dd52e63e688580150be0e9cac0}\index{LightEcu@{LightEcu}!cycle\_ms@{cycle\_ms}}
+\index{cycle\_ms@{cycle\_ms}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{cycle\_ms}{cycle\_ms}}
+{\footnotesize\ttfamily \label{structLightEcu_ac81f06dd52e63e688580150be0e9cac0} 
+uint32\+\_\+t Light\+Ecu\+::cycle\+\_\+ms}
+
+Period of the cyclic LAMP\+\_\+\+CMD message (0 = only on change). \Hypertarget{structLightEcu_a7712dea6d676285b53546cce940e143f}\index{LightEcu@{LightEcu}!dirty@{dirty}}
+\index{dirty@{dirty}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{dirty}{dirty}}
+{\footnotesize\ttfamily \label{structLightEcu_a7712dea6d676285b53546cce940e143f} 
+bool Light\+Ecu\+::dirty}
+
+State changed, send immediately. \Hypertarget{structLightEcu_a69bf377f8868877cfe89b18400dddd1d}\index{LightEcu@{LightEcu}!lamp\_on@{lamp\_on}}
+\index{lamp\_on@{lamp\_on}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{lamp\_on}{lamp\_on}}
+{\footnotesize\ttfamily \label{structLightEcu_a69bf377f8868877cfe89b18400dddd1d} 
+bool Light\+Ecu\+::lamp\+\_\+on}
+
+Commanded lamp state. \Hypertarget{structLightEcu_a586b43ec34ea02c87c55bd5a72ccf5e0}\index{LightEcu@{LightEcu}!last\_send\_ms@{last\_send\_ms}}
+\index{last\_send\_ms@{last\_send\_ms}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{last\_send\_ms}{last\_send\_ms}}
+{\footnotesize\ttfamily \label{structLightEcu_a586b43ec34ea02c87c55bd5a72ccf5e0} 
+uint64\+\_\+t Light\+Ecu\+::last\+\_\+send\+\_\+ms}
+
+Time of the last LAMP\+\_\+\+CMD. \Hypertarget{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5}\index{LightEcu@{LightEcu}!last\_toggle\_ms@{last\_toggle\_ms}}
+\index{last\_toggle\_ms@{last\_toggle\_ms}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{last\_toggle\_ms}{last\_toggle\_ms}}
+{\footnotesize\ttfamily \label{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5} 
+uint64\+\_\+t Light\+Ecu\+::last\+\_\+toggle\+\_\+ms}
+
+Time of the last blink toggle. \Hypertarget{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0}\index{LightEcu@{LightEcu}!started@{started}}
+\index{started@{started}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{started}{started}}
+{\footnotesize\ttfamily \label{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0} 
+bool Light\+Ecu\+::started}
+
+First step executed. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/simulators/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8h}{light\+\_\+ecu.\+h}}\end{DoxyCompactItemize}

@@ -1,11 +1,52 @@
 \doxysection{log.\+h}
-\hypertarget{log_8h_source}{}\label{log_8h_source}\index{src/common/log.h@{src/common/log.h}}
+\hypertarget{log_8h_source}{}\label{log_8h_source}\index{src/core/logger/log.h@{src/core/logger/log.h}}
 \mbox{\hyperlink{log_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
-\DoxyCodeLine{00004\ }
-\DoxyCodeLine{00005\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{log_8h_a00ab4d4c0b970dca7ecbce08c912d828}{log\_info}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *msg);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_LOG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_LOG\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a538b2b6e011479d408ecd2be0f6d6177}{LOG\_LEVEL\_DEBUG}}\ =\ 0,}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9aedee1e3159bfe7d918b6e29873c5aee4}{LOG\_LEVEL\_INFO}},}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a99c1e5c8e6d557f3993b9ab54a0107f4}{LOG\_LEVEL\_WARN}},}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9a5b40f003febbc3b535649d63f4b8a44f}{LOG\_LEVEL\_ERROR}},}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9ae24e27e4037b7d172fff40d51825a856}{LOG\_LEVEL\_OFF}}}
+\DoxyCodeLine{00025\ \}\ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{LogLevel}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{log_8h_a20d53fe4929c9f90f83a10c739b02dfa}{log\_set\_level}}(\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{LogLevel}}\ level);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{LogLevel}}\ \mbox{\hyperlink{log_8h_ae5099953981ab6c18721857fd2f8d6fc}{log\_get\_level}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{log_8h_a556e1a9fa74bea3e6cfebc44995306a6}{log\_parse\_level}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ \mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{LogLevel}}*\ level);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#if\ defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ IOTWIN\_PRINTF\_FORMAT(fmt\_index,\ args\_index)\ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \_\_attribute\_\_((format(gnu\_printf,\ fmt\_index,\ args\_index)))}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ IOTWIN\_PRINTF\_FORMAT(fmt\_index,\ args\_index)\ \(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \_\_attribute\_\_((format(printf,\ fmt\_index,\ args\_index)))}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ IOTWIN\_PRINTF\_FORMAT(fmt\_index,\ args\_index)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{log_8h_ae71d9715f5a34f2757408d25295f12a4}{log\_write}}(\mbox{\hyperlink{log_8h_aca1fd1d8935433e6ba2e3918214e07f9}{LogLevel}}\ level,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fmt,\ ...)\ \mbox{\hyperlink{log_8h_a632a3e364fe8b1a3ea16b971f2c5ca36}{IOTWIN\_PRINTF\_FORMAT}}(2,\ 3);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ log\_debug(...)\ log\_write(LOG\_LEVEL\_DEBUG,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ log\_info(...)\ log\_write(LOG\_LEVEL\_INFO,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ log\_warn(...)\ log\_write(LOG\_LEVEL\_WARN,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ log\_error(...)\ log\_write(LOG\_LEVEL\_ERROR,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00058\ \}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_LOG\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

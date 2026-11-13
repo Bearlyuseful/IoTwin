@@ -1,7 +1,8 @@
 var structCanFrame =
 [
-    [ "ext", "structCanFrame.html#a98053153d3f257a0f12484bbaa08c5ff", null ],
-    [ "frame", "structCanFrame.html#a0cf8b7a6803ceea47260c9e0830a8b85", null ],
-    [ "std", "structCanFrame.html#a7abd909d93ed48167a2f3c797f54710a", null ],
-    [ "type", "structCanFrame.html#a1da898fb9f5daeaaded0e6a1dc0c20cc", null ]
+    [ "data", "structCanFrame.html#a6cba02a9edd71f7001f2993f0d4df58e", null ],
+    [ "dlc", "structCanFrame.html#aa896aaac27a424ba8e46c50e7bdb065d", null ],
+    [ "extended", "structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596", null ],
+    [ "id", "structCanFrame.html#aa850629d26a09531d2f40bd2b30b77f7", null ],
+    [ "rtr", "structCanFrame.html#a837bb392f53185a39b101f1d9ec087e2", null ]
 ];

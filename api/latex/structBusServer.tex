@@ -1,0 +1,111 @@
+\doxysection{Bus\+Server Struct Reference}
+\hypertarget{structBusServer}{}\label{structBusServer}\index{BusServer@{BusServer}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}} \mbox{\hyperlink{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9}{config}}
+\item 
+char \mbox{\hyperlink{structBusServer_a44caf4b22fface6deab276fef61f0958}{bind\+\_\+address}} \mbox{[}64\mbox{]}
+\item 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} \mbox{\hyperlink{structBusServer_adc75c4fca9b4ffa5458aabb02a48e230}{listener}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{structBusServer_ac1ac4c77e5017947c978340f9c00bd73}{port}}
+\item 
+\mbox{\hyperlink{structBusClient}{Bus\+Client}} \mbox{\hyperlink{structBusServer_ad869e22b9b6d9511f9334729d6883207}{clients}} \mbox{[}\mbox{\hyperlink{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structBusServer_a8753871ca492d1d1c03db1e61ee3ac85}{client\+\_\+count}}
+\item 
+unsigned \mbox{\hyperlink{structBusServer_a7a97f71eefa900cf415039cdff6c25ae}{next\+\_\+client\+\_\+id}}
+\item 
+\mbox{\hyperlink{structBusClient}{Bus\+Client}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structBusServer_a87cc325845a7c543b3b9ee1214bbea7c}{current\+\_\+sender}}
+\item 
+atomic\+\_\+size\+\_\+t \mbox{\hyperlink{structBusServer_a522d475a583f963f819fa57af3ca1ff9}{published\+\_\+client\+\_\+count}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_a6934545c91a933bd41df3585ebc66485}{frames\+\_\+routed}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_aa915b8a490ffc378fe36df21ce62815c}{frames\+\_\+rejected}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_a75462217efb4e202502b33ea3316e7e4}{clients\+\_\+accepted}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structBusServer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structBusServer_a44caf4b22fface6deab276fef61f0958}\index{BusServer@{BusServer}!bind\_address@{bind\_address}}
+\index{bind\_address@{bind\_address}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{bind\_address}{bind\_address}}
+{\footnotesize\ttfamily \label{structBusServer_a44caf4b22fface6deab276fef61f0958} 
+char Bus\+Server\+::bind\+\_\+address\mbox{[}64\mbox{]}}
+
+\Hypertarget{structBusServer_a8753871ca492d1d1c03db1e61ee3ac85}\index{BusServer@{BusServer}!client\_count@{client\_count}}
+\index{client\_count@{client\_count}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{client\_count}{client\_count}}
+{\footnotesize\ttfamily \label{structBusServer_a8753871ca492d1d1c03db1e61ee3ac85} 
+size\+\_\+t Bus\+Server\+::client\+\_\+count}
+
+\Hypertarget{structBusServer_ad869e22b9b6d9511f9334729d6883207}\index{BusServer@{BusServer}!clients@{clients}}
+\index{clients@{clients}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily \label{structBusServer_ad869e22b9b6d9511f9334729d6883207} 
+\mbox{\hyperlink{structBusClient}{Bus\+Client}} Bus\+Server\+::clients\mbox{[}\mbox{\hyperlink{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS}}\mbox{]}}
+
+\Hypertarget{structBusServer_a75462217efb4e202502b33ea3316e7e4}\index{BusServer@{BusServer}!clients\_accepted@{clients\_accepted}}
+\index{clients\_accepted@{clients\_accepted}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{clients\_accepted}{clients\_accepted}}
+{\footnotesize\ttfamily \label{structBusServer_a75462217efb4e202502b33ea3316e7e4} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::clients\+\_\+accepted}
+
+\Hypertarget{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9}\index{BusServer@{BusServer}!config@{config}}
+\index{config@{config}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9} 
+\mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}} Bus\+Server\+::config}
+
+\Hypertarget{structBusServer_a87cc325845a7c543b3b9ee1214bbea7c}\index{BusServer@{BusServer}!current\_sender@{current\_sender}}
+\index{current\_sender@{current\_sender}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{current\_sender}{current\_sender}}
+{\footnotesize\ttfamily \label{structBusServer_a87cc325845a7c543b3b9ee1214bbea7c} 
+\mbox{\hyperlink{structBusClient}{Bus\+Client}}\texorpdfstring{$\ast$}{*} Bus\+Server\+::current\+\_\+sender}
+
+\Hypertarget{structBusServer_aa915b8a490ffc378fe36df21ce62815c}\index{BusServer@{BusServer}!frames\_rejected@{frames\_rejected}}
+\index{frames\_rejected@{frames\_rejected}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{frames\_rejected}{frames\_rejected}}
+{\footnotesize\ttfamily \label{structBusServer_aa915b8a490ffc378fe36df21ce62815c} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+rejected}
+
+\Hypertarget{structBusServer_a6934545c91a933bd41df3585ebc66485}\index{BusServer@{BusServer}!frames\_routed@{frames\_routed}}
+\index{frames\_routed@{frames\_routed}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{frames\_routed}{frames\_routed}}
+{\footnotesize\ttfamily \label{structBusServer_a6934545c91a933bd41df3585ebc66485} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+routed}
+
+\Hypertarget{structBusServer_adc75c4fca9b4ffa5458aabb02a48e230}\index{BusServer@{BusServer}!listener@{listener}}
+\index{listener@{listener}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{listener}{listener}}
+{\footnotesize\ttfamily \label{structBusServer_adc75c4fca9b4ffa5458aabb02a48e230} 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} Bus\+Server\+::listener}
+
+\Hypertarget{structBusServer_a7a97f71eefa900cf415039cdff6c25ae}\index{BusServer@{BusServer}!next\_client\_id@{next\_client\_id}}
+\index{next\_client\_id@{next\_client\_id}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{next\_client\_id}{next\_client\_id}}
+{\footnotesize\ttfamily \label{structBusServer_a7a97f71eefa900cf415039cdff6c25ae} 
+unsigned Bus\+Server\+::next\+\_\+client\+\_\+id}
+
+\Hypertarget{structBusServer_ac1ac4c77e5017947c978340f9c00bd73}\index{BusServer@{BusServer}!port@{port}}
+\index{port@{port}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily \label{structBusServer_ac1ac4c77e5017947c978340f9c00bd73} 
+uint16\+\_\+t Bus\+Server\+::port}
+
+\Hypertarget{structBusServer_a522d475a583f963f819fa57af3ca1ff9}\index{BusServer@{BusServer}!published\_client\_count@{published\_client\_count}}
+\index{published\_client\_count@{published\_client\_count}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{published\_client\_count}{published\_client\_count}}
+{\footnotesize\ttfamily \label{structBusServer_a522d475a583f963f819fa57af3ca1ff9} 
+atomic\+\_\+size\+\_\+t Bus\+Server\+::published\+\_\+client\+\_\+count}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/bus/\mbox{\hyperlink{bus__server_8c}{bus\+\_\+server.\+c}}\end{DoxyCompactItemize}

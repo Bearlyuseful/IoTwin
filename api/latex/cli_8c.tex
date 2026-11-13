@@ -1,0 +1,55 @@
+\doxysection{src/core/platform/cli.c File Reference}
+\hypertarget{cli_8c}{}\label{cli_8c}\index{src/core/platform/cli.c@{src/core/platform/cli.c}}
+{\ttfamily \#include "{}cli.\+h"{}}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{cli_8c_a4546ee1fd7fdbb417afccff6efe2ac43}{cli\+\_\+parse\+\_\+long}} (const char \texorpdfstring{$\ast$}{*}text, long min, long max, long \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Parses a decimal integer in \mbox{[}min, max\mbox{]}. Returns false on garbage or overflow. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{cli_8c_a8c6fcccdd40a104beced4f476b06b785}{cli\+\_\+parse\+\_\+common\+\_\+option}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv, int \texorpdfstring{$\ast$}{*}index, \mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}rt)
+\begin{DoxyCompactList}\small\item\em Consumes the real-\/time and log options (--rt-\/priority N, --rt-\/cpu N, --rt-\/lock-\/memory, --log-\/level L) at argv\mbox{[}\texorpdfstring{$\ast$}{*}index\mbox{]}. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{cli_8c_ab191f7de5665bc2eec82490e8b928c2b}{cli\+\_\+common\+\_\+usage}} (void)
+\begin{DoxyCompactList}\small\item\em Usage text for the options handled by \doxylink{cli_8h_a8c6fcccdd40a104beced4f476b06b785}{cli\+\_\+parse\+\_\+common\+\_\+option()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{cli_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{cli_8c_ab191f7de5665bc2eec82490e8b928c2b}\index{cli.c@{cli.c}!cli\_common\_usage@{cli\_common\_usage}}
+\index{cli\_common\_usage@{cli\_common\_usage}!cli.c@{cli.c}}
+\doxysubsubsection{\texorpdfstring{cli\_common\_usage()}{cli\_common\_usage()}}
+{\footnotesize\ttfamily \label{cli_8c_ab191f7de5665bc2eec82490e8b928c2b} 
+const char \texorpdfstring{$\ast$}{*} cli\+\_\+common\+\_\+usage (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Usage text for the options handled by \doxylink{cli_8h_a8c6fcccdd40a104beced4f476b06b785}{cli\+\_\+parse\+\_\+common\+\_\+option()}. 
+
+\Hypertarget{cli_8c_a8c6fcccdd40a104beced4f476b06b785}\index{cli.c@{cli.c}!cli\_parse\_common\_option@{cli\_parse\_common\_option}}
+\index{cli\_parse\_common\_option@{cli\_parse\_common\_option}!cli.c@{cli.c}}
+\doxysubsubsection{\texorpdfstring{cli\_parse\_common\_option()}{cli\_parse\_common\_option()}}
+{\footnotesize\ttfamily \label{cli_8c_a8c6fcccdd40a104beced4f476b06b785} 
+int cli\+\_\+parse\+\_\+common\+\_\+option (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{index}{, }\item[{\mbox{\hyperlink{structPalRtConfig}{Pal\+Rt\+Config}} \texorpdfstring{$\ast$}{*}}]{rt}{}\end{DoxyParamCaption})}
+
+
+
+Consumes the real-\/time and log options (--rt-\/priority N, --rt-\/cpu N, --rt-\/lock-\/memory, --log-\/level L) at argv\mbox{[}\texorpdfstring{$\ast$}{*}index\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+1 if the option was consumed (and \texorpdfstring{$\ast$}{*}index advanced past its value), 0 if argv\mbox{[}\texorpdfstring{$\ast$}{*}index\mbox{]} is not one of these options, -\/1 if the option was recognised but its value is invalid/missing. 
+\end{DoxyReturn}
+\Hypertarget{cli_8c_a4546ee1fd7fdbb417afccff6efe2ac43}\index{cli.c@{cli.c}!cli\_parse\_long@{cli\_parse\_long}}
+\index{cli\_parse\_long@{cli\_parse\_long}!cli.c@{cli.c}}
+\doxysubsubsection{\texorpdfstring{cli\_parse\_long()}{cli\_parse\_long()}}
+{\footnotesize\ttfamily \label{cli_8c_a4546ee1fd7fdbb417afccff6efe2ac43} 
+bool cli\+\_\+parse\+\_\+long (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{long}]{min}{, }\item[{long}]{max}{, }\item[{long \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Parses a decimal integer in \mbox{[}min, max\mbox{]}. Returns false on garbage or overflow. 
+

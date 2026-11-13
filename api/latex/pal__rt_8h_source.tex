@@ -1,0 +1,40 @@
+\doxysection{pal\+\_\+rt.\+h}
+\hypertarget{pal__rt_8h_source}{}\label{pal__rt_8h_source}\index{src/core/platform/pal\_rt.h@{src/core/platform/pal\_rt.h}}
+\mbox{\hyperlink{pal__rt_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_PAL\_RT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_PAL\_RT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPalRtConfig_af7e3bf9b764178d79ae36d1e9f88db95}{priority}};\ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPalRtConfig_ab88d486f4a7cd5ad9c2f74ea9a7af5f3}{cpu}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structPalRtConfig_a166b0391b35d1f6cff67aea1186e28b8}{lock\_memory}};\ }
+\DoxyCodeLine{00029\ \}\ \mbox{\hyperlink{structPalRtConfig}{PalRtConfig}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pal__rt_8h_a68b301ad1931f4f5eeeba6b1f504cd7f}{pal\_rt\_default\_config}}(\mbox{\hyperlink{structPalRtConfig}{PalRtConfig}}*\ config);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pal__rt_8h_a1711097fa0462ad77098a35cd8213e48}{pal\_rt\_requested}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structPalRtConfig}{PalRtConfig}}*\ config);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pal__rt_8h_a32cf505dbb2a256d1252dd00e63373fe}{pal\_rt\_apply}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structPalRtConfig}{PalRtConfig}}*\ config,\ \textcolor{keywordtype}{char}*\ message,\ \textcolor{keywordtype}{size\_t}\ message\_size);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pal__rt_8h_a0052555a6217643aa8dae47344dd9913}{pal\_rt\_kernel\_is\_preempt\_rt}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{pal__rt_8h_aabf37afaebe634fcb476eb5e9bddbf10}{pal\_platform\_name}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pal__rt_8h_a3c8c3f295206cf66d5c6c8006e11c42e}{pal\_rt\_setup\_and\_log}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structPalRtConfig}{PalRtConfig}}*\ config);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_PAL\_RT\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

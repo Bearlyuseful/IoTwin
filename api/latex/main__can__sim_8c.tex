@@ -1,24 +1,81 @@
 \doxysection{src/simulators/can\+\_\+sim/main\+\_\+can\+\_\+sim.c File Reference}
 \hypertarget{main__can__sim_8c}{}\label{main__can__sim_8c}\index{src/simulators/can\_sim/main\_can\_sim.c@{src/simulators/can\_sim/main\_can\_sim.c}}
-{\ttfamily \#include "{}can\+\_\+bus.\+h"{}}\newline
+
+
+can\+\_\+sim\+: simulated light control ECU on the \doxylink{classIoTwin}{Io\+Twin} CAN bus.  
+
+
 {\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdatomic.\+h$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include "{}can\+Simulator.\+h"{}}\newline
-{\ttfamily \#include "{}../../common/socket\+Client.\+h"{}}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+bus.\+h"{}}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include "{}cli.\+h"{}}\newline
+{\ttfamily \#include "{}cycle\+\_\+timer.\+h"{}}\newline
+{\ttfamily \#include "{}light\+\_\+ecu.\+h"{}}\newline
+{\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
+{\ttfamily \#include "{}net.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+rt.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structSimOptions}{Sim\+Options}}
+\item 
+struct \mbox{\hyperlink{structSimShared}{Sim\+Shared}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main__can__sim_8c_a14445f86300d5faa6a4ebad02e496c09}{RECONNECT\+\_\+\+INTERVAL\+\_\+\+MS}}~1000
+\item 
+\#define \mbox{\hyperlink{main__can__sim_8c_a377c10ddb1999e7e32f9e11499e13734}{SEND\+\_\+\+TIMEOUT\+\_\+\+MS}}~50
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{main__can__sim_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+int \mbox{\hyperlink{main__can__sim_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+can\+\_\+sim\+: simulated light control ECU on the \doxylink{classIoTwin}{Io\+Twin} CAN bus. 
+
+Threads\+:
+\begin{DoxyItemize}
+\item main thread\+: cyclic control loop (optionally real-\/time), owns the socket
+\item console thread\+: reads commands from stdin (not real-\/time)
+\end{DoxyItemize}
+
+The control loop never blocks on the network while connected\+: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline. 
+
+\label{doc-define-members}
+\Hypertarget{main__can__sim_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main__can__sim_8c_a14445f86300d5faa6a4ebad02e496c09}\index{main\_can\_sim.c@{main\_can\_sim.c}!RECONNECT\_INTERVAL\_MS@{RECONNECT\_INTERVAL\_MS}}
+\index{RECONNECT\_INTERVAL\_MS@{RECONNECT\_INTERVAL\_MS}!main\_can\_sim.c@{main\_can\_sim.c}}
+\doxysubsubsection{\texorpdfstring{RECONNECT\_INTERVAL\_MS}{RECONNECT\_INTERVAL\_MS}}
+{\footnotesize\ttfamily \label{main__can__sim_8c_a14445f86300d5faa6a4ebad02e496c09} 
+\#define RECONNECT\+\_\+\+INTERVAL\+\_\+\+MS~1000}
+
+\Hypertarget{main__can__sim_8c_a377c10ddb1999e7e32f9e11499e13734}\index{main\_can\_sim.c@{main\_can\_sim.c}!SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}}
+\index{SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}!main\_can\_sim.c@{main\_can\_sim.c}}
+\doxysubsubsection{\texorpdfstring{SEND\_TIMEOUT\_MS}{SEND\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{main__can__sim_8c_a377c10ddb1999e7e32f9e11499e13734} 
+\#define SEND\+\_\+\+TIMEOUT\+\_\+\+MS~50}
+
+
+
+\label{doc-func-members}
+\Hypertarget{main__can__sim_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{main__can__sim_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main__can__sim_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
-\index{main\_can\_sim.c@{main\_can\_sim.c}!main@{main}}
+\Hypertarget{main__can__sim_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{main\_can\_sim.c@{main\_can\_sim.c}!main@{main}}
 \index{main@{main}!main\_can\_sim.c@{main\_can\_sim.c}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{main__can__sim_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
 

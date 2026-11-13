@@ -1,0 +1,59 @@
+\doxysection{Line\+Reader Struct Reference}
+\hypertarget{structLineReader}{}\label{structLineReader}\index{LineReader@{LineReader}}
+
+
+Reader state (one per connection).  
+
+
+
+
+{\ttfamily \#include $<$line\+\_\+reader.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{structLineReader_a0d67cbf25a36558b98fe703e92fd3744}{buffer}} \mbox{[}\mbox{\hyperlink{line__reader_8h_a834ceb4d82b6813573cc48e79812bb86}{LINE\+\_\+\+READER\+\_\+\+MAX\+\_\+\+LINE}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structLineReader_a0aaa30c60cd0d5bef363a65161f63113}{length}}
+\item 
+bool \mbox{\hyperlink{structLineReader_adde82efe0473809bc547b23e11d97823}{discarding}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structLineReader_a6b2be1f6fa8a26f275917895bae00e39}{dropped\+\_\+lines}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reader state (one per connection). 
+
+\label{doc-variable-members}
+\Hypertarget{structLineReader_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structLineReader_a0d67cbf25a36558b98fe703e92fd3744}\index{LineReader@{LineReader}!buffer@{buffer}}
+\index{buffer@{buffer}!LineReader@{LineReader}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \label{structLineReader_a0d67cbf25a36558b98fe703e92fd3744} 
+char Line\+Reader\+::buffer\mbox{[}\mbox{\hyperlink{line__reader_8h_a834ceb4d82b6813573cc48e79812bb86}{LINE\+\_\+\+READER\+\_\+\+MAX\+\_\+\+LINE}}\mbox{]}}
+
+Partial line. \Hypertarget{structLineReader_adde82efe0473809bc547b23e11d97823}\index{LineReader@{LineReader}!discarding@{discarding}}
+\index{discarding@{discarding}!LineReader@{LineReader}}
+\doxysubsubsection{\texorpdfstring{discarding}{discarding}}
+{\footnotesize\ttfamily \label{structLineReader_adde82efe0473809bc547b23e11d97823} 
+bool Line\+Reader\+::discarding}
+
+Current line is too long and being skipped. \Hypertarget{structLineReader_a6b2be1f6fa8a26f275917895bae00e39}\index{LineReader@{LineReader}!dropped\_lines@{dropped\_lines}}
+\index{dropped\_lines@{dropped\_lines}!LineReader@{LineReader}}
+\doxysubsubsection{\texorpdfstring{dropped\_lines}{dropped\_lines}}
+{\footnotesize\ttfamily \label{structLineReader_a6b2be1f6fa8a26f275917895bae00e39} 
+uint64\+\_\+t Line\+Reader\+::dropped\+\_\+lines}
+
+Number of over-\/long lines dropped. \Hypertarget{structLineReader_a0aaa30c60cd0d5bef363a65161f63113}\index{LineReader@{LineReader}!length@{length}}
+\index{length@{length}!LineReader@{LineReader}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \label{structLineReader_a0aaa30c60cd0d5bef363a65161f63113} 
+size\+\_\+t Line\+Reader\+::length}
+
+Bytes in buffer. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/communication/tcp/\mbox{\hyperlink{line__reader_8h}{line\+\_\+reader.\+h}}\end{DoxyCompactItemize}

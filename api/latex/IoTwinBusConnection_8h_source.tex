@@ -1,0 +1,66 @@
+\doxysection{Io\+Twin\+Bus\+Connection.\+h}
+\hypertarget{IoTwinBusConnection_8h_source}{}\label{IoTwinBusConnection_8h_source}\index{src/ue/IoTwin/Source/IoTwin/Bus/IoTwinBusConnection.h@{src/ue/IoTwin/Source/IoTwin/Bus/IoTwinBusConnection.h}}
+\mbox{\hyperlink{IoTwinBusConnection_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ background\ TCP\ connection\ to\ iotwin-\/bus.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Containers/Queue.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}HAL/Runnable.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }FRunnableThread;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }FSocket;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFIoTwinBusConnection_a1daec294f78dd023123525a59c4f02f3}{FIoTwinBusConnection}}\ final\ :\ \textcolor{keyword}{public}\ FRunnable}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classFIoTwinBusConnection_a1daec294f78dd023123525a59c4f02f3}{FIoTwinBusConnection}}(FString\ InHost,\ int32\ InPort);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classFIoTwinBusConnection_a34603192e432ff6b7c2987ac01ffc0cb}{\string~FIoTwinBusConnection}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFIoTwinBusConnection_a5b1c6c538b7ae6f399ad414e5d8d1810}{Start}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFIoTwinBusConnection_ab2ede2cc9693b0158bf945f292239f46}{Shutdown}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFIoTwinBusConnection_a0f6f2545ac96d52e823823ad8fda2822}{IsConnected}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bConnected.load();\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFIoTwinBusConnection_ab716de12d6d35d894bf33dfb730d5351}{EnqueueLine}}(\textcolor{keyword}{const}\ FString\&\ Line);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFIoTwinBusConnection_a536a74e23a13384e24b84e6230f76dff}{DequeueLine}}(FString\&\ OutLine);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ FRunnable}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{virtual}\ uint32\ \mbox{\hyperlink{classFIoTwinBusConnection_a80b5f9af5ae40f56f0c0861c793a0c95}{Run}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFIoTwinBusConnection_ac022699d54d5a1dc0392556d32f0069f}{Stop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ Connect();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ Disconnect();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ SendPending();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ ReceiveAvailable();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ SleepInterruptible(\textcolor{keywordtype}{double}\ Seconds)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ ReconnectDelaySeconds\ =\ 1.0;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ ConnectTimeoutSeconds\ =\ 2.0;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxLineLength\ =\ 256;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{const}\ FString\ Host;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ int32\ Port;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ FRunnableThread*\ Thread\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00062\ \ \ \ \ FSocket*\ Socket\ =\ \textcolor{keyword}{nullptr};\ \textcolor{comment}{//\ worker\ thread\ only}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ std::atomic<bool>\ bStopRequested\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00065\ \ \ \ \ std::atomic<bool>\ bConnected\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ TQueue<FString,\ EQueueMode::Mpsc>\ Outgoing;}
+\DoxyCodeLine{00068\ \ \ \ \ TQueue<FString,\ EQueueMode::Spsc>\ Incoming;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ TArray<ANSICHAR>\ PartialLine;\ \textcolor{comment}{//\ worker\ thread\ only}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ bDiscardingLine\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ bReportedUnreachable\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00073\ \};}
+
+\end{DoxyCode}

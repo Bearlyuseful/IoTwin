@@ -1,0 +1,306 @@
+\doxysection{src/communication/tcp/net.h File Reference}
+\hypertarget{net_8h}{}\label{net_8h}\index{src/communication/tcp/net.h@{src/communication/tcp/net.h}}
+
+
+Minimal portable TCP socket layer (POSIX sockets / Winsock2).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structNetPollFd}{Net\+Poll\+Fd}}
+\begin{DoxyCompactList}\small\item\em Entry for \doxylink{net_8c_a2b9beae339774515025e2613a5937cca}{net\+\_\+poll()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{net_8h_a2ba97a0c892b071feb44689e0ec09564}{NET\+\_\+\+INVALID\+\_\+\+SOCKET}}~(-\/1)
+\item 
+\#define \mbox{\hyperlink{net_8h_ad90656fe59525c5701265ae4f4fb746c}{NET\+\_\+\+POLL\+\_\+\+MAX}}~128
+\begin{DoxyCompactList}\small\item\em Maximum number of descriptors accepted by \doxylink{net_8h_a2b9beae339774515025e2613a5937cca}{net\+\_\+poll()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Return codes of net\+\_\+recv()}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{net_8h_aecd11948b2d2007153ce7938f4822e16}{NET\+\_\+\+RECV\+\_\+\+CLOSED}}~0
+\item 
+\#define \mbox{\hyperlink{net_8h_a144985aa24b48a6163301b25eebf7cdf}{NET\+\_\+\+RECV\+\_\+\+ERROR}}~(-\/1)
+\item 
+\#define \mbox{\hyperlink{net_8h_ad0d31dc8ab290a6630fe9f57bd08351c}{NET\+\_\+\+RECV\+\_\+\+WOULD\+\_\+\+BLOCK}}~(-\/2)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Poll event flags}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{net_8h_ada391427cc944dc22a1317914d75fce1}{NET\+\_\+\+POLL\+\_\+\+IN}}~0x1
+\item 
+\#define \mbox{\hyperlink{net_8h_a55016a5bc8ec49a2b5b3db73a23e743f}{NET\+\_\+\+POLL\+\_\+\+OUT}}~0x2
+\item 
+\#define \mbox{\hyperlink{net_8h_aa8fe7d5ad2f189e39079d1c6b6c4aff4}{NET\+\_\+\+POLL\+\_\+\+ERR}}~0x4
+\item 
+\#define \mbox{\hyperlink{net_8h_a7a866a9bf691c5695df68d27b44efdc5}{NET\+\_\+\+POLL\+\_\+\+HUP}}~0x8
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{net_8h_a918562542524de03184f138af40a9d63}{net\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialises the socket library. Safe to call multiple times (pair with \doxylink{net_8h_a80e1786701da5f7d8ec92ef997909106}{net\+\_\+cleanup()}). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{net_8h_a80e1786701da5f7d8ec92ef997909106}{net\+\_\+cleanup}} (void)
+\begin{DoxyCompactList}\small\item\em Releases the socket library (Windows\+: WSACleanup). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} \mbox{\hyperlink{net_8h_ad060ea9167b864135cf10d565a6ecd23}{net\+\_\+connect\+\_\+tcp}} (const char \texorpdfstring{$\ast$}{*}host, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Opens a blocking TCP connection to host\+:port (TCP\+\_\+\+NODELAY set). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} \mbox{\hyperlink{net_8h_ada822b25d0d25e753f9d3b1156053402}{net\+\_\+listen\+\_\+tcp}} (const char \texorpdfstring{$\ast$}{*}bind\+\_\+address, uint16\+\_\+t port, int backlog)
+\begin{DoxyCompactList}\small\item\em Creates a listening TCP socket. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} \mbox{\hyperlink{net_8h_ae0ba5046f8b13ff3619ce546bebc827b}{net\+\_\+accept}} (\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} listener, char \texorpdfstring{$\ast$}{*}peer, size\+\_\+t peer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Accepts a pending connection. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{net_8h_a4f3d2c6573d5b378fd3bbb06768efb6d}{net\+\_\+local\+\_\+port}} (\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} socket)
+\begin{DoxyCompactList}\small\item\em Returns the local port a socket is bound to (0 on error). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{net_8h_af639b53af266e50cfdcc203224c2f905}{net\+\_\+set\+\_\+nonblocking}} (\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} socket, bool nonblocking)
+\begin{DoxyCompactList}\small\item\em Switches a socket between blocking and non-\/blocking mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{net_8h_aec6ff90c6613781c56b1f5877bf43691}{net\+\_\+send\+\_\+all}} (\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} socket, const void \texorpdfstring{$\ast$}{*}data, size\+\_\+t length, int timeout\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Sends all bytes, waiting up to {\ttfamily timeout\+\_\+ms} whenever the send buffer is full. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{net_8h_ad3fc9c7449f5fb4e158856cecff1161f}{net\+\_\+recv}} (\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} socket, void \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Receives up to {\ttfamily length} bytes. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{net_8h_a2b9beae339774515025e2613a5937cca}{net\+\_\+poll}} (\mbox{\hyperlink{structNetPollFd}{Net\+Poll\+Fd}} \texorpdfstring{$\ast$}{*}fds, size\+\_\+t count, int timeout\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Waits for socket events (poll() / WSAPoll()). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{net_8h_ac4db60e011fea57d53bea0f06154add3}{net\+\_\+close}} (\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} socket)
+\begin{DoxyCompactList}\small\item\em Closes a socket (ignores NET\+\_\+\+INVALID\+\_\+\+SOCKET). \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{net_8h_a912eab893c5e9a40c94bc55a05eddd40}{net\+\_\+last\+\_\+error}} (void)
+\begin{DoxyCompactList}\small\item\em Text of the last socket error of the calling thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Minimal portable TCP socket layer (POSIX sockets / Winsock2). 
+
+Only what the bus server and the simulators need\+: connect, listen, accept, send/recv, non-\/blocking mode and poll. On POSIX SIGPIPE is ignored by \doxylink{net_8h_a918562542524de03184f138af40a9d63}{net\+\_\+init()}, so writing to a closed peer returns an error instead of killing the process. 
+
+\label{doc-define-members}
+\Hypertarget{net_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{net_8h_a2ba97a0c892b071feb44689e0ec09564}\index{net.h@{net.h}!NET\_INVALID\_SOCKET@{NET\_INVALID\_SOCKET}}
+\index{NET\_INVALID\_SOCKET@{NET\_INVALID\_SOCKET}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_INVALID\_SOCKET}{NET\_INVALID\_SOCKET}}
+{\footnotesize\ttfamily \label{net_8h_a2ba97a0c892b071feb44689e0ec09564} 
+\#define NET\+\_\+\+INVALID\+\_\+\+SOCKET~(-\/1)}
+
+\Hypertarget{net_8h_aa8fe7d5ad2f189e39079d1c6b6c4aff4}\index{net.h@{net.h}!NET\_POLL\_ERR@{NET\_POLL\_ERR}}
+\index{NET\_POLL\_ERR@{NET\_POLL\_ERR}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_POLL\_ERR}{NET\_POLL\_ERR}}
+{\footnotesize\ttfamily \label{net_8h_aa8fe7d5ad2f189e39079d1c6b6c4aff4} 
+\#define NET\+\_\+\+POLL\+\_\+\+ERR~0x4}
+
+Error condition (revents only). \Hypertarget{net_8h_a7a866a9bf691c5695df68d27b44efdc5}\index{net.h@{net.h}!NET\_POLL\_HUP@{NET\_POLL\_HUP}}
+\index{NET\_POLL\_HUP@{NET\_POLL\_HUP}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_POLL\_HUP}{NET\_POLL\_HUP}}
+{\footnotesize\ttfamily \label{net_8h_a7a866a9bf691c5695df68d27b44efdc5} 
+\#define NET\+\_\+\+POLL\+\_\+\+HUP~0x8}
+
+Peer hung up (revents only). \Hypertarget{net_8h_ada391427cc944dc22a1317914d75fce1}\index{net.h@{net.h}!NET\_POLL\_IN@{NET\_POLL\_IN}}
+\index{NET\_POLL\_IN@{NET\_POLL\_IN}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_POLL\_IN}{NET\_POLL\_IN}}
+{\footnotesize\ttfamily \label{net_8h_ada391427cc944dc22a1317914d75fce1} 
+\#define NET\+\_\+\+POLL\+\_\+\+IN~0x1}
+
+Readable (or a pending connection on a listener). \Hypertarget{net_8h_ad90656fe59525c5701265ae4f4fb746c}\index{net.h@{net.h}!NET\_POLL\_MAX@{NET\_POLL\_MAX}}
+\index{NET\_POLL\_MAX@{NET\_POLL\_MAX}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_POLL\_MAX}{NET\_POLL\_MAX}}
+{\footnotesize\ttfamily \label{net_8h_ad90656fe59525c5701265ae4f4fb746c} 
+\#define NET\+\_\+\+POLL\+\_\+\+MAX~128}
+
+
+
+Maximum number of descriptors accepted by \doxylink{net_8h_a2b9beae339774515025e2613a5937cca}{net\+\_\+poll()}. 
+
+\Hypertarget{net_8h_a55016a5bc8ec49a2b5b3db73a23e743f}\index{net.h@{net.h}!NET\_POLL\_OUT@{NET\_POLL\_OUT}}
+\index{NET\_POLL\_OUT@{NET\_POLL\_OUT}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_POLL\_OUT}{NET\_POLL\_OUT}}
+{\footnotesize\ttfamily \label{net_8h_a55016a5bc8ec49a2b5b3db73a23e743f} 
+\#define NET\+\_\+\+POLL\+\_\+\+OUT~0x2}
+
+Writable. \Hypertarget{net_8h_aecd11948b2d2007153ce7938f4822e16}\index{net.h@{net.h}!NET\_RECV\_CLOSED@{NET\_RECV\_CLOSED}}
+\index{NET\_RECV\_CLOSED@{NET\_RECV\_CLOSED}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_RECV\_CLOSED}{NET\_RECV\_CLOSED}}
+{\footnotesize\ttfamily \label{net_8h_aecd11948b2d2007153ce7938f4822e16} 
+\#define NET\+\_\+\+RECV\+\_\+\+CLOSED~0}
+
+Peer closed the connection. \Hypertarget{net_8h_a144985aa24b48a6163301b25eebf7cdf}\index{net.h@{net.h}!NET\_RECV\_ERROR@{NET\_RECV\_ERROR}}
+\index{NET\_RECV\_ERROR@{NET\_RECV\_ERROR}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_RECV\_ERROR}{NET\_RECV\_ERROR}}
+{\footnotesize\ttfamily \label{net_8h_a144985aa24b48a6163301b25eebf7cdf} 
+\#define NET\+\_\+\+RECV\+\_\+\+ERROR~(-\/1)}
+
+Socket error, connection unusable. \Hypertarget{net_8h_ad0d31dc8ab290a6630fe9f57bd08351c}\index{net.h@{net.h}!NET\_RECV\_WOULD\_BLOCK@{NET\_RECV\_WOULD\_BLOCK}}
+\index{NET\_RECV\_WOULD\_BLOCK@{NET\_RECV\_WOULD\_BLOCK}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{NET\_RECV\_WOULD\_BLOCK}{NET\_RECV\_WOULD\_BLOCK}}
+{\footnotesize\ttfamily \label{net_8h_ad0d31dc8ab290a6630fe9f57bd08351c} 
+\#define NET\+\_\+\+RECV\+\_\+\+WOULD\+\_\+\+BLOCK~(-\/2)}
+
+Non-\/blocking socket has no data right now. 
+
+\label{doc-typedef-members}
+\Hypertarget{net_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{net_8h_ac55f128edf45073869b140a7daf019ce}\index{net.h@{net.h}!net\_socket\_t@{net\_socket\_t}}
+\index{net\_socket\_t@{net\_socket\_t}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_socket\_t}{net\_socket\_t}}
+{\footnotesize\ttfamily \label{net_8h_ac55f128edf45073869b140a7daf019ce} 
+typedef int \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{net_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{net_8h_ae0ba5046f8b13ff3619ce546bebc827b}\index{net.h@{net.h}!net\_accept@{net\_accept}}
+\index{net\_accept@{net\_accept}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_accept()}{net\_accept()}}
+{\footnotesize\ttfamily \label{net_8h_ae0ba5046f8b13ff3619ce546bebc827b} 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} net\+\_\+accept (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}]{listener}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{peer}{, }\item[{size\+\_\+t}]{peer\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Accepts a pending connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer} & Optional buffer receiving "{}address\+:port"{} of the peer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{net_8h_a80e1786701da5f7d8ec92ef997909106}\index{net.h@{net.h}!net\_cleanup@{net\_cleanup}}
+\index{net\_cleanup@{net\_cleanup}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_cleanup()}{net\_cleanup()}}
+{\footnotesize\ttfamily \label{net_8h_a80e1786701da5f7d8ec92ef997909106} 
+void net\+\_\+cleanup (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Releases the socket library (Windows\+: WSACleanup). 
+
+\Hypertarget{net_8h_ac4db60e011fea57d53bea0f06154add3}\index{net.h@{net.h}!net\_close@{net\_close}}
+\index{net\_close@{net\_close}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_close()}{net\_close()}}
+{\footnotesize\ttfamily \label{net_8h_ac4db60e011fea57d53bea0f06154add3} 
+void net\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}]{socket}{}\end{DoxyParamCaption})}
+
+
+
+Closes a socket (ignores NET\+\_\+\+INVALID\+\_\+\+SOCKET). 
+
+\Hypertarget{net_8h_ad060ea9167b864135cf10d565a6ecd23}\index{net.h@{net.h}!net\_connect\_tcp@{net\_connect\_tcp}}
+\index{net\_connect\_tcp@{net\_connect\_tcp}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_connect\_tcp()}{net\_connect\_tcp()}}
+{\footnotesize\ttfamily \label{net_8h_ad060ea9167b864135cf10d565a6ecd23} 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} net\+\_\+connect\+\_\+tcp (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{host}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Opens a blocking TCP connection to host\+:port (TCP\+\_\+\+NODELAY set). 
+
+\Hypertarget{net_8h_a918562542524de03184f138af40a9d63}\index{net.h@{net.h}!net\_init@{net\_init}}
+\index{net\_init@{net\_init}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_init()}{net\_init()}}
+{\footnotesize\ttfamily \label{net_8h_a918562542524de03184f138af40a9d63} 
+bool net\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialises the socket library. Safe to call multiple times (pair with \doxylink{net_8h_a80e1786701da5f7d8ec92ef997909106}{net\+\_\+cleanup()}). 
+
+\Hypertarget{net_8h_a912eab893c5e9a40c94bc55a05eddd40}\index{net.h@{net.h}!net\_last\_error@{net\_last\_error}}
+\index{net\_last\_error@{net\_last\_error}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_last\_error()}{net\_last\_error()}}
+{\footnotesize\ttfamily \label{net_8h_a912eab893c5e9a40c94bc55a05eddd40} 
+const char \texorpdfstring{$\ast$}{*} net\+\_\+last\+\_\+error (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Text of the last socket error of the calling thread. 
+
+\Hypertarget{net_8h_ada822b25d0d25e753f9d3b1156053402}\index{net.h@{net.h}!net\_listen\_tcp@{net\_listen\_tcp}}
+\index{net\_listen\_tcp@{net\_listen\_tcp}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_listen\_tcp()}{net\_listen\_tcp()}}
+{\footnotesize\ttfamily \label{net_8h_ada822b25d0d25e753f9d3b1156053402} 
+\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}} net\+\_\+listen\+\_\+tcp (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{bind\+\_\+address}{, }\item[{uint16\+\_\+t}]{port}{, }\item[{int}]{backlog}{}\end{DoxyParamCaption})}
+
+
+
+Creates a listening TCP socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bind\+\_\+address} & Address to bind to, e.\+g. "{}127.\+0.\+0.\+1"{} or "{}0.\+0.\+0.\+0"{}. \\
+\hline
+{\em port} & Port to listen on, 0 lets the OS choose (see \doxylink{net_8h_a4f3d2c6573d5b378fd3bbb06768efb6d}{net\+\_\+local\+\_\+port()}). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{net_8h_a4f3d2c6573d5b378fd3bbb06768efb6d}\index{net.h@{net.h}!net\_local\_port@{net\_local\_port}}
+\index{net\_local\_port@{net\_local\_port}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_local\_port()}{net\_local\_port()}}
+{\footnotesize\ttfamily \label{net_8h_a4f3d2c6573d5b378fd3bbb06768efb6d} 
+uint16\+\_\+t net\+\_\+local\+\_\+port (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}]{socket}{}\end{DoxyParamCaption})}
+
+
+
+Returns the local port a socket is bound to (0 on error). 
+
+\Hypertarget{net_8h_a2b9beae339774515025e2613a5937cca}\index{net.h@{net.h}!net\_poll@{net\_poll}}
+\index{net\_poll@{net\_poll}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_poll()}{net\_poll()}}
+{\footnotesize\ttfamily \label{net_8h_a2b9beae339774515025e2613a5937cca} 
+int net\+\_\+poll (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structNetPollFd}{Net\+Poll\+Fd}} \texorpdfstring{$\ast$}{*}}]{fds}{, }\item[{size\+\_\+t}]{count}{, }\item[{int}]{timeout\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Waits for socket events (poll() / WSAPoll()). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+ms} & -\/1 waits forever, 0 returns immediately. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of sockets with events, 0 on timeout, -\/1 on error. 
+\end{DoxyReturn}
+\Hypertarget{net_8h_ad3fc9c7449f5fb4e158856cecff1161f}\index{net.h@{net.h}!net\_recv@{net\_recv}}
+\index{net\_recv@{net\_recv}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_recv()}{net\_recv()}}
+{\footnotesize\ttfamily \label{net_8h_ad3fc9c7449f5fb4e158856cecff1161f} 
+int net\+\_\+recv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}]{socket}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Receives up to {\ttfamily length} bytes. 
+
+\begin{DoxyReturn}{Returns}
+Number of bytes (\texorpdfstring{$>$}{>} 0) or NET\+\_\+\+RECV\+\_\+\+CLOSED / NET\+\_\+\+RECV\+\_\+\+ERROR / NET\+\_\+\+RECV\+\_\+\+WOULD\+\_\+\+BLOCK. 
+\end{DoxyReturn}
+\Hypertarget{net_8h_aec6ff90c6613781c56b1f5877bf43691}\index{net.h@{net.h}!net\_send\_all@{net\_send\_all}}
+\index{net\_send\_all@{net\_send\_all}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_send\_all()}{net\_send\_all()}}
+{\footnotesize\ttfamily \label{net_8h_aec6ff90c6613781c56b1f5877bf43691} 
+int net\+\_\+send\+\_\+all (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}]{socket}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{, }\item[{int}]{timeout\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Sends all bytes, waiting up to {\ttfamily timeout\+\_\+ms} whenever the send buffer is full. 
+
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on error or timeout. 
+\end{DoxyReturn}
+\Hypertarget{net_8h_af639b53af266e50cfdcc203224c2f905}\index{net.h@{net.h}!net\_set\_nonblocking@{net\_set\_nonblocking}}
+\index{net\_set\_nonblocking@{net\_set\_nonblocking}!net.h@{net.h}}
+\doxysubsubsection{\texorpdfstring{net\_set\_nonblocking()}{net\_set\_nonblocking()}}
+{\footnotesize\ttfamily \label{net_8h_af639b53af266e50cfdcc203224c2f905} 
+bool net\+\_\+set\+\_\+nonblocking (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\+\_\+socket\+\_\+t}}}]{socket}{, }\item[{bool}]{nonblocking}{}\end{DoxyParamCaption})}
+
+
+
+Switches a socket between blocking and non-\/blocking mode. 
+

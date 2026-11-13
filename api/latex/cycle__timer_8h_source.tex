@@ -1,0 +1,43 @@
+\doxysection{cycle\+\_\+timer.\+h}
+\hypertarget{cycle__timer_8h_source}{}\label{cycle__timer_8h_source}\index{src/core/platform/cycle\_timer.h@{src/core/platform/cycle\_timer.h}}
+\mbox{\hyperlink{cycle__timer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_CYCLE\_TIMER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_CYCLE\_TIMER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00023\ \ \ uint64\_t\ \mbox{\hyperlink{structCycleStats_aaa42c9e67547a25ccc6c999c11cf6460}{samples}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ int64\_t\ \mbox{\hyperlink{structCycleStats_a220391273c377cc23da811f509d74106}{min\_latency\_ns}};\ }
+\DoxyCodeLine{00025\ \ \ int64\_t\ \mbox{\hyperlink{structCycleStats_aefacf2b09c82fbcc9eb4a2c9143dfa32}{max\_latency\_ns}};\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structCycleStats_a7e965d639bc83b8aef9fd62adbe58613}{sum\_latency\_ns}};\ \ }
+\DoxyCodeLine{00027\ \ \ uint64\_t\ \mbox{\hyperlink{structCycleStats_a37de80ea296e3f9edebf43092196dd83}{overruns}};\ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \}\ \mbox{\hyperlink{structCycleStats}{CycleStats}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00032\ \ \ uint64\_t\ \mbox{\hyperlink{structCycleTimer_a452a54b666982b3de6818f337285c008}{period\_ns}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ uint64\_t\ \mbox{\hyperlink{structCycleTimer_ad2f01921defca96707858cc87e63f383}{next\_deadline\_ns}};\ }
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{structCycleStats}{CycleStats}}\ \mbox{\hyperlink{structCycleTimer_aa23d2e0116d512f1e188692342547150}{stats}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \}\ \mbox{\hyperlink{structCycleTimer}{CycleTimer}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cycle__timer_8h_ac0f86283515a7daa77d6a360c0f9b922}{cycle\_timer\_start}}(\mbox{\hyperlink{structCycleTimer}{CycleTimer}}*\ timer,\ uint64\_t\ period\_ns);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ uint64\_t\ \mbox{\hyperlink{cycle__timer_8h_a6fe398dd485b54a23d59270494c9b27a}{cycle\_timer\_wait}}(\mbox{\hyperlink{structCycleTimer}{CycleTimer}}*\ timer);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{cycle__timer_8h_aafa5fa8deda0e0aa605e7493861ef5ef}{cycle\_stats\_reset}}(\mbox{\hyperlink{structCycleStats}{CycleStats}}*\ stats);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{cycle__timer_8h_af6f1b9339b8403d67d0d61c2319ad0cc}{cycle\_stats\_mean\_ns}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCycleStats}{CycleStats}}*\ stats);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_CYCLE\_TIMER\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

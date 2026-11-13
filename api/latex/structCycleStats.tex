@@ -1,0 +1,67 @@
+\doxysection{Cycle\+Stats Struct Reference}
+\hypertarget{structCycleStats}{}\label{structCycleStats}\index{CycleStats@{CycleStats}}
+
+
+Wake-\/up latency statistics of a cycle timer.  
+
+
+
+
+{\ttfamily \#include $<$cycle\+\_\+timer.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structCycleStats_aaa42c9e67547a25ccc6c999c11cf6460}{samples}}
+\item 
+int64\+\_\+t \mbox{\hyperlink{structCycleStats_a220391273c377cc23da811f509d74106}{min\+\_\+latency\+\_\+ns}}
+\item 
+int64\+\_\+t \mbox{\hyperlink{structCycleStats_aefacf2b09c82fbcc9eb4a2c9143dfa32}{max\+\_\+latency\+\_\+ns}}
+\item 
+double \mbox{\hyperlink{structCycleStats_a7e965d639bc83b8aef9fd62adbe58613}{sum\+\_\+latency\+\_\+ns}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structCycleStats_a37de80ea296e3f9edebf43092196dd83}{overruns}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wake-\/up latency statistics of a cycle timer. 
+
+\label{doc-variable-members}
+\Hypertarget{structCycleStats_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCycleStats_aefacf2b09c82fbcc9eb4a2c9143dfa32}\index{CycleStats@{CycleStats}!max\_latency\_ns@{max\_latency\_ns}}
+\index{max\_latency\_ns@{max\_latency\_ns}!CycleStats@{CycleStats}}
+\doxysubsubsection{\texorpdfstring{max\_latency\_ns}{max\_latency\_ns}}
+{\footnotesize\ttfamily \label{structCycleStats_aefacf2b09c82fbcc9eb4a2c9143dfa32} 
+int64\+\_\+t Cycle\+Stats\+::max\+\_\+latency\+\_\+ns}
+
+Largest wake-\/up latency. \Hypertarget{structCycleStats_a220391273c377cc23da811f509d74106}\index{CycleStats@{CycleStats}!min\_latency\_ns@{min\_latency\_ns}}
+\index{min\_latency\_ns@{min\_latency\_ns}!CycleStats@{CycleStats}}
+\doxysubsubsection{\texorpdfstring{min\_latency\_ns}{min\_latency\_ns}}
+{\footnotesize\ttfamily \label{structCycleStats_a220391273c377cc23da811f509d74106} 
+int64\+\_\+t Cycle\+Stats\+::min\+\_\+latency\+\_\+ns}
+
+Smallest wake-\/up latency. \Hypertarget{structCycleStats_a37de80ea296e3f9edebf43092196dd83}\index{CycleStats@{CycleStats}!overruns@{overruns}}
+\index{overruns@{overruns}!CycleStats@{CycleStats}}
+\doxysubsubsection{\texorpdfstring{overruns}{overruns}}
+{\footnotesize\ttfamily \label{structCycleStats_a37de80ea296e3f9edebf43092196dd83} 
+uint64\+\_\+t Cycle\+Stats\+::overruns}
+
+Deadlines missed completely (cycle skipped). \Hypertarget{structCycleStats_aaa42c9e67547a25ccc6c999c11cf6460}\index{CycleStats@{CycleStats}!samples@{samples}}
+\index{samples@{samples}!CycleStats@{CycleStats}}
+\doxysubsubsection{\texorpdfstring{samples}{samples}}
+{\footnotesize\ttfamily \label{structCycleStats_aaa42c9e67547a25ccc6c999c11cf6460} 
+uint64\+\_\+t Cycle\+Stats\+::samples}
+
+Number of completed cycles. \Hypertarget{structCycleStats_a7e965d639bc83b8aef9fd62adbe58613}\index{CycleStats@{CycleStats}!sum\_latency\_ns@{sum\_latency\_ns}}
+\index{sum\_latency\_ns@{sum\_latency\_ns}!CycleStats@{CycleStats}}
+\doxysubsubsection{\texorpdfstring{sum\_latency\_ns}{sum\_latency\_ns}}
+{\footnotesize\ttfamily \label{structCycleStats_a7e965d639bc83b8aef9fd62adbe58613} 
+double Cycle\+Stats\+::sum\+\_\+latency\+\_\+ns}
+
+Sum of latencies (for the mean). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/platform/\mbox{\hyperlink{cycle__timer_8h}{cycle\+\_\+timer.\+h}}\end{DoxyCompactItemize}

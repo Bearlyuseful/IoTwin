@@ -1,0 +1,51 @@
+\doxysection{Cycle\+Timer Struct Reference}
+\hypertarget{structCycleTimer}{}\label{structCycleTimer}\index{CycleTimer@{CycleTimer}}
+
+
+Periodic timer state.  
+
+
+
+
+{\ttfamily \#include $<$cycle\+\_\+timer.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structCycleTimer_a452a54b666982b3de6818f337285c008}{period\+\_\+ns}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structCycleTimer_ad2f01921defca96707858cc87e63f383}{next\+\_\+deadline\+\_\+ns}}
+\item 
+\mbox{\hyperlink{structCycleStats}{Cycle\+Stats}} \mbox{\hyperlink{structCycleTimer_aa23d2e0116d512f1e188692342547150}{stats}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Periodic timer state. 
+
+\label{doc-variable-members}
+\Hypertarget{structCycleTimer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCycleTimer_ad2f01921defca96707858cc87e63f383}\index{CycleTimer@{CycleTimer}!next\_deadline\_ns@{next\_deadline\_ns}}
+\index{next\_deadline\_ns@{next\_deadline\_ns}!CycleTimer@{CycleTimer}}
+\doxysubsubsection{\texorpdfstring{next\_deadline\_ns}{next\_deadline\_ns}}
+{\footnotesize\ttfamily \label{structCycleTimer_ad2f01921defca96707858cc87e63f383} 
+uint64\+\_\+t Cycle\+Timer\+::next\+\_\+deadline\+\_\+ns}
+
+Next absolute deadline on the monotonic clock. \Hypertarget{structCycleTimer_a452a54b666982b3de6818f337285c008}\index{CycleTimer@{CycleTimer}!period\_ns@{period\_ns}}
+\index{period\_ns@{period\_ns}!CycleTimer@{CycleTimer}}
+\doxysubsubsection{\texorpdfstring{period\_ns}{period\_ns}}
+{\footnotesize\ttfamily \label{structCycleTimer_a452a54b666982b3de6818f337285c008} 
+uint64\+\_\+t Cycle\+Timer\+::period\+\_\+ns}
+
+Cycle period. \Hypertarget{structCycleTimer_aa23d2e0116d512f1e188692342547150}\index{CycleTimer@{CycleTimer}!stats@{stats}}
+\index{stats@{stats}!CycleTimer@{CycleTimer}}
+\doxysubsubsection{\texorpdfstring{stats}{stats}}
+{\footnotesize\ttfamily \label{structCycleTimer_aa23d2e0116d512f1e188692342547150} 
+\mbox{\hyperlink{structCycleStats}{Cycle\+Stats}} Cycle\+Timer\+::stats}
+
+Statistics since the last reset. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/platform/\mbox{\hyperlink{cycle__timer_8h}{cycle\+\_\+timer.\+h}}\end{DoxyCompactItemize}

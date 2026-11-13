@@ -1,0 +1,50 @@
+\doxysection{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\+Can\+Signal\+Component.h File Reference}
+\hypertarget{CanSignalComponent_8h}{}\label{CanSignalComponent_8h}\index{src/ue/IoTwin/Source/IoTwin/Bus/CanSignalComponent.h@{src/ue/IoTwin/Source/IoTwin/Bus/CanSignalComponent.h}}
+{\ttfamily \#include "{}Core\+Minimal.\+h"{}}\newline
+{\ttfamily \#include "{}Bus/\+Can\+Frame.\+h"{}}\newline
+{\ttfamily \#include "{}Components/\+Actor\+Component.\+h"{}}\newline
+{\ttfamily \#include "{}Can\+Signal\+Component.\+generated.\+h"{}}\newline
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}{ECan\+Signal\+Direction}} \+: uint8 \{ \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a5639d3df5aea3d9e78027b843ee3cbb2}{Receive}}
+, \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a6c2958de5e2295b8cb67bac908244879}{Transmit}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{CanSignalComponent_8h_acb26abc9d42d256490f8da28873239b7}{DECLARE\+\_\+\+DYNAMIC\+\_\+\+MULTICAST\+\_\+\+DELEGATE\+\_\+\+One\+Param}} (FOn\+Can\+Signal\+Changed, bool, b\+New\+Value)
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{CanSignalComponent_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}\index{CanSignalComponent.h@{CanSignalComponent.h}!ECanSignalDirection@{ECanSignalDirection}}
+\index{ECanSignalDirection@{ECanSignalDirection}!CanSignalComponent.h@{CanSignalComponent.h}}
+\doxysubsubsection{\texorpdfstring{ECanSignalDirection}{ECanSignalDirection}}
+{\footnotesize\ttfamily \label{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601} 
+enum class \mbox{\hyperlink{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601}{ECan\+Signal\+Direction}} \+: uint8\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Receive@{Receive}!CanSignalComponent.h@{CanSignalComponent.h}}\index{CanSignalComponent.h@{CanSignalComponent.h}!Receive@{Receive}}}\Hypertarget{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a5639d3df5aea3d9e78027b843ee3cbb2}\label{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a5639d3df5aea3d9e78027b843ee3cbb2} 
+Receive&The value follows frames received from the bus. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Transmit@{Transmit}!CanSignalComponent.h@{CanSignalComponent.h}}\index{CanSignalComponent.h@{CanSignalComponent.h}!Transmit@{Transmit}}}\Hypertarget{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a6c2958de5e2295b8cb67bac908244879}\label{CanSignalComponent_8h_a4c933bb48cd6507bbbe3faad1187d601a6c2958de5e2295b8cb67bac908244879} 
+Transmit&Set\+Value() sends frames to the bus. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{CanSignalComponent_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{CanSignalComponent_8h_acb26abc9d42d256490f8da28873239b7}\index{CanSignalComponent.h@{CanSignalComponent.h}!DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam@{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}
+\index{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam@{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}!CanSignalComponent.h@{CanSignalComponent.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam()}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam()}}
+{\footnotesize\ttfamily \label{CanSignalComponent_8h_acb26abc9d42d256490f8da28873239b7} 
+DECLARE\+\_\+\+DYNAMIC\+\_\+\+MULTICAST\+\_\+\+DELEGATE\+\_\+\+One\+Param (\begin{DoxyParamCaption}\item[{FOn\+Can\+Signal\+Changed}]{}{, }\item[{bool}]{}{, }\item[{b\+New\+Value}]{}{}\end{DoxyParamCaption})}
+

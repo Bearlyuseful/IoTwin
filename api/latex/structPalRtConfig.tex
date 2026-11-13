@@ -1,0 +1,51 @@
+\doxysection{Pal\+Rt\+Config Struct Reference}
+\hypertarget{structPalRtConfig}{}\label{structPalRtConfig}\index{PalRtConfig@{PalRtConfig}}
+
+
+Requested real-\/time settings.  
+
+
+
+
+{\ttfamily \#include $<$pal\+\_\+rt.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structPalRtConfig_af7e3bf9b764178d79ae36d1e9f88db95}{priority}}
+\item 
+int \mbox{\hyperlink{structPalRtConfig_ab88d486f4a7cd5ad9c2f74ea9a7af5f3}{cpu}}
+\item 
+bool \mbox{\hyperlink{structPalRtConfig_a166b0391b35d1f6cff67aea1186e28b8}{lock\+\_\+memory}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Requested real-\/time settings. 
+
+\label{doc-variable-members}
+\Hypertarget{structPalRtConfig_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structPalRtConfig_ab88d486f4a7cd5ad9c2f74ea9a7af5f3}\index{PalRtConfig@{PalRtConfig}!cpu@{cpu}}
+\index{cpu@{cpu}!PalRtConfig@{PalRtConfig}}
+\doxysubsubsection{\texorpdfstring{cpu}{cpu}}
+{\footnotesize\ttfamily \label{structPalRtConfig_ab88d486f4a7cd5ad9c2f74ea9a7af5f3} 
+int Pal\+Rt\+Config\+::cpu}
+
+CPU core to pin the thread to, -\/1 = no pinning. \Hypertarget{structPalRtConfig_a166b0391b35d1f6cff67aea1186e28b8}\index{PalRtConfig@{PalRtConfig}!lock\_memory@{lock\_memory}}
+\index{lock\_memory@{lock\_memory}!PalRtConfig@{PalRtConfig}}
+\doxysubsubsection{\texorpdfstring{lock\_memory}{lock\_memory}}
+{\footnotesize\ttfamily \label{structPalRtConfig_a166b0391b35d1f6cff67aea1186e28b8} 
+bool Pal\+Rt\+Config\+::lock\+\_\+memory}
+
+Lock current and future memory pages into RAM. \Hypertarget{structPalRtConfig_af7e3bf9b764178d79ae36d1e9f88db95}\index{PalRtConfig@{PalRtConfig}!priority@{priority}}
+\index{priority@{priority}!PalRtConfig@{PalRtConfig}}
+\doxysubsubsection{\texorpdfstring{priority}{priority}}
+{\footnotesize\ttfamily \label{structPalRtConfig_af7e3bf9b764178d79ae36d1e9f88db95} 
+int Pal\+Rt\+Config\+::priority}
+
+SCHED\+\_\+\+FIFO priority 1..99, 0 = keep the default scheduler. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/platform/\mbox{\hyperlink{pal__rt_8h}{pal\+\_\+rt.\+h}}\end{DoxyCompactItemize}

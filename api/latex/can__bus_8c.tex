@@ -1,26 +1,84 @@
-\doxysection{src/simulators/can\+\_\+sim/can\+\_\+bus.c File Reference}
-\hypertarget{can__bus_8c}{}\label{can__bus_8c}\index{src/simulators/can\_sim/can\_bus.c@{src/simulators/can\_sim/can\_bus.c}}
+\doxysection{src/core/can/can\+\_\+bus.c File Reference}
+\hypertarget{can__bus_8c}{}\label{can__bus_8c}\index{src/core/can/can\_bus.c@{src/core/can/can\_bus.c}}
 {\ttfamily \#include "{}can\+\_\+bus.\+h"{}}\newline
-{\ttfamily \#include "{}../../common/log.\+h"{}}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{can__bus_8c_a45327e2aed4ad85d8fa882e6032fe321}{can\+\_\+init}} (void)
-\item 
-bool \mbox{\hyperlink{can__bus_8c_a3a1ec4335a890bead2c48278436dcb9c}{can\+\_\+send}} (uint32\+\_\+t id, uint8\+\_\+t data)
-\end{DoxyCompactItemize}
+bool \mbox{\hyperlink{can__bus_8c_afb69097d292102f7ecd6c5ed50c93c03}{can\+\_\+bus\+\_\+init}} (\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}bus)
+\begin{DoxyCompactList}\small\item\em Initialises an empty FIFO. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__bus_8c_a4949c7cfd8ad5f621b4dd9fad9751cd0}{can\+\_\+bus\+\_\+send}} (\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}bus, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Appends a copy of {\ttfamily frame}. Returns false if the FIFO is full or the frame invalid. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__bus_8c_a411655e75a7928f35e1219ac6acc41bf}{can\+\_\+bus\+\_\+receive}} (\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}bus, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Removes the oldest frame into {\ttfamily frame}. Returns false if the FIFO is empty. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{can__bus_8c_a1bbee5737f5aabf99d712f2bb926c523}{can\+\_\+bus\+\_\+count}} (\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}bus)
+\begin{DoxyCompactList}\small\item\em Number of queued frames. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{can__bus_8c_a2b85d69faccbe8c194b9559b767d17d7}{can\+\_\+bus\+\_\+dropped}} (\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}bus)
+\begin{DoxyCompactList}\small\item\em Number of frames rejected because the FIFO was full. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{can__bus_8c_ab27c8fb222434a27d10e12eb22762aa0}{can\+\_\+bus\+\_\+destroy}} (\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}bus)
+\begin{DoxyCompactList}\small\item\em Releases the lock; the FIFO must not be used afterwards. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-func-members}
+\Hypertarget{can__bus_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{can__bus_8c_a45327e2aed4ad85d8fa882e6032fe321}\label{can__bus_8c_a45327e2aed4ad85d8fa882e6032fe321} 
-\index{can\_bus.c@{can\_bus.c}!can\_init@{can\_init}}
-\index{can\_init@{can\_init}!can\_bus.c@{can\_bus.c}}
-\doxysubsubsection{\texorpdfstring{can\_init()}{can\_init()}}
-{\footnotesize\ttfamily bool can\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+\Hypertarget{can__bus_8c_a1bbee5737f5aabf99d712f2bb926c523}\index{can\_bus.c@{can\_bus.c}!can\_bus\_count@{can\_bus\_count}}
+\index{can\_bus\_count@{can\_bus\_count}!can\_bus.c@{can\_bus.c}}
+\doxysubsubsection{\texorpdfstring{can\_bus\_count()}{can\_bus\_count()}}
+{\footnotesize\ttfamily \label{can__bus_8c_a1bbee5737f5aabf99d712f2bb926c523} 
+size\+\_\+t can\+\_\+bus\+\_\+count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}}]{bus}{}\end{DoxyParamCaption})}
 
-\Hypertarget{can__bus_8c_a3a1ec4335a890bead2c48278436dcb9c}\label{can__bus_8c_a3a1ec4335a890bead2c48278436dcb9c} 
-\index{can\_bus.c@{can\_bus.c}!can\_send@{can\_send}}
-\index{can\_send@{can\_send}!can\_bus.c@{can\_bus.c}}
-\doxysubsubsection{\texorpdfstring{can\_send()}{can\_send()}}
-{\footnotesize\ttfamily bool can\+\_\+send (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+Number of queued frames. 
+
+\Hypertarget{can__bus_8c_ab27c8fb222434a27d10e12eb22762aa0}\index{can\_bus.c@{can\_bus.c}!can\_bus\_destroy@{can\_bus\_destroy}}
+\index{can\_bus\_destroy@{can\_bus\_destroy}!can\_bus.c@{can\_bus.c}}
+\doxysubsubsection{\texorpdfstring{can\_bus\_destroy()}{can\_bus\_destroy()}}
+{\footnotesize\ttfamily \label{can__bus_8c_ab27c8fb222434a27d10e12eb22762aa0} 
+void can\+\_\+bus\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}}]{bus}{}\end{DoxyParamCaption})}
+
+
+
+Releases the lock; the FIFO must not be used afterwards. 
+
+\Hypertarget{can__bus_8c_a2b85d69faccbe8c194b9559b767d17d7}\index{can\_bus.c@{can\_bus.c}!can\_bus\_dropped@{can\_bus\_dropped}}
+\index{can\_bus\_dropped@{can\_bus\_dropped}!can\_bus.c@{can\_bus.c}}
+\doxysubsubsection{\texorpdfstring{can\_bus\_dropped()}{can\_bus\_dropped()}}
+{\footnotesize\ttfamily \label{can__bus_8c_a2b85d69faccbe8c194b9559b767d17d7} 
+uint64\+\_\+t can\+\_\+bus\+\_\+dropped (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}}]{bus}{}\end{DoxyParamCaption})}
+
+
+
+Number of frames rejected because the FIFO was full. 
+
+\Hypertarget{can__bus_8c_afb69097d292102f7ecd6c5ed50c93c03}\index{can\_bus.c@{can\_bus.c}!can\_bus\_init@{can\_bus\_init}}
+\index{can\_bus\_init@{can\_bus\_init}!can\_bus.c@{can\_bus.c}}
+\doxysubsubsection{\texorpdfstring{can\_bus\_init()}{can\_bus\_init()}}
+{\footnotesize\ttfamily \label{can__bus_8c_afb69097d292102f7ecd6c5ed50c93c03} 
+bool can\+\_\+bus\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}}]{bus}{}\end{DoxyParamCaption})}
+
+
+
+Initialises an empty FIFO. 
+
+\Hypertarget{can__bus_8c_a411655e75a7928f35e1219ac6acc41bf}\index{can\_bus.c@{can\_bus.c}!can\_bus\_receive@{can\_bus\_receive}}
+\index{can\_bus\_receive@{can\_bus\_receive}!can\_bus.c@{can\_bus.c}}
+\doxysubsubsection{\texorpdfstring{can\_bus\_receive()}{can\_bus\_receive()}}
+{\footnotesize\ttfamily \label{can__bus_8c_a411655e75a7928f35e1219ac6acc41bf} 
+bool can\+\_\+bus\+\_\+receive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}}]{bus}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Removes the oldest frame into {\ttfamily frame}. Returns false if the FIFO is empty. 
+
+\Hypertarget{can__bus_8c_a4949c7cfd8ad5f621b4dd9fad9751cd0}\index{can\_bus.c@{can\_bus.c}!can\_bus\_send@{can\_bus\_send}}
+\index{can\_bus\_send@{can\_bus\_send}!can\_bus.c@{can\_bus.c}}
+\doxysubsubsection{\texorpdfstring{can\_bus\_send()}{can\_bus\_send()}}
+{\footnotesize\ttfamily \label{can__bus_8c_a4949c7cfd8ad5f621b4dd9fad9751cd0} 
+bool can\+\_\+bus\+\_\+send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanBus}{Can\+Bus}} \texorpdfstring{$\ast$}{*}}]{bus}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Appends a copy of {\ttfamily frame}. Returns false if the FIFO is full or the frame invalid. 
 

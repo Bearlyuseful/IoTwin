@@ -1,0 +1,159 @@
+\doxysection{src/bus/bus\+\_\+server.h File Reference}
+\hypertarget{bus__server_8h}{}\label{bus__server_8h}\index{src/bus/bus\_server.h@{src/bus/bus\_server.h}}
+
+
+Virtual CAN bus over TCP.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}}
+\begin{DoxyCompactList}\small\item\em Server configuration. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structBusServerStats}{Bus\+Server\+Stats}}
+\begin{DoxyCompactList}\small\item\em Counters since start. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{bus__server_8h_ad0847debb1fd581c6ce7344e734ce4ef}{BUS\+\_\+\+SERVER\+\_\+\+DEFAULT\+\_\+\+PORT}}~8080
+\item 
+\#define \mbox{\hyperlink{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS}}~64
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Bus\+Server \mbox{\hyperlink{bus__server_8h_a2c91e21ce1fec4e1d0e7e6ef0bde7a0f}{Bus\+Server}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{bus__server_8h_a50ce920559025870425f865499475b90}{bus\+\_\+server\+\_\+default\+\_\+config}} (\mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Fills {\ttfamily config} with the defaults listed above. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bus__server_8h_ad64505e36af75d92aaf59a1c4fde3b58}{bus\+\_\+server\+\_\+create}} (const \mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Creates the server and starts listening. Returns NULL on failure (logged). \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb}{bus\+\_\+server\+\_\+port}} (const \mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}server)
+\begin{DoxyCompactList}\small\item\em Port the server listens on (useful with port 0). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277}{bus\+\_\+server\+\_\+poll}} (\mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}server, int timeout\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Waits up to {\ttfamily timeout\+\_\+ms} for network activity and processes it. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5}{bus\+\_\+server\+\_\+client\+\_\+count}} (const \mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}server)
+\begin{DoxyCompactList}\small\item\em Number of currently connected clients. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structBusServerStats}{Bus\+Server\+Stats}} \mbox{\hyperlink{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49}{bus\+\_\+server\+\_\+get\+\_\+stats}} (const \mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}server)
+\begin{DoxyCompactList}\small\item\em Snapshot of the counters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bus__server_8h_a846e70f1895f6c60a0e680c8c941636d}{bus\+\_\+server\+\_\+destroy}} (\mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}server)
+\begin{DoxyCompactList}\small\item\em Disconnects all clients and frees the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Virtual CAN bus over TCP. 
+
+Every connected client (simulator, visualizer, test tool) is a node on the bus. A frame received from one node is validated, normalised and forwarded to all other nodes -\/ like a broadcast on a physical CAN bus. Invalid lines are counted and dropped. See docs/dev/protocol.\+md.
+
+The server is single threaded\+: call \doxylink{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277}{bus\+\_\+server\+\_\+poll()} in a loop. \doxylink{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb}{bus\+\_\+server\+\_\+port()}, \doxylink{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5}{bus\+\_\+server\+\_\+client\+\_\+count()} and \doxylink{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49}{bus\+\_\+server\+\_\+get\+\_\+stats()} may be called from other threads. 
+
+\label{doc-define-members}
+\Hypertarget{bus__server_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{bus__server_8h_ad0847debb1fd581c6ce7344e734ce4ef}\index{bus\_server.h@{bus\_server.h}!BUS\_SERVER\_DEFAULT\_PORT@{BUS\_SERVER\_DEFAULT\_PORT}}
+\index{BUS\_SERVER\_DEFAULT\_PORT@{BUS\_SERVER\_DEFAULT\_PORT}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{BUS\_SERVER\_DEFAULT\_PORT}{BUS\_SERVER\_DEFAULT\_PORT}}
+{\footnotesize\ttfamily \label{bus__server_8h_ad0847debb1fd581c6ce7344e734ce4ef} 
+\#define BUS\+\_\+\+SERVER\+\_\+\+DEFAULT\+\_\+\+PORT~8080}
+
+\Hypertarget{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3}\index{bus\_server.h@{bus\_server.h}!BUS\_SERVER\_MAX\_CLIENTS@{BUS\_SERVER\_MAX\_CLIENTS}}
+\index{BUS\_SERVER\_MAX\_CLIENTS@{BUS\_SERVER\_MAX\_CLIENTS}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{BUS\_SERVER\_MAX\_CLIENTS}{BUS\_SERVER\_MAX\_CLIENTS}}
+{\footnotesize\ttfamily \label{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3} 
+\#define BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS~64}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{bus__server_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{bus__server_8h_a2c91e21ce1fec4e1d0e7e6ef0bde7a0f}\index{bus\_server.h@{bus\_server.h}!BusServer@{BusServer}}
+\index{BusServer@{BusServer}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{BusServer}{BusServer}}
+{\footnotesize\ttfamily \label{bus__server_8h_a2c91e21ce1fec4e1d0e7e6ef0bde7a0f} 
+typedef struct Bus\+Server Bus\+Server}
+
+
+
+\label{doc-func-members}
+\Hypertarget{bus__server_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5}\index{bus\_server.h@{bus\_server.h}!bus\_server\_client\_count@{bus\_server\_client\_count}}
+\index{bus\_server\_client\_count@{bus\_server\_client\_count}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_client\_count()}{bus\_server\_client\_count()}}
+{\footnotesize\ttfamily \label{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5} 
+size\+\_\+t bus\+\_\+server\+\_\+client\+\_\+count (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{}\end{DoxyParamCaption})}
+
+
+
+Number of currently connected clients. 
+
+\Hypertarget{bus__server_8h_ad64505e36af75d92aaf59a1c4fde3b58}\index{bus\_server.h@{bus\_server.h}!bus\_server\_create@{bus\_server\_create}}
+\index{bus\_server\_create@{bus\_server\_create}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_create()}{bus\_server\_create()}}
+{\footnotesize\ttfamily \label{bus__server_8h_ad64505e36af75d92aaf59a1c4fde3b58} 
+\mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*} bus\+\_\+server\+\_\+create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Creates the server and starts listening. Returns NULL on failure (logged). 
+
+\Hypertarget{bus__server_8h_a50ce920559025870425f865499475b90}\index{bus\_server.h@{bus\_server.h}!bus\_server\_default\_config@{bus\_server\_default\_config}}
+\index{bus\_server\_default\_config@{bus\_server\_default\_config}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_default\_config()}{bus\_server\_default\_config()}}
+{\footnotesize\ttfamily \label{bus__server_8h_a50ce920559025870425f865499475b90} 
+void bus\+\_\+server\+\_\+default\+\_\+config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusServerConfig}{Bus\+Server\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Fills {\ttfamily config} with the defaults listed above. 
+
+\Hypertarget{bus__server_8h_a846e70f1895f6c60a0e680c8c941636d}\index{bus\_server.h@{bus\_server.h}!bus\_server\_destroy@{bus\_server\_destroy}}
+\index{bus\_server\_destroy@{bus\_server\_destroy}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_destroy()}{bus\_server\_destroy()}}
+{\footnotesize\ttfamily \label{bus__server_8h_a846e70f1895f6c60a0e680c8c941636d} 
+void bus\+\_\+server\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{}\end{DoxyParamCaption})}
+
+
+
+Disconnects all clients and frees the server. 
+
+\Hypertarget{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49}\index{bus\_server.h@{bus\_server.h}!bus\_server\_get\_stats@{bus\_server\_get\_stats}}
+\index{bus\_server\_get\_stats@{bus\_server\_get\_stats}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_get\_stats()}{bus\_server\_get\_stats()}}
+{\footnotesize\ttfamily \label{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49} 
+\mbox{\hyperlink{structBusServerStats}{Bus\+Server\+Stats}} bus\+\_\+server\+\_\+get\+\_\+stats (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{}\end{DoxyParamCaption})}
+
+
+
+Snapshot of the counters. 
+
+\Hypertarget{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277}\index{bus\_server.h@{bus\_server.h}!bus\_server\_poll@{bus\_server\_poll}}
+\index{bus\_server\_poll@{bus\_server\_poll}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_poll()}{bus\_server\_poll()}}
+{\footnotesize\ttfamily \label{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277} 
+int bus\+\_\+server\+\_\+poll (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{, }\item[{int}]{timeout\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Waits up to {\ttfamily timeout\+\_\+ms} for network activity and processes it. 
+
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on a fatal error. 
+\end{DoxyReturn}
+\Hypertarget{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb}\index{bus\_server.h@{bus\_server.h}!bus\_server\_port@{bus\_server\_port}}
+\index{bus\_server\_port@{bus\_server\_port}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{bus\_server\_port()}{bus\_server\_port()}}
+{\footnotesize\ttfamily \label{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb} 
+uint16\+\_\+t bus\+\_\+server\+\_\+port (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structBusServer}{Bus\+Server}} \texorpdfstring{$\ast$}{*}}]{server}{}\end{DoxyParamCaption})}
+
+
+
+Port the server listens on (useful with port 0). 
+

@@ -13,17 +13,17 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../../user/quickstart/">
       
       
-        <link rel="next" href="../../api/">
+        <link rel="next" href="../architecture_overview/">
       
       
         
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -214,6 +214,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../user/quickstart/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Quickstart
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -264,26 +283,6 @@
   
   
   Architecture Decisions
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../roadmap/2025_q4.md" class="md-tabs__link">
-          
-  
-  
-  Roadmap
 
         </a>
       </li>
@@ -369,6 +368,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -388,10 +414,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -409,8 +435,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -487,22 +513,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📦 Prerequisites
+        Prerequisites
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📦 Prerequisites">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#general-requirements" class="md-nav__link">
+  <a href="#build-and-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        General Requirements
+        Build and test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run
       
     </span>
   </a>
@@ -515,22 +563,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#building-the-iotwin-core-c" class="md-nav__link">
+  <a href="#visualizer-unreal-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧱 Building the IoTwin Core (C++)
+        Visualizer (Unreal Engine)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧱 Building the IoTwin Core (C++)">
+    <nav class="md-nav" aria-label="Visualizer (Unreal Engine)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-clone-the-repository" class="md-nav__link">
+  <a href="#prerequisites_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Clone the repository
+        Prerequisites
       
     </span>
   </a>
@@ -538,10 +586,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-create-a-build-directory" class="md-nav__link">
+  <a href="#open-in-the-editor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Create a build directory
+        Open in the editor
       
     </span>
   </a>
@@ -549,82 +597,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-configure-with-cmake" class="md-nav__link">
+  <a href="#build-from-the-command-line" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Configure with CMake
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-build" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Build
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Run
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setting-up-the-iotwin-visualizer-unreal-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎮 Setting up the IoTwin Visualizer (Unreal Engine)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🎮 Setting up the IoTwin Visualizer (Unreal Engine)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-unreal-engine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Install Unreal Engine
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-open-the-unreal-project" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Open the Unreal Project
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-configure-the-visualizer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Configure the Visualizer
+        Build from the command line
       
     </span>
   </a>
@@ -652,14 +628,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../coding_guidelines.md" class="md-nav__link">
+      <a href="../architecture_overview/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Coding Guidelines
+    Architecture Overview
   
 
     
@@ -680,14 +656,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../architecture_overview.md" class="md-nav__link">
+      <a href="../protocol/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Architecture Overview
+    Bus Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../realtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Real-Time Operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packaging
   
 
     
@@ -753,10 +813,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -774,8 +834,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -799,7 +859,7 @@
   <span class="md-ellipsis">
     
   
-    ADR 0001
+    ADR 0001 Documentation
   
 
     
@@ -820,14 +880,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../adr/0002-grpc-communication-layer.md" class="md-nav__link">
+      <a href="../../adr/0002-bus-server-and-text-protocol/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ADR 0002
+    ADR 0002 Bus and Protocol
   
 
     
@@ -841,63 +901,6 @@
 
               
             
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roadmap
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Roadmap
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
               
                 
   
@@ -905,14 +908,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../roadmap/2025_q4.md" class="md-nav__link">
+      <a href="../../adr/0003-linux-rt-target-windows-best-effort/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    2025 Q4
+    ADR 0003 Platforms
   
 
     
@@ -954,79 +957,106 @@
 
 
 <h1 id="build-instructions">Build Instructions<a class="headerlink" href="#build-instructions" title="Permanent link">&para;</a></h1>
-<p>This document describes how to set up, build, and run the IoTwin project on <strong>Linux</strong>, <strong>Windows</strong>, and <strong>macOS</strong>.</p>
+<p>IoTwin has two parts that are built separately:</p>
+<ol>
+<li><strong>Core</strong> (C, CMake): <code>iotwin-bus</code>, <code>can_sim</code> and the tests.</li>
+<li><strong>Visualizer</strong> (Unreal Engine 5.6 project in <code>src/ue/IoTwin</code>).</li>
+</ol>
 <hr />
-<h2 id="prerequisites">📦 Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<h3 id="general-requirements">General Requirements<a class="headerlink" href="#general-requirements" title="Permanent link">&para;</a></h3>
+<h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Tool / Library</th>
-<th>Minimum Version</th>
+<th>Tool</th>
+<th>Version</th>
 <th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>CMake</strong></td>
-<td>3.20+</td>
-<td>Required for building the C++ components</td>
+<td>GCC</td>
+<td>11+</td>
+<td>the build enforces GCC; on Windows MSYS2 UCRT64 GCC</td>
 </tr>
 <tr>
-<td><strong>Git</strong></td>
-<td>—</td>
-<td>To clone the repository</td>
+<td>CMake</td>
+<td>3.22+</td>
+<td></td>
 </tr>
 <tr>
-<td><strong>C++ Compiler</strong></td>
-<td>C++20-compatible</td>
-<td>GCC ≥ 11, Clang ≥ 13, or MSVC 2022</td>
+<td>Ninja</td>
+<td></td>
+<td>used by the CMake presets</td>
 </tr>
 <tr>
-<td><strong>Python 3</strong></td>
-<td>3.8+</td>
-<td>Used for helper scripts</td>
+<td>Git</td>
+<td></td>
+<td>Catch2 is fetched during configure (tests)</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Linux (Debian/Ubuntu):</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>ninja-build<span class="w"> </span>git
+</code></pre></div>
+<p><strong>Windows:</strong> install <a href="https://www.msys2.org/">MSYS2</a>, then in the <em>UCRT64</em> shell:</p>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>mingw-w64-ucrt-x86_64-gcc<span class="w"> </span>mingw-w64-ucrt-x86_64-cmake<span class="w"> </span>mingw-w64-ucrt-x86_64-ninja<span class="w"> </span>git
+</code></pre></div>
+<p>Make sure <code>C:\msys64\ucrt64\bin</code> is on <code>PATH</code> if you build from PowerShell
+or Git Bash. The Windows executables are linked statically and run without
+MSYS2 installed.</p>
+<h3 id="build-and-test">Build and test<a class="headerlink" href="#build-and-test" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--preset<span class="w"> </span>gcc-debug<span class="w">          </span><span class="c1"># or gcc-release</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class="w"> </span>gcc-debug
+ctest<span class="w"> </span>--preset<span class="w"> </span>gcc-debug
+</code></pre></div>
+<p>Binaries are placed in <code>build/&lt;preset&gt;/bin/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Binary</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iotwin-bus</code></td>
+<td>virtual CAN bus server</td>
+</tr>
+<tr>
+<td><code>can_sim</code></td>
+<td>simulated light ECU</td>
+</tr>
+<tr>
+<td><code>iotwin_tests</code></td>
+<td>Catch2 test runner (used by <code>ctest</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Add <code>-DIOTWIN_WARNINGS_AS_ERRORS=ON</code> to the configure step to treat
+warnings as errors (CI does this).</p>
+<h3 id="run">Run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>build/gcc-debug/bin/iotwin-bus
+build/gcc-debug/bin/can_sim<span class="w">        </span><span class="c1"># second terminal, type 'help'</span>
+</code></pre></div>
+<p>All options: <code>--help</code>. Real-time options are described in
+<a href="../realtime/">Real-Time Operation</a>.</p>
 <hr />
-<h2 id="building-the-iotwin-core-c">🧱 Building the IoTwin Core (C++)<a class="headerlink" href="#building-the-iotwin-core-c" title="Permanent link">&para;</a></h2>
-<h3 id="1-clone-the-repository">1. Clone the repository<a class="headerlink" href="#1-clone-the-repository" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/BearlyUseful/IoTwin.git
-<span class="nb">cd</span><span class="w"> </span>IoTwin
+<h2 id="visualizer-unreal-engine">Visualizer (Unreal Engine)<a class="headerlink" href="#visualizer-unreal-engine" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites_1">Prerequisites<a class="headerlink" href="#prerequisites_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Unreal Engine <strong>5.6</strong> (Epic Games Launcher or source build)</li>
+<li>Windows: Visual Studio 2022 with the "Game development with C++" workload</li>
+</ul>
+<h3 id="open-in-the-editor">Open in the editor<a class="headerlink" href="#open-in-the-editor" title="Permanent link">&para;</a></h3>
+<p>Open <code>src/ue/IoTwin/IoTwin.uproject</code>. On first open Unreal asks to rebuild
+the <code>IoTwin</code> module - confirm with <em>Yes</em>. Start the core first, then press
+<em>Play</em>: the demo scene connects to <code>127.0.0.1:8080</code>.</p>
+<h3 id="build-from-the-command-line">Build from the command line<a class="headerlink" href="#build-from-the-command-line" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">&amp;</span> <span class="s2">"&lt;UE&gt;\Engine\Build\BatchFiles\Build.bat"</span> <span class="n">IoTwinEditor</span> <span class="n">Win64</span> <span class="n">Development</span> <span class="p">`</span>
+    <span class="n">-Project</span><span class="p">=</span><span class="s2">"$PWD\src\ue\IoTwin\IoTwin.uproject"</span> <span class="n">-WaitMutex</span>
 </code></pre></div>
-<h3 id="2-create-a-build-directory">2. Create a build directory<a class="headerlink" href="#2-create-a-build-directory" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>build
-<span class="nb">cd</span><span class="w"> </span>build
-</code></pre></div>
-<h3 id="3-configure-with-cmake">3. Configure with CMake<a class="headerlink" href="#3-configure-with-cmake" title="Permanent link">&para;</a></h3>
-<p>Linux/macOS</p>
-<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>..
-</code></pre></div>
-<p>Windows
-<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;MinGW Makefiles&quot;</span><span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>gcc<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>g++<span class="w"> </span>..
-</code></pre></div></p>
-<h3 id="4-build">4. Build<a class="headerlink" href="#4-build" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--build<span class="w"> </span>.
-</code></pre></div>
-<h3 id="5-run">5. Run<a class="headerlink" href="#5-run" title="Permanent link">&para;</a></h3>
-<p>The built binaries will be located in:
-<div class="highlight"><pre><span></span><code>build/bin/
-</code></pre></div></p>
-<h2 id="setting-up-the-iotwin-visualizer-unreal-engine">🎮 Setting up the IoTwin Visualizer (Unreal Engine)<a class="headerlink" href="#setting-up-the-iotwin-visualizer-unreal-engine" title="Permanent link">&para;</a></h2>
-<h3 id="1-install-unreal-engine">1. Install Unreal Engine<a class="headerlink" href="#1-install-unreal-engine" title="Permanent link">&para;</a></h3>
-<p>IoTwin requires Unreal Engine 5.3 or later.</p>
-<p>Linux/macOS: Install via Epic Games Launcher
-Windows: Install via Epic Games Launcher.</p>
-<p>If building from source, follow the Unreal Engine GitHub setup guide</p>
-<h3 id="2-open-the-unreal-project">2. Open the Unreal Project<a class="headerlink" href="#2-open-the-unreal-project" title="Permanent link">&para;</a></h3>
-<p>In the repository:
-<div class="highlight"><pre><span></span><code>src/ue/IoTwin/IoTwin.uproject
-</code></pre></div>
-Open this file in Unreal Engine. On first open, Unreal will prompt to rebuild missing modules — confirm with Yes.</p>
-<h3 id="3-configure-the-visualizer">3. Configure the Visualizer<a class="headerlink" href="#3-configure-the-visualizer" title="Permanent link">&para;</a></h3>
-<p>The Unreal project communicates with the IoTwin Core via local networking interfaces (default: TCP localhost).
-Ensure the backend is running before starting the simulation in the editor.</p>
+<p>Packaging a standalone build is described in <a href="../packaging/">Packaging</a>.</p>
 
 
 
@@ -1078,10 +1108,10 @@ Ensure the backend is running before starting the simulation in the editor.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.integrate", "search.suggest", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.integrate", "search.suggest", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

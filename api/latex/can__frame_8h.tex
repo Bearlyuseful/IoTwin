@@ -1,52 +1,162 @@
-\doxysection{src/simulators/can\+\_\+sim/can\+\_\+frame.h File Reference}
-\hypertarget{can__frame_8h}{}\label{can__frame_8h}\index{src/simulators/can\_sim/can\_frame.h@{src/simulators/can\_sim/can\_frame.h}}
+\doxysection{src/core/can/can\+\_\+frame.h File Reference}
+\hypertarget{can__frame_8h}{}\label{can__frame_8h}\index{src/core/can/can\_frame.h@{src/core/can/can\_frame.h}}
 
 
-Defines the data structures for standard and extended CAN frames.  
+Message-\/level model of classic CAN frames and their text encoding.  
 
 
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structCanStandardFrame}{Can\+Standard\+Frame}}
-\begin{DoxyCompactList}\small\item\em Represents a standard CAN frame (11-\/bit Identifier) \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structCanExtendedFrame}{Can\+Extended\+Frame}}
-\begin{DoxyCompactList}\small\item\em Represents an extended CAN Frame (29-\/bit Identifier) \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structCanFrame}{Can\+Frame}}
-\begin{DoxyCompactList}\small\item\em Generic CAN frame container. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactList}\small\item\em One classic CAN frame (standard or extended identifier). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}{Can\+Frame\+Type}} \{ \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92ad5962ff25acf9958205dbf7195386a40}{CAN\+\_\+\+FRAME\+\_\+\+STANDARD}}
-, \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92add2a0d944c6adf2238abb261f5f37624}{CAN\+\_\+\+FRAME\+\_\+\+EXTENDED}}
- \}
-\begin{DoxyCompactList}\small\item\em Specifies whether the CAN frame is standard or extended. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}{CAN\+\_\+\+MAX\+\_\+\+DLEN}}~8
+\item 
+\#define \mbox{\hyperlink{can__frame_8h_afe4fc3f9cab58aeeb463861289e8ce93}{CAN\+\_\+\+SFF\+\_\+\+MASK}}~0x000007\+FFu
+\item 
+\#define \mbox{\hyperlink{can__frame_8h_a83b943dca61d0aad5b07ec01c3317572}{CAN\+\_\+\+EFF\+\_\+\+MASK}}~0x1\+FFFFFFFu
+\item 
+\#define \mbox{\hyperlink{can__frame_8h_a07bb70e1eb62d64b3eca316b9b301536}{CAN\+\_\+\+FRAME\+\_\+\+TEXT\+\_\+\+MAX}}~32
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{can__frame_8h_a3cba2b615c62825074ad13f0f62c62cd}{can\+\_\+frame\+\_\+clear}} (\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Resets {\ttfamily frame} to a standard data frame with id 0 and no payload. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8h_a8dc82d098613ee8b871998816fb4b7d0}{can\+\_\+frame\+\_\+set}} (\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint32\+\_\+t id, bool extended, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint8\+\_\+t dlc)
+\begin{DoxyCompactList}\small\item\em Initialises a data frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8h_a5ec36140a3ef5ec7efac0ad5eb5786fc}{can\+\_\+frame\+\_\+is\+\_\+valid}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Checks identifier range and DLC. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8h_a82d54b7b5fc257c24d92668f9eda6503}{can\+\_\+frame\+\_\+equals}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}a, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}b)
+\begin{DoxyCompactList}\small\item\em Compares two frames (payload bytes beyond dlc are ignored). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{can__frame_8h_af5cbe2fda93c41fd84c9dc2665ffcdcc}{can\+\_\+frame\+\_\+to\+\_\+text}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Encodes {\ttfamily frame} as text (without newline). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__frame_8h_aaa5128900ed29b8a0b0a57307dfc916c}{can\+\_\+frame\+\_\+from\+\_\+text}} (const char \texorpdfstring{$\ast$}{*}text, size\+\_\+t length, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Parses one encoded frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Defines the data structures for standard and extended CAN frames. 
+Message-\/level model of classic CAN frames and their text encoding. 
 
-This header contains bit-\/accurate representations of standard(11-\/bit ID) and extended (29-\/bit ID) CAN frames as defined by ISO 11898-\/1. 
+The simulation works on the logical content of a frame (identifier, flags, payload) like Socket\+CAN does. Bit-\/level fields such as SOF, CRC, ACK or EOF are generated by real controllers and are not modelled.
 
-\doxysubsection{Enumeration Type Documentation}
-\Hypertarget{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}\label{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92} 
-\index{can\_frame.h@{can\_frame.h}!CanFrameType@{CanFrameType}}
-\index{CanFrameType@{CanFrameType}!can\_frame.h@{can\_frame.h}}
-\doxysubsubsection{\texorpdfstring{CanFrameType}{CanFrameType}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92}{Can\+Frame\+Type}}}
+Text encoding (subset of the can-\/utils cansend/candump "{}compact"{} format), one frame per line on the wire\+:
+
+123\#\+DEADBEEF standard frame, 3 hex digit identifier (\texorpdfstring{$<$}{<}= 0x7\+FF) 1F334455\#11 extended frame, 8 hex digit identifier (\texorpdfstring{$<$}{<}= 0x1\+FFFFFFF) 123\# frame without payload (DLC 0) 123\#R remote transmission request, optional DLC\+: 123\#\+R4 123\#\+DE.\+AD.\+BE \textquotesingle{}.\textquotesingle{} separators between bytes are accepted on input
+
+Output is always upper case without separators. 
+
+\label{doc-define-members}
+\Hypertarget{can__frame_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{can__frame_8h_a83b943dca61d0aad5b07ec01c3317572}\index{can\_frame.h@{can\_frame.h}!CAN\_EFF\_MASK@{CAN\_EFF\_MASK}}
+\index{CAN\_EFF\_MASK@{CAN\_EFF\_MASK}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_EFF\_MASK}{CAN\_EFF\_MASK}}
+{\footnotesize\ttfamily \label{can__frame_8h_a83b943dca61d0aad5b07ec01c3317572} 
+\#define CAN\+\_\+\+EFF\+\_\+\+MASK~0x1\+FFFFFFFu}
+
+Valid bits of a 29-\/bit identifier. \Hypertarget{can__frame_8h_a07bb70e1eb62d64b3eca316b9b301536}\index{can\_frame.h@{can\_frame.h}!CAN\_FRAME\_TEXT\_MAX@{CAN\_FRAME\_TEXT\_MAX}}
+\index{CAN\_FRAME\_TEXT\_MAX@{CAN\_FRAME\_TEXT\_MAX}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_FRAME\_TEXT\_MAX}{CAN\_FRAME\_TEXT\_MAX}}
+{\footnotesize\ttfamily \label{can__frame_8h_a07bb70e1eb62d64b3eca316b9b301536} 
+\#define CAN\+\_\+\+FRAME\+\_\+\+TEXT\+\_\+\+MAX~32}
+
+Buffer size that fits any encoded frame plus NUL. \Hypertarget{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}\index{can\_frame.h@{can\_frame.h}!CAN\_MAX\_DLEN@{CAN\_MAX\_DLEN}}
+\index{CAN\_MAX\_DLEN@{CAN\_MAX\_DLEN}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_MAX\_DLEN}{CAN\_MAX\_DLEN}}
+{\footnotesize\ttfamily \label{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43} 
+\#define CAN\+\_\+\+MAX\+\_\+\+DLEN~8}
+
+Maximum payload of a classic CAN frame. \Hypertarget{can__frame_8h_afe4fc3f9cab58aeeb463861289e8ce93}\index{can\_frame.h@{can\_frame.h}!CAN\_SFF\_MASK@{CAN\_SFF\_MASK}}
+\index{CAN\_SFF\_MASK@{CAN\_SFF\_MASK}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_SFF\_MASK}{CAN\_SFF\_MASK}}
+{\footnotesize\ttfamily \label{can__frame_8h_afe4fc3f9cab58aeeb463861289e8ce93} 
+\#define CAN\+\_\+\+SFF\+\_\+\+MASK~0x000007\+FFu}
+
+Valid bits of an 11-\/bit identifier. 
+
+\label{doc-func-members}
+\Hypertarget{can__frame_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{can__frame_8h_a3cba2b615c62825074ad13f0f62c62cd}\index{can\_frame.h@{can\_frame.h}!can\_frame\_clear@{can\_frame\_clear}}
+\index{can\_frame\_clear@{can\_frame\_clear}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_clear()}{can\_frame\_clear()}}
+{\footnotesize\ttfamily \label{can__frame_8h_a3cba2b615c62825074ad13f0f62c62cd} 
+void can\+\_\+frame\+\_\+clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
 
 
 
-Specifies whether the CAN frame is standard or extended. 
+Resets {\ttfamily frame} to a standard data frame with id 0 and no payload. 
 
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{CAN\_FRAME\_STANDARD@{CAN\_FRAME\_STANDARD}!can\_frame.h@{can\_frame.h}}\index{can\_frame.h@{can\_frame.h}!CAN\_FRAME\_STANDARD@{CAN\_FRAME\_STANDARD}}}\Hypertarget{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92ad5962ff25acf9958205dbf7195386a40}\label{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92ad5962ff25acf9958205dbf7195386a40} 
-CAN\+\_\+\+FRAME\+\_\+\+STANDARD&11-\/bit identifier frame. \\
+\Hypertarget{can__frame_8h_a82d54b7b5fc257c24d92668f9eda6503}\index{can\_frame.h@{can\_frame.h}!can\_frame\_equals@{can\_frame\_equals}}
+\index{can\_frame\_equals@{can\_frame\_equals}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_equals()}{can\_frame\_equals()}}
+{\footnotesize\ttfamily \label{can__frame_8h_a82d54b7b5fc257c24d92668f9eda6503} 
+bool can\+\_\+frame\+\_\+equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Compares two frames (payload bytes beyond dlc are ignored). 
+
+\Hypertarget{can__frame_8h_aaa5128900ed29b8a0b0a57307dfc916c}\index{can\_frame.h@{can\_frame.h}!can\_frame\_from\_text@{can\_frame\_from\_text}}
+\index{can\_frame\_from\_text@{can\_frame\_from\_text}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_from\_text()}{can\_frame\_from\_text()}}
+{\footnotesize\ttfamily \label{can__frame_8h_aaa5128900ed29b8a0b0a57307dfc916c} 
+bool can\+\_\+frame\+\_\+from\+\_\+text (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Parses one encoded frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Characters of the frame, not necessarily NUL terminated. \\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{CAN\_FRAME\_EXTENDED@{CAN\_FRAME\_EXTENDED}!can\_frame.h@{can\_frame.h}}\index{can\_frame.h@{can\_frame.h}!CAN\_FRAME\_EXTENDED@{CAN\_FRAME\_EXTENDED}}}\Hypertarget{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92add2a0d944c6adf2238abb261f5f37624}\label{can__frame_8h_a3ebfd1ad98ad10d5853e00abfbd0cb92add2a0d944c6adf2238abb261f5f37624} 
-CAN\+\_\+\+FRAME\+\_\+\+EXTENDED&29-\/bit identifier frame. \\
+{\em length} & Number of characters in {\ttfamily text}. \\
 \hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success; {\ttfamily frame} is left untouched on failure. 
+\end{DoxyReturn}
+\Hypertarget{can__frame_8h_a5ec36140a3ef5ec7efac0ad5eb5786fc}\index{can\_frame.h@{can\_frame.h}!can\_frame\_is\_valid@{can\_frame\_is\_valid}}
+\index{can\_frame\_is\_valid@{can\_frame\_is\_valid}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_is\_valid()}{can\_frame\_is\_valid()}}
+{\footnotesize\ttfamily \label{can__frame_8h_a5ec36140a3ef5ec7efac0ad5eb5786fc} 
+bool can\+\_\+frame\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
 
-\end{DoxyEnumFields}
+
+
+Checks identifier range and DLC. 
+
+\Hypertarget{can__frame_8h_a8dc82d098613ee8b871998816fb4b7d0}\index{can\_frame.h@{can\_frame.h}!can\_frame\_set@{can\_frame\_set}}
+\index{can\_frame\_set@{can\_frame\_set}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_set()}{can\_frame\_set()}}
+{\footnotesize\ttfamily \label{can__frame_8h_a8dc82d098613ee8b871998816fb4b7d0} 
+bool can\+\_\+frame\+\_\+set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint32\+\_\+t}]{id}{, }\item[{bool}]{extended}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint8\+\_\+t}]{dlc}{}\end{DoxyParamCaption})}
+
+
+
+Initialises a data frame. 
+
+\begin{DoxyReturn}{Returns}
+false (and a cleared frame) if id or dlc are out of range. 
+\end{DoxyReturn}
+\Hypertarget{can__frame_8h_af5cbe2fda93c41fd84c9dc2665ffcdcc}\index{can\_frame.h@{can\_frame.h}!can\_frame\_to\_text@{can\_frame\_to\_text}}
+\index{can\_frame\_to\_text@{can\_frame\_to\_text}!can\_frame.h@{can\_frame.h}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_to\_text()}{can\_frame\_to\_text()}}
+{\footnotesize\ttfamily \label{can__frame_8h_af5cbe2fda93c41fd84c9dc2665ffcdcc} 
+int can\+\_\+frame\+\_\+to\+\_\+text (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Encodes {\ttfamily frame} as text (without newline). 
+
+\begin{DoxyReturn}{Returns}
+Number of characters written (excluding NUL) or -\/1 if the frame is invalid or the buffer is too small. 
+\end{DoxyReturn}

@@ -1,0 +1,72 @@
+\doxysection{net.\+h}
+\hypertarget{net_8h_source}{}\label{net_8h_source}\index{src/communication/tcp/net.h@{src/communication/tcp/net.h}}
+\mbox{\hyperlink{net_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_NET\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_NET\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ uintptr\_t\ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}};\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ NET\_INVALID\_SOCKET\ ((net\_socket\_t)\ \string~(uintptr\_t)0)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}};}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ NET\_INVALID\_SOCKET\ (-\/1)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ NET\_RECV\_CLOSED\ 0\ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ NET\_RECV\_ERROR\ (-\/1)\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ NET\_RECV\_WOULD\_BLOCK\ (-\/2)\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ NET\_POLL\_IN\ 0x1\ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ NET\_POLL\_OUT\ 0x2\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ NET\_POLL\_ERR\ 0x4\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ NET\_POLL\_HUP\ 0x8\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ NET\_POLL\_MAX\ 128}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ \mbox{\hyperlink{structNetPollFd_a273fa5b92c8886ba3fb6c35067ec1cb4}{socket}};\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structNetPollFd_a8d17260def323bcf334317030b0b9773}{events}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structNetPollFd_a6b3ebb61d16ac2b92a1e81442bd84328}{revents}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00053\ \}\ \mbox{\hyperlink{structNetPollFd}{NetPollFd}};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{net_8h_a918562542524de03184f138af40a9d63}{net\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{net_8h_a80e1786701da5f7d8ec92ef997909106}{net\_cleanup}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ \mbox{\hyperlink{net_8h_ad060ea9167b864135cf10d565a6ecd23}{net\_connect\_tcp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host,\ uint16\_t\ port);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00069\ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ \mbox{\hyperlink{net_8h_ada822b25d0d25e753f9d3b1156053402}{net\_listen\_tcp}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ bind\_address,\ uint16\_t\ port,\ \textcolor{keywordtype}{int}\ backlog);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ \mbox{\hyperlink{net_8h_ae0ba5046f8b13ff3619ce546bebc827b}{net\_accept}}(\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ listener,\ \textcolor{keywordtype}{char}*\ peer,\ \textcolor{keywordtype}{size\_t}\ peer\_size);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ uint16\_t\ \mbox{\hyperlink{net_8h_a4f3d2c6573d5b378fd3bbb06768efb6d}{net\_local\_port}}(\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ socket);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{net_8h_af639b53af266e50cfdcc203224c2f905}{net\_set\_nonblocking}}(\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ socket,\ \textcolor{keywordtype}{bool}\ nonblocking);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{net_8h_aec6ff90c6613781c56b1f5877bf43691}{net\_send\_all}}(\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ socket,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{int}\ timeout\_ms);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{net_8h_ad3fc9c7449f5fb4e158856cecff1161f}{net\_recv}}(\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ socket,\ \textcolor{keywordtype}{void}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{net_8h_a2b9beae339774515025e2613a5937cca}{net\_poll}}(\mbox{\hyperlink{structNetPollFd}{NetPollFd}}*\ fds,\ \textcolor{keywordtype}{size\_t}\ count,\ \textcolor{keywordtype}{int}\ timeout\_ms);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00103\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{net_8h_ac4db60e011fea57d53bea0f06154add3}{net\_close}}(\mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ socket);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{net_8h_a912eab893c5e9a40c94bc55a05eddd40}{net\_last\_error}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00109\ \}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_NET\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
