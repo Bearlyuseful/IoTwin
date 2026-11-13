@@ -1173,10 +1173,14 @@
 <h1 id="packaging">Packaging<a class="headerlink" href="#packaging" title="Permanent link">&para;</a></h1>
 <p><code>tools/package.ps1</code> produces a self-contained Windows release:</p>
 <div class="highlight"><pre><span></span><code>dist/IoTwin-&lt;version&gt;-win64/
-  bin/iotwin-bus.exe        static MinGW build, no runtime DLLs needed
-  bin/can_sim.exe
+  bin/                      static MinGW builds, no runtime DLLs needed:
+                            iotwin-bus, can_sim, serial_bridge, can_monitor,
+                            uds_client, can_replay, can_scenario
+  firmware/                 NUCLEO-G0B1RE gateway (.bin, .hex)
+  data/                     DBC, component database, systems, scenarios
   Visualizer/IoTwin.exe     cooked Unreal build (Win64)
   start-demo.bat            starts bus, ECU and visualizer
+  start-demo-hardware.bat   the same plus the NUCLEO gateway (COM port)
   README.txt, LICENSE
 dist/IoTwin-&lt;version&gt;-win64.zip
 </code></pre></div>
@@ -1204,7 +1208,7 @@ dist/IoTwin-&lt;version&gt;-win64.zip
 </tr>
 <tr>
 <td><code>-Version</code></td>
-<td><code>0.1.0</code></td>
+<td><code>0.3.0</code></td>
 <td>used in the package name</td>
 </tr>
 <tr>
