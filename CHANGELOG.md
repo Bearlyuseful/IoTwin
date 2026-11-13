@@ -1,38 +1,38 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 - 2026-11-13
 
-### Power and dimming
-- `libs/power`: electrical model of a switched output: supply with internal
-  resistance, slow fuse (I2t), smart high-side switch with PWM, current limit
-  and restart, resistive load.
-- Light ECU: brightness 0..100 % (`DIMMER_CMD` 0x201, console `dim`, DID
-  0105), `LAMP_CMD` carries it in byte 1; `LAMP_STATUS` (0x101) with current,
-  supply voltage, duty and flags every 200 ms; DIDs 0106 current, 0107 fuse.
-- The existing faults act on the circuit; new fault `overload`: overcurrent
-  DTC `B1001-19`, the 3 A fuse blows after about 2 s (`B1003-13`),
-  `fuse replace`.
-- Gateway firmware: LD4 dimmed with TIM2 PWM; DID 0204 compares commanded
-  and measured brightness (verified on the NUCLEO).
-- Visualizer: mouse wheel dims, the lamp follows the brightness, the HUD
-  shows current and voltage.
-- Scenarios `dimmer` and `overload-fuse`; `can_scenario` expectations also
-  see reactions that arrive while an action is still running.
+Next phase, features A-E: component database, 2D schematic view, UDS
+diagnostics, scenarios with fault injection, power model and dimming.
 
-### Scenarios and faults
-- `iotwin-bus` fault injection of the medium, controlled with `!fault`
-  lines: frame loss (optionally by id, reproducible with a seed), delay
-  with jitter (no reordering), silence; `!status` with counters.
-- Test bench channel: `@<node> <command>` reaches only registered nodes;
-  `can_sim` registers as `ecu` and runs e.g. `fault short on`.
-- `can_monitor --log` records in candump -L format, `can_replay` plays such
-  logs (also from can-utils) with the original timing, speed factor, loop
-  and id filter.
-- `can_scenario` runs scripts with `send`, `expect`, `expect-not`, `wait`,
-  `bench`, `bus`, `uds`; seven scenarios of the light demo run as CTest
-  `scenarios` (fresh bus and ECU each, Linux and Windows).
-- Visualizer: the schematic shows injected bus faults (red bus, fault text,
-  lost and delayed frames); it registers on the bus as `visualizer`.
+### Compatibility
+- `LAMP_CMD` has two bytes (brightness in byte 1); receivers treat a missing
+  byte as 100 %, so older senders still work.
+- The release package contains `data/` (DBC, components, systems,
+  scenarios) instead of `config/`.
+- The bus protocol accepts control (`!`) and test bench (`@`) lines; nodes
+  that never send them are not affected.
+
+### Component database
+- STM32G0B1: USART, LPUART, SPI, I2C, UCPD and USB instances verified from
+  the ST device header.
+- `data/components/`: parts with characteristics for simulation (value or
+  min/typ/max, unit, source, verified flag), interfaces, ports and contained
+  parts; first entries: STM32G0B1RET6 and NUCLEO-G0B1RE.
+- `data/systems/light-demo.json`: nodes, buses, links and messages of the
+  demo - the input for the planned schematic view.
+- JSON schemas for editor support and `tools/validate_data.py` (CTest).
+
+### Schematic view (visualizer)
+- TAB switches between the 3D scene and a 2D schematic built from
+  `data/systems/light-demo.json`: nodes, CAN bus with members, USB link.
+- Live traffic: every frame decoded with the DBC (value tables, Intel and
+  Motorola signals) at the node that sent it, animated from producer to
+  consumers, node status, frame rate and message log.
+- Detail panel per node incl. characteristics from the component database
+  (unverified values marked).
+- The release package now contains the whole `data/` folder (replaces `config/`).
+- Automation tests for DBC reader, system description and component catalog.
 
 ### UDS diagnostics
 - `libs/can/uds`: ISO 14229-1 server on ISO-TP, portable C without heap (host
@@ -51,28 +51,37 @@
 - Diagnostic messages in the DBC and the system description
   (`"protocol": "uds"`); the schematic view decodes them and shows the tester.
 
-### Component database
-- STM32G0B1: USART, LPUART, SPI, I2C, UCPD and USB instances verified from
-  the ST device header.
+### Scenarios and faults
+- `iotwin-bus` fault injection of the medium, controlled with `!fault`
+  lines: frame loss (optionally by id, reproducible with a seed), delay
+  with jitter (no reordering), silence; `!status` with counters.
+- Test bench channel: `@<node> <command>` reaches only registered nodes;
+  `can_sim` registers as `ecu` and runs e.g. `fault short on`.
+- `can_monitor --log` records in candump -L format, `can_replay` plays such
+  logs (also from can-utils) with the original timing, speed factor, loop
+  and id filter.
+- `can_scenario` runs scripts with `send`, `expect`, `expect-not`, `wait`,
+  `bench`, `bus`, `uds`; seven scenarios of the light demo run as CTest
+  `scenarios` (fresh bus and ECU each, Linux and Windows).
+- Visualizer: the schematic shows injected bus faults (red bus, fault text,
+  lost and delayed frames); it registers on the bus as `visualizer`.
 
-### Schematic view (visualizer)
-- TAB switches between the 3D scene and a 2D schematic built from
-  `data/systems/light-demo.json`: nodes, CAN bus with members, USB link.
-- Live traffic: every frame decoded with the DBC (value tables, Intel and
-  Motorola signals) at the node that sent it, animated from producer to
-  consumers, node status, frame rate and message log.
-- Detail panel per node incl. characteristics from the component database
-  (unverified values marked).
-- The release package now contains the whole `data/` folder (replaces `config/`).
-- Automation tests for DBC reader, system description and component catalog.
-
-### Component database
-- `data/components/`: parts with characteristics for simulation (value or
-  min/typ/max, unit, source, verified flag), interfaces, ports and contained
-  parts; first entries: STM32G0B1RET6 and NUCLEO-G0B1RE.
-- `data/systems/light-demo.json`: nodes, buses, links and messages of the
-  demo - the input for the planned schematic view.
-- JSON schemas for editor support and `tools/validate_data.py` (CTest).
+### Power and dimming
+- `libs/power`: electrical model of a switched output: supply with internal
+  resistance, slow fuse (I2t), smart high-side switch with PWM, current limit
+  and restart, resistive load.
+- Light ECU: brightness 0..100 % (`DIMMER_CMD` 0x201, console `dim`, DID
+  0105), `LAMP_CMD` carries it in byte 1; `LAMP_STATUS` (0x101) with current,
+  supply voltage, duty and flags every 200 ms; DIDs 0106 current, 0107 fuse.
+- The existing faults act on the circuit; new fault `overload`: overcurrent
+  DTC `B1001-19`, the 3 A fuse blows after about 2 s (`B1003-13`),
+  `fuse replace`.
+- Gateway firmware: LD4 dimmed with TIM2 PWM; DID 0204 compares commanded
+  and measured brightness (verified on the NUCLEO).
+- Visualizer: mouse wheel dims, the lamp follows the brightness, the HUD
+  shows current and voltage.
+- Scenarios `dimmer` and `overload-fuse`; `can_scenario` expectations also
+  see reactions that arrive while an action is still running.
 
 ### Repository
 - Flat layout: `libs/` (shared C libraries), `apps/` (programs), `firmware/`,

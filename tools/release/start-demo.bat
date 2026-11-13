@@ -12,7 +12,8 @@ start "" Visualizer\IoTwin.exe -windowed -ResX=1600 -ResY=900
 echo.
 echo IoTwin started:
 echo   - "IoTwin Bus" window:     bus traffic
-echo   - "IoTwin CAN-Sim" window: type 'help' for commands (lamp on/off, blink 500, ...)
-echo   - Visualizer:              click the wall switch or press SPACE
+echo   - "IoTwin CAN-Sim" window: type 'help' for commands (lamp on/off, dim 50, fault overload on, ...)
+echo   - Visualizer:              click the wall switch or press SPACE, mouse wheel dims, TAB schematic
+echo   - Diagnostics:             bin\uds_client scan   /   scenarios: bin\can_scenario data\scenarios\light-demo\dimmer.scn
 echo.
 echo Close the windows (or Ctrl+C) to stop.

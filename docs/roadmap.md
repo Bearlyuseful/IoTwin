@@ -45,7 +45,8 @@ Order of work:
 | E | **More devices and electrical model** ✅ (dimmer, current, fuse) | dimmable lamp with PWM (also on the NUCLEO LED), electrical model of the output with supply, fuse and smart switch, `LAMP_STATUS` ([Power and Dimming](dev/power.md)); open: sensors, fan/motor |
 | F | **Real bus and real time** | transceiver + second node, PREEMPT_RT measurements (needs hardware) |
 
-Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup.
+Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup (all done).
+Release 0.3.0 contains features A-E.
 
 ## Order of the post-MVP steps
 
