@@ -20,6 +20,14 @@ Roadmap steps 1-3: a real microcontroller on the virtual bus.
 - Tests: gateway logic, SLCAN, bit timing, bridge, PTY serial port and an
   end-to-end test with the real bridge process (Linux).
 
+### CAN tools (roadmap steps 4 and 5)
+- DBC reader (messages, signals, multiplexing, value tables, extended ids)
+  and a signal codec for Intel/Motorola layouts, sign, factor and offset.
+- `can_monitor`: live view of the bus, decoded with `config/can/iotwin.dbc`.
+- ISO-TP (ISO 15765-2) library: segmentation, flow control with block size
+  and STmin, WAIT/OVFLW, N_Bs/N_Cr timeouts, padding - portable, no heap.
+- `socketcan_bridge` (Linux): any SocketCAN interface <-> iotwin-bus.
+
 ### Tooling
 - CI builds the firmware; `tools/flash-firmware.ps1`; release package with
   firmware and `start-demo-hardware.bat`.

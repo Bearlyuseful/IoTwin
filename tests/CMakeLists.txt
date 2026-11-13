@@ -17,6 +17,9 @@ add_executable(iotwin_tests
     test_can_bus.cpp
     test_can_frame.cpp
     test_can_bit_timing.cpp
+    test_can_signal.cpp
+    test_dbc.cpp
+    test_isotp.cpp
     test_slcan.cpp
     test_line_reader.cpp
     test_light_ecu.cpp
@@ -26,6 +29,7 @@ add_executable(iotwin_tests
     test_bridge_core.cpp
     test_serial_port.cpp
     test_serial_bridge_e2e.cpp
+    test_socketcan.cpp
 )
 
 target_link_libraries(iotwin_tests PRIVATE
@@ -42,12 +46,17 @@ target_link_libraries(iotwin_tests PRIVATE
     Catch2::Catch2WithMain
 )
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_link_libraries(iotwin_tests PRIVATE util) # openpty for the serial port tests
+    target_link_libraries(iotwin_tests PRIVATE util iotwin_socketcan) # openpty, SocketCAN
+    add_dependencies(iotwin_tests socketcan_bridge)
+    target_compile_definitions(iotwin_tests PRIVATE SOCKETCAN_BRIDGE_PATH="$<TARGET_FILE:socketcan_bridge>")
 endif()
 # The end-to-end test starts the real serial_bridge executable.
 add_dependencies(iotwin_tests serial_bridge)
-target_compile_definitions(iotwin_tests PRIVATE SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>")
+target_compile_definitions(iotwin_tests PRIVATE
+    SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>"
+    IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/config/can/iotwin.dbc"
+)
 
 # register with CTest
 include(Catch)
-catch_discover_tests(iotwin_tests)
+catch_discover_tests(iotwin_tests PROPERTIES SKIP_RETURN_CODE 4) # 4 = Catch2 SKIP
