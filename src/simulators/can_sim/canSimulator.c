@@ -10,12 +10,15 @@ void* receive_thread(void* arg) {
   uint8_t buffer[16];
 
   while(1){
-    uint8_t bytes_read = read(sim->socket_fd, buffer, sizeof(buffer));
-    
-    if(bytes_read > 0){
-      for(uint8_t i = 0; i < bytes_read; i++) {
-        printf("Received byte %d: %d\n", i, buffer[i]);
-      }
+    ssize_t bytes_read = read(sim->socket_fd, buffer, sizeof(buffer));
+
+    if(bytes_read <= 0){
+      /* 0 = peer closed the connection, <0 = error: stop instead of spinning */
+      printf("Connection closed\n");
+      return NULL;
+    }
+    for(ssize_t i = 0; i < bytes_read; i++) {
+      printf("Received byte %zd: %d\n", i, buffer[i]);
     }
   }
 }

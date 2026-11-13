@@ -12,14 +12,8 @@ add_executable(test_can_sim
     test_can_sim.cpp
 )
 
-target_include_directories(test_can_sim PRIVATE
-    ${PROJECT_SOURCE_DIR}/src/common
-    ${PROJECT_SOURCE_DIR}/src/simulators/can_sim
-)
-
 target_link_libraries(test_can_sim PRIVATE
     can_sim
-    common
     Catch2::Catch2WithMain
 )
 

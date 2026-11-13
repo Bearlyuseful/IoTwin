@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "canSimulator.h"
-#include "../../common/socketClient.h"
+#include "socketClient.h"
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>

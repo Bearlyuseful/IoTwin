@@ -1,5 +1,5 @@
 #include "can_bus.h"
-#include "../../common/log.h"
+#include "log.h"
 
 static CanFrame buffer[CAN_BUS_BUFFER_SIZE];
 static uint8_t head = 0;
