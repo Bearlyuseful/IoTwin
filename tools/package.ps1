@@ -26,7 +26,10 @@ param(
     [switch]$IncludeDebugInfo,
     [switch]$SkipTests,
     # Do not build the NUCLEO-G0B1RE firmware (needs arm-none-eabi-gcc).
-    [switch]$SkipFirmware
+    [switch]$SkipFirmware,
+    # Use the existing editor binaries for cooking (needed while an editor with
+    # Live Coding is running, which blocks rebuilding the editor module).
+    [switch]$SkipEditorBuild
 )
 
 $ErrorActionPreference = "Stop"
@@ -92,6 +95,7 @@ if (-not $SkipVisualizer) {
         "-archive", "-archivedirectory=$UeStaging"
     )
     if (-not $IncludeDebugInfo) { $UatArgs += "-nodebuginfo" }
+    if ($SkipEditorBuild) { $UatArgs += "-nocompileeditor" }
     if (Test-Path $UeStaging) { Remove-Item $UeStaging -Recurse -Force }
     Invoke-Checked $RunUAT $UatArgs
 }
