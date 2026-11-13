@@ -112,6 +112,11 @@ Functions</h2></td></tr>
 <tr class="memitem:af6a218803b32fbde3610564a990c39a5" id="r_af6a218803b32fbde3610564a990c39a5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6a218803b32fbde3610564a990c39a5">board_millis</a> (void)</td></tr>
 <tr class="memdesc:af6a218803b32fbde3610564a990c39a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Milliseconds since start (SysTick).  <br /></td></tr>
 <tr class="memitem:a05173a3c0b7188496922ec5d4e4a6b34" id="r_a05173a3c0b7188496922ec5d4e4a6b34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05173a3c0b7188496922ec5d4e4a6b34">board_led_set</a> (bool on)</td></tr>
+<tr class="memdesc:a05173a3c0b7188496922ec5d4e4a6b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">LD4 on or off (100 % / 0 %).  <br /></td></tr>
+<tr class="memitem:a4e56d403b56735dc46bad9fc68836ecc" id="r_a4e56d403b56735dc46bad9fc68836ecc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e56d403b56735dc46bad9fc68836ecc">board_led_set_level</a> (uint8_t percent)</td></tr>
+<tr class="memdesc:a4e56d403b56735dc46bad9fc68836ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">LD4 brightness 0..100 %: TIM2 CH1 PWM on PA5 (AF2), 1 kHz.  <br /></td></tr>
+<tr class="memitem:abacf1dedceee883f48bc9e22e78836a6" id="r_abacf1dedceee883f48bc9e22e78836a6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abacf1dedceee883f48bc9e22e78836a6">board_led_measure_percent</a> (void)</td></tr>
+<tr class="memdesc:abacf1dedceee883f48bc9e22e78836a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measures the duty cycle on the LED pin by sampling its input register for about 5 ms (self test of the PWM, independent of the timer registers).  <br /></td></tr>
 <tr class="memitem:ae1f776c3e6f3e8528ad15f3488bf60ab" id="r_ae1f776c3e6f3e8528ad15f3488bf60ab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1f776c3e6f3e8528ad15f3488bf60ab">board_button_raw</a> (void)</td></tr>
 <tr class="memdesc:ae1f776c3e6f3e8528ad15f3488bf60ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw (not debounced) state of the user button, true = pressed.  <br /></td></tr>
 </table>
@@ -206,6 +211,25 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="abacf1dedceee883f48bc9e22e78836a6" name="abacf1dedceee883f48bc9e22e78836a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abacf1dedceee883f48bc9e22e78836a6">&#9670;&#160;</a></span>board_led_measure_percent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t board_led_measure_percent </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Measures the duty cycle on the LED pin by sampling its input register for about 5 ms (self test of the PWM, independent of the timer registers). </p>
+
+</div>
+</div>
 <a id="a05173a3c0b7188496922ec5d4e4a6b34" name="a05173a3c0b7188496922ec5d4e4a6b34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05173a3c0b7188496922ec5d4e4a6b34">&#9670;&#160;</a></span>board_led_set()</h2>
 
@@ -220,6 +244,27 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>LD4 on or off (100 % / 0 %). </p>
+
+</div>
+</div>
+<a id="a4e56d403b56735dc46bad9fc68836ecc" name="a4e56d403b56735dc46bad9fc68836ecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e56d403b56735dc46bad9fc68836ecc">&#9670;&#160;</a></span>board_led_set_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void board_led_set_level </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>percent</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>LD4 brightness 0..100 %: TIM2 CH1 PWM on PA5 (AF2), 1 kHz. </p>
 
 </div>
 </div>

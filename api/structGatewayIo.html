@@ -104,7 +104,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae467a6410407578ccfc2c3e1350e7c3f" id="r_ae467a6410407578ccfc2c3e1350e7c3f"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae467a6410407578ccfc2c3e1350e7c3f">can_stop</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>)</td></tr>
 <tr class="memitem:a95ef5812185be8f5d60995c14456e91b" id="r_a95ef5812185be8f5d60995c14456e91b"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95ef5812185be8f5d60995c14456e91b">can_send</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, const <a class="el" href="structCanFrame.html">CanFrame</a> *frame)</td></tr>
 <tr class="memitem:a7fb34ee7e645ab9d5266b607d1aac768" id="r_a7fb34ee7e645ab9d5266b607d1aac768"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fb34ee7e645ab9d5266b607d1aac768">can_status</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, <a class="el" href="structGatewayCanStatus.html">GatewayCanStatus</a> *status)</td></tr>
-<tr class="memitem:ad0a71227d1f0d8e9ed1af902237b34ba" id="r_ad0a71227d1f0d8e9ed1af902237b34ba"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0a71227d1f0d8e9ed1af902237b34ba">led_set</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, bool on)</td></tr>
+<tr class="memitem:a6629960794b516a467a039be54a933de" id="r_a6629960794b516a467a039be54a933de"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6629960794b516a467a039be54a933de">led_set_level</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, uint8_t percent)</td></tr>
+<tr class="memitem:ab2f35ba674e0456250f9f5d873c58a79" id="r_ab2f35ba674e0456250f9f5d873c58a79"><td class="memItemLeft" align="right" valign="top">uint8_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2f35ba674e0456250f9f5d873c58a79">led_measure</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>)</td></tr>
 <tr class="memitem:ab99a1574b73cace1286852d887e4117a" id="r_ab99a1574b73cace1286852d887e4117a"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab99a1574b73cace1286852d887e4117a">system_reset</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>)</td></tr>
 <tr class="memitem:a5dda457906e8444de07286a6d1b0a32d" id="r_a5dda457906e8444de07286a6d1b0a32d"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dda457906e8444de07286a6d1b0a32d">unique_id</a> )(void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, uint8_t out[12])</td></tr>
 <tr class="memitem:af34ecbc044828591c68b10a51199707d" id="r_af34ecbc044828591c68b10a51199707d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a></td></tr>
@@ -182,17 +183,33 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad0a71227d1f0d8e9ed1af902237b34ba" name="ad0a71227d1f0d8e9ed1af902237b34ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0a71227d1f0d8e9ed1af902237b34ba">&#9670;&#160;</a></span>led_set</h2>
+<a id="ab2f35ba674e0456250f9f5d873c58a79" name="ab2f35ba674e0456250f9f5d873c58a79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2f35ba674e0456250f9f5d873c58a79">&#9670;&#160;</a></span>led_measure</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* GatewayIo::led_set) (void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, bool on)</td>
+          <td class="memname">uint8_t(* GatewayIo::led_measure) (void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Optional: duty cycle measured on the LED pin (self test of the PWM). </p>
+
+</div>
+</div>
+<a id="a6629960794b516a467a039be54a933de" name="a6629960794b516a467a039be54a933de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6629960794b516a467a039be54a933de">&#9670;&#160;</a></span>led_set_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* GatewayIo::led_set_level) (void *<a class="el" href="#af34ecbc044828591c68b10a51199707d">context</a>, uint8_t percent)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>0 = off, 100 = full </p>
 
 </div>
 </div>

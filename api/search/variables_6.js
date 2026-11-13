@@ -20,5 +20,7 @@ var searchData=
   ['framesdropped_17',['FramesDropped',['../structFIoTwinBusStatus.html#a6ed6b6651506e2f9a5a442353ed88f69',1,'FIoTwinBusStatus']]],
   ['framesrouted_18',['FramesRouted',['../structFIoTwinBusStatus.html#ac4ad466aa7adbc9753f730a735fa97ce',1,'FIoTwinBusStatus']]],
   ['from_19',['From',['../structFSchematicPulse.html#a4450333bbcaa5c4cae2b3752528569eb',1,'FSchematicPulse::From'],['../structFSystemLink.html#a02ec6ff13659192a8e71e38159173e1c',1,'FSystemLink::From']]],
-  ['functional_5fid_20',['functional_id',['../structUdsServerConfig.html#ad308c3dc123e5afbc7d4f872b73ba22f',1,'UdsServerConfig']]]
+  ['functional_5fid_20',['functional_id',['../structUdsServerConfig.html#ad308c3dc123e5afbc7d4f872b73ba22f',1,'UdsServerConfig']]],
+  ['fuse_21',['fuse',['../structPowerPath.html#a3156aa2da22d148811f8540fd36fc54d',1,'PowerPath']]],
+  ['fuse_5fblown_22',['fuse_blown',['../structPowerReading.html#a8e2545e128d58acdbc25576aa461ee94',1,'PowerReading']]]
 ];

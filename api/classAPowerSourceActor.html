@@ -105,6 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3f6f8ae7c44cc508d9455343deb13448" id="r_a3f6f8ae7c44cc508d9455343deb13448"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f6f8ae7c44cc508d9455343deb13448">APowerSourceActor</a> ()</td></tr>
 <tr class="memitem:aac2b771a76e833f027fbbd2630fb367b" id="r_aac2b771a76e833f027fbbd2630fb367b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac2b771a76e833f027fbbd2630fb367b">SetOutputEnabled</a> (bool bEnabled)</td></tr>
 <tr class="memitem:a4ca57b51ec19162748ab86b26d667511" id="r_a4ca57b51ec19162748ab86b26d667511"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ca57b51ec19162748ab86b26d667511">IsOutputEnabled</a> () const</td></tr>
+<tr class="memitem:af506aa2e41ee9abb860feec86d9e459f" id="r_af506aa2e41ee9abb860feec86d9e459f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af506aa2e41ee9abb860feec86d9e459f">GetOutputLevel</a> () const</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -113,6 +114,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a31186cc3354eecc502498833ffc4281a" id="r_a31186cc3354eecc502498833ffc4281a"><td class="memItemLeft" align="right" valign="top">TObjectPtr&lt; UMaterialInterface &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31186cc3354eecc502498833ffc4281a">HousingBaseMaterial</a></td></tr>
 <tr class="memitem:a40238d0de62387b2ce509ef50b29627c" id="r_a40238d0de62387b2ce509ef50b29627c"><td class="memItemLeft" align="right" valign="top">UCanSignalComponent *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40238d0de62387b2ce509ef50b29627c">RelayControl</a></td></tr>
 <tr class="memitem:a2eec9aaa0a87f837f447303c1338bc6a" id="r_a2eec9aaa0a87f837f447303c1338bc6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2eec9aaa0a87f837f447303c1338bc6a">bControlledByCan</a> = false</td></tr>
+<tr class="memitem:a696aab603a86094f0937381b753a1f59" id="r_a696aab603a86094f0937381b753a1f59"><td class="memItemLeft" align="right" valign="top">int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a696aab603a86094f0937381b753a1f59">LevelByteIndex</a> = 1</td></tr>
 <tr class="memitem:a119460e295069e388a78c0411ac8b129" id="r_a119460e295069e388a78c0411ac8b129"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a119460e295069e388a78c0411ac8b129">bOutputEnabled</a> = true</td></tr>
 <tr class="memitem:a1f2c215f80fb8bdb152db7f8d70c1969" id="r_a1f2c215f80fb8bdb152db7f8d70c1969"><td class="memItemLeft" align="right" valign="top">FOnRelayChanged&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f2c215f80fb8bdb152db7f8d70c1969">OnRelayChanged</a></td></tr>
 </table><table class="memberdecls">
@@ -161,6 +163,32 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="af506aa2e41ee9abb860feec86d9e459f" name="af506aa2e41ee9abb860feec86d9e459f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af506aa2e41ee9abb860feec86d9e459f">&#9670;&#160;</a></span>GetOutputLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float APowerSourceActor::GetOutputLevel </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Output level 0..1 (dimming). </p>
 
 </div>
 </div>
@@ -264,6 +292,21 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Material with a "Color" vector parameter used for the housing. </p>
+
+</div>
+</div>
+<a id="a696aab603a86094f0937381b753a1f59" name="a696aab603a86094f0937381b753a1f59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a696aab603a86094f0937381b753a1f59">&#9670;&#160;</a></span>LevelByteIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32 APowerSourceActor::LevelByteIndex = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Byte of the relay frame with the brightness 0..100 % (LAMP_CMD byte 1), -1 = not dimmable. </p>
 
 </div>
 </div>

@@ -109,7 +109,9 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a55699f2a4c8c60f6814fa4bdde60e764" id="r_a55699f2a4c8c60f6814fa4bdde60e764"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55699f2a4c8c60f6814fa4bdde60e764">LIGHT_ECU_ID_LAMP_CMD</a>&#160;&#160;&#160;0x100u</td></tr>
 <tr class="memitem:aea742e162f722145b33dfd4c75581d49" id="r_aea742e162f722145b33dfd4c75581d49"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea742e162f722145b33dfd4c75581d49">LIGHT_ECU_ID_SWITCH_STATE</a>&#160;&#160;&#160;0x200u</td></tr>
+<tr class="memitem:ad9d1d1e899437c8766f05c3e196758ad" id="r_ad9d1d1e899437c8766f05c3e196758ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9d1d1e899437c8766f05c3e196758ad">LIGHT_ECU_ID_DIMMER_CMD</a>&#160;&#160;&#160;0x201u</td></tr>
 <tr class="memitem:abb5ee0d4f5b5ac811c2998c0d4711e92" id="r_abb5ee0d4f5b5ac811c2998c0d4711e92"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb5ee0d4f5b5ac811c2998c0d4711e92">LIGHT_ECU_DEFAULT_CYCLE_MS</a>&#160;&#160;&#160;500u</td></tr>
+<tr class="memitem:a0b573c1784a6f757ee9b5d654805e79a" id="r_a0b573c1784a6f757ee9b5d654805e79a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b573c1784a6f757ee9b5d654805e79a">LIGHT_ECU_DEFAULT_LEVEL</a>&#160;&#160;&#160;100u</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -119,6 +121,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a7f762142d5a7d2c34cd11b72bd265239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a received frame.  <br /></td></tr>
 <tr class="memitem:a62eb9fd4971ac3eb69e0f6d436172d1a" id="r_a62eb9fd4971ac3eb69e0f6d436172d1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62eb9fd4971ac3eb69e0f6d436172d1a">light_ecu_set_lamp</a> (<a class="el" href="structLightEcu.html">LightEcu</a> *ecu, bool on)</td></tr>
 <tr class="memdesc:a62eb9fd4971ac3eb69e0f6d436172d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the lamp (stops blinking).  <br /></td></tr>
+<tr class="memitem:ae837b1db710a455cbd05a778a1825dd2" id="r_ae837b1db710a455cbd05a778a1825dd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae837b1db710a455cbd05a778a1825dd2">light_ecu_set_level</a> (<a class="el" href="structLightEcu.html">LightEcu</a> *ecu, uint32_t percent)</td></tr>
+<tr class="memdesc:ae837b1db710a455cbd05a778a1825dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the brightness (clamped to 0..100 %).  <br /></td></tr>
 <tr class="memitem:a87747d99d86faf11f561793a602efe9e" id="r_a87747d99d86faf11f561793a602efe9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87747d99d86faf11f561793a602efe9e">light_ecu_set_blink</a> (<a class="el" href="structLightEcu.html">LightEcu</a> *ecu, uint32_t period_ms)</td></tr>
 <tr class="memdesc:a87747d99d86faf11f561793a602efe9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts blinking with the given toggle period; 0 stops blinking.  <br /></td></tr>
 <tr class="memitem:a960ee4c117db171fed12d742e4ce9591" id="r_a960ee4c117db171fed12d742e4ce9591"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a960ee4c117db171fed12d742e4ce9591">light_ecu_set_output_inhibit</a> (<a class="el" href="structLightEcu.html">LightEcu</a> *ecu, bool inhibit)</td></tr>
@@ -134,7 +138,8 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Simulated light control unit (the demo ECU of can_sim). </p>
 <p>Signals (see docs/dev/protocol.md):</p><ul>
 <li>0x200 SWITCH_STATE (input): data[0] bit 0 = position of the wall switch</li>
-<li>0x100 LAMP_CMD (output): data[0] bit 0 = lamp relay closed (lamp on)</li>
+<li>0x201 DIMMER_CMD (input): data[0] = brightness 0..100 %</li>
+<li>0x100 LAMP_CMD (output): data[0] bit 0 = lamp on, data[1] = brightness 0..100 %</li>
 </ul>
 <p>The ECU sets the lamp to the switch position, can blink the lamp on its own, and sends LAMP_CMD on every change plus cyclically, so a node that joins the bus later learns the current state within one cycle.</p>
 <p>The logic is free of I/O and time sources so it can be unit tested. </p>
@@ -147,6 +152,34 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define LIGHT_ECU_DEFAULT_CYCLE_MS&#160;&#160;&#160;500u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0b573c1784a6f757ee9b5d654805e79a" name="a0b573c1784a6f757ee9b5d654805e79a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b573c1784a6f757ee9b5d654805e79a">&#9670;&#160;</a></span>LIGHT_ECU_DEFAULT_LEVEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIGHT_ECU_DEFAULT_LEVEL&#160;&#160;&#160;100u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad9d1d1e899437c8766f05c3e196758ad" name="ad9d1d1e899437c8766f05c3e196758ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d1d1e899437c8766f05c3e196758ad">&#9670;&#160;</a></span>LIGHT_ECU_ID_DIMMER_CMD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LIGHT_ECU_ID_DIMMER_CMD&#160;&#160;&#160;0x201u</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -225,7 +258,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Processes a received frame. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if the frame was a valid SWITCH_STATE frame. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the frame was a valid SWITCH_STATE or DIMMER_CMD frame. </dd></dl>
 
 </div>
 </div>
@@ -310,6 +343,29 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets the lamp (stops blinking). </p>
+
+</div>
+</div>
+<a id="ae837b1db710a455cbd05a778a1825dd2" name="ae837b1db710a455cbd05a778a1825dd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae837b1db710a455cbd05a778a1825dd2">&#9670;&#160;</a></span>light_ecu_set_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void light_ecu_set_level </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structLightEcu.html">LightEcu</a> *</td>          <td class="paramname"><span class="paramname"><em>ecu</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>percent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the brightness (clamped to 0..100 %). </p>
 
 </div>
 </div>

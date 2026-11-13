@@ -1,0 +1,67 @@
+\doxysection{libs/power/power\+\_\+path.c File Reference}
+\hypertarget{power__path_8c}{}\label{power__path_8c}\index{libs/power/power\_path.c@{libs/power/power\_path.c}}
+{\ttfamily \#include "{}power\+\_\+path.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{power__path_8c_ae79e748e17a4dce850888ef4cdf73604}{power\+\_\+path\+\_\+init}} (\mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Defaults of the light demo\+: 12.\+6 V battery with 50 m\+Ohm, 3 A slow fuse (melting 40 A\texorpdfstring{$^\wedge$}{\string^}2 s), 15 A current limit with 100 ms restart, 20 m\+Ohm wire, 21 W / 12 V bulb. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{power__path_8c_a8c6fd7bd38a466f64a20287187fefe55}{power\+\_\+path\+\_\+nominal\+\_\+current}} (const \mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Nominal on-\/current of the load at the rated voltage (P / U). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{power__path_8c_a0baf3d5fc81e1ba24e010370178ae8f8}{power\+\_\+path\+\_\+replace\+\_\+fuse}} (\mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em Replaces a blown fuse (cold). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{power__path_8c_a81be6b784de6a6a4e1acd1813772b553}{power\+\_\+path\+\_\+step}} (\mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}path, bool on, double duty, uint32\+\_\+t dt\+\_\+ms, \mbox{\hyperlink{structPowerReading}{Power\+Reading}} \texorpdfstring{$\ast$}{*}reading)
+\begin{DoxyCompactList}\small\item\em Advances the model by {\ttfamily dt\+\_\+ms}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{power__path_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{power__path_8c_ae79e748e17a4dce850888ef4cdf73604}\index{power\_path.c@{power\_path.c}!power\_path\_init@{power\_path\_init}}
+\index{power\_path\_init@{power\_path\_init}!power\_path.c@{power\_path.c}}
+\doxysubsubsection{\texorpdfstring{power\_path\_init()}{power\_path\_init()}}
+{\footnotesize\ttfamily \label{power__path_8c_ae79e748e17a4dce850888ef4cdf73604} 
+void power\+\_\+path\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Defaults of the light demo\+: 12.\+6 V battery with 50 m\+Ohm, 3 A slow fuse (melting 40 A\texorpdfstring{$^\wedge$}{\string^}2 s), 15 A current limit with 100 ms restart, 20 m\+Ohm wire, 21 W / 12 V bulb. 
+
+\Hypertarget{power__path_8c_a8c6fd7bd38a466f64a20287187fefe55}\index{power\_path.c@{power\_path.c}!power\_path\_nominal\_current@{power\_path\_nominal\_current}}
+\index{power\_path\_nominal\_current@{power\_path\_nominal\_current}!power\_path.c@{power\_path.c}}
+\doxysubsubsection{\texorpdfstring{power\_path\_nominal\_current()}{power\_path\_nominal\_current()}}
+{\footnotesize\ttfamily \label{power__path_8c_a8c6fd7bd38a466f64a20287187fefe55} 
+double power\+\_\+path\+\_\+nominal\+\_\+current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Nominal on-\/current of the load at the rated voltage (P / U). 
+
+\Hypertarget{power__path_8c_a0baf3d5fc81e1ba24e010370178ae8f8}\index{power\_path.c@{power\_path.c}!power\_path\_replace\_fuse@{power\_path\_replace\_fuse}}
+\index{power\_path\_replace\_fuse@{power\_path\_replace\_fuse}!power\_path.c@{power\_path.c}}
+\doxysubsubsection{\texorpdfstring{power\_path\_replace\_fuse()}{power\_path\_replace\_fuse()}}
+{\footnotesize\ttfamily \label{power__path_8c_a0baf3d5fc81e1ba24e010370178ae8f8} 
+void power\+\_\+path\+\_\+replace\+\_\+fuse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Replaces a blown fuse (cold). 
+
+\Hypertarget{power__path_8c_a81be6b784de6a6a4e1acd1813772b553}\index{power\_path.c@{power\_path.c}!power\_path\_step@{power\_path\_step}}
+\index{power\_path\_step@{power\_path\_step}!power\_path.c@{power\_path.c}}
+\doxysubsubsection{\texorpdfstring{power\_path\_step()}{power\_path\_step()}}
+{\footnotesize\ttfamily \label{power__path_8c_a81be6b784de6a6a4e1acd1813772b553} 
+void power\+\_\+path\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPowerPath}{Power\+Path}} \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{bool}]{on}{, }\item[{double}]{duty}{, }\item[{uint32\+\_\+t}]{dt\+\_\+ms}{, }\item[{\mbox{\hyperlink{structPowerReading}{Power\+Reading}} \texorpdfstring{$\ast$}{*}}]{reading}{}\end{DoxyParamCaption})}
+
+
+
+Advances the model by {\ttfamily dt\+\_\+ms}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em on} & Output commanded on. \\
+\hline
+{\em duty} & PWM duty 0..1 (clamped). \\
+\hline
+\end{DoxyParams}

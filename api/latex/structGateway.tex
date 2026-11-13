@@ -26,7 +26,11 @@ bool \mbox{\hyperlink{structGateway_a934f79073e899297c3fddd1e6ce248b6}{switch\+\
 \item 
 bool \mbox{\hyperlink{structGateway_a599d619c445d8077e44b6a5c04da2bb8}{lamp\+\_\+on}}
 \item 
+uint8\+\_\+t \mbox{\hyperlink{structGateway_a7c07938c8a7fbf473f393e39c74f3185}{lamp\+\_\+level}}
+\item 
 bool \mbox{\hyperlink{structGateway_a0761bcd2966eb407561fa2fc726948c2}{led\+\_\+on}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structGateway_a5748678828a9617b0e142fa677a27301}{led\+\_\+level}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{structGateway_a29a1374049b479fd9605bfc26f0cb954}{last\+\_\+blink\+\_\+ms}}
 \item 
@@ -106,7 +110,13 @@ Loopback echoes recognised and suppressed. \Hypertarget{structGateway_ae3bf99515
 {\footnotesize\ttfamily \label{structGateway_ae3bf99515f10d9aca6026b8ef68d157e} 
 \mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} Gateway\+::io}
 
-\Hypertarget{structGateway_a599d619c445d8077e44b6a5c04da2bb8}\index{Gateway@{Gateway}!lamp\_on@{lamp\_on}}
+\Hypertarget{structGateway_a7c07938c8a7fbf473f393e39c74f3185}\index{Gateway@{Gateway}!lamp\_level@{lamp\_level}}
+\index{lamp\_level@{lamp\_level}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{lamp\_level}{lamp\_level}}
+{\footnotesize\ttfamily \label{structGateway_a7c07938c8a7fbf473f393e39c74f3185} 
+uint8\+\_\+t Gateway\+::lamp\+\_\+level}
+
+Brightness of the last LAMP\+\_\+\+CMD (100 if it had none). \Hypertarget{structGateway_a599d619c445d8077e44b6a5c04da2bb8}\index{Gateway@{Gateway}!lamp\_on@{lamp\_on}}
 \index{lamp\_on@{lamp\_on}!Gateway@{Gateway}}
 \doxysubsubsection{\texorpdfstring{lamp\_on}{lamp\_on}}
 {\footnotesize\ttfamily \label{structGateway_a599d619c445d8077e44b6a5c04da2bb8} 
@@ -117,6 +127,12 @@ Last LAMP\+\_\+\+CMD seen on the bus. \Hypertarget{structGateway_a29a1374049b479
 \doxysubsubsection{\texorpdfstring{last\_blink\_ms}{last\_blink\_ms}}
 {\footnotesize\ttfamily \label{structGateway_a29a1374049b479fd9605bfc26f0cb954} 
 uint32\+\_\+t Gateway\+::last\+\_\+blink\+\_\+ms}
+
+\Hypertarget{structGateway_a5748678828a9617b0e142fa677a27301}\index{Gateway@{Gateway}!led\_level@{led\_level}}
+\index{led\_level@{led\_level}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{led\_level}{led\_level}}
+{\footnotesize\ttfamily \label{structGateway_a5748678828a9617b0e142fa677a27301} 
+uint8\+\_\+t Gateway\+::led\+\_\+level}
 
 \Hypertarget{structGateway_a0761bcd2966eb407561fa2fc726948c2}\index{Gateway@{Gateway}!led\_on@{led\_on}}
 \index{led\_on@{led\_on}!Gateway@{Gateway}}

@@ -56,6 +56,8 @@ struct \mbox{\hyperlink{structGateway}{Gateway}}
 \item 
 \#define \mbox{\hyperlink{gateway_8h_ab908842b58963e48ce9b7a5e9e838db3}{GATEWAY\+\_\+\+DID\+\_\+\+CHANNEL}}~0x0203u
 \item 
+\#define \mbox{\hyperlink{gateway_8h_aa7b4d89608c3f1c9d5fae2f043bbd739}{GATEWAY\+\_\+\+DID\+\_\+\+LED}}~0x0204u
+\item 
 \#define \mbox{\hyperlink{gateway_8h_ab72ee14093b69a3c2d415753bf8d3468}{GATEWAY\+\_\+\+RESET\+\_\+\+DELAY\+\_\+\+MS}}~50u
 \end{DoxyCompactItemize}
 \end{Indent}
@@ -100,7 +102,7 @@ Application logic of the \doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware (
 The board is two things at once\+:
 \begin{DoxyItemize}
 \item an SLCAN adapter\+: frames from the serial link are sent on the CAN bus, frames received from CAN are reported on the serial link;
-\item a small CAN node\+: the user button is a wall switch (SWITCH\+\_\+\+STATE 0x200) and the LED shows the lamp command (LAMP\+\_\+\+CMD 0x100);
+\item a small CAN node\+: the user button is a wall switch (SWITCH\+\_\+\+STATE 0x200) and the LED shows the lamp command (LAMP\+\_\+\+CMD 0x100), dimmed with its brightness byte (PWM);
 \item a UDS server (requests 0x7\+E1 or functional 0x7\+DF, responses 0x7\+E9) for testers on the serial side or on the CAN bus; responses go to both.
 \end{DoxyItemize}
 
@@ -159,7 +161,13 @@ uint32 frames to CAN, from CAN, echoes \Hypertarget{gateway_8h_a2348a819d34d1669
 {\footnotesize\ttfamily \label{gateway_8h_a2348a819d34d1669f83ba73817a4d75e} 
 \#define GATEWAY\+\_\+\+DID\+\_\+\+LAMP~0x0100u}
 
-1 byte, last LAMP\+\_\+\+CMD \Hypertarget{gateway_8h_aea73af4bf896fb5a472d36050eb7271c}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_SWITCH@{GATEWAY\_DID\_SWITCH}}
+1 byte, last LAMP\+\_\+\+CMD \Hypertarget{gateway_8h_aa7b4d89608c3f1c9d5fae2f043bbd739}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_LED@{GATEWAY\_DID\_LED}}
+\index{GATEWAY\_DID\_LED@{GATEWAY\_DID\_LED}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_LED}{GATEWAY\_DID\_LED}}
+{\footnotesize\ttfamily \label{gateway_8h_aa7b4d89608c3f1c9d5fae2f043bbd739} 
+\#define GATEWAY\+\_\+\+DID\+\_\+\+LED~0x0204u}
+
+LED brightness\+: commanded \%, measured \% (pin sampling) \Hypertarget{gateway_8h_aea73af4bf896fb5a472d36050eb7271c}\index{gateway.h@{gateway.h}!GATEWAY\_DID\_SWITCH@{GATEWAY\_DID\_SWITCH}}
 \index{GATEWAY\_DID\_SWITCH@{GATEWAY\_DID\_SWITCH}!gateway.h@{gateway.h}}
 \doxysubsubsection{\texorpdfstring{GATEWAY\_DID\_SWITCH}{GATEWAY\_DID\_SWITCH}}
 {\footnotesize\ttfamily \label{gateway_8h_aea73af4bf896fb5a472d36050eb7271c} 

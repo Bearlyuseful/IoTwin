@@ -130,6 +130,7 @@ Macros</h2></td></tr>
 <tr class="memitem:aa01f0c39d3d8cd227139e7a08aeeef48" id="r_aa01f0c39d3d8cd227139e7a08aeeef48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa01f0c39d3d8cd227139e7a08aeeef48">GATEWAY_DID_COUNTERS</a>&#160;&#160;&#160;0x0201u</td></tr>
 <tr class="memitem:a047d602019ec46ec6ead0897e03e09e1" id="r_a047d602019ec46ec6ead0897e03e09e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a047d602019ec46ec6ead0897e03e09e1">GATEWAY_DID_UPTIME</a>&#160;&#160;&#160;0x0202u</td></tr>
 <tr class="memitem:ab908842b58963e48ce9b7a5e9e838db3" id="r_ab908842b58963e48ce9b7a5e9e838db3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab908842b58963e48ce9b7a5e9e838db3">GATEWAY_DID_CHANNEL</a>&#160;&#160;&#160;0x0203u</td></tr>
+<tr class="memitem:aa7b4d89608c3f1c9d5fae2f043bbd739" id="r_aa7b4d89608c3f1c9d5fae2f043bbd739"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7b4d89608c3f1c9d5fae2f043bbd739">GATEWAY_DID_LED</a>&#160;&#160;&#160;0x0204u</td></tr>
 <tr class="memitem:ab72ee14093b69a3c2d415753bf8d3468" id="r_ab72ee14093b69a3c2d415753bf8d3468"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab72ee14093b69a3c2d415753bf8d3468">GATEWAY_RESET_DELAY_MS</a>&#160;&#160;&#160;50u</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -169,7 +170,7 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Application logic of the <a class="el" href="classIoTwin.html">IoTwin</a> CAN gateway firmware (hardware independent). </p>
 <p>The board is two things at once:</p><ul>
 <li>an SLCAN adapter: frames from the serial link are sent on the CAN bus, frames received from CAN are reported on the serial link;</li>
-<li>a small CAN node: the user button is a wall switch (SWITCH_STATE 0x200) and the LED shows the lamp command (LAMP_CMD 0x100);</li>
+<li>a small CAN node: the user button is a wall switch (SWITCH_STATE 0x200) and the LED shows the lamp command (LAMP_CMD 0x100), dimmed with its brightness byte (PWM);</li>
 <li>a UDS server (requests 0x7E1 or functional 0x7DF, responses 0x7E9) for testers on the serial side or on the CAN bus; responses go to both.</li>
 </ul>
 <p>In internal loopback mode the controller receives its own frames. They are matched against the transmitted ones and not reported a second time, so the virtual bus does not see echoes.</p>
@@ -288,6 +289,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>1 byte, last LAMP_CMD </p>
+
+</div>
+</div>
+<a id="aa7b4d89608c3f1c9d5fae2f043bbd739" name="aa7b4d89608c3f1c9d5fae2f043bbd739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7b4d89608c3f1c9d5fae2f043bbd739">&#9670;&#160;</a></span>GATEWAY_DID_LED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GATEWAY_DID_LED&#160;&#160;&#160;0x0204u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>LED brightness: commanded %, measured % (pin sampling) </p>
 
 </div>
 </div>

@@ -21,11 +21,15 @@ var searchData=
   ['connected_18',['connected',['../structSimShared.html#a481ba48180eb778f5a3b21a88a0e7a46',1,'SimShared']]],
   ['connection_5flost_19',['connection_lost',['../structClient.html#a08b03c5d223cc24875e10b9e0fd6414a',1,'Client']]],
   ['consecutive_5ferrors_20',['consecutive_errors',['../structBridge.html#af31f2c58101db7326ab8199831956647',1,'Bridge']]],
-  ['consumers_21',['Consumers',['../structFSystemMessage.html#a14dd9fe56abf023f34cb017837ee9943',1,'FSystemMessage']]],
-  ['contains_22',['Contains',['../structFComponentInfo.html#a536e3814dee1a1cadbd3b03b75c5cb77',1,'FComponentInfo']]],
-  ['context_23',['context',['../structIsoTpConfig.html#ae56d52732b333357110436f724a53a67',1,'IsoTpConfig::context'],['../structUdsServerHandlers.html#af8c76ffbb43056d0ff534625b9d3c837',1,'UdsServerHandlers::context'],['../structBusLinkHandlers.html#a02dd5281f9d62f67bae7f873f23869e2',1,'BusLinkHandlers::context'],['../structGatewayIo.html#af34ecbc044828591c68b10a51199707d',1,'GatewayIo::context']]],
-  ['count_24',['count',['../structCanBus.html#a8b4c1d23a0d934d35e1d175836a24fec',1,'CanBus::count'],['../structScenario.html#a3b75499284752fcec4646b4058791ba2',1,'Scenario::count'],['../structInputQueue.html#ab628b40e99d144c5121755ae4f25286d',1,'InputQueue::count']]],
-  ['cpu_25',['cpu',['../structPalRtConfig.html#ab88d486f4a7cd5ad9c2f74ea9a7af5f3',1,'PalRtConfig']]],
-  ['current_5fsender_26',['current_sender',['../structBusServer.html#a87cc325845a7c543b3b9ee1214bbea7c',1,'BusServer']]],
-  ['cycle_5fms_27',['cycle_ms',['../structLightEcu.html#ac81f06dd52e63e688580150be0e9cac0',1,'LightEcu::cycle_ms'],['../structSimOptions.html#a42cb6f93b7fea410bff9cb8d2083d8f5',1,'SimOptions::cycle_ms']]]
+  ['consumed_21',['consumed',['../structRunner.html#ae8a32185daa295c94743755ef08a30f1',1,'Runner']]],
+  ['consumers_22',['Consumers',['../structFSystemMessage.html#a14dd9fe56abf023f34cb017837ee9943',1,'FSystemMessage']]],
+  ['contains_23',['Contains',['../structFComponentInfo.html#a536e3814dee1a1cadbd3b03b75c5cb77',1,'FComponentInfo']]],
+  ['context_24',['context',['../structIsoTpConfig.html#ae56d52732b333357110436f724a53a67',1,'IsoTpConfig::context'],['../structUdsServerHandlers.html#af8c76ffbb43056d0ff534625b9d3c837',1,'UdsServerHandlers::context'],['../structBusLinkHandlers.html#a02dd5281f9d62f67bae7f873f23869e2',1,'BusLinkHandlers::context'],['../structGatewayIo.html#af34ecbc044828591c68b10a51199707d',1,'GatewayIo::context']]],
+  ['cooling_5fi2t_25',['cooling_i2t',['../structFuse.html#a2f7c03cbe3faff4e2174d149b6f82862',1,'Fuse']]],
+  ['count_26',['count',['../structCanBus.html#a8b4c1d23a0d934d35e1d175836a24fec',1,'CanBus::count'],['../structScenario.html#a3b75499284752fcec4646b4058791ba2',1,'Scenario::count'],['../structInputQueue.html#ab628b40e99d144c5121755ae4f25286d',1,'InputQueue::count']]],
+  ['cpu_27',['cpu',['../structPalRtConfig.html#ab88d486f4a7cd5ad9c2f74ea9a7af5f3',1,'PalRtConfig']]],
+  ['current_5fa_28',['current_a',['../structPowerReading.html#a372babb2e84a1c7dafc00537c9d16e38',1,'PowerReading']]],
+  ['current_5flimit_5fa_29',['current_limit_a',['../structSmartSwitch.html#a32dc5b71efa2ca002ca5e5e554498cc0',1,'SmartSwitch']]],
+  ['current_5fsender_30',['current_sender',['../structBusServer.html#a87cc325845a7c543b3b9ee1214bbea7c',1,'BusServer']]],
+  ['cycle_5fms_31',['cycle_ms',['../structLightEcu.html#ac81f06dd52e63e688580150be0e9cac0',1,'LightEcu::cycle_ms'],['../structSimOptions.html#a42cb6f93b7fea410bff9cb8d2083d8f5',1,'SimOptions::cycle_ms']]]
 ];

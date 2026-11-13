@@ -9,63 +9,75 @@
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}PowerSourceActor.generated.h"{}}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }UCanSignalComponent;}
-\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }UMaterialInstanceDynamic;}
-\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }UMaterialInterface;}
-\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }UStaticMeshComponent;}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \mbox{\hyperlink{PowerSourceActor_8h_afa6ff72aca7635cdb03f34cf77d46ee7}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnRelayChanged,\ \textcolor{keywordtype}{bool},\ bClosed);}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ UCLASS()}
-\DoxyCodeLine{00018\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}{APowerSourceActor}}\ :\ public\ AActor}
-\DoxyCodeLine{00019\ \{}
-\DoxyCodeLine{00020\ \ \ \ \ GENERATED\_BODY()}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
-\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}{APowerSourceActor}}();}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00027\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}{Port}};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00030\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00031\ \ \ \ \ UStaticMeshComponent*\ \mbox{\hyperlink{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a}{Housing}};}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00034\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00035\ \ \ \ \ TObjectPtr<UMaterialInterface>\ \mbox{\hyperlink{classAPowerSourceActor_a31186cc3354eecc502498833ffc4281a}{HousingBaseMaterial}};}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00038\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00039\ \ \ \ \ UCanSignalComponent*\ \mbox{\hyperlink{classAPowerSourceActor_a40238d0de62387b2ce509ef50b29627c}{RelayControl}};}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00042\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAPowerSourceActor_a2eec9aaa0a87f837f447303c1338bc6a}{bControlledByCan}}\ =\ false;}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00046\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{bOutputEnabled}}\ =\ true;}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00050\ \ \ \ \ FOnRelayChanged\ \mbox{\hyperlink{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}{OnRelayChanged}};}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b}{SetOutputEnabled}}(\textcolor{keywordtype}{bool}\ bEnabled);}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}{IsOutputEnabled}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{bOutputEnabled}};\ \}}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Called\ when\ the\ game\ starts\ or\ when\ spawned}}
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BeginPlay()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00063\ \ \ \ \ UFUNCTION()}
-\DoxyCodeLine{00064\ \ \ \ \ void\ HandleRelaySignal(\textcolor{keywordtype}{bool}\ bClosed);}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateHousing();}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \ \ \ \ UPROPERTY(Transient)}
-\DoxyCodeLine{00069\ \ \ \ \ TObjectPtr<UMaterialInstanceDynamic>\ HousingMaterial;}
-\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CanFrame_8h}{Bus/CanFrame.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}PowerSourceActor.generated.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }UCanSignalComponent;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }UMaterialInstanceDynamic;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }UMaterialInterface;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }UStaticMeshComponent;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \mbox{\hyperlink{PowerSourceActor_8h_afa6ff72aca7635cdb03f34cf77d46ee7}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnRelayChanged,\ \textcolor{keywordtype}{bool},\ bClosed);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ UCLASS()}
+\DoxyCodeLine{00019\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}{APowerSourceActor}}\ :\ public\ AActor}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classAPowerSourceActor_a3f6f8ae7c44cc508d9455343deb13448}{APowerSourceActor}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00028\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}{Port}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00032\ \ \ \ \ UStaticMeshComponent*\ \mbox{\hyperlink{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a}{Housing}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00036\ \ \ \ \ TObjectPtr<UMaterialInterface>\ \mbox{\hyperlink{classAPowerSourceActor_a31186cc3354eecc502498833ffc4281a}{HousingBaseMaterial}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00040\ \ \ \ \ UCanSignalComponent*\ \mbox{\hyperlink{classAPowerSourceActor_a40238d0de62387b2ce509ef50b29627c}{RelayControl}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAPowerSourceActor_a2eec9aaa0a87f837f447303c1338bc6a}{bControlledByCan}}\ =\ false;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00047\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}},\ meta=(ClampMin=-\/1,\ ClampMax=7))}
+\DoxyCodeLine{00048\ \ \ \ \ int32\ \mbox{\hyperlink{classAPowerSourceActor_a696aab603a86094f0937381b753a1f59}{LevelByteIndex}}\ =\ 1;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{bOutputEnabled}}\ =\ true;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00055\ \ \ \ \ FOnRelayChanged\ \mbox{\hyperlink{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}{OnRelayChanged}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b}{SetOutputEnabled}}(\textcolor{keywordtype}{bool}\ bEnabled);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}{IsOutputEnabled}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{bOutputEnabled}};\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00065\ \ \ \ \ float\ \mbox{\hyperlink{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f}{GetOutputLevel}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}{Port}}\ ?\ \mbox{\hyperlink{classAPowerSourceActor_a2f411740b3ba22305115d92ba1d20908}{Port}}-\/>SupplyLevel\ :\ 1.0f;\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Called\ when\ the\ game\ starts\ or\ when\ spawned}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BeginPlay()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00072\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00073\ \ \ \ \ void\ HandleRelaySignal(\textcolor{keywordtype}{bool}\ bClosed);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ HandleBusFrame(const\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ int32\ RelayFrameId\ =\ -\/1;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateHousing();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ UPROPERTY(Transient)}
+\DoxyCodeLine{00083\ \ \ \ \ TObjectPtr<UMaterialInstanceDynamic>\ HousingMaterial;}
+\DoxyCodeLine{00084\ \};}
 
 \end{DoxyCode}

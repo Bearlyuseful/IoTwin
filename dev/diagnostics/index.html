@@ -881,6 +881,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power and Dimming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../component_database/" class="md-nav__link">
         
   
@@ -1326,8 +1354,26 @@ runs in <code>can_sim</code> and on the STM32.</p>
 </tr>
 <tr>
 <td>0104</td>
-<td>supply voltage (simulated)</td>
+<td>supply voltage (measured)</td>
 <td>uint16 mV</td>
+<td>read</td>
+</tr>
+<tr>
+<td>0105</td>
+<td>brightness</td>
+<td>1 byte %</td>
+<td>read / write (0..100)</td>
+</tr>
+<tr>
+<td>0106</td>
+<td>lamp current</td>
+<td>uint16 mA</td>
+<td>read</td>
+</tr>
+<tr>
+<td>0107</td>
+<td>fuse: blown, heat in % of melting</td>
+<td>2 bytes</td>
 <td>read</td>
 </tr>
 </tbody>
@@ -1363,8 +1409,16 @@ the way a real ECU does:</p>
 <td><code>B1002-16</code></td>
 <td>always</td>
 </tr>
+<tr>
+<td><code>fault overload on</code></td>
+<td>3x current; the 3 A fuse blows after about 2 s</td>
+<td><code>B1001-19</code>, <code>B1003-13</code></td>
+<td>while the lamp is on</td>
+</tr>
 </tbody>
 </table>
+<p>The faults act on an electrical model of the output (see <a href="../power/">Power and Dimming</a>);
+the monitors only see measured current and voltage. <code>fuse replace</code> puts in a new fuse.</p>
 <p><code>dtc</code> on the console shows the ECU's own view. A removed fault leaves the
 DTC confirmed until it is cleared (<code>uds_client clear</code>). An ECUReset keeps the
 DTC memory and starts a new operation cycle, like a real ECU.</p>
@@ -1417,6 +1471,10 @@ SLCAN) or from a tester on a real CAN bus; responses go to both sides.</p>
 <tr>
 <td>0203</td>
 <td>channel open, mode (0 normal, 1 loopback, 2 listen), uint32 bitrate</td>
+</tr>
+<tr>
+<td>0204</td>
+<td>LED brightness: commanded %, measured % (pin sampling)</td>
 </tr>
 </tbody>
 </table>

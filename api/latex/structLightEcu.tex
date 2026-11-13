@@ -18,6 +18,8 @@ bool \mbox{\hyperlink{structLightEcu_a2418ed2ef6034ea21ae2ef358b7437bb}{switch\+
 \item 
 bool \mbox{\hyperlink{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}{output\+\_\+inhibit}}
 \item 
+uint8\+\_\+t \mbox{\hyperlink{structLightEcu_abd7e04b57a01f8aa014cdaa8d78fb682}{level}}
+\item 
 uint32\+\_\+t \mbox{\hyperlink{structLightEcu_ac81f06dd52e63e688580150be0e9cac0}{cycle\+\_\+ms}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{structLightEcu_a03303065311638e2df54c46092d30864}{blink\+\_\+period\+\_\+ms}}
@@ -74,7 +76,13 @@ Time of the last LAMP\+\_\+\+CMD. \Hypertarget{structLightEcu_a20c6979600f3bcb2e
 {\footnotesize\ttfamily \label{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5} 
 uint64\+\_\+t Light\+Ecu\+::last\+\_\+toggle\+\_\+ms}
 
-Time of the last blink toggle. \Hypertarget{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}\index{LightEcu@{LightEcu}!output\_inhibit@{output\_inhibit}}
+Time of the last blink toggle. \Hypertarget{structLightEcu_abd7e04b57a01f8aa014cdaa8d78fb682}\index{LightEcu@{LightEcu}!level@{level}}
+\index{level@{level}!LightEcu@{LightEcu}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily \label{structLightEcu_abd7e04b57a01f8aa014cdaa8d78fb682} 
+uint8\+\_\+t Light\+Ecu\+::level}
+
+Brightness 0..100 \% (PWM duty of the output). \Hypertarget{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}\index{LightEcu@{LightEcu}!output\_inhibit@{output\_inhibit}}
 \index{output\_inhibit@{output\_inhibit}!LightEcu@{LightEcu}}
 \doxysubsubsection{\texorpdfstring{output\_inhibit}{output\_inhibit}}
 {\footnotesize\ttfamily \label{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6} 

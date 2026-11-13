@@ -6,6 +6,7 @@ var light__ecu_8c =
     [ "light_ecu_request_send", "light__ecu_8c.html#ab8cb4fd55e4b2ba439a0c73e0a5575bc", null ],
     [ "light_ecu_set_blink", "light__ecu_8c.html#a87747d99d86faf11f561793a602efe9e", null ],
     [ "light_ecu_set_lamp", "light__ecu_8c.html#a62eb9fd4971ac3eb69e0f6d436172d1a", null ],
+    [ "light_ecu_set_level", "light__ecu_8c.html#ae837b1db710a455cbd05a778a1825dd2", null ],
     [ "light_ecu_set_output_inhibit", "light__ecu_8c.html#a960ee4c117db171fed12d742e4ce9591", null ],
     [ "light_ecu_step", "light__ecu_8c.html#adf2109604c377e8c13357c9b848f18de", null ]
 ];

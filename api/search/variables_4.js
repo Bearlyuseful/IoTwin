@@ -28,5 +28,6 @@ var searchData=
   ['droppercent_25',['DropPercent',['../structFIoTwinBusStatus.html#aa5d5f0eda642bb322f519f433e8b4d93',1,'FIoTwinBusStatus']]],
   ['dtc_5fcount_26',['dtc_count',['../structUdsServerConfig.html#add0f97a300963fd3c7fbd287b5b5d4c2',1,'UdsServerConfig']]],
   ['dtcs_27',['dtcs',['../structUdsServerConfig.html#a5cbe904b2b14f0477222716c62c9ccef',1,'UdsServerConfig::dtcs'],['../structLightEcuDiag.html#adb9d2e5625de28ed4c88543ab5c549ee',1,'LightEcuDiag::dtcs'],['../structGateway.html#a21a777c15b573b20a879f0710fc95aa5',1,'Gateway::dtcs']]],
-  ['due_5fms_28',['due_ms',['../structPendingFrame.html#a1d400e6a9b7af830db067d66986785a1',1,'PendingFrame']]]
+  ['due_5fms_28',['due_ms',['../structPendingFrame.html#a1d400e6a9b7af830db067d66986785a1',1,'PendingFrame']]],
+  ['duty_29',['duty',['../structPowerReading.html#a5f9e5ec1f109e968b3383d495eab05be',1,'PowerReading']]]
 ];

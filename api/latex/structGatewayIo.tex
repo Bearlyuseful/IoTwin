@@ -22,7 +22,9 @@ bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a95ef5812185be8
 \item 
 void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a7fb34ee7e645ab9d5266b607d1aac768}{can\+\_\+status}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, \mbox{\hyperlink{structGatewayCanStatus}{Gateway\+Can\+Status}} \texorpdfstring{$\ast$}{*}status)
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba}{led\+\_\+set}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, bool on)
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a6629960794b516a467a039be54a933de}{led\+\_\+set\+\_\+level}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, uint8\+\_\+t percent)
+\item 
+uint8\+\_\+t(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ab2f35ba674e0456250f9f5d873c58a79}{led\+\_\+measure}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})
 \item 
 void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ab99a1574b73cace1286852d887e4117a}{system\+\_\+reset}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})
 \item 
@@ -68,13 +70,19 @@ void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::can\+\_\+stop) (void \texorpdfstr
 {\footnotesize\ttfamily \label{structGatewayIo_af34ecbc044828591c68b10a51199707d} 
 void\texorpdfstring{$\ast$}{*} Gateway\+Io\+::context}
 
-\Hypertarget{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba}\index{GatewayIo@{GatewayIo}!led\_set@{led\_set}}
-\index{led\_set@{led\_set}!GatewayIo@{GatewayIo}}
-\doxysubsubsection{\texorpdfstring{led\_set}{led\_set}}
-{\footnotesize\ttfamily \label{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba} 
-void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::led\+\_\+set) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, bool on)}
+\Hypertarget{structGatewayIo_ab2f35ba674e0456250f9f5d873c58a79}\index{GatewayIo@{GatewayIo}!led\_measure@{led\_measure}}
+\index{led\_measure@{led\_measure}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{led\_measure}{led\_measure}}
+{\footnotesize\ttfamily \label{structGatewayIo_ab2f35ba674e0456250f9f5d873c58a79} 
+uint8\+\_\+t(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::led\+\_\+measure) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})}
 
-\Hypertarget{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab}\index{GatewayIo@{GatewayIo}!serial\_write@{serial\_write}}
+Optional\+: duty cycle measured on the LED pin (self test of the PWM). \Hypertarget{structGatewayIo_a6629960794b516a467a039be54a933de}\index{GatewayIo@{GatewayIo}!led\_set\_level@{led\_set\_level}}
+\index{led\_set\_level@{led\_set\_level}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{led\_set\_level}{led\_set\_level}}
+{\footnotesize\ttfamily \label{structGatewayIo_a6629960794b516a467a039be54a933de} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::led\+\_\+set\+\_\+level) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, uint8\+\_\+t percent)}
+
+0 = off, 100 = full \Hypertarget{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab}\index{GatewayIo@{GatewayIo}!serial\_write@{serial\_write}}
 \index{serial\_write@{serial\_write}!GatewayIo@{GatewayIo}}
 \doxysubsubsection{\texorpdfstring{serial\_write}{serial\_write}}
 {\footnotesize\ttfamily \label{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab} 

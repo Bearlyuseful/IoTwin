@@ -13,9 +13,21 @@
 \item 
 \mbox{\hyperlink{structUdsDtc}{Uds\+Dtc}} \mbox{\hyperlink{structLightEcuDiag_adb9d2e5625de28ed4c88543ab5c549ee}{dtcs}} \mbox{[}\mbox{\hyperlink{light__ecu__diag_8h_a674fc59f7962cd85b1fca4fd208b50cb}{LIGHT\+\_\+\+ECU\+\_\+\+DTC\+\_\+\+COUNT}}\mbox{]}
 \item 
+\mbox{\hyperlink{structPowerPath}{Power\+Path}} \mbox{\hyperlink{structLightEcuDiag_a917067fc04fa7b790377a30acf48a20a}{power}}
+\item 
+\mbox{\hyperlink{structPowerReading}{Power\+Reading}} \mbox{\hyperlink{structLightEcuDiag_af7eca108d7de4382fc743cbf34e00803}{reading}}
+\item 
 uint8\+\_\+t \mbox{\hyperlink{structLightEcuDiag_a170ef980d33f2c2c33eef0de92215f56}{faults}}
 \item 
 uint32\+\_\+t \mbox{\hyperlink{structLightEcuDiag_a5c3d8cb270a1375b6fdd8a90021c7134}{resets}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structLightEcuDiag_ac02b53ca62ca0e07bb03c6edf32f7ea5}{overcurrent\+\_\+ms}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structLightEcuDiag_a05c3375d853b9632945b6e5db0957d07}{last\+\_\+step\+\_\+ms}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structLightEcuDiag_a633e956ddb0b3f71cea14d411e747ac1}{last\+\_\+status\+\_\+ms}}
+\item 
+bool \mbox{\hyperlink{structLightEcuDiag_aee9b402b74e179a1df408323ded79f4f}{stepped}}
 \item 
 const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structLightEcuDiag_a7f2efd7b6c943d2db6e1f6104af4e3f4}{software\+\_\+version}}
 \end{DoxyCompactItemize}
@@ -42,7 +54,37 @@ const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structLightEcuDiag_a7f2ef
 {\footnotesize\ttfamily \label{structLightEcuDiag_a170ef980d33f2c2c33eef0de92215f56} 
 uint8\+\_\+t Light\+Ecu\+Diag\+::faults}
 
-Active \doxylink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault} bits. \Hypertarget{structLightEcuDiag_a5c3d8cb270a1375b6fdd8a90021c7134}\index{LightEcuDiag@{LightEcuDiag}!resets@{resets}}
+Active \doxylink{light__ecu__diag_8h_ac9e924745535c30929e38cd68d28c715}{Light\+Ecu\+Fault} bits. \Hypertarget{structLightEcuDiag_a633e956ddb0b3f71cea14d411e747ac1}\index{LightEcuDiag@{LightEcuDiag}!last\_status\_ms@{last\_status\_ms}}
+\index{last\_status\_ms@{last\_status\_ms}!LightEcuDiag@{LightEcuDiag}}
+\doxysubsubsection{\texorpdfstring{last\_status\_ms}{last\_status\_ms}}
+{\footnotesize\ttfamily \label{structLightEcuDiag_a633e956ddb0b3f71cea14d411e747ac1} 
+uint64\+\_\+t Light\+Ecu\+Diag\+::last\+\_\+status\+\_\+ms}
+
+\Hypertarget{structLightEcuDiag_a05c3375d853b9632945b6e5db0957d07}\index{LightEcuDiag@{LightEcuDiag}!last\_step\_ms@{last\_step\_ms}}
+\index{last\_step\_ms@{last\_step\_ms}!LightEcuDiag@{LightEcuDiag}}
+\doxysubsubsection{\texorpdfstring{last\_step\_ms}{last\_step\_ms}}
+{\footnotesize\ttfamily \label{structLightEcuDiag_a05c3375d853b9632945b6e5db0957d07} 
+uint64\+\_\+t Light\+Ecu\+Diag\+::last\+\_\+step\+\_\+ms}
+
+\Hypertarget{structLightEcuDiag_ac02b53ca62ca0e07bb03c6edf32f7ea5}\index{LightEcuDiag@{LightEcuDiag}!overcurrent\_ms@{overcurrent\_ms}}
+\index{overcurrent\_ms@{overcurrent\_ms}!LightEcuDiag@{LightEcuDiag}}
+\doxysubsubsection{\texorpdfstring{overcurrent\_ms}{overcurrent\_ms}}
+{\footnotesize\ttfamily \label{structLightEcuDiag_ac02b53ca62ca0e07bb03c6edf32f7ea5} 
+uint32\+\_\+t Light\+Ecu\+Diag\+::overcurrent\+\_\+ms}
+
+Time the current has been above the threshold. \Hypertarget{structLightEcuDiag_a917067fc04fa7b790377a30acf48a20a}\index{LightEcuDiag@{LightEcuDiag}!power@{power}}
+\index{power@{power}!LightEcuDiag@{LightEcuDiag}}
+\doxysubsubsection{\texorpdfstring{power}{power}}
+{\footnotesize\ttfamily \label{structLightEcuDiag_a917067fc04fa7b790377a30acf48a20a} 
+\mbox{\hyperlink{structPowerPath}{Power\+Path}} Light\+Ecu\+Diag\+::power}
+
+\Hypertarget{structLightEcuDiag_af7eca108d7de4382fc743cbf34e00803}\index{LightEcuDiag@{LightEcuDiag}!reading@{reading}}
+\index{reading@{reading}!LightEcuDiag@{LightEcuDiag}}
+\doxysubsubsection{\texorpdfstring{reading}{reading}}
+{\footnotesize\ttfamily \label{structLightEcuDiag_af7eca108d7de4382fc743cbf34e00803} 
+\mbox{\hyperlink{structPowerReading}{Power\+Reading}} Light\+Ecu\+Diag\+::reading}
+
+Last result of the electrical model. \Hypertarget{structLightEcuDiag_a5c3d8cb270a1375b6fdd8a90021c7134}\index{LightEcuDiag@{LightEcuDiag}!resets@{resets}}
 \index{resets@{resets}!LightEcuDiag@{LightEcuDiag}}
 \doxysubsubsection{\texorpdfstring{resets}{resets}}
 {\footnotesize\ttfamily \label{structLightEcuDiag_a5c3d8cb270a1375b6fdd8a90021c7134} 
@@ -53,6 +95,12 @@ ECUReset requests executed. \Hypertarget{structLightEcuDiag_a7f2efd7b6c943d2db6e
 \doxysubsubsection{\texorpdfstring{software\_version}{software\_version}}
 {\footnotesize\ttfamily \label{structLightEcuDiag_a7f2efd7b6c943d2db6e1f6104af4e3f4} 
 const char\texorpdfstring{$\ast$}{*} Light\+Ecu\+Diag\+::software\+\_\+version}
+
+\Hypertarget{structLightEcuDiag_aee9b402b74e179a1df408323ded79f4f}\index{LightEcuDiag@{LightEcuDiag}!stepped@{stepped}}
+\index{stepped@{stepped}!LightEcuDiag@{LightEcuDiag}}
+\doxysubsubsection{\texorpdfstring{stepped}{stepped}}
+{\footnotesize\ttfamily \label{structLightEcuDiag_aee9b402b74e179a1df408323ded79f4f} 
+bool Light\+Ecu\+Diag\+::stepped}
 
 \Hypertarget{structLightEcuDiag_ac8df1499493ce0505f2b46f81af7f510}\index{LightEcuDiag@{LightEcuDiag}!uds@{uds}}
 \index{uds@{uds}!LightEcuDiag@{LightEcuDiag}}

@@ -63,6 +63,7 @@ var hierarchy =
     [ "FSystemMessage", "structFSystemMessage.html", null ],
     [ "FSystemNode", "structFSystemNode.html", null ],
     [ "FUdsText", "structFUdsText.html", null ],
+    [ "Fuse", "structFuse.html", null ],
     [ "Gateway", "structGateway.html", null ],
     [ "GatewayCanStatus", "structGatewayCanStatus.html", null ],
     [ "GatewayIo", "structGatewayIo.html", null ],
@@ -82,6 +83,10 @@ var hierarchy =
     [ "Options", "structOptions.html", null ],
     [ "PalRtConfig", "structPalRtConfig.html", null ],
     [ "PendingFrame", "structPendingFrame.html", null ],
+    [ "PowerPath", "structPowerPath.html", null ],
+    [ "PowerReading", "structPowerReading.html", null ],
+    [ "PowerSupply", "structPowerSupply.html", null ],
+    [ "ResistiveLoad", "structResistiveLoad.html", null ],
     [ "Runner", "structRunner.html", null ],
     [ "Scenario", "structScenario.html", null ],
     [ "ScenarioStep", "structScenarioStep.html", null ],
@@ -90,6 +95,7 @@ var hierarchy =
     [ "SimShared", "structSimShared.html", null ],
     [ "SlcanCommand", "structSlcanCommand.html", null ],
     [ "SlcanReader", "structSlcanReader.html", null ],
+    [ "SmartSwitch", "structSmartSwitch.html", null ],
     [ "UBlueprintFunctionLibrary", null, [
       [ "UCanFrameLibrary", "classUCanFrameLibrary.html", null ]
     ] ],

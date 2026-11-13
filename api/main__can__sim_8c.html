@@ -134,7 +134,7 @@ Functions</h2></td></tr>
 <li>console thread: reads commands from stdin (not real-time)</li>
 </ul>
 <p>The control loop never blocks on the network while connected: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline.</p>
-<p>Diagnostics: UDS server on 0x7E0/0x7E8 (functional 0x7DF), faults can be injected on the console (see <a class="el" href="light__ecu__diag_8h.html" title="UDS diagnostics of the simulated light ECU (see docs/dev/diagnostics.md).">light_ecu_diag.h</a>, docs/dev/diagnostics.md).</p>
+<p>Diagnostics: UDS server on 0x7E0/0x7E8 (functional 0x7DF), faults can be injected on the console (see <a class="el" href="light__ecu__diag_8h.html" title="Output stage, electrical model and UDS diagnostics of the simulated light ECU (see docs/dev/diagnosti...">light_ecu_diag.h</a>, docs/dev/diagnostics.md).</p>
 <p>Test bench: the simulator registers on the bus as "--name" (default "ecu") and executes test bench lines "@ecu &lt;console command&gt;" sent by can_scenario (see docs/dev/scenarios.md). </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="aa8fc9e28d180bbfc92ca0515b7613a98" name="aa8fc9e28d180bbfc92ca0515b7613a98"></a>

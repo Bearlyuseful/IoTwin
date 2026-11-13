@@ -37,22 +37,28 @@
 \DoxyCodeLine{00043\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
 \DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsSupplying()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bSupplying;\ \}}
 \DoxyCodeLine{00045\ }
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ setPowerSource(\textcolor{keywordtype}{bool}\ bPowered)\ \{\ SetSupplying(bPowered);\ \}}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00053\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Connection"{}},\ meta=(ExposeOnSpawn=\textcolor{keyword}{true}))}
-\DoxyCodeLine{00054\ \ \ \ \ TObjectPtr<UElectricalPortComponent>\ ConnectedPort;}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ protected:}
-\DoxyCodeLine{00057\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ OnRegister()\ override;}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ private:}
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ AddWire(UElectricalPortComponent*\ Other);}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00063\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ Category=\textcolor{stringliteral}{"{}Connection"{}})}
-\DoxyCodeLine{00064\ \ \ \ \ TArray<TObjectPtr<UElectricalPortComponent>>\ Connections;}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ UPROPERTY(VisibleInstanceOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ bSupplying\ =\ false;}
-\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00047\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}},\ meta=(ClampMin=0.0,\ ClampMax=1.0))}
+\DoxyCodeLine{00048\ \ \ \ \ float\ SupplyLevel\ =\ 1.0f;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{float}\ GetSupplyLevel()\ const;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ setPowerSource(\textcolor{keywordtype}{bool}\ bPowered)\ \{\ SetSupplying(bPowered);\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Connection"{}},\ meta=(ExposeOnSpawn=\textcolor{keyword}{true}))}
+\DoxyCodeLine{00062\ \ \ \ \ TObjectPtr<UElectricalPortComponent>\ ConnectedPort;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ protected:}
+\DoxyCodeLine{00065\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ OnRegister()\ override;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ private:}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ AddWire(UElectricalPortComponent*\ Other);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ Category=\textcolor{stringliteral}{"{}Connection"{}})}
+\DoxyCodeLine{00072\ \ \ \ \ TArray<TObjectPtr<UElectricalPortComponent>>\ Connections;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ UPROPERTY(VisibleInstanceOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ bSupplying\ =\ false;}
+\DoxyCodeLine{00076\ \};}
 
 \end{DoxyCode}

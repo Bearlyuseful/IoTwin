@@ -18,6 +18,8 @@ Inheritance diagram for APower\+Source\+Actor\+:\begin{figure}[H]
 void \mbox{\hyperlink{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b}{Set\+Output\+Enabled}} (bool b\+Enabled)
 \item 
 bool \mbox{\hyperlink{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}{Is\+Output\+Enabled}} () const
+\item 
+float \mbox{\hyperlink{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f}{Get\+Output\+Level}} () const
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -31,6 +33,8 @@ TObject\+Ptr$<$ UMaterial\+Interface $>$ \mbox{\hyperlink{classAPowerSourceActor
 UCan\+Signal\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAPowerSourceActor_a40238d0de62387b2ce509ef50b29627c}{Relay\+Control}}
 \item 
 bool \mbox{\hyperlink{classAPowerSourceActor_a2eec9aaa0a87f837f447303c1338bc6a}{b\+Controlled\+By\+Can}} = false
+\item 
+int32 \mbox{\hyperlink{classAPowerSourceActor_a696aab603a86094f0937381b753a1f59}{Level\+Byte\+Index}} = 1
 \item 
 bool \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{b\+Output\+Enabled}} = true
 \item 
@@ -63,7 +67,13 @@ APower\+Source\+Actor\+::\+APower\+Source\+Actor (\begin{DoxyParamCaption}{}{}\e
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929} 
 void APower\+Source\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-\Hypertarget{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}\index{APowerSourceActor@{APowerSourceActor}!IsOutputEnabled@{IsOutputEnabled}}
+\Hypertarget{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f}\index{APowerSourceActor@{APowerSourceActor}!GetOutputLevel@{GetOutputLevel}}
+\index{GetOutputLevel@{GetOutputLevel}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{GetOutputLevel()}{GetOutputLevel()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f} 
+float APower\+Source\+Actor\+::\+Get\+Output\+Level (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Output level 0..1 (dimming). \Hypertarget{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}\index{APowerSourceActor@{APowerSourceActor}!IsOutputEnabled@{IsOutputEnabled}}
 \index{IsOutputEnabled@{IsOutputEnabled}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{IsOutputEnabled()}{IsOutputEnabled()}}
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511} 
@@ -104,7 +114,13 @@ Housing; its colour shows the relay state (green = closed). \Hypertarget{classAP
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a31186cc3354eecc502498833ffc4281a} 
 TObject\+Ptr$<$UMaterial\+Interface$>$ APower\+Source\+Actor\+::\+Housing\+Base\+Material}
 
-Material with a "{}\+Color"{} vector parameter used for the housing. \Hypertarget{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}\index{APowerSourceActor@{APowerSourceActor}!OnRelayChanged@{OnRelayChanged}}
+Material with a "{}\+Color"{} vector parameter used for the housing. \Hypertarget{classAPowerSourceActor_a696aab603a86094f0937381b753a1f59}\index{APowerSourceActor@{APowerSourceActor}!LevelByteIndex@{LevelByteIndex}}
+\index{LevelByteIndex@{LevelByteIndex}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{LevelByteIndex}{LevelByteIndex}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a696aab603a86094f0937381b753a1f59} 
+int32 APower\+Source\+Actor\+::\+Level\+Byte\+Index = 1}
+
+Byte of the relay frame with the brightness 0..100 \% (LAMP\+\_\+\+CMD byte 1), -\/1 = not dimmable. \Hypertarget{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}\index{APowerSourceActor@{APowerSourceActor}!OnRelayChanged@{OnRelayChanged}}
 \index{OnRelayChanged@{OnRelayChanged}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{OnRelayChanged}{OnRelayChanged}}
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969} 

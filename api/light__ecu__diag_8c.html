@@ -102,18 +102,34 @@ Macros</h2></td></tr>
 <tr class="memitem:a096d0660feb339fc1bdfb9b311452934" id="r_a096d0660feb339fc1bdfb9b311452934"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a096d0660feb339fc1bdfb9b311452934">MAX_PERIOD_MS</a>&#160;&#160;&#160;60000u</td></tr>
 <tr class="memitem:a8c0c78e25cf789295f7c17d42a3e271b" id="r_a8c0c78e25cf789295f7c17d42a3e271b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c0c78e25cf789295f7c17d42a3e271b">MIN_PERIOD_MS</a>&#160;&#160;&#160;50u</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a47ae6e75307215f6c370c6790d301317" id="r_a47ae6e75307215f6c370c6790d301317"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<a class="el" href="#a47ae6e75307215f6c370c6790d301317adbde34355c676d401ce4426d8ccf3e6f">DTC_SHORT</a>
+, <a class="el" href="#a47ae6e75307215f6c370c6790d301317ac3d680bb12a8d2434fc1b34cf492cc34">DTC_OPEN</a>
+, <a class="el" href="#a47ae6e75307215f6c370c6790d301317abb47565217a4a34c86df2da4cee258f6">DTC_OVERCURRENT</a>
+, <a class="el" href="#a47ae6e75307215f6c370c6790d301317a7c0a668b18415e2cb698d79ebee18d8b">DTC_SUPPLY</a>
+, <br />
+&#160;&#160;<a class="el" href="#a47ae6e75307215f6c370c6790d301317aa988f91041b2d68fef4c8a00066ef84d">DTC_FUSE</a>
+<br />
+ }</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a81273acaebc69d616c3ec4a9b3e3c581" id="r_a81273acaebc69d616c3ec4a9b3e3c581"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81273acaebc69d616c3ec4a9b3e3c581">light_ecu_diag_init</a> (<a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *diag, <a class="el" href="structLightEcu.html">LightEcu</a> *ecu, bool(*send)(void *context, const <a class="el" href="structCanFrame.html">CanFrame</a> *frame), void *send_context, const char *software_version)</td></tr>
-<tr class="memdesc:a81273acaebc69d616c3ec4a9b3e3c581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises diagnostics for <code class="param">ecu</code>.  <br /></td></tr>
+<tr class="memdesc:a81273acaebc69d616c3ec4a9b3e3c581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises diagnostics and the output stage for <code class="param">ecu</code>.  <br /></td></tr>
 <tr class="memitem:a159894dac8f27a22e9976c89c8334d45" id="r_a159894dac8f27a22e9976c89c8334d45"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a159894dac8f27a22e9976c89c8334d45">light_ecu_diag_on_frame</a> (<a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *diag, const <a class="el" href="structCanFrame.html">CanFrame</a> *frame, uint64_t now_ms)</td></tr>
 <tr class="memdesc:a159894dac8f27a22e9976c89c8334d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hands a received frame to the UDS server.  <br /></td></tr>
 <tr class="memitem:ab09c523c51fe78fbf3e486c7908e07d8" id="r_ab09c523c51fe78fbf3e486c7908e07d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab09c523c51fe78fbf3e486c7908e07d8">light_ecu_diag_step</a> (<a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *diag, uint64_t now_ms)</td></tr>
-<tr class="memdesc:ab09c523c51fe78fbf3e486c7908e07d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the fault monitors and the UDS timers; call every control step before <a class="el" href="light__ecu_8c.html#adf2109604c377e8c13357c9b848f18de" title="Runs one control step.">light_ecu_step()</a>.  <br /></td></tr>
+<tr class="memdesc:ab09c523c51fe78fbf3e486c7908e07d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the electrical model, the fault monitors and the UDS timers. Call every control step before <a class="el" href="light__ecu_8c.html#adf2109604c377e8c13357c9b848f18de" title="Runs one control step.">light_ecu_step()</a> (it sets the output inhibit).  <br /></td></tr>
+<tr class="memitem:ae37888c1f43a56c472e0ad6104ee0def" id="r_ae37888c1f43a56c472e0ad6104ee0def"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae37888c1f43a56c472e0ad6104ee0def">light_ecu_diag_status</a> (<a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *diag, uint64_t now_ms, <a class="el" href="structCanFrame.html">CanFrame</a> *out)</td></tr>
+<tr class="memdesc:ae37888c1f43a56c472e0ad6104ee0def"><td class="mdescLeft">&#160;</td><td class="mdescRight">LAMP_STATUS every LIGHT_ECU_STATUS_PERIOD_MS.  <br /></td></tr>
 <tr class="memitem:a8d1e567e049a58bead09b10a3c521679" id="r_a8d1e567e049a58bead09b10a3c521679"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d1e567e049a58bead09b10a3c521679">light_ecu_diag_set_fault</a> (<a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *diag, <a class="el" href="light__ecu__diag_8h.html#ac9e924745535c30929e38cd68d28c715">LightEcuFault</a> fault, bool active)</td></tr>
 <tr class="memdesc:a8d1e567e049a58bead09b10a3c521679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates or removes an injected fault.  <br /></td></tr>
+<tr class="memitem:aa2620f6d0982a8431d441d8a8fd6ccfc" id="r_aa2620f6d0982a8431d441d8a8fd6ccfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2620f6d0982a8431d441d8a8fd6ccfc">light_ecu_diag_replace_fuse</a> (<a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *diag)</td></tr>
+<tr class="memdesc:aa2620f6d0982a8431d441d8a8fd6ccfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts in a new fuse.  <br /></td></tr>
 <tr class="memitem:add9b0003c398d0a18c0f77108b304b61" id="r_add9b0003c398d0a18c0f77108b304b61"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add9b0003c398d0a18c0f77108b304b61">light_ecu_fault_from_name</a> (const char *name, <a class="el" href="light__ecu__diag_8h.html#ac9e924745535c30929e38cd68d28c715">LightEcuFault</a> *fault)</td></tr>
-<tr class="memdesc:add9b0003c398d0a18c0f77108b304b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses "short", "open" or "supply".  <br /></td></tr>
+<tr class="memdesc:add9b0003c398d0a18c0f77108b304b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses "short", "open", "supply" or "overload".  <br /></td></tr>
 <tr class="memitem:a5ee115823122f152e1ba4b19669938b2" id="r_a5ee115823122f152e1ba4b19669938b2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ee115823122f152e1ba4b19669938b2">light_ecu_fault_name</a> (<a class="el" href="light__ecu__diag_8h.html#ac9e924745535c30929e38cd68d28c715">LightEcuFault</a> fault)</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
@@ -187,6 +203,28 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a47ae6e75307215f6c370c6790d301317" name="a47ae6e75307215f6c370c6790d301317"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ae6e75307215f6c370c6790d301317">&#9670;&#160;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a47ae6e75307215f6c370c6790d301317adbde34355c676d401ce4426d8ccf3e6f" name="a47ae6e75307215f6c370c6790d301317adbde34355c676d401ce4426d8ccf3e6f"></a>DTC_SHORT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a47ae6e75307215f6c370c6790d301317ac3d680bb12a8d2434fc1b34cf492cc34" name="a47ae6e75307215f6c370c6790d301317ac3d680bb12a8d2434fc1b34cf492cc34"></a>DTC_OPEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a47ae6e75307215f6c370c6790d301317abb47565217a4a34c86df2da4cee258f6" name="a47ae6e75307215f6c370c6790d301317abb47565217a4a34c86df2da4cee258f6"></a>DTC_OVERCURRENT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a47ae6e75307215f6c370c6790d301317a7c0a668b18415e2cb698d79ebee18d8b" name="a47ae6e75307215f6c370c6790d301317a7c0a668b18415e2cb698d79ebee18d8b"></a>DTC_SUPPLY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a47ae6e75307215f6c370c6790d301317aa988f91041b2d68fef4c8a00066ef84d" name="a47ae6e75307215f6c370c6790d301317aa988f91041b2d68fef4c8a00066ef84d"></a>DTC_FUSE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a81273acaebc69d616c3ec4a9b3e3c581" name="a81273acaebc69d616c3ec4a9b3e3c581"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81273acaebc69d616c3ec4a9b3e3c581">&#9670;&#160;</a></span>light_ecu_diag_init()</h2>
@@ -222,10 +260,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialises diagnostics for <code class="param">ecu</code>. </p>
+<p>Initialises diagnostics and the output stage for <code class="param">ecu</code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">send</td><td>CAN transmit function for the responses. </td></tr>
+    <tr><td class="paramname">send</td><td>CAN transmit function for the UDS responses. </td></tr>
     <tr><td class="paramname">software_version</td><td>Reported in DID F189. </td></tr>
   </table>
   </dd>
@@ -262,6 +300,25 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aa2620f6d0982a8431d441d8a8fd6ccfc" name="aa2620f6d0982a8431d441d8a8fd6ccfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2620f6d0982a8431d441d8a8fd6ccfc">&#9670;&#160;</a></span>light_ecu_diag_replace_fuse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void light_ecu_diag_replace_fuse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *</td>          <td class="paramname"><span class="paramname"><em>diag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Puts in a new fuse. </p>
+
+</div>
+</div>
 <a id="a8d1e567e049a58bead09b10a3c521679" name="a8d1e567e049a58bead09b10a3c521679"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d1e567e049a58bead09b10a3c521679">&#9670;&#160;</a></span>light_ecu_diag_set_fault()</h2>
 
@@ -290,6 +347,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae37888c1f43a56c472e0ad6104ee0def" name="ae37888c1f43a56c472e0ad6104ee0def"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae37888c1f43a56c472e0ad6104ee0def">&#9670;&#160;</a></span>light_ecu_diag_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool light_ecu_diag_status </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structLightEcuDiag.html">LightEcuDiag</a> *</td>          <td class="paramname"><span class="paramname"><em>diag</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>now_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structCanFrame.html">CanFrame</a> *</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>LAMP_STATUS every LIGHT_ECU_STATUS_PERIOD_MS. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if <code class="param">out</code> has to be sent. </dd></dl>
+
+</div>
+</div>
 <a id="ab09c523c51fe78fbf3e486c7908e07d8" name="ab09c523c51fe78fbf3e486c7908e07d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab09c523c51fe78fbf3e486c7908e07d8">&#9670;&#160;</a></span>light_ecu_diag_step()</h2>
 
@@ -309,7 +395,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Runs the fault monitors and the UDS timers; call every control step before <a class="el" href="light__ecu_8c.html#adf2109604c377e8c13357c9b848f18de" title="Runs one control step.">light_ecu_step()</a>. </p>
+<p>Runs the electrical model, the fault monitors and the UDS timers. Call every control step before <a class="el" href="light__ecu_8c.html#adf2109604c377e8c13357c9b848f18de" title="Runs one control step.">light_ecu_step()</a> (it sets the output inhibit). </p>
 
 </div>
 </div>
@@ -332,7 +418,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Parses "short", "open" or "supply". </p>
+<p>Parses "short", "open", "supply" or "overload". </p>
 
 </div>
 </div>

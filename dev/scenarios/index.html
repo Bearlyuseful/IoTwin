@@ -16,7 +16,7 @@
         <link rel="prev" href="../diagnostics/">
       
       
-        <link rel="next" href="../component_database/">
+        <link rel="next" href="../power/">
       
       
         
@@ -864,6 +864,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power and Dimming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../component_database/" class="md-nav__link">
         
   
@@ -1232,8 +1260,11 @@ comment). Times are in milliseconds.</p>
 </tr>
 </tbody>
 </table>
-<p>Before every action (<code>send</code>, <code>bench</code>, <code>bus</code>, <code>uds</code>) the runner discards what
-has arrived so far, so an <code>expect</code> only sees frames that follow the action.</p>
+<p>An <code>expect</code> sees the frames since the start of the last action (<code>send</code>,
+<code>bench</code>, <code>bus</code>, <code>uds</code>), including those that arrived while the action was
+still running (e.g. a reaction sent before the UDS response), and consumes
+them up to its match, so two <code>expect</code> in a row need two frames. <code>wait</code>
+discards what arrives during the wait.</p>
 <p><strong>Frame patterns:</strong> <code>100#01</code> exact payload, <code>100#01*</code> payload starting with
 <code>01</code>, <code>100#*</code> any payload, <code>100#XX01</code> <code>XX</code> = any byte, <code>100#R</code> remote frame,
 8-digit ids for extended frames.</p>
@@ -1308,6 +1339,18 @@ one typed on its console:</p>
 <td>supply voltage low: DTC <code>B1002-16</code></td>
 </tr>
 <tr>
+<td><code>fault overload on/off</code></td>
+<td>bulb with three times the power: DTC <code>B1001-19</code>, the fuse blows (<code>B1003-13</code>)</td>
+</tr>
+<tr>
+<td><code>fuse replace</code></td>
+<td>put in a new lamp fuse</td>
+</tr>
+<tr>
+<td><code>dim &lt;0..100&gt;</code></td>
+<td>brightness</td>
+</tr>
+<tr>
 <td><code>fault clear</code></td>
 <td>remove all injected faults</td>
 </tr>
@@ -1365,6 +1408,14 @@ IoTwin logs can be played on a real bus with <code>canplayer</code>:</p>
 <tr>
 <td><code>bus-silence</code></td>
 <td>silent bus: nothing arrives, the ECU continues afterwards</td>
+</tr>
+<tr>
+<td><code>dimmer</code></td>
+<td><code>DIMMER_CMD</code> -&gt; brightness in <code>LAMP_CMD</code>, duty and current in <code>LAMP_STATUS</code></td>
+</tr>
+<tr>
+<td><code>overload-fuse</code></td>
+<td>overload: overcurrent DTC, fuse blows, replaced fuse brings the lamp back</td>
 </tr>
 </tbody>
 </table>

@@ -20,7 +20,11 @@ struct \mbox{\hyperlink{structLightEcu}{Light\+Ecu}}
 \item 
 \#define \mbox{\hyperlink{light__ecu_8h_aea742e162f722145b33dfd4c75581d49}{LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+SWITCH\+\_\+\+STATE}}~0x200u
 \item 
+\#define \mbox{\hyperlink{light__ecu_8h_ad9d1d1e899437c8766f05c3e196758ad}{LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+DIMMER\+\_\+\+CMD}}~0x201u
+\item 
 \#define \mbox{\hyperlink{light__ecu_8h_abb5ee0d4f5b5ac811c2998c0d4711e92}{LIGHT\+\_\+\+ECU\+\_\+\+DEFAULT\+\_\+\+CYCLE\+\_\+\+MS}}~500u
+\item 
+\#define \mbox{\hyperlink{light__ecu_8h_a0b573c1784a6f757ee9b5d654805e79a}{LIGHT\+\_\+\+ECU\+\_\+\+DEFAULT\+\_\+\+LEVEL}}~100u
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -31,6 +35,8 @@ bool \mbox{\hyperlink{light__ecu_8h_a7f762142d5a7d2c34cd11b72bd265239}{light\+\_
 \begin{DoxyCompactList}\small\item\em Processes a received frame. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{light__ecu_8h_a62eb9fd4971ac3eb69e0f6d436172d1a}{light\+\_\+ecu\+\_\+set\+\_\+lamp}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, bool on)
 \begin{DoxyCompactList}\small\item\em Sets the lamp (stops blinking). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu_8h_ae837b1db710a455cbd05a778a1825dd2}{light\+\_\+ecu\+\_\+set\+\_\+level}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint32\+\_\+t percent)
+\begin{DoxyCompactList}\small\item\em Sets the brightness (clamped to 0..100 \%). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{light__ecu_8h_a87747d99d86faf11f561793a602efe9e}{light\+\_\+ecu\+\_\+set\+\_\+blink}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint32\+\_\+t period\+\_\+ms)
 \begin{DoxyCompactList}\small\item\em Starts blinking with the given toggle period; 0 stops blinking. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{light__ecu_8h_a960ee4c117db171fed12d742e4ce9591}{light\+\_\+ecu\+\_\+set\+\_\+output\+\_\+inhibit}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, bool inhibit)
@@ -49,7 +55,8 @@ Simulated light control unit (the demo ECU of can\+\_\+sim).
 Signals (see docs/dev/protocol.\+md)\+:
 \begin{DoxyItemize}
 \item 0x200 SWITCH\+\_\+\+STATE (input)\+: data\mbox{[}0\mbox{]} bit 0 = position of the wall switch
-\item 0x100 LAMP\+\_\+\+CMD (output)\+: data\mbox{[}0\mbox{]} bit 0 = lamp relay closed (lamp on)
+\item 0x201 DIMMER\+\_\+\+CMD (input)\+: data\mbox{[}0\mbox{]} = brightness 0..100 \%
+\item 0x100 LAMP\+\_\+\+CMD (output)\+: data\mbox{[}0\mbox{]} bit 0 = lamp on, data\mbox{[}1\mbox{]} = brightness 0..100 \%
 \end{DoxyItemize}
 
 The ECU sets the lamp to the switch position, can blink the lamp on its own, and sends LAMP\+\_\+\+CMD on every change plus cyclically, so a node that joins the bus later learns the current state within one cycle.
@@ -64,6 +71,18 @@ The logic is free of I/O and time sources so it can be unit tested.
 \doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS}{LIGHT\_ECU\_DEFAULT\_CYCLE\_MS}}
 {\footnotesize\ttfamily \label{light__ecu_8h_abb5ee0d4f5b5ac811c2998c0d4711e92} 
 \#define LIGHT\+\_\+\+ECU\+\_\+\+DEFAULT\+\_\+\+CYCLE\+\_\+\+MS~500u}
+
+\Hypertarget{light__ecu_8h_a0b573c1784a6f757ee9b5d654805e79a}\index{light\_ecu.h@{light\_ecu.h}!LIGHT\_ECU\_DEFAULT\_LEVEL@{LIGHT\_ECU\_DEFAULT\_LEVEL}}
+\index{LIGHT\_ECU\_DEFAULT\_LEVEL@{LIGHT\_ECU\_DEFAULT\_LEVEL}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_DEFAULT\_LEVEL}{LIGHT\_ECU\_DEFAULT\_LEVEL}}
+{\footnotesize\ttfamily \label{light__ecu_8h_a0b573c1784a6f757ee9b5d654805e79a} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+DEFAULT\+\_\+\+LEVEL~100u}
+
+\Hypertarget{light__ecu_8h_ad9d1d1e899437c8766f05c3e196758ad}\index{light\_ecu.h@{light\_ecu.h}!LIGHT\_ECU\_ID\_DIMMER\_CMD@{LIGHT\_ECU\_ID\_DIMMER\_CMD}}
+\index{LIGHT\_ECU\_ID\_DIMMER\_CMD@{LIGHT\_ECU\_ID\_DIMMER\_CMD}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{LIGHT\_ECU\_ID\_DIMMER\_CMD}{LIGHT\_ECU\_ID\_DIMMER\_CMD}}
+{\footnotesize\ttfamily \label{light__ecu_8h_ad9d1d1e899437c8766f05c3e196758ad} 
+\#define LIGHT\+\_\+\+ECU\+\_\+\+ID\+\_\+\+DIMMER\+\_\+\+CMD~0x201u}
 
 \Hypertarget{light__ecu_8h_a55699f2a4c8c60f6814fa4bdde60e764}\index{light\_ecu.h@{light\_ecu.h}!LIGHT\_ECU\_ID\_LAMP\_CMD@{LIGHT\_ECU\_ID\_LAMP\_CMD}}
 \index{LIGHT\_ECU\_ID\_LAMP\_CMD@{LIGHT\_ECU\_ID\_LAMP\_CMD}!light\_ecu.h@{light\_ecu.h}}
@@ -103,7 +122,7 @@ bool light\+\_\+ecu\+\_\+on\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hy
 Processes a received frame. 
 
 \begin{DoxyReturn}{Returns}
-true if the frame was a valid SWITCH\+\_\+\+STATE frame. 
+true if the frame was a valid SWITCH\+\_\+\+STATE or DIMMER\+\_\+\+CMD frame. 
 \end{DoxyReturn}
 \Hypertarget{light__ecu_8h_afa5413786f818389645994e5c9acd1c7}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_output@{light\_ecu\_output}}
 \index{light\_ecu\_output@{light\_ecu\_output}!light\_ecu.h@{light\_ecu.h}}
@@ -144,6 +163,16 @@ void light\+\_\+ecu\+\_\+set\+\_\+lamp (\begin{DoxyParamCaption}\item[{\mbox{\hy
 
 
 Sets the lamp (stops blinking). 
+
+\Hypertarget{light__ecu_8h_ae837b1db710a455cbd05a778a1825dd2}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_set\_level@{light\_ecu\_set\_level}}
+\index{light\_ecu\_set\_level@{light\_ecu\_set\_level}!light\_ecu.h@{light\_ecu.h}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_set\_level()}{light\_ecu\_set\_level()}}
+{\footnotesize\ttfamily \label{light__ecu_8h_ae837b1db710a455cbd05a778a1825dd2} 
+void light\+\_\+ecu\+\_\+set\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{uint32\+\_\+t}]{percent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the brightness (clamped to 0..100 \%). 
 
 \Hypertarget{light__ecu_8h_a960ee4c117db171fed12d742e4ce9591}\index{light\_ecu.h@{light\_ecu.h}!light\_ecu\_set\_output\_inhibit@{light\_ecu\_set\_output\_inhibit}}
 \index{light\_ecu\_set\_output\_inhibit@{light\_ecu\_set\_output\_inhibit}!light\_ecu.h@{light\_ecu.h}}

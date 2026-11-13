@@ -710,6 +710,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dimming-and-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimming and power
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#electrical-model-sourceiotwinsystems" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -850,6 +861,34 @@
     
   
     Scenarios and Faults
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power and Dimming
   
 
     
@@ -1280,6 +1319,14 @@ root (<code>visualizer/..</code>) and the package root. Command line:
 <code>-IoTwinSystem=&lt;file&gt;</code>, <code>-IoTwinView=Schematic</code> (start in the schematic),
 <code>-IoTwinSelectNode=&lt;node id&gt;</code> (preselect a node, e.g. for screenshots).</p>
 <p><img alt="Schematic view" src="../../images/schematic.png" /></p>
+<h2 id="dimming-and-power">Dimming and power<a class="headerlink" href="#dimming-and-power" title="Permanent link">&para;</a></h2>
+<p>The <strong>mouse wheel</strong> dims the lamp: the visualizer sends <code>DIMMER_CMD</code> (0x201)
+in 10 % steps, starting from the brightness in the last <code>LAMP_CMD</code>. The power
+source reads that brightness from <code>LAMP_CMD</code> byte 1 (<code>LevelByteIndex</code>), its
+port carries it as <code>SupplyLevel</code>, and the lamp's light intensity and bulb
+colour follow <code>UElectricalDeviceComponent::PowerLevel</code>. The HUD shows the
+brightness and the ECU's measured current and supply voltage from
+<code>LAMP_STATUS</code> (0x101), plus fuse, overcurrent or short circuit.</p>
 <h2 id="electrical-model-sourceiotwinsystems">Electrical model (<code>Source/IoTwin/Systems</code>)<a class="headerlink" href="#electrical-model-sourceiotwinsystems" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>UElectricalPortComponent</code>: wiring is a symmetric list of ports stored on

@@ -11,6 +11,7 @@ var gateway_8h =
     [ "GATEWAY_DID_CHANNEL", "gateway_8h.html#ab908842b58963e48ce9b7a5e9e838db3", null ],
     [ "GATEWAY_DID_COUNTERS", "gateway_8h.html#aa01f0c39d3d8cd227139e7a08aeeef48", null ],
     [ "GATEWAY_DID_LAMP", "gateway_8h.html#a2348a819d34d1669f83ba73817a4d75e", null ],
+    [ "GATEWAY_DID_LED", "gateway_8h.html#aa7b4d89608c3f1c9d5fae2f043bbd739", null ],
     [ "GATEWAY_DID_SWITCH", "gateway_8h.html#aea73af4bf896fb5a472d36050eb7271c", null ],
     [ "GATEWAY_DID_UPTIME", "gateway_8h.html#a047d602019ec46ec6ead0897e03e09e1", null ],
     [ "GATEWAY_DTC_BUS_OFF", "gateway_8h.html#af6e55c356bdde1319435b485df29f62f", null ],

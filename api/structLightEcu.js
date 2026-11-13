@@ -6,6 +6,7 @@ var structLightEcu =
     [ "lamp_on", "structLightEcu.html#a69bf377f8868877cfe89b18400dddd1d", null ],
     [ "last_send_ms", "structLightEcu.html#a586b43ec34ea02c87c55bd5a72ccf5e0", null ],
     [ "last_toggle_ms", "structLightEcu.html#a20c6979600f3bcb2eb7f0faafbd85dd5", null ],
+    [ "level", "structLightEcu.html#abd7e04b57a01f8aa014cdaa8d78fb682", null ],
     [ "output_inhibit", "structLightEcu.html#a5de29a874ebf7f6f7ed198f13df44be6", null ],
     [ "started", "structLightEcu.html#a2daad4c84d5329da21825b09a8b86ec0", null ],
     [ "switch_on", "structLightEcu.html#a2418ed2ef6034ea21ae2ef358b7437bb", null ]

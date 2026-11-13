@@ -99,8 +99,14 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aa8396abc1905a2aa797884f736724168" id="r_aa8396abc1905a2aa797884f736724168"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLightEcu.html">LightEcu</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8396abc1905a2aa797884f736724168">ecu</a></td></tr>
 <tr class="memitem:ac8df1499493ce0505f2b46f81af7f510" id="r_ac8df1499493ce0505f2b46f81af7f510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUdsServer.html">UdsServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8df1499493ce0505f2b46f81af7f510">uds</a></td></tr>
 <tr class="memitem:adb9d2e5625de28ed4c88543ab5c549ee" id="r_adb9d2e5625de28ed4c88543ab5c549ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUdsDtc.html">UdsDtc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb9d2e5625de28ed4c88543ab5c549ee">dtcs</a> [<a class="el" href="light__ecu__diag_8h.html#a674fc59f7962cd85b1fca4fd208b50cb">LIGHT_ECU_DTC_COUNT</a>]</td></tr>
+<tr class="memitem:a917067fc04fa7b790377a30acf48a20a" id="r_a917067fc04fa7b790377a30acf48a20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPowerPath.html">PowerPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a917067fc04fa7b790377a30acf48a20a">power</a></td></tr>
+<tr class="memitem:af7eca108d7de4382fc743cbf34e00803" id="r_af7eca108d7de4382fc743cbf34e00803"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPowerReading.html">PowerReading</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7eca108d7de4382fc743cbf34e00803">reading</a></td></tr>
 <tr class="memitem:a170ef980d33f2c2c33eef0de92215f56" id="r_a170ef980d33f2c2c33eef0de92215f56"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a170ef980d33f2c2c33eef0de92215f56">faults</a></td></tr>
 <tr class="memitem:a5c3d8cb270a1375b6fdd8a90021c7134" id="r_a5c3d8cb270a1375b6fdd8a90021c7134"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c3d8cb270a1375b6fdd8a90021c7134">resets</a></td></tr>
+<tr class="memitem:ac02b53ca62ca0e07bb03c6edf32f7ea5" id="r_ac02b53ca62ca0e07bb03c6edf32f7ea5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac02b53ca62ca0e07bb03c6edf32f7ea5">overcurrent_ms</a></td></tr>
+<tr class="memitem:a05c3375d853b9632945b6e5db0957d07" id="r_a05c3375d853b9632945b6e5db0957d07"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05c3375d853b9632945b6e5db0957d07">last_step_ms</a></td></tr>
+<tr class="memitem:a633e956ddb0b3f71cea14d411e747ac1" id="r_a633e956ddb0b3f71cea14d411e747ac1"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a633e956ddb0b3f71cea14d411e747ac1">last_status_ms</a></td></tr>
+<tr class="memitem:aee9b402b74e179a1df408323ded79f4f" id="r_aee9b402b74e179a1df408323ded79f4f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee9b402b74e179a1df408323ded79f4f">stepped</a></td></tr>
 <tr class="memitem:a7f2efd7b6c943d2db6e1f6104af4e3f4" id="r_a7f2efd7b6c943d2db6e1f6104af4e3f4"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f2efd7b6c943d2db6e1f6104af4e3f4">software_version</a></td></tr>
 </table>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
@@ -147,6 +153,78 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a633e956ddb0b3f71cea14d411e747ac1" name="a633e956ddb0b3f71cea14d411e747ac1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a633e956ddb0b3f71cea14d411e747ac1">&#9670;&#160;</a></span>last_status_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t LightEcuDiag::last_status_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a05c3375d853b9632945b6e5db0957d07" name="a05c3375d853b9632945b6e5db0957d07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05c3375d853b9632945b6e5db0957d07">&#9670;&#160;</a></span>last_step_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t LightEcuDiag::last_step_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac02b53ca62ca0e07bb03c6edf32f7ea5" name="ac02b53ca62ca0e07bb03c6edf32f7ea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02b53ca62ca0e07bb03c6edf32f7ea5">&#9670;&#160;</a></span>overcurrent_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t LightEcuDiag::overcurrent_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Time the current has been above the threshold. </p>
+
+</div>
+</div>
+<a id="a917067fc04fa7b790377a30acf48a20a" name="a917067fc04fa7b790377a30acf48a20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917067fc04fa7b790377a30acf48a20a">&#9670;&#160;</a></span>power</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPowerPath.html">PowerPath</a> LightEcuDiag::power</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7eca108d7de4382fc743cbf34e00803" name="af7eca108d7de4382fc743cbf34e00803"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7eca108d7de4382fc743cbf34e00803">&#9670;&#160;</a></span>reading</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPowerReading.html">PowerReading</a> LightEcuDiag::reading</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Last result of the electrical model. </p>
+
+</div>
+</div>
 <a id="a5c3d8cb270a1375b6fdd8a90021c7134" name="a5c3d8cb270a1375b6fdd8a90021c7134"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5c3d8cb270a1375b6fdd8a90021c7134">&#9670;&#160;</a></span>resets</h2>
 
@@ -170,6 +248,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const char* LightEcuDiag::software_version</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aee9b402b74e179a1df408323ded79f4f" name="aee9b402b74e179a1df408323ded79f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee9b402b74e179a1df408323ded79f4f">&#9670;&#160;</a></span>stepped</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LightEcuDiag::stepped</td>
         </tr>
       </table>
 </div><div class="memdoc">

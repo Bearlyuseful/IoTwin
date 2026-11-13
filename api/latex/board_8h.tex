@@ -24,7 +24,11 @@ void \mbox{\hyperlink{board_8h_a916f2adc2080b4fe88034086d107a8dc}{board\+\_\+ini
 uint32\+\_\+t \mbox{\hyperlink{board_8h_af6a218803b32fbde3610564a990c39a5}{board\+\_\+millis}} (void)
 \begin{DoxyCompactList}\small\item\em Milliseconds since start (Sys\+Tick). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{board_8h_a05173a3c0b7188496922ec5d4e4a6b34}{board\+\_\+led\+\_\+set}} (bool on)
-\item 
+\begin{DoxyCompactList}\small\item\em LD4 on or off (100 \% / 0 \%). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{board_8h_a4e56d403b56735dc46bad9fc68836ecc}{board\+\_\+led\+\_\+set\+\_\+level}} (uint8\+\_\+t percent)
+\begin{DoxyCompactList}\small\item\em LD4 brightness 0..100 \%\+: TIM2 CH1 PWM on PA5 (AF2), 1 k\+Hz. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{board_8h_abacf1dedceee883f48bc9e22e78836a6}{board\+\_\+led\+\_\+measure\+\_\+percent}} (void)
+\begin{DoxyCompactList}\small\item\em Measures the duty cycle on the LED pin by sampling its input register for about 5 ms (self test of the PWM, independent of the timer registers). \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{board_8h_ae1f776c3e6f3e8528ad15f3488bf60ab}{board\+\_\+button\+\_\+raw}} (void)
 \begin{DoxyCompactList}\small\item\em Raw (not debounced) state of the user button, true = pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -87,11 +91,35 @@ void board\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCap
 
 Clocks are set up by \doxylink{board_8c_a93f514700ccf00d08dbdcff7f1224eb2}{System\+Init()} (startup); this configures GPIO and Sys\+Tick. 
 
+\Hypertarget{board_8h_abacf1dedceee883f48bc9e22e78836a6}\index{board.h@{board.h}!board\_led\_measure\_percent@{board\_led\_measure\_percent}}
+\index{board\_led\_measure\_percent@{board\_led\_measure\_percent}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{board\_led\_measure\_percent()}{board\_led\_measure\_percent()}}
+{\footnotesize\ttfamily \label{board_8h_abacf1dedceee883f48bc9e22e78836a6} 
+uint8\+\_\+t board\+\_\+led\+\_\+measure\+\_\+percent (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Measures the duty cycle on the LED pin by sampling its input register for about 5 ms (self test of the PWM, independent of the timer registers). 
+
 \Hypertarget{board_8h_a05173a3c0b7188496922ec5d4e4a6b34}\index{board.h@{board.h}!board\_led\_set@{board\_led\_set}}
 \index{board\_led\_set@{board\_led\_set}!board.h@{board.h}}
 \doxysubsubsection{\texorpdfstring{board\_led\_set()}{board\_led\_set()}}
 {\footnotesize\ttfamily \label{board_8h_a05173a3c0b7188496922ec5d4e4a6b34} 
 void board\+\_\+led\+\_\+set (\begin{DoxyParamCaption}\item[{bool}]{on}{}\end{DoxyParamCaption})}
+
+
+
+LD4 on or off (100 \% / 0 \%). 
+
+\Hypertarget{board_8h_a4e56d403b56735dc46bad9fc68836ecc}\index{board.h@{board.h}!board\_led\_set\_level@{board\_led\_set\_level}}
+\index{board\_led\_set\_level@{board\_led\_set\_level}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{board\_led\_set\_level()}{board\_led\_set\_level()}}
+{\footnotesize\ttfamily \label{board_8h_a4e56d403b56735dc46bad9fc68836ecc} 
+void board\+\_\+led\+\_\+set\+\_\+level (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{percent}{}\end{DoxyParamCaption})}
+
+
+
+LD4 brightness 0..100 \%\+: TIM2 CH1 PWM on PA5 (AF2), 1 k\+Hz. 
 
 \Hypertarget{board_8h_af6a218803b32fbde3610564a990c39a5}\index{board.h@{board.h}!board\_millis@{board\_millis}}
 \index{board\_millis@{board\_millis}!board.h@{board.h}}

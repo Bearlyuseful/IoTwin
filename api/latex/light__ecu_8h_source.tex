@@ -5,52 +5,57 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_LIGHT\_ECU\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_LIGHT\_ECU\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00025\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_ID\_LAMP\_CMD\ 0x100u}}
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_ID\_SWITCH\_STATE\ 0x200u}}
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DEFAULT\_CYCLE\_MS\ 500u}}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00033\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a69bf377f8868877cfe89b18400dddd1d}{lamp\_on}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a2418ed2ef6034ea21ae2ef358b7437bb}{switch\_on}};\ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}{output\_inhibit}};\ \ \ \ \ \ }
-\DoxyCodeLine{00037\ \ \ uint32\_t\ \mbox{\hyperlink{structLightEcu_ac81f06dd52e63e688580150be0e9cac0}{cycle\_ms}};\ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00038\ \ \ uint32\_t\ \mbox{\hyperlink{structLightEcu_a03303065311638e2df54c46092d30864}{blink\_period\_ms}};\ }
-\DoxyCodeLine{00039\ \ \ uint64\_t\ \mbox{\hyperlink{structLightEcu_a586b43ec34ea02c87c55bd5a72ccf5e0}{last\_send\_ms}};\ \ \ \ }
-\DoxyCodeLine{00040\ \ \ uint64\_t\ \mbox{\hyperlink{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5}{last\_toggle\_ms}};\ \ }
-\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a7712dea6d676285b53546cce940e143f}{dirty}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0}{started}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00043\ \}\ \mbox{\hyperlink{structLightEcu}{LightEcu}};}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a2cae1fbb1accbf1ed00f65a1815306fd}{light\_ecu\_init}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint32\_t\ cycle\_ms);}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00052\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu_8h_a7f762142d5a7d2c34cd11b72bd265239}{light\_ecu\_on\_frame}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a62eb9fd4971ac3eb69e0f6d436172d1a}{light\_ecu\_set\_lamp}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keywordtype}{bool}\ on);}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a87747d99d86faf11f561793a602efe9e}{light\_ecu\_set\_blink}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint32\_t\ period\_ms);}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00061\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a960ee4c117db171fed12d742e4ce9591}{light\_ecu\_set\_output\_inhibit}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keywordtype}{bool}\ inhibit);}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00064\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu_8h_afa5413786f818389645994e5c9acd1c7}{light\_ecu\_output}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu);}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_ab8cb4fd55e4b2ba439a0c73e0a5575bc}{light\_ecu\_request\_send}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu);}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00076\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu_8h_adf2109604c377e8c13357c9b848f18de}{light\_ecu\_step}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint64\_t\ now\_ms,\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ out,\ \textcolor{keywordtype}{bool}*\ state\_changed);}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00079\ \}}
-\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_LIGHT\_ECU\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_ID\_LAMP\_CMD\ 0x100u}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_ID\_SWITCH\_STATE\ 0x200u}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_ID\_DIMMER\_CMD\ 0x201u}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DEFAULT\_CYCLE\_MS\ 500u}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ LIGHT\_ECU\_DEFAULT\_LEVEL\ 100u}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a69bf377f8868877cfe89b18400dddd1d}{lamp\_on}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a2418ed2ef6034ea21ae2ef358b7437bb}{switch\_on}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a5de29a874ebf7f6f7ed198f13df44be6}{output\_inhibit}};\ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ uint8\_t\ \mbox{\hyperlink{structLightEcu_abd7e04b57a01f8aa014cdaa8d78fb682}{level}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ uint32\_t\ \mbox{\hyperlink{structLightEcu_ac81f06dd52e63e688580150be0e9cac0}{cycle\_ms}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ uint32\_t\ \mbox{\hyperlink{structLightEcu_a03303065311638e2df54c46092d30864}{blink\_period\_ms}};\ }
+\DoxyCodeLine{00043\ \ \ uint64\_t\ \mbox{\hyperlink{structLightEcu_a586b43ec34ea02c87c55bd5a72ccf5e0}{last\_send\_ms}};\ \ \ \ }
+\DoxyCodeLine{00044\ \ \ uint64\_t\ \mbox{\hyperlink{structLightEcu_a20c6979600f3bcb2eb7f0faafbd85dd5}{last\_toggle\_ms}};\ \ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a7712dea6d676285b53546cce940e143f}{dirty}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLightEcu_a2daad4c84d5329da21825b09a8b86ec0}{started}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \}\ \mbox{\hyperlink{structLightEcu}{LightEcu}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a2cae1fbb1accbf1ed00f65a1815306fd}{light\_ecu\_init}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint32\_t\ cycle\_ms);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu_8h_a7f762142d5a7d2c34cd11b72bd265239}{light\_ecu\_on\_frame}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a62eb9fd4971ac3eb69e0f6d436172d1a}{light\_ecu\_set\_lamp}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keywordtype}{bool}\ on);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_ae837b1db710a455cbd05a778a1825dd2}{light\_ecu\_set\_level}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint32\_t\ percent);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a87747d99d86faf11f561793a602efe9e}{light\_ecu\_set\_blink}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint32\_t\ period\_ms);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_a960ee4c117db171fed12d742e4ce9591}{light\_ecu\_set\_output\_inhibit}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ \textcolor{keywordtype}{bool}\ inhibit);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu_8h_afa5413786f818389645994e5c9acd1c7}{light\_ecu\_output}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{light__ecu_8h_ab8cb4fd55e4b2ba439a0c73e0a5575bc}{light\_ecu\_request\_send}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00083\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{light__ecu_8h_adf2109604c377e8c13357c9b848f18de}{light\_ecu\_step}}(\mbox{\hyperlink{structLightEcu}{LightEcu}}*\ ecu,\ uint64\_t\ now\_ms,\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ out,\ \textcolor{keywordtype}{bool}*\ state\_changed);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00086\ \}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_LIGHT\_ECU\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

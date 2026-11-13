@@ -10,9 +10,12 @@ var searchData=
   ['onframesent_7',['OnFrameSent',['../classUIoTwinBusSubsystem.html#acbb7c208537522194bac1656c5006fae',1,'UIoTwinBusSubsystem']]],
   ['onrelaychanged_8',['OnRelayChanged',['../classAPowerSourceActor.html#a1f2c215f80fb8bdb152db7f8d70c1969',1,'APowerSourceActor']]],
   ['onviewchanged_9',['OnViewChanged',['../classUIoTwinSchematicSubsystem.html#a634bf3bedfda0ca6e1c1e842550139f0',1,'UIoTwinSchematicSubsystem']]],
-  ['open_10',['open',['../structGateway.html#a576e5425a73342206a139c54a175ca97',1,'Gateway']]],
-  ['options_11',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
-  ['output_5finhibit_12',['output_inhibit',['../structLightEcu.html#a5de29a874ebf7f6f7ed198f13df44be6',1,'LightEcu']]],
-  ['overflows_13',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
-  ['overruns_14',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
+  ['open_10',['open',['../structResistiveLoad.html#a0ebd8bc3871d46e15a338a8699117f0f',1,'ResistiveLoad::open'],['../structGateway.html#a576e5425a73342206a139c54a175ca97',1,'Gateway::open']]],
+  ['open_5fcircuit_5fv_11',['open_circuit_v',['../structPowerSupply.html#ae4acdeac2c6ede99588442987d5e19b1',1,'PowerSupply']]],
+  ['options_12',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
+  ['output_13',['output',['../structPowerPath.html#aa430f57a087774d88d7dd9b85c9387b0',1,'PowerPath']]],
+  ['output_5finhibit_14',['output_inhibit',['../structLightEcu.html#a5de29a874ebf7f6f7ed198f13df44be6',1,'LightEcu']]],
+  ['overcurrent_5fms_15',['overcurrent_ms',['../structLightEcuDiag.html#ac02b53ca62ca0e07bb03c6edf32f7ea5',1,'LightEcuDiag']]],
+  ['overflows_16',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
+  ['overruns_17',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
 ];

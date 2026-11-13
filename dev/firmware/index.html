@@ -771,6 +771,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#led-dimming-pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LED dimming (PWM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#diagnostics-uds" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -883,6 +894,34 @@
     
   
     Scenarios and Faults
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power and Dimming
   
 
     
@@ -1374,6 +1413,12 @@ same syntax in both directions.</p>
 </table>
 <p>Any terminal works for experiments (115200 8N1, send CR): <code>V</code>, <code>S6</code>, <code>l</code>,
 <code>t100101</code> → LD4 on.</p>
+<h2 id="led-dimming-pwm">LED dimming (PWM)<a class="headerlink" href="#led-dimming-pwm" title="Permanent link">&para;</a></h2>
+<p>LD4 (PA5) runs on TIM2 channel 1 (AF2) at 1 kHz. The LED shows the lamp:
+off, or on with the brightness of <code>LAMP_CMD</code> byte 1 (100 % if the frame has
+only one byte). <code>board_led_measure_percent()</code> samples the pin for about 5 ms
+as a self test; UDS DID <code>0204</code> reports commanded and measured brightness
+(see <a href="../power/">Power and Dimming</a>).</p>
 <h2 id="diagnostics-uds">Diagnostics (UDS)<a class="headerlink" href="#diagnostics-uds" title="Permanent link">&para;</a></h2>
 <p>The firmware is a UDS server on <code>0x7E1 -&gt; 0x7E9</code> (and functional <code>0x7DF</code>):
 identification incl. the STM32 unique id, CAN error counters and frame

@@ -18,10 +18,11 @@ var searchData=
   ['getlivebus_15',['GetLiveBus',['../classUIoTwinSchematicSubsystem.html#aec89fb46faa7ed794a2c385c6b5d9f40',1,'UIoTwinSchematicSubsystem']]],
   ['getloaderror_16',['GetLoadError',['../classUIoTwinSchematicSubsystem.html#a55c83919f493ba13a83d49f2b7b8fd0f',1,'UIoTwinSchematicSubsystem']]],
   ['getlog_17',['GetLog',['../classUIoTwinSchematicSubsystem.html#aa430974d271accac8f9c4531c0529e44',1,'UIoTwinSchematicSubsystem']]],
-  ['getpulses_18',['GetPulses',['../classUIoTwinSchematicSubsystem.html#a41b5afdcf09124861aa7f7d8c25ad464',1,'UIoTwinSchematicSubsystem']]],
-  ['getrecenttraffic_19',['GetRecentTraffic',['../classUIoTwinBusSubsystem.html#ac03153ea778e165fc8ddc99d721b1cd0',1,'UIoTwinBusSubsystem']]],
-  ['getsystem_20',['GetSystem',['../classUIoTwinSchematicSubsystem.html#abb860dee7abbbcb764dcf122555b024a',1,'UIoTwinSchematicSubsystem']]],
-  ['getsystempath_21',['GetSystemPath',['../classUIoTwinSchematicSubsystem.html#ac83a702d8c6208d52799dd37f3261998',1,'UIoTwinSchematicSubsystem']]],
-  ['gettotalframes_22',['GetTotalFrames',['../classUIoTwinSchematicSubsystem.html#acbde610cd7e58e111c1eb70b04fb37f9',1,'UIoTwinSchematicSubsystem']]],
-  ['guessproducer_23',['GuessProducer',['../classUIoTwinSchematicSubsystem.html#a3eb8042a7bc9fb5e0db1d0ebd7b6a0f8',1,'UIoTwinSchematicSubsystem']]]
+  ['getoutputlevel_18',['GetOutputLevel',['../classAPowerSourceActor.html#af506aa2e41ee9abb860feec86d9e459f',1,'APowerSourceActor']]],
+  ['getpulses_19',['GetPulses',['../classUIoTwinSchematicSubsystem.html#a41b5afdcf09124861aa7f7d8c25ad464',1,'UIoTwinSchematicSubsystem']]],
+  ['getrecenttraffic_20',['GetRecentTraffic',['../classUIoTwinBusSubsystem.html#ac03153ea778e165fc8ddc99d721b1cd0',1,'UIoTwinBusSubsystem']]],
+  ['getsystem_21',['GetSystem',['../classUIoTwinSchematicSubsystem.html#abb860dee7abbbcb764dcf122555b024a',1,'UIoTwinSchematicSubsystem']]],
+  ['getsystempath_22',['GetSystemPath',['../classUIoTwinSchematicSubsystem.html#ac83a702d8c6208d52799dd37f3261998',1,'UIoTwinSchematicSubsystem']]],
+  ['gettotalframes_23',['GetTotalFrames',['../classUIoTwinSchematicSubsystem.html#acbde610cd7e58e111c1eb70b04fb37f9',1,'UIoTwinSchematicSubsystem']]],
+  ['guessproducer_24',['GuessProducer',['../classUIoTwinSchematicSubsystem.html#a3eb8042a7bc9fb5e0db1d0ebd7b6a0f8',1,'UIoTwinSchematicSubsystem']]]
 ];

@@ -853,6 +853,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power and Dimming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../component_database/" class="md-nav__link">
         
   
@@ -1246,13 +1274,25 @@ existing nodes (visualizer, <code>serial_bridge</code>) are not affected.</p>
 <td><code>100</code></td>
 <td><code>LAMP_CMD</code></td>
 <td><code>can_sim</code> (light ECU)</td>
-<td><code>data[0]</code> bit 0: 1 = relay closed, lamp on</td>
+<td><code>data[0]</code> bit 0: 1 = lamp on; <code>data[1]</code>: brightness 0..100 %</td>
+</tr>
+<tr>
+<td><code>101</code></td>
+<td><code>LAMP_STATUS</code></td>
+<td><code>can_sim</code> (light ECU)</td>
+<td>current, supply voltage, duty, flags (<a href="../power/#lamp_status-0x101">Power</a>)</td>
 </tr>
 <tr>
 <td><code>200</code></td>
 <td><code>SWITCH_STATE</code></td>
 <td>Visualizer wall switch</td>
 <td><code>data[0]</code> bit 0: 1 = switch on</td>
+</tr>
+<tr>
+<td><code>201</code></td>
+<td><code>DIMMER_CMD</code></td>
+<td>Visualizer (mouse wheel)</td>
+<td><code>data[0]</code>: brightness 0..100 %</td>
 </tr>
 </tbody>
 </table>

@@ -13,7 +13,8 @@ var main__uds__client_8c =
       [ "FORMAT_TEXT", "main__uds__client_8c.html#ad9484262ec04b56e52ce8df1e7444edaa1c40f820c8bbd9dbcf53d83bbbc7298c", null ],
       [ "FORMAT_UNSIGNED", "main__uds__client_8c.html#ad9484262ec04b56e52ce8df1e7444edaab82da0d82ac5ce71ebfac179edd585b5", null ],
       [ "FORMAT_SESSION", "main__uds__client_8c.html#ad9484262ec04b56e52ce8df1e7444edaadfb5ea3ea3f4da2bf443f550d7606d55", null ],
-      [ "FORMAT_HEX", "main__uds__client_8c.html#ad9484262ec04b56e52ce8df1e7444edaad2b29d18c55335d2225d91cdd7e1a114", null ]
+      [ "FORMAT_HEX", "main__uds__client_8c.html#ad9484262ec04b56e52ce8df1e7444edaad2b29d18c55335d2225d91cdd7e1a114", null ],
+      [ "FORMAT_BYTES", "main__uds__client_8c.html#ad9484262ec04b56e52ce8df1e7444edaa9d174fe3d81ae29805481d83e7f598f5", null ]
     ] ],
     [ "main", "main__uds__client_8c.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
 ];

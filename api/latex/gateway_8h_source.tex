@@ -5,118 +5,122 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_GATEWAY\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_GATEWAY\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
-\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{slcan_8h}{slcan.h}}"{}}}
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{uds_8h}{uds.h}}"{}}}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00033\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ GATEWAY\_ID\_LAMP\_CMD\ 0x100u}}
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ GATEWAY\_ID\_SWITCH\_STATE\ 0x200u}}
-\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ GATEWAY\_DEFAULT\_BITRATE\ 500000u}}
-\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ GATEWAY\_ECHO\_SLOTS\ 8u}}
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ GATEWAY\_BLINK\_PERIOD\_MS\ 500u}}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ GATEWAY\_DIAG\_REQUEST\_ID\ 0x7E1u}}
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ GATEWAY\_DIAG\_RESPONSE\_ID\ 0x7E9u}}
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ GATEWAY\_DTC\_BUS\_OFF\ 0xC07388u\ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ GATEWAY\_DTC\_COUNT\ 1u}}
-\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_LAMP\ 0x0100u\ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_SWITCH\ 0x0101u\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_CAN\_ERRORS\ 0x0200u\ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_COUNTERS\ 0x0201u\ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_UPTIME\ 0x0202u\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_CHANNEL\ 0x0203u\ \ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ GATEWAY\_RESET\_DELAY\_MS\ 50u\ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00058\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192cab694ce8d219110598a19fee2e81fee9e}{GATEWAY\_CAN\_NORMAL}},\ \ \ }
-\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192ca350b7d4552540a20aec2f5be7fcdf805}{GATEWAY\_CAN\_LOOPBACK}},\ }
-\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192caa3b0fb5aacb99d8f95b58ad640d12716}{GATEWAY\_CAN\_LISTEN}}\ \ \ \ }
-\DoxyCodeLine{00062\ \}\ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{GatewayCanMode}};}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00065\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00066\ \ \ uint8\_t\ \mbox{\hyperlink{structGatewayCanStatus_a2c62b8ec702231a951d42463c9e35120}{tx\_error\_count}};}
-\DoxyCodeLine{00067\ \ \ uint8\_t\ \mbox{\hyperlink{structGatewayCanStatus_af87caa9622f6b5997611adf30810a4eb}{rx\_error\_count}};}
-\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_af062e032204801ee146c5b1d7a633ac2}{error\_warning}};}
-\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_a3154ab76fcb1d2c52df534b3410ba19f}{error\_passive}};}
-\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_a43d903f1bdae7e4aa020029d893ffce9}{bus\_off}};}
-\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_aaf0af85cd11fa702727ce1d3900beca0}{bus\_error}};\ }
-\DoxyCodeLine{00072\ \}\ \mbox{\hyperlink{structGatewayCanStatus}{GatewayCanStatus}};}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00075\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00076\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab}{serial\_write}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
-\DoxyCodeLine{00077\ \ \ bool\ (*\mbox{\hyperlink{structGatewayIo_a2f9cd606664397ff9e9a613b6ab1e6b4}{can\_start}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ uint32\_t\ bitrate,\ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{GatewayCanMode}}\ mode);}
-\DoxyCodeLine{00078\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ae467a6410407578ccfc2c3e1350e7c3f}{can\_stop}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}});}
-\DoxyCodeLine{00079\ \ \ bool\ (*\mbox{\hyperlink{structGatewayIo_a95ef5812185be8f5d60995c14456e91b}{can\_send}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
-\DoxyCodeLine{00080\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_a7fb34ee7e645ab9d5266b607d1aac768}{can\_status}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \mbox{\hyperlink{structGatewayCanStatus}{GatewayCanStatus}}*\ status);}
-\DoxyCodeLine{00081\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba}{led\_set}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \textcolor{keywordtype}{bool}\ on);}
-\DoxyCodeLine{00083\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ab99a1574b73cace1286852d887e4117a}{system\_reset}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}});}
-\DoxyCodeLine{00085\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_a5dda457906e8444de07286a6d1b0a32d}{unique\_id}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ uint8\_t\ out[12]);}
-\DoxyCodeLine{00086\ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}};}
-\DoxyCodeLine{00087\ \}\ \mbox{\hyperlink{structGatewayIo}{GatewayIo}};}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00090\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00091\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57acc79b1a346ff007e87815c6a6d42ad7b}{GATEWAY\_FLAG\_RX\_QUEUE\_FULL}}\ =\ 0x01,}
-\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57ab0f6078e445e6632f650a73ec8b12f4d}{GATEWAY\_FLAG\_TX\_QUEUE\_FULL}}\ =\ 0x02,}
-\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0770bb913339dd04c067c6551c734b37}{GATEWAY\_FLAG\_ERROR\_WARNING}}\ =\ 0x04,}
-\DoxyCodeLine{00094\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57aff0caf70a6d88fba1d6a8cb6ee3074f1}{GATEWAY\_FLAG\_DATA\_OVERRUN}}\ =\ 0x08,}
-\DoxyCodeLine{00095\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0faa0cac4e23cc011e2274b56153e8af}{GATEWAY\_FLAG\_ERROR\_PASSIVE}}\ =\ 0x20,}
-\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a56a82cf76afb30ff8d4af2d51ed3fc23}{GATEWAY\_FLAG\_BUS\_ERROR}}\ =\ 0x80}
-\DoxyCodeLine{00097\ \};}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00100\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{structGatewayIo}{GatewayIo}}\ \mbox{\hyperlink{structGateway_ae3bf99515f10d9aca6026b8ef68d157e}{io}};}
-\DoxyCodeLine{00102\ \ \ \mbox{\hyperlink{structSlcanReader}{SlcanReader}}\ \mbox{\hyperlink{structGateway_a7b14fb9ecd0682dd7fa5b68d26291340}{reader}};}
-\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a576e5425a73342206a139c54a175ca97}{open}};}
-\DoxyCodeLine{00104\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{GatewayCanMode}}\ \mbox{\hyperlink{structGateway_af477dbcf02493a11f38c52f5f79fe32f}{mode}};}
-\DoxyCodeLine{00105\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_ae6742b551812a2673af34c49a29f249e}{bitrate}};}
-\DoxyCodeLine{00106\ }
-\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a934f79073e899297c3fddd1e6ce248b6}{switch\_on}};\ }
-\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a599d619c445d8077e44b6a5c04da2bb8}{lamp\_on}};\ \ \ }
-\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a0761bcd2966eb407561fa2fc726948c2}{led\_on}};}
-\DoxyCodeLine{00110\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a29a1374049b479fd9605bfc26f0cb954}{last\_blink\_ms}};}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \ \ \mbox{\hyperlink{structCanFrame}{CanFrame}}\ \mbox{\hyperlink{structGateway_a2551b8be41edec487904bc24a223b54c}{echo}}[\mbox{\hyperlink{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}{GATEWAY\_ECHO\_SLOTS}}];\ }
-\DoxyCodeLine{00113\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structGateway_a5284f67aa628f147e9ee9d2b241c4baa}{echo\_head}};}
-\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structGateway_a69b61475b216b2e9ef9cd8835cbfaf31}{echo\_count}};}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \ \ uint8\_t\ \mbox{\hyperlink{structGateway_ab304f07aeda9f0d34da3ea718632eac3}{sticky\_flags}};\ }
-\DoxyCodeLine{00117\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_ae5ac04aeeaed877ccb82771214a639f6}{tx\_frames}};\ \ \ }
-\DoxyCodeLine{00118\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a45b9a95732bacd411ebf59bf3de02092}{rx\_frames}};\ \ \ }
-\DoxyCodeLine{00119\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab}{echoes}};\ \ \ \ \ \ }
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \mbox{\hyperlink{structUdsServer}{UdsServer}}\ \mbox{\hyperlink{structGateway_a40195ff1ec63604bbabdfea043ac7826}{uds}};}
-\DoxyCodeLine{00122\ \ \ \mbox{\hyperlink{structUdsDtc}{UdsDtc}}\ \mbox{\hyperlink{structGateway_a21a777c15b573b20a879f0710fc95aa5}{dtcs}}[\mbox{\hyperlink{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8}{GATEWAY\_DTC\_COUNT}}];}
-\DoxyCodeLine{00123\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a1b4995096b389749282db25f448873fb}{now\_ms}};\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00124\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_aff81ad4f60114dcdedce772996748b8f}{reset\_scheduled}};\ \ \ \ }
-\DoxyCodeLine{00125\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a1397816a0f34eae1aeb3994332f521c1}{reset\_due\_ms}};}
-\DoxyCodeLine{00126\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a78c24e58aa2a17e441c6cafdbc58279a}{soft\_resets}};}
-\DoxyCodeLine{00127\ \}\ \mbox{\hyperlink{structGateway}{Gateway}};}
-\DoxyCodeLine{00128\ }
-\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_ab91ea63374822e9774faec6e3722a279}{gateway\_init}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structGatewayIo}{GatewayIo}}*\ io);}
-\DoxyCodeLine{00130\ }
-\DoxyCodeLine{00132\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_aeaab48f97068bf7e0383010cacdb2b2c}{gateway\_on\_serial\_data}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00135\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_afc75c3f805cdebb24b356a6f048bccd9}{gateway\_on\_can\_frame}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{slcan_8h}{slcan.h}}"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{uds_8h}{uds.h}}"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ GATEWAY\_ID\_LAMP\_CMD\ 0x100u}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ GATEWAY\_ID\_SWITCH\_STATE\ 0x200u}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ GATEWAY\_DEFAULT\_BITRATE\ 500000u}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ GATEWAY\_ECHO\_SLOTS\ 8u}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ GATEWAY\_BLINK\_PERIOD\_MS\ 500u}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ GATEWAY\_DIAG\_REQUEST\_ID\ 0x7E1u}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ GATEWAY\_DIAG\_RESPONSE\_ID\ 0x7E9u}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ GATEWAY\_DTC\_BUS\_OFF\ 0xC07388u\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ GATEWAY\_DTC\_COUNT\ 1u}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_LAMP\ 0x0100u\ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_SWITCH\ 0x0101u\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_CAN\_ERRORS\ 0x0200u\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_COUNTERS\ 0x0201u\ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_UPTIME\ 0x0202u\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_CHANNEL\ 0x0203u\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ GATEWAY\_DID\_LED\ 0x0204u\ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ GATEWAY\_RESET\_DELAY\_MS\ 50u\ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192cab694ce8d219110598a19fee2e81fee9e}{GATEWAY\_CAN\_NORMAL}},\ \ \ }
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192ca350b7d4552540a20aec2f5be7fcdf805}{GATEWAY\_CAN\_LOOPBACK}},\ }
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192caa3b0fb5aacb99d8f95b58ad640d12716}{GATEWAY\_CAN\_LISTEN}}\ \ \ \ }
+\DoxyCodeLine{00064\ \}\ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{GatewayCanMode}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00068\ \ \ uint8\_t\ \mbox{\hyperlink{structGatewayCanStatus_a2c62b8ec702231a951d42463c9e35120}{tx\_error\_count}};}
+\DoxyCodeLine{00069\ \ \ uint8\_t\ \mbox{\hyperlink{structGatewayCanStatus_af87caa9622f6b5997611adf30810a4eb}{rx\_error\_count}};}
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_af062e032204801ee146c5b1d7a633ac2}{error\_warning}};}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_a3154ab76fcb1d2c52df534b3410ba19f}{error\_passive}};}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_a43d903f1bdae7e4aa020029d893ffce9}{bus\_off}};}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGatewayCanStatus_aaf0af85cd11fa702727ce1d3900beca0}{bus\_error}};\ }
+\DoxyCodeLine{00074\ \}\ \mbox{\hyperlink{structGatewayCanStatus}{GatewayCanStatus}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00078\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab}{serial\_write}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00079\ \ \ bool\ (*\mbox{\hyperlink{structGatewayIo_a2f9cd606664397ff9e9a613b6ab1e6b4}{can\_start}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ uint32\_t\ bitrate,\ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{GatewayCanMode}}\ mode);}
+\DoxyCodeLine{00080\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ae467a6410407578ccfc2c3e1350e7c3f}{can\_stop}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}});}
+\DoxyCodeLine{00081\ \ \ bool\ (*\mbox{\hyperlink{structGatewayIo_a95ef5812185be8f5d60995c14456e91b}{can\_send}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00082\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_a7fb34ee7e645ab9d5266b607d1aac768}{can\_status}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ \mbox{\hyperlink{structGatewayCanStatus}{GatewayCanStatus}}*\ status);}
+\DoxyCodeLine{00083\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_a6629960794b516a467a039be54a933de}{led\_set\_level}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ uint8\_t\ percent);\ }
+\DoxyCodeLine{00085\ \ \ uint8\_t\ (*\mbox{\hyperlink{structGatewayIo_ab2f35ba674e0456250f9f5d873c58a79}{led\_measure}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}});}
+\DoxyCodeLine{00087\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_ab99a1574b73cace1286852d887e4117a}{system\_reset}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}});}
+\DoxyCodeLine{00089\ \ \ void\ (*\mbox{\hyperlink{structGatewayIo_a5dda457906e8444de07286a6d1b0a32d}{unique\_id}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}},\ uint8\_t\ out[12]);}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}};}
+\DoxyCodeLine{00091\ \}\ \mbox{\hyperlink{structGatewayIo}{GatewayIo}};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00095\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57acc79b1a346ff007e87815c6a6d42ad7b}{GATEWAY\_FLAG\_RX\_QUEUE\_FULL}}\ =\ 0x01,}
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57ab0f6078e445e6632f650a73ec8b12f4d}{GATEWAY\_FLAG\_TX\_QUEUE\_FULL}}\ =\ 0x02,}
+\DoxyCodeLine{00097\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0770bb913339dd04c067c6551c734b37}{GATEWAY\_FLAG\_ERROR\_WARNING}}\ =\ 0x04,}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57aff0caf70a6d88fba1d6a8cb6ee3074f1}{GATEWAY\_FLAG\_DATA\_OVERRUN}}\ =\ 0x08,}
+\DoxyCodeLine{00099\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0faa0cac4e23cc011e2274b56153e8af}{GATEWAY\_FLAG\_ERROR\_PASSIVE}}\ =\ 0x20,}
+\DoxyCodeLine{00100\ \ \ \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a56a82cf76afb30ff8d4af2d51ed3fc23}{GATEWAY\_FLAG\_BUS\_ERROR}}\ =\ 0x80}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{structGatewayIo}{GatewayIo}}\ \mbox{\hyperlink{structGateway_ae3bf99515f10d9aca6026b8ef68d157e}{io}};}
+\DoxyCodeLine{00106\ \ \ \mbox{\hyperlink{structSlcanReader}{SlcanReader}}\ \mbox{\hyperlink{structGateway_a7b14fb9ecd0682dd7fa5b68d26291340}{reader}};}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a576e5425a73342206a139c54a175ca97}{open}};}
+\DoxyCodeLine{00108\ \ \ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{GatewayCanMode}}\ \mbox{\hyperlink{structGateway_af477dbcf02493a11f38c52f5f79fe32f}{mode}};}
+\DoxyCodeLine{00109\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_ae6742b551812a2673af34c49a29f249e}{bitrate}};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a934f79073e899297c3fddd1e6ce248b6}{switch\_on}};\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a599d619c445d8077e44b6a5c04da2bb8}{lamp\_on}};\ \ \ }
+\DoxyCodeLine{00113\ \ \ uint8\_t\ \mbox{\hyperlink{structGateway_a7c07938c8a7fbf473f393e39c74f3185}{lamp\_level}};\ }
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_a0761bcd2966eb407561fa2fc726948c2}{led\_on}};}
+\DoxyCodeLine{00115\ \ \ uint8\_t\ \mbox{\hyperlink{structGateway_a5748678828a9617b0e142fa677a27301}{led\_level}};}
+\DoxyCodeLine{00116\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a29a1374049b479fd9605bfc26f0cb954}{last\_blink\_ms}};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \mbox{\hyperlink{structCanFrame}{CanFrame}}\ \mbox{\hyperlink{structGateway_a2551b8be41edec487904bc24a223b54c}{echo}}[\mbox{\hyperlink{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}{GATEWAY\_ECHO\_SLOTS}}];\ }
+\DoxyCodeLine{00119\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structGateway_a5284f67aa628f147e9ee9d2b241c4baa}{echo\_head}};}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structGateway_a69b61475b216b2e9ef9cd8835cbfaf31}{echo\_count}};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ uint8\_t\ \mbox{\hyperlink{structGateway_ab304f07aeda9f0d34da3ea718632eac3}{sticky\_flags}};\ }
+\DoxyCodeLine{00123\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_ae5ac04aeeaed877ccb82771214a639f6}{tx\_frames}};\ \ \ }
+\DoxyCodeLine{00124\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a45b9a95732bacd411ebf59bf3de02092}{rx\_frames}};\ \ \ }
+\DoxyCodeLine{00125\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab}{echoes}};\ \ \ \ \ \ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \mbox{\hyperlink{structUdsServer}{UdsServer}}\ \mbox{\hyperlink{structGateway_a40195ff1ec63604bbabdfea043ac7826}{uds}};}
+\DoxyCodeLine{00128\ \ \ \mbox{\hyperlink{structUdsDtc}{UdsDtc}}\ \mbox{\hyperlink{structGateway_a21a777c15b573b20a879f0710fc95aa5}{dtcs}}[\mbox{\hyperlink{gateway_8h_ad8dd5beb539a31972a04e97c5a2282a8}{GATEWAY\_DTC\_COUNT}}];}
+\DoxyCodeLine{00129\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a1b4995096b389749282db25f448873fb}{now\_ms}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGateway_aff81ad4f60114dcdedce772996748b8f}{reset\_scheduled}};\ \ \ \ }
+\DoxyCodeLine{00131\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a1397816a0f34eae1aeb3994332f521c1}{reset\_due\_ms}};}
+\DoxyCodeLine{00132\ \ \ uint32\_t\ \mbox{\hyperlink{structGateway_a78c24e58aa2a17e441c6cafdbc58279a}{soft\_resets}};}
+\DoxyCodeLine{00133\ \}\ \mbox{\hyperlink{structGateway}{Gateway}};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_ab91ea63374822e9774faec6e3722a279}{gateway\_init}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structGatewayIo}{GatewayIo}}*\ io);}
 \DoxyCodeLine{00136\ }
-\DoxyCodeLine{00138\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_af40f9bf19ba615758dc5d24d17831cce}{gateway\_on\_button}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway);}
+\DoxyCodeLine{00138\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_aeaab48f97068bf7e0383010cacdb2b2c}{gateway\_on\_serial\_data}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
 \DoxyCodeLine{00139\ }
-\DoxyCodeLine{00141\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_a2d4dbaaa3bee9c4c6f4529328dfaa998}{gateway\_on\_rx\_overrun}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway);}
+\DoxyCodeLine{00141\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_afc75c3f805cdebb24b356a6f048bccd9}{gateway\_on\_can\_frame}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
 \DoxyCodeLine{00142\ }
-\DoxyCodeLine{00147\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_a8be8bdc7e33addbc49bd6295b77aa191}{gateway\_tick}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ uint32\_t\ now\_ms);}
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_af40f9bf19ba615758dc5d24d17831cce}{gateway\_on\_button}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00147\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_a2d4dbaaa3bee9c4c6f4529328dfaa998}{gateway\_on\_rx\_overrun}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway);}
 \DoxyCodeLine{00148\ }
-\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00150\ \}}
-\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00152\ }
-\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_GATEWAY\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00153\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{gateway_8h_a8be8bdc7e33addbc49bd6295b77aa191}{gateway\_tick}}(\mbox{\hyperlink{structGateway}{Gateway}}*\ gateway,\ uint32\_t\ now\_ms);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00156\ \}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_GATEWAY\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

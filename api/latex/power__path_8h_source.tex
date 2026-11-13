@@ -1,0 +1,76 @@
+\doxysection{power\+\_\+path.\+h}
+\hypertarget{power__path_8h_source}{}\label{power__path_8h_source}\index{libs/power/power\_path.h@{libs/power/power\_path.h}}
+\mbox{\hyperlink{power__path_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_POWER\_PATH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_POWER\_PATH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerSupply_ae4acdeac2c6ede99588442987d5e19b1}{open\_circuit\_v}};\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerSupply_a5c858e6b92256a32523de257ce51f5ae}{internal\_ohm}};\ \ \ }
+\DoxyCodeLine{00034\ \}\ \mbox{\hyperlink{structPowerSupply}{PowerSupply}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFuse_a31ee9c191262d1ed9a60acd6a92a1672}{rated\_a}};\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFuse_a9c247190dad078366fe4dc864a1e3fc9}{melting\_i2t}};\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFuse_a2f7c03cbe3faff4e2174d149b6f82862}{cooling\_i2t}};\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFuse_a3dcd938510cc5eab75b423359840787e}{heat}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFuse_a03b953f6f153164dec3f05ef1da1607b}{blown}};}
+\DoxyCodeLine{00042\ \}\ \mbox{\hyperlink{structFuse}{Fuse}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structSmartSwitch_a32dc5b71efa2ca002ca5e5e554498cc0}{current\_limit\_a}};\ }
+\DoxyCodeLine{00046\ \ \ uint32\_t\ \mbox{\hyperlink{structSmartSwitch_a07be3a0d405d1acfc3f822f026ec2b69}{restart\_ms}};\ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structSmartSwitch_a9fb4c069808496fbdba68a9ecf1bddba}{tripped}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ uint32\_t\ \mbox{\hyperlink{structSmartSwitch_afb729f3453975013eac3b9538548baf2}{tripped\_ms}};\ \ \ \ }
+\DoxyCodeLine{00049\ \}\ \mbox{\hyperlink{structSmartSwitch}{SmartSwitch}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structResistiveLoad_a7b74da39285524dd864bb69e4a9315ec}{rated\_power\_w}};}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structResistiveLoad_a3ff80f65ff8ce40942c378eb8fd58a77}{rated\_voltage\_v}};}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structResistiveLoad_a5879c3e095cad2a0752c69e99077a65c}{power\_factor}};\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structResistiveLoad_a1675c7d241a45a292915547000cfbcab}{shorted}};}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structResistiveLoad_a0ebd8bc3871d46e15a338a8699117f0f}{open}};}
+\DoxyCodeLine{00057\ \}\ \mbox{\hyperlink{structResistiveLoad}{ResistiveLoad}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{structPowerSupply}{PowerSupply}}\ \mbox{\hyperlink{structPowerPath_ad1f2e24cf70f7676b1762ccabc2b1dcd}{supply}};}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{structFuse}{Fuse}}\ \mbox{\hyperlink{structPowerPath_a3156aa2da22d148811f8540fd36fc54d}{fuse}};}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{structSmartSwitch}{SmartSwitch}}\ \mbox{\hyperlink{structPowerPath_aa430f57a087774d88d7dd9b85c9387b0}{output}};}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{structResistiveLoad}{ResistiveLoad}}\ \mbox{\hyperlink{structPowerPath_a1bc5d26602d6d613ef1d8947152d41f8}{load}};}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerPath_a145c4b85c3dbd3cb4300c8348f41ead9}{wire\_ohm}};}
+\DoxyCodeLine{00065\ \}\ \mbox{\hyperlink{structPowerPath}{PowerPath}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerReading_a364e99544a06e42ea6bb86480a3f669a}{supply\_v}};\ \ \ }
+\DoxyCodeLine{00070\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerReading_a372babb2e84a1c7dafc00537c9d16e38}{current\_a}};\ \ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerReading_a9e7639f48aaa21406a0af69ca73789d2}{load\_v}};\ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerReading_a7740e25f213d044ff75d3874e42ab404}{power\_w}};\ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structPowerReading_a5f9e5ec1f109e968b3383d495eab05be}{duty}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structPowerReading_ae522450f53921cf059302d985fc3ad74}{tripped}};\ \ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structPowerReading_a8e2545e128d58acdbc25576aa461ee94}{fuse\_blown}};}
+\DoxyCodeLine{00076\ \}\ \mbox{\hyperlink{structPowerReading}{PowerReading}};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00083\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{power__path_8h_ae79e748e17a4dce850888ef4cdf73604}{power\_path\_init}}(\mbox{\hyperlink{structPowerPath}{PowerPath}}*\ path);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{power__path_8h_a8c6fd7bd38a466f64a20287187fefe55}{power\_path\_nominal\_current}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structPowerPath}{PowerPath}}*\ path);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{power__path_8h_a81be6b784de6a6a4e1acd1813772b553}{power\_path\_step}}(\mbox{\hyperlink{structPowerPath}{PowerPath}}*\ path,\ \textcolor{keywordtype}{bool}\ on,\ \textcolor{keywordtype}{double}\ duty,\ uint32\_t\ dt\_ms,\ \mbox{\hyperlink{structPowerReading}{PowerReading}}*\ reading);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{power__path_8h_a0baf3d5fc81e1ba24e010370178ae8f8}{power\_path\_replace\_fuse}}(\mbox{\hyperlink{structPowerPath}{PowerPath}}*\ path);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_POWER\_PATH\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

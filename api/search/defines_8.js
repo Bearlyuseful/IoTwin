@@ -1,25 +1,9 @@
 var searchData=
 [
-  ['light_5fecu_5fdefault_5fcycle_5fms_0',['LIGHT_ECU_DEFAULT_CYCLE_MS',['../light__ecu_8h.html#abb5ee0d4f5b5ac811c2998c0d4711e92',1,'light_ecu.h']]],
-  ['light_5fecu_5fdiag_5frequest_5fid_1',['LIGHT_ECU_DIAG_REQUEST_ID',['../light__ecu__diag_8h.html#a77fd6f9589c4a98790b7ae50b3bd4dca',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdiag_5fresponse_5fid_2',['LIGHT_ECU_DIAG_RESPONSE_ID',['../light__ecu__diag_8h.html#a54dea7c75b16df5ed535b07e893342c2',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdid_5fblink_5fperiod_3',['LIGHT_ECU_DID_BLINK_PERIOD',['../light__ecu__diag_8h.html#a7dc4dae68bf68efac0aa760312a1224a',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdid_5fcycle_5ftime_4',['LIGHT_ECU_DID_CYCLE_TIME',['../light__ecu__diag_8h.html#a67a17df5ccba49a6ec5117b2aa87a236',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdid_5flamp_5foutput_5',['LIGHT_ECU_DID_LAMP_OUTPUT',['../light__ecu__diag_8h.html#a1a41ccbd13fabfaee1eaa46d4adb30fa',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdid_5fsupply_5fvoltage_6',['LIGHT_ECU_DID_SUPPLY_VOLTAGE',['../light__ecu__diag_8h.html#a71336c0c9dbe2ea759816e1be44f5d20',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdid_5fswitch_5finput_7',['LIGHT_ECU_DID_SWITCH_INPUT',['../light__ecu__diag_8h.html#ad6a77c1d0746bb3cf60dd367edd7a833',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdtc_5fcount_8',['LIGHT_ECU_DTC_COUNT',['../light__ecu__diag_8h.html#a674fc59f7962cd85b1fca4fd208b50cb',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdtc_5flamp_5fopen_9',['LIGHT_ECU_DTC_LAMP_OPEN',['../light__ecu__diag_8h.html#a5e3c7365e8b22a35aa5f9ec0f2e26696',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdtc_5flamp_5fshort_10',['LIGHT_ECU_DTC_LAMP_SHORT',['../light__ecu__diag_8h.html#aa3d17eb2825bb92f9cc657f55200dc18',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fdtc_5fsupply_5flow_11',['LIGHT_ECU_DTC_SUPPLY_LOW',['../light__ecu__diag_8h.html#a1a9da9b06e1e62e7ccc0b24bc292e1ee',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fid_5flamp_5fcmd_12',['LIGHT_ECU_ID_LAMP_CMD',['../light__ecu_8h.html#a55699f2a4c8c60f6814fa4bdde60e764',1,'light_ecu.h']]],
-  ['light_5fecu_5fid_5fswitch_5fstate_13',['LIGHT_ECU_ID_SWITCH_STATE',['../light__ecu_8h.html#aea742e162f722145b33dfd4c75581d49',1,'light_ecu.h']]],
-  ['light_5fecu_5fsupply_5flow_5fmv_14',['LIGHT_ECU_SUPPLY_LOW_MV',['../light__ecu__diag_8h.html#a35efab25a0d66f16f20e4156050d36fa',1,'light_ecu_diag.h']]],
-  ['light_5fecu_5fsupply_5fnormal_5fmv_15',['LIGHT_ECU_SUPPLY_NORMAL_MV',['../light__ecu__diag_8h.html#a073b49b5a119d0dbb036844a3f72582f',1,'light_ecu_diag.h']]],
-  ['line_5fmax_5flength_16',['LINE_MAX_LENGTH',['../dbc_8c.html#a84df153da40bb90bb68155be7caf631d',1,'dbc.c']]],
-  ['line_5freader_5fmax_5fline_17',['LINE_READER_MAX_LINE',['../line__reader_8h.html#a834ceb4d82b6813573cc48e79812bb86',1,'line_reader.h']]],
-  ['log_5fdebug_18',['log_debug',['../log_8h.html#aa77e596ef13d2f0f75d0ac9540ed358d',1,'log.h']]],
-  ['log_5ferror_19',['log_error',['../log_8h.html#a6ae72553ea9805dd87a463d6f710364d',1,'log.h']]],
-  ['log_5finfo_20',['log_info',['../log_8h.html#aa1cfe5444875c8eca0ea6f6993977d6d',1,'log.h']]],
-  ['log_5fwarn_21',['log_warn',['../log_8h.html#a04af09851c431d178f16b24fa1aac1e9',1,'log.h']]]
+  ['init_5ftimeout_5floops_0',['INIT_TIMEOUT_LOOPS',['../fdcan_8c.html#ad759606c5be03877d487461053da40fe',1,'fdcan.c']]],
+  ['input_5fslots_1',['INPUT_SLOTS',['../main__uds__client_8c.html#a7d257fbf180c2ff3a0cf6fc4dbb37e8e',1,'main_uds_client.c']]],
+  ['iotwin_5ffirmware_5fversion_2',['IOTWIN_FIRMWARE_VERSION',['../gateway_8c.html#aa347c34248a567aadeb4eee093a5dd39',1,'gateway.c']]],
+  ['iotwin_5fprintf_5fformat_3',['IOTWIN_PRINTF_FORMAT',['../log_8h.html#a632a3e364fe8b1a3ea16b971f2c5ca36',1,'log.h']]],
+  ['iotwin_5fversion_4',['IOTWIN_VERSION',['../main__can__sim_8c.html#aa8fc9e28d180bbfc92ca0515b7613a98',1,'main_can_sim.c']]],
+  ['isotp_5fmax_5flength_5',['ISOTP_MAX_LENGTH',['../isotp_8h.html#a8919503e7a32cc6b187807a6ba9484a2',1,'isotp.h']]]
 ];

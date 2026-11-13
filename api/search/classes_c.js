@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['runner_0',['Runner',['../structRunner.html',1,'']]]
+  ['resistiveload_0',['ResistiveLoad',['../structResistiveLoad.html',1,'']]],
+  ['runner_1',['Runner',['../structRunner.html',1,'']]]
 ];

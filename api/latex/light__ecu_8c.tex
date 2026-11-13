@@ -10,6 +10,8 @@ bool \mbox{\hyperlink{light__ecu_8c_a7f762142d5a7d2c34cd11b72bd265239}{light\+\_
 \begin{DoxyCompactList}\small\item\em Processes a received frame. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{light__ecu_8c_a62eb9fd4971ac3eb69e0f6d436172d1a}{light\+\_\+ecu\+\_\+set\+\_\+lamp}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, bool on)
 \begin{DoxyCompactList}\small\item\em Sets the lamp (stops blinking). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{light__ecu_8c_ae837b1db710a455cbd05a778a1825dd2}{light\+\_\+ecu\+\_\+set\+\_\+level}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint32\+\_\+t percent)
+\begin{DoxyCompactList}\small\item\em Sets the brightness (clamped to 0..100 \%). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{light__ecu_8c_a87747d99d86faf11f561793a602efe9e}{light\+\_\+ecu\+\_\+set\+\_\+blink}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, uint32\+\_\+t period\+\_\+ms)
 \begin{DoxyCompactList}\small\item\em Starts blinking with the given toggle period; 0 stops blinking. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{light__ecu_8c_a960ee4c117db171fed12d742e4ce9591}{light\+\_\+ecu\+\_\+set\+\_\+output\+\_\+inhibit}} (\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}ecu, bool inhibit)
@@ -46,7 +48,7 @@ bool light\+\_\+ecu\+\_\+on\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hy
 Processes a received frame. 
 
 \begin{DoxyReturn}{Returns}
-true if the frame was a valid SWITCH\+\_\+\+STATE frame. 
+true if the frame was a valid SWITCH\+\_\+\+STATE or DIMMER\+\_\+\+CMD frame. 
 \end{DoxyReturn}
 \Hypertarget{light__ecu_8c_afa5413786f818389645994e5c9acd1c7}\index{light\_ecu.c@{light\_ecu.c}!light\_ecu\_output@{light\_ecu\_output}}
 \index{light\_ecu\_output@{light\_ecu\_output}!light\_ecu.c@{light\_ecu.c}}
@@ -87,6 +89,16 @@ void light\+\_\+ecu\+\_\+set\+\_\+lamp (\begin{DoxyParamCaption}\item[{\mbox{\hy
 
 
 Sets the lamp (stops blinking). 
+
+\Hypertarget{light__ecu_8c_ae837b1db710a455cbd05a778a1825dd2}\index{light\_ecu.c@{light\_ecu.c}!light\_ecu\_set\_level@{light\_ecu\_set\_level}}
+\index{light\_ecu\_set\_level@{light\_ecu\_set\_level}!light\_ecu.c@{light\_ecu.c}}
+\doxysubsubsection{\texorpdfstring{light\_ecu\_set\_level()}{light\_ecu\_set\_level()}}
+{\footnotesize\ttfamily \label{light__ecu_8c_ae837b1db710a455cbd05a778a1825dd2} 
+void light\+\_\+ecu\+\_\+set\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLightEcu}{Light\+Ecu}} \texorpdfstring{$\ast$}{*}}]{ecu}{, }\item[{uint32\+\_\+t}]{percent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the brightness (clamped to 0..100 \%). 
 
 \Hypertarget{light__ecu_8c_a960ee4c117db171fed12d742e4ce9591}\index{light\_ecu.c@{light\_ecu.c}!light\_ecu\_set\_output\_inhibit@{light\_ecu\_set\_output\_inhibit}}
 \index{light\_ecu\_set\_output\_inhibit@{light\_ecu\_set\_output\_inhibit}!light\_ecu.c@{light\_ecu.c}}
