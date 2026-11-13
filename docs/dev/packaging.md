@@ -4,10 +4,14 @@
 
 ```
 dist/IoTwin-<version>-win64/
-  bin/iotwin-bus.exe        static MinGW build, no runtime DLLs needed
-  bin/can_sim.exe
+  bin/                      static MinGW builds, no runtime DLLs needed:
+                            iotwin-bus, can_sim, serial_bridge, can_monitor,
+                            uds_client, can_replay, can_scenario
+  firmware/                 NUCLEO-G0B1RE gateway (.bin, .hex)
+  data/                     DBC, component database, systems, scenarios
   Visualizer/IoTwin.exe     cooked Unreal build (Win64)
   start-demo.bat            starts bus, ECU and visualizer
+  start-demo-hardware.bat   the same plus the NUCLEO gateway (COM port)
   README.txt, LICENSE
 dist/IoTwin-<version>-win64.zip
 ```
@@ -26,7 +30,7 @@ dist/IoTwin-<version>-win64.zip
 | Parameter          | Default        | Meaning                                         |
 |--------------------|----------------|-------------------------------------------------|
 | `-EngineDir`       | `$env:UE_ENGINE_DIR` | `Engine` folder of the UE installation   |
-| `-Version`         | `0.1.0`        | used in the package name                        |
+| `-Version`         | `0.3.0`        | used in the package name                        |
 | `-Configuration`   | `Development`  | `Shipping` removes logs and the console         |
 | `-SkipVisualizer`  |                | reuse `dist/ue-staging` from a previous run     |
 | `-SkipTests`       |                | do not run `ctest`                              |

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(IoTwin VERSION 0.2.0 LANGUAGES C CXX)
+project(IoTwin VERSION 0.3.0 LANGUAGES C CXX)
 
 # GCC is the reference toolchain: natively on Linux (incl. PREEMPT_RT targets)
 # and MSYS2 / MinGW-w64 on Windows (best effort, see docs/adr/0003).
