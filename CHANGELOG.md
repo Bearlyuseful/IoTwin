@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - unreleased
+## 0.2.0 - 2026-11-13
 
 Roadmap steps 1-3: a real microcontroller on the virtual bus.
 
@@ -27,6 +27,9 @@ Roadmap steps 1-3: a real microcontroller on the virtual bus.
 - ISO-TP (ISO 15765-2) library: segmentation, flow control with block size
   and STmin, WAIT/OVFLW, N_Bs/N_Cr timeouts, padding - portable, no heap.
 - `socketcan_bridge` (Linux): any SocketCAN interface <-> iotwin-bus.
+
+### Repository
+- Unreal assets (`*.uasset`, `*.umap`) are stored with Git LFS.
 
 ### Tooling
 - CI builds the firmware; `tools/flash-firmware.ps1`; release package with
