@@ -7,14 +7,8 @@ var searchData=
   ['max_5fseg2_4',['max_seg2',['../structCanBitTimingLimits.html#a5a331ad6c0e4f35774e95c2660a8b22f',1,'CanBitTimingLimits']]],
   ['max_5fsjw_5',['max_sjw',['../structCanBitTimingLimits.html#a820ef8077e42833d06b7bfb9c731a599',1,'CanBitTimingLimits']]],
   ['max_5ftq_5fper_5fbit_6',['max_tq_per_bit',['../structCanBitTimingLimits.html#ae8ba0a3b25378840aa72166ed2199a79',1,'CanBitTimingLimits']]],
-  ['max_5fwait_5fframes_7',['max_wait_frames',['../structIsoTpConfig.html#a7d53e72b8d03b6e9bdda7095a012a7b4',1,'IsoTpConfig']]],
-  ['maxdatalength_8',['MaxDataLength',['../structFCanFrame.html#a7ac87238f3178b0cedb22d8c04991337',1,'FCanFrame']]],
-  ['maximum_9',['maximum',['../structDbcSignal.html#a1c5293eb08bd2fe5e794e90a42b44b70',1,'DbcSignal']]],
-  ['message_5fcount_10',['message_count',['../structDbcDatabase.html#ae8d1ca4a3a1658d6d06303457a79e746',1,'DbcDatabase']]],
-  ['messages_11',['messages',['../structDbcDatabase.html#a70e9f1897eb9eeae184171bbe2e7200e',1,'DbcDatabase']]],
-  ['min_5flatency_5fns_12',['min_latency_ns',['../structCycleStats.html#a220391273c377cc23da811f509d74106',1,'CycleStats']]],
-  ['min_5ftq_5fper_5fbit_13',['min_tq_per_bit',['../structCanBitTimingLimits.html#a494718431046b9d1125255d89b0a31a0',1,'CanBitTimingLimits']]],
-  ['minimum_14',['minimum',['../structDbcSignal.html#a0d5a3fe12cf94ee931b08bc759a88983',1,'DbcSignal']]],
-  ['mode_15',['mode',['../structOptions.html#af3ea795cc58500f8bc442fb6a9f938c5',1,'Options']]],
-  ['mux_5fvalue_16',['mux_value',['../structDbcSignal.html#a703fa2c389a71a3895ef6621aecb46fe',1,'DbcSignal']]]
+  ['maxdatalength_7',['MaxDataLength',['../structFCanFrame.html#a7ac87238f3178b0cedb22d8c04991337',1,'FCanFrame']]],
+  ['min_5flatency_5fns_8',['min_latency_ns',['../structCycleStats.html#a220391273c377cc23da811f509d74106',1,'CycleStats']]],
+  ['min_5ftq_5fper_5fbit_9',['min_tq_per_bit',['../structCanBitTimingLimits.html#a494718431046b9d1125255d89b0a31a0',1,'CanBitTimingLimits']]],
+  ['mode_10',['mode',['../structOptions.html#af3ea795cc58500f8bc442fb6a9f938c5',1,'Options']]]
 ];

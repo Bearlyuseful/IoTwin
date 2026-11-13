@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['wallswitchactor_2ecpp_0',['WallSwitchActor.cpp',['../WallSwitchActor_8cpp.html',1,'']]],
-  ['wallswitchactor_2eh_1',['WallSwitchActor.h',['../WallSwitchActor_8h.html',1,'']]]
+  ['_7efiotwinbusconnection_0',['~FIoTwinBusConnection',['../classFIoTwinBusConnection.html#a34603192e432ff6b7c2987ac01ffc0cb',1,'FIoTwinBusConnection']]]
 ];

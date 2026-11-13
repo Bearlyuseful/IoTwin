@@ -825,34 +825,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../dev/can_tools/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CAN Tools (DBC, ISO-TP, SocketCAN)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../dev/packaging/" class="md-nav__link">
         
   
@@ -1156,21 +1128,6 @@ digital-twin features.</p>
 <td>✅ FDCAN driver, internal loopback; ⚠️ real bus needs a transceiver + second node</td>
 </tr>
 <tr>
-<td>SocketCAN bridge</td>
-<td>step 4</td>
-<td>✅ <code>socketcan_bridge</code> (<a href="../dev/can_tools/">CAN Tools</a>); live test needs <code>vcan0</code></td>
-</tr>
-<tr>
-<td>Real-time measurements on PREEMPT_RT</td>
-<td>step 4</td>
-<td>❌ needs PREEMPT_RT hardware</td>
-</tr>
-<tr>
-<td>DBC, ISO-TP</td>
-<td>step 5</td>
-<td>✅ DBC reader + <code>can_monitor</code>, ISO-TP library; UDS services open</td>
-</tr>
-<tr>
 <td>Scenarios, more devices, extensions</td>
 <td>Oct 2025 outlook</td>
 <td>❌</td>
@@ -1214,13 +1171,13 @@ digital-twin features.</p>
 </tr>
 <tr>
 <td>4</td>
-<td><strong>Real-time Linux and SocketCAN</strong> (SocketCAN ✅, RT measurement open)</td>
+<td><strong>Real-time Linux and SocketCAN</strong></td>
 <td>M</td>
 <td>can run in parallel to 3</td>
 </tr>
 <tr>
 <td>5</td>
-<td><strong>Protocols on CAN</strong> (DBC ✅, ISO-TP ✅, UDS open)</td>
+<td><strong>Protocols on CAN</strong> (optional)</td>
 <td>M–L</td>
 <td>builds on 3 and 4</td>
 </tr>

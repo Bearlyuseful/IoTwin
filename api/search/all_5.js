@@ -16,8 +16,6 @@ var searchData=
   ['endb_13',['EndB',['../classAElectricalCableActor.html#ac17cf8b2d87dff21de85c0bb74b62447',1,'AElectricalCableActor']]],
   ['enqueueline_14',['EnqueueLine',['../classFIoTwinBusConnection.html#ab716de12d6d35d894bf33dfb730d5351',1,'FIoTwinBusConnection']]],
   ['events_15',['events',['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd']]],
-  ['extended_16',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended']]],
-  ['extended_5fflag_17',['EXTENDED_FLAG',['../dbc_8c.html#a280c5f61344ef6a1ca351e540f592c47',1,'dbc.c']]],
-  ['extended_5fid_18',['extended_id',['../structIsoTpConfig.html#ac1eb44a4ed2deaf2a4fd95bdcc864377',1,'IsoTpConfig']]],
-  ['extendedidmask_19',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
+  ['extended_16',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame']]],
+  ['extendedidmask_17',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
 ];

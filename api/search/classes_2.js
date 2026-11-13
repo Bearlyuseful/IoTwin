@@ -4,7 +4,6 @@ var searchData=
   ['canbittiminglimits_1',['CanBitTimingLimits',['../structCanBitTimingLimits.html',1,'']]],
   ['canbus_2',['CanBus',['../structCanBus.html',1,'']]],
   ['canframe_3',['CanFrame',['../structCanFrame.html',1,'']]],
-  ['cansignal_4',['CanSignal',['../structCanSignal.html',1,'']]],
-  ['cyclestats_5',['CycleStats',['../structCycleStats.html',1,'']]],
-  ['cycletimer_6',['CycleTimer',['../structCycleTimer.html',1,'']]]
+  ['cyclestats_4',['CycleStats',['../structCycleStats.html',1,'']]],
+  ['cycletimer_5',['CycleTimer',['../structCycleTimer.html',1,'']]]
 ];
