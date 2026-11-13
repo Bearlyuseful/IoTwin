@@ -35,6 +35,47 @@ e.g. `100`), *Byte Index* and *Bit Index*.
 For full frames use the subsystem directly (**Get IoTwin Bus Subsystem** →
 **Send Frame** / **On Frame Received**).
 
+## Schematic view (`Source/IoTwin/Schematic`)
+
+**TAB** (or the button in the HUD) switches between the 3D scene and a 2D
+schematic of the system:
+
+- nodes from the system description (`data/systems/*.json`), the CAN bus with
+  its members, other links (USB) as dashed lines;
+- every frame is decoded with the DBC of the bus and shown at the node that
+  sent it, with a dot travelling over the bus to the consumers;
+- status per node (green < 3 s, yellow < 10 s since its last frame), frame
+  rate, message log;
+- click a node for details: description, messages it sends/receives, links
+  and the characteristics from the component database (unverified values
+  are marked).
+
+| Class                        | Role                                                                 |
+|------------------------------|----------------------------------------------------------------------|
+| `FSystemDescription`         | loads a system JSON (nodes, buses, links, messages)                  |
+| `FCanDatabase`               | DBC reader for the visualizer (messages, signals, value tables, Intel/Motorola) |
+| `FComponentCatalog`          | reads `data/components/**/*.json`, formats values (`1.7 .. 3.6 V`, `64 MHz`) |
+| `UIoTwinSchematicSubsystem`  | model: loads the data, follows `OnFrameReceived` / `OnFrameSent`, attributes frames to nodes, view switch |
+| `FSchematicRenderer`         | draws the view on the HUD canvas (layout designed for 900 px, scaled) |
+
+Which node sent a frame: frames sent by this game belong to `SelfNode`
+(`visualizer`); for received frames the first producer of the message in the
+system description other than `SelfNode` is used (iotwin-bus does not echo
+frames back to their sender).
+
+```ini
+[/Script/IoTwin.IoTwinSchematicSubsystem]
+SystemFile=data/systems/light-demo.json
+SelfNode=visualizer
+```
+
+`SystemFile` is searched relative to the launch directory, the repository
+root (`visualizer/..`) and the package root. Command line:
+`-IoTwinSystem=<file>`, `-IoTwinView=Schematic` (start in the schematic),
+`-IoTwinSelectNode=<node id>` (preselect a node, e.g. for screenshots).
+
+![Schematic view](../images/schematic.png)
+
 ## Electrical model (`Source/IoTwin/Systems`)
 
 - `UElectricalPortComponent`: wiring is a symmetric list of ports stored on
@@ -62,11 +103,14 @@ and select it as *GameMode Override* in the map's World Settings.
 ## Tests and smoke runs
 
 ```powershell
-# Automation tests (CAN codec)
+# Automation tests (CAN codec, DBC, system description, component database)
 UnrealEditor-Cmd.exe visualizer/IoTwin.uproject -ExecCmds="Automation RunTests IoTwin;Quit" -unattended -nullrhi
 
 # Unattended game run: screenshot after 10 s, quit after 15 s
 UnrealEditor.exe visualizer/IoTwin.uproject -game -IoTwinScreenshot=10 -IoTwinQuitAfter=15
+
+# Same in the schematic view with the gateway selected
+UnrealEditor.exe visualizer/IoTwin.uproject -game -IoTwinView=Schematic -IoTwinSelectNode=gateway -IoTwinScreenshot=10 -IoTwinQuitAfter=15
 ```
 
 The screenshot is written to `Saved/Screenshots/IoTwinDemo.png`.

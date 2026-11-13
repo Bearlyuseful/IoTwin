@@ -109,8 +109,9 @@ Step "Assembling $PackageName"
 if (Test-Path $PackageDir) { Remove-Item $PackageDir -Recurse -Force }
 New-Item -ItemType Directory -Force (Join-Path $PackageDir "bin") | Out-Null
 Copy-Item (Join-Path $CoreBin "iotwin-bus.exe"), (Join-Path $CoreBin "can_sim.exe"), (Join-Path $CoreBin "serial_bridge.exe"), (Join-Path $CoreBin "can_monitor.exe") (Join-Path $PackageDir "bin")
-$ConfigTarget = New-Item -ItemType Directory -Force (Join-Path $PackageDir "config")
-Copy-Item (Join-Path $RepoRoot "data\dbc\iotwin.dbc") $ConfigTarget
+# DBC files, component database and system descriptions; the visualizer's
+# schematic view finds data\systems\light-demo.json two levels above its project dir.
+Copy-Item (Join-Path $RepoRoot "data") (Join-Path $PackageDir "data") -Recurse
 Copy-Item $VisualizerStage (Join-Path $PackageDir "Visualizer") -Recurse
 Copy-Item (Join-Path $PSScriptRoot "release\start-demo.bat"), (Join-Path $PSScriptRoot "release\start-demo-hardware.bat") $PackageDir
 if (-not $SkipFirmware) {

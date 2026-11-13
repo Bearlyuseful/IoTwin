@@ -8,6 +8,9 @@
 #include "Engine/Engine.h"
 #include "Engine/Font.h"
 #include "EngineUtils.h"
+#include "HAL/PlatformTime.h"
+#include "Schematic/IoTwinSchematicSubsystem.h"
+#include "Schematic/SchematicRenderer.h"
 #include "Systems/LampActor.h"
 #include "Systems/PowerSourceActor.h"
 #include "Systems/WallSwitchActor.h"
@@ -20,6 +23,7 @@ namespace
 	const FLinearColor BadColor(1.0f, 0.4f, 0.3f);
 	constexpr float Left = 24.0f;
 	constexpr float LineHeight = 22.0f;
+	const FName SchematicButton(TEXT("Hud.Schematic"));
 
 	/** Prefers actors of the generated demo, falls back to the first one in the level. */
 	template <typename T>
@@ -52,6 +56,53 @@ void AIoTwinHUD::DrawHUD()
 		return;
 	}
 
+	const UIoTwinSchematicSubsystem* Schematic = UIoTwinSchematicSubsystem::Get(this);
+	if (Schematic && Schematic->IsSchematicVisible())
+	{
+		TArray<FSchematicHitBox> HitBoxes;
+		FSchematicRenderer(Canvas, *Schematic, UIoTwinBusSubsystem::Get(this), FPlatformTime::Seconds()).Draw(HitBoxes);
+		for (const FSchematicHitBox& HitBox : HitBoxes)
+		{
+			AddHitBox(HitBox.Position, HitBox.Size, HitBox.Name, /*bConsumesInput=*/true, HitBox.Priority);
+		}
+		return;
+	}
+	DrawSimulationPanel();
+}
+
+void AIoTwinHUD::NotifyHitBoxClick(FName BoxName)
+{
+	Super::NotifyHitBoxClick(BoxName);
+
+	UIoTwinSchematicSubsystem* Schematic = UIoTwinSchematicSubsystem::Get(this);
+	if (Schematic == nullptr)
+	{
+		return;
+	}
+	if (BoxName == SchematicButton)
+	{
+		Schematic->SetSchematicVisible(true);
+	}
+	else if (BoxName == FSchematicRenderer::View3DBox)
+	{
+		Schematic->SetSchematicVisible(false);
+	}
+	else if (BoxName == FSchematicRenderer::BackgroundBox)
+	{
+		Schematic->SelectedNode.Reset();
+	}
+	else
+	{
+		FString Name = BoxName.ToString();
+		if (Name.RemoveFromStart(FSchematicRenderer::NodeBoxPrefix))
+		{
+			Schematic->SelectedNode = Name;
+		}
+	}
+}
+
+void AIoTwinHUD::DrawSimulationPanel()
+{
 	const UIoTwinBusSubsystem* Bus = UIoTwinBusSubsystem::Get(this);
 	APowerSourceActor* Source = nullptr;
 	ALampActor* Lamp = nullptr;
@@ -61,7 +112,7 @@ void AIoTwinHUD::DrawHUD()
 	Switch = FindDisplayedActor<AWallSwitchActor>(GetWorld());
 
 	const int32 TrafficLines = Bus ? Bus->GetRecentTraffic().Num() : 0;
-	const float PanelHeight = LineHeight * (7.5f + TrafficLines) + 24.0f;
+	const float PanelHeight = LineHeight * (8.5f + TrafficLines) + 24.0f;
 	DrawRect(FLinearColor(0.0f, 0.0f, 0.0f, 0.72f), Left, 20.0f, 255.0f, PanelHeight);
 
 	float Y = 30.0f;
@@ -95,6 +146,11 @@ void AIoTwinHUD::DrawHUD()
 		DrawLine(FString::Printf(TEXT("Switch: %s"), Switch->IsOn() ? TEXT("ON") : TEXT("OFF")), TextColor, Y);
 	}
 	DrawLine(TEXT("Click the wall switch or press SPACE"), DimColor, Y);
+	if (UIoTwinSchematicSubsystem::Get(this))
+	{
+		AddHitBox(FVector2D(Left, Y), FVector2D(255.0f, LineHeight), SchematicButton, /*bConsumesInput=*/true, 10);
+		DrawLine(TEXT("[Tab] schematic view"), FLinearColor(0.45f, 0.7f, 1.0f), Y);
+	}
 
 	Y += LineHeight * 0.5f;
 	DrawLine(TEXT("Recent bus traffic:"), DimColor, Y);

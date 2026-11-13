@@ -16,6 +16,8 @@ lamp relay  (Visualizer) <--100#01-- iotwin-bus <-- can_sim (light ECU)
 1. Download and unzip `IoTwin-<version>-win64.zip`.
 2. Double-click `start-demo.bat`.
 3. In the visualizer click the wall switch (or press **SPACE**).
+   Press **TAB** for the 2D schematic: nodes, CAN bus and USB link with every
+   message decoded at its sender; click a node for its details.
 
 Three windows open:
 

@@ -51,6 +51,10 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "IoTwin|Bus")
 	FOnCanFrameReceived OnFrameReceived;
 
+	/** Fired on the game thread for every frame this game sent to the bus. */
+	UPROPERTY(BlueprintAssignable, Category = "IoTwin|Bus")
+	FOnCanFrameReceived OnFrameSent;
+
 	/** Fired when the connection to the bus is established or lost. */
 	UPROPERTY(BlueprintAssignable, Category = "IoTwin|Bus")
 	FOnBusConnectionChanged OnConnectionChanged;

@@ -78,6 +78,7 @@ bool UIoTwinBusSubsystem::SendFrame(const FCanFrame& Frame)
 		return false;
 	}
 	AddTraffic(TEXT("TX"), Text);
+	OnFrameSent.Broadcast(Frame);
 	UE_LOG(LogIoTwinBus, Verbose, TEXT("TX %s"), *Text);
 	return true;
 }

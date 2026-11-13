@@ -17,6 +17,11 @@ In the visualizer click the wall switch (or press SPACE): the switch sends
 CAN frame 200#01, the ECU answers with 100#01, the relay closes and the lamp
 turns on.
 
+Press TAB to switch between the 3D scene and the 2D schematic: nodes, CAN bus
+and USB link of the system with every message decoded at its sender. Click a
+node for details, including the characteristics from the component database
+(data\components). The system itself is described in data\systems\light-demo.json.
+
 Commands in the CAN-Sim window:
 
   lamp on | lamp off | lamp toggle
@@ -26,6 +31,7 @@ Commands in the CAN-Sim window:
 
 Components can also be started separately; every program has --help.
 Visualizer options: -IoTwinBusHost=<host> -IoTwinBusPort=<port>
+                    -IoTwinView=Schematic -IoTwinSystem=<system json>
 
 With a NUCLEO-G0B1RE
 --------------------
