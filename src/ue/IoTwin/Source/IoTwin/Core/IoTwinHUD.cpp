@@ -62,7 +62,7 @@ void AIoTwinHUD::DrawHUD()
 
 	const int32 TrafficLines = Bus ? Bus->GetRecentTraffic().Num() : 0;
 	const float PanelHeight = LineHeight * (7.5f + TrafficLines) + 24.0f;
-	DrawRect(FLinearColor(0.0f, 0.0f, 0.0f, 0.6f), Left, 20.0f, 320.0f, PanelHeight);
+	DrawRect(FLinearColor(0.0f, 0.0f, 0.0f, 0.72f), Left, 20.0f, 255.0f, PanelHeight);
 
 	float Y = 30.0f;
 	DrawLine(TEXT("IoTwin  -  Light Demo"), TextColor, Y, 1.2f);

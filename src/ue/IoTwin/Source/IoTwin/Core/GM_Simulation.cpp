@@ -135,11 +135,32 @@ void AGM_Simulation::AddLabel(AActor* LabelOwner, const FString& Text, const FVe
 	Label->SetHorizontalAlignment(EHTA_Center);
 	Label->SetVerticalAlignment(EVRTA_TextCenter);
 	Label->SetWorldSize(Size);
-	// Saturated colour: readable on the dark (lamp off) and the lit (lamp on) wall.
-	Label->SetTextRenderColor(FColor(40, 120, 230));
+	Label->SetTextRenderColor(FColor(235, 235, 235));
 	// Readable from the camera, which looks along +X.
 	Label->SetWorldLocationAndRotation(WorldLocation, FRotator(0.0f, 180.0f, 0.0f));
 	Label->SetWorldScale3D(FVector::OneVector);
+
+	// Dark sign behind the text keeps it readable whether the wall is lit or not.
+	if (CubeMesh)
+	{
+		UStaticMeshComponent* Sign = NewObject<UStaticMeshComponent>(LabelOwner);
+		Sign->SetupAttachment(LabelOwner->GetRootComponent());
+		Sign->SetMobility(EComponentMobility::Movable);
+		Sign->SetStaticMesh(CubeMesh);
+		Sign->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Sign->SetCastShadow(false);
+		Sign->RegisterComponent();
+		const float Width = Text.Len() * Size * 0.6f + 14.0f;
+		const float Height = Size * 1.8f;
+		Sign->SetWorldLocationAndRotation(WorldLocation + FVector(1.5f, 0.0f, 0.0f), FRotator::ZeroRotator);
+		Sign->SetWorldScale3D(FVector(0.01f, Width / 100.0f, Height / 100.0f));
+		if (ColorMaterial)
+		{
+			UMaterialInstanceDynamic* SignMaterial = UMaterialInstanceDynamic::Create(ColorMaterial, Sign);
+			SignMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(0.01f, 0.012f, 0.015f));
+			Sign->SetMaterial(0, SignMaterial);
+		}
+	}
 }
 
 void AGM_Simulation::SpawnDemoScene()
