@@ -32,13 +32,16 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Quickstart: user/quickstart.md
   - Developer Guide:
       - Build Instructions: dev/build_instructions.md
-      - Coding Guidelines: dev/coding_guidelines.md
       - Architecture Overview: dev/architecture_overview.md
+      - Bus Protocol: dev/protocol.md
+      - Real-Time Operation: dev/realtime.md
+      - Visualizer: dev/visualizer.md
+      - Packaging: dev/packaging.md
   - API Reference: api/index.html
   - Architecture Decisions:
-      - ADR 0001: adr/0001-choice-of-documentation.md
-      - ADR 0002: adr/0002-grpc-communication-layer.md
-  - Roadmap:
-      - 2025 Q4: roadmap/2025_q4.md
+      - ADR 0001 Documentation: adr/0001-choice-of-documentation.md
+      - ADR 0002 Bus and Protocol: adr/0002-bus-server-and-text-protocol.md
+      - ADR 0003 Platforms: adr/0003-linux-rt-target-windows-best-effort.md
