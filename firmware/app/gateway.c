@@ -14,10 +14,16 @@ static void reply(Gateway* gw, const char* text) {
   gw->io.serial_write(gw->io.context, text, strlen(text));
 }
 
-static void set_led(Gateway* gw, bool on) {
-  gw->led_on = on;
-  gw->io.led_set(gw->io.context, on);
+static void set_led_level(Gateway* gw, uint8_t percent) {
+  gw->led_on = percent > 0;
+  gw->led_level = percent;
+  gw->io.led_set_level(gw->io.context, percent);
 }
+
+static void set_led(Gateway* gw, bool on) { set_led_level(gw, on ? 100u : 0u); }
+
+/* The LED shows the lamp: off, or on with the brightness of LAMP_CMD. */
+static void show_lamp(Gateway* gw) { set_led_level(gw, gw->lamp_on ? gw->lamp_level : 0u); }
 
 static void report_frame(Gateway* gw, const CanFrame* frame) {
   char line[SLCAN_MAX_LINE];
@@ -36,8 +42,9 @@ static void local_node_receive(Gateway* gw, const CanFrame* frame) {
     return;
   }
   gw->lamp_on = (frame->data[0] & 0x01u) != 0;
+  gw->lamp_level = frame->dlc >= 2 ? (frame->data[1] > 100u ? 100u : frame->data[1]) : 100u;
   if (gw->open) {
-    set_led(gw, gw->lamp_on);
+    show_lamp(gw);
   }
 }
 
@@ -165,6 +172,10 @@ static int read_did(void* context, uint16_t did, uint8_t* out, size_t capacity) 
       out[1] = (uint8_t)gw->mode;
       put_u32(&out[2], gw->bitrate);
       return 6;
+    case GATEWAY_DID_LED:
+      out[0] = gw->led_level;
+      out[1] = gw->io.led_measure != NULL ? gw->io.led_measure(gw->io.context) : 0xFFu;
+      return 2;
     default:
       return -(int)UDS_NRC_REQUEST_OUT_OF_RANGE;
   }
@@ -269,7 +280,7 @@ static void open_channel(Gateway* gw, GatewayCanMode mode) {
   gw->echo_head = 0;
   gw->echo_count = 0;
   gw->sticky_flags = 0;
-  set_led(gw, gw->lamp_on);
+  show_lamp(gw);
   reply(gw, SLCAN_OK);
 }
 
@@ -356,6 +367,7 @@ void gateway_init(Gateway* gateway, const GatewayIo* io) {
   memset(gateway, 0, sizeof(*gateway));
   gateway->io = *io;
   gateway->bitrate = GATEWAY_DEFAULT_BITRATE;
+  gateway->lamp_level = 100u;
   slcan_reader_init(&gateway->reader);
   diag_init(gateway);
   set_led(gateway, false);

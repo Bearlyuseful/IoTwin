@@ -25,7 +25,17 @@ void board_init(void);
 /** @brief Milliseconds since start (SysTick). */
 uint32_t board_millis(void);
 
+/** @brief LD4 on or off (100 % / 0 %). */
 void board_led_set(bool on);
+
+/** @brief LD4 brightness 0..100 %: TIM2 CH1 PWM on PA5 (AF2), 1 kHz. */
+void board_led_set_level(uint8_t percent);
+
+/**
+ * @brief Measures the duty cycle on the LED pin by sampling its input register for
+ *        about 5 ms (self test of the PWM, independent of the timer registers).
+ */
+uint8_t board_led_measure_percent(void);
 
 /** @brief Raw (not debounced) state of the user button, true = pressed. */
 bool board_button_raw(void);

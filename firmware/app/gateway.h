@@ -9,7 +9,8 @@
  *  - an SLCAN adapter: frames from the serial link are sent on the CAN bus,
  *    frames received from CAN are reported on the serial link;
  *  - a small CAN node: the user button is a wall switch (SWITCH_STATE 0x200)
- *    and the LED shows the lamp command (LAMP_CMD 0x100);
+ *    and the LED shows the lamp command (LAMP_CMD 0x100), dimmed with its
+ *    brightness byte (PWM);
  *  - a UDS server (requests 0x7E1 or functional 0x7DF, responses 0x7E9) for
  *    testers on the serial side or on the CAN bus; responses go to both.
  *
@@ -51,6 +52,7 @@ extern "C" {
 #define GATEWAY_DID_COUNTERS 0x0201u     /**< uint32 frames to CAN, from CAN, echoes */
 #define GATEWAY_DID_UPTIME 0x0202u       /**< uint32 ms */
 #define GATEWAY_DID_CHANNEL 0x0203u      /**< open, mode (0 normal, 1 loopback, 2 listen), uint32 bitrate */
+#define GATEWAY_DID_LED 0x0204u          /**< LED brightness: commanded %, measured % (pin sampling) */
 #define GATEWAY_RESET_DELAY_MS 50u       /**< lets the ECUReset response leave UART and CAN */
 /**@}*/
 
@@ -78,7 +80,9 @@ typedef struct {
   void (*can_stop)(void* context);
   bool (*can_send)(void* context, const CanFrame* frame);
   void (*can_status)(void* context, GatewayCanStatus* status);
-  void (*led_set)(void* context, bool on);
+  void (*led_set_level)(void* context, uint8_t percent); /**< 0 = off, 100 = full */
+  /** Optional: duty cycle measured on the LED pin (self test of the PWM). */
+  uint8_t (*led_measure)(void* context);
   /** Optional: restarts the MCU (UDS ECUReset hard). */
   void (*system_reset)(void* context);
   /** Optional: 96-bit unique device id (UDS serial number F18C). */
@@ -106,7 +110,9 @@ typedef struct {
 
   bool switch_on; /**< State of the local wall switch (button). */
   bool lamp_on;   /**< Last LAMP_CMD seen on the bus. */
+  uint8_t lamp_level; /**< Brightness of the last LAMP_CMD (100 if it had none). */
   bool led_on;
+  uint8_t led_level;
   uint32_t last_blink_ms;
 
   CanFrame echo[GATEWAY_ECHO_SLOTS]; /**< Loopback mode: transmitted, echo not seen yet. */
