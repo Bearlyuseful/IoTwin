@@ -1,87 +1,128 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿// IoTwin - electrical connection point of a device.
 
 #include "ElectricalPortComponent.h"
 
+#include "IoTwin.h"
 
-// Sets default values for this component's properties
 UElectricalPortComponent::UElectricalPortComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
-	// ...
 }
 
+void UElectricalPortComponent::OnRegister()
+{
+	Super::OnRegister();
+
+	// Assets saved before wires were stored on both ports only know ConnectedPort.
+	if (ConnectedPort && ConnectedPort != this && !Connections.Contains(ConnectedPort))
+	{
+		Connections.AddUnique(ConnectedPort);
+		ConnectedPort->Connections.AddUnique(this);
+	}
+}
 
 bool UElectricalPortComponent::HasPower_Implementation() const
 {
-	if (bHasPower)
+	TArray<const UElectricalPortComponent*, TInlineAllocator<16>> Pending;
+	TSet<const UElectricalPortComponent*, DefaultKeyFuncs<const UElectricalPortComponent*>, TInlineSetAllocator<16>> Visited;
+	Pending.Add(this);
+	Visited.Add(this);
+
+	while (Pending.Num() > 0)
 	{
-		return true;
-	}
-	if(ConnectedDevicePrevious)
-	{
-		return IPowerInterface::Execute_HasPower(ConnectedDevicePrevious.GetObject());
+		const UElectricalPortComponent* Port = Pending.Pop(EAllowShrinking::No);
+		if (Port->bSupplying)
+		{
+			return true;
+		}
+		for (const TObjectPtr<UElectricalPortComponent>& Next : Port->Connections)
+		{
+			if (Next && !Visited.Contains(Next.Get()))
+			{
+				Visited.Add(Next.Get());
+				Pending.Add(Next.Get());
+			}
+		}
 	}
 	return false;
 }
 
 void UElectricalPortComponent::ConnectTo_Implementation(const TScriptInterface<IPowerInterface>& other)
 {
-	if (other.GetObject() == this)
+	UElectricalPortComponent* OtherPort = Cast<UElectricalPortComponent>(other.GetObject());
+	if (OtherPort == nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Cannot connect a port to itself."));
+		UE_LOG(LogIoTwin, Warning, TEXT("%s: can only be connected to another electrical port"), *GetName());
 		return;
 	}
-	
-	//ConnectedDevicePrevious = other;
-	//TODO unused is broken bidirectionally
-	if (UElectricalPortComponent* OtherPort = Cast<UElectricalPortComponent>(other.GetObject()))
+	if (OtherPort == this)
 	{
-		ConnectedPort = OtherPort;
-	}
-	
-	// Optional: also connect the other side back to this
-	if (other && other.GetObject()->GetClass()->ImplementsInterface(UPowerInterface::StaticClass()))
-	{
-		bool bAlreadyConnected = false;
-		if(UElectricalPortComponent* OtherPort = Cast<UElectricalPortComponent>(other.GetObject()))
-		{
-			if(OtherPort->ConnectedDeviceNext.GetObject() == this)
-			{
-				ConnectedDevicePrevious = other;
-			}
-			else if(OtherPort->ConnectedDevicePrevious.GetObject() == this)
-			{
-				ConnectedDeviceNext = other;
-			}
-			else
-			{
-				ConnectedDevicePrevious = other;
-			}
-		}
-		if(UElectricalPortComponent* OtherPort = Cast<UElectricalPortComponent>(other.GetObject()))
-		{
-			bAlreadyConnected = (OtherPort->ConnectedDeviceNext.GetObject() == this || OtherPort->ConnectedDevicePrevious.GetObject() == this);
-		}
-		if(!bAlreadyConnected)
-		{
-			IPowerInterface::Execute_ConnectTo(other.GetObject(), this);
-		}
+		UE_LOG(LogIoTwin, Warning, TEXT("Cannot connect a port to itself."));
+		return;
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("%s connected to %s"),
-		*GetName(),
-		other ? *other.GetObject()->GetName() : TEXT("None"));
+	AddWire(OtherPort);
+	UE_LOG(LogIoTwin, Verbose, TEXT("%s.%s connected to %s.%s"),
+		*GetNameSafe(GetOwner()), *GetName(), *GetNameSafe(OtherPort->GetOwner()), *OtherPort->GetName());
 }
 
-void UElectricalPortComponent::setPowerSource(bool bPowered)
+void UElectricalPortComponent::AddWire(UElectricalPortComponent* Other)
 {
-	bHasPower = bPowered;
+	Modify();
+	Other->Modify();
+	Connections.AddUnique(Other);
+	Other->Connections.AddUnique(this);
+	ConnectedPort = Other;
+	if (Other->ConnectedPort == nullptr)
+	{
+		Other->ConnectedPort = this;
+	}
 }
 
+void UElectricalPortComponent::DisconnectFrom(UElectricalPortComponent* Other)
+{
+	if (Other == nullptr)
+	{
+		return;
+	}
+	Modify();
+	Other->Modify();
+	Connections.Remove(Other);
+	Other->Connections.Remove(this);
+	if (ConnectedPort == Other)
+	{
+		ConnectedPort = Connections.Num() > 0 ? Connections.Last() : nullptr;
+	}
+	if (Other->ConnectedPort == this)
+	{
+		Other->ConnectedPort = Other->Connections.Num() > 0 ? Other->Connections.Last() : nullptr;
+	}
+}
 
+void UElectricalPortComponent::DisconnectAll()
+{
+	const TArray<TObjectPtr<UElectricalPortComponent>> Wired = Connections;
+	for (const TObjectPtr<UElectricalPortComponent>& Other : Wired)
+	{
+		DisconnectFrom(Other.Get());
+	}
+}
 
+TArray<UElectricalPortComponent*> UElectricalPortComponent::GetConnections() const
+{
+	TArray<UElectricalPortComponent*> Result;
+	Result.Reserve(Connections.Num());
+	for (const TObjectPtr<UElectricalPortComponent>& Port : Connections)
+	{
+		if (Port)
+		{
+			Result.Add(Port.Get());
+		}
+	}
+	return Result;
+}
 
+void UElectricalPortComponent::SetSupplying(bool bSupply)
+{
+	bSupplying = bSupply;
+}

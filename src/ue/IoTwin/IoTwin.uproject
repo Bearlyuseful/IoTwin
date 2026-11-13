@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"EngineAssociation": "5.6",
 	"Category": "",
-	"Description": "",
+	"Description": "IoTwin Visualizer - digital twin of simulated IoT / CAN systems",
 	"Modules": [
 		{
 			"Name": "IoTwin",
@@ -20,6 +20,10 @@
 			"TargetAllowList": [
 				"Editor"
 			]
+		},
+		{
+			"Name": "CableComponent",
+			"Enabled": true
 		}
 	]
 }

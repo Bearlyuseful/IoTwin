@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// IoTwin - point light that shines while its device is powered.
 
 #pragma once
 
@@ -6,7 +6,6 @@
 #include "ElectricalDeviceComponent.h"
 #include "Components/PointLightComponent.h"
 #include "LightEmitterComponent.generated.h"
-
 
 UCLASS(ClassGroup=(Light), meta=(BlueprintSpawnableComponent))
 class IOTWIN_API ULightEmitterComponent : public UPointLightComponent
@@ -16,11 +15,19 @@ class IOTWIN_API ULightEmitterComponent : public UPointLightComponent
 public:
 	ULightEmitterComponent();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category="Light")
 	UElectricalDeviceComponent* Device;
 
-public:
-	// Called every frame
+	/** Intensity while the device is powered. */
+	UPROPERTY(EditAnywhere, Category="Light", meta=(ClampMin=0.0))
+	float PoweredIntensity = 30000.0f;
+
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
+
+private:
+	void Apply(bool bOn);
+
+	bool bApplied = false;
+	bool bLastOn = false;
 };

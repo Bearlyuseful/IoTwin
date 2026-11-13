@@ -1,40 +1,66 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿// IoTwin - cable: two ports that conduct to each other, drawn as a hanging cable.
 
 #include "ElectricalCableActor.h"
 
+#include "CableComponent.h"
 
-// Sets default values
 AElectricalCableActor::AElectricalCableActor()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	RootComponent = Root;
-	
+
 	EndA = CreateDefaultSubobject<UElectricalPortComponent>(TEXT("EndA"));
 	EndA->SetupAttachment(Root);
 
 	EndB = CreateDefaultSubobject<UElectricalPortComponent>(TEXT("EndB"));
 	EndB->SetupAttachment(Root);
 
-	
+	CableMesh = CreateDefaultSubobject<UCableComponent>(TEXT("CableMesh"));
+	CableMesh->SetupAttachment(EndA);
+	CableMesh->bAttachStart = true;
+	CableMesh->bAttachEnd = true;
+	CableMesh->CableWidth = 2.5f;
+	CableMesh->NumSegments = 16;
+	CableMesh->NumSides = 6;
+	CableMesh->SetCastShadow(false);
 }
 
-// Called when the game starts or when spawned
 void AElectricalCableActor::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
-	if(EndA && EndB)
+	// Both ends of a cable conduct to each other.
+	if (EndA && EndB)
 	{
-		if(EndB->GetClass()->ImplementsInterface(UPowerInterface::StaticClass()))
-		{
-			IPowerInterface::Execute_ConnectTo(EndB, EndA);
-		}
+		IPowerInterface::Execute_ConnectTo(EndB, EndA);
 	}
-	
-	
+	RefreshCable();
 }
 
+void AElectricalCableActor::ConnectBetween(UElectricalPortComponent* A, UElectricalPortComponent* B)
+{
+	if (A == nullptr || B == nullptr || EndA == nullptr || EndB == nullptr)
+	{
+		return;
+	}
+	EndA->SetWorldLocation(A->GetComponentLocation());
+	EndB->SetWorldLocation(B->GetComponentLocation());
+	IPowerInterface::Execute_ConnectTo(EndA, A);
+	IPowerInterface::Execute_ConnectTo(EndB, B);
+	IPowerInterface::Execute_ConnectTo(EndB, EndA);
+	RefreshCable();
+}
+
+void AElectricalCableActor::RefreshCable()
+{
+	if (CableMesh == nullptr || EndA == nullptr || EndB == nullptr)
+	{
+		return;
+	}
+	CableMesh->SetAttachEndToComponent(EndB);
+	CableMesh->EndLocation = FVector::ZeroVector;
+	const float Distance = FVector::Distance(EndA->GetComponentLocation(), EndB->GetComponentLocation());
+	CableMesh->CableLength = FMath::Max(1.0f, Distance * Slack);
+}

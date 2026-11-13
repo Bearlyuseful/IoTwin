@@ -1,32 +1,29 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿// IoTwin - point light that shines while its device is powered.
 
 #include "LightEmitterComponent.h"
 
-
-// Sets default values for this component's properties
 ULightEmitterComponent::ULightEmitterComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-
-// Called every frame
 void ULightEmitterComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                            FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if(Device)
+	const bool bOn = Device != nullptr && Device->bIsPowered;
+	if (!bApplied || bOn != bLastOn)
 	{
-		SetVisibility(Device->bIsPowered);
-		SetIntensity(Device->bIsPowered ? 30000.0f : 0.0f);
+		Apply(bOn);
 	}
-	else
-	{
-		SetVisibility(false);
-		SetIntensity(0.0f);
-	}
-	
 }
 
+void ULightEmitterComponent::Apply(bool bOn)
+{
+	// Only touch the render state on changes.
+	bApplied = true;
+	bLastOn = bOn;
+	SetVisibility(bOn);
+	SetIntensity(bOn ? PoweredIntensity : 0.0f);
+}
