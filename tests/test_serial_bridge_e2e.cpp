@@ -56,7 +56,7 @@ class VirtualAdapter {
       return true;
     };
     io.can_status = [](void*, GatewayCanStatus* status) { *status = GatewayCanStatus{}; };
-    io.led_set = [](void* ctx, bool on) { static_cast<VirtualAdapter*>(ctx)->led = on; };
+    io.led_set_level = [](void* ctx, uint8_t percent) { static_cast<VirtualAdapter*>(ctx)->led = percent > 0; };
     gateway_init(&gateway, &io);
   }
 

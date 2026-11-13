@@ -39,8 +39,11 @@ comment). Times are in milliseconds.
 | `uds <target> <request> [expect <response>]` | UDS request to `ecu`, `gateway` or `TX:RX` (hex ids) |
 | `log <text>` | print a note |
 
-Before every action (`send`, `bench`, `bus`, `uds`) the runner discards what
-has arrived so far, so an `expect` only sees frames that follow the action.
+An `expect` sees the frames since the start of the last action (`send`,
+`bench`, `bus`, `uds`), including those that arrived while the action was
+still running (e.g. a reaction sent before the UDS response), and consumes
+them up to its match, so two `expect` in a row need two frames. `wait`
+discards what arrives during the wait.
 
 **Frame patterns:** `100#01` exact payload, `100#01*` payload starting with
 `01`, `100#*` any payload, `100#XX01` `XX` = any byte, `100#R` remote frame,
@@ -88,6 +91,9 @@ one typed on its console:
 | `fault short on/off` | lamp output short to ground: output switched off, DTC `B1001-11` |
 | `fault open on/off` | open load: DTC `B1001-13` while the lamp is on |
 | `fault supply on/off` | supply voltage low: DTC `B1002-16` |
+| `fault overload on/off` | bulb with three times the power: DTC `B1001-19`, the fuse blows (`B1003-13`) |
+| `fuse replace` | put in a new lamp fuse |
+| `dim <0..100>` | brightness |
 | `fault clear` | remove all injected faults |
 | `lamp on/off/toggle`, `blink <ms>/off` | operate the ECU directly |
 
@@ -121,6 +127,8 @@ IoTwin logs can be played on a real bus with `canplayer`:
 | `frame-loss` | lost `SWITCH_STATE`: the lamp does not react |
 | `bus-delay` | 250 ms delay adds up in both directions |
 | `bus-silence` | silent bus: nothing arrives, the ECU continues afterwards |
+| `dimmer` | `DIMMER_CMD` -> brightness in `LAMP_CMD`, duty and current in `LAMP_STATUS` |
+| `overload-fuse` | overload: overcurrent DTC, fuse blows, replaced fuse brings the lamp back |
 
 `tools/run_scenarios.py` starts a fresh `iotwin-bus` (free port) and `can_sim`
 for every scenario, so faults, DTCs and settings never leak into the next one:

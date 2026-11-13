@@ -56,7 +56,7 @@ static uint64_t now_us(void) { return pal_time_monotonic_ns() / 1000u; }
 /* Knowledge about identifiers and trouble codes                              */
 /* ------------------------------------------------------------------------- */
 
-typedef enum { FORMAT_TEXT, FORMAT_UNSIGNED, FORMAT_SESSION, FORMAT_HEX } ValueFormat;
+typedef enum { FORMAT_TEXT, FORMAT_UNSIGNED, FORMAT_SESSION, FORMAT_HEX, FORMAT_BYTES } ValueFormat;
 
 typedef struct {
   uint16_t did;
@@ -77,11 +77,15 @@ static const DidInfo kDids[] = {
     {0x0102, "LAMP_CMD cycle time", FORMAT_UNSIGNED, "ms"},
     {0x0103, "blink period", FORMAT_UNSIGNED, "ms"},
     {0x0104, "supply voltage", FORMAT_UNSIGNED, "mV"},
+    {0x0105, "brightness", FORMAT_UNSIGNED, "%"},
+    {0x0106, "lamp current", FORMAT_UNSIGNED, "mA"},
+    {0x0107, "fuse blown, heat", FORMAT_BYTES, "%"},
     /* gateway (firmware) */
     {0x0200, "CAN error counters TEC REC, state", FORMAT_HEX, ""},
     {0x0201, "frames to CAN, from CAN, echoes", FORMAT_HEX, ""},
     {0x0202, "uptime", FORMAT_UNSIGNED, "ms"},
     {0x0203, "CAN channel open, mode, bitrate", FORMAT_HEX, ""},
+    {0x0204, "LED brightness set, measured", FORMAT_BYTES, "%"},
 };
 
 static const DidInfo* find_did(uint16_t did) {
@@ -141,6 +145,11 @@ static void print_value(const DidInfo* info, const uint8_t* data, size_t length)
     printf("\"%.*s\"", (int)length, (const char*)data);
   } else if (format == FORMAT_SESSION && length == 1) {
     printf("%s (0x%02X)", uds_session_name(data[0]), data[0]);
+  } else if (format == FORMAT_BYTES) {
+    for (size_t i = 0; i < length; i++) {
+      printf("%s%u", i ? " / " : "", data[i]);
+    }
+    printf(" %s", info->unit);
   } else if (format == FORMAT_UNSIGNED && length >= 1 && length <= 4) {
     uint32_t value = 0;
     for (size_t i = 0; i < length; i++) {

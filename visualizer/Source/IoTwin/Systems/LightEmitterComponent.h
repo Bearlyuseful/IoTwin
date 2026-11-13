@@ -1,4 +1,4 @@
-﻿// IoTwin - point light that shines while its device is powered.
+// IoTwin - point light that shines while its device is powered.
 
 #pragma once
 
@@ -26,8 +26,8 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	void Apply(bool bOn);
+	void Apply(float Level);
 
 	bool bApplied = false;
-	bool bLastOn = false;
+	float LastLevel = 0.0f;
 };

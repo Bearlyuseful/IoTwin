@@ -23,16 +23,25 @@
 #include "uds.h"
 
 #define RECENT_FRAMES 6
+#define HISTORY_FRAMES 512
 #define COMMAND_TIMEOUT_MS 1000
 
+/*
+ * Frames are collected from the start of the last action (send, bench, bus, uds),
+ * so a reaction that arrives while the action is still running (e.g. during a UDS
+ * request) is seen by the next expect. Every expect consumes the frames up to its
+ * match; "wait" discards what arrived during the wait.
+ */
 typedef struct {
   BusLink link;
   bool verbose;
-  /* frames seen by the current expect step */
+  CanFrame history[HISTORY_FRAMES];
+  size_t history_count;
+  size_t consumed;      /* frames already used by expect steps */
+  size_t total_frames;  /* since the last action, incl. frames beyond the history */
+  /* the current expect step */
   const FramePattern* pattern;
   bool matched;
-  CanFrame recent[RECENT_FRAMES];
-  size_t recent_count;
   /* UDS */
   IsoTpLink isotp;
   uint8_t uds_buffer[ISOTP_MAX_LENGTH];
@@ -58,14 +67,31 @@ static void on_frame(void* context, const CanFrame* frame) {
   if (runner->uds_active) {
     isotp_on_frame(&runner->isotp, frame, pal_time_monotonic_ns() / 1000u);
   }
-  if (runner->pattern != NULL && !runner->matched) {
-    if (frame_pattern_matches(runner->pattern, frame)) {
-      runner->matched = true;
-    } else {
-      runner->recent[runner->recent_count % RECENT_FRAMES] = *frame;
-      runner->recent_count++;
+  runner->total_frames++;
+  if (runner->history_count < HISTORY_FRAMES) {
+    runner->history[runner->history_count++] = *frame;
+  }
+  if (runner->pattern != NULL && !runner->matched && frame_pattern_matches(runner->pattern, frame)) {
+    runner->matched = true;
+    runner->consumed = runner->history_count;
+  }
+}
+
+static void clear_history(Runner* runner) {
+  runner->history_count = 0;
+  runner->consumed = 0;
+  runner->total_frames = 0;
+}
+
+/* Looks for the pattern among the frames not consumed yet. */
+static bool match_history(Runner* runner, const FramePattern* pattern) {
+  for (size_t i = runner->consumed; i < runner->history_count; i++) {
+    if (frame_pattern_matches(pattern, &runner->history[i])) {
+      runner->consumed = i + 1;
+      return true;
     }
   }
+  return false;
 }
 
 static void on_control(void* context, const char* line, size_t length) {
@@ -83,12 +109,11 @@ static const BusLinkHandlers* handlers(Runner* runner) {
   return &h;
 }
 
-/* Processes everything that already arrived, so expectations only see what follows an action. */
+/* Start of an action: everything that arrived so far is history no expect should see. */
 static bool drain(Runner* runner) {
-  const FramePattern* saved = runner->pattern;
   runner->pattern = NULL;
   const bool ok = bus_link_poll(&runner->link, 0, handlers(runner));
-  runner->pattern = saved;
+  clear_history(runner);
   return ok;
 }
 
@@ -108,17 +133,18 @@ static bool run_for(Runner* runner, uint32_t duration_ms) {
   return true;
 }
 
-static void describe_recent(const Runner* runner, char* out, size_t size) {
+static void describe_recent(const Runner* runner, size_t from, char* out, size_t size) {
   out[0] = '\0';
-  if (runner->recent_count == 0) {
+  if (runner->history_count <= from) {
     snprintf(out, size, "no frames at all");
     return;
   }
   size_t used = (size_t)snprintf(out, size, "last frames:");
-  const size_t shown = runner->recent_count < RECENT_FRAMES ? runner->recent_count : RECENT_FRAMES;
-  for (size_t i = runner->recent_count - shown; i < runner->recent_count && used < size; i++) {
+  const size_t available = runner->history_count - from;
+  const size_t shown = available < RECENT_FRAMES ? available : RECENT_FRAMES;
+  for (size_t i = runner->history_count - shown; i < runner->history_count && used < size; i++) {
     char text[CAN_FRAME_TEXT_MAX];
-    can_frame_to_text(&runner->recent[i % RECENT_FRAMES], text, sizeof(text));
+    can_frame_to_text(&runner->history[i], text, sizeof(text));
     used += (size_t)snprintf(out + used, size - used, " %s", text);
   }
 }
@@ -181,14 +207,18 @@ static int uds_request(Runner* runner, const ScenarioStep* step, char* error, si
 static bool run_step(Runner* runner, const ScenarioStep* step, char* error, size_t error_size) {
   runner->pattern = NULL;
   runner->matched = false;
-  runner->recent_count = 0;
 
   switch (step->type) {
     case STEP_LOG:
       printf("        %s\n", step->text);
       return true;
     case STEP_WAIT:
-      return run_for(runner, step->ms) || (snprintf(error, error_size, "connection to the bus lost"), false);
+      if (!run_for(runner, step->ms)) {
+        snprintf(error, error_size, "connection to the bus lost");
+        return false;
+      }
+      clear_history(runner); /* what happened during the wait does not count */
+      return true;
     case STEP_SEND:
       if (!drain(runner) || !bus_link_send_frame(&runner->link, &step->frame)) {
         snprintf(error, error_size, "sending failed");
@@ -212,16 +242,21 @@ static bool run_step(Runner* runner, const ScenarioStep* step, char* error, size
     }
     case STEP_EXPECT:
     case STEP_EXPECT_NOT: {
-      runner->pattern = &step->pattern;
+      const size_t first_unconsumed = runner->consumed;
       const uint64_t start = now_ms();
-      if (!run_for(runner, step->ms)) {
+      runner->matched = match_history(runner, &step->pattern); /* arrived during the last action */
+      runner->pattern = &step->pattern;
+      if (!runner->matched && !run_for(runner, step->ms)) {
         snprintf(error, error_size, "connection to the bus lost");
         return false;
       }
       runner->pattern = NULL;
+      if (step->type == STEP_EXPECT_NOT) {
+        runner->consumed = runner->history_count;
+      }
       if (step->type == STEP_EXPECT && !runner->matched) {
         char recent[200];
-        describe_recent(runner, recent, sizeof(recent));
+        describe_recent(runner, first_unconsumed, recent, sizeof(recent));
         snprintf(error, error_size, "not seen within %u ms (%s)", (unsigned)step->ms, recent);
         return false;
       }

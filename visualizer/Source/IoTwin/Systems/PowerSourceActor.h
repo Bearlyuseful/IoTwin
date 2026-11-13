@@ -1,10 +1,11 @@
-﻿// IoTwin - power supply with an output relay, optionally controlled via CAN.
+// IoTwin - power supply with an output relay, optionally controlled via CAN.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ElectricalPortComponent.h"
+#include "Bus/CanFrame.h"
 #include "PowerSourceActor.generated.h"
 
 class UCanSignalComponent;
@@ -42,6 +43,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Power")
 	bool bControlledByCan = false;
 
+	/** Byte of the relay frame with the brightness 0..100 % (LAMP_CMD byte 1), -1 = not dimmable. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Power", meta=(ClampMin=-1, ClampMax=7))
+	int32 LevelByteIndex = 1;
+
 	/** Relay state when not controlled by CAN. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Power")
 	bool bOutputEnabled = true;
@@ -55,6 +60,10 @@ public:
 	UFUNCTION(BlueprintPure, Category="Power")
 	bool IsOutputEnabled() const { return bOutputEnabled; }
 
+	/** Output level 0..1 (dimming). */
+	UFUNCTION(BlueprintPure, Category="Power")
+	float GetOutputLevel() const { return Port ? Port->SupplyLevel : 1.0f; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -62,6 +71,11 @@ protected:
 private:
 	UFUNCTION()
 	void HandleRelaySignal(bool bClosed);
+
+	UFUNCTION()
+	void HandleBusFrame(const FCanFrame& Frame);
+
+	int32 RelayFrameId = -1;
 
 	void UpdateHousing();
 

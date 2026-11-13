@@ -1,0 +1,14 @@
+name Overload: overcurrent DTC, then the 3 A fuse blows
+send 200#01
+expect 100#01* within 300
+bench ecu fault overload on                      # bulb with three times the power
+wait 400
+uds ecu 190209 expect 59027F900119*              # B1001-19 current above threshold
+expect 100#00* within 4000                       # the fuse blows after about two seconds
+expect 101#XXXXXXXXXX03 within 500               # LAMP_STATUS: fuse blown + overcurrent
+uds ecu 220107 expect 6201070164                 # fuse blown
+bench ecu fault overload off                     # a new bulb alone does not help
+expect-not 100#01* for 500
+bench ecu fuse replace
+expect 100#01* within 300                        # lamp back
+uds ecu 220107 expect 62010700*

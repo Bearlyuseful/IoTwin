@@ -1,6 +1,6 @@
 add_library(iotwin_light_ecu STATIC light_ecu.c light_ecu.h light_ecu_diag.c light_ecu_diag.h)
 target_include_directories(iotwin_light_ecu PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(iotwin_light_ecu PUBLIC iotwin_can PRIVATE iotwin_compile_options)
+target_link_libraries(iotwin_light_ecu PUBLIC iotwin_can iotwin_power PRIVATE iotwin_compile_options)
 
 add_executable(can_sim main_can_sim.c)
 target_link_libraries(can_sim PRIVATE

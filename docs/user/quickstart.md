@@ -15,7 +15,8 @@ lamp relay  (Visualizer) <--100#01-- iotwin-bus <-- can_sim (light ECU)
 
 1. Download and unzip `IoTwin-<version>-win64.zip`.
 2. Double-click `start-demo.bat`.
-3. In the visualizer click the wall switch (or press **SPACE**).
+3. In the visualizer click the wall switch (or press **SPACE**); the mouse
+   wheel dims the lamp ([Power and Dimming](../dev/power.md)).
    Press **TAB** for the 2D schematic: nodes, CAN bus and USB link with every
    message decoded at its sender; click a node for its details.
 4. Diagnose the ECU like a workshop tester: `uds_client scan`, then type

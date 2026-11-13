@@ -1,4 +1,4 @@
-﻿// IoTwin - electrical connection point of a device.
+// IoTwin - electrical connection point of a device.
 
 #pragma once
 
@@ -42,6 +42,14 @@ public:
 
 	UFUNCTION(BlueprintPure, Category="Power")
 	bool IsSupplying() const { return bSupplying; }
+
+	/** Output level of a supplying port, 0..1 (dimming, PWM duty). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Power", meta=(ClampMin=0.0, ClampMax=1.0))
+	float SupplyLevel = 1.0f;
+
+	/** Highest level of all supplying ports reachable through the wiring, 0 without power. */
+	UFUNCTION(BlueprintPure, Category="Power")
+	float GetSupplyLevel() const;
 
 	/** Kept for existing callers, use SetSupplying(). */
 	void setPowerSource(bool bPowered) { SetSupplying(bPowered); }

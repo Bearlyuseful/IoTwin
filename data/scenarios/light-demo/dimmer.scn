@@ -1,0 +1,15 @@
+name Dimmer: brightness follows DIMMER_CMD, the current follows the brightness
+send 200#01
+expect 100#0164 within 300                       # on, 100 %
+expect 101#XXXXXXXX64* within 500                # LAMP_STATUS: duty 100 %
+uds ecu 220106 expect 62010607*                  # about 1.8 A (0x07xx mA)
+send 201#32                                      # dimmer to 50 %
+expect 100#0132 within 300
+expect 101#XXXXXXXX32* within 500                # duty 50 %
+uds ecu 220106 expect 62010603*                  # about 0.9 A (0x03xx mA)
+uds ecu 220105 expect 62010532
+send 201#00                                      # 0 %: lamp dark although switched on
+expect 100#0100 within 300
+uds ecu 1003
+uds ecu 2E010564 expect 6E0105                   # back to 100 % via diagnostics
+expect 100#0164 within 300

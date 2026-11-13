@@ -1,4 +1,4 @@
-﻿// IoTwin - lamp: port -> device -> light, with a visible bulb.
+// IoTwin - lamp: port -> device -> light, with a visible bulb.
 
 #pragma once
 
@@ -59,6 +59,9 @@ public:
 private:
 	UFUNCTION()
 	void HandlePoweredChanged(bool bPowered);
+
+	UFUNCTION()
+	void HandlePowerLevelChanged(float Level);
 
 	UPROPERTY(Transient)
 	TObjectPtr<UMaterialInstanceDynamic> BulbMaterial;

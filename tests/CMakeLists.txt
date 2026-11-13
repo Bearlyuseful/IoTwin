@@ -26,6 +26,7 @@ add_executable(iotwin_tests
     test_line_reader.cpp
     test_light_ecu.cpp
     test_light_ecu_diag.cpp
+    test_power_path.cpp
     test_cycle_timer.cpp
     test_bus_server.cpp
     test_gateway.cpp

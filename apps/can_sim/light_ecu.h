@@ -7,7 +7,8 @@
  *
  * Signals (see docs/dev/protocol.md):
  *  - 0x200 SWITCH_STATE (input):  data[0] bit 0 = position of the wall switch
- *  - 0x100 LAMP_CMD     (output): data[0] bit 0 = lamp relay closed (lamp on)
+ *  - 0x201 DIMMER_CMD   (input):  data[0] = brightness 0..100 %
+ *  - 0x100 LAMP_CMD     (output): data[0] bit 0 = lamp on, data[1] = brightness 0..100 %
  *
  * The ECU sets the lamp to the switch position, can blink the lamp on its
  * own, and sends LAMP_CMD on every change plus cyclically, so a node that
@@ -27,13 +28,16 @@ extern "C" {
 
 #define LIGHT_ECU_ID_LAMP_CMD 0x100u
 #define LIGHT_ECU_ID_SWITCH_STATE 0x200u
+#define LIGHT_ECU_ID_DIMMER_CMD 0x201u
 #define LIGHT_ECU_DEFAULT_CYCLE_MS 500u
+#define LIGHT_ECU_DEFAULT_LEVEL 100u
 
 /** @brief ECU state. */
 typedef struct {
   bool lamp_on;             /**< Commanded lamp state. */
   bool switch_on;           /**< Last position reported by SWITCH_STATE. */
   bool output_inhibit;      /**< Output switched off by a protection (e.g. short circuit). */
+  uint8_t level;            /**< Brightness 0..100 % (PWM duty of the output). */
   uint32_t cycle_ms;        /**< Period of the cyclic LAMP_CMD message (0 = only on change). */
   uint32_t blink_period_ms; /**< Toggle period while blinking, 0 = not blinking. */
   uint64_t last_send_ms;    /**< Time of the last LAMP_CMD. */
@@ -47,12 +51,15 @@ void light_ecu_init(LightEcu* ecu, uint32_t cycle_ms);
 
 /**
  * @brief Processes a received frame.
- * @return true if the frame was a valid SWITCH_STATE frame.
+ * @return true if the frame was a valid SWITCH_STATE or DIMMER_CMD frame.
  */
 bool light_ecu_on_frame(LightEcu* ecu, const CanFrame* frame);
 
 /** @brief Sets the lamp (stops blinking). */
 void light_ecu_set_lamp(LightEcu* ecu, bool on);
+
+/** @brief Sets the brightness (clamped to 0..100 %). */
+void light_ecu_set_level(LightEcu* ecu, uint32_t percent);
 
 /** @brief Starts blinking with the given toggle period; 0 stops blinking. */
 void light_ecu_set_blink(LightEcu* ecu, uint32_t period_ms);

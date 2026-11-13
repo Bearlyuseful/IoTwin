@@ -7,6 +7,8 @@ uint32_t SystemCoreClock = 16000000u;
 
 static volatile uint32_t g_millis;
 
+#define LED_PWM_PERIOD 1000u
+
 enum { MODE_INPUT = 0u, MODE_OUTPUT = 1u, MODE_ALTERNATE = 2u };
 enum { PULL_NONE = 0u, PULL_UP = 1u };
 
@@ -60,9 +62,18 @@ void board_init(void) {
   RCC->IOPENR |= RCC_IOPENR_GPIOAEN | RCC_IOPENR_GPIOCEN;
   (void)RCC->IOPENR; /* ensure the clock is running before touching the ports */
 
-  /* LD4 */
-  GPIOA->BSRR = 1u << (5u + 16u);
-  gpio_mode(GPIOA, 5, MODE_OUTPUT);
+  /* LD4 dimmed by TIM2 CH1 PWM: 64 MHz / 64 = 1 MHz, period 1000 counts = 1 kHz */
+  RCC->APBENR1 |= RCC_APBENR1_TIM2EN;
+  (void)RCC->APBENR1;
+  TIM2->PSC = (BOARD_PCLK_HZ / 1000000u) - 1u;
+  TIM2->ARR = LED_PWM_PERIOD - 1u;
+  TIM2->CCR1 = 0;
+  TIM2->CCMR1 = (6u << TIM_CCMR1_OC1M_Pos) | TIM_CCMR1_OC1PE; /* PWM mode 1, preload */
+  TIM2->CCER = TIM_CCER_CC1E;
+  TIM2->CR1 = TIM_CR1_ARPE;
+  TIM2->EGR = TIM_EGR_UG;
+  TIM2->CR1 |= TIM_CR1_CEN;
+  gpio_alternate(GPIOA, 5, 2); /* PA5 AF2 = TIM2_CH1 */
 
   /* B1 (external pull-up on the board; internal one as well for safety) */
   gpio_pull(GPIOC, 13, PULL_UP);
@@ -86,6 +97,25 @@ void SysTick_Handler(void) { g_millis++; }
 
 uint32_t board_millis(void) { return g_millis; }
 
-void board_led_set(bool on) { GPIOA->BSRR = on ? (1u << 5) : (1u << (5u + 16u)); }
+void board_led_set(bool on) { board_led_set_level(on ? 100u : 0u); }
+
+void board_led_set_level(uint8_t percent) {
+  if (percent > 100u) {
+    percent = 100u;
+  }
+  /* CCR1 = period (or more) keeps the output high all the time, 0 keeps it low. */
+  TIM2->CCR1 = (uint32_t)percent * LED_PWM_PERIOD / 100u;
+}
+
+uint8_t board_led_measure_percent(void) {
+  uint32_t high = 0;
+  uint32_t samples = 0;
+  /* About 5 ms of samples covers five PWM periods; the loop runs from flash at 64 MHz. */
+  for (uint32_t i = 0; i < 40000u; i++) {
+    high += (GPIOA->IDR >> 5) & 1u;
+    samples++;
+  }
+  return (uint8_t)((high * 100u + samples / 2u) / samples);
+}
 
 bool board_button_raw(void) { return (GPIOC->IDR & (1u << 13)) == 0; }

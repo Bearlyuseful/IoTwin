@@ -6,11 +6,23 @@ BS_:
 
 BU_: LightECU Visualizer WallSwitch Gateway Tester
 
-BO_ 256 LAMP_CMD: 1 LightECU
+BO_ 256 LAMP_CMD: 2 LightECU
  SG_ LampOn : 0|1@1+ (1,0) [0|1] "" Visualizer,Gateway
+ SG_ LampLevel : 8|8@1+ (1,0) [0|100] "%" Visualizer,Gateway
+
+BO_ 257 LAMP_STATUS: 6 LightECU
+ SG_ LampCurrent : 0|16@1+ (0.001,0) [0|65.535] "A" Visualizer,Tester
+ SG_ SupplyVoltage : 16|16@1+ (0.001,0) [0|65.535] "V" Visualizer,Tester
+ SG_ OutputDuty : 32|8@1+ (1,0) [0|100] "%" Visualizer,Tester
+ SG_ FuseBlown : 40|1@1+ (1,0) [0|1] "" Visualizer,Tester
+ SG_ Overcurrent : 41|1@1+ (1,0) [0|1] "" Visualizer,Tester
+ SG_ ShortShutdown : 42|1@1+ (1,0) [0|1] "" Visualizer,Tester
 
 BO_ 512 SWITCH_STATE: 1 WallSwitch
  SG_ SwitchOn : 0|1@1+ (1,0) [0|1] "" LightECU
+
+BO_ 513 DIMMER_CMD: 1 Visualizer
+ SG_ Level : 0|8@1+ (1,0) [0|100] "%" LightECU
 
 BO_ 2015 DIAG_FUNCTIONAL_REQ: 8 Tester
 
@@ -26,6 +38,9 @@ CM_ BO_ 256 "Lamp relay command of the light ECU (can_sim).
 Sent on every change and cyclically every 500 ms.";
 CM_ BO_ 512 "Position of a wall switch: the switch in the visualizer or button B1 of the NUCLEO-G0B1RE.";
 CM_ SG_ 256 LampOn "1 = relay closed, lamp on";
+CM_ SG_ 256 LampLevel "Brightness, PWM duty of the lamp output";
+CM_ BO_ 257 "Output stage of the light ECU: measured lamp current and supply voltage, every 200 ms.";
+CM_ BO_ 513 "Requested brightness, e.g. from the mouse wheel in the visualizer.";
 CM_ BO_ 2015 "UDS functional requests (ISO-TP single frames) to all ECUs, see docs/dev/diagnostics.md";
 CM_ BO_ 2016 "UDS requests to the light ECU (ISO-TP), see docs/dev/diagnostics.md";
 CM_ BO_ 2017 "UDS requests to the NUCLEO-G0B1RE gateway (ISO-TP)";
@@ -34,3 +49,6 @@ CM_ BO_ 2025 "UDS responses of the NUCLEO-G0B1RE gateway (ISO-TP)";
 
 VAL_ 256 LampOn 0 "Off" 1 "On" ;
 VAL_ 512 SwitchOn 0 "Off" 1 "On" ;
+VAL_ 257 FuseBlown 0 "OK" 1 "Blown" ;
+VAL_ 257 Overcurrent 0 "No" 1 "Yes" ;
+VAL_ 257 ShortShutdown 0 "No" 1 "Yes" ;

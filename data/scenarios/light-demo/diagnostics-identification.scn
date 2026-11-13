@@ -6,8 +6,8 @@ uds ecu 2E0103012C expect 7F2E7F                # writing needs the extended ses
 uds ecu 1003 expect 5003*
 uds ecu 2E0103012C expect 6E0103                # blink every 300 ms
 uds ecu 220103 expect 620103012C
-expect 100#01 within 500
-expect 100#00 within 500
+expect 100#01* within 500
+expect 100#00* within 500
 uds ecu 3101 expect 7F3111                      # service not supported
 uds ecu 1101 expect 5101                        # hard reset: application restarts
 wait 100

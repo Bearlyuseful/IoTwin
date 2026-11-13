@@ -8,7 +8,8 @@
 
 /**
  * Shows the mouse cursor, enables clicking on actors (and HUD hit boxes),
- * toggles the first wall switch with SPACE and switches 3D / schematic view with TAB.
+ * toggles the first wall switch with SPACE, dims the lamp with the mouse wheel
+ * (DIMMER_CMD 0x201) and switches 3D / schematic view with TAB.
  */
 UCLASS()
 class IOTWIN_API AIoTwinPlayerController : public APlayerController
@@ -25,4 +26,8 @@ protected:
 private:
 	void HandleToggleKey(FKey Key);
 	void HandleViewKey(FKey Key);
+	void HandleDimKey(FKey Key);
+
+	/** Brightness step per wheel notch in percent. */
+	static constexpr int32 DimStep = 10;
 };

@@ -18,6 +18,7 @@ struct FakeBoard {
   GatewayCanMode mode = GATEWAY_CAN_NORMAL;
   bool tx_full = false;
   bool led = false;
+  uint8_t led_level = 0;
   int led_changes = 0;
   int system_resets = 0;
   GatewayCanStatus status{};
@@ -45,10 +46,12 @@ struct FakeBoard {
       return true;
     };
     io.can_status = [](void* ctx, GatewayCanStatus* status) { *status = self(ctx).status; };
-    io.led_set = [](void* ctx, bool on) {
-      self(ctx).led = on;
+    io.led_set_level = [](void* ctx, uint8_t percent) {
+      self(ctx).led = percent > 0;
+      self(ctx).led_level = percent;
       self(ctx).led_changes++;
     };
+    io.led_measure = [](void* ctx) { return self(ctx).led_level; };
     io.system_reset = [](void* ctx) { self(ctx).system_resets++; };
     io.unique_id = [](void* ctx, uint8_t out[12]) {
       (void)ctx;
@@ -312,4 +315,21 @@ TEST_CASE_METHOD(Fixture, "Gateway answers testers on the CAN bus, not while clo
   CHECK(board.take_output() == "t7E1803220101CCCCCCCC\rt7E980462010100CCCCCC\r");
   REQUIRE(board.sent.size() == 1);
   CHECK(board.sent[0].id == GATEWAY_DIAG_RESPONSE_ID);
+}
+
+TEST_CASE_METHOD(Fixture, "Gateway dims the LED with the brightness of LAMP_CMD", "[gateway]") {
+  serial("O\r");
+  board.take_output();
+  can_rx(0x100, {0x01, 40});
+  CHECK(board.led_level == 40);
+  can_rx(0x100, {0x00, 40});
+  CHECK(board.led_level == 0);
+  can_rx(0x100, {0x01});  // old one-byte LAMP_CMD: full brightness
+  CHECK(board.led_level == 100);
+  can_rx(0x100, {0x01, 250});
+  CHECK(board.led_level == 100);  // clamped
+  can_rx(0x100, {0x01, 25});
+  board.take_output();
+  serial("t7E18" "03220204CCCCCCCC\r");  // DID 0204: commanded and measured brightness
+  CHECK(board.take_output() == "t7E98056202041919CCCC\rz\r");
 }

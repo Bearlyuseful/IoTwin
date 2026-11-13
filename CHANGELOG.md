@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+### Power and dimming
+- `libs/power`: electrical model of a switched output: supply with internal
+  resistance, slow fuse (I2t), smart high-side switch with PWM, current limit
+  and restart, resistive load.
+- Light ECU: brightness 0..100 % (`DIMMER_CMD` 0x201, console `dim`, DID
+  0105), `LAMP_CMD` carries it in byte 1; `LAMP_STATUS` (0x101) with current,
+  supply voltage, duty and flags every 200 ms; DIDs 0106 current, 0107 fuse.
+- The existing faults act on the circuit; new fault `overload`: overcurrent
+  DTC `B1001-19`, the 3 A fuse blows after about 2 s (`B1003-13`),
+  `fuse replace`.
+- Gateway firmware: LD4 dimmed with TIM2 PWM; DID 0204 compares commanded
+  and measured brightness (verified on the NUCLEO).
+- Visualizer: mouse wheel dims, the lamp follows the brightness, the HUD
+  shows current and voltage.
+- Scenarios `dimmer` and `overload-fuse`; `can_scenario` expectations also
+  see reactions that arrive while an action is still running.
+
 ### Scenarios and faults
 - `iotwin-bus` fault injection of the medium, controlled with `!fault`
   lines: frame loss (optionally by id, reproducible with a seed), delay

@@ -56,9 +56,14 @@ static void io_can_status(void* context, GatewayCanStatus* status) {
   status->bus_error = s.last_error_code != 0 && s.last_error_code != 7;
 }
 
-static void io_led_set(void* context, bool on) {
+static void io_led_set_level(void* context, uint8_t percent) {
   (void)context;
-  board_led_set(on);
+  board_led_set_level(percent);
+}
+
+static uint8_t io_led_measure(void* context) {
+  (void)context;
+  return board_led_measure_percent();
 }
 
 static void io_system_reset(void* context) {
@@ -101,7 +106,8 @@ int main(void) {
       .can_stop = io_can_stop,
       .can_send = io_can_send,
       .can_status = io_can_status,
-      .led_set = io_led_set,
+      .led_set_level = io_led_set_level,
+      .led_measure = io_led_measure,
       .system_reset = io_system_reset,
       .unique_id = io_unique_id,
       .context = 0,

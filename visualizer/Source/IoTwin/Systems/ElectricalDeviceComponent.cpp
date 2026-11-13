@@ -1,4 +1,4 @@
-﻿// IoTwin - consumer that is powered through its input port.
+// IoTwin - consumer that is powered through its input port.
 
 #include "ElectricalDeviceComponent.h"
 
@@ -13,10 +13,17 @@ void UElectricalDeviceComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	const bool bPoweredNow = InputPort != nullptr && IPowerInterface::Execute_HasPower(InputPort);
-	if (!bInitialised || bPoweredNow != bIsPowered)
+	const float LevelNow = bPoweredNow ? InputPort->GetSupplyLevel() : 0.0f;
+	const bool bFirst = !bInitialised;
+	bInitialised = true;
+	if (bFirst || bPoweredNow != bIsPowered)
 	{
-		bInitialised = true;
 		bIsPowered = bPoweredNow;
 		OnPoweredChanged.Broadcast(bIsPowered);
+	}
+	if (bFirst || !FMath::IsNearlyEqual(LevelNow, PowerLevel))
+	{
+		PowerLevel = LevelNow;
+		OnPowerLevelChanged.Broadcast(PowerLevel);
 	}
 }
