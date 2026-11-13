@@ -30,8 +30,13 @@ extern "C" {
 #endif
 
 #define CAN_MAX_DLEN 8              /**< Maximum payload of a classic CAN frame. */
-#define CAN_SFF_MASK 0x000007FFu    /**< Valid bits of an 11-bit identifier. */
-#define CAN_EFF_MASK 0x1FFFFFFFu    /**< Valid bits of a 29-bit identifier. */
+/* Same spelling as <linux/can.h>, so both headers can be included together. */
+#ifndef CAN_SFF_MASK
+#define CAN_SFF_MASK 0x000007FFU    /**< Valid bits of an 11-bit identifier. */
+#endif
+#ifndef CAN_EFF_MASK
+#define CAN_EFF_MASK 0x1FFFFFFFU    /**< Valid bits of a 29-bit identifier. */
+#endif
 #define CAN_FRAME_TEXT_MAX 32       /**< Buffer size that fits any encoded frame plus NUL. */
 
 /**

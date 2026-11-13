@@ -104,7 +104,9 @@ if (-not (Test-Path (Join-Path $VisualizerStage "IoTwin.exe"))) {
 Step "Assembling $PackageName"
 if (Test-Path $PackageDir) { Remove-Item $PackageDir -Recurse -Force }
 New-Item -ItemType Directory -Force (Join-Path $PackageDir "bin") | Out-Null
-Copy-Item (Join-Path $CoreBin "iotwin-bus.exe"), (Join-Path $CoreBin "can_sim.exe"), (Join-Path $CoreBin "serial_bridge.exe") (Join-Path $PackageDir "bin")
+Copy-Item (Join-Path $CoreBin "iotwin-bus.exe"), (Join-Path $CoreBin "can_sim.exe"), (Join-Path $CoreBin "serial_bridge.exe"), (Join-Path $CoreBin "can_monitor.exe") (Join-Path $PackageDir "bin")
+$ConfigTarget = New-Item -ItemType Directory -Force (Join-Path $PackageDir "config")
+Copy-Item (Join-Path $RepoRoot "config\can\iotwin.dbc") $ConfigTarget
 Copy-Item $VisualizerStage (Join-Path $PackageDir "Visualizer") -Recurse
 Copy-Item (Join-Path $PSScriptRoot "release\start-demo.bat"), (Join-Path $PSScriptRoot "release\start-demo-hardware.bat") $PackageDir
 if (-not $SkipFirmware) {

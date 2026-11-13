@@ -22,6 +22,9 @@ digital-twin features.
 | Git tag for the MVP | Oct 2025 | ✅ `v0.1.0` |
 | Serial bridge PC ↔ MCU | Mar 2026, phase 2 | ✅ `serial_bridge` + SLCAN firmware ([Firmware](dev/firmware.md)) |
 | STM32 as CAN controller | Mar 2026, phase 3 | ✅ FDCAN driver, internal loopback; ⚠️ real bus needs a transceiver + second node |
+| SocketCAN bridge | step 4 | ✅ `socketcan_bridge` ([CAN Tools](dev/can_tools.md)); live test needs `vcan0` |
+| Real-time measurements on PREEMPT_RT | step 4 | ❌ needs PREEMPT_RT hardware |
+| DBC, ISO-TP | step 5 | ✅ DBC reader + `can_monitor`, ISO-TP library; UDS services open |
 | Scenarios, more devices, extensions | Oct 2025 outlook | ❌ |
 
 ## Order
@@ -32,8 +35,8 @@ digital-twin features.
 | 1 | **Phase 2a – MCU basics and serial protocol** ✅ | M | no CAN hardware needed yet, core embedded skills |
 | 2 | **Phase 2b – `serial_bridge` on the PC** ✅ | S–M | connects the MCU to the virtual bus |
 | 3 | **Phase 3 – STM32 as CAN controller** ✅ (loopback) | L | real hardware nodes in the digital twin |
-| 4 | **Real-time Linux and SocketCAN** | M | can run in parallel to 3 |
-| 5 | **Protocols on CAN** (optional) | M–L | builds on 3 and 4 |
+| 4 | **Real-time Linux and SocketCAN** (SocketCAN ✅, RT measurement open) | M | can run in parallel to 3 |
+| 5 | **Protocols on CAN** (DBC ✅, ISO-TP ✅, UDS open) | M–L | builds on 3 and 4 |
 | 6 | **Deeper digital twin** | ongoing | lower priority for the learning goal |
 
 ### 0. Close the MVP
