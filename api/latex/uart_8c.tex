@@ -1,0 +1,88 @@
+\doxysection{firmware/drivers/uart.c File Reference}
+\hypertarget{uart_8c}{}\label{uart_8c}\index{firmware/drivers/uart.c@{firmware/drivers/uart.c}}
+{\ttfamily \#include "{}uart.\+h"{}}\newline
+{\ttfamily \#include "{}stm32g0xx.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uart_8c_aaa981e599aa044183d4c19a576cdc8a9}{RX\+\_\+\+SIZE}}~256u  /\texorpdfstring{$\ast$}{*} power of two \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{uart_8c_a6a1eef3a18bfaa9a6c515692ffd9321e}{TX\+\_\+\+SIZE}}~1024u /\texorpdfstring{$\ast$}{*} power of two \texorpdfstring{$\ast$}{*}/
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{uart_8c_a958a59f06c7ca923f4c8813f03e9b17d}{uart\+\_\+init}} (uint32\+\_\+t peripheral\+\_\+clock\+\_\+hz, uint32\+\_\+t baudrate)
+\item 
+size\+\_\+t \mbox{\hyperlink{uart_8c_a51b4803bbc296fdda58f998cd3925427}{uart\+\_\+read}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Copies up to {\ttfamily size} received bytes; returns the number copied. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uart_8c_a586cd2b7752ed14f2961b8ddb00ab488}{uart\+\_\+write}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Queues all bytes for transmission (waits while the TX buffer is full). \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{uart_8c_a2372f5b75b734f4ccf69de9a4ea85aac}{uart\+\_\+rx\+\_\+overruns}} (void)
+\begin{DoxyCompactList}\small\item\em Bytes lost because the RX buffer or the hardware overran (since start). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uart_8c_ad81f8f5f4eeb37afbe93e95d0727bb73}{USART2\+\_\+\+LPUART2\+\_\+\+IRQHandler}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{uart_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{uart_8c_aaa981e599aa044183d4c19a576cdc8a9}\index{uart.c@{uart.c}!RX\_SIZE@{RX\_SIZE}}
+\index{RX\_SIZE@{RX\_SIZE}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{RX\_SIZE}{RX\_SIZE}}
+{\footnotesize\ttfamily \label{uart_8c_aaa981e599aa044183d4c19a576cdc8a9} 
+\#define RX\+\_\+\+SIZE~256u  /\texorpdfstring{$\ast$}{*} power of two \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{uart_8c_a6a1eef3a18bfaa9a6c515692ffd9321e}\index{uart.c@{uart.c}!TX\_SIZE@{TX\_SIZE}}
+\index{TX\_SIZE@{TX\_SIZE}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{TX\_SIZE}{TX\_SIZE}}
+{\footnotesize\ttfamily \label{uart_8c_a6a1eef3a18bfaa9a6c515692ffd9321e} 
+\#define TX\+\_\+\+SIZE~1024u /\texorpdfstring{$\ast$}{*} power of two \texorpdfstring{$\ast$}{*}/}
+
+
+
+\label{doc-func-members}
+\Hypertarget{uart_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{uart_8c_a958a59f06c7ca923f4c8813f03e9b17d}\index{uart.c@{uart.c}!uart\_init@{uart\_init}}
+\index{uart\_init@{uart\_init}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{uart\_init()}{uart\_init()}}
+{\footnotesize\ttfamily \label{uart_8c_a958a59f06c7ca923f4c8813f03e9b17d} 
+void uart\+\_\+init (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{peripheral\+\_\+clock\+\_\+hz}{, }\item[{uint32\+\_\+t}]{baudrate}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uart_8c_a51b4803bbc296fdda58f998cd3925427}\index{uart.c@{uart.c}!uart\_read@{uart\_read}}
+\index{uart\_read@{uart\_read}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{uart\_read()}{uart\_read()}}
+{\footnotesize\ttfamily \label{uart_8c_a51b4803bbc296fdda58f998cd3925427} 
+size\+\_\+t uart\+\_\+read (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Copies up to {\ttfamily size} received bytes; returns the number copied. 
+
+\Hypertarget{uart_8c_a2372f5b75b734f4ccf69de9a4ea85aac}\index{uart.c@{uart.c}!uart\_rx\_overruns@{uart\_rx\_overruns}}
+\index{uart\_rx\_overruns@{uart\_rx\_overruns}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{uart\_rx\_overruns()}{uart\_rx\_overruns()}}
+{\footnotesize\ttfamily \label{uart_8c_a2372f5b75b734f4ccf69de9a4ea85aac} 
+uint32\+\_\+t uart\+\_\+rx\+\_\+overruns (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Bytes lost because the RX buffer or the hardware overran (since start). 
+
+\Hypertarget{uart_8c_a586cd2b7752ed14f2961b8ddb00ab488}\index{uart.c@{uart.c}!uart\_write@{uart\_write}}
+\index{uart\_write@{uart\_write}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{uart\_write()}{uart\_write()}}
+{\footnotesize\ttfamily \label{uart_8c_a586cd2b7752ed14f2961b8ddb00ab488} 
+void uart\+\_\+write (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Queues all bytes for transmission (waits while the TX buffer is full). 
+
+\Hypertarget{uart_8c_ad81f8f5f4eeb37afbe93e95d0727bb73}\index{uart.c@{uart.c}!USART2\_LPUART2\_IRQHandler@{USART2\_LPUART2\_IRQHandler}}
+\index{USART2\_LPUART2\_IRQHandler@{USART2\_LPUART2\_IRQHandler}!uart.c@{uart.c}}
+\doxysubsubsection{\texorpdfstring{USART2\_LPUART2\_IRQHandler()}{USART2\_LPUART2\_IRQHandler()}}
+{\footnotesize\ttfamily \label{uart_8c_ad81f8f5f4eeb37afbe93e95d0727bb73} 
+void USART2\+\_\+\+LPUART2\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+

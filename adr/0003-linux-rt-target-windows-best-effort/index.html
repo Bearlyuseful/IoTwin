@@ -690,6 +690,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dev/component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../dev/packaging/" class="md-nav__link">
         
   
@@ -922,6 +950,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -963,7 +1019,7 @@ one Windows machine makes development and testing much easier.</p>
   implemented for Linux only: <code>SCHED_FIFO</code> priorities, CPU pinning,
   <code>mlockall()</code> and drift-free cycles with <code>clock_nanosleep(TIMER_ABSTIME)</code>.</li>
 <li>The same sources build on Windows with MSYS2 GCC through a thin platform
-  layer (<code>src/core/platform</code>, <code>src/communication/tcp/net.*</code>). On Windows the
+  layer (<code>libs/platform</code>, <code>libs/net/net.*</code>). On Windows the
   programs run <em>best effort</em>: correct behaviour, but no timing guarantees.</li>
 <li>Simulation logic (e.g. <code>light_ecu.c</code>) is free of platform code and time
   sources so it stays portable and unit-testable.</li>

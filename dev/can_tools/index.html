@@ -16,7 +16,7 @@
         <link rel="prev" href="../firmware/">
       
       
-        <link rel="next" href="../packaging/">
+        <link rel="next" href="../component_database/">
       
       
         
@@ -739,10 +739,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#library-srccorecan" class="md-nav__link">
+  <a href="#library-libscan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Library (src/core/can)
+        Library (libs/can)
       
     </span>
   </a>
@@ -780,6 +780,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1009,6 +1037,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1038,7 +1094,7 @@
 
 <h1 id="can-tools-dbc-iso-tp-socketcan">CAN Tools: DBC, ISO-TP, SocketCAN<a class="headerlink" href="#can-tools-dbc-iso-tp-socketcan" title="Permanent link">&para;</a></h1>
 <h2 id="dbc-and-can_monitor">DBC and <code>can_monitor</code><a class="headerlink" href="#dbc-and-can_monitor" title="Permanent link">&para;</a></h2>
-<p><code>config/can/iotwin.dbc</code> describes the signals of the light demo:</p>
+<p><code>data/dbc/iotwin.dbc</code> describes the signals of the light demo:</p>
 <table>
 <thead>
 <tr>
@@ -1064,14 +1120,14 @@
 </tbody>
 </table>
 <p><code>can_monitor</code> shows the bus traffic decoded with a DBC file:</p>
-<div class="highlight"><pre><span></span><code>can_monitor<span class="w"> </span>--dbc<span class="w"> </span>config/can/iotwin.dbc<span class="w"> </span>--changes
+<div class="highlight"><pre><span></span><code>can_monitor<span class="w"> </span>--dbc<span class="w"> </span>data/dbc/iotwin.dbc<span class="w"> </span>--changes
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>17:51:00.270  100#01                     LAMP_CMD LampOn=1 (On)
 17:51:03.689  200#01                     SWITCH_STATE SwitchOn=1 (On)
 17:51:03.689  7FF#1234                   (unknown id)
 </code></pre></div>
 <p><code>--changes</code> hides cyclic repetitions with unchanged payload.</p>
-<h3 id="library-srccorecan">Library (<code>src/core/can</code>)<a class="headerlink" href="#library-srccorecan" title="Permanent link">&para;</a></h3>
+<h3 id="library-libscan">Library (<code>libs/can</code>)<a class="headerlink" href="#library-libscan" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>can_signal.h</code> – signal codec, portable and heap-free (usable in firmware):
   Intel (little endian) and Motorola (big endian, DBC sawtooth numbering)
@@ -1082,7 +1138,7 @@
   <code>dbc_set_signal()</code> decode and build frames by name.</li>
 </ul>
 <h2 id="iso-tp-iso-15765-2">ISO-TP (ISO 15765-2)<a class="headerlink" href="#iso-tp-iso-15765-2" title="Permanent link">&para;</a></h2>
-<p><code>src/core/can/isotp.h</code> transports messages of up to 4095 bytes over classic
+<p><code>libs/can/isotp.h</code> transports messages of up to 4095 bytes over classic
 CAN frames (normal addressing), e.g. for UDS diagnostics:</p>
 <table>
 <thead>

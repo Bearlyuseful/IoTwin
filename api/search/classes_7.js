@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['monitor_0',['Monitor',['../structMonitor.html',1,'']]]
+  ['lightecu_0',['LightEcu',['../structLightEcu.html',1,'']]],
+  ['linereader_1',['LineReader',['../structLineReader.html',1,'']]]
 ];

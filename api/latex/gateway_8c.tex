@@ -1,0 +1,104 @@
+\doxysection{firmware/app/gateway.c File Reference}
+\hypertarget{gateway_8c}{}\label{gateway_8c}\index{firmware/app/gateway.c@{firmware/app/gateway.c}}
+{\ttfamily \#include "{}gateway.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gateway_8c_a11a96c83096a2287769e3b5701ede44b}{VERSION\+\_\+\+REPLY}}~"{}V0100\textbackslash{}r"{}     /\texorpdfstring{$\ast$}{*} hardware 01, software 00 \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{gateway_8c_a21271d6f9809fc3b6cc2599e53a545b1}{SERIAL\+\_\+\+REPLY}}~"{}NG0\+B1\textbackslash{}r"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{gateway_8c_ab91ea63374822e9774faec6e3722a279}{gateway\+\_\+init}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, const \mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} \texorpdfstring{$\ast$}{*}io)
+\item 
+void \mbox{\hyperlink{gateway_8c_aeaab48f97068bf7e0383010cacdb2b2c}{gateway\+\_\+on\+\_\+serial\+\_\+data}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Bytes received on the serial link. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8c_afc75c3f805cdebb24b356a6f048bccd9}{gateway\+\_\+on\+\_\+can\+\_\+frame}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Frame received by the CAN controller. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8c_af40f9bf19ba615758dc5d24d17831cce}{gateway\+\_\+on\+\_\+button}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway)
+\begin{DoxyCompactList}\small\item\em The user button was pressed (debounced). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8c_a2d4dbaaa3bee9c4c6f4529328dfaa998}{gateway\+\_\+on\+\_\+rx\+\_\+overrun}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway)
+\begin{DoxyCompactList}\small\item\em Driver dropped frames because its receive queue was full. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8c_a8be8bdc7e33addbc49bd6295b77aa191}{gateway\+\_\+tick}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, uint32\+\_\+t now\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Periodic call with the current time; blinks the LED while the channel is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{gateway_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{gateway_8c_a21271d6f9809fc3b6cc2599e53a545b1}\index{gateway.c@{gateway.c}!SERIAL\_REPLY@{SERIAL\_REPLY}}
+\index{SERIAL\_REPLY@{SERIAL\_REPLY}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{SERIAL\_REPLY}{SERIAL\_REPLY}}
+{\footnotesize\ttfamily \label{gateway_8c_a21271d6f9809fc3b6cc2599e53a545b1} 
+\#define SERIAL\+\_\+\+REPLY~"{}NG0\+B1\textbackslash{}r"{}}
+
+\Hypertarget{gateway_8c_a11a96c83096a2287769e3b5701ede44b}\index{gateway.c@{gateway.c}!VERSION\_REPLY@{VERSION\_REPLY}}
+\index{VERSION\_REPLY@{VERSION\_REPLY}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{VERSION\_REPLY}{VERSION\_REPLY}}
+{\footnotesize\ttfamily \label{gateway_8c_a11a96c83096a2287769e3b5701ede44b} 
+\#define VERSION\+\_\+\+REPLY~"{}V0100\textbackslash{}r"{}     /\texorpdfstring{$\ast$}{*} hardware 01, software 00 \texorpdfstring{$\ast$}{*}/}
+
+
+
+\label{doc-func-members}
+\Hypertarget{gateway_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{gateway_8c_ab91ea63374822e9774faec6e3722a279}\index{gateway.c@{gateway.c}!gateway\_init@{gateway\_init}}
+\index{gateway\_init@{gateway\_init}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{gateway\_init()}{gateway\_init()}}
+{\footnotesize\ttfamily \label{gateway_8c_ab91ea63374822e9774faec6e3722a279} 
+void gateway\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{const \mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} \texorpdfstring{$\ast$}{*}}]{io}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gateway_8c_af40f9bf19ba615758dc5d24d17831cce}\index{gateway.c@{gateway.c}!gateway\_on\_button@{gateway\_on\_button}}
+\index{gateway\_on\_button@{gateway\_on\_button}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_button()}{gateway\_on\_button()}}
+{\footnotesize\ttfamily \label{gateway_8c_af40f9bf19ba615758dc5d24d17831cce} 
+void gateway\+\_\+on\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{}\end{DoxyParamCaption})}
+
+
+
+The user button was pressed (debounced). 
+
+\Hypertarget{gateway_8c_afc75c3f805cdebb24b356a6f048bccd9}\index{gateway.c@{gateway.c}!gateway\_on\_can\_frame@{gateway\_on\_can\_frame}}
+\index{gateway\_on\_can\_frame@{gateway\_on\_can\_frame}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_can\_frame()}{gateway\_on\_can\_frame()}}
+{\footnotesize\ttfamily \label{gateway_8c_afc75c3f805cdebb24b356a6f048bccd9} 
+void gateway\+\_\+on\+\_\+can\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Frame received by the CAN controller. 
+
+\Hypertarget{gateway_8c_a2d4dbaaa3bee9c4c6f4529328dfaa998}\index{gateway.c@{gateway.c}!gateway\_on\_rx\_overrun@{gateway\_on\_rx\_overrun}}
+\index{gateway\_on\_rx\_overrun@{gateway\_on\_rx\_overrun}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_rx\_overrun()}{gateway\_on\_rx\_overrun()}}
+{\footnotesize\ttfamily \label{gateway_8c_a2d4dbaaa3bee9c4c6f4529328dfaa998} 
+void gateway\+\_\+on\+\_\+rx\+\_\+overrun (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{}\end{DoxyParamCaption})}
+
+
+
+Driver dropped frames because its receive queue was full. 
+
+\Hypertarget{gateway_8c_aeaab48f97068bf7e0383010cacdb2b2c}\index{gateway.c@{gateway.c}!gateway\_on\_serial\_data@{gateway\_on\_serial\_data}}
+\index{gateway\_on\_serial\_data@{gateway\_on\_serial\_data}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_serial\_data()}{gateway\_on\_serial\_data()}}
+{\footnotesize\ttfamily \label{gateway_8c_aeaab48f97068bf7e0383010cacdb2b2c} 
+void gateway\+\_\+on\+\_\+serial\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Bytes received on the serial link. 
+
+\Hypertarget{gateway_8c_a8be8bdc7e33addbc49bd6295b77aa191}\index{gateway.c@{gateway.c}!gateway\_tick@{gateway\_tick}}
+\index{gateway\_tick@{gateway\_tick}!gateway.c@{gateway.c}}
+\doxysubsubsection{\texorpdfstring{gateway\_tick()}{gateway\_tick()}}
+{\footnotesize\ttfamily \label{gateway_8c_a8be8bdc7e33addbc49bd6295b77aa191} 
+void gateway\+\_\+tick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{uint32\+\_\+t}]{now\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Periodic call with the current time; blinks the LED while the channel is closed. 
+

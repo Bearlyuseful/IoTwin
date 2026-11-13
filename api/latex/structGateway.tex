@@ -1,0 +1,155 @@
+\doxysection{Gateway Struct Reference}
+\hypertarget{structGateway}{}\label{structGateway}\index{Gateway@{Gateway}}
+
+
+\doxylink{structGateway}{Gateway} state.  
+
+
+
+
+{\ttfamily \#include $<$gateway.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} \mbox{\hyperlink{structGateway_ae3bf99515f10d9aca6026b8ef68d157e}{io}}
+\item 
+\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \mbox{\hyperlink{structGateway_a7b14fb9ecd0682dd7fa5b68d26291340}{reader}}
+\item 
+bool \mbox{\hyperlink{structGateway_a576e5425a73342206a139c54a175ca97}{open}}
+\item 
+\mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}} \mbox{\hyperlink{structGateway_af477dbcf02493a11f38c52f5f79fe32f}{mode}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_ae6742b551812a2673af34c49a29f249e}{bitrate}}
+\item 
+bool \mbox{\hyperlink{structGateway_a934f79073e899297c3fddd1e6ce248b6}{switch\+\_\+on}}
+\item 
+bool \mbox{\hyperlink{structGateway_a599d619c445d8077e44b6a5c04da2bb8}{lamp\+\_\+on}}
+\item 
+bool \mbox{\hyperlink{structGateway_a0761bcd2966eb407561fa2fc726948c2}{led\+\_\+on}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_a29a1374049b479fd9605bfc26f0cb954}{last\+\_\+blink\+\_\+ms}}
+\item 
+\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \mbox{\hyperlink{structGateway_a2551b8be41edec487904bc24a223b54c}{echo}} \mbox{[}\mbox{\hyperlink{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}{GATEWAY\+\_\+\+ECHO\+\_\+\+SLOTS}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structGateway_a5284f67aa628f147e9ee9d2b241c4baa}{echo\+\_\+head}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structGateway_a69b61475b216b2e9ef9cd8835cbfaf31}{echo\+\_\+count}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structGateway_ab304f07aeda9f0d34da3ea718632eac3}{sticky\+\_\+flags}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_ae5ac04aeeaed877ccb82771214a639f6}{tx\+\_\+frames}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_a45b9a95732bacd411ebf59bf3de02092}{rx\+\_\+frames}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab}{echoes}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{structGateway}{Gateway} state. 
+
+\label{doc-variable-members}
+\Hypertarget{structGateway_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGateway_ae6742b551812a2673af34c49a29f249e}\index{Gateway@{Gateway}!bitrate@{bitrate}}
+\index{bitrate@{bitrate}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{bitrate}{bitrate}}
+{\footnotesize\ttfamily \label{structGateway_ae6742b551812a2673af34c49a29f249e} 
+uint32\+\_\+t Gateway\+::bitrate}
+
+\Hypertarget{structGateway_a2551b8be41edec487904bc24a223b54c}\index{Gateway@{Gateway}!echo@{echo}}
+\index{echo@{echo}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{echo}{echo}}
+{\footnotesize\ttfamily \label{structGateway_a2551b8be41edec487904bc24a223b54c} 
+\mbox{\hyperlink{structCanFrame}{Can\+Frame}} Gateway\+::echo\mbox{[}\mbox{\hyperlink{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}{GATEWAY\+\_\+\+ECHO\+\_\+\+SLOTS}}\mbox{]}}
+
+Loopback mode\+: transmitted, echo not seen yet. \Hypertarget{structGateway_a69b61475b216b2e9ef9cd8835cbfaf31}\index{Gateway@{Gateway}!echo\_count@{echo\_count}}
+\index{echo\_count@{echo\_count}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{echo\_count}{echo\_count}}
+{\footnotesize\ttfamily \label{structGateway_a69b61475b216b2e9ef9cd8835cbfaf31} 
+size\+\_\+t Gateway\+::echo\+\_\+count}
+
+\Hypertarget{structGateway_a5284f67aa628f147e9ee9d2b241c4baa}\index{Gateway@{Gateway}!echo\_head@{echo\_head}}
+\index{echo\_head@{echo\_head}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{echo\_head}{echo\_head}}
+{\footnotesize\ttfamily \label{structGateway_a5284f67aa628f147e9ee9d2b241c4baa} 
+size\+\_\+t Gateway\+::echo\+\_\+head}
+
+\Hypertarget{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab}\index{Gateway@{Gateway}!echoes@{echoes}}
+\index{echoes@{echoes}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{echoes}{echoes}}
+{\footnotesize\ttfamily \label{structGateway_ad4d2b2047232ea8aaf2d25ec0217d4ab} 
+uint32\+\_\+t Gateway\+::echoes}
+
+Loopback echoes recognised and suppressed. \Hypertarget{structGateway_ae3bf99515f10d9aca6026b8ef68d157e}\index{Gateway@{Gateway}!io@{io}}
+\index{io@{io}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{io}{io}}
+{\footnotesize\ttfamily \label{structGateway_ae3bf99515f10d9aca6026b8ef68d157e} 
+\mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} Gateway\+::io}
+
+\Hypertarget{structGateway_a599d619c445d8077e44b6a5c04da2bb8}\index{Gateway@{Gateway}!lamp\_on@{lamp\_on}}
+\index{lamp\_on@{lamp\_on}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{lamp\_on}{lamp\_on}}
+{\footnotesize\ttfamily \label{structGateway_a599d619c445d8077e44b6a5c04da2bb8} 
+bool Gateway\+::lamp\+\_\+on}
+
+Last LAMP\+\_\+\+CMD seen on the bus. \Hypertarget{structGateway_a29a1374049b479fd9605bfc26f0cb954}\index{Gateway@{Gateway}!last\_blink\_ms@{last\_blink\_ms}}
+\index{last\_blink\_ms@{last\_blink\_ms}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{last\_blink\_ms}{last\_blink\_ms}}
+{\footnotesize\ttfamily \label{structGateway_a29a1374049b479fd9605bfc26f0cb954} 
+uint32\+\_\+t Gateway\+::last\+\_\+blink\+\_\+ms}
+
+\Hypertarget{structGateway_a0761bcd2966eb407561fa2fc726948c2}\index{Gateway@{Gateway}!led\_on@{led\_on}}
+\index{led\_on@{led\_on}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{led\_on}{led\_on}}
+{\footnotesize\ttfamily \label{structGateway_a0761bcd2966eb407561fa2fc726948c2} 
+bool Gateway\+::led\+\_\+on}
+
+\Hypertarget{structGateway_af477dbcf02493a11f38c52f5f79fe32f}\index{Gateway@{Gateway}!mode@{mode}}
+\index{mode@{mode}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \label{structGateway_af477dbcf02493a11f38c52f5f79fe32f} 
+\mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}} Gateway\+::mode}
+
+\Hypertarget{structGateway_a576e5425a73342206a139c54a175ca97}\index{Gateway@{Gateway}!open@{open}}
+\index{open@{open}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{open}{open}}
+{\footnotesize\ttfamily \label{structGateway_a576e5425a73342206a139c54a175ca97} 
+bool Gateway\+::open}
+
+\Hypertarget{structGateway_a7b14fb9ecd0682dd7fa5b68d26291340}\index{Gateway@{Gateway}!reader@{reader}}
+\index{reader@{reader}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{reader}{reader}}
+{\footnotesize\ttfamily \label{structGateway_a7b14fb9ecd0682dd7fa5b68d26291340} 
+\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} Gateway\+::reader}
+
+\Hypertarget{structGateway_a45b9a95732bacd411ebf59bf3de02092}\index{Gateway@{Gateway}!rx\_frames@{rx\_frames}}
+\index{rx\_frames@{rx\_frames}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{rx\_frames}{rx\_frames}}
+{\footnotesize\ttfamily \label{structGateway_a45b9a95732bacd411ebf59bf3de02092} 
+uint32\+\_\+t Gateway\+::rx\+\_\+frames}
+
+Frames received from the CAN controller (incl. echoes). \Hypertarget{structGateway_ab304f07aeda9f0d34da3ea718632eac3}\index{Gateway@{Gateway}!sticky\_flags@{sticky\_flags}}
+\index{sticky\_flags@{sticky\_flags}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{sticky\_flags}{sticky\_flags}}
+{\footnotesize\ttfamily \label{structGateway_ab304f07aeda9f0d34da3ea718632eac3} 
+uint8\+\_\+t Gateway\+::sticky\+\_\+flags}
+
+Flags reported (and cleared) by the next F command. \Hypertarget{structGateway_a934f79073e899297c3fddd1e6ce248b6}\index{Gateway@{Gateway}!switch\_on@{switch\_on}}
+\index{switch\_on@{switch\_on}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{switch\_on}{switch\_on}}
+{\footnotesize\ttfamily \label{structGateway_a934f79073e899297c3fddd1e6ce248b6} 
+bool Gateway\+::switch\+\_\+on}
+
+State of the local wall switch (button). \Hypertarget{structGateway_ae5ac04aeeaed877ccb82771214a639f6}\index{Gateway@{Gateway}!tx\_frames@{tx\_frames}}
+\index{tx\_frames@{tx\_frames}!Gateway@{Gateway}}
+\doxysubsubsection{\texorpdfstring{tx\_frames}{tx\_frames}}
+{\footnotesize\ttfamily \label{structGateway_ae5ac04aeeaed877ccb82771214a639f6} 
+uint32\+\_\+t Gateway\+::tx\+\_\+frames}
+
+Frames handed to the CAN controller. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+firmware/app/\mbox{\hyperlink{gateway_8h}{gateway.\+h}}\end{DoxyCompactItemize}

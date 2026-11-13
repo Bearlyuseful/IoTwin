@@ -1,0 +1,75 @@
+\doxysection{Gateway\+Can\+Status Struct Reference}
+\hypertarget{structGatewayCanStatus}{}\label{structGatewayCanStatus}\index{GatewayCanStatus@{GatewayCanStatus}}
+
+
+Controller state reported by the driver.  
+
+
+
+
+{\ttfamily \#include $<$gateway.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structGatewayCanStatus_a2c62b8ec702231a951d42463c9e35120}{tx\+\_\+error\+\_\+count}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structGatewayCanStatus_af87caa9622f6b5997611adf30810a4eb}{rx\+\_\+error\+\_\+count}}
+\item 
+bool \mbox{\hyperlink{structGatewayCanStatus_af062e032204801ee146c5b1d7a633ac2}{error\+\_\+warning}}
+\item 
+bool \mbox{\hyperlink{structGatewayCanStatus_a3154ab76fcb1d2c52df534b3410ba19f}{error\+\_\+passive}}
+\item 
+bool \mbox{\hyperlink{structGatewayCanStatus_a43d903f1bdae7e4aa020029d893ffce9}{bus\+\_\+off}}
+\item 
+bool \mbox{\hyperlink{structGatewayCanStatus_aaf0af85cd11fa702727ce1d3900beca0}{bus\+\_\+error}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller state reported by the driver. 
+
+\label{doc-variable-members}
+\Hypertarget{structGatewayCanStatus_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGatewayCanStatus_aaf0af85cd11fa702727ce1d3900beca0}\index{GatewayCanStatus@{GatewayCanStatus}!bus\_error@{bus\_error}}
+\index{bus\_error@{bus\_error}!GatewayCanStatus@{GatewayCanStatus}}
+\doxysubsubsection{\texorpdfstring{bus\_error}{bus\_error}}
+{\footnotesize\ttfamily \label{structGatewayCanStatus_aaf0af85cd11fa702727ce1d3900beca0} 
+bool Gateway\+Can\+Status\+::bus\+\_\+error}
+
+Last protocol error code != none. \Hypertarget{structGatewayCanStatus_a43d903f1bdae7e4aa020029d893ffce9}\index{GatewayCanStatus@{GatewayCanStatus}!bus\_off@{bus\_off}}
+\index{bus\_off@{bus\_off}!GatewayCanStatus@{GatewayCanStatus}}
+\doxysubsubsection{\texorpdfstring{bus\_off}{bus\_off}}
+{\footnotesize\ttfamily \label{structGatewayCanStatus_a43d903f1bdae7e4aa020029d893ffce9} 
+bool Gateway\+Can\+Status\+::bus\+\_\+off}
+
+\Hypertarget{structGatewayCanStatus_a3154ab76fcb1d2c52df534b3410ba19f}\index{GatewayCanStatus@{GatewayCanStatus}!error\_passive@{error\_passive}}
+\index{error\_passive@{error\_passive}!GatewayCanStatus@{GatewayCanStatus}}
+\doxysubsubsection{\texorpdfstring{error\_passive}{error\_passive}}
+{\footnotesize\ttfamily \label{structGatewayCanStatus_a3154ab76fcb1d2c52df534b3410ba19f} 
+bool Gateway\+Can\+Status\+::error\+\_\+passive}
+
+\Hypertarget{structGatewayCanStatus_af062e032204801ee146c5b1d7a633ac2}\index{GatewayCanStatus@{GatewayCanStatus}!error\_warning@{error\_warning}}
+\index{error\_warning@{error\_warning}!GatewayCanStatus@{GatewayCanStatus}}
+\doxysubsubsection{\texorpdfstring{error\_warning}{error\_warning}}
+{\footnotesize\ttfamily \label{structGatewayCanStatus_af062e032204801ee146c5b1d7a633ac2} 
+bool Gateway\+Can\+Status\+::error\+\_\+warning}
+
+\Hypertarget{structGatewayCanStatus_af87caa9622f6b5997611adf30810a4eb}\index{GatewayCanStatus@{GatewayCanStatus}!rx\_error\_count@{rx\_error\_count}}
+\index{rx\_error\_count@{rx\_error\_count}!GatewayCanStatus@{GatewayCanStatus}}
+\doxysubsubsection{\texorpdfstring{rx\_error\_count}{rx\_error\_count}}
+{\footnotesize\ttfamily \label{structGatewayCanStatus_af87caa9622f6b5997611adf30810a4eb} 
+uint8\+\_\+t Gateway\+Can\+Status\+::rx\+\_\+error\+\_\+count}
+
+\Hypertarget{structGatewayCanStatus_a2c62b8ec702231a951d42463c9e35120}\index{GatewayCanStatus@{GatewayCanStatus}!tx\_error\_count@{tx\_error\_count}}
+\index{tx\_error\_count@{tx\_error\_count}!GatewayCanStatus@{GatewayCanStatus}}
+\doxysubsubsection{\texorpdfstring{tx\_error\_count}{tx\_error\_count}}
+{\footnotesize\ttfamily \label{structGatewayCanStatus_a2c62b8ec702231a951d42463c9e35120} 
+uint8\+\_\+t Gateway\+Can\+Status\+::tx\+\_\+error\+\_\+count}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+firmware/app/\mbox{\hyperlink{gateway_8h}{gateway.\+h}}\end{DoxyCompactItemize}

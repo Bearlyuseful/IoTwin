@@ -5,8 +5,9 @@ var searchData=
   ['onconstruction_2',['OnConstruction',['../classAElectricalCableActor.html#a3a880086aa16f27ea49d33120753be5e',1,'AElectricalCableActor::OnConstruction()'],['../classALampActor.html#a6f6acd897f1c24390e4e7dda07b752a3',1,'ALampActor::OnConstruction()']]],
   ['onframereceived_3',['OnFrameReceived',['../classUIoTwinBusSubsystem.html#af9cfda99d41b7601c963ffa006e11481',1,'UIoTwinBusSubsystem']]],
   ['onrelaychanged_4',['OnRelayChanged',['../classAPowerSourceActor.html#a1f2c215f80fb8bdb152db7f8d70c1969',1,'APowerSourceActor']]],
-  ['options_5',['Options',['../structOptions.html',1,'']]],
-  ['options_6',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
-  ['overflows_7',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
-  ['overruns_8',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
+  ['open_5',['open',['../structGateway.html#a576e5425a73342206a139c54a175ca97',1,'Gateway']]],
+  ['options_6',['Options',['../structOptions.html',1,'']]],
+  ['options_7',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
+  ['overflows_8',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
+  ['overruns_9',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
 ];

@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['offset_0',['offset',['../structCanSignal.html#a36ad6156fc1db4773620f288cf568cb7',1,'CanSignal']]],
-  ['onconnectionchanged_1',['OnConnectionChanged',['../classUIoTwinBusSubsystem.html#a7d56d1d5ad14799bf928c30f1d336a5e',1,'UIoTwinBusSubsystem']]],
-  ['onframereceived_2',['OnFrameReceived',['../classUIoTwinBusSubsystem.html#af9cfda99d41b7601c963ffa006e11481',1,'UIoTwinBusSubsystem']]],
-  ['onrelaychanged_3',['OnRelayChanged',['../classAPowerSourceActor.html#a1f2c215f80fb8bdb152db7f8d70c1969',1,'APowerSourceActor']]],
-  ['options_4',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
-  ['overflows_5',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
-  ['overruns_6',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
+  ['name_0',['name',['../structDbcSignal.html#a310401a4e8c7b83245ce293d1713ddc7',1,'DbcSignal::name'],['../structDbcMessage.html#a62316d346cef61e0f715afa1c47844d0',1,'DbcMessage::name']]],
+  ['next_5fclient_5fid_1',['next_client_id',['../structBusServer.html#a7a97f71eefa900cf415039cdff6c25ae',1,'BusServer']]],
+  ['next_5fdeadline_5fns_2',['next_deadline_ns',['../structCycleTimer.html#ad2f01921defca96707858cc87e63f383',1,'CycleTimer']]]
 ];

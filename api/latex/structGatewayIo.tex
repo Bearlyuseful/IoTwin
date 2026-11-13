@@ -1,0 +1,83 @@
+\doxysection{Gateway\+Io Struct Reference}
+\hypertarget{structGatewayIo}{}\label{structGatewayIo}\index{GatewayIo@{GatewayIo}}
+
+
+Hardware interface (implemented by the board, faked in tests).  
+
+
+
+
+{\ttfamily \#include $<$gateway.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab}{serial\+\_\+write}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a2f9cd606664397ff9e9a613b6ab1e6b4}{can\+\_\+start}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, uint32\+\_\+t bitrate, \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}} mode)
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ae467a6410407578ccfc2c3e1350e7c3f}{can\+\_\+stop}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a95ef5812185be8f5d60995c14456e91b}{can\+\_\+send}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_a7fb34ee7e645ab9d5266b607d1aac768}{can\+\_\+status}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, \mbox{\hyperlink{structGatewayCanStatus}{Gateway\+Can\+Status}} \texorpdfstring{$\ast$}{*}status)
+\item 
+void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba}{led\+\_\+set}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, bool on)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hardware interface (implemented by the board, faked in tests). 
+
+\label{doc-variable-members}
+\Hypertarget{structGatewayIo_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGatewayIo_a95ef5812185be8f5d60995c14456e91b}\index{GatewayIo@{GatewayIo}!can\_send@{can\_send}}
+\index{can\_send@{can\_send}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{can\_send}{can\_send}}
+{\footnotesize\ttfamily \label{structGatewayIo_a95ef5812185be8f5d60995c14456e91b} 
+bool(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::can\+\_\+send) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)}
+
+\Hypertarget{structGatewayIo_a2f9cd606664397ff9e9a613b6ab1e6b4}\index{GatewayIo@{GatewayIo}!can\_start@{can\_start}}
+\index{can\_start@{can\_start}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{can\_start}{can\_start}}
+{\footnotesize\ttfamily \label{structGatewayIo_a2f9cd606664397ff9e9a613b6ab1e6b4} 
+bool(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::can\+\_\+start) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, uint32\+\_\+t bitrate, \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}} mode)}
+
+\Hypertarget{structGatewayIo_a7fb34ee7e645ab9d5266b607d1aac768}\index{GatewayIo@{GatewayIo}!can\_status@{can\_status}}
+\index{can\_status@{can\_status}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{can\_status}{can\_status}}
+{\footnotesize\ttfamily \label{structGatewayIo_a7fb34ee7e645ab9d5266b607d1aac768} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::can\+\_\+status) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, \mbox{\hyperlink{structGatewayCanStatus}{Gateway\+Can\+Status}} \texorpdfstring{$\ast$}{*}status)}
+
+\Hypertarget{structGatewayIo_ae467a6410407578ccfc2c3e1350e7c3f}\index{GatewayIo@{GatewayIo}!can\_stop@{can\_stop}}
+\index{can\_stop@{can\_stop}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{can\_stop}{can\_stop}}
+{\footnotesize\ttfamily \label{structGatewayIo_ae467a6410407578ccfc2c3e1350e7c3f} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::can\+\_\+stop) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}})}
+
+\Hypertarget{structGatewayIo_af34ecbc044828591c68b10a51199707d}\index{GatewayIo@{GatewayIo}!context@{context}}
+\index{context@{context}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \label{structGatewayIo_af34ecbc044828591c68b10a51199707d} 
+void\texorpdfstring{$\ast$}{*} Gateway\+Io\+::context}
+
+\Hypertarget{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba}\index{GatewayIo@{GatewayIo}!led\_set@{led\_set}}
+\index{led\_set@{led\_set}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{led\_set}{led\_set}}
+{\footnotesize\ttfamily \label{structGatewayIo_ad0a71227d1f0d8e9ed1af902237b34ba} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::led\+\_\+set) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, bool on)}
+
+\Hypertarget{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab}\index{GatewayIo@{GatewayIo}!serial\_write@{serial\_write}}
+\index{serial\_write@{serial\_write}!GatewayIo@{GatewayIo}}
+\doxysubsubsection{\texorpdfstring{serial\_write}{serial\_write}}
+{\footnotesize\ttfamily \label{structGatewayIo_ac1aeded1b64d24d7f027edd983f2c9ab} 
+void(\texorpdfstring{$\ast$}{*} Gateway\+Io\+::serial\+\_\+write) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structGatewayIo_af34ecbc044828591c68b10a51199707d}{context}}, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+firmware/app/\mbox{\hyperlink{gateway_8h}{gateway.\+h}}\end{DoxyCompactItemize}

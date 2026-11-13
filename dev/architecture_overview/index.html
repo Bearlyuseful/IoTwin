@@ -775,6 +775,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../packaging/" class="md-nav__link">
         
   
@@ -992,6 +1020,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1045,6 +1101,7 @@
   (<a href="../firmware/">Firmware</a>, <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/">ADR 0004</a>).</li>
 </ul>
 <h2 id="repository-layout">Repository layout<a class="headerlink" href="#repository-layout" title="Permanent link">&para;</a></h2>
+<p>One repository with flat, role-based directories (<a href="../../adr/0005-repository-layout/">ADR 0005</a>):</p>
 <table>
 <thead>
 <tr>
@@ -1054,52 +1111,68 @@
 </thead>
 <tbody>
 <tr>
-<td><code>src/core/logger</code></td>
-<td>Thread-safe logger</td>
+<td><code>libs/can</code></td>
+<td><code>CanFrame</code> + text codec, <code>CanBus</code> FIFO, SLCAN, bit timing, signals/DBC, ISO-TP (partly compiled into the firmware)</td>
 </tr>
 <tr>
-<td><code>src/core/platform</code></td>
-<td>Time, cycle timer, real-time setup, CLI helpers</td>
+<td><code>libs/net</code></td>
+<td>portable sockets (<code>net</code>), line framing (<code>line_reader</code>)</td>
 </tr>
 <tr>
-<td><code>src/core/can</code></td>
-<td><code>CanFrame</code> + text codec, <code>CanBus</code> FIFO, SLCAN, bit timing (also used by the firmware)</td>
+<td><code>libs/serial</code></td>
+<td>portable serial port (Win32 / termios)</td>
 </tr>
 <tr>
-<td><code>src/communication/tcp</code></td>
-<td>Portable sockets (<code>net</code>), line framing (<code>line_reader</code>)</td>
+<td><code>libs/platform</code></td>
+<td>time, cycle timer, real-time setup, CLI helpers</td>
 </tr>
 <tr>
-<td><code>src/communication/serial</code></td>
-<td>Portable serial port (Win32 / termios)</td>
+<td><code>libs/log</code></td>
+<td>thread-safe logger</td>
 </tr>
 <tr>
-<td><code>src/bus</code></td>
+<td><code>apps/bus</code></td>
 <td><code>iotwin-bus</code> server</td>
 </tr>
 <tr>
-<td><code>src/simulators/can_sim</code></td>
-<td>Light ECU logic and <code>can_sim</code> executable</td>
+<td><code>apps/can_sim</code></td>
+<td>light ECU and <code>can_sim</code></td>
 </tr>
 <tr>
-<td><code>src/bridges/serial_bridge</code></td>
-<td><code>serial_bridge</code>: SLCAN adapter ↔ bus</td>
+<td><code>apps/serial_bridge</code></td>
+<td>SLCAN adapter ↔ bus</td>
+</tr>
+<tr>
+<td><code>apps/socketcan_bridge</code></td>
+<td>Linux SocketCAN ↔ bus</td>
+</tr>
+<tr>
+<td><code>apps/can_monitor</code></td>
+<td>live bus view with DBC decoding</td>
 </tr>
 <tr>
 <td><code>firmware</code></td>
 <td>NUCLEO-G0B1RE gateway firmware (separate CMake project)</td>
 </tr>
 <tr>
-<td><code>src/ue/IoTwin</code></td>
-<td>Unreal Engine project (visualizer)</td>
+<td><code>visualizer</code></td>
+<td>Unreal Engine project</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>DBC files, component database, system descriptions</td>
 </tr>
 <tr>
 <td><code>tests</code></td>
-<td>Catch2 unit and socket integration tests</td>
+<td>Catch2 unit, socket and end-to-end tests</td>
 </tr>
 <tr>
 <td><code>tools</code></td>
-<td>Run and packaging scripts</td>
+<td>run, flash and packaging scripts</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td>this documentation, ADRs, <code>Doxyfile</code></td>
 </tr>
 </tbody>
 </table>

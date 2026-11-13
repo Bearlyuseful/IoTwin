@@ -1,0 +1,19 @@
+var structGateway =
+[
+    [ "bitrate", "structGateway.html#ae6742b551812a2673af34c49a29f249e", null ],
+    [ "echo", "structGateway.html#a2551b8be41edec487904bc24a223b54c", null ],
+    [ "echo_count", "structGateway.html#a69b61475b216b2e9ef9cd8835cbfaf31", null ],
+    [ "echo_head", "structGateway.html#a5284f67aa628f147e9ee9d2b241c4baa", null ],
+    [ "echoes", "structGateway.html#ad4d2b2047232ea8aaf2d25ec0217d4ab", null ],
+    [ "io", "structGateway.html#ae3bf99515f10d9aca6026b8ef68d157e", null ],
+    [ "lamp_on", "structGateway.html#a599d619c445d8077e44b6a5c04da2bb8", null ],
+    [ "last_blink_ms", "structGateway.html#a29a1374049b479fd9605bfc26f0cb954", null ],
+    [ "led_on", "structGateway.html#a0761bcd2966eb407561fa2fc726948c2", null ],
+    [ "mode", "structGateway.html#af477dbcf02493a11f38c52f5f79fe32f", null ],
+    [ "open", "structGateway.html#a576e5425a73342206a139c54a175ca97", null ],
+    [ "reader", "structGateway.html#a7b14fb9ecd0682dd7fa5b68d26291340", null ],
+    [ "rx_frames", "structGateway.html#a45b9a95732bacd411ebf59bf3de02092", null ],
+    [ "sticky_flags", "structGateway.html#ab304f07aeda9f0d34da3ea718632eac3", null ],
+    [ "switch_on", "structGateway.html#a934f79073e899297c3fddd1e6ce248b6", null ],
+    [ "tx_frames", "structGateway.html#ae5ac04aeeaed877ccb82771214a639f6", null ]
+];

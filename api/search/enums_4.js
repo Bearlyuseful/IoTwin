@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loglevel_0',['LogLevel',['../log_8h.html#aca1fd1d8935433e6ba2e3918214e07f9',1,'log.h']]]
+  ['gatewaycanmode_0',['GatewayCanMode',['../gateway_8h.html#a562ef363ddb7371e26ed54f664e3192c',1,'gateway.h']]]
 ];

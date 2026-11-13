@@ -16,6 +16,8 @@
         <link rel="prev" href="../0003-linux-rt-target-windows-best-effort/">
       
       
+        <link rel="next" href="../0005-repository-layout/">
+      
       
         
       
@@ -688,6 +690,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dev/component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../dev/packaging/" class="md-nav__link">
         
   
@@ -920,6 +950,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -965,7 +1023,7 @@ protocol runs on the serial link.</p>
    ST are vendored (<code>firmware/vendor</code>). Startup code, linker script, clock, UART
    and FDCAN drivers are written against the registers - no HAL, no RTOS.</li>
 <li><strong>Portable core code is shared and host tested:</strong> <code>can_frame</code>, <code>slcan</code> and
-   <code>can_bit_timing</code> (in <code>src/core/can</code>) and the application logic
+   <code>can_bit_timing</code> (in <code>libs/can</code>) and the application logic
    (<code>firmware/app/gateway.c</code>, hardware access only through function pointers)
    compile for the PC and the MCU and are unit tested on the host.</li>
 <li><strong>SLCAN (Lawicel) on the serial link</strong>, with two documented extensions:

@@ -1,0 +1,181 @@
+\doxysection{firmware/drivers/fdcan.c File Reference}
+\hypertarget{fdcan_8c}{}\label{fdcan_8c}\index{firmware/drivers/fdcan.c@{firmware/drivers/fdcan.c}}
+{\ttfamily \#include "{}fdcan.\+h"{}}\newline
+{\ttfamily \#include "{}can\+\_\+bit\+\_\+timing.\+h"{}}\newline
+{\ttfamily \#include "{}stm32g0xx.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_a1398c0b2eb80d9e5bae4a93c7819553a}{RAM\+\_\+\+RX\+\_\+\+FIFO0}}~0x0\+B0u
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_a3084170fe79aa36c03252348a8a9c868}{RAM\+\_\+\+TX\+\_\+\+BUFFERS}}~0x278u
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_ab82dd208a7e716e09a3f8c229bfe78d7}{RAM\+\_\+\+SIZE}}~0x350u
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_af085e853a5f535ff24cf6a3316a17df1}{ELEMENT\+\_\+\+WORDS}}~18u
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_a6379d40aab941279679b21fbe8d72aee}{ELEMENT\+\_\+\+XTD}}~(1u $<$$<$ 30)
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_a8f3324422f0e70795f9e40bdf7feaeab}{ELEMENT\+\_\+\+RTR}}~(1u $<$$<$ 29)
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_a4e11812b4968b254d75a9f517e41abd8}{ELEMENT\+\_\+\+DLC\+\_\+\+POS}}~16u
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_a0616225f8714515d1139d62323d2fb60}{RX\+\_\+\+QUEUE\+\_\+\+SIZE}}~32u /\texorpdfstring{$\ast$}{*} power of two \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{fdcan_8c_ad759606c5be03877d487461053da40fe}{INIT\+\_\+\+TIMEOUT\+\_\+\+LOOPS}}~1000000u
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{fdcan_8c_ae6a0955b622927919f9ffea9235c75bd}{fdcan\+\_\+start}} (uint32\+\_\+t kernel\+\_\+clock\+\_\+hz, uint32\+\_\+t bitrate, \mbox{\hyperlink{fdcan_8h_a2207f43131408ec105e86b22da7d3477}{Fdcan\+Mode}} mode)
+\begin{DoxyCompactList}\small\item\em Configures and starts the controller. False if the bitrate cannot be reached. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdcan_8c_a6ed5e49d24d2ab9dfab9b919bcbcad59}{fdcan\+\_\+stop}} (void)
+\begin{DoxyCompactList}\small\item\em Stops the controller (initialisation mode). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{fdcan_8c_a1e53a7e93f3bdb9b21e84f9426cecc7d}{fdcan\+\_\+send}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Queues a frame for transmission. False if the Tx FIFO is full or the controller is stopped. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{fdcan_8c_a14d62867ea9bee18744ee3d0d3116048}{fdcan\+\_\+receive}} (\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Takes the oldest received frame from the software queue. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{fdcan_8c_a2aceee966235d0cd1847e8c0baa0780a}{fdcan\+\_\+take\+\_\+overrun}} (void)
+\begin{DoxyCompactList}\small\item\em True (once) if frames were lost since the last call. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdcan_8c_aeb3df614491462b486588b3eac3ec56b}{fdcan\+\_\+get\+\_\+status}} (\mbox{\hyperlink{structFdcanStatus}{Fdcan\+Status}} \texorpdfstring{$\ast$}{*}status)
+\item 
+void \mbox{\hyperlink{fdcan_8c_aa601b8c93d54d57153a78da520428e4b}{fdcan\+\_\+poll}} (void)
+\begin{DoxyCompactList}\small\item\em Call periodically\+: restarts the controller after bus-\/off. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fdcan_8c_a3dd3cb2692eb629c3950d1f759539860}{TIM16\+\_\+\+FDCAN\+\_\+\+IT0\+\_\+\+IRQHandler}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{fdcan_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fdcan_8c_a4e11812b4968b254d75a9f517e41abd8}\index{fdcan.c@{fdcan.c}!ELEMENT\_DLC\_POS@{ELEMENT\_DLC\_POS}}
+\index{ELEMENT\_DLC\_POS@{ELEMENT\_DLC\_POS}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{ELEMENT\_DLC\_POS}{ELEMENT\_DLC\_POS}}
+{\footnotesize\ttfamily \label{fdcan_8c_a4e11812b4968b254d75a9f517e41abd8} 
+\#define ELEMENT\+\_\+\+DLC\+\_\+\+POS~16u}
+
+\Hypertarget{fdcan_8c_a8f3324422f0e70795f9e40bdf7feaeab}\index{fdcan.c@{fdcan.c}!ELEMENT\_RTR@{ELEMENT\_RTR}}
+\index{ELEMENT\_RTR@{ELEMENT\_RTR}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{ELEMENT\_RTR}{ELEMENT\_RTR}}
+{\footnotesize\ttfamily \label{fdcan_8c_a8f3324422f0e70795f9e40bdf7feaeab} 
+\#define ELEMENT\+\_\+\+RTR~(1u $<$$<$ 29)}
+
+\Hypertarget{fdcan_8c_af085e853a5f535ff24cf6a3316a17df1}\index{fdcan.c@{fdcan.c}!ELEMENT\_WORDS@{ELEMENT\_WORDS}}
+\index{ELEMENT\_WORDS@{ELEMENT\_WORDS}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{ELEMENT\_WORDS}{ELEMENT\_WORDS}}
+{\footnotesize\ttfamily \label{fdcan_8c_af085e853a5f535ff24cf6a3316a17df1} 
+\#define ELEMENT\+\_\+\+WORDS~18u}
+
+\Hypertarget{fdcan_8c_a6379d40aab941279679b21fbe8d72aee}\index{fdcan.c@{fdcan.c}!ELEMENT\_XTD@{ELEMENT\_XTD}}
+\index{ELEMENT\_XTD@{ELEMENT\_XTD}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{ELEMENT\_XTD}{ELEMENT\_XTD}}
+{\footnotesize\ttfamily \label{fdcan_8c_a6379d40aab941279679b21fbe8d72aee} 
+\#define ELEMENT\+\_\+\+XTD~(1u $<$$<$ 30)}
+
+\Hypertarget{fdcan_8c_ad759606c5be03877d487461053da40fe}\index{fdcan.c@{fdcan.c}!INIT\_TIMEOUT\_LOOPS@{INIT\_TIMEOUT\_LOOPS}}
+\index{INIT\_TIMEOUT\_LOOPS@{INIT\_TIMEOUT\_LOOPS}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{INIT\_TIMEOUT\_LOOPS}{INIT\_TIMEOUT\_LOOPS}}
+{\footnotesize\ttfamily \label{fdcan_8c_ad759606c5be03877d487461053da40fe} 
+\#define INIT\+\_\+\+TIMEOUT\+\_\+\+LOOPS~1000000u}
+
+\Hypertarget{fdcan_8c_a1398c0b2eb80d9e5bae4a93c7819553a}\index{fdcan.c@{fdcan.c}!RAM\_RX\_FIFO0@{RAM\_RX\_FIFO0}}
+\index{RAM\_RX\_FIFO0@{RAM\_RX\_FIFO0}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{RAM\_RX\_FIFO0}{RAM\_RX\_FIFO0}}
+{\footnotesize\ttfamily \label{fdcan_8c_a1398c0b2eb80d9e5bae4a93c7819553a} 
+\#define RAM\+\_\+\+RX\+\_\+\+FIFO0~0x0\+B0u}
+
+\Hypertarget{fdcan_8c_ab82dd208a7e716e09a3f8c229bfe78d7}\index{fdcan.c@{fdcan.c}!RAM\_SIZE@{RAM\_SIZE}}
+\index{RAM\_SIZE@{RAM\_SIZE}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{RAM\_SIZE}{RAM\_SIZE}}
+{\footnotesize\ttfamily \label{fdcan_8c_ab82dd208a7e716e09a3f8c229bfe78d7} 
+\#define RAM\+\_\+\+SIZE~0x350u}
+
+\Hypertarget{fdcan_8c_a3084170fe79aa36c03252348a8a9c868}\index{fdcan.c@{fdcan.c}!RAM\_TX\_BUFFERS@{RAM\_TX\_BUFFERS}}
+\index{RAM\_TX\_BUFFERS@{RAM\_TX\_BUFFERS}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{RAM\_TX\_BUFFERS}{RAM\_TX\_BUFFERS}}
+{\footnotesize\ttfamily \label{fdcan_8c_a3084170fe79aa36c03252348a8a9c868} 
+\#define RAM\+\_\+\+TX\+\_\+\+BUFFERS~0x278u}
+
+\Hypertarget{fdcan_8c_a0616225f8714515d1139d62323d2fb60}\index{fdcan.c@{fdcan.c}!RX\_QUEUE\_SIZE@{RX\_QUEUE\_SIZE}}
+\index{RX\_QUEUE\_SIZE@{RX\_QUEUE\_SIZE}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{RX\_QUEUE\_SIZE}{RX\_QUEUE\_SIZE}}
+{\footnotesize\ttfamily \label{fdcan_8c_a0616225f8714515d1139d62323d2fb60} 
+\#define RX\+\_\+\+QUEUE\+\_\+\+SIZE~32u /\texorpdfstring{$\ast$}{*} power of two \texorpdfstring{$\ast$}{*}/}
+
+
+
+\label{doc-func-members}
+\Hypertarget{fdcan_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{fdcan_8c_aeb3df614491462b486588b3eac3ec56b}\index{fdcan.c@{fdcan.c}!fdcan\_get\_status@{fdcan\_get\_status}}
+\index{fdcan\_get\_status@{fdcan\_get\_status}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_get\_status()}{fdcan\_get\_status()}}
+{\footnotesize\ttfamily \label{fdcan_8c_aeb3df614491462b486588b3eac3ec56b} 
+void fdcan\+\_\+get\+\_\+status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFdcanStatus}{Fdcan\+Status}} \texorpdfstring{$\ast$}{*}}]{status}{}\end{DoxyParamCaption})}
+
+\Hypertarget{fdcan_8c_aa601b8c93d54d57153a78da520428e4b}\index{fdcan.c@{fdcan.c}!fdcan\_poll@{fdcan\_poll}}
+\index{fdcan\_poll@{fdcan\_poll}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_poll()}{fdcan\_poll()}}
+{\footnotesize\ttfamily \label{fdcan_8c_aa601b8c93d54d57153a78da520428e4b} 
+void fdcan\+\_\+poll (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Call periodically\+: restarts the controller after bus-\/off. 
+
+\Hypertarget{fdcan_8c_a14d62867ea9bee18744ee3d0d3116048}\index{fdcan.c@{fdcan.c}!fdcan\_receive@{fdcan\_receive}}
+\index{fdcan\_receive@{fdcan\_receive}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_receive()}{fdcan\_receive()}}
+{\footnotesize\ttfamily \label{fdcan_8c_a14d62867ea9bee18744ee3d0d3116048} 
+bool fdcan\+\_\+receive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Takes the oldest received frame from the software queue. 
+
+\Hypertarget{fdcan_8c_a1e53a7e93f3bdb9b21e84f9426cecc7d}\index{fdcan.c@{fdcan.c}!fdcan\_send@{fdcan\_send}}
+\index{fdcan\_send@{fdcan\_send}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_send()}{fdcan\_send()}}
+{\footnotesize\ttfamily \label{fdcan_8c_a1e53a7e93f3bdb9b21e84f9426cecc7d} 
+bool fdcan\+\_\+send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Queues a frame for transmission. False if the Tx FIFO is full or the controller is stopped. 
+
+\Hypertarget{fdcan_8c_ae6a0955b622927919f9ffea9235c75bd}\index{fdcan.c@{fdcan.c}!fdcan\_start@{fdcan\_start}}
+\index{fdcan\_start@{fdcan\_start}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_start()}{fdcan\_start()}}
+{\footnotesize\ttfamily \label{fdcan_8c_ae6a0955b622927919f9ffea9235c75bd} 
+bool fdcan\+\_\+start (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{kernel\+\_\+clock\+\_\+hz}{, }\item[{uint32\+\_\+t}]{bitrate}{, }\item[{\mbox{\hyperlink{fdcan_8h_a2207f43131408ec105e86b22da7d3477}{Fdcan\+Mode}}}]{mode}{}\end{DoxyParamCaption})}
+
+
+
+Configures and starts the controller. False if the bitrate cannot be reached. 
+
+\Hypertarget{fdcan_8c_a6ed5e49d24d2ab9dfab9b919bcbcad59}\index{fdcan.c@{fdcan.c}!fdcan\_stop@{fdcan\_stop}}
+\index{fdcan\_stop@{fdcan\_stop}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_stop()}{fdcan\_stop()}}
+{\footnotesize\ttfamily \label{fdcan_8c_a6ed5e49d24d2ab9dfab9b919bcbcad59} 
+void fdcan\+\_\+stop (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the controller (initialisation mode). 
+
+\Hypertarget{fdcan_8c_a2aceee966235d0cd1847e8c0baa0780a}\index{fdcan.c@{fdcan.c}!fdcan\_take\_overrun@{fdcan\_take\_overrun}}
+\index{fdcan\_take\_overrun@{fdcan\_take\_overrun}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{fdcan\_take\_overrun()}{fdcan\_take\_overrun()}}
+{\footnotesize\ttfamily \label{fdcan_8c_a2aceee966235d0cd1847e8c0baa0780a} 
+bool fdcan\+\_\+take\+\_\+overrun (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+True (once) if frames were lost since the last call. 
+
+\Hypertarget{fdcan_8c_a3dd3cb2692eb629c3950d1f759539860}\index{fdcan.c@{fdcan.c}!TIM16\_FDCAN\_IT0\_IRQHandler@{TIM16\_FDCAN\_IT0\_IRQHandler}}
+\index{TIM16\_FDCAN\_IT0\_IRQHandler@{TIM16\_FDCAN\_IT0\_IRQHandler}!fdcan.c@{fdcan.c}}
+\doxysubsubsection{\texorpdfstring{TIM16\_FDCAN\_IT0\_IRQHandler()}{TIM16\_FDCAN\_IT0\_IRQHandler()}}
+{\footnotesize\ttfamily \label{fdcan_8c_a3dd3cb2692eb629c3950d1f759539860} 
+void TIM16\+\_\+\+FDCAN\+\_\+\+IT0\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+

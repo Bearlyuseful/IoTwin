@@ -1,0 +1,66 @@
+\doxysection{firmware/drivers/uart.h File Reference}
+\hypertarget{uart_8h}{}\label{uart_8h}\index{firmware/drivers/uart.h@{firmware/drivers/uart.h}}
+
+
+Interrupt driven USART2 (ST-\/\+LINK virtual COM port) with ring buffers.  
+
+
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{uart_8h_a958a59f06c7ca923f4c8813f03e9b17d}{uart\+\_\+init}} (uint32\+\_\+t peripheral\+\_\+clock\+\_\+hz, uint32\+\_\+t baudrate)
+\item 
+size\+\_\+t \mbox{\hyperlink{uart_8h_a51b4803bbc296fdda58f998cd3925427}{uart\+\_\+read}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Copies up to {\ttfamily size} received bytes; returns the number copied. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uart_8h_a586cd2b7752ed14f2961b8ddb00ab488}{uart\+\_\+write}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Queues all bytes for transmission (waits while the TX buffer is full). \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{uart_8h_a2372f5b75b734f4ccf69de9a4ea85aac}{uart\+\_\+rx\+\_\+overruns}} (void)
+\begin{DoxyCompactList}\small\item\em Bytes lost because the RX buffer or the hardware overran (since start). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interrupt driven USART2 (ST-\/\+LINK virtual COM port) with ring buffers. 
+
+RX\+: the ISR stores bytes in a ring buffer, the main loop reads them. TX\+: the main loop fills a ring buffer, the TXE interrupt drains it. 
+
+\label{doc-func-members}
+\Hypertarget{uart_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{uart_8h_a958a59f06c7ca923f4c8813f03e9b17d}\index{uart.h@{uart.h}!uart\_init@{uart\_init}}
+\index{uart\_init@{uart\_init}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{uart\_init()}{uart\_init()}}
+{\footnotesize\ttfamily \label{uart_8h_a958a59f06c7ca923f4c8813f03e9b17d} 
+void uart\+\_\+init (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{peripheral\+\_\+clock\+\_\+hz}{, }\item[{uint32\+\_\+t}]{baudrate}{}\end{DoxyParamCaption})}
+
+\Hypertarget{uart_8h_a51b4803bbc296fdda58f998cd3925427}\index{uart.h@{uart.h}!uart\_read@{uart\_read}}
+\index{uart\_read@{uart\_read}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{uart\_read()}{uart\_read()}}
+{\footnotesize\ttfamily \label{uart_8h_a51b4803bbc296fdda58f998cd3925427} 
+size\+\_\+t uart\+\_\+read (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Copies up to {\ttfamily size} received bytes; returns the number copied. 
+
+\Hypertarget{uart_8h_a2372f5b75b734f4ccf69de9a4ea85aac}\index{uart.h@{uart.h}!uart\_rx\_overruns@{uart\_rx\_overruns}}
+\index{uart\_rx\_overruns@{uart\_rx\_overruns}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{uart\_rx\_overruns()}{uart\_rx\_overruns()}}
+{\footnotesize\ttfamily \label{uart_8h_a2372f5b75b734f4ccf69de9a4ea85aac} 
+uint32\+\_\+t uart\+\_\+rx\+\_\+overruns (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Bytes lost because the RX buffer or the hardware overran (since start). 
+
+\Hypertarget{uart_8h_a586cd2b7752ed14f2961b8ddb00ab488}\index{uart.h@{uart.h}!uart\_write@{uart\_write}}
+\index{uart\_write@{uart\_write}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{uart\_write()}{uart\_write()}}
+{\footnotesize\ttfamily \label{uart_8h_a586cd2b7752ed14f2961b8ddb00ab488} 
+void uart\+\_\+write (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Queues all bytes for transmission (waits while the TX buffer is full). 
+

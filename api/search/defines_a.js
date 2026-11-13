@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['send_5ftimeout_5fms_0',['SEND_TIMEOUT_MS',['../main__serial__bridge_8c.html#a377c10ddb1999e7e32f9e11499e13734',1,'SEND_TIMEOUT_MS:&#160;main_serial_bridge.c'],['../bus__server_8c.html#a377c10ddb1999e7e32f9e11499e13734',1,'SEND_TIMEOUT_MS:&#160;bus_server.c'],['../main__can__sim_8c.html#a377c10ddb1999e7e32f9e11499e13734',1,'SEND_TIMEOUT_MS:&#160;main_can_sim.c']]],
-  ['serial_5fpoll_5fms_1',['SERIAL_POLL_MS',['../main__serial__bridge_8c.html#af7f929849524a2ae79fdc0e8c9225db7',1,'main_serial_bridge.c']]],
-  ['slcan_5ferror_2',['SLCAN_ERROR',['../slcan_8h.html#a42d97dbcc96ffcc94403bd759128afc7',1,'slcan.h']]],
-  ['slcan_5fmax_5fline_3',['SLCAN_MAX_LINE',['../slcan_8h.html#a8b72da6e1892fae75e12f923b2495eaa',1,'slcan.h']]],
-  ['slcan_5fok_4',['SLCAN_OK',['../slcan_8h.html#a26b7c07524761c6415f985f43dea3973',1,'slcan.h']]]
+  ['ram_5frx_5ffifo0_0',['RAM_RX_FIFO0',['../fdcan_8c.html#a1398c0b2eb80d9e5bae4a93c7819553a',1,'fdcan.c']]],
+  ['ram_5fsize_1',['RAM_SIZE',['../fdcan_8c.html#ab82dd208a7e716e09a3f8c229bfe78d7',1,'fdcan.c']]],
+  ['ram_5ftx_5fbuffers_2',['RAM_TX_BUFFERS',['../fdcan_8c.html#a3084170fe79aa36c03252348a8a9c868',1,'fdcan.c']]],
+  ['reconnect_5finterval_5fms_3',['RECONNECT_INTERVAL_MS',['../main__can__sim_8c.html#a14445f86300d5faa6a4ebad02e496c09',1,'main_can_sim.c']]],
+  ['retry_5finterval_5fms_4',['RETRY_INTERVAL_MS',['../main__serial__bridge_8c.html#a2a7a0b5f8a93ef53544dd65a1392c693',1,'RETRY_INTERVAL_MS:&#160;main_serial_bridge.c'],['../main__socketcan__bridge_8c.html#a2a7a0b5f8a93ef53544dd65a1392c693',1,'RETRY_INTERVAL_MS:&#160;main_socketcan_bridge.c']]],
+  ['rx_5fqueue_5fsize_5',['RX_QUEUE_SIZE',['../fdcan_8c.html#a0616225f8714515d1139d62323d2fb60',1,'fdcan.c']]],
+  ['rx_5fsize_6',['RX_SIZE',['../uart_8c.html#aaa981e599aa044183d4c19a576cdc8a9',1,'uart.c']]]
 ];

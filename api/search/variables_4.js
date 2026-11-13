@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['echo_0',['echo',['../structBusServerConfig.html#a6fe5cb73bae4d810cee062f8d391d7c8',1,'BusServerConfig']]],
-  ['ecu_1',['ecu',['../structSimShared.html#a2b3ce84f7ad03a76776d8c345e9f6091',1,'SimShared']]],
-  ['enable_2',['enable',['../structSlcanCommand.html#ab764477773c004bd5377803cd2271f29',1,'SlcanCommand']]],
-  ['enda_3',['EndA',['../classAElectricalCableActor.html#a412eaad48daf53f2d0ad77a3097f8b0d',1,'AElectricalCableActor']]],
-  ['endb_4',['EndB',['../classAElectricalCableActor.html#ac17cf8b2d87dff21de85c0bb74b62447',1,'AElectricalCableActor']]],
-  ['events_5',['events',['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd']]],
-  ['extended_6',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended']]],
-  ['extended_5fid_7',['extended_id',['../structIsoTpConfig.html#ac1eb44a4ed2deaf2a4fd95bdcc864377',1,'IsoTpConfig']]],
-  ['extendedidmask_8',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
+  ['data_0',['Data',['../structFCanFrame.html#aaf04cd7a149802a6ee6aa35ad0c4700d',1,'FCanFrame']]],
+  ['data_1',['data',['../structCanFrame.html#a6cba02a9edd71f7001f2993f0d4df58e',1,'CanFrame']]],
+  ['dbc_2',['dbc',['../structMonitor.html#a6b31eb366e03aaf427449e8ae8bc1419',1,'Monitor']]],
+  ['demoorigin_3',['DemoOrigin',['../classAGM__Simulation.html#ab1e72a523ed3167c6478296dcea64936',1,'AGM_Simulation']]],
+  ['demotag_4',['DemoTag',['../classAGM__Simulation.html#a947a2d078317f1614db9e4479fd38e9f',1,'AGM_Simulation']]],
+  ['device_5',['Device',['../classALampActor.html#a483de8992df3799767c441417aae482c',1,'ALampActor']]],
+  ['dirty_6',['dirty',['../structLightEcu.html#a7712dea6d676285b53546cce940e143f',1,'LightEcu']]],
+  ['discarding_7',['discarding',['../structSlcanReader.html#ad2bf1a48c4604ed9c5148456dc74d050',1,'SlcanReader::discarding'],['../structLineReader.html#adde82efe0473809bc547b23e11d97823',1,'LineReader::discarding']]],
+  ['dlc_8',['dlc',['../structCanFrame.html#aa896aaac27a424ba8e46c50e7bdb065d',1,'CanFrame::dlc'],['../structDbcMessage.html#a35104280a3672682e99a8e310b3306dd',1,'DbcMessage::dlc']]],
+  ['dropped_9',['dropped',['../structCanBus.html#a78cb41c8d272f0fb41e7b3f071a5547f',1,'CanBus']]],
+  ['dropped_5flines_10',['dropped_lines',['../structLineReader.html#a6b2be1f6fa8a26f275917895bae00e39',1,'LineReader']]],
+  ['dropped_5foffline_11',['dropped_offline',['../structBridge.html#acd9e2c80936c73968b8f5309682cf56f',1,'Bridge']]]
 ];

@@ -853,6 +853,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../packaging/" class="md-nav__link">
         
   
@@ -1070,6 +1098,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1101,7 +1157,7 @@
 <p>IoTwin has two parts that are built separately:</p>
 <ol>
 <li><strong>Core</strong> (C, CMake): <code>iotwin-bus</code>, <code>can_sim</code> and the tests.</li>
-<li><strong>Visualizer</strong> (Unreal Engine 5.6 project in <code>src/ue/IoTwin</code>).</li>
+<li><strong>Visualizer</strong> (Unreal Engine 5.6 project in <code>visualizer</code>).</li>
 </ol>
 <hr />
 <h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
@@ -1209,12 +1265,12 @@ cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class=
 <li>Windows: Visual Studio 2022 with the "Game development with C++" workload</li>
 </ul>
 <h3 id="open-in-the-editor">Open in the editor<a class="headerlink" href="#open-in-the-editor" title="Permanent link">&para;</a></h3>
-<p>Open <code>src/ue/IoTwin/IoTwin.uproject</code>. On first open Unreal asks to rebuild
+<p>Open <code>visualizer/IoTwin.uproject</code>. On first open Unreal asks to rebuild
 the <code>IoTwin</code> module - confirm with <em>Yes</em>. Start the core first, then press
 <em>Play</em>: the demo scene connects to <code>127.0.0.1:8080</code>.</p>
 <h3 id="build-from-the-command-line">Build from the command line<a class="headerlink" href="#build-from-the-command-line" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">&amp;</span> <span class="s2">"&lt;UE&gt;\Engine\Build\BatchFiles\Build.bat"</span> <span class="n">IoTwinEditor</span> <span class="n">Win64</span> <span class="n">Development</span> <span class="p">`</span>
-    <span class="n">-Project</span><span class="p">=</span><span class="s2">"$PWD\src\ue\IoTwin\IoTwin.uproject"</span> <span class="n">-WaitMutex</span>
+    <span class="n">-Project</span><span class="p">=</span><span class="s2">"$PWD\visualizer\IoTwin.uproject"</span> <span class="n">-WaitMutex</span>
 </code></pre></div>
 <p>Packaging a standalone build is described in <a href="../packaging/">Packaging</a>.</p>
 

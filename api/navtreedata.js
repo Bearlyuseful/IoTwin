@@ -53,9 +53,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "CanFrameTests_8cpp.html",
-"classUCanFrameLibrary.html",
-"main__bus_8c.html#a3c04138a5bfe5d72780bb7e82a18e627",
-"structDbcSignal.html#a1c5293eb08bd2fe5e794e90a42b44b70"
+"classFIoTwinBusConnection.html#a536a74e23a13384e24b84e6230f76dff",
+"isotp_8h.html",
+"structBridge.html#acd9e2c80936c73968b8f5309682cf56f",
+"structSlcanReader.html#aaf4c84ffa57b9fb3e226772f95765e41"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['lightecu_0',['LightEcu',['../structLightEcu.html',1,'']]],
-  ['linereader_1',['LineReader',['../structLineReader.html',1,'']]]
+  ['iotwin_0',['IoTwin',['../classIoTwin.html',1,'']]],
+  ['ipowerinterface_1',['IPowerInterface',['../classIPowerInterface.html',1,'']]],
+  ['isotpconfig_2',['IsoTpConfig',['../structIsoTpConfig.html',1,'']]],
+  ['isotplink_3',['IsoTpLink',['../structIsoTpLink.html',1,'']]]
 ];

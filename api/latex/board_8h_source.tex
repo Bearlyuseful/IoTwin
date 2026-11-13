@@ -1,0 +1,26 @@
+\doxysection{board.\+h}
+\hypertarget{board_8h_source}{}\label{board_8h_source}\index{firmware/board/nucleo\_g0b1re/board.h@{firmware/board/nucleo\_g0b1re/board.h}}
+\mbox{\hyperlink{board_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_BOARD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_BOARD\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ BOARD\_SYSCLK\_HZ\ 64000000u}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ BOARD\_PCLK\_HZ\ 64000000u}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOARD\_FDCAN\_CLOCK\_HZ\ BOARD\_PCLK\_HZ\ }\textcolor{comment}{/*\ FDCANSEL\ =\ PCLK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{board_8h_a916f2adc2080b4fe88034086d107a8dc}{board\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ uint32\_t\ \mbox{\hyperlink{board_8h_af6a218803b32fbde3610564a990c39a5}{board\_millis}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{board_8h_a05173a3c0b7188496922ec5d4e4a6b34}{board\_led\_set}}(\textcolor{keywordtype}{bool}\ on);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{board_8h_ae1f776c3e6f3e8528ad15f3488bf60ab}{board\_button\_raw}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_BOARD\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

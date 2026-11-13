@@ -1,0 +1,134 @@
+\doxysection{firmware/board/nucleo\+\_\+g0b1re/startup.c File Reference}
+\hypertarget{startup_8c}{}\label{startup_8c}\index{firmware/board/nucleo\_g0b1re/startup.c@{firmware/board/nucleo\_g0b1re/startup.c}}
+
+
+Reset handler and vector table for the STM32\+G0\+B1 (Cortex-\/\+M0+), in C.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}stm32g0xx.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{startup_8c_a3d8fd21cb72d524df68ebc6de1fecf33}{CORE\+\_\+\+VECTORS}}~16
+\item 
+\#define \mbox{\hyperlink{startup_8c_a35d208335cd2ece446be19dd2205c597}{DEVICE\+\_\+\+VECTORS}}~32
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{startup_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\item 
+void \mbox{\hyperlink{startup_8c_ae7ee340978f5c25f52f0cad1457c6616}{Reset\+\_\+\+Handler}} (void)
+\item 
+void \mbox{\hyperlink{startup_8c_a4e0c522c1bb26af24accaf20e6b87d12}{Default\+\_\+\+Handler}} (void)
+\item 
+void \mbox{\hyperlink{startup_8c_a6ad7a5e3ee69cb6db6a6b9111ba898bc}{NMI\+\_\+\+Handler}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{startup_8c_a1ecae4ad04c5b02e60d2db51706c2d75}{\+\_\+sidata}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{startup_8c_a61687bc10bffbfec9c6fd33bddff3094}{\+\_\+sdata}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{startup_8c_a1fc4a71c31f5b048d3b1b7b2d10684d1}{\+\_\+edata}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{startup_8c_adcc3ae1cacdf95ad88f01dd26f589175}{\+\_\+sbss}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{startup_8c_a580f44faf8ff886796f2114d0de12c77}{\+\_\+ebss}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{startup_8c_a69247aef56f755ef3b08265060dea50f}{\+\_\+estack}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reset handler and vector table for the STM32\+G0\+B1 (Cortex-\/\+M0+), in C. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{startup_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{startup_8c_a3d8fd21cb72d524df68ebc6de1fecf33}\index{startup.c@{startup.c}!CORE\_VECTORS@{CORE\_VECTORS}}
+\index{CORE\_VECTORS@{CORE\_VECTORS}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{CORE\_VECTORS}{CORE\_VECTORS}}
+{\footnotesize\ttfamily \label{startup_8c_a3d8fd21cb72d524df68ebc6de1fecf33} 
+\#define CORE\+\_\+\+VECTORS~16}
+
+\Hypertarget{startup_8c_a35d208335cd2ece446be19dd2205c597}\index{startup.c@{startup.c}!DEVICE\_VECTORS@{DEVICE\_VECTORS}}
+\index{DEVICE\_VECTORS@{DEVICE\_VECTORS}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{DEVICE\_VECTORS}{DEVICE\_VECTORS}}
+{\footnotesize\ttfamily \label{startup_8c_a35d208335cd2ece446be19dd2205c597} 
+\#define DEVICE\+\_\+\+VECTORS~32}
+
+
+
+\label{doc-func-members}
+\Hypertarget{startup_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{startup_8c_a4e0c522c1bb26af24accaf20e6b87d12}\index{startup.c@{startup.c}!Default\_Handler@{Default\_Handler}}
+\index{Default\_Handler@{Default\_Handler}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{Default\_Handler()}{Default\_Handler()}}
+{\footnotesize\ttfamily \label{startup_8c_a4e0c522c1bb26af24accaf20e6b87d12} 
+void Default\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{startup_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{startup.c@{startup.c}!main@{main}}
+\index{main@{main}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{startup_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{startup_8c_a6ad7a5e3ee69cb6db6a6b9111ba898bc}\index{startup.c@{startup.c}!NMI\_Handler@{NMI\_Handler}}
+\index{NMI\_Handler@{NMI\_Handler}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{NMI\_Handler()}{NMI\_Handler()}}
+{\footnotesize\ttfamily \label{startup_8c_a6ad7a5e3ee69cb6db6a6b9111ba898bc} 
+void NMI\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{startup_8c_ae7ee340978f5c25f52f0cad1457c6616}\index{startup.c@{startup.c}!Reset\_Handler@{Reset\_Handler}}
+\index{Reset\_Handler@{Reset\_Handler}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{Reset\_Handler()}{Reset\_Handler()}}
+{\footnotesize\ttfamily \label{startup_8c_ae7ee340978f5c25f52f0cad1457c6616} 
+void Reset\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{startup_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{startup_8c_a580f44faf8ff886796f2114d0de12c77}\index{startup.c@{startup.c}!\_ebss@{\_ebss}}
+\index{\_ebss@{\_ebss}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{\_ebss}{\_ebss}}
+{\footnotesize\ttfamily \label{startup_8c_a580f44faf8ff886796f2114d0de12c77} 
+uint32\+\_\+t \+\_\+ebss}
+
+\Hypertarget{startup_8c_a1fc4a71c31f5b048d3b1b7b2d10684d1}\index{startup.c@{startup.c}!\_edata@{\_edata}}
+\index{\_edata@{\_edata}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{\_edata}{\_edata}}
+{\footnotesize\ttfamily \label{startup_8c_a1fc4a71c31f5b048d3b1b7b2d10684d1} 
+uint32\+\_\+t \+\_\+edata}
+
+\Hypertarget{startup_8c_a69247aef56f755ef3b08265060dea50f}\index{startup.c@{startup.c}!\_estack@{\_estack}}
+\index{\_estack@{\_estack}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{\_estack}{\_estack}}
+{\footnotesize\ttfamily \label{startup_8c_a69247aef56f755ef3b08265060dea50f} 
+uint32\+\_\+t \+\_\+estack}
+
+\Hypertarget{startup_8c_adcc3ae1cacdf95ad88f01dd26f589175}\index{startup.c@{startup.c}!\_sbss@{\_sbss}}
+\index{\_sbss@{\_sbss}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{\_sbss}{\_sbss}}
+{\footnotesize\ttfamily \label{startup_8c_adcc3ae1cacdf95ad88f01dd26f589175} 
+uint32\+\_\+t \+\_\+sbss}
+
+\Hypertarget{startup_8c_a61687bc10bffbfec9c6fd33bddff3094}\index{startup.c@{startup.c}!\_sdata@{\_sdata}}
+\index{\_sdata@{\_sdata}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{\_sdata}{\_sdata}}
+{\footnotesize\ttfamily \label{startup_8c_a61687bc10bffbfec9c6fd33bddff3094} 
+uint32\+\_\+t \+\_\+sdata}
+
+\Hypertarget{startup_8c_a1ecae4ad04c5b02e60d2db51706c2d75}\index{startup.c@{startup.c}!\_sidata@{\_sidata}}
+\index{\_sidata@{\_sidata}!startup.c@{startup.c}}
+\doxysubsubsection{\texorpdfstring{\_sidata}{\_sidata}}
+{\footnotesize\ttfamily \label{startup_8c_a1ecae4ad04c5b02e60d2db51706c2d75} 
+uint32\+\_\+t \+\_\+sidata\hspace{0.3cm}{\ttfamily [extern]}}
+

@@ -1,0 +1,57 @@
+\doxysection{firmware/app/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{firmware/app/main.c@{firmware/app/main.c}}
+
+
+\doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware for the NUCLEO-\/\+G0\+B1\+RE.  
+
+
+{\ttfamily \#include "{}board.\+h"{}}\newline
+{\ttfamily \#include "{}fdcan.\+h"{}}\newline
+{\ttfamily \#include "{}gateway.\+h"{}}\newline
+{\ttfamily \#include "{}stm32g0xx.\+h"{}}\newline
+{\ttfamily \#include "{}uart.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a89f82a9d44beaa52b00c7245a50a105c}{SERIAL\+\_\+\+BAUDRATE}}~115200u
+\item 
+\#define \mbox{\hyperlink{main_8c_add56dedbc09f82766e39588e01978e7d}{DEBOUNCE\+\_\+\+MS}}~20u
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware for the NUCLEO-\/\+G0\+B1\+RE. 
+
+SLCAN over the ST-\/\+LINK virtual COM port (115200 8N1) \texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>} FDCAN1, plus a local node\+: user button = wall switch (0x200), LED = lamp command (0x100). 
+
+\label{doc-define-members}
+\Hypertarget{main_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8c_add56dedbc09f82766e39588e01978e7d}\index{main.c@{main.c}!DEBOUNCE\_MS@{DEBOUNCE\_MS}}
+\index{DEBOUNCE\_MS@{DEBOUNCE\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEBOUNCE\_MS}{DEBOUNCE\_MS}}
+{\footnotesize\ttfamily \label{main_8c_add56dedbc09f82766e39588e01978e7d} 
+\#define DEBOUNCE\+\_\+\+MS~20u}
+
+\Hypertarget{main_8c_a89f82a9d44beaa52b00c7245a50a105c}\index{main.c@{main.c}!SERIAL\_BAUDRATE@{SERIAL\_BAUDRATE}}
+\index{SERIAL\_BAUDRATE@{SERIAL\_BAUDRATE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SERIAL\_BAUDRATE}{SERIAL\_BAUDRATE}}
+{\footnotesize\ttfamily \label{main_8c_a89f82a9d44beaa52b00c7245a50a105c} 
+\#define SERIAL\+\_\+\+BAUDRATE~115200u}
+
+
+
+\label{doc-func-members}
+\Hypertarget{main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+

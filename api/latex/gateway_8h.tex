@@ -1,0 +1,239 @@
+\doxysection{firmware/app/gateway.h File Reference}
+\hypertarget{gateway_8h}{}\label{gateway_8h}\index{firmware/app/gateway.h@{firmware/app/gateway.h}}
+
+
+Application logic of the \doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware (hardware independent).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+{\ttfamily \#include "{}slcan.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structGatewayCanStatus}{Gateway\+Can\+Status}}
+\begin{DoxyCompactList}\small\item\em Controller state reported by the driver. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGatewayIo}{Gateway\+Io}}
+\begin{DoxyCompactList}\small\item\em Hardware interface (implemented by the board, faked in tests). \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGateway}{Gateway}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structGateway}{Gateway} state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a2e5feaead2af596856d6bf859814cc06}{GATEWAY\+\_\+\+ID\+\_\+\+LAMP\+\_\+\+CMD}}~0x100u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a02ccfa1fed6f144cd6c3874c28f9d09c}{GATEWAY\+\_\+\+ID\+\_\+\+SWITCH\+\_\+\+STATE}}~0x200u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_abe8f68e0b641bc3eb441f4fe5164ec70}{GATEWAY\+\_\+\+DEFAULT\+\_\+\+BITRATE}}~500000u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}{GATEWAY\+\_\+\+ECHO\+\_\+\+SLOTS}}~8u
+\item 
+\#define \mbox{\hyperlink{gateway_8h_a5ea28e61a31c44bb1dad4276689a3d24}{GATEWAY\+\_\+\+BLINK\+\_\+\+PERIOD\+\_\+\+MS}}~500u
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}} \{ \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192cab694ce8d219110598a19fee2e81fee9e}{GATEWAY\+\_\+\+CAN\+\_\+\+NORMAL}}
+, \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192ca350b7d4552540a20aec2f5be7fcdf805}{GATEWAY\+\_\+\+CAN\+\_\+\+LOOPBACK}}
+, \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192caa3b0fb5aacb99d8f95b58ad640d12716}{GATEWAY\+\_\+\+CAN\+\_\+\+LISTEN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Operating modes of the CAN controller. \end{DoxyCompactList}\item 
+enum \{ \newline
+\mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57acc79b1a346ff007e87815c6a6d42ad7b}{GATEWAY\+\_\+\+FLAG\+\_\+\+RX\+\_\+\+QUEUE\+\_\+\+FULL}} = 0x01
+, \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57ab0f6078e445e6632f650a73ec8b12f4d}{GATEWAY\+\_\+\+FLAG\+\_\+\+TX\+\_\+\+QUEUE\+\_\+\+FULL}} = 0x02
+, \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0770bb913339dd04c067c6551c734b37}{GATEWAY\+\_\+\+FLAG\+\_\+\+ERROR\+\_\+\+WARNING}} = 0x04
+, \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57aff0caf70a6d88fba1d6a8cb6ee3074f1}{GATEWAY\+\_\+\+FLAG\+\_\+\+DATA\+\_\+\+OVERRUN}} = 0x08
+, \newline
+\mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0faa0cac4e23cc011e2274b56153e8af}{GATEWAY\+\_\+\+FLAG\+\_\+\+ERROR\+\_\+\+PASSIVE}} = 0x20
+, \mbox{\hyperlink{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a56a82cf76afb30ff8d4af2d51ed3fc23}{GATEWAY\+\_\+\+FLAG\+\_\+\+BUS\+\_\+\+ERROR}} = 0x80
+ \}
+\begin{DoxyCompactList}\small\item\em SLCAN status flags (command F). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{gateway_8h_ab91ea63374822e9774faec6e3722a279}{gateway\+\_\+init}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, const \mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} \texorpdfstring{$\ast$}{*}io)
+\item 
+void \mbox{\hyperlink{gateway_8h_aeaab48f97068bf7e0383010cacdb2b2c}{gateway\+\_\+on\+\_\+serial\+\_\+data}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Bytes received on the serial link. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8h_afc75c3f805cdebb24b356a6f048bccd9}{gateway\+\_\+on\+\_\+can\+\_\+frame}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Frame received by the CAN controller. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8h_af40f9bf19ba615758dc5d24d17831cce}{gateway\+\_\+on\+\_\+button}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway)
+\begin{DoxyCompactList}\small\item\em The user button was pressed (debounced). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8h_a2d4dbaaa3bee9c4c6f4529328dfaa998}{gateway\+\_\+on\+\_\+rx\+\_\+overrun}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway)
+\begin{DoxyCompactList}\small\item\em Driver dropped frames because its receive queue was full. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gateway_8h_a8be8bdc7e33addbc49bd6295b77aa191}{gateway\+\_\+tick}} (\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}gateway, uint32\+\_\+t now\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Periodic call with the current time; blinks the LED while the channel is closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Application logic of the \doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware (hardware independent). 
+
+The board is two things at once\+:
+\begin{DoxyItemize}
+\item an SLCAN adapter\+: frames from the serial link are sent on the CAN bus, frames received from CAN are reported on the serial link;
+\item a small CAN node\+: the user button is a wall switch (SWITCH\+\_\+\+STATE 0x200) and the LED shows the lamp command (LAMP\+\_\+\+CMD 0x100).
+\end{DoxyItemize}
+
+In internal loopback mode the controller receives its own frames. They are matched against the transmitted ones and not reported a second time, so the virtual bus does not see echoes.
+
+All hardware access goes through \doxylink{structGatewayIo}{Gateway\+Io}, so this file is unit tested on the host with fake I/O. 
+
+\label{doc-define-members}
+\Hypertarget{gateway_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{gateway_8h_a5ea28e61a31c44bb1dad4276689a3d24}\index{gateway.h@{gateway.h}!GATEWAY\_BLINK\_PERIOD\_MS@{GATEWAY\_BLINK\_PERIOD\_MS}}
+\index{GATEWAY\_BLINK\_PERIOD\_MS@{GATEWAY\_BLINK\_PERIOD\_MS}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_BLINK\_PERIOD\_MS}{GATEWAY\_BLINK\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{gateway_8h_a5ea28e61a31c44bb1dad4276689a3d24} 
+\#define GATEWAY\+\_\+\+BLINK\+\_\+\+PERIOD\+\_\+\+MS~500u}
+
+\Hypertarget{gateway_8h_abe8f68e0b641bc3eb441f4fe5164ec70}\index{gateway.h@{gateway.h}!GATEWAY\_DEFAULT\_BITRATE@{GATEWAY\_DEFAULT\_BITRATE}}
+\index{GATEWAY\_DEFAULT\_BITRATE@{GATEWAY\_DEFAULT\_BITRATE}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_DEFAULT\_BITRATE}{GATEWAY\_DEFAULT\_BITRATE}}
+{\footnotesize\ttfamily \label{gateway_8h_abe8f68e0b641bc3eb441f4fe5164ec70} 
+\#define GATEWAY\+\_\+\+DEFAULT\+\_\+\+BITRATE~500000u}
+
+\Hypertarget{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3}\index{gateway.h@{gateway.h}!GATEWAY\_ECHO\_SLOTS@{GATEWAY\_ECHO\_SLOTS}}
+\index{GATEWAY\_ECHO\_SLOTS@{GATEWAY\_ECHO\_SLOTS}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_ECHO\_SLOTS}{GATEWAY\_ECHO\_SLOTS}}
+{\footnotesize\ttfamily \label{gateway_8h_af5db41017dc83b482397d4ab2a9ad1e3} 
+\#define GATEWAY\+\_\+\+ECHO\+\_\+\+SLOTS~8u}
+
+\Hypertarget{gateway_8h_a2e5feaead2af596856d6bf859814cc06}\index{gateway.h@{gateway.h}!GATEWAY\_ID\_LAMP\_CMD@{GATEWAY\_ID\_LAMP\_CMD}}
+\index{GATEWAY\_ID\_LAMP\_CMD@{GATEWAY\_ID\_LAMP\_CMD}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_ID\_LAMP\_CMD}{GATEWAY\_ID\_LAMP\_CMD}}
+{\footnotesize\ttfamily \label{gateway_8h_a2e5feaead2af596856d6bf859814cc06} 
+\#define GATEWAY\+\_\+\+ID\+\_\+\+LAMP\+\_\+\+CMD~0x100u}
+
+\Hypertarget{gateway_8h_a02ccfa1fed6f144cd6c3874c28f9d09c}\index{gateway.h@{gateway.h}!GATEWAY\_ID\_SWITCH\_STATE@{GATEWAY\_ID\_SWITCH\_STATE}}
+\index{GATEWAY\_ID\_SWITCH\_STATE@{GATEWAY\_ID\_SWITCH\_STATE}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GATEWAY\_ID\_SWITCH\_STATE}{GATEWAY\_ID\_SWITCH\_STATE}}
+{\footnotesize\ttfamily \label{gateway_8h_a02ccfa1fed6f144cd6c3874c28f9d09c} 
+\#define GATEWAY\+\_\+\+ID\+\_\+\+SWITCH\+\_\+\+STATE~0x200u}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{gateway_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57}\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily \label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57} 
+anonymous enum}
+
+
+
+SLCAN status flags (command F). 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_FLAG\_RX\_QUEUE\_FULL@{GATEWAY\_FLAG\_RX\_QUEUE\_FULL}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_FLAG\_RX\_QUEUE\_FULL@{GATEWAY\_FLAG\_RX\_QUEUE\_FULL}}}\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57acc79b1a346ff007e87815c6a6d42ad7b}\label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57acc79b1a346ff007e87815c6a6d42ad7b} 
+GATEWAY\+\_\+\+FLAG\+\_\+\+RX\+\_\+\+QUEUE\+\_\+\+FULL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_FLAG\_TX\_QUEUE\_FULL@{GATEWAY\_FLAG\_TX\_QUEUE\_FULL}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_FLAG\_TX\_QUEUE\_FULL@{GATEWAY\_FLAG\_TX\_QUEUE\_FULL}}}\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57ab0f6078e445e6632f650a73ec8b12f4d}\label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57ab0f6078e445e6632f650a73ec8b12f4d} 
+GATEWAY\+\_\+\+FLAG\+\_\+\+TX\+\_\+\+QUEUE\+\_\+\+FULL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_FLAG\_ERROR\_WARNING@{GATEWAY\_FLAG\_ERROR\_WARNING}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_FLAG\_ERROR\_WARNING@{GATEWAY\_FLAG\_ERROR\_WARNING}}}\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0770bb913339dd04c067c6551c734b37}\label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0770bb913339dd04c067c6551c734b37} 
+GATEWAY\+\_\+\+FLAG\+\_\+\+ERROR\+\_\+\+WARNING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_FLAG\_DATA\_OVERRUN@{GATEWAY\_FLAG\_DATA\_OVERRUN}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_FLAG\_DATA\_OVERRUN@{GATEWAY\_FLAG\_DATA\_OVERRUN}}}\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57aff0caf70a6d88fba1d6a8cb6ee3074f1}\label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57aff0caf70a6d88fba1d6a8cb6ee3074f1} 
+GATEWAY\+\_\+\+FLAG\+\_\+\+DATA\+\_\+\+OVERRUN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_FLAG\_ERROR\_PASSIVE@{GATEWAY\_FLAG\_ERROR\_PASSIVE}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_FLAG\_ERROR\_PASSIVE@{GATEWAY\_FLAG\_ERROR\_PASSIVE}}}\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0faa0cac4e23cc011e2274b56153e8af}\label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a0faa0cac4e23cc011e2274b56153e8af} 
+GATEWAY\+\_\+\+FLAG\+\_\+\+ERROR\+\_\+\+PASSIVE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_FLAG\_BUS\_ERROR@{GATEWAY\_FLAG\_BUS\_ERROR}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_FLAG\_BUS\_ERROR@{GATEWAY\_FLAG\_BUS\_ERROR}}}\Hypertarget{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a56a82cf76afb30ff8d4af2d51ed3fc23}\label{gateway_8h_a0ddc1e3f4b5387a4f05fd760ce90cd57a56a82cf76afb30ff8d4af2d51ed3fc23} 
+GATEWAY\+\_\+\+FLAG\+\_\+\+BUS\+\_\+\+ERROR&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}\index{gateway.h@{gateway.h}!GatewayCanMode@{GatewayCanMode}}
+\index{GatewayCanMode@{GatewayCanMode}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{GatewayCanMode}{GatewayCanMode}}
+{\footnotesize\ttfamily \label{gateway_8h_a562ef363ddb7371e26ed54f664e3192c} 
+enum \mbox{\hyperlink{gateway_8h_a562ef363ddb7371e26ed54f664e3192c}{Gateway\+Can\+Mode}}}
+
+
+
+Operating modes of the CAN controller. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_CAN\_NORMAL@{GATEWAY\_CAN\_NORMAL}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_CAN\_NORMAL@{GATEWAY\_CAN\_NORMAL}}}\Hypertarget{gateway_8h_a562ef363ddb7371e26ed54f664e3192cab694ce8d219110598a19fee2e81fee9e}\label{gateway_8h_a562ef363ddb7371e26ed54f664e3192cab694ce8d219110598a19fee2e81fee9e} 
+GATEWAY\+\_\+\+CAN\+\_\+\+NORMAL&Normal bus operation (needs a transceiver and another node). \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_CAN\_LOOPBACK@{GATEWAY\_CAN\_LOOPBACK}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_CAN\_LOOPBACK@{GATEWAY\_CAN\_LOOPBACK}}}\Hypertarget{gateway_8h_a562ef363ddb7371e26ed54f664e3192ca350b7d4552540a20aec2f5be7fcdf805}\label{gateway_8h_a562ef363ddb7371e26ed54f664e3192ca350b7d4552540a20aec2f5be7fcdf805} 
+GATEWAY\+\_\+\+CAN\+\_\+\+LOOPBACK&Internal loopback\+: TX is received by the own controller. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATEWAY\_CAN\_LISTEN@{GATEWAY\_CAN\_LISTEN}!gateway.h@{gateway.h}}\index{gateway.h@{gateway.h}!GATEWAY\_CAN\_LISTEN@{GATEWAY\_CAN\_LISTEN}}}\Hypertarget{gateway_8h_a562ef363ddb7371e26ed54f664e3192caa3b0fb5aacb99d8f95b58ad640d12716}\label{gateway_8h_a562ef363ddb7371e26ed54f664e3192caa3b0fb5aacb99d8f95b58ad640d12716} 
+GATEWAY\+\_\+\+CAN\+\_\+\+LISTEN&Bus monitoring\+: receive only, never drive the bus. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{gateway_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{gateway_8h_ab91ea63374822e9774faec6e3722a279}\index{gateway.h@{gateway.h}!gateway\_init@{gateway\_init}}
+\index{gateway\_init@{gateway\_init}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{gateway\_init()}{gateway\_init()}}
+{\footnotesize\ttfamily \label{gateway_8h_ab91ea63374822e9774faec6e3722a279} 
+void gateway\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{const \mbox{\hyperlink{structGatewayIo}{Gateway\+Io}} \texorpdfstring{$\ast$}{*}}]{io}{}\end{DoxyParamCaption})}
+
+\Hypertarget{gateway_8h_af40f9bf19ba615758dc5d24d17831cce}\index{gateway.h@{gateway.h}!gateway\_on\_button@{gateway\_on\_button}}
+\index{gateway\_on\_button@{gateway\_on\_button}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_button()}{gateway\_on\_button()}}
+{\footnotesize\ttfamily \label{gateway_8h_af40f9bf19ba615758dc5d24d17831cce} 
+void gateway\+\_\+on\+\_\+button (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{}\end{DoxyParamCaption})}
+
+
+
+The user button was pressed (debounced). 
+
+\Hypertarget{gateway_8h_afc75c3f805cdebb24b356a6f048bccd9}\index{gateway.h@{gateway.h}!gateway\_on\_can\_frame@{gateway\_on\_can\_frame}}
+\index{gateway\_on\_can\_frame@{gateway\_on\_can\_frame}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_can\_frame()}{gateway\_on\_can\_frame()}}
+{\footnotesize\ttfamily \label{gateway_8h_afc75c3f805cdebb24b356a6f048bccd9} 
+void gateway\+\_\+on\+\_\+can\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Frame received by the CAN controller. 
+
+\Hypertarget{gateway_8h_a2d4dbaaa3bee9c4c6f4529328dfaa998}\index{gateway.h@{gateway.h}!gateway\_on\_rx\_overrun@{gateway\_on\_rx\_overrun}}
+\index{gateway\_on\_rx\_overrun@{gateway\_on\_rx\_overrun}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_rx\_overrun()}{gateway\_on\_rx\_overrun()}}
+{\footnotesize\ttfamily \label{gateway_8h_a2d4dbaaa3bee9c4c6f4529328dfaa998} 
+void gateway\+\_\+on\+\_\+rx\+\_\+overrun (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{}\end{DoxyParamCaption})}
+
+
+
+Driver dropped frames because its receive queue was full. 
+
+\Hypertarget{gateway_8h_aeaab48f97068bf7e0383010cacdb2b2c}\index{gateway.h@{gateway.h}!gateway\_on\_serial\_data@{gateway\_on\_serial\_data}}
+\index{gateway\_on\_serial\_data@{gateway\_on\_serial\_data}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{gateway\_on\_serial\_data()}{gateway\_on\_serial\_data()}}
+{\footnotesize\ttfamily \label{gateway_8h_aeaab48f97068bf7e0383010cacdb2b2c} 
+void gateway\+\_\+on\+\_\+serial\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Bytes received on the serial link. 
+
+\Hypertarget{gateway_8h_a8be8bdc7e33addbc49bd6295b77aa191}\index{gateway.h@{gateway.h}!gateway\_tick@{gateway\_tick}}
+\index{gateway\_tick@{gateway\_tick}!gateway.h@{gateway.h}}
+\doxysubsubsection{\texorpdfstring{gateway\_tick()}{gateway\_tick()}}
+{\footnotesize\ttfamily \label{gateway_8h_a8be8bdc7e33addbc49bd6295b77aa191} 
+void gateway\+\_\+tick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGateway}{Gateway}} \texorpdfstring{$\ast$}{*}}]{gateway}{, }\item[{uint32\+\_\+t}]{now\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Periodic call with the current time; blinks the LED while the channel is closed. 
+

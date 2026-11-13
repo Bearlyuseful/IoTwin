@@ -30,5 +30,6 @@ var searchData=
   ['net_5fsocket_5ft_27',['net_socket_t',['../net_8h.html#ac55f128edf45073869b140a7daf019ce',1,'net.h']]],
   ['netpollfd_28',['NetPollFd',['../structNetPollFd.html',1,'']]],
   ['next_5fclient_5fid_29',['next_client_id',['../structBusServer.html#a7a97f71eefa900cf415039cdff6c25ae',1,'BusServer']]],
-  ['next_5fdeadline_5fns_30',['next_deadline_ns',['../structCycleTimer.html#ad2f01921defca96707858cc87e63f383',1,'CycleTimer']]]
+  ['next_5fdeadline_5fns_30',['next_deadline_ns',['../structCycleTimer.html#ad2f01921defca96707858cc87e63f383',1,'CycleTimer']]],
+  ['nmi_5fhandler_31',['NMI_Handler',['../startup_8c.html#a6ad7a5e3ee69cb6db6a6b9111ba898bc',1,'startup.c']]]
 ];

@@ -1,0 +1,22 @@
+\doxysection{uart.\+h}
+\hypertarget{uart_8h_source}{}\label{uart_8h_source}\index{firmware/drivers/uart.h@{firmware/drivers/uart.h}}
+\mbox{\hyperlink{uart_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_UART\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_UART\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uart_8h_a958a59f06c7ca923f4c8813f03e9b17d}{uart\_init}}(uint32\_t\ peripheral\_clock\_hz,\ uint32\_t\ baudrate);}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{uart_8h_a51b4803bbc296fdda58f998cd3925427}{uart\_read}}(uint8\_t*\ buffer,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{uart_8h_a586cd2b7752ed14f2961b8ddb00ab488}{uart\_write}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ uint32\_t\ \mbox{\hyperlink{uart_8h_a2372f5b75b734f4ccf69de9a4ea85aac}{uart\_rx\_overruns}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_UART\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

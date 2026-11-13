@@ -33,9 +33,13 @@ var hierarchy =
     [ "DbcSignal", "structDbcSignal.html", null ],
     [ "DbcValueName", "structDbcValueName.html", null ],
     [ "FCanFrame", "structFCanFrame.html", null ],
+    [ "FdcanStatus", "structFdcanStatus.html", null ],
     [ "FRunnable", null, [
       [ "FIoTwinBusConnection", "classFIoTwinBusConnection.html", null ]
     ] ],
+    [ "Gateway", "structGateway.html", null ],
+    [ "GatewayCanStatus", "structGatewayCanStatus.html", null ],
+    [ "GatewayIo", "structGatewayIo.html", null ],
     [ "IPowerInterface", "classIPowerInterface.html", null ],
     [ "IsoTpConfig", "structIsoTpConfig.html", null ],
     [ "IsoTpLink", "structIsoTpLink.html", null ],
@@ -53,10 +57,6 @@ var hierarchy =
     [ "SimShared", "structSimShared.html", null ],
     [ "SlcanCommand", "structSlcanCommand.html", null ],
     [ "SlcanReader", "structSlcanReader.html", null ],
-    [ "TargetRules", null, [
-      [ "IoTwinEditorTarget", "classIoTwinEditorTarget.html", null ],
-      [ "IoTwinTarget", "classIoTwinTarget.html", null ]
-    ] ],
     [ "UBlueprintFunctionLibrary", null, [
       [ "UCanFrameLibrary", "classUCanFrameLibrary.html", null ]
     ] ],

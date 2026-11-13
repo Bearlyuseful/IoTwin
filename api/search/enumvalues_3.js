@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['isotp_5fbusy_0',['ISOTP_BUSY',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefa84b40d8dd42d09b73553586bed881e90',1,'isotp.h']]],
-  ['isotp_5ferror_5flength_1',['ISOTP_ERROR_LENGTH',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefa299e79a913394e5550071be355a48cf6',1,'isotp.h']]],
-  ['isotp_5ferror_5foverflow_2',['ISOTP_ERROR_OVERFLOW',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefa34d41f324ead726c4688e9cd42ff984f',1,'isotp.h']]],
-  ['isotp_5ferror_5fsend_3',['ISOTP_ERROR_SEND',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefaec4a83623575f8187be70c98ef7a7209',1,'isotp.h']]],
-  ['isotp_5ferror_5fsequence_4',['ISOTP_ERROR_SEQUENCE',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefaa1ccddf712621dd3543e6f72f01ea488',1,'isotp.h']]],
-  ['isotp_5ferror_5ftimeout_5fbs_5',['ISOTP_ERROR_TIMEOUT_BS',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefa32ca738e4fa2694f6e80064af7a7a7f1',1,'isotp.h']]],
-  ['isotp_5ferror_5ftimeout_5fcr_6',['ISOTP_ERROR_TIMEOUT_CR',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefa4865d0de497aa5ee356b1f5415f6888a',1,'isotp.h']]],
-  ['isotp_5ferror_5funexpected_7',['ISOTP_ERROR_UNEXPECTED',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefa3e7bc1af70c1da82f0d817445ad61f39',1,'isotp.h']]],
-  ['isotp_5ferror_5fwait_5flimit_8',['ISOTP_ERROR_WAIT_LIMIT',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefac9ad0c288efcf74d1a870789631fdbd2',1,'isotp.h']]],
-  ['isotp_5fok_9',['ISOTP_OK',['../isotp_8h.html#a6f8ccd590bf09c3515922c28fc53faefaa48e4a555e760bee930e207369b3706b',1,'isotp.h']]]
+  ['gateway_5fcan_5flisten_0',['GATEWAY_CAN_LISTEN',['../gateway_8h.html#a562ef363ddb7371e26ed54f664e3192caa3b0fb5aacb99d8f95b58ad640d12716',1,'gateway.h']]],
+  ['gateway_5fcan_5floopback_1',['GATEWAY_CAN_LOOPBACK',['../gateway_8h.html#a562ef363ddb7371e26ed54f664e3192ca350b7d4552540a20aec2f5be7fcdf805',1,'gateway.h']]],
+  ['gateway_5fcan_5fnormal_2',['GATEWAY_CAN_NORMAL',['../gateway_8h.html#a562ef363ddb7371e26ed54f664e3192cab694ce8d219110598a19fee2e81fee9e',1,'gateway.h']]],
+  ['gateway_5fflag_5fbus_5ferror_3',['GATEWAY_FLAG_BUS_ERROR',['../gateway_8h.html#a0ddc1e3f4b5387a4f05fd760ce90cd57a56a82cf76afb30ff8d4af2d51ed3fc23',1,'gateway.h']]],
+  ['gateway_5fflag_5fdata_5foverrun_4',['GATEWAY_FLAG_DATA_OVERRUN',['../gateway_8h.html#a0ddc1e3f4b5387a4f05fd760ce90cd57aff0caf70a6d88fba1d6a8cb6ee3074f1',1,'gateway.h']]],
+  ['gateway_5fflag_5ferror_5fpassive_5',['GATEWAY_FLAG_ERROR_PASSIVE',['../gateway_8h.html#a0ddc1e3f4b5387a4f05fd760ce90cd57a0faa0cac4e23cc011e2274b56153e8af',1,'gateway.h']]],
+  ['gateway_5fflag_5ferror_5fwarning_6',['GATEWAY_FLAG_ERROR_WARNING',['../gateway_8h.html#a0ddc1e3f4b5387a4f05fd760ce90cd57a0770bb913339dd04c067c6551c734b37',1,'gateway.h']]],
+  ['gateway_5fflag_5frx_5fqueue_5ffull_7',['GATEWAY_FLAG_RX_QUEUE_FULL',['../gateway_8h.html#a0ddc1e3f4b5387a4f05fd760ce90cd57acc79b1a346ff007e87815c6a6d42ad7b',1,'gateway.h']]],
+  ['gateway_5fflag_5ftx_5fqueue_5ffull_8',['GATEWAY_FLAG_TX_QUEUE_FULL',['../gateway_8h.html#a0ddc1e3f4b5387a4f05fd760ce90cd57ab0f6078e445e6632f650a73ec8b12f4d',1,'gateway.h']]]
 ];

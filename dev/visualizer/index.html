@@ -803,6 +803,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../packaging/" class="md-nav__link">
         
   
@@ -1020,6 +1048,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1048,7 +1104,7 @@
 
 
 <h1 id="visualizer-unreal-engine">Visualizer (Unreal Engine)<a class="headerlink" href="#visualizer-unreal-engine" title="Permanent link">&para;</a></h1>
-<p>The Unreal project lives in <code>src/ue/IoTwin</code> (UE 5.6, C++ module <code>IoTwin</code>).</p>
+<p>The Unreal project lives in <code>visualizer</code> (UE 5.6, C++ module <code>IoTwin</code>).</p>
 <h2 id="bus-integration-sourceiotwinbus">Bus integration (<code>Source/IoTwin/Bus</code>)<a class="headerlink" href="#bus-integration-sourceiotwinbus" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1117,10 +1173,10 @@ your own scene, create a Blueprint subclass of <code>GM_Simulation</code>, untic
 and select it as <em>GameMode Override</em> in the map's World Settings.</p>
 <h2 id="tests-and-smoke-runs">Tests and smoke runs<a class="headerlink" href="#tests-and-smoke-runs" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c"># Automation tests (CAN codec)</span>
-<span class="n">UnrealEditor-Cmd</span><span class="p">.</span><span class="n">exe</span> <span class="n">src</span><span class="p">/</span><span class="n">ue</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-ExecCmds</span><span class="p">=</span><span class="s2">"Automation RunTests IoTwin;Quit"</span> <span class="n">-unattended</span> <span class="n">-nullrhi</span>
+<span class="n">UnrealEditor-Cmd</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-ExecCmds</span><span class="p">=</span><span class="s2">"Automation RunTests IoTwin;Quit"</span> <span class="n">-unattended</span> <span class="n">-nullrhi</span>
 
 <span class="c"># Unattended game run: screenshot after 10 s, quit after 15 s</span>
-<span class="n">UnrealEditor</span><span class="p">.</span><span class="n">exe</span> <span class="n">src</span><span class="p">/</span><span class="n">ue</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-game</span> <span class="n">-IoTwinScreenshot</span><span class="p">=</span><span class="n">10</span> <span class="n">-IoTwinQuitAfter</span><span class="p">=</span><span class="n">15</span>
+<span class="n">UnrealEditor</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-game</span> <span class="n">-IoTwinScreenshot</span><span class="p">=</span><span class="n">10</span> <span class="n">-IoTwinQuitAfter</span><span class="p">=</span><span class="n">15</span>
 </code></pre></div>
 <p>The screenshot is written to <code>Saved/Screenshots/IoTwinDemo.png</code>.</p>
 

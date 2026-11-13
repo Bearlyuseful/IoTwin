@@ -1,0 +1,105 @@
+\doxysection{firmware/board/nucleo\+\_\+g0b1re/board.h File Reference}
+\hypertarget{board_8h}{}\label{board_8h}\index{firmware/board/nucleo\_g0b1re/board.h@{firmware/board/nucleo\_g0b1re/board.h}}
+
+
+NUCLEO-\/\+G0\+B1\+RE board support (STM32\+G0\+B1\+RET6, Cortex-\/\+M0+).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{board_8h_ad29bfbd9ccafdae6b91d5c274b2b685e}{BOARD\+\_\+\+SYSCLK\+\_\+\+HZ}}~64000000u
+\item 
+\#define \mbox{\hyperlink{board_8h_a91a70b0e00a458f4757c309ec068f42e}{BOARD\+\_\+\+PCLK\+\_\+\+HZ}}~64000000u
+\item 
+\#define \mbox{\hyperlink{board_8h_a28317e6b7e9aa6552ea186c8157ecf5a}{BOARD\+\_\+\+FDCAN\+\_\+\+CLOCK\+\_\+\+HZ}}~\mbox{\hyperlink{board_8h_a91a70b0e00a458f4757c309ec068f42e}{BOARD\+\_\+\+PCLK\+\_\+\+HZ}} /\texorpdfstring{$\ast$}{*} FDCANSEL = PCLK \texorpdfstring{$\ast$}{*}/
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{board_8h_a916f2adc2080b4fe88034086d107a8dc}{board\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Clocks are set up by \doxylink{board_8c_a93f514700ccf00d08dbdcff7f1224eb2}{System\+Init()} (startup); this configures GPIO and Sys\+Tick. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{board_8h_af6a218803b32fbde3610564a990c39a5}{board\+\_\+millis}} (void)
+\begin{DoxyCompactList}\small\item\em Milliseconds since start (Sys\+Tick). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{board_8h_a05173a3c0b7188496922ec5d4e4a6b34}{board\+\_\+led\+\_\+set}} (bool on)
+\item 
+bool \mbox{\hyperlink{board_8h_ae1f776c3e6f3e8528ad15f3488bf60ab}{board\+\_\+button\+\_\+raw}} (void)
+\begin{DoxyCompactList}\small\item\em Raw (not debounced) state of the user button, true = pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+NUCLEO-\/\+G0\+B1\+RE board support (STM32\+G0\+B1\+RET6, Cortex-\/\+M0+). 
+
+
+\begin{DoxyItemize}
+\item SYSCLK 64 MHz\+: HSI16 -\/\texorpdfstring{$>$}{>} PLL (M=1, N=8, R=2), APB prescaler 1 (PCLK 64 MHz)
+\item LD4 (green LED)\+: PA5, active high
+\item B1 (user button)\+: PC13, active low
+\item ST-\/\+LINK virtual COM port\+: USART2, PA2 (TX) / PA3 (RX), AF1
+\item FDCAN1\+: PA11 (RX) / PA12 (TX), AF3 -\/ connect a CAN transceiver here for a real bus 
+\end{DoxyItemize}
+
+\label{doc-define-members}
+\Hypertarget{board_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{board_8h_a28317e6b7e9aa6552ea186c8157ecf5a}\index{board.h@{board.h}!BOARD\_FDCAN\_CLOCK\_HZ@{BOARD\_FDCAN\_CLOCK\_HZ}}
+\index{BOARD\_FDCAN\_CLOCK\_HZ@{BOARD\_FDCAN\_CLOCK\_HZ}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{BOARD\_FDCAN\_CLOCK\_HZ}{BOARD\_FDCAN\_CLOCK\_HZ}}
+{\footnotesize\ttfamily \label{board_8h_a28317e6b7e9aa6552ea186c8157ecf5a} 
+\#define BOARD\+\_\+\+FDCAN\+\_\+\+CLOCK\+\_\+\+HZ~\mbox{\hyperlink{board_8h_a91a70b0e00a458f4757c309ec068f42e}{BOARD\+\_\+\+PCLK\+\_\+\+HZ}} /\texorpdfstring{$\ast$}{*} FDCANSEL = PCLK \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{board_8h_a91a70b0e00a458f4757c309ec068f42e}\index{board.h@{board.h}!BOARD\_PCLK\_HZ@{BOARD\_PCLK\_HZ}}
+\index{BOARD\_PCLK\_HZ@{BOARD\_PCLK\_HZ}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{BOARD\_PCLK\_HZ}{BOARD\_PCLK\_HZ}}
+{\footnotesize\ttfamily \label{board_8h_a91a70b0e00a458f4757c309ec068f42e} 
+\#define BOARD\+\_\+\+PCLK\+\_\+\+HZ~64000000u}
+
+\Hypertarget{board_8h_ad29bfbd9ccafdae6b91d5c274b2b685e}\index{board.h@{board.h}!BOARD\_SYSCLK\_HZ@{BOARD\_SYSCLK\_HZ}}
+\index{BOARD\_SYSCLK\_HZ@{BOARD\_SYSCLK\_HZ}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{BOARD\_SYSCLK\_HZ}{BOARD\_SYSCLK\_HZ}}
+{\footnotesize\ttfamily \label{board_8h_ad29bfbd9ccafdae6b91d5c274b2b685e} 
+\#define BOARD\+\_\+\+SYSCLK\+\_\+\+HZ~64000000u}
+
+
+
+\label{doc-func-members}
+\Hypertarget{board_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{board_8h_ae1f776c3e6f3e8528ad15f3488bf60ab}\index{board.h@{board.h}!board\_button\_raw@{board\_button\_raw}}
+\index{board\_button\_raw@{board\_button\_raw}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{board\_button\_raw()}{board\_button\_raw()}}
+{\footnotesize\ttfamily \label{board_8h_ae1f776c3e6f3e8528ad15f3488bf60ab} 
+bool board\+\_\+button\+\_\+raw (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Raw (not debounced) state of the user button, true = pressed. 
+
+\Hypertarget{board_8h_a916f2adc2080b4fe88034086d107a8dc}\index{board.h@{board.h}!board\_init@{board\_init}}
+\index{board\_init@{board\_init}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{board\_init()}{board\_init()}}
+{\footnotesize\ttfamily \label{board_8h_a916f2adc2080b4fe88034086d107a8dc} 
+void board\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Clocks are set up by \doxylink{board_8c_a93f514700ccf00d08dbdcff7f1224eb2}{System\+Init()} (startup); this configures GPIO and Sys\+Tick. 
+
+\Hypertarget{board_8h_a05173a3c0b7188496922ec5d4e4a6b34}\index{board.h@{board.h}!board\_led\_set@{board\_led\_set}}
+\index{board\_led\_set@{board\_led\_set}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{board\_led\_set()}{board\_led\_set()}}
+{\footnotesize\ttfamily \label{board_8h_a05173a3c0b7188496922ec5d4e4a6b34} 
+void board\+\_\+led\+\_\+set (\begin{DoxyParamCaption}\item[{bool}]{on}{}\end{DoxyParamCaption})}
+
+\Hypertarget{board_8h_af6a218803b32fbde3610564a990c39a5}\index{board.h@{board.h}!board\_millis@{board\_millis}}
+\index{board\_millis@{board\_millis}!board.h@{board.h}}
+\doxysubsubsection{\texorpdfstring{board\_millis()}{board\_millis()}}
+{\footnotesize\ttfamily \label{board_8h_af6a218803b32fbde3610564a990c39a5} 
+uint32\+\_\+t board\+\_\+millis (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Milliseconds since start (Sys\+Tick). 
+

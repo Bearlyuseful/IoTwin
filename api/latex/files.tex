@@ -1,83 +1,91 @@
 \doxysection{File List}
 Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
-\item\contentsline{section}{src/bridges/serial\+\_\+bridge/\mbox{\hyperlink{bridge__core_8c}{bridge\+\_\+core.\+c}} }{\pageref{bridge__core_8c}}{}
-\item\contentsline{section}{src/bridges/serial\+\_\+bridge/\mbox{\hyperlink{bridge__core_8h}{bridge\+\_\+core.\+h}} \\*Translation between an SLCAN adapter (serial) and iotwin-\/bus (TCP text lines) }{\pageref{bridge__core_8h}}{}
-\item\contentsline{section}{src/bridges/serial\+\_\+bridge/\mbox{\hyperlink{main__serial__bridge_8c}{main\+\_\+serial\+\_\+bridge.\+c}} \\*Serial\+\_\+bridge\+: connects an SLCAN adapter (e.\+g. the \doxylink{classIoTwin}{Io\+Twin} STM32 gateway) to iotwin-\/bus }{\pageref{main__serial__bridge_8c}}{}
-\item\contentsline{section}{src/bridges/socketcan\+\_\+bridge/\mbox{\hyperlink{main__socketcan__bridge_8c}{main\+\_\+socketcan\+\_\+bridge.\+c}} \\*Socketcan\+\_\+bridge\+: connects a Linux CAN interface (vcan0, can0, USB adapter) to iotwin-\/bus }{\pageref{main__socketcan__bridge_8c}}{}
-\item\contentsline{section}{src/bridges/socketcan\+\_\+bridge/\mbox{\hyperlink{socketcan_8c}{socketcan.\+c}} }{\pageref{socketcan_8c}}{}
-\item\contentsline{section}{src/bridges/socketcan\+\_\+bridge/\mbox{\hyperlink{socketcan_8h}{socketcan.\+h}} \\*Linux Socket\+CAN raw sockets and conversion to/from \doxylink{structCanFrame}{Can\+Frame} (Linux only) }{\pageref{socketcan_8h}}{}
-\item\contentsline{section}{src/bus/\mbox{\hyperlink{bus__server_8c}{bus\+\_\+server.\+c}} }{\pageref{bus__server_8c}}{}
-\item\contentsline{section}{src/bus/\mbox{\hyperlink{bus__server_8h}{bus\+\_\+server.\+h}} \\*Virtual CAN bus over TCP }{\pageref{bus__server_8h}}{}
-\item\contentsline{section}{src/bus/\mbox{\hyperlink{main__bus_8c}{main\+\_\+bus.\+c}} \\*Iotwin-\/bus\+: virtual CAN bus server (command line front end) }{\pageref{main__bus_8c}}{}
-\item\contentsline{section}{src/communication/serial/\mbox{\hyperlink{serial__port_8c}{serial\+\_\+port.\+c}} }{\pageref{serial__port_8c}}{}
-\item\contentsline{section}{src/communication/serial/\mbox{\hyperlink{serial__port_8h}{serial\+\_\+port.\+h}} \\*Minimal portable serial port (Win32 COM ports / POSIX termios) }{\pageref{serial__port_8h}}{}
-\item\contentsline{section}{src/communication/tcp/\mbox{\hyperlink{line__reader_8c}{line\+\_\+reader.\+c}} }{\pageref{line__reader_8c}}{}
-\item\contentsline{section}{src/communication/tcp/\mbox{\hyperlink{line__reader_8h}{line\+\_\+reader.\+h}} \\*Splits a TCP byte stream into newline terminated lines }{\pageref{line__reader_8h}}{}
-\item\contentsline{section}{src/communication/tcp/\mbox{\hyperlink{net_8c}{net.\+c}} }{\pageref{net_8c}}{}
-\item\contentsline{section}{src/communication/tcp/\mbox{\hyperlink{net_8h}{net.\+h}} \\*Minimal portable TCP socket layer (POSIX sockets / Winsock2) }{\pageref{net_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__bit__timing_8c}{can\+\_\+bit\+\_\+timing.\+c}} }{\pageref{can__bit__timing_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__bit__timing_8h}{can\+\_\+bit\+\_\+timing.\+h}} \\*Calculation of CAN bit timing parameters from a controller clock }{\pageref{can__bit__timing_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__bus_8c}{can\+\_\+bus.\+c}} }{\pageref{can__bus_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__bus_8h}{can\+\_\+bus.\+h}} \\*Thread-\/safe FIFO of CAN frames\+: the local view of a node on the bus }{\pageref{can__bus_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__frame_8c}{can\+\_\+frame.\+c}} }{\pageref{can__frame_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}} \\*Message-\/level model of classic CAN frames and their text encoding }{\pageref{can__frame_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__signal_8c}{can\+\_\+signal.\+c}} }{\pageref{can__signal_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{can__signal_8h}{can\+\_\+signal.\+h}} \\*Encoding and decoding of signals inside a CAN payload (DBC semantics) }{\pageref{can__signal_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{dbc_8c}{dbc.\+c}} }{\pageref{dbc_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{dbc_8h}{dbc.\+h}} \\*Reader for the DBC subset needed to name CAN traffic }{\pageref{dbc_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{isotp_8c}{isotp.\+c}} }{\pageref{isotp_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{isotp_8h}{isotp.\+h}} \\*ISO-\/\+TP (ISO 15765-\/2) transport protocol for classic CAN, normal addressing }{\pageref{isotp_8h}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{slcan_8c}{slcan.\+c}} }{\pageref{slcan_8c}}{}
-\item\contentsline{section}{src/core/can/\mbox{\hyperlink{slcan_8h}{slcan.\+h}} \\*SLCAN (Lawicel CAN232/\+CANUSB) ASCII protocol used on serial links }{\pageref{slcan_8h}}{}
-\item\contentsline{section}{src/core/logger/\mbox{\hyperlink{log_8c}{log.\+c}} }{\pageref{log_8c}}{}
-\item\contentsline{section}{src/core/logger/\mbox{\hyperlink{log_8h}{log.\+h}} \\*Small thread-\/safe logger with severity levels and timestamps }{\pageref{log_8h}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{cli_8c}{cli.\+c}} }{\pageref{cli_8c}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{cli_8h}{cli.\+h}} \\*Helpers shared by the command line front ends }{\pageref{cli_8h}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{cycle__timer_8c}{cycle\+\_\+timer.\+c}} }{\pageref{cycle__timer_8c}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{cycle__timer_8h}{cycle\+\_\+timer.\+h}} \\*Drift-\/free periodic execution with wake-\/up latency statistics }{\pageref{cycle__timer_8h}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{pal__rt_8c}{pal\+\_\+rt.\+c}} }{\pageref{pal__rt_8c}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{pal__rt_8h}{pal\+\_\+rt.\+h}} \\*Real-\/time setup of the calling thread }{\pageref{pal__rt_8h}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{pal__time_8c}{pal\+\_\+time.\+c}} }{\pageref{pal__time_8c}}{}
-\item\contentsline{section}{src/core/platform/\mbox{\hyperlink{pal__time_8h}{pal\+\_\+time.\+h}} \\*Platform abstraction for monotonic time and sleeping }{\pageref{pal__time_8h}}{}
-\item\contentsline{section}{src/simulators/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8c}{light\+\_\+ecu.\+c}} }{\pageref{light__ecu_8c}}{}
-\item\contentsline{section}{src/simulators/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8h}{light\+\_\+ecu.\+h}} \\*Simulated light control unit (the demo ECU of can\+\_\+sim) }{\pageref{light__ecu_8h}}{}
-\item\contentsline{section}{src/simulators/can\+\_\+sim/\mbox{\hyperlink{main__can__sim_8c}{main\+\_\+can\+\_\+sim.\+c}} \\*Can\+\_\+sim\+: simulated light control ECU on the \doxylink{classIoTwin}{Io\+Twin} CAN bus }{\pageref{main__can__sim_8c}}{}
-\item\contentsline{section}{src/tools/can\+\_\+monitor/\mbox{\hyperlink{main__can__monitor_8c}{main\+\_\+can\+\_\+monitor.\+c}} \\*Can\+\_\+monitor\+: prints the traffic of iotwin-\/bus, decoded with a DBC file }{\pageref{main__can__monitor_8c}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\mbox{\hyperlink{IoTwin_8Target_8cs}{Io\+Twin.\+Target.\+cs}} }{\pageref{IoTwin_8Target_8cs}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\mbox{\hyperlink{IoTwinEditor_8Target_8cs}{Io\+Twin\+Editor.\+Target.\+cs}} }{\pageref{IoTwinEditor_8Target_8cs}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8Build_8cs}{Io\+Twin.\+Build.\+cs}} }{\pageref{IoTwin_8Build_8cs}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8cpp}{Io\+Twin.\+cpp}} }{\pageref{IoTwin_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8h}{Io\+Twin.\+h}} }{\pageref{IoTwin_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8cpp}{Can\+Frame.\+cpp}} }{\pageref{CanFrame_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8h}{Can\+Frame.\+h}} }{\pageref{CanFrame_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanSignalComponent_8cpp}{Can\+Signal\+Component.\+cpp}} }{\pageref{CanSignalComponent_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanSignalComponent_8h}{Can\+Signal\+Component.\+h}} }{\pageref{CanSignalComponent_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusConnection_8cpp}{Io\+Twin\+Bus\+Connection.\+cpp}} }{\pageref{IoTwinBusConnection_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusConnection_8h}{Io\+Twin\+Bus\+Connection.\+h}} }{\pageref{IoTwinBusConnection_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusSubsystem_8cpp}{Io\+Twin\+Bus\+Subsystem.\+cpp}} }{\pageref{IoTwinBusSubsystem_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusSubsystem_8h}{Io\+Twin\+Bus\+Subsystem.\+h}} }{\pageref{IoTwinBusSubsystem_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Bus/\+Tests/\mbox{\hyperlink{CanFrameTests_8cpp}{Can\+Frame\+Tests.\+cpp}} }{\pageref{CanFrameTests_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8cpp}{GM\+\_\+\+Simulation.\+cpp}} }{\pageref{GM__Simulation_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8h}{GM\+\_\+\+Simulation.\+h}} }{\pageref{GM__Simulation_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinHUD_8cpp}{Io\+Twin\+HUD.\+cpp}} }{\pageref{IoTwinHUD_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinHUD_8h}{Io\+Twin\+HUD.\+h}} }{\pageref{IoTwinHUD_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinPlayerController_8cpp}{Io\+Twin\+Player\+Controller.\+cpp}} }{\pageref{IoTwinPlayerController_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinPlayerController_8h}{Io\+Twin\+Player\+Controller.\+h}} }{\pageref{IoTwinPlayerController_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalCableActor_8cpp}{Electrical\+Cable\+Actor.\+cpp}} }{\pageref{ElectricalCableActor_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalCableActor_8h}{Electrical\+Cable\+Actor.\+h}} }{\pageref{ElectricalCableActor_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDevice_8cpp}{Electrical\+Device.\+cpp}} }{\pageref{ElectricalDevice_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDevice_8h}{Electrical\+Device.\+h}} }{\pageref{ElectricalDevice_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDeviceComponent_8cpp}{Electrical\+Device\+Component.\+cpp}} }{\pageref{ElectricalDeviceComponent_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDeviceComponent_8h}{Electrical\+Device\+Component.\+h}} }{\pageref{ElectricalDeviceComponent_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalPortComponent_8cpp}{Electrical\+Port\+Component.\+cpp}} }{\pageref{ElectricalPortComponent_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalPortComponent_8h}{Electrical\+Port\+Component.\+h}} }{\pageref{ElectricalPortComponent_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LampActor_8cpp}{Lamp\+Actor.\+cpp}} }{\pageref{LampActor_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LampActor_8h}{Lamp\+Actor.\+h}} }{\pageref{LampActor_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LightEmitterComponent_8cpp}{Light\+Emitter\+Component.\+cpp}} }{\pageref{LightEmitterComponent_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LightEmitterComponent_8h}{Light\+Emitter\+Component.\+h}} }{\pageref{LightEmitterComponent_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{PowerInterface_8h}{Power\+Interface.\+h}} }{\pageref{PowerInterface_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{PowerSourceActor_8cpp}{Power\+Source\+Actor.\+cpp}} }{\pageref{PowerSourceActor_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{PowerSourceActor_8h}{Power\+Source\+Actor.\+h}} }{\pageref{PowerSourceActor_8h}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{WallSwitchActor_8cpp}{Wall\+Switch\+Actor.\+cpp}} }{\pageref{WallSwitchActor_8cpp}}{}
-\item\contentsline{section}{src/ue/\+Io\+Twin/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{WallSwitchActor_8h}{Wall\+Switch\+Actor.\+h}} }{\pageref{WallSwitchActor_8h}}{}
+\item\contentsline{section}{apps/bus/\mbox{\hyperlink{bus__server_8c}{bus\+\_\+server.\+c}} }{\pageref{bus__server_8c}}{}
+\item\contentsline{section}{apps/bus/\mbox{\hyperlink{bus__server_8h}{bus\+\_\+server.\+h}} \\*Virtual CAN bus over TCP }{\pageref{bus__server_8h}}{}
+\item\contentsline{section}{apps/bus/\mbox{\hyperlink{main__bus_8c}{main\+\_\+bus.\+c}} \\*Iotwin-\/bus\+: virtual CAN bus server (command line front end) }{\pageref{main__bus_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+monitor/\mbox{\hyperlink{main__can__monitor_8c}{main\+\_\+can\+\_\+monitor.\+c}} \\*Can\+\_\+monitor\+: prints the traffic of iotwin-\/bus, decoded with a DBC file }{\pageref{main__can__monitor_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8c}{light\+\_\+ecu.\+c}} }{\pageref{light__ecu_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8h}{light\+\_\+ecu.\+h}} \\*Simulated light control unit (the demo ECU of can\+\_\+sim) }{\pageref{light__ecu_8h}}{}
+\item\contentsline{section}{apps/can\+\_\+sim/\mbox{\hyperlink{main__can__sim_8c}{main\+\_\+can\+\_\+sim.\+c}} \\*Can\+\_\+sim\+: simulated light control ECU on the \doxylink{classIoTwin}{Io\+Twin} CAN bus }{\pageref{main__can__sim_8c}}{}
+\item\contentsline{section}{apps/serial\+\_\+bridge/\mbox{\hyperlink{bridge__core_8c}{bridge\+\_\+core.\+c}} }{\pageref{bridge__core_8c}}{}
+\item\contentsline{section}{apps/serial\+\_\+bridge/\mbox{\hyperlink{bridge__core_8h}{bridge\+\_\+core.\+h}} \\*Translation between an SLCAN adapter (serial) and iotwin-\/bus (TCP text lines) }{\pageref{bridge__core_8h}}{}
+\item\contentsline{section}{apps/serial\+\_\+bridge/\mbox{\hyperlink{main__serial__bridge_8c}{main\+\_\+serial\+\_\+bridge.\+c}} \\*Serial\+\_\+bridge\+: connects an SLCAN adapter (e.\+g. the \doxylink{classIoTwin}{Io\+Twin} STM32 gateway) to iotwin-\/bus }{\pageref{main__serial__bridge_8c}}{}
+\item\contentsline{section}{apps/socketcan\+\_\+bridge/\mbox{\hyperlink{main__socketcan__bridge_8c}{main\+\_\+socketcan\+\_\+bridge.\+c}} \\*Socketcan\+\_\+bridge\+: connects a Linux CAN interface (vcan0, can0, USB adapter) to iotwin-\/bus }{\pageref{main__socketcan__bridge_8c}}{}
+\item\contentsline{section}{apps/socketcan\+\_\+bridge/\mbox{\hyperlink{socketcan_8c}{socketcan.\+c}} }{\pageref{socketcan_8c}}{}
+\item\contentsline{section}{apps/socketcan\+\_\+bridge/\mbox{\hyperlink{socketcan_8h}{socketcan.\+h}} \\*Linux Socket\+CAN raw sockets and conversion to/from \doxylink{structCanFrame}{Can\+Frame} (Linux only) }{\pageref{socketcan_8h}}{}
+\item\contentsline{section}{firmware/app/\mbox{\hyperlink{gateway_8c}{gateway.\+c}} }{\pageref{gateway_8c}}{}
+\item\contentsline{section}{firmware/app/\mbox{\hyperlink{gateway_8h}{gateway.\+h}} \\*Application logic of the \doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware (hardware independent) }{\pageref{gateway_8h}}{}
+\item\contentsline{section}{firmware/app/\mbox{\hyperlink{main_8c}{main.\+c}} \\*\doxylink{classIoTwin}{Io\+Twin} CAN gateway firmware for the NUCLEO-\/\+G0\+B1\+RE }{\pageref{main_8c}}{}
+\item\contentsline{section}{firmware/board/nucleo\+\_\+g0b1re/\mbox{\hyperlink{board_8c}{board.\+c}} }{\pageref{board_8c}}{}
+\item\contentsline{section}{firmware/board/nucleo\+\_\+g0b1re/\mbox{\hyperlink{board_8h}{board.\+h}} \\*NUCLEO-\/\+G0\+B1\+RE board support (STM32\+G0\+B1\+RET6, Cortex-\/\+M0+) }{\pageref{board_8h}}{}
+\item\contentsline{section}{firmware/board/nucleo\+\_\+g0b1re/\mbox{\hyperlink{startup_8c}{startup.\+c}} \\*Reset handler and vector table for the STM32\+G0\+B1 (Cortex-\/\+M0+), in C }{\pageref{startup_8c}}{}
+\item\contentsline{section}{firmware/drivers/\mbox{\hyperlink{fdcan_8c}{fdcan.\+c}} }{\pageref{fdcan_8c}}{}
+\item\contentsline{section}{firmware/drivers/\mbox{\hyperlink{fdcan_8h}{fdcan.\+h}} \\*Register level driver for FDCAN1 of the STM32\+G0\+B1 in classic CAN mode }{\pageref{fdcan_8h}}{}
+\item\contentsline{section}{firmware/drivers/\mbox{\hyperlink{uart_8c}{uart.\+c}} }{\pageref{uart_8c}}{}
+\item\contentsline{section}{firmware/drivers/\mbox{\hyperlink{uart_8h}{uart.\+h}} \\*Interrupt driven USART2 (ST-\/\+LINK virtual COM port) with ring buffers }{\pageref{uart_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__bit__timing_8c}{can\+\_\+bit\+\_\+timing.\+c}} }{\pageref{can__bit__timing_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__bit__timing_8h}{can\+\_\+bit\+\_\+timing.\+h}} \\*Calculation of CAN bit timing parameters from a controller clock }{\pageref{can__bit__timing_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__bus_8c}{can\+\_\+bus.\+c}} }{\pageref{can__bus_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__bus_8h}{can\+\_\+bus.\+h}} \\*Thread-\/safe FIFO of CAN frames\+: the local view of a node on the bus }{\pageref{can__bus_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__frame_8c}{can\+\_\+frame.\+c}} }{\pageref{can__frame_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}} \\*Message-\/level model of classic CAN frames and their text encoding }{\pageref{can__frame_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__signal_8c}{can\+\_\+signal.\+c}} }{\pageref{can__signal_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{can__signal_8h}{can\+\_\+signal.\+h}} \\*Encoding and decoding of signals inside a CAN payload (DBC semantics) }{\pageref{can__signal_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{dbc_8c}{dbc.\+c}} }{\pageref{dbc_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{dbc_8h}{dbc.\+h}} \\*Reader for the DBC subset needed to name CAN traffic }{\pageref{dbc_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{isotp_8c}{isotp.\+c}} }{\pageref{isotp_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{isotp_8h}{isotp.\+h}} \\*ISO-\/\+TP (ISO 15765-\/2) transport protocol for classic CAN, normal addressing }{\pageref{isotp_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{slcan_8c}{slcan.\+c}} }{\pageref{slcan_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{slcan_8h}{slcan.\+h}} \\*SLCAN (Lawicel CAN232/\+CANUSB) ASCII protocol used on serial links }{\pageref{slcan_8h}}{}
+\item\contentsline{section}{libs/log/\mbox{\hyperlink{log_8c}{log.\+c}} }{\pageref{log_8c}}{}
+\item\contentsline{section}{libs/log/\mbox{\hyperlink{log_8h}{log.\+h}} \\*Small thread-\/safe logger with severity levels and timestamps }{\pageref{log_8h}}{}
+\item\contentsline{section}{libs/net/\mbox{\hyperlink{line__reader_8c}{line\+\_\+reader.\+c}} }{\pageref{line__reader_8c}}{}
+\item\contentsline{section}{libs/net/\mbox{\hyperlink{line__reader_8h}{line\+\_\+reader.\+h}} \\*Splits a TCP byte stream into newline terminated lines }{\pageref{line__reader_8h}}{}
+\item\contentsline{section}{libs/net/\mbox{\hyperlink{net_8c}{net.\+c}} }{\pageref{net_8c}}{}
+\item\contentsline{section}{libs/net/\mbox{\hyperlink{net_8h}{net.\+h}} \\*Minimal portable TCP socket layer (POSIX sockets / Winsock2) }{\pageref{net_8h}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{cli_8c}{cli.\+c}} }{\pageref{cli_8c}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{cli_8h}{cli.\+h}} \\*Helpers shared by the command line front ends }{\pageref{cli_8h}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{cycle__timer_8c}{cycle\+\_\+timer.\+c}} }{\pageref{cycle__timer_8c}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{cycle__timer_8h}{cycle\+\_\+timer.\+h}} \\*Drift-\/free periodic execution with wake-\/up latency statistics }{\pageref{cycle__timer_8h}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{pal__rt_8c}{pal\+\_\+rt.\+c}} }{\pageref{pal__rt_8c}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{pal__rt_8h}{pal\+\_\+rt.\+h}} \\*Real-\/time setup of the calling thread }{\pageref{pal__rt_8h}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{pal__time_8c}{pal\+\_\+time.\+c}} }{\pageref{pal__time_8c}}{}
+\item\contentsline{section}{libs/platform/\mbox{\hyperlink{pal__time_8h}{pal\+\_\+time.\+h}} \\*Platform abstraction for monotonic time and sleeping }{\pageref{pal__time_8h}}{}
+\item\contentsline{section}{libs/serial/\mbox{\hyperlink{serial__port_8c}{serial\+\_\+port.\+c}} }{\pageref{serial__port_8c}}{}
+\item\contentsline{section}{libs/serial/\mbox{\hyperlink{serial__port_8h}{serial\+\_\+port.\+h}} \\*Minimal portable serial port (Win32 COM ports / POSIX termios) }{\pageref{serial__port_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8Build_8cs}{Io\+Twin.\+Build.\+cs}} }{\pageref{IoTwin_8Build_8cs}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8cpp}{Io\+Twin.\+cpp}} }{\pageref{IoTwin_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8h}{Io\+Twin.\+h}} }{\pageref{IoTwin_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8cpp}{Can\+Frame.\+cpp}} }{\pageref{CanFrame_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8h}{Can\+Frame.\+h}} }{\pageref{CanFrame_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanSignalComponent_8cpp}{Can\+Signal\+Component.\+cpp}} }{\pageref{CanSignalComponent_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanSignalComponent_8h}{Can\+Signal\+Component.\+h}} }{\pageref{CanSignalComponent_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusConnection_8cpp}{Io\+Twin\+Bus\+Connection.\+cpp}} }{\pageref{IoTwinBusConnection_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusConnection_8h}{Io\+Twin\+Bus\+Connection.\+h}} }{\pageref{IoTwinBusConnection_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusSubsystem_8cpp}{Io\+Twin\+Bus\+Subsystem.\+cpp}} }{\pageref{IoTwinBusSubsystem_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{IoTwinBusSubsystem_8h}{Io\+Twin\+Bus\+Subsystem.\+h}} }{\pageref{IoTwinBusSubsystem_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\+Tests/\mbox{\hyperlink{CanFrameTests_8cpp}{Can\+Frame\+Tests.\+cpp}} }{\pageref{CanFrameTests_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8cpp}{GM\+\_\+\+Simulation.\+cpp}} }{\pageref{GM__Simulation_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{GM__Simulation_8h}{GM\+\_\+\+Simulation.\+h}} }{\pageref{GM__Simulation_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinHUD_8cpp}{Io\+Twin\+HUD.\+cpp}} }{\pageref{IoTwinHUD_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinHUD_8h}{Io\+Twin\+HUD.\+h}} }{\pageref{IoTwinHUD_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinPlayerController_8cpp}{Io\+Twin\+Player\+Controller.\+cpp}} }{\pageref{IoTwinPlayerController_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Core/\mbox{\hyperlink{IoTwinPlayerController_8h}{Io\+Twin\+Player\+Controller.\+h}} }{\pageref{IoTwinPlayerController_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalCableActor_8cpp}{Electrical\+Cable\+Actor.\+cpp}} }{\pageref{ElectricalCableActor_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalCableActor_8h}{Electrical\+Cable\+Actor.\+h}} }{\pageref{ElectricalCableActor_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDevice_8cpp}{Electrical\+Device.\+cpp}} }{\pageref{ElectricalDevice_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDevice_8h}{Electrical\+Device.\+h}} }{\pageref{ElectricalDevice_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDeviceComponent_8cpp}{Electrical\+Device\+Component.\+cpp}} }{\pageref{ElectricalDeviceComponent_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalDeviceComponent_8h}{Electrical\+Device\+Component.\+h}} }{\pageref{ElectricalDeviceComponent_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalPortComponent_8cpp}{Electrical\+Port\+Component.\+cpp}} }{\pageref{ElectricalPortComponent_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{ElectricalPortComponent_8h}{Electrical\+Port\+Component.\+h}} }{\pageref{ElectricalPortComponent_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LampActor_8cpp}{Lamp\+Actor.\+cpp}} }{\pageref{LampActor_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LampActor_8h}{Lamp\+Actor.\+h}} }{\pageref{LampActor_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LightEmitterComponent_8cpp}{Light\+Emitter\+Component.\+cpp}} }{\pageref{LightEmitterComponent_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{LightEmitterComponent_8h}{Light\+Emitter\+Component.\+h}} }{\pageref{LightEmitterComponent_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{PowerInterface_8h}{Power\+Interface.\+h}} }{\pageref{PowerInterface_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{PowerSourceActor_8cpp}{Power\+Source\+Actor.\+cpp}} }{\pageref{PowerSourceActor_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{PowerSourceActor_8h}{Power\+Source\+Actor.\+h}} }{\pageref{PowerSourceActor_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{WallSwitchActor_8cpp}{Wall\+Switch\+Actor.\+cpp}} }{\pageref{WallSwitchActor_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Systems/\mbox{\hyperlink{WallSwitchActor_8h}{Wall\+Switch\+Actor.\+h}} }{\pageref{WallSwitchActor_8h}}{}
 \end{DoxyCompactList}
