@@ -33,6 +33,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Quickstart: user/quickstart.md
+  - Roadmap: roadmap.md
   - Developer Guide:
       - Build Instructions: dev/build_instructions.md
       - Architecture Overview: dev/architecture_overview.md
