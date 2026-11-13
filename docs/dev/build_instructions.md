@@ -34,6 +34,12 @@ Make sure `C:\msys64\ucrt64\bin` is on `PATH` if you build from PowerShell
 or Git Bash. The Windows executables are linked statically and run without
 MSYS2 installed.
 
+!!! warning "Git Bash"
+    Git Bash puts Git's own `mingw64/bin` in front of `PATH`. Its older runtime
+    DLLs break the compiler of a recent MSYS2 GCC (it fails silently, CMake
+    reports "compiler is broken"). Prepend MSYS2 in that shell:
+    `export PATH="/c/msys64/ucrt64/bin:$PATH"`.
+
 ### Build and test
 
 ```bash
@@ -48,6 +54,7 @@ Binaries are placed in `build/<preset>/bin/`:
 |---------------|---------------------------------------------|
 | `iotwin-bus`  | virtual CAN bus server                      |
 | `can_sim`     | simulated light ECU                         |
+| `serial_bridge` | connects an SLCAN adapter (NUCLEO-G0B1RE) to the bus |
 | `iotwin_tests`| Catch2 test runner (used by `ctest`)        |
 
 Add `-DIOTWIN_WARNINGS_AS_ERRORS=ON` to the configure step to treat
@@ -62,6 +69,20 @@ build/gcc-debug/bin/can_sim        # second terminal, type 'help'
 
 All options: `--help`. Real-time options are described in
 [Real-Time Operation](realtime.md).
+
+---
+
+## Firmware (NUCLEO-G0B1RE)
+
+Separate CMake project with an `arm-none-eabi-gcc` toolchain:
+
+```bash
+cd firmware
+cmake --preset nucleo-g0b1re
+cmake --build --preset nucleo-g0b1re
+```
+
+Flashing, wiring and the serial protocol are described in [Firmware](firmware.md).
 
 ---
 

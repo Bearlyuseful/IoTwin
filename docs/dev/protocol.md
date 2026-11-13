@@ -32,6 +32,13 @@ The syntax is the compact format of the Linux can-utils (`cansend`, `candump`):
 The ECU sends `LAMP_CMD` on every change and cyclically (default every
 500 ms), so a node that connects later learns the state within one cycle.
 
+## Serial side
+
+Microcontroller nodes are attached through `serial_bridge`, which speaks
+**SLCAN** (Lawicel) on the serial link and translates every frame 1:1 into the
+bus format above, e.g. `t1002AA55` ↔ `100#AA55`. The commands are listed in
+[Firmware](firmware.md#serial-protocol-slcan).
+
 ## Trying it by hand
 
 ```bash

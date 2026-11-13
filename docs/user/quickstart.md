@@ -34,6 +34,20 @@ Commands in the CAN-Sim window:
 | `send 123#DEADBEEF`       | put any frame on the bus                       |
 | `status`, `help`, `quit`  |                                                |
 
+## With a NUCLEO-G0B1RE
+
+The board becomes a real CAN node of the demo: its blue button B1 is a second
+wall switch, its green LED LD4 shows the lamp.
+
+1. Copy `firmware\iotwin_gateway.bin` to the `NOD_G0B1RE` USB drive of the
+   board (LD4 starts blinking: firmware runs, waiting for the PC).
+2. Look up the COM port ("STMicroelectronics STLink Virtual COM Port" in the
+   Device Manager).
+3. Run `start-demo-hardware.bat COM5` (your port).
+
+Press B1: the lamp in the visualizer and LD4 turn on. Details and wiring for a
+real CAN bus: [Firmware](../dev/firmware.md).
+
 ## From source
 
 ```bash

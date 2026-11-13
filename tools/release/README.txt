@@ -27,6 +27,13 @@ Commands in the CAN-Sim window:
 Components can also be started separately; every program has --help.
 Visualizer options: -IoTwinBusHost=<host> -IoTwinBusPort=<port>
 
+With a NUCLEO-G0B1RE
+--------------------
+1. Copy firmware\iotwin_gateway.bin to the NOD_G0B1RE drive of the board.
+2. Find the COM port ("STMicroelectronics STLink Virtual COM Port").
+3. start-demo-hardware.bat COM5
+The blue button B1 is a second wall switch, the green LED LD4 shows the lamp.
+
 Requirements
 ------------
 Windows 10/11 x64, DirectX 12 capable GPU. If the visualizer reports missing

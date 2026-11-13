@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.2.0 - unreleased
+
+Roadmap steps 1-3: a real microcontroller on the virtual bus.
+
+### Firmware (NUCLEO-G0B1RE)
+- Bare-metal on CMSIS headers: startup code and vector table in C, linker
+  script, 64 MHz PLL clock, interrupt driven USART2 with ring buffers.
+- FDCAN1 driver on register level: message RAM, run-time bit timing,
+  Tx FIFO, Rx FIFO 0 interrupt, bus-off recovery; normal, internal loopback
+  and bus monitoring mode.
+- SLCAN adapter (incl. extensions `l` loopback and `Q` statistics), echo
+  suppression in loopback mode, user button = wall switch, LED = lamp.
+
+### Core
+- `serial_bridge`: SLCAN adapter <-> iotwin-bus, auto-reconnect on both sides.
+- Portable serial port layer (Win32 / termios).
+- Shared, host-tested code: SLCAN codec, CAN bit timing calculation.
+- Tests: gateway logic, SLCAN, bit timing, bridge, PTY serial port and an
+  end-to-end test with the real bridge process (Linux).
+
+### Tooling
+- CI builds the firmware; `tools/flash-firmware.ps1`; release package with
+  firmware and `start-demo-hardware.bat`.
+
 ## 0.1.0 - 2026-11-13
 
 First runnable version: the light demo end to end.

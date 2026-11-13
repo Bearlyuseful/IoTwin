@@ -1,6 +1,7 @@
 # Roadmap
 
-Status: November 2026, after the MVP (v0.1.0).
+Status: November 2026 - v0.1.0 released, steps 0-3 implemented on `feature/firmware`
+(hardware test on the NUCLEO-G0B1RE pending).
 
 This roadmap merges the two earlier plans - the MVP plan of October 2025 and the
 post-MVP plan of March 2026 (virtual CAN bus → serial bridge → STM32 CAN
@@ -18,20 +19,20 @@ digital-twin features.
 | Communication layer (gRPC idea) | Oct 2025 | replaced by the TCP text protocol ([ADR 0002](adr/0002-bus-server-and-text-protocol.md)) |
 | Unreal integration, status display | Oct 2025 | ✅ as module code (bus subsystem, lamp, switch); not yet a standalone plugin |
 | Electrical / load simulation | Oct 2025 | ⚠️ on/off only, no load, current or fuse |
-| ADR: repository structure (mono vs multi repo) | Oct 2025 | ❌ open, needed once firmware is added |
-| Git tag for the MVP | Oct 2025 | ❌ tag `v0.1.0` after merging the MVP pull request |
-| Serial bridge PC ↔ MCU | Mar 2026, phase 2 | ❌ |
-| STM32 as CAN controller | Mar 2026, phase 3 | ❌ |
+| ADR: repository structure (mono vs multi repo) | Oct 2025 | ✅ [ADR 0004](adr/0004-firmware-in-mono-repo-bare-metal.md) |
+| Git tag for the MVP | Oct 2025 | ✅ `v0.1.0` |
+| Serial bridge PC ↔ MCU | Mar 2026, phase 2 | ✅ `serial_bridge` + SLCAN firmware ([Firmware](dev/firmware.md)) |
+| STM32 as CAN controller | Mar 2026, phase 3 | ✅ FDCAN driver, internal loopback; ⚠️ real bus needs a transceiver + second node |
 | Scenarios, more devices, extensions | Oct 2025 outlook | ❌ |
 
 ## Order
 
 | # | Step | Size | Why here |
 |---|------|------|----------|
-| 0 | **Close the MVP** | S | clean starting point |
-| 1 | **Phase 2a – MCU basics and serial protocol** | M | no CAN hardware needed yet, core embedded skills |
-| 2 | **Phase 2b – `serial_bridge` on the PC** | S–M | connects the MCU to the virtual bus |
-| 3 | **Phase 3 – STM32 as CAN controller** | L | real hardware nodes in the digital twin |
+| 0 | **Close the MVP** ✅ | S | clean starting point |
+| 1 | **Phase 2a – MCU basics and serial protocol** ✅ | M | no CAN hardware needed yet, core embedded skills |
+| 2 | **Phase 2b – `serial_bridge` on the PC** ✅ | S–M | connects the MCU to the virtual bus |
+| 3 | **Phase 3 – STM32 as CAN controller** ✅ (loopback) | L | real hardware nodes in the digital twin |
 | 4 | **Real-time Linux and SocketCAN** | M | can run in parallel to 3 |
 | 5 | **Protocols on CAN** (optional) | M–L | builds on 3 and 4 |
 | 6 | **Deeper digital twin** | ongoing | lower priority for the learning goal |
