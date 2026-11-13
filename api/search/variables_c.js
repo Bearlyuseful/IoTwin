@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['offset_0',['offset',['../structCanSignal.html#a36ad6156fc1db4773620f288cf568cb7',1,'CanSignal']]],
-  ['onconnectionchanged_1',['OnConnectionChanged',['../classUIoTwinBusSubsystem.html#a7d56d1d5ad14799bf928c30f1d336a5e',1,'UIoTwinBusSubsystem']]],
-  ['onframereceived_2',['OnFrameReceived',['../classUIoTwinBusSubsystem.html#af9cfda99d41b7601c963ffa006e11481',1,'UIoTwinBusSubsystem']]],
-  ['onrelaychanged_3',['OnRelayChanged',['../classAPowerSourceActor.html#a1f2c215f80fb8bdb152db7f8d70c1969',1,'APowerSourceActor']]],
-  ['open_4',['open',['../structGateway.html#a576e5425a73342206a139c54a175ca97',1,'Gateway']]],
-  ['options_5',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
-  ['overflows_6',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
-  ['overruns_7',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
+  ['name_0',['Name',['../structFCanSignalDef.html#a5b066c1051e7e1dce7beee8f82c6644f',1,'FCanSignalDef::Name'],['../structFCanMessageDef.html#a0657b4a8a57fbc85faf3559115ae8d3a',1,'FCanMessageDef::Name'],['../structFComponentParameter.html#ac595f961e0ab2f0c53c4138fab9880b2',1,'FComponentParameter::Name'],['../structFComponentInfo.html#a0c474def033f8f9862c62c4735e6c6ff',1,'FComponentInfo::Name'],['../structFSchematicHitBox.html#a534ceaf9577ef0c587aac1de212dd1f0',1,'FSchematicHitBox::Name'],['../structFSystemMessage.html#ae31d6ee218457d68cf5600a028ddabe4',1,'FSystemMessage::Name'],['../classFSystemDescription.html#a3fdb73b204df0ccd5848406210513ac3',1,'FSystemDescription::Name']]],
+  ['name_1',['name',['../structDbcSignal.html#a310401a4e8c7b83245ce293d1713ddc7',1,'DbcSignal::name'],['../structDbcMessage.html#a62316d346cef61e0f715afa1c47844d0',1,'DbcMessage::name']]],
+  ['next_5fclient_5fid_2',['next_client_id',['../structBusServer.html#a7a97f71eefa900cf415039cdff6c25ae',1,'BusServer']]],
+  ['next_5fdeadline_5fns_3',['next_deadline_ns',['../structCycleTimer.html#ad2f01921defca96707858cc87e63f383',1,'CycleTimer']]],
+  ['nodeboxprefix_4',['NodeBoxPrefix',['../classFSchematicRenderer.html#a760ca5e30a892a882ffaf942b383bd86',1,'FSchematicRenderer']]],
+  ['nodeid_5',['NodeId',['../structFSchematicLogEntry.html#a7cbc5224482fdde5b6e4aad51a0fc871',1,'FSchematicLogEntry']]],
+  ['nodes_6',['Nodes',['../classFSystemDescription.html#ab7bd5cc6aa28517bf281a4314daa0f88',1,'FSystemDescription']]]
 ];

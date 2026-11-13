@@ -14,11 +14,13 @@ Inheritance diagram for AIo\+Twin\+HUD\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 virtual void \mbox{\hyperlink{classAIoTwinHUD_ad605a66b09f39aa68c32cc05ca1c52a9}{Draw\+HUD}} () override
+\item 
+virtual void \mbox{\hyperlink{classAIoTwinHUD_a646c77983ad193dca9038df31ff07c94}{Notify\+Hit\+Box\+Click}} (FName Box\+Name) override
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Draws bus connection, device states and recent CAN traffic. 
+3D view\+: draws bus connection, device states and recent CAN traffic. Schematic view\+: full-\/screen 2D schematic (\doxylink{classFSchematicRenderer}{FSchematic\+Renderer}). 
 
 \label{doc-func-members}
 \Hypertarget{classAIoTwinHUD_doc-func-members}
@@ -28,6 +30,12 @@ Draws bus connection, device states and recent CAN traffic.
 \doxysubsubsection{\texorpdfstring{DrawHUD()}{DrawHUD()}}
 {\footnotesize\ttfamily \label{classAIoTwinHUD_ad605a66b09f39aa68c32cc05ca1c52a9} 
 void AIo\+Twin\+HUD\+::\+Draw\+HUD (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classAIoTwinHUD_a646c77983ad193dca9038df31ff07c94}\index{AIoTwinHUD@{AIoTwinHUD}!NotifyHitBoxClick@{NotifyHitBoxClick}}
+\index{NotifyHitBoxClick@{NotifyHitBoxClick}!AIoTwinHUD@{AIoTwinHUD}}
+\doxysubsubsection{\texorpdfstring{NotifyHitBoxClick()}{NotifyHitBoxClick()}}
+{\footnotesize\ttfamily \label{classAIoTwinHUD_a646c77983ad193dca9038df31ff07c94} 
+void AIo\+Twin\+HUD\+::\+Notify\+Hit\+Box\+Click (\begin{DoxyParamCaption}\item[{FName}]{Box\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 

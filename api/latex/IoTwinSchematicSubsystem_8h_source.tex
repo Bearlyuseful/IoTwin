@@ -1,0 +1,127 @@
+\doxysection{Io\+Twin\+Schematic\+Subsystem.\+h}
+\hypertarget{IoTwinSchematicSubsystem_8h_source}{}\label{IoTwinSchematicSubsystem_8h_source}\index{visualizer/Source/IoTwin/Schematic/IoTwinSchematicSubsystem.h@{visualizer/Source/IoTwin/Schematic/IoTwinSchematicSubsystem.h}}
+\mbox{\hyperlink{IoTwinSchematicSubsystem_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ model\ behind\ the\ 2D\ schematic\ view:\ system\ description,\ DBC,}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ component\ data\ and\ the\ live\ activity\ of\ every\ node.}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CanFrame_8h}{Bus/CanFrame.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CanDatabase_8h}{Schematic/CanDatabase.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ComponentCatalog_8h}{Schematic/ComponentCatalog.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{SystemDescription_8h}{Schematic/SystemDescription.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Subsystems/GameInstanceSubsystem.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}IoTwinSchematicSubsystem.generated.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \mbox{\hyperlink{IoTwinSchematicSubsystem_8h_a4e5fb43cf1aaf248d5b36e71c9241ca9}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnSchematicViewChanged,\ \textcolor{keywordtype}{bool},\ bSchematicVisible);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFSchematicNodeActivity}{FSchematicNodeActivity}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFSchematicNodeActivity_aa4858f134e7196b66b05d2c417b32f8c}{LastSeen}}\ =\ -\/1.0;}
+\DoxyCodeLine{00020\ \ \ \ \ FString\ \mbox{\hyperlink{structFSchematicNodeActivity_aa96aac252b4a045f8788250ac9541cb9}{LastMessage}};}
+\DoxyCodeLine{00021\ \ \ \ \ int32\ \mbox{\hyperlink{structFSchematicNodeActivity_abdb2af4d303bcf3dc1172163b63c1638}{FrameCount}}\ =\ 0;}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFSchematicLogEntry}{FSchematicLogEntry}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFSchematicLogEntry_a390d31ab29e0264198e3af7d75e8b2ee}{Time}}\ =\ 0.0;}
+\DoxyCodeLine{00028\ \ \ \ \ FString\ \mbox{\hyperlink{structFSchematicLogEntry_a7cbc5224482fdde5b6e4aad51a0fc871}{NodeId}};\ \ \textcolor{comment}{//\ producer,\ empty\ if\ unknown}}
+\DoxyCodeLine{00029\ \ \ \ \ FString\ \mbox{\hyperlink{structFSchematicLogEntry_a2dfb03ee46bf68f7fb425bde358067e8}{Raw}};\ \ \ \ \ \textcolor{comment}{//\ "{}100\#01"{}}}
+\DoxyCodeLine{00030\ \ \ \ \ FString\ \mbox{\hyperlink{structFSchematicLogEntry_a588d5392fed8d348b090eb3b0be85fd0}{Decoded}};\ \textcolor{comment}{//\ "{}LAMP\_CMD\ LampOn=1\ (On)"{},\ empty\ without\ DBC\ entry}}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFSchematicPulse}{FSchematicPulse}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFSchematicPulse_a10a727972f6239fa03f571885de76df4}{Time}}\ =\ 0.0;}
+\DoxyCodeLine{00037\ \ \ \ \ FString\ \mbox{\hyperlink{structFSchematicPulse_a4450333bbcaa5c4cae2b3752528569eb}{From}};}
+\DoxyCodeLine{00038\ \ \ \ \ TArray<FString>\ \mbox{\hyperlink{structFSchematicPulse_aa5655a7a807d857f4c619471de34df6c}{To}};}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00049\ UCLASS(Config\ =\ Game)}
+\DoxyCodeLine{00050\ class\ IOTWIN\_API\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIoTwinSchematicSubsystem}}\ :\ public\ UGameInstanceSubsystem}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a2d869f9aa346d294f6f7ae80bd4cebd1}{Initialize}}(FSubsystemCollectionBase\&\ Collection)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ae3c9b74eaa11939dd6e9b04dac401f55}{Deinitialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIoTwinSchematicSubsystem}}*\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a0e9f15352ba2e73fcb755a09139d0b6f}{Get}}(\textcolor{keyword}{const}\ UObject*\ WorldContextObject);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Schematic"{}})}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a96104bf30ecdead789d71e34e198331a}{ToggleView}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Schematic"{}})}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a42154343f560a13aff2a9b70a553f442}{SetSchematicVisible}}(\textcolor{keywordtype}{bool}\ bVisible);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Schematic"{}})}
+\DoxyCodeLine{00068\ \ \ \ \ bool\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ab090b9969314bbfb4f406317dba75b18}{IsSchematicVisible}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bSchematicVisible;\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Schematic"{}})}
+\DoxyCodeLine{00072\ \ \ \ \ FOnSchematicViewChanged\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a634bf3bedfda0ca6e1c1e842550139f0}{OnViewChanged}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ab10309240cbabaa9738cc41f71466377}{LoadSystem}}(const\ FString\&\ Path);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ace13c13bc3a5bc4883ce244e146e807c}{HasSystem}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bSystemLoaded;\ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classFSystemDescription}{FSystemDescription}}\&\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_abb860dee7abbbcb764dcf122555b024a}{GetSystem}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ System;\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ac83a702d8c6208d52799dd37f3261998}{GetSystemPath}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ SystemPath;\ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a55c83919f493ba13a83d49f2b7b8fd0f}{GetLoadError}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ LoadError;\ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classFComponentCatalog}{FComponentCatalog}}\&\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a422671852e104a0ba1f6e1dac90fad03}{GetComponents}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Components;\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemBus}{FSystemBus}}*\ GetLiveBus()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \ \ \ \ FString\ Describe(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame,\ FString*\ OutMessageName\ =\ \textcolor{keyword}{nullptr})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00090\ \ \ \ \ FString\ GuessProducer(\textcolor{keyword}{const}\ FString\&\ MessageName,\ \textcolor{keywordtype}{bool}\ bSentByThisNode)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \ \ TArray<FString>\ GetConsumers(\textcolor{keyword}{const}\ FString\&\ MessageName,\ \textcolor{keyword}{const}\ FString\&\ Producer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ RecordFrame(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame,\ \textcolor{keywordtype}{bool}\ bSentByThisNode,\ \textcolor{keywordtype}{double}\ Now);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSchematicNodeActivity}{FSchematicNodeActivity}}*\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a00c5289f669dad949f7956c1f088cb30}{FindActivity}}(\textcolor{keyword}{const}\ FString\&\ NodeId)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Activity.Find(NodeId);\ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{const}\ TArray<FSchematicLogEntry>\&\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_aa430974d271accac8f9c4531c0529e44}{GetLog}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Log;\ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{const}\ TArray<FSchematicPulse>\&\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a41b5afdcf09124861aa7f7d8c25ad464}{GetPulses}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Pulses;\ \}}
+\DoxyCodeLine{00101\ \ \ \ \ int32\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_acbde610cd7e58e111c1eb70b04fb37f9}{GetTotalFrames}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ TotalFrames;\ \}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{float}\ GetFramesPerSecond(\textcolor{keywordtype}{double}\ Now)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00105\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a0e00c94599f2d195b97e894df52391c0}{SelectedNode}};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00108\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Schematic"{}})}
+\DoxyCodeLine{00109\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a959ca6cdc8ede88dee0606ad7a29024f}{SystemFile}}\ =\ TEXT(\textcolor{stringliteral}{"{}data/systems/light-\/demo.json"{}});}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00112\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Schematic"{}})}
+\DoxyCodeLine{00113\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_af430add6fb99214995578c1e9df66304}{SelfNode}}\ =\ TEXT(\textcolor{stringliteral}{"{}visualizer"{}});}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ static\ constexpr\ int32\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_abf33256c5b4cdce5d9058a4902ae01e9}{MaxLogEntries}}\ =\ 14;}
+\DoxyCodeLine{00116\ \ \ \ \ static\ constexpr\ int32\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a18656cbc5c38d21f8b0770094e1d1d84}{MaxPulses}}\ =\ 24;}
+\DoxyCodeLine{00117\ \ \ \ \ static\ constexpr\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a71dfdab29f201800691decb7d876e270}{PulseDuration}}\ =\ 0.8;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ private:}
+\DoxyCodeLine{00120\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ HandleFrameReceived(const\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ HandleFrameSent(const\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ FString\ FindSystemFile()\ const;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classFSystemDescription}{FSystemDescription}}\ System;}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{classFCanDatabase}{FCanDatabase}}\ LiveDatabase;}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classFComponentCatalog}{FComponentCatalog}}\ Components;}
+\DoxyCodeLine{00131\ \ \ \ \ FString\ SystemPath;}
+\DoxyCodeLine{00132\ \ \ \ \ FString\ LoadError;}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{bool}\ bSystemLoaded\ =\ false;}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{bool}\ bSchematicVisible\ =\ false;}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ TMap<FString,\ \mbox{\hyperlink{structFSchematicNodeActivity}{FSchematicNodeActivity}}>\ Activity;}
+\DoxyCodeLine{00137\ \ \ \ \ TArray<\mbox{\hyperlink{structFSchematicLogEntry}{FSchematicLogEntry}}>\ Log;}
+\DoxyCodeLine{00138\ \ \ \ \ TArray<\mbox{\hyperlink{structFSchematicPulse}{FSchematicPulse}}>\ Pulses;}
+\DoxyCodeLine{00139\ \ \ \ \ int32\ TotalFrames\ =\ 0;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{double}\ RateWindowStart\ =\ 0.0;}
+\DoxyCodeLine{00141\ \ \ \ \ int32\ RateWindowFrames\ =\ 0;}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{float}\ LastRate\ =\ 0.0f;}
+\DoxyCodeLine{00143\ \};}
+
+\end{DoxyCode}

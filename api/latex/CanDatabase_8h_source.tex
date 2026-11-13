@@ -1,0 +1,57 @@
+\doxysection{Can\+Database.\+h}
+\hypertarget{CanDatabase_8h_source}{}\label{CanDatabase_8h_source}\index{visualizer/Source/IoTwin/Schematic/CanDatabase.h@{visualizer/Source/IoTwin/Schematic/CanDatabase.h}}
+\mbox{\hyperlink{CanDatabase_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ DBC\ reader\ for\ the\ visualizer\ (messages,\ signals,\ value\ tables).}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ Same\ bit\ semantics\ as\ libs/can\ (can\_signal.c\ /\ dbc.c):\ Intel\ =\ little\ endian,}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Motorola\ =\ big\ endian\ in\ DBC\ sawtooth\ numbering.\ Multiplexing\ is\ not}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ evaluated\ here\ (all\ signals\ are\ decoded).}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CanFrame_8h}{Bus/CanFrame.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFCanSignalDef}{FCanSignalDef}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ FString\ \mbox{\hyperlink{structFCanSignalDef_a5b066c1051e7e1dce7beee8f82c6644f}{Name}};}
+\DoxyCodeLine{00015\ \ \ \ \ int32\ \mbox{\hyperlink{structFCanSignalDef_a52fcc4a4b6b876c12ed56cb7066a001a}{StartBit}}\ =\ 0;}
+\DoxyCodeLine{00016\ \ \ \ \ int32\ \mbox{\hyperlink{structFCanSignalDef_aaf7e82b3f684d82ae012da67293bae51}{Length}}\ =\ 1;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanSignalDef_a1618265d14d52812ec1a680e47751e35}{bIntel}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanSignalDef_a338a0235898d474e551b8bf071922f13}{bSigned}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFCanSignalDef_aec26a62273cf319255dd417c63aad226}{Factor}}\ =\ 1.0;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structFCanSignalDef_a0e0e7767d60dfbefeabdec84576d06fe}{Offset}}\ =\ 0.0;}
+\DoxyCodeLine{00021\ \ \ \ \ FString\ \mbox{\hyperlink{structFCanSignalDef_ad3ec92635ebd3657889c2307c9bcf30e}{Unit}};}
+\DoxyCodeLine{00022\ \ \ \ \ TMap<int64,\ FString>\ \mbox{\hyperlink{structFCanSignalDef_aeded84a90c18907bc4c0f9393a2ccf8c}{ValueNames}};}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFCanMessageDef}{FCanMessageDef}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ uint32\ \mbox{\hyperlink{structFCanMessageDef_a5dab95745d2392da55aeb6d72a54578c}{Id}}\ =\ 0;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFCanMessageDef_a1ed5b8d21d99a34ab4e8839d71ad123d}{bExtended}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00029\ \ \ \ \ FString\ \mbox{\hyperlink{structFCanMessageDef_a0657b4a8a57fbc85faf3559115ae8d3a}{Name}};}
+\DoxyCodeLine{00030\ \ \ \ \ FString\ \mbox{\hyperlink{structFCanMessageDef_a6a611cbebe1e6fabdc2f65ec07e3e293}{Transmitter}};}
+\DoxyCodeLine{00031\ \ \ \ \ TArray<FCanSignalDef>\ \mbox{\hyperlink{structFCanMessageDef_a0226c81fb8c19831b86930546217d394}{Signals}};}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFCanDatabase}{FCanDatabase}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFCanDatabase_a33da4ba232db9d126d40e63ce1b453c8}{LoadFromFile}}(\textcolor{keyword}{const}\ FString\&\ Path,\ FString\&\ OutError);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFCanDatabase_a39c59e7e98960b5f8c95e5df6fd90ae4}{LoadFromString}}(\textcolor{keyword}{const}\ FString\&\ Text,\ FString\&\ OutError);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanMessageDef}{FCanMessageDef}}*\ \mbox{\hyperlink{classFCanDatabase_ad34456db10ce793df40139182ad133b3}{FindMessage}}(int32\ Id,\ \textcolor{keywordtype}{bool}\ bExtended)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanMessageDef}{FCanMessageDef}}*\ \mbox{\hyperlink{classFCanDatabase_a047c42c1b9605f962407a3adf497e278}{FindMessageByName}}(\textcolor{keyword}{const}\ FString\&\ Name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ \ \ \ \ int32\ \mbox{\hyperlink{classFCanDatabase_a923f31dc13caf9d9631c87a14cb7873b}{NumMessages}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Messages.Num();\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ FString\ Describe(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanFrame}{FCanFrame}}\&\ Frame)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ uint64\ ExtractRaw(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanSignalDef}{FCanSignalDef}}\&\ Signal,\ \textcolor{keyword}{const}\ uint8\ Data[8]);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ Decode(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFCanSignalDef}{FCanSignalDef}}\&\ Signal,\ \textcolor{keyword}{const}\ uint8\ Data[8],\ int64*\ OutRawSigned\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ TArray<FCanMessageDef>\ Messages;}
+\DoxyCodeLine{00052\ \};}
+
+\end{DoxyCode}

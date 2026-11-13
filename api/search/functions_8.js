@@ -1,7 +1,7 @@
 var searchData=
 [
   ['implement_5fprimary_5fgame_5fmodule_0',['IMPLEMENT_PRIMARY_GAME_MODULE',['../IoTwin_8cpp.html#a2fded865091598f71627e9213ddff16a',1,'IoTwin.cpp']]],
-  ['initialize_1',['Initialize',['../classUIoTwinBusSubsystem.html#a46ded7bf1f099443cb294d6036b8c6f2',1,'UIoTwinBusSubsystem']]],
+  ['initialize_1',['Initialize',['../classUIoTwinBusSubsystem.html#a46ded7bf1f099443cb294d6036b8c6f2',1,'UIoTwinBusSubsystem::Initialize()'],['../classUIoTwinSchematicSubsystem.html#a2d869f9aa346d294f6f7ae80bd4cebd1',1,'UIoTwinSchematicSubsystem::Initialize()']]],
   ['iotwin_2',['IoTwin',['../classIoTwin.html#aa0ab60ea6bb5fba63fe30649256f5e05',1,'IoTwin']]],
   ['isconnected_3',['IsConnected',['../classFIoTwinBusConnection.html#a0f6f2545ac96d52e823823ad8fda2822',1,'FIoTwinBusConnection::IsConnected()'],['../classUIoTwinBusSubsystem.html#a3e1a28b7cb33c5d9487c85022eae6e22',1,'UIoTwinBusSubsystem::IsConnected()']]],
   ['ison_4',['IsOn',['../classALampActor.html#a4cb50cf0191a8b1b2e0fec9b628fc729',1,'ALampActor::IsOn()'],['../classAWallSwitchActor.html#a6f6fd1438f6199d7b23ae0d4f646a345',1,'AWallSwitchActor::IsOn()']]],
@@ -17,5 +17,6 @@ var searchData=
   ['isotp_5ftx_5fbusy_14',['isotp_tx_busy',['../isotp_8c.html#a34ee96a5e62c372b10c65ac504215e5c',1,'isotp_tx_busy(const IsoTpLink *link):&#160;isotp.c'],['../isotp_8h.html#a34ee96a5e62c372b10c65ac504215e5c',1,'isotp_tx_busy(const IsoTpLink *link):&#160;isotp.c']]],
   ['isotp_5ftx_5fresult_15',['isotp_tx_result',['../isotp_8c.html#a2b0d08f409cb3810e7a2bf4260ad809d',1,'isotp_tx_result(const IsoTpLink *link):&#160;isotp.c'],['../isotp_8h.html#a2b0d08f409cb3810e7a2bf4260ad809d',1,'isotp_tx_result(const IsoTpLink *link):&#160;isotp.c']]],
   ['isoutputenabled_16',['IsOutputEnabled',['../classAPowerSourceActor.html#a4ca57b51ec19162748ab86b26d667511',1,'APowerSourceActor']]],
-  ['isvalid_17',['IsValid',['../structFCanFrame.html#a0eccf472330530f6ae30b5f622f16780',1,'FCanFrame']]]
+  ['isschematicvisible_17',['IsSchematicVisible',['../classUIoTwinSchematicSubsystem.html#ab090b9969314bbfb4f406317dba75b18',1,'UIoTwinSchematicSubsystem']]],
+  ['isvalid_18',['IsValid',['../structFCanFrame.html#a0eccf472330530f6ae30b5f622f16780',1,'FCanFrame']]]
 ];

@@ -699,6 +699,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#schematic-view-sourceiotwinschematic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schematic view (Source/IoTwin/Schematic)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#electrical-model-sourceiotwinsystems" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1150,6 +1161,63 @@ e.g. <code>100</code>), <em>Byte Index</em> and <em>Bit Index</em>.</p>
 </ul>
 <p>For full frames use the subsystem directly (<strong>Get IoTwin Bus Subsystem</strong> →
 <strong>Send Frame</strong> / <strong>On Frame Received</strong>).</p>
+<h2 id="schematic-view-sourceiotwinschematic">Schematic view (<code>Source/IoTwin/Schematic</code>)<a class="headerlink" href="#schematic-view-sourceiotwinschematic" title="Permanent link">&para;</a></h2>
+<p><strong>TAB</strong> (or the button in the HUD) switches between the 3D scene and a 2D
+schematic of the system:</p>
+<ul>
+<li>nodes from the system description (<code>data/systems/*.json</code>), the CAN bus with
+  its members, other links (USB) as dashed lines;</li>
+<li>every frame is decoded with the DBC of the bus and shown at the node that
+  sent it, with a dot travelling over the bus to the consumers;</li>
+<li>status per node (green &lt; 3 s, yellow &lt; 10 s since its last frame), frame
+  rate, message log;</li>
+<li>click a node for details: description, messages it sends/receives, links
+  and the characteristics from the component database (unverified values
+  are marked).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FSystemDescription</code></td>
+<td>loads a system JSON (nodes, buses, links, messages)</td>
+</tr>
+<tr>
+<td><code>FCanDatabase</code></td>
+<td>DBC reader for the visualizer (messages, signals, value tables, Intel/Motorola)</td>
+</tr>
+<tr>
+<td><code>FComponentCatalog</code></td>
+<td>reads <code>data/components/**/*.json</code>, formats values (<code>1.7 .. 3.6 V</code>, <code>64 MHz</code>)</td>
+</tr>
+<tr>
+<td><code>UIoTwinSchematicSubsystem</code></td>
+<td>model: loads the data, follows <code>OnFrameReceived</code> / <code>OnFrameSent</code>, attributes frames to nodes, view switch</td>
+</tr>
+<tr>
+<td><code>FSchematicRenderer</code></td>
+<td>draws the view on the HUD canvas (layout designed for 900 px, scaled)</td>
+</tr>
+</tbody>
+</table>
+<p>Which node sent a frame: frames sent by this game belong to <code>SelfNode</code>
+(<code>visualizer</code>); for received frames the first producer of the message in the
+system description other than <code>SelfNode</code> is used (iotwin-bus does not echo
+frames back to their sender).</p>
+<div class="highlight"><pre><span></span><code><span class="k">[/Script/IoTwin.IoTwinSchematicSubsystem]</span>
+<span class="na">SystemFile</span><span class="o">=</span><span class="s">data/systems/light-demo.json</span>
+<span class="na">SelfNode</span><span class="o">=</span><span class="s">visualizer</span>
+</code></pre></div>
+<p><code>SystemFile</code> is searched relative to the launch directory, the repository
+root (<code>visualizer/..</code>) and the package root. Command line:
+<code>-IoTwinSystem=&lt;file&gt;</code>, <code>-IoTwinView=Schematic</code> (start in the schematic),
+<code>-IoTwinSelectNode=&lt;node id&gt;</code> (preselect a node, e.g. for screenshots).</p>
+<p><img alt="Schematic view" src="../../images/schematic.png" /></p>
 <h2 id="electrical-model-sourceiotwinsystems">Electrical model (<code>Source/IoTwin/Systems</code>)<a class="headerlink" href="#electrical-model-sourceiotwinsystems" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>UElectricalPortComponent</code>: wiring is a symmetric list of ports stored on
@@ -1172,11 +1240,14 @@ your own scene, create a Blueprint subclass of <code>GM_Simulation</code>, untic
 <em>Spawn Demo Scene</em> (the relay and switch ids are configurable there as well)
 and select it as <em>GameMode Override</em> in the map's World Settings.</p>
 <h2 id="tests-and-smoke-runs">Tests and smoke runs<a class="headerlink" href="#tests-and-smoke-runs" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c"># Automation tests (CAN codec)</span>
+<div class="highlight"><pre><span></span><code><span class="c"># Automation tests (CAN codec, DBC, system description, component database)</span>
 <span class="n">UnrealEditor-Cmd</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-ExecCmds</span><span class="p">=</span><span class="s2">"Automation RunTests IoTwin;Quit"</span> <span class="n">-unattended</span> <span class="n">-nullrhi</span>
 
 <span class="c"># Unattended game run: screenshot after 10 s, quit after 15 s</span>
 <span class="n">UnrealEditor</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-game</span> <span class="n">-IoTwinScreenshot</span><span class="p">=</span><span class="n">10</span> <span class="n">-IoTwinQuitAfter</span><span class="p">=</span><span class="n">15</span>
+
+<span class="c"># Same in the schematic view with the gateway selected</span>
+<span class="n">UnrealEditor</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-game</span> <span class="n">-IoTwinView</span><span class="p">=</span><span class="n">Schematic</span> <span class="n">-IoTwinSelectNode</span><span class="p">=</span><span class="n">gateway</span> <span class="n">-IoTwinScreenshot</span><span class="p">=</span><span class="n">10</span> <span class="n">-IoTwinQuitAfter</span><span class="p">=</span><span class="n">15</span>
 </code></pre></div>
 <p>The screenshot is written to <code>Saved/Screenshots/IoTwinDemo.png</code>.</p>
 

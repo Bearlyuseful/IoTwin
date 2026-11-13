@@ -1,0 +1,87 @@
+\doxysection{FCan\+Database Class Reference}
+\hypertarget{classFCanDatabase}{}\label{classFCanDatabase}\index{FCanDatabase@{FCanDatabase}}
+
+
+{\ttfamily \#include $<$Can\+Database.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classFCanDatabase_a33da4ba232db9d126d40e63ce1b453c8}{Load\+From\+File}} (const FString \&Path, FString \&Out\+Error)
+\item 
+bool \mbox{\hyperlink{classFCanDatabase_a39c59e7e98960b5f8c95e5df6fd90ae4}{Load\+From\+String}} (const FString \&Text, FString \&Out\+Error)
+\item 
+const \mbox{\hyperlink{structFCanMessageDef}{FCan\+Message\+Def}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFCanDatabase_ad34456db10ce793df40139182ad133b3}{Find\+Message}} (int32 Id, bool b\+Extended) const
+\item 
+const \mbox{\hyperlink{structFCanMessageDef}{FCan\+Message\+Def}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFCanDatabase_a047c42c1b9605f962407a3adf497e278}{Find\+Message\+By\+Name}} (const FString \&Name) const
+\item 
+int32 \mbox{\hyperlink{classFCanDatabase_a923f31dc13caf9d9631c87a14cb7873b}{Num\+Messages}} () const
+\item 
+FString \mbox{\hyperlink{classFCanDatabase_a56a5255a41911e9fa79fcaa8975b100b}{Describe}} (const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint64 \mbox{\hyperlink{classFCanDatabase_ab792d631cb4928a116737442ae0222c3}{Extract\+Raw}} (const \mbox{\hyperlink{structFCanSignalDef}{FCan\+Signal\+Def}} \&Signal, const uint8 Data\mbox{[}8\mbox{]})
+\item 
+static double \mbox{\hyperlink{classFCanDatabase_a008c34f9d7d11296dc5894a84774aa8c}{Decode}} (const \mbox{\hyperlink{structFCanSignalDef}{FCan\+Signal\+Def}} \&Signal, const uint8 Data\mbox{[}8\mbox{]}, int64 \texorpdfstring{$\ast$}{*}Out\+Raw\+Signed=nullptr)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classFCanDatabase_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFCanDatabase_a008c34f9d7d11296dc5894a84774aa8c}\index{FCanDatabase@{FCanDatabase}!Decode@{Decode}}
+\index{Decode@{Decode}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{Decode()}{Decode()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_a008c34f9d7d11296dc5894a84774aa8c} 
+double FCan\+Database\+::\+Decode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanSignalDef}{FCan\+Signal\+Def}} \&}]{Signal}{, }\item[{const uint8}]{Data}{\mbox{[}8\mbox{]}, }\item[{int64 \texorpdfstring{$\ast$}{*}}]{Out\+Raw\+Signed}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classFCanDatabase_a56a5255a41911e9fa79fcaa8975b100b}\index{FCanDatabase@{FCanDatabase}!Describe@{Describe}}
+\index{Describe@{Describe}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{Describe()}{Describe()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_a56a5255a41911e9fa79fcaa8975b100b} 
+FString FCan\+Database\+::\+Describe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Frame}{}\end{DoxyParamCaption}) const}
+
+"{}\+LAMP\+\_\+\+CMD Lamp\+On=1 (\+On)"{}, or an empty string for unknown ids. \Hypertarget{classFCanDatabase_ab792d631cb4928a116737442ae0222c3}\index{FCanDatabase@{FCanDatabase}!ExtractRaw@{ExtractRaw}}
+\index{ExtractRaw@{ExtractRaw}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{ExtractRaw()}{ExtractRaw()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_ab792d631cb4928a116737442ae0222c3} 
+uint64 FCan\+Database\+::\+Extract\+Raw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanSignalDef}{FCan\+Signal\+Def}} \&}]{Signal}{, }\item[{const uint8}]{Data}{\mbox{[}8\mbox{]}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classFCanDatabase_ad34456db10ce793df40139182ad133b3}\index{FCanDatabase@{FCanDatabase}!FindMessage@{FindMessage}}
+\index{FindMessage@{FindMessage}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{FindMessage()}{FindMessage()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_ad34456db10ce793df40139182ad133b3} 
+const \mbox{\hyperlink{structFCanMessageDef}{FCan\+Message\+Def}} \texorpdfstring{$\ast$}{*} FCan\+Database\+::\+Find\+Message (\begin{DoxyParamCaption}\item[{int32}]{Id}{, }\item[{bool}]{b\+Extended}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classFCanDatabase_a047c42c1b9605f962407a3adf497e278}\index{FCanDatabase@{FCanDatabase}!FindMessageByName@{FindMessageByName}}
+\index{FindMessageByName@{FindMessageByName}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{FindMessageByName()}{FindMessageByName()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_a047c42c1b9605f962407a3adf497e278} 
+const \mbox{\hyperlink{structFCanMessageDef}{FCan\+Message\+Def}} \texorpdfstring{$\ast$}{*} FCan\+Database\+::\+Find\+Message\+By\+Name (\begin{DoxyParamCaption}\item[{const FString \&}]{Name}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classFCanDatabase_a33da4ba232db9d126d40e63ce1b453c8}\index{FCanDatabase@{FCanDatabase}!LoadFromFile@{LoadFromFile}}
+\index{LoadFromFile@{LoadFromFile}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{LoadFromFile()}{LoadFromFile()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_a33da4ba232db9d126d40e63ce1b453c8} 
+bool FCan\+Database\+::\+Load\+From\+File (\begin{DoxyParamCaption}\item[{const FString \&}]{Path}{, }\item[{FString \&}]{Out\+Error}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFCanDatabase_a39c59e7e98960b5f8c95e5df6fd90ae4}\index{FCanDatabase@{FCanDatabase}!LoadFromString@{LoadFromString}}
+\index{LoadFromString@{LoadFromString}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{LoadFromString()}{LoadFromString()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_a39c59e7e98960b5f8c95e5df6fd90ae4} 
+bool FCan\+Database\+::\+Load\+From\+String (\begin{DoxyParamCaption}\item[{const FString \&}]{Text}{, }\item[{FString \&}]{Out\+Error}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFCanDatabase_a923f31dc13caf9d9631c87a14cb7873b}\index{FCanDatabase@{FCanDatabase}!NumMessages@{NumMessages}}
+\index{NumMessages@{NumMessages}!FCanDatabase@{FCanDatabase}}
+\doxysubsubsection{\texorpdfstring{NumMessages()}{NumMessages()}}
+{\footnotesize\ttfamily \label{classFCanDatabase_a923f31dc13caf9d9631c87a14cb7873b} 
+int32 FCan\+Database\+::\+Num\+Messages (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{CanDatabase_8h}{Can\+Database.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{CanDatabase_8cpp}{Can\+Database.\+cpp}}\end{DoxyCompactItemize}

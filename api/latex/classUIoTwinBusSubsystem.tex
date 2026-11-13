@@ -37,6 +37,8 @@ static \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIo\+Twin\+Bus\+Subsystem}} \t
 \item 
 FOn\+Can\+Frame\+Received \mbox{\hyperlink{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481}{On\+Frame\+Received}}
 \item 
+FOn\+Can\+Frame\+Received \mbox{\hyperlink{classUIoTwinBusSubsystem_acbb7c208537522194bac1656c5006fae}{On\+Frame\+Sent}}
+\item 
 FOn\+Bus\+Connection\+Changed \mbox{\hyperlink{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e}{On\+Connection\+Changed}}
 \item 
 FString \mbox{\hyperlink{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522}{Host}} = TEXT("{}127.\+0.\+0.\+1"{})
@@ -130,7 +132,13 @@ Fired when the connection to the bus is established or lost. \Hypertarget{classU
 {\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481} 
 FOn\+Can\+Frame\+Received UIo\+Twin\+Bus\+Subsystem\+::\+On\+Frame\+Received}
 
-Fired on the game thread for every frame received from the bus. \Hypertarget{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Port@{Port}}
+Fired on the game thread for every frame received from the bus. \Hypertarget{classUIoTwinBusSubsystem_acbb7c208537522194bac1656c5006fae}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!OnFrameSent@{OnFrameSent}}
+\index{OnFrameSent@{OnFrameSent}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
+\doxysubsubsection{\texorpdfstring{OnFrameSent}{OnFrameSent}}
+{\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_acbb7c208537522194bac1656c5006fae} 
+FOn\+Can\+Frame\+Received UIo\+Twin\+Bus\+Subsystem\+::\+On\+Frame\+Sent}
+
+Fired on the game thread for every frame this game sent to the bus. \Hypertarget{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}\index{UIoTwinBusSubsystem@{UIoTwinBusSubsystem}!Port@{Port}}
 \index{Port@{Port}!UIoTwinBusSubsystem@{UIoTwinBusSubsystem}}
 \doxysubsubsection{\texorpdfstring{Port}{Port}}
 {\footnotesize\ttfamily \label{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f} 

@@ -1,0 +1,277 @@
+\doxysection{UIo\+Twin\+Schematic\+Subsystem Class Reference}
+\hypertarget{classUIoTwinSchematicSubsystem}{}\label{classUIoTwinSchematicSubsystem}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+
+
+{\ttfamily \#include $<$Io\+Twin\+Schematic\+Subsystem.\+h$>$}
+
+Inheritance diagram for UIo\+Twin\+Schematic\+Subsystem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUIoTwinSchematicSubsystem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a2d869f9aa346d294f6f7ae80bd4cebd1}{Initialize}} (FSubsystem\+Collection\+Base \&Collection) override
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ae3c9b74eaa11939dd6e9b04dac401f55}{Deinitialize}} () override
+\item 
+void \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a96104bf30ecdead789d71e34e198331a}{Toggle\+View}} ()
+\item 
+void \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a42154343f560a13aff2a9b70a553f442}{Set\+Schematic\+Visible}} (bool b\+Visible)
+\item 
+bool \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ab090b9969314bbfb4f406317dba75b18}{Is\+Schematic\+Visible}} () const
+\item 
+bool \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ab10309240cbabaa9738cc41f71466377}{Load\+System}} (const FString \&Path)
+\item 
+bool \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ace13c13bc3a5bc4883ce244e146e807c}{Has\+System}} () const
+\item 
+const \mbox{\hyperlink{classFSystemDescription}{FSystem\+Description}} \& \mbox{\hyperlink{classUIoTwinSchematicSubsystem_abb860dee7abbbcb764dcf122555b024a}{Get\+System}} () const
+\item 
+const FString \& \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ac83a702d8c6208d52799dd37f3261998}{Get\+System\+Path}} () const
+\item 
+const FString \& \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a55c83919f493ba13a83d49f2b7b8fd0f}{Get\+Load\+Error}} () const
+\item 
+const \mbox{\hyperlink{classFComponentCatalog}{FComponent\+Catalog}} \& \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a422671852e104a0ba1f6e1dac90fad03}{Get\+Components}} () const
+\item 
+const \mbox{\hyperlink{structFSystemBus}{FSystem\+Bus}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUIoTwinSchematicSubsystem_aec89fb46faa7ed794a2c385c6b5d9f40}{Get\+Live\+Bus}} () const
+\item 
+FString \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a180dc3f13a6548d64d0492d08069df8b}{Describe}} (const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame, FString \texorpdfstring{$\ast$}{*}Out\+Message\+Name=nullptr) const
+\item 
+FString \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a3eb8042a7bc9fb5e0db1d0ebd7b6a0f8}{Guess\+Producer}} (const FString \&Message\+Name, bool b\+Sent\+By\+This\+Node) const
+\item 
+TArray$<$ FString $>$ \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a797fe1205691b7e4f6cb0e117e6e5ef2}{Get\+Consumers}} (const FString \&Message\+Name, const FString \&Producer) const
+\item 
+void \mbox{\hyperlink{classUIoTwinSchematicSubsystem_ae7355f2f9e649ef09870a29d907fbf2b}{Record\+Frame}} (const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&Frame, bool b\+Sent\+By\+This\+Node, double Now)
+\item 
+const \mbox{\hyperlink{structFSchematicNodeActivity}{FSchematic\+Node\+Activity}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a00c5289f669dad949f7956c1f088cb30}{Find\+Activity}} (const FString \&Node\+Id) const
+\item 
+const TArray$<$ \mbox{\hyperlink{structFSchematicLogEntry}{FSchematic\+Log\+Entry}} $>$ \& \mbox{\hyperlink{classUIoTwinSchematicSubsystem_aa430974d271accac8f9c4531c0529e44}{Get\+Log}} () const
+\item 
+const TArray$<$ \mbox{\hyperlink{structFSchematicPulse}{FSchematic\+Pulse}} $>$ \& \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a41b5afdcf09124861aa7f7d8c25ad464}{Get\+Pulses}} () const
+\item 
+int32 \mbox{\hyperlink{classUIoTwinSchematicSubsystem_acbde610cd7e58e111c1eb70b04fb37f9}{Get\+Total\+Frames}} () const
+\item 
+float \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a26d4e55bf7ee4069fe5a5b7b902612d8}{Get\+Frames\+Per\+Second}} (double Now) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIo\+Twin\+Schematic\+Subsystem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a0e9f15352ba2e73fcb755a09139d0b6f}{Get}} (const UObject \texorpdfstring{$\ast$}{*}World\+Context\+Object)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+FOn\+Schematic\+View\+Changed \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a634bf3bedfda0ca6e1c1e842550139f0}{On\+View\+Changed}}
+\item 
+FString \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a0e00c94599f2d195b97e894df52391c0}{Selected\+Node}}
+\item 
+FString \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a959ca6cdc8ede88dee0606ad7a29024f}{System\+File}} = TEXT("{}data/systems/light-\/demo.\+json"{})
+\item 
+FString \mbox{\hyperlink{classUIoTwinSchematicSubsystem_af430add6fb99214995578c1e9df66304}{Self\+Node}} = TEXT("{}visualizer"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32 \mbox{\hyperlink{classUIoTwinSchematicSubsystem_abf33256c5b4cdce5d9058a4902ae01e9}{Max\+Log\+Entries}} = 14
+\item 
+static constexpr int32 \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a18656cbc5c38d21f8b0770094e1d1d84}{Max\+Pulses}} = 24
+\item 
+static constexpr double \mbox{\hyperlink{classUIoTwinSchematicSubsystem_a71dfdab29f201800691decb7d876e270}{Pulse\+Duration}} = 0.\+8
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Loads the system description (data/systems/\texorpdfstring{$\ast$}{*}.json) with its DBC files and the component database, follows the traffic of \doxylink{classUIoTwinBusSubsystem}{UIo\+Twin\+Bus\+Subsystem} and owns the 3D / schematic view switch.
+
+Configure in Default\+Game.\+ini (\mbox{[}/\+Script/\+Io\+Twin.Io\+Twin\+Schematic\+Subsystem\mbox{]}) or per run with -\/Io\+Twin\+System=$<$file$>$, -\/Io\+Twin\+View=Schematic and -\/Io\+Twin\+Select\+Node=$<$node id$>$. 
+
+\label{doc-func-members}
+\Hypertarget{classUIoTwinSchematicSubsystem_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUIoTwinSchematicSubsystem_ae3c9b74eaa11939dd6e9b04dac401f55}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!Deinitialize@{Deinitialize}}
+\index{Deinitialize@{Deinitialize}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{Deinitialize()}{Deinitialize()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_ae3c9b74eaa11939dd6e9b04dac401f55} 
+void UIo\+Twin\+Schematic\+Subsystem\+::\+Deinitialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a180dc3f13a6548d64d0492d08069df8b}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!Describe@{Describe}}
+\index{Describe@{Describe}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{Describe()}{Describe()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a180dc3f13a6548d64d0492d08069df8b} 
+FString UIo\+Twin\+Schematic\+Subsystem\+::\+Describe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Frame}{, }\item[{FString \texorpdfstring{$\ast$}{*}}]{Out\+Message\+Name}{ = {\ttfamily nullptr}}\end{DoxyParamCaption}) const}
+
+"{}\+LAMP\+\_\+\+CMD Lamp\+On=1 (\+On)"{} decoded with the DBC of the live bus, empty if unknown. \Hypertarget{classUIoTwinSchematicSubsystem_a00c5289f669dad949f7956c1f088cb30}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!FindActivity@{FindActivity}}
+\index{FindActivity@{FindActivity}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{FindActivity()}{FindActivity()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a00c5289f669dad949f7956c1f088cb30} 
+const \mbox{\hyperlink{structFSchematicNodeActivity}{FSchematic\+Node\+Activity}} \texorpdfstring{$\ast$}{*} UIo\+Twin\+Schematic\+Subsystem\+::\+Find\+Activity (\begin{DoxyParamCaption}\item[{const FString \&}]{Node\+Id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a0e9f15352ba2e73fcb755a09139d0b6f}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!Get@{Get}}
+\index{Get@{Get}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a0e9f15352ba2e73fcb755a09139d0b6f} 
+\mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIo\+Twin\+Schematic\+Subsystem}} \texorpdfstring{$\ast$}{*} UIo\+Twin\+Schematic\+Subsystem\+::\+Get (\begin{DoxyParamCaption}\item[{const UObject \texorpdfstring{$\ast$}{*}}]{World\+Context\+Object}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Convenience accessor, returns nullptr outside of a game world. \Hypertarget{classUIoTwinSchematicSubsystem_a422671852e104a0ba1f6e1dac90fad03}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetComponents@{GetComponents}}
+\index{GetComponents@{GetComponents}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetComponents()}{GetComponents()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a422671852e104a0ba1f6e1dac90fad03} 
+const \mbox{\hyperlink{classFComponentCatalog}{FComponent\+Catalog}} \& UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Components (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a797fe1205691b7e4f6cb0e117e6e5ef2}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetConsumers@{GetConsumers}}
+\index{GetConsumers@{GetConsumers}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetConsumers()}{GetConsumers()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a797fe1205691b7e4f6cb0e117e6e5ef2} 
+TArray$<$ FString $>$ UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Consumers (\begin{DoxyParamCaption}\item[{const FString \&}]{Message\+Name}{, }\item[{const FString \&}]{Producer}{}\end{DoxyParamCaption}) const}
+
+Nodes that consume a message; all other bus members if the system does not say. \Hypertarget{classUIoTwinSchematicSubsystem_a26d4e55bf7ee4069fe5a5b7b902612d8}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetFramesPerSecond@{GetFramesPerSecond}}
+\index{GetFramesPerSecond@{GetFramesPerSecond}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetFramesPerSecond()}{GetFramesPerSecond()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a26d4e55bf7ee4069fe5a5b7b902612d8} 
+float UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Frames\+Per\+Second (\begin{DoxyParamCaption}\item[{double}]{Now}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_aec89fb46faa7ed794a2c385c6b5d9f40}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetLiveBus@{GetLiveBus}}
+\index{GetLiveBus@{GetLiveBus}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetLiveBus()}{GetLiveBus()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_aec89fb46faa7ed794a2c385c6b5d9f40} 
+const \mbox{\hyperlink{structFSystemBus}{FSystem\+Bus}} \texorpdfstring{$\ast$}{*} UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Live\+Bus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Bus that carries the frames of iotwin-\/bus (first CAN bus of the system), nullptr if none. \Hypertarget{classUIoTwinSchematicSubsystem_a55c83919f493ba13a83d49f2b7b8fd0f}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetLoadError@{GetLoadError}}
+\index{GetLoadError@{GetLoadError}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetLoadError()}{GetLoadError()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a55c83919f493ba13a83d49f2b7b8fd0f} 
+const FString \& UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Load\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_aa430974d271accac8f9c4531c0529e44}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetLog@{GetLog}}
+\index{GetLog@{GetLog}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetLog()}{GetLog()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_aa430974d271accac8f9c4531c0529e44} 
+const TArray$<$ \mbox{\hyperlink{structFSchematicLogEntry}{FSchematic\+Log\+Entry}} $>$ \& UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Log (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a41b5afdcf09124861aa7f7d8c25ad464}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetPulses@{GetPulses}}
+\index{GetPulses@{GetPulses}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetPulses()}{GetPulses()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a41b5afdcf09124861aa7f7d8c25ad464} 
+const TArray$<$ \mbox{\hyperlink{structFSchematicPulse}{FSchematic\+Pulse}} $>$ \& UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Pulses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_abb860dee7abbbcb764dcf122555b024a}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetSystem@{GetSystem}}
+\index{GetSystem@{GetSystem}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetSystem()}{GetSystem()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_abb860dee7abbbcb764dcf122555b024a} 
+const \mbox{\hyperlink{classFSystemDescription}{FSystem\+Description}} \& UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_ac83a702d8c6208d52799dd37f3261998}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetSystemPath@{GetSystemPath}}
+\index{GetSystemPath@{GetSystemPath}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetSystemPath()}{GetSystemPath()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_ac83a702d8c6208d52799dd37f3261998} 
+const FString \& UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+System\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_acbde610cd7e58e111c1eb70b04fb37f9}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GetTotalFrames@{GetTotalFrames}}
+\index{GetTotalFrames@{GetTotalFrames}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetTotalFrames()}{GetTotalFrames()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_acbde610cd7e58e111c1eb70b04fb37f9} 
+int32 UIo\+Twin\+Schematic\+Subsystem\+::\+Get\+Total\+Frames (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a3eb8042a7bc9fb5e0db1d0ebd7b6a0f8}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!GuessProducer@{GuessProducer}}
+\index{GuessProducer@{GuessProducer}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{GuessProducer()}{GuessProducer()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a3eb8042a7bc9fb5e0db1d0ebd7b6a0f8} 
+FString UIo\+Twin\+Schematic\+Subsystem\+::\+Guess\+Producer (\begin{DoxyParamCaption}\item[{const FString \&}]{Message\+Name}{, }\item[{bool}]{b\+Sent\+By\+This\+Node}{}\end{DoxyParamCaption}) const}
+
+Node that most likely produced a message ("{}"{} if unknown). \Hypertarget{classUIoTwinSchematicSubsystem_ace13c13bc3a5bc4883ce244e146e807c}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!HasSystem@{HasSystem}}
+\index{HasSystem@{HasSystem}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{HasSystem()}{HasSystem()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_ace13c13bc3a5bc4883ce244e146e807c} 
+bool UIo\+Twin\+Schematic\+Subsystem\+::\+Has\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a2d869f9aa346d294f6f7ae80bd4cebd1}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a2d869f9aa346d294f6f7ae80bd4cebd1} 
+void UIo\+Twin\+Schematic\+Subsystem\+::\+Initialize (\begin{DoxyParamCaption}\item[{FSubsystem\+Collection\+Base \&}]{Collection}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_ab090b9969314bbfb4f406317dba75b18}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!IsSchematicVisible@{IsSchematicVisible}}
+\index{IsSchematicVisible@{IsSchematicVisible}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{IsSchematicVisible()}{IsSchematicVisible()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_ab090b9969314bbfb4f406317dba75b18} 
+bool UIo\+Twin\+Schematic\+Subsystem\+::\+Is\+Schematic\+Visible (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_ab10309240cbabaa9738cc41f71466377}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!LoadSystem@{LoadSystem}}
+\index{LoadSystem@{LoadSystem}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{LoadSystem()}{LoadSystem()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_ab10309240cbabaa9738cc41f71466377} 
+bool UIo\+Twin\+Schematic\+Subsystem\+::\+Load\+System (\begin{DoxyParamCaption}\item[{const FString \&}]{Path}{}\end{DoxyParamCaption})}
+
+Loads a system file plus the DBC files it references and the component database next to it. \Hypertarget{classUIoTwinSchematicSubsystem_ae7355f2f9e649ef09870a29d907fbf2b}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!RecordFrame@{RecordFrame}}
+\index{RecordFrame@{RecordFrame}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{RecordFrame()}{RecordFrame()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_ae7355f2f9e649ef09870a29d907fbf2b} 
+void UIo\+Twin\+Schematic\+Subsystem\+::\+Record\+Frame (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFCanFrame}{FCan\+Frame}} \&}]{Frame}{, }\item[{bool}]{b\+Sent\+By\+This\+Node}{, }\item[{double}]{Now}{}\end{DoxyParamCaption})}
+
+Records a frame seen on the live bus. Public for tests. \Hypertarget{classUIoTwinSchematicSubsystem_a42154343f560a13aff2a9b70a553f442}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!SetSchematicVisible@{SetSchematicVisible}}
+\index{SetSchematicVisible@{SetSchematicVisible}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{SetSchematicVisible()}{SetSchematicVisible()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a42154343f560a13aff2a9b70a553f442} 
+void UIo\+Twin\+Schematic\+Subsystem\+::\+Set\+Schematic\+Visible (\begin{DoxyParamCaption}\item[{bool}]{b\+Visible}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a96104bf30ecdead789d71e34e198331a}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!ToggleView@{ToggleView}}
+\index{ToggleView@{ToggleView}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{ToggleView()}{ToggleView()}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a96104bf30ecdead789d71e34e198331a} 
+void UIo\+Twin\+Schematic\+Subsystem\+::\+Toggle\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classUIoTwinSchematicSubsystem_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUIoTwinSchematicSubsystem_abf33256c5b4cdce5d9058a4902ae01e9}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!MaxLogEntries@{MaxLogEntries}}
+\index{MaxLogEntries@{MaxLogEntries}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{MaxLogEntries}{MaxLogEntries}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_abf33256c5b4cdce5d9058a4902ae01e9} 
+int32 UIo\+Twin\+Schematic\+Subsystem\+::\+Max\+Log\+Entries = 14\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a18656cbc5c38d21f8b0770094e1d1d84}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!MaxPulses@{MaxPulses}}
+\index{MaxPulses@{MaxPulses}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{MaxPulses}{MaxPulses}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a18656cbc5c38d21f8b0770094e1d1d84} 
+int32 UIo\+Twin\+Schematic\+Subsystem\+::\+Max\+Pulses = 24\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a634bf3bedfda0ca6e1c1e842550139f0}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!OnViewChanged@{OnViewChanged}}
+\index{OnViewChanged@{OnViewChanged}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{OnViewChanged}{OnViewChanged}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a634bf3bedfda0ca6e1c1e842550139f0} 
+FOn\+Schematic\+View\+Changed UIo\+Twin\+Schematic\+Subsystem\+::\+On\+View\+Changed}
+
+Fired when the view switches between 3D scene and schematic. \Hypertarget{classUIoTwinSchematicSubsystem_a71dfdab29f201800691decb7d876e270}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!PulseDuration@{PulseDuration}}
+\index{PulseDuration@{PulseDuration}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{PulseDuration}{PulseDuration}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a71dfdab29f201800691decb7d876e270} 
+double UIo\+Twin\+Schematic\+Subsystem\+::\+Pulse\+Duration = 0.\+8\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classUIoTwinSchematicSubsystem_a0e00c94599f2d195b97e894df52391c0}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!SelectedNode@{SelectedNode}}
+\index{SelectedNode@{SelectedNode}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{SelectedNode}{SelectedNode}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a0e00c94599f2d195b97e894df52391c0} 
+FString UIo\+Twin\+Schematic\+Subsystem\+::\+Selected\+Node}
+
+Node selected in the schematic, empty if none. \Hypertarget{classUIoTwinSchematicSubsystem_af430add6fb99214995578c1e9df66304}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!SelfNode@{SelfNode}}
+\index{SelfNode@{SelfNode}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{SelfNode}{SelfNode}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_af430add6fb99214995578c1e9df66304} 
+FString UIo\+Twin\+Schematic\+Subsystem\+::\+Self\+Node = TEXT("{}visualizer"{})}
+
+Id of this visualizer in the system description. \Hypertarget{classUIoTwinSchematicSubsystem_a959ca6cdc8ede88dee0606ad7a29024f}\index{UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}!SystemFile@{SystemFile}}
+\index{SystemFile@{SystemFile}!UIoTwinSchematicSubsystem@{UIoTwinSchematicSubsystem}}
+\doxysubsubsection{\texorpdfstring{SystemFile}{SystemFile}}
+{\footnotesize\ttfamily \label{classUIoTwinSchematicSubsystem_a959ca6cdc8ede88dee0606ad7a29024f} 
+FString UIo\+Twin\+Schematic\+Subsystem\+::\+System\+File = TEXT("{}data/systems/light-\/demo.\+json"{})}
+
+Relative to the repository / package root, or absolute. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{IoTwinSchematicSubsystem_8h}{Io\+Twin\+Schematic\+Subsystem.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{IoTwinSchematicSubsystem_8cpp}{Io\+Twin\+Schematic\+Subsystem.\+cpp}}\end{DoxyCompactItemize}

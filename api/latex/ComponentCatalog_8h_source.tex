@@ -1,0 +1,54 @@
+\doxysection{Component\+Catalog.\+h}
+\hypertarget{ComponentCatalog_8h_source}{}\label{ComponentCatalog_8h_source}\index{visualizer/Source/IoTwin/Schematic/ComponentCatalog.h@{visualizer/Source/IoTwin/Schematic/ComponentCatalog.h}}
+\mbox{\hyperlink{ComponentCatalog_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ read-\/only\ view\ of\ the\ component\ database\ (data/components/**/*.json).}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFComponentParameter}{FComponentParameter}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentParameter_ac595f961e0ab2f0c53c4138fab9880b2}{Name}};}
+\DoxyCodeLine{00011\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentParameter_a953bff4c2fffc3c843c2e0334399b956}{Display}};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFComponentParameter_ad6bb673564c62b21d20795741644815f}{bVerified}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFComponentPart}{FComponentPart}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentPart_a4c17b2537172d187ede79f3511bf458e}{Instance}};}
+\DoxyCodeLine{00018\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentPart_a8584dc144fc6225ddb99769950f063b6}{ComponentId}};}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFComponentInfo}{FComponentInfo}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentInfo_a5ae4c02f0a933975d9e1d2d95cac2553}{Id}};}
+\DoxyCodeLine{00024\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentInfo_a0c474def033f8f9862c62c4735e6c6ff}{Name}};}
+\DoxyCodeLine{00025\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentInfo_a74072e4746af8352b41128de04351eb7}{Category}};}
+\DoxyCodeLine{00026\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentInfo_aa88a065758d25ce67f9f165000fe8060}{Manufacturer}};}
+\DoxyCodeLine{00027\ \ \ \ \ FString\ \mbox{\hyperlink{structFComponentInfo_a8d05a374ba99f79eaf2fad6b626d7854}{Description}};}
+\DoxyCodeLine{00028\ \ \ \ \ TArray<FComponentParameter>\ \mbox{\hyperlink{structFComponentInfo_a0d18a793bd03e2b2e4c0d5eb8fb23e46}{Parameters}};}
+\DoxyCodeLine{00029\ \ \ \ \ TArray<FComponentPart>\ \mbox{\hyperlink{structFComponentInfo_a536e3814dee1a1cadbd3b03b75c5cb77}{Contains}};}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFComponentCatalog}{FComponentCatalog}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ int32\ \mbox{\hyperlink{classFComponentCatalog_ad4c6f0af428be3f6c23a70413ef34554}{LoadDirectory}}(\textcolor{keyword}{const}\ FString\&\ Directory,\ TArray<FString>*\ OutErrors\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFComponentCatalog_a9a54776829aff9609ef2af49ee567466}{AddFromString}}(\textcolor{keyword}{const}\ FString\&\ Json,\ FString\&\ OutError);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFComponentInfo}{FComponentInfo}}*\ \mbox{\hyperlink{classFComponentCatalog_a021eb672561b43b06edeada75127dc8d}{Find}}(\textcolor{keyword}{const}\ FString\&\ ComponentId)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Components.Find(ComponentId);\ \}}
+\DoxyCodeLine{00040\ \ \ \ \ int32\ \mbox{\hyperlink{classFComponentCatalog_a8ac8ae234bbaaf2c9f82283061e56ebb}{Num}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Components.Num();\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ FString\ FormatParameter(\textcolor{keywordtype}{double}\ Value,\ \textcolor{keywordtype}{bool}\ bHasValue,\ \textcolor{keywordtype}{double}\ Min,\ \textcolor{keywordtype}{bool}\ bHasMin,\ \textcolor{keywordtype}{double}\ Typ,\ \textcolor{keywordtype}{bool}\ bHasTyp,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ Max,\ \textcolor{keywordtype}{bool}\ bHasMax,\ \textcolor{keyword}{const}\ FString\&\ Unit);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ FString\ FormatQuantity(\textcolor{keywordtype}{double}\ Value,\ \textcolor{keyword}{const}\ FString\&\ Unit);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ChooseScale(\textcolor{keywordtype}{double}\ Magnitude,\ \textcolor{keyword}{const}\ FString\&\ Unit,\ \textcolor{keywordtype}{double}\&\ OutDivisor,\ FString\&\ OutSuffix);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ TMap<FString,\ FComponentInfo>\ Components;}
+\DoxyCodeLine{00053\ \};}
+
+\end{DoxyCode}

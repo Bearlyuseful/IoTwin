@@ -45,34 +45,37 @@
 \DoxyCodeLine{00052\ \ \ \ \ FOnCanFrameReceived\ \mbox{\hyperlink{classUIoTwinBusSubsystem_af9cfda99d41b7601c963ffa006e11481}{OnFrameReceived}};}
 \DoxyCodeLine{00053\ }
 \DoxyCodeLine{00055\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
-\DoxyCodeLine{00056\ \ \ \ \ FOnBusConnectionChanged\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e}{OnConnectionChanged}};}
+\DoxyCodeLine{00056\ \ \ \ \ FOnCanFrameReceived\ \mbox{\hyperlink{classUIoTwinBusSubsystem_acbb7c208537522194bac1656c5006fae}{OnFrameSent}};}
 \DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
-\DoxyCodeLine{00059\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522}{Host}}\ =\ TEXT(\textcolor{stringliteral}{"{}127.0.0.1"{}});}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
-\DoxyCodeLine{00062\ \ \ \ \ int32\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}{Port}}\ =\ 8080;}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a0b6433f9fe7eb282a27f9a4a297377ca}{bEnabled}}\ =\ true;}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ private:}
-\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ Tick(\textcolor{keywordtype}{float}\ DeltaSeconds);}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ AddTraffic(const\ TCHAR*\ Direction,\ const\ FString\&\ Line);}
+\DoxyCodeLine{00059\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00060\ \ \ \ \ FOnBusConnectionChanged\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a7d56d1d5ad14799bf928c30f1d336a5e}{OnConnectionChanged}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00063\ \ \ \ \ FString\ \mbox{\hyperlink{classUIoTwinBusSubsystem_ab2bb3f119e740984fa0280911980b522}{Host}}\ =\ TEXT(\textcolor{stringliteral}{"{}127.0.0.1"{}});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00066\ \ \ \ \ int32\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a568d350ea363fb45b5be2fc65f562f2f}{Port}}\ =\ 8080;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ UPROPERTY(Config,\ EditAnywhere,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinBusSubsystem_a0b6433f9fe7eb282a27f9a4a297377ca}{bEnabled}}\ =\ true;}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ static\ int64\ MakeKey(int32\ Id,\ \textcolor{keywordtype}{bool}\ bExtended)}
-\DoxyCodeLine{00072\ \ \ \ \ \{}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{static\_cast<}int64\textcolor{keyword}{>}(bExtended)\ <<\ 32)\ |\ \textcolor{keyword}{static\_cast<}uint32\textcolor{keyword}{>}(Id);}
-\DoxyCodeLine{00074\ \ \ \ \ \}}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxRecentTraffic\ =\ 10;}
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxFramesPerTick\ =\ 1024;}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \ \ \ \ TUniquePtr<FIoTwinBusConnection>\ Connection;}
-\DoxyCodeLine{00080\ \ \ \ \ FTSTicker::FDelegateHandle\ TickHandle;}
-\DoxyCodeLine{00081\ \ \ \ \ TMap<int64,\ FCanFrame>\ LastFrames;}
-\DoxyCodeLine{00082\ \ \ \ \ TArray<FString>\ RecentTraffic;}
-\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ bWasConnected\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00071\ private:}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ Tick(\textcolor{keywordtype}{float}\ DeltaSeconds);}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ AddTraffic(const\ TCHAR*\ Direction,\ const\ FString\&\ Line);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ static\ int64\ MakeKey(int32\ Id,\ \textcolor{keywordtype}{bool}\ bExtended)}
+\DoxyCodeLine{00076\ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{static\_cast<}int64\textcolor{keyword}{>}(bExtended)\ <<\ 32)\ |\ \textcolor{keyword}{static\_cast<}uint32\textcolor{keyword}{>}(Id);}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxRecentTraffic\ =\ 10;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\ MaxFramesPerTick\ =\ 1024;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ TUniquePtr<FIoTwinBusConnection>\ Connection;}
+\DoxyCodeLine{00084\ \ \ \ \ FTSTicker::FDelegateHandle\ TickHandle;}
+\DoxyCodeLine{00085\ \ \ \ \ TMap<int64,\ FCanFrame>\ LastFrames;}
+\DoxyCodeLine{00086\ \ \ \ \ TArray<FString>\ RecentTraffic;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ bWasConnected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00088\ \};}
 
 \end{DoxyCode}

@@ -1,0 +1,132 @@
+\doxysection{FSystem\+Description Class Reference}
+\hypertarget{classFSystemDescription}{}\label{classFSystemDescription}\index{FSystemDescription@{FSystemDescription}}
+
+
+{\ttfamily \#include $<$System\+Description.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classFSystemDescription_a771e7646aea7291335b31f0f1652c1ab}{Load\+From\+File}} (const FString \&Path, FString \&Out\+Error)
+\item 
+bool \mbox{\hyperlink{classFSystemDescription_a18aa490c4a49f8df109c362f724af281}{Load\+From\+String}} (const FString \&Json, const FString \&\mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{Base\+Directory}}, FString \&Out\+Error)
+\item 
+const \mbox{\hyperlink{structFSystemNode}{FSystem\+Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFSystemDescription_a9ed232013429b62ee64d118cb9db76c3}{Find\+Node}} (const FString \&Node\+Id) const
+\item 
+const \mbox{\hyperlink{structFSystemMessage}{FSystem\+Message}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFSystemDescription_a816825db146544f3a3171d84783afb6f}{Find\+Message}} (const FString \&\mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}}) const
+\item 
+FString \mbox{\hyperlink{classFSystemDescription_ab25c34371ae1023dec5d3148aad44f42}{Resolve\+Path}} (const FString \&Relative) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+FString \mbox{\hyperlink{classFSystemDescription_a74b208b2e74c463a143f40a75d780609}{Id}}
+\item 
+FString \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}}
+\item 
+FString \mbox{\hyperlink{classFSystemDescription_a27606d353da05f84d90f4fad569a5a17}{Description}}
+\item 
+TArray$<$ \mbox{\hyperlink{structFSystemNode}{FSystem\+Node}} $>$ \mbox{\hyperlink{classFSystemDescription_ab7bd5cc6aa28517bf281a4314daa0f88}{Nodes}}
+\item 
+TArray$<$ \mbox{\hyperlink{structFSystemBus}{FSystem\+Bus}} $>$ \mbox{\hyperlink{classFSystemDescription_a8d064f7ac1dbd33913de21b53903c2c6}{Buses}}
+\item 
+TArray$<$ \mbox{\hyperlink{structFSystemLink}{FSystem\+Link}} $>$ \mbox{\hyperlink{classFSystemDescription_af399acec59d4bf53a584bbc516ad9580}{Links}}
+\item 
+TArray$<$ \mbox{\hyperlink{structFSystemMessage}{FSystem\+Message}} $>$ \mbox{\hyperlink{classFSystemDescription_ab76c46e62f73b1b6973007386214c752}{Messages}}
+\item 
+FString \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{Base\+Directory}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classFSystemDescription_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFSystemDescription_a816825db146544f3a3171d84783afb6f}\index{FSystemDescription@{FSystemDescription}!FindMessage@{FindMessage}}
+\index{FindMessage@{FindMessage}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{FindMessage()}{FindMessage()}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a816825db146544f3a3171d84783afb6f} 
+const \mbox{\hyperlink{structFSystemMessage}{FSystem\+Message}} \texorpdfstring{$\ast$}{*} FSystem\+Description\+::\+Find\+Message (\begin{DoxyParamCaption}\item[{const FString \&}]{Name}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classFSystemDescription_a9ed232013429b62ee64d118cb9db76c3}\index{FSystemDescription@{FSystemDescription}!FindNode@{FindNode}}
+\index{FindNode@{FindNode}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{FindNode()}{FindNode()}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a9ed232013429b62ee64d118cb9db76c3} 
+const \mbox{\hyperlink{structFSystemNode}{FSystem\+Node}} \texorpdfstring{$\ast$}{*} FSystem\+Description\+::\+Find\+Node (\begin{DoxyParamCaption}\item[{const FString \&}]{Node\+Id}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classFSystemDescription_a771e7646aea7291335b31f0f1652c1ab}\index{FSystemDescription@{FSystemDescription}!LoadFromFile@{LoadFromFile}}
+\index{LoadFromFile@{LoadFromFile}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{LoadFromFile()}{LoadFromFile()}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a771e7646aea7291335b31f0f1652c1ab} 
+bool FSystem\+Description\+::\+Load\+From\+File (\begin{DoxyParamCaption}\item[{const FString \&}]{Path}{, }\item[{FString \&}]{Out\+Error}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFSystemDescription_a18aa490c4a49f8df109c362f724af281}\index{FSystemDescription@{FSystemDescription}!LoadFromString@{LoadFromString}}
+\index{LoadFromString@{LoadFromString}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{LoadFromString()}{LoadFromString()}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a18aa490c4a49f8df109c362f724af281} 
+bool FSystem\+Description\+::\+Load\+From\+String (\begin{DoxyParamCaption}\item[{const FString \&}]{Json}{, }\item[{const FString \&}]{Base\+Directory}{, }\item[{FString \&}]{Out\+Error}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFSystemDescription_ab25c34371ae1023dec5d3148aad44f42}\index{FSystemDescription@{FSystemDescription}!ResolvePath@{ResolvePath}}
+\index{ResolvePath@{ResolvePath}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{ResolvePath()}{ResolvePath()}}
+{\footnotesize\ttfamily \label{classFSystemDescription_ab25c34371ae1023dec5d3148aad44f42} 
+FString FSystem\+Description\+::\+Resolve\+Path (\begin{DoxyParamCaption}\item[{const FString \&}]{Relative}{}\end{DoxyParamCaption}) const}
+
+Absolute path of a file referenced relative to the system file. 
+
+\label{doc-variable-members}
+\Hypertarget{classFSystemDescription_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}\index{FSystemDescription@{FSystemDescription}!BaseDirectory@{BaseDirectory}}
+\index{BaseDirectory@{BaseDirectory}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{BaseDirectory}{BaseDirectory}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313} 
+FString FSystem\+Description\+::\+Base\+Directory}
+
+\Hypertarget{classFSystemDescription_a8d064f7ac1dbd33913de21b53903c2c6}\index{FSystemDescription@{FSystemDescription}!Buses@{Buses}}
+\index{Buses@{Buses}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Buses}{Buses}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a8d064f7ac1dbd33913de21b53903c2c6} 
+TArray$<$\mbox{\hyperlink{structFSystemBus}{FSystem\+Bus}}$>$ FSystem\+Description\+::\+Buses}
+
+\Hypertarget{classFSystemDescription_a27606d353da05f84d90f4fad569a5a17}\index{FSystemDescription@{FSystemDescription}!Description@{Description}}
+\index{Description@{Description}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Description}{Description}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a27606d353da05f84d90f4fad569a5a17} 
+FString FSystem\+Description\+::\+Description}
+
+\Hypertarget{classFSystemDescription_a74b208b2e74c463a143f40a75d780609}\index{FSystemDescription@{FSystemDescription}!Id@{Id}}
+\index{Id@{Id}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a74b208b2e74c463a143f40a75d780609} 
+FString FSystem\+Description\+::\+Id}
+
+\Hypertarget{classFSystemDescription_af399acec59d4bf53a584bbc516ad9580}\index{FSystemDescription@{FSystemDescription}!Links@{Links}}
+\index{Links@{Links}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Links}{Links}}
+{\footnotesize\ttfamily \label{classFSystemDescription_af399acec59d4bf53a584bbc516ad9580} 
+TArray$<$\mbox{\hyperlink{structFSystemLink}{FSystem\+Link}}$>$ FSystem\+Description\+::\+Links}
+
+\Hypertarget{classFSystemDescription_ab76c46e62f73b1b6973007386214c752}\index{FSystemDescription@{FSystemDescription}!Messages@{Messages}}
+\index{Messages@{Messages}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Messages}{Messages}}
+{\footnotesize\ttfamily \label{classFSystemDescription_ab76c46e62f73b1b6973007386214c752} 
+TArray$<$\mbox{\hyperlink{structFSystemMessage}{FSystem\+Message}}$>$ FSystem\+Description\+::\+Messages}
+
+\Hypertarget{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}\index{FSystemDescription@{FSystemDescription}!Name@{Name}}
+\index{Name@{Name}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Name}{Name}}
+{\footnotesize\ttfamily \label{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3} 
+FString FSystem\+Description\+::\+Name}
+
+\Hypertarget{classFSystemDescription_ab7bd5cc6aa28517bf281a4314daa0f88}\index{FSystemDescription@{FSystemDescription}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!FSystemDescription@{FSystemDescription}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{classFSystemDescription_ab7bd5cc6aa28517bf281a4314daa0f88} 
+TArray$<$\mbox{\hyperlink{structFSystemNode}{FSystem\+Node}}$>$ FSystem\+Description\+::\+Nodes}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{SystemDescription_8h}{System\+Description.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{SystemDescription_8cpp}{System\+Description.\+cpp}}\end{DoxyCompactItemize}

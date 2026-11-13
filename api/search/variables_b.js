@@ -1,6 +1,25 @@
 var searchData=
 [
-  ['name_0',['name',['../structDbcSignal.html#a310401a4e8c7b83245ce293d1713ddc7',1,'DbcSignal::name'],['../structDbcMessage.html#a62316d346cef61e0f715afa1c47844d0',1,'DbcMessage::name']]],
-  ['next_5fclient_5fid_1',['next_client_id',['../structBusServer.html#a7a97f71eefa900cf415039cdff6c25ae',1,'BusServer']]],
-  ['next_5fdeadline_5fns_2',['next_deadline_ns',['../structCycleTimer.html#ad2f01921defca96707858cc87e63f383',1,'CycleTimer']]]
+  ['manufacturer_0',['Manufacturer',['../structFComponentInfo.html#aa88a065758d25ce67f9f165000fe8060',1,'FComponentInfo']]],
+  ['max_5fclients_1',['max_clients',['../structBusServerConfig.html#aeafec274535cb89520365e1bb5794beb',1,'BusServerConfig']]],
+  ['max_5flatency_5fns_2',['max_latency_ns',['../structCycleStats.html#aefacf2b09c82fbcc9eb4a2c9143dfa32',1,'CycleStats']]],
+  ['max_5fprescaler_3',['max_prescaler',['../structCanBitTimingLimits.html#ae74adcb390a5428fc0f27358f62d24df',1,'CanBitTimingLimits']]],
+  ['max_5fseg1_4',['max_seg1',['../structCanBitTimingLimits.html#af23fbefd1af8315ee6206bf364e162ae',1,'CanBitTimingLimits']]],
+  ['max_5fseg2_5',['max_seg2',['../structCanBitTimingLimits.html#a5a331ad6c0e4f35774e95c2660a8b22f',1,'CanBitTimingLimits']]],
+  ['max_5fsjw_6',['max_sjw',['../structCanBitTimingLimits.html#a820ef8077e42833d06b7bfb9c731a599',1,'CanBitTimingLimits']]],
+  ['max_5ftq_5fper_5fbit_7',['max_tq_per_bit',['../structCanBitTimingLimits.html#ae8ba0a3b25378840aa72166ed2199a79',1,'CanBitTimingLimits']]],
+  ['max_5fwait_5fframes_8',['max_wait_frames',['../structIsoTpConfig.html#a7d53e72b8d03b6e9bdda7095a012a7b4',1,'IsoTpConfig']]],
+  ['maxdatalength_9',['MaxDataLength',['../structFCanFrame.html#a7ac87238f3178b0cedb22d8c04991337',1,'FCanFrame']]],
+  ['maximum_10',['maximum',['../structDbcSignal.html#a1c5293eb08bd2fe5e794e90a42b44b70',1,'DbcSignal']]],
+  ['maxlogentries_11',['MaxLogEntries',['../classUIoTwinSchematicSubsystem.html#abf33256c5b4cdce5d9058a4902ae01e9',1,'UIoTwinSchematicSubsystem']]],
+  ['maxpulses_12',['MaxPulses',['../classUIoTwinSchematicSubsystem.html#a18656cbc5c38d21f8b0770094e1d1d84',1,'UIoTwinSchematicSubsystem']]],
+  ['members_13',['Members',['../structFSystemBus.html#a3429853da02bccba3b8fe298340b4521',1,'FSystemBus']]],
+  ['message_5fcount_14',['message_count',['../structDbcDatabase.html#ae8d1ca4a3a1658d6d06303457a79e746',1,'DbcDatabase']]],
+  ['messages_15',['Messages',['../classFSystemDescription.html#ab76c46e62f73b1b6973007386214c752',1,'FSystemDescription']]],
+  ['messages_16',['messages',['../structDbcDatabase.html#a70e9f1897eb9eeae184171bbe2e7200e',1,'DbcDatabase']]],
+  ['min_5flatency_5fns_17',['min_latency_ns',['../structCycleStats.html#a220391273c377cc23da811f509d74106',1,'CycleStats']]],
+  ['min_5ftq_5fper_5fbit_18',['min_tq_per_bit',['../structCanBitTimingLimits.html#a494718431046b9d1125255d89b0a31a0',1,'CanBitTimingLimits']]],
+  ['minimum_19',['minimum',['../structDbcSignal.html#a0d5a3fe12cf94ee931b08bc759a88983',1,'DbcSignal']]],
+  ['mode_20',['mode',['../structOptions.html#af3ea795cc58500f8bc442fb6a9f938c5',1,'Options::mode'],['../structGateway.html#af477dbcf02493a11f38c52f5f79fe32f',1,'Gateway::mode']]],
+  ['mux_5fvalue_21',['mux_value',['../structDbcSignal.html#a703fa2c389a71a3895ef6621aecb46fe',1,'DbcSignal']]]
 ];

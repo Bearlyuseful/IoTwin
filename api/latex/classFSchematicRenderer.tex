@@ -1,0 +1,84 @@
+\doxysection{FSchematic\+Renderer Class Reference}
+\hypertarget{classFSchematicRenderer}{}\label{classFSchematicRenderer}\index{FSchematicRenderer@{FSchematicRenderer}}
+
+
+{\ttfamily \#include $<$Schematic\+Renderer.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFSchematicRenderer_a93df9099c9abe40ced2c5096c9df0bbc}{FSchematic\+Renderer}} (UCanvas \texorpdfstring{$\ast$}{*}In\+Canvas, const \mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIo\+Twin\+Schematic\+Subsystem}} \&In\+Schematic, const \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIo\+Twin\+Bus\+Subsystem}} \texorpdfstring{$\ast$}{*}In\+Bus, double In\+Now)
+\item 
+void \mbox{\hyperlink{classFSchematicRenderer_a094210e0916d3b078d3e68b5c080fe49}{Draw}} (TArray$<$ \mbox{\hyperlink{structFSchematicHitBox}{FSchematic\+Hit\+Box}} $>$ \&Out\+Hit\+Boxes)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const FName \mbox{\hyperlink{classFSchematicRenderer_aad42fd19869e1e1ee43356549eb4cc53}{Background\+Box}}
+\item 
+static const FName \mbox{\hyperlink{classFSchematicRenderer_a0a757a6108e977e9440239daef505333}{View3\+DBox}}
+\item 
+static const TCHAR \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFSchematicRenderer_a760ca5e30a892a882ffaf942b383bd86}{Node\+Box\+Prefix}} = TEXT("{}Schematic.\+Node\+:"{})
+\item 
+static constexpr float \mbox{\hyperlink{classFSchematicRenderer_a1686cc6b6de4c8d863f905d2972ac797}{Reference\+Height}} = 900.\+0f
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Paints one frame of the schematic\+: nodes of the system description, buses with their members, links (USB, ...), frames travelling from producer to consumers, a detail panel for the selected node and the decoded message log. 
+
+\label{doc-constructors}
+\Hypertarget{classFSchematicRenderer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFSchematicRenderer_a93df9099c9abe40ced2c5096c9df0bbc}\index{FSchematicRenderer@{FSchematicRenderer}!FSchematicRenderer@{FSchematicRenderer}}
+\index{FSchematicRenderer@{FSchematicRenderer}!FSchematicRenderer@{FSchematicRenderer}}
+\doxysubsubsection{\texorpdfstring{FSchematicRenderer()}{FSchematicRenderer()}}
+{\footnotesize\ttfamily \label{classFSchematicRenderer_a93df9099c9abe40ced2c5096c9df0bbc} 
+FSchematic\+Renderer\+::\+FSchematic\+Renderer (\begin{DoxyParamCaption}\item[{UCanvas \texorpdfstring{$\ast$}{*}}]{In\+Canvas}{, }\item[{const \mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIo\+Twin\+Schematic\+Subsystem}} \&}]{In\+Schematic}{, }\item[{const \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIo\+Twin\+Bus\+Subsystem}} \texorpdfstring{$\ast$}{*}}]{In\+Bus}{, }\item[{double}]{In\+Now}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classFSchematicRenderer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFSchematicRenderer_a094210e0916d3b078d3e68b5c080fe49}\index{FSchematicRenderer@{FSchematicRenderer}!Draw@{Draw}}
+\index{Draw@{Draw}!FSchematicRenderer@{FSchematicRenderer}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{classFSchematicRenderer_a094210e0916d3b078d3e68b5c080fe49} 
+void FSchematic\+Renderer\+::\+Draw (\begin{DoxyParamCaption}\item[{TArray$<$ \mbox{\hyperlink{structFSchematicHitBox}{FSchematic\+Hit\+Box}} $>$ \&}]{Out\+Hit\+Boxes}{}\end{DoxyParamCaption})}
+
+Draws the whole view. Hit boxes are returned in screen pixels. 
+
+\label{doc-variable-members}
+\Hypertarget{classFSchematicRenderer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classFSchematicRenderer_aad42fd19869e1e1ee43356549eb4cc53}\index{FSchematicRenderer@{FSchematicRenderer}!BackgroundBox@{BackgroundBox}}
+\index{BackgroundBox@{BackgroundBox}!FSchematicRenderer@{FSchematicRenderer}}
+\doxysubsubsection{\texorpdfstring{BackgroundBox}{BackgroundBox}}
+{\footnotesize\ttfamily \label{classFSchematicRenderer_aad42fd19869e1e1ee43356549eb4cc53} 
+const FName FSchematic\+Renderer\+::\+Background\+Box\hspace{0.3cm}{\ttfamily [static]}}
+
+Hit box names. Node boxes are Node\+Box\+Prefix + node id. \Hypertarget{classFSchematicRenderer_a760ca5e30a892a882ffaf942b383bd86}\index{FSchematicRenderer@{FSchematicRenderer}!NodeBoxPrefix@{NodeBoxPrefix}}
+\index{NodeBoxPrefix@{NodeBoxPrefix}!FSchematicRenderer@{FSchematicRenderer}}
+\doxysubsubsection{\texorpdfstring{NodeBoxPrefix}{NodeBoxPrefix}}
+{\footnotesize\ttfamily \label{classFSchematicRenderer_a760ca5e30a892a882ffaf942b383bd86} 
+const TCHAR \texorpdfstring{$\ast$}{*} FSchematic\+Renderer\+::\+Node\+Box\+Prefix = TEXT("{}Schematic.\+Node\+:"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classFSchematicRenderer_a1686cc6b6de4c8d863f905d2972ac797}\index{FSchematicRenderer@{FSchematicRenderer}!ReferenceHeight@{ReferenceHeight}}
+\index{ReferenceHeight@{ReferenceHeight}!FSchematicRenderer@{FSchematicRenderer}}
+\doxysubsubsection{\texorpdfstring{ReferenceHeight}{ReferenceHeight}}
+{\footnotesize\ttfamily \label{classFSchematicRenderer_a1686cc6b6de4c8d863f905d2972ac797} 
+float FSchematic\+Renderer\+::\+Reference\+Height = 900.\+0f\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+Layout is designed for 900 px height and scaled to the viewport. \Hypertarget{classFSchematicRenderer_a0a757a6108e977e9440239daef505333}\index{FSchematicRenderer@{FSchematicRenderer}!View3DBox@{View3DBox}}
+\index{View3DBox@{View3DBox}!FSchematicRenderer@{FSchematicRenderer}}
+\doxysubsubsection{\texorpdfstring{View3DBox}{View3DBox}}
+{\footnotesize\ttfamily \label{classFSchematicRenderer_a0a757a6108e977e9440239daef505333} 
+const FName FSchematic\+Renderer\+::\+View3\+DBox\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{SchematicRenderer_8h}{Schematic\+Renderer.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{SchematicRenderer_8cpp}{Schematic\+Renderer.\+cpp}}\end{DoxyCompactItemize}

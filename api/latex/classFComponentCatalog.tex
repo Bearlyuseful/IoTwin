@@ -1,0 +1,71 @@
+\doxysection{FComponent\+Catalog Class Reference}
+\hypertarget{classFComponentCatalog}{}\label{classFComponentCatalog}\index{FComponentCatalog@{FComponentCatalog}}
+
+
+{\ttfamily \#include $<$Component\+Catalog.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32 \mbox{\hyperlink{classFComponentCatalog_ad4c6f0af428be3f6c23a70413ef34554}{Load\+Directory}} (const FString \&Directory, TArray$<$ FString $>$ \texorpdfstring{$\ast$}{*}Out\+Errors=nullptr)
+\item 
+bool \mbox{\hyperlink{classFComponentCatalog_a9a54776829aff9609ef2af49ee567466}{Add\+From\+String}} (const FString \&Json, FString \&Out\+Error)
+\item 
+const \mbox{\hyperlink{structFComponentInfo}{FComponent\+Info}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classFComponentCatalog_a021eb672561b43b06edeada75127dc8d}{Find}} (const FString \&Component\+Id) const
+\item 
+int32 \mbox{\hyperlink{classFComponentCatalog_a8ac8ae234bbaaf2c9f82283061e56ebb}{Num}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static FString \mbox{\hyperlink{classFComponentCatalog_afc8a78ffa8c9859aa8fdd74878b52f89}{Format\+Parameter}} (double Value, bool b\+Has\+Value, double Min, bool b\+Has\+Min, double Typ, bool b\+Has\+Typ, double Max, bool b\+Has\+Max, const FString \&Unit)
+\item 
+static FString \mbox{\hyperlink{classFComponentCatalog_a2a6e64bea5e8e50ff93855c4861b1961}{Format\+Quantity}} (double Value, const FString \&Unit)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classFComponentCatalog_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFComponentCatalog_a9a54776829aff9609ef2af49ee567466}\index{FComponentCatalog@{FComponentCatalog}!AddFromString@{AddFromString}}
+\index{AddFromString@{AddFromString}!FComponentCatalog@{FComponentCatalog}}
+\doxysubsubsection{\texorpdfstring{AddFromString()}{AddFromString()}}
+{\footnotesize\ttfamily \label{classFComponentCatalog_a9a54776829aff9609ef2af49ee567466} 
+bool FComponent\+Catalog\+::\+Add\+From\+String (\begin{DoxyParamCaption}\item[{const FString \&}]{Json}{, }\item[{FString \&}]{Out\+Error}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFComponentCatalog_a021eb672561b43b06edeada75127dc8d}\index{FComponentCatalog@{FComponentCatalog}!Find@{Find}}
+\index{Find@{Find}!FComponentCatalog@{FComponentCatalog}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily \label{classFComponentCatalog_a021eb672561b43b06edeada75127dc8d} 
+const \mbox{\hyperlink{structFComponentInfo}{FComponent\+Info}} \texorpdfstring{$\ast$}{*} FComponent\+Catalog\+::\+Find (\begin{DoxyParamCaption}\item[{const FString \&}]{Component\+Id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classFComponentCatalog_afc8a78ffa8c9859aa8fdd74878b52f89}\index{FComponentCatalog@{FComponentCatalog}!FormatParameter@{FormatParameter}}
+\index{FormatParameter@{FormatParameter}!FComponentCatalog@{FComponentCatalog}}
+\doxysubsubsection{\texorpdfstring{FormatParameter()}{FormatParameter()}}
+{\footnotesize\ttfamily \label{classFComponentCatalog_afc8a78ffa8c9859aa8fdd74878b52f89} 
+FString FComponent\+Catalog\+::\+Format\+Parameter (\begin{DoxyParamCaption}\item[{double}]{Value}{, }\item[{bool}]{b\+Has\+Value}{, }\item[{double}]{Min}{, }\item[{bool}]{b\+Has\+Min}{, }\item[{double}]{Typ}{, }\item[{bool}]{b\+Has\+Typ}{, }\item[{double}]{Max}{, }\item[{bool}]{b\+Has\+Max}{, }\item[{const FString \&}]{Unit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Formats a parameter object (\{value\texorpdfstring{$\vert$}{|}min\texorpdfstring{$\vert$}{|}typ\texorpdfstring{$\vert$}{|}max, unit\}) for display. \Hypertarget{classFComponentCatalog_a2a6e64bea5e8e50ff93855c4861b1961}\index{FComponentCatalog@{FComponentCatalog}!FormatQuantity@{FormatQuantity}}
+\index{FormatQuantity@{FormatQuantity}!FComponentCatalog@{FComponentCatalog}}
+\doxysubsubsection{\texorpdfstring{FormatQuantity()}{FormatQuantity()}}
+{\footnotesize\ttfamily \label{classFComponentCatalog_a2a6e64bea5e8e50ff93855c4861b1961} 
+FString FComponent\+Catalog\+::\+Format\+Quantity (\begin{DoxyParamCaption}\item[{double}]{Value}{, }\item[{const FString \&}]{Unit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+"{}64 MHz"{}, "{}512 Ki\+B"{}, "{}25 m\+A"{}, "{}3.\+3 V"{}. \Hypertarget{classFComponentCatalog_ad4c6f0af428be3f6c23a70413ef34554}\index{FComponentCatalog@{FComponentCatalog}!LoadDirectory@{LoadDirectory}}
+\index{LoadDirectory@{LoadDirectory}!FComponentCatalog@{FComponentCatalog}}
+\doxysubsubsection{\texorpdfstring{LoadDirectory()}{LoadDirectory()}}
+{\footnotesize\ttfamily \label{classFComponentCatalog_ad4c6f0af428be3f6c23a70413ef34554} 
+int32 FComponent\+Catalog\+::\+Load\+Directory (\begin{DoxyParamCaption}\item[{const FString \&}]{Directory}{, }\item[{TArray$<$ FString $>$ \texorpdfstring{$\ast$}{*}}]{Out\+Errors}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+Loads every \texorpdfstring{$\ast$}{*}.json below Directory. Files that fail to parse are skipped and counted. \Hypertarget{classFComponentCatalog_a8ac8ae234bbaaf2c9f82283061e56ebb}\index{FComponentCatalog@{FComponentCatalog}!Num@{Num}}
+\index{Num@{Num}!FComponentCatalog@{FComponentCatalog}}
+\doxysubsubsection{\texorpdfstring{Num()}{Num()}}
+{\footnotesize\ttfamily \label{classFComponentCatalog_a8ac8ae234bbaaf2c9f82283061e56ebb} 
+int32 FComponent\+Catalog\+::\+Num (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{ComponentCatalog_8h}{Component\+Catalog.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Schematic/\mbox{\hyperlink{ComponentCatalog_8cpp}{Component\+Catalog.\+cpp}}\end{DoxyCompactItemize}

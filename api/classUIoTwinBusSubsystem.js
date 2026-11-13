@@ -11,5 +11,6 @@ var classUIoTwinBusSubsystem =
     [ "Host", "classUIoTwinBusSubsystem.html#ab2bb3f119e740984fa0280911980b522", null ],
     [ "OnConnectionChanged", "classUIoTwinBusSubsystem.html#a7d56d1d5ad14799bf928c30f1d336a5e", null ],
     [ "OnFrameReceived", "classUIoTwinBusSubsystem.html#af9cfda99d41b7601c963ffa006e11481", null ],
+    [ "OnFrameSent", "classUIoTwinBusSubsystem.html#acbb7c208537522194bac1656c5006fae", null ],
     [ "Port", "classUIoTwinBusSubsystem.html#a568d350ea363fb45b5be2fc65f562f2f", null ]
 ];

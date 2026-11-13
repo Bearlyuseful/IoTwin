@@ -10,16 +10,18 @@
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/HUD.h"{}}}
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}IoTwinHUD.generated.h"{}}}
 \DoxyCodeLine{00008\ }
-\DoxyCodeLine{00010\ UCLASS()}
-\DoxyCodeLine{00011\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAIoTwinHUD}{AIoTwinHUD}}\ :\ public\ AHUD}
-\DoxyCodeLine{00012\ \{}
-\DoxyCodeLine{00013\ \ \ \ \ GENERATED\_BODY()}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAIoTwinHUD_ad605a66b09f39aa68c32cc05ca1c52a9}{DrawHUD}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00013\ UCLASS()}
+\DoxyCodeLine{00014\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAIoTwinHUD}{AIoTwinHUD}}\ :\ public\ AHUD}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ GENERATED\_BODY()}
 \DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawLine(\textcolor{keyword}{const}\ FString\&\ Text,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\&\ Y,\ \textcolor{keywordtype}{float}\ Scale\ =\ 1.0f);}
-\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAIoTwinHUD_ad605a66b09f39aa68c32cc05ca1c52a9}{DrawHUD}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAIoTwinHUD_a646c77983ad193dca9038df31ff07c94}{NotifyHitBoxClick}}(FName\ BoxName)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawSimulationPanel();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawLine(\textcolor{keyword}{const}\ FString\&\ Text,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\&\ Y,\ \textcolor{keywordtype}{float}\ Scale\ =\ 1.0f);}
+\DoxyCodeLine{00025\ \};}
 
 \end{DoxyCode}

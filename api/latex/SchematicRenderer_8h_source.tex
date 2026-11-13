@@ -1,0 +1,105 @@
+\doxysection{Schematic\+Renderer.\+h}
+\hypertarget{SchematicRenderer_8h_source}{}\label{SchematicRenderer_8h_source}\index{visualizer/Source/IoTwin/Schematic/SchematicRenderer.h@{visualizer/Source/IoTwin/Schematic/SchematicRenderer.h}}
+\mbox{\hyperlink{SchematicRenderer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ draws\ the\ 2D\ schematic\ view\ onto\ a\ UCanvas.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }UCanvas;}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }UFont;}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUIoTwinBusSubsystem}{UIoTwinBusSubsystem}};}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIoTwinSchematicSubsystem}};}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFSystemNode}{FSystemNode}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFSchematicHitBox}{FSchematicHitBox}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ FName\ \mbox{\hyperlink{structFSchematicHitBox_a534ceaf9577ef0c587aac1de212dd1f0}{Name}};}
+\DoxyCodeLine{00017\ \ \ \ \ FVector2D\ \mbox{\hyperlink{structFSchematicHitBox_a6bed2c60a3273274a899019fa43379ea}{Position}}\ =\ FVector2D::ZeroVector;}
+\DoxyCodeLine{00018\ \ \ \ \ FVector2D\ \mbox{\hyperlink{structFSchematicHitBox_a6636ab31035421618fe1b4363135e07d}{Size}}\ =\ FVector2D::ZeroVector;}
+\DoxyCodeLine{00019\ \ \ \ \ int32\ \mbox{\hyperlink{structFSchematicHitBox_af98a6ddc400b8db50d4011408b1f8930}{Priority}}\ =\ 0;}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFSchematicRenderer_a93df9099c9abe40ced2c5096c9df0bbc}{FSchematicRenderer}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ FName\ \mbox{\hyperlink{classFSchematicRenderer_aad42fd19869e1e1ee43356549eb4cc53}{BackgroundBox}};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ FName\ \mbox{\hyperlink{classFSchematicRenderer_a0a757a6108e977e9440239daef505333}{View3DBox}};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ TCHAR*\ \mbox{\hyperlink{classFSchematicRenderer_a760ca5e30a892a882ffaf942b383bd86}{NodeBoxPrefix}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classFSchematicRenderer_a93df9099c9abe40ced2c5096c9df0bbc}{FSchematicRenderer}}(UCanvas*\ InCanvas,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classUIoTwinSchematicSubsystem}{UIoTwinSchematicSubsystem}}\&\ InSchematic,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classUIoTwinBusSubsystem}{UIoTwinBusSubsystem}}*\ InBus,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ InNow);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFSchematicRenderer_a094210e0916d3b078d3e68b5c080fe49}{Draw}}(TArray<FSchematicHitBox>\&\ OutHitBoxes);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classFSchematicRenderer_a1686cc6b6de4c8d863f905d2972ac797}{ReferenceHeight}}\ =\ 900.0f;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }FNodeSlot}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ FVector2D\ Position\ =\ FVector2D::ZeroVector;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ FVector2D\ Size\ =\ FVector2D::ZeroVector;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ int32\ Bus\ =\ INDEX\_NONE;\ \textcolor{comment}{//\ index\ into\ BusSlots,\ if\ the\ node\ is\ a\ member\ of\ the\ row's\ bus}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ FVector2D\ Center()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Position\ +\ Size\ *\ 0.5;\ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ Bottom()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Position.Y\ +\ Size.Y;\ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{struct\ }FBusSlot}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ FString\ BusId;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ Y\ =\ 0.0f;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ X0\ =\ 0.0f;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ X1\ =\ 0.0f;}
+\DoxyCodeLine{00061\ \ \ \ \ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Primitives}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ Rect(\textcolor{keyword}{const}\ FVector2D\&\ Position,\ \textcolor{keyword}{const}\ FVector2D\&\ Size,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ Outline(\textcolor{keyword}{const}\ FVector2D\&\ Position,\ \textcolor{keyword}{const}\ FVector2D\&\ Size,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\ Thickness)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ Line(\textcolor{keyword}{const}\ FVector2D\&\ A,\ \textcolor{keyword}{const}\ FVector2D\&\ B,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\ Thickness)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ DashedLine(\textcolor{keyword}{const}\ FVector2D\&\ A,\ \textcolor{keyword}{const}\ FVector2D\&\ B,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\ Thickness)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ Dot(\textcolor{keyword}{const}\ FVector2D\&\ Center,\ \textcolor{keywordtype}{float}\ Radius,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ Text(\textcolor{keyword}{const}\ FString\&\ Value,\ \textcolor{keyword}{const}\ FVector2D\&\ Position,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\ Scale)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{float}\ TextWidth(\textcolor{keyword}{const}\ FString\&\ Value,\ \textcolor{keywordtype}{float}\ Scale)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{float}\ LineHeight(\textcolor{keywordtype}{float}\ Scale)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ \ \ \ \ FString\ Fit(\textcolor{keyword}{const}\ FString\&\ Value,\ \textcolor{keywordtype}{float}\ MaxWidth,\ \textcolor{keywordtype}{float}\ Scale)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{float}\ Paragraph(\textcolor{keyword}{const}\ FString\&\ Value,\ \textcolor{keyword}{const}\ FVector2D\&\ Position,\ \textcolor{keywordtype}{float}\ Width,\ \textcolor{keyword}{const}\ FLinearColor\&\ Color,\ \textcolor{keywordtype}{float}\ Scale,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ MaxY)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Parts}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawContents(TArray<FSchematicHitBox>\&\ OutHitBoxes);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawBackground(\textcolor{keyword}{const}\ FBox2D\&\ Diagram)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawTopBar(TArray<FSchematicHitBox>\&\ OutHitBoxes)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ LayoutNodes(\textcolor{keyword}{const}\ FBox2D\&\ Area);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawBuses()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawLinks()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawNodes(TArray<FSchematicHitBox>\&\ OutHitBoxes)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawPulses()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawDetails(\textcolor{keyword}{const}\ FBox2D\&\ Area)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawNodeDetails(\textcolor{keyword}{const}\ FSystemNode\&\ Node,\ \textcolor{keywordtype}{float}\ X,\ \textcolor{keywordtype}{float}\ Y,\ \textcolor{keywordtype}{float}\ Width,\ \textcolor{keywordtype}{float}\ MaxY)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawSystemOverview(\textcolor{keywordtype}{float}\ X,\ \textcolor{keywordtype}{float}\ Y,\ \textcolor{keywordtype}{float}\ Width,\ \textcolor{keywordtype}{float}\ MaxY)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{float}\ DrawComponent(\textcolor{keyword}{const}\ FString\&\ ComponentId,\ \textcolor{keyword}{const}\ FString\&\ Heading,\ \textcolor{keywordtype}{float}\ X,\ \textcolor{keywordtype}{float}\ Y,\ \textcolor{keywordtype}{float}\ Width,\ \textcolor{keywordtype}{float}\ MaxY,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ int32\ Depth)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawLog(\textcolor{keyword}{const}\ FBox2D\&\ Area)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawMessage(\textcolor{keyword}{const}\ FString\&\ Value)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ FLinearColor\ AccentOf(\textcolor{keyword}{const}\ FString\&\ NodeId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ \ \ \ \ FLinearColor\ ActivityColor(\textcolor{keyword}{const}\ FString\&\ NodeId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ \ \ \ \ FString\ NodeLabel(\textcolor{keyword}{const}\ FString\&\ NodeId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{double}\ SecondsSinceLastFrame()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ UCanvas*\ Canvas;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{const}\ UIoTwinSchematicSubsystem\&\ Schematic;}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{const}\ UIoTwinBusSubsystem*\ Bus;}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{double}\ Now;}
+\DoxyCodeLine{00103\ \ \ \ \ UFont*\ Font;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{float}\ ViewWidth\ =\ 0.0f;\ \ \textcolor{comment}{//\ in\ layout\ units\ (screen\ pixels\ /\ UiScale)}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{float}\ ViewHeight\ =\ 0.0f;}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ TMap<FString,\ FNodeSlot>\ Slots;}
+\DoxyCodeLine{00108\ \ \ \ \ TArray<FBusSlot>\ BusSlots;}
+\DoxyCodeLine{00109\ \};}
+
+\end{DoxyCode}

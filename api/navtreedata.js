@@ -25,6 +25,9 @@
 var NAVTREE =
 [
   [ "IoTwin", "index.html", [
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -52,11 +55,11 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"CanFrameTests_8cpp.html",
-"classFIoTwinBusConnection.html#a536a74e23a13384e24b84e6230f76dff",
-"isotp_8h.html",
-"structBridge.html#acd9e2c80936c73968b8f5309682cf56f",
-"structSlcanReader.html#aaf4c84ffa57b9fb3e226772f95765e41"
+"CanDatabase_8cpp.html",
+"classAPowerSourceActor.html#a4ca57b51ec19162748ab86b26d667511",
+"gateway_8c.html",
+"pal__time_8h_source.html",
+"structFSystemLink.html#a02ec6ff13659192a8e71e38159173e1c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

@@ -99,21 +99,24 @@ $(function(){initNavTree('IoTwinHUD_8h_source.html','',''); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;GameFramework/HUD.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;IoTwinHUD.generated.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>UCLASS()</div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classAIoTwinHUD.html">   11</a></span>class IOTWIN_API <a class="code hl_class" href="classAIoTwinHUD.html">AIoTwinHUD</a> : public AHUD</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    GENERATED_BODY()</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAIoTwinHUD.html#ad605a66b09f39aa68c32cc05ca1c52a9">DrawHUD</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>UCLASS()</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classAIoTwinHUD.html">   14</a></span>class IOTWIN_API <a class="code hl_class" href="classAIoTwinHUD.html">AIoTwinHUD</a> : public AHUD</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    GENERATED_BODY()</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> DrawLine(<span class="keyword">const</span> FString&amp; Text, <span class="keyword">const</span> FLinearColor&amp; Color, <span class="keywordtype">float</span>&amp; Y, <span class="keywordtype">float</span> Scale = 1.0f);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAIoTwinHUD.html#ad605a66b09f39aa68c32cc05ca1c52a9">DrawHUD</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAIoTwinHUD.html#a646c77983ad193dca9038df31ff07c94">NotifyHitBoxClick</a>(FName BoxName) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> DrawSimulationPanel();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> DrawLine(<span class="keyword">const</span> FString&amp; Text, <span class="keyword">const</span> FLinearColor&amp; Color, <span class="keywordtype">float</span>&amp; Y, <span class="keywordtype">float</span> Scale = 1.0f);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
 </div>
-<div class="ttc" id="aclassAIoTwinHUD_html"><div class="ttname"><a href="classAIoTwinHUD.html">AIoTwinHUD</a></div><div class="ttdef"><b>Definition</b> IoTwinHUD.h:12</div></div>
-<div class="ttc" id="aclassAIoTwinHUD_html_ad605a66b09f39aa68c32cc05ca1c52a9"><div class="ttname"><a href="classAIoTwinHUD.html#ad605a66b09f39aa68c32cc05ca1c52a9">AIoTwinHUD::DrawHUD</a></div><div class="ttdeci">virtual void DrawHUD() override</div><div class="ttdef"><b>Definition</b> IoTwinHUD.cpp:47</div></div>
+<div class="ttc" id="aclassAIoTwinHUD_html"><div class="ttname"><a href="classAIoTwinHUD.html">AIoTwinHUD</a></div><div class="ttdef"><b>Definition</b> IoTwinHUD.h:15</div></div>
+<div class="ttc" id="aclassAIoTwinHUD_html_a646c77983ad193dca9038df31ff07c94"><div class="ttname"><a href="classAIoTwinHUD.html#a646c77983ad193dca9038df31ff07c94">AIoTwinHUD::NotifyHitBoxClick</a></div><div class="ttdeci">virtual void NotifyHitBoxClick(FName BoxName) override</div><div class="ttdef"><b>Definition</b> IoTwinHUD.cpp:73</div></div>
+<div class="ttc" id="aclassAIoTwinHUD_html_ad605a66b09f39aa68c32cc05ca1c52a9"><div class="ttname"><a href="classAIoTwinHUD.html#ad605a66b09f39aa68c32cc05ca1c52a9">AIoTwinHUD::DrawHUD</a></div><div class="ttdeci">virtual void DrawHUD() override</div><div class="ttdef"><b>Definition</b> IoTwinHUD.cpp:51</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

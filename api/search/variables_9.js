@@ -1,19 +1,4 @@
 var searchData=
 [
-  ['lamp_5fon_0',['lamp_on',['../structLightEcu.html#a69bf377f8868877cfe89b18400dddd1d',1,'LightEcu::lamp_on'],['../structGateway.html#a599d619c445d8077e44b6a5c04da2bb8',1,'Gateway::lamp_on']]],
-  ['last_1',['last',['../structMonitor.html#a0071ae41c3cea19aba30fd888d326d03',1,'Monitor']]],
-  ['last_5fblink_5fms_2',['last_blink_ms',['../structGateway.html#a29a1374049b479fd9605bfc26f0cb954',1,'Gateway']]],
-  ['last_5fcount_3',['last_count',['../structMonitor.html#a7f3370056f967b69a47607deb9a0dbee',1,'Monitor']]],
-  ['last_5ferror_5fcode_4',['last_error_code',['../structFdcanStatus.html#ab15f6e037119f5e3c0c4f260eba77e4d',1,'FdcanStatus']]],
-  ['last_5fsend_5fms_5',['last_send_ms',['../structLightEcu.html#a586b43ec34ea02c87c55bd5a72ccf5e0',1,'LightEcu']]],
-  ['last_5ftoggle_5fms_6',['last_toggle_ms',['../structLightEcu.html#a20c6979600f3bcb2eb7f0faafbd85dd5',1,'LightEcu']]],
-  ['last_5fwas_5fcr_7',['last_was_cr',['../structSlcanReader.html#acc6c44003870c9b9e18eccf42cabd0b3',1,'SlcanReader']]],
-  ['led_5fon_8',['led_on',['../structGateway.html#a0761bcd2966eb407561fa2fc726948c2',1,'Gateway']]],
-  ['led_5fset_9',['led_set',['../structGatewayIo.html#ad0a71227d1f0d8e9ed1af902237b34ba',1,'GatewayIo']]],
-  ['length_10',['length',['../structCanSignal.html#a440766abe86616f54c3425e7d30739c9',1,'CanSignal::length'],['../structSlcanReader.html#a74fcda0bbba62ef83d6d7ce86bbfe26a',1,'SlcanReader::length'],['../structLineReader.html#a0aaa30c60cd0d5bef363a65161f63113',1,'LineReader::length']]],
-  ['light_11',['Light',['../classALampActor.html#ad71ff753af4e93ac58eb25c1404a3e1c',1,'ALampActor']]],
-  ['listener_12',['listener',['../structBusServer.html#adc75c4fca9b4ffa5458aabb02a48e230',1,'BusServer']]],
-  ['lock_13',['lock',['../structCanBus.html#a54237b138743c3450480e5025eaa1d65',1,'CanBus::lock'],['../structSimShared.html#a875c7673214b76e60b13a1d97311ba26',1,'SimShared::lock']]],
-  ['lock_5fmemory_14',['lock_memory',['../structPalRtConfig.html#a166b0391b35d1f6cff67aea1186e28b8',1,'PalRtConfig']]],
-  ['log_5fframes_15',['log_frames',['../structBusServerConfig.html#ab9aaa40e0fc060322ec0b1754f6c4a74',1,'BusServerConfig']]]
+  ['kind_0',['Kind',['../structFSystemNode.html#a91f4773e8febd8a372c454f290504358',1,'FSystemNode']]]
 ];

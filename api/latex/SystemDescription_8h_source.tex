@@ -1,0 +1,70 @@
+\doxysection{System\+Description.\+h}
+\hypertarget{SystemDescription_8h_source}{}\label{SystemDescription_8h_source}\index{visualizer/Source/IoTwin/Schematic/SystemDescription.h@{visualizer/Source/IoTwin/Schematic/SystemDescription.h}}
+\mbox{\hyperlink{SystemDescription_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ system\ description\ (data/systems/*.json):\ nodes,\ buses,\ links,\ messages.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFSystemNode}{FSystemNode}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemNode_a36bc2038a9bd092a43da4cc55358dfdc}{Id}};}
+\DoxyCodeLine{00010\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemNode_a91f4773e8febd8a372c454f290504358}{Kind}};\ \textcolor{comment}{//\ physical\ |\ virtual}}
+\DoxyCodeLine{00011\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemNode_abdf0a01c3a695b90c0b7a99d62e69fda}{Label}};}
+\DoxyCodeLine{00012\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemNode_afdd174e8c9defdcb11ef5df8de2a1b24}{Component}};}
+\DoxyCodeLine{00013\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemNode_a97630efab660efbffda5e88ebb4c8a07}{Program}};}
+\DoxyCodeLine{00014\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemNode_a6629cb97d88e4f8dcd3cc515fb6702b9}{Description}};}
+\DoxyCodeLine{00015\ \};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFSystemBus}{FSystemBus}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemBus_a154e20b9a433925cf87708f8c6694545}{Id}};}
+\DoxyCodeLine{00020\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemBus_aa76edb4e409ad97de4ad674c24db96ab}{Type}};}
+\DoxyCodeLine{00021\ \ \ \ \ int32\ \mbox{\hyperlink{structFSystemBus_a6b4e136010307be8cf7c1ab7445366f4}{Bitrate}}\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemBus_a4180415c9053014125b7bc13e7df255d}{Dbc}};\ \textcolor{comment}{//\ relative\ to\ the\ system\ file}}
+\DoxyCodeLine{00023\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemBus_a34b6f207d645cac89762b5bbca91b6c1}{Transport}};}
+\DoxyCodeLine{00024\ \ \ \ \ TArray<FString>\ \mbox{\hyperlink{structFSystemBus_a3429853da02bccba3b8fe298340b4521}{Members}};}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFSystemLink}{FSystemLink}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemLink_a10f93387bf7785976ae274548437b9ef}{Id}};}
+\DoxyCodeLine{00030\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemLink_a9b0adfda94d2ad1c79cb88087eb4b819}{Type}};}
+\DoxyCodeLine{00031\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemLink_a02ec6ff13659192a8e71e38159173e1c}{From}};\ \textcolor{comment}{//\ node\ or\ node:port}}
+\DoxyCodeLine{00032\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemLink_a22bb2d4134c3c7118a9d1dc5758db20c}{To}};}
+\DoxyCodeLine{00033\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemLink_adcef6714af7f13ce73a425495885b83f}{Carries}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ FString\ \mbox{\hyperlink{structFSystemLink_aa482e2f48780316040a34fd9edb5a934}{NodeOf}}(\textcolor{keyword}{const}\ FString\&\ Endpoint);}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{struct\ }IOTWIN\_API\ \mbox{\hyperlink{structFSystemMessage}{FSystemMessage}}}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ FString\ \mbox{\hyperlink{structFSystemMessage_ae31d6ee218457d68cf5600a028ddabe4}{Name}};}
+\DoxyCodeLine{00041\ \ \ \ \ TArray<FString>\ \mbox{\hyperlink{structFSystemMessage_af60ce5973853489978a1adfb9f5b5214}{Producers}};}
+\DoxyCodeLine{00042\ \ \ \ \ TArray<FString>\ \mbox{\hyperlink{structFSystemMessage_a14dd9fe56abf023f34cb017837ee9943}{Consumers}};}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFSystemDescription}{FSystemDescription}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFSystemDescription_a771e7646aea7291335b31f0f1652c1ab}{LoadFromFile}}(\textcolor{keyword}{const}\ FString\&\ Path,\ FString\&\ OutError);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFSystemDescription_a18aa490c4a49f8df109c362f724af281}{LoadFromString}}(\textcolor{keyword}{const}\ FString\&\ Json,\ \textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{BaseDirectory}},\ FString\&\ OutError);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemNode}{FSystemNode}}*\ \mbox{\hyperlink{classFSystemDescription_a9ed232013429b62ee64d118cb9db76c3}{FindNode}}(\textcolor{keyword}{const}\ FString\&\ NodeId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFSystemMessage}{FSystemMessage}}*\ \mbox{\hyperlink{classFSystemDescription_a816825db146544f3a3171d84783afb6f}{FindMessage}}(\textcolor{keyword}{const}\ FString\&\ \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_ab25c34371ae1023dec5d3148aad44f42}{ResolvePath}}(\textcolor{keyword}{const}\ FString\&\ Relative)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a74b208b2e74c463a143f40a75d780609}{Id}};}
+\DoxyCodeLine{00058\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a3fdb73b204df0ccd5848406210513ac3}{Name}};}
+\DoxyCodeLine{00059\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a27606d353da05f84d90f4fad569a5a17}{Description}};}
+\DoxyCodeLine{00060\ \ \ \ \ TArray<FSystemNode>\ \mbox{\hyperlink{classFSystemDescription_ab7bd5cc6aa28517bf281a4314daa0f88}{Nodes}};}
+\DoxyCodeLine{00061\ \ \ \ \ TArray<FSystemBus>\ \mbox{\hyperlink{classFSystemDescription_a8d064f7ac1dbd33913de21b53903c2c6}{Buses}};}
+\DoxyCodeLine{00062\ \ \ \ \ TArray<FSystemLink>\ \mbox{\hyperlink{classFSystemDescription_af399acec59d4bf53a584bbc516ad9580}{Links}};}
+\DoxyCodeLine{00063\ \ \ \ \ TArray<FSystemMessage>\ \mbox{\hyperlink{classFSystemDescription_ab76c46e62f73b1b6973007386214c752}{Messages}};}
+\DoxyCodeLine{00064\ \ \ \ \ FString\ \mbox{\hyperlink{classFSystemDescription_a4d27b4ad7d51354fb67c26d2cad06313}{BaseDirectory}};}
+\DoxyCodeLine{00065\ \};}
+
+\end{DoxyCode}
