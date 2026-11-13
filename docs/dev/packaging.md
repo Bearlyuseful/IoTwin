@@ -44,10 +44,6 @@ releases are packaged locally with the script above.
 
 ## Repository size
 
-`.uasset`/`.umap` files are stored directly in Git today. Before larger
-content is added, they should move to Git LFS:
-
-```bash
-git lfs install
-git lfs track "*.uasset" "*.umap"
-```
+`.uasset`/`.umap` files are stored with Git LFS (see `.gitattributes`).
+Install Git LFS before cloning (`git lfs install`), otherwise the Unreal
+project only contains pointer files.

@@ -27,7 +27,27 @@ digital-twin features.
 | DBC, ISO-TP | step 5 | ✅ DBC reader + `can_monitor`, ISO-TP library; UDS services open |
 | Scenarios, more devices, extensions | Oct 2025 outlook | ❌ |
 
-## Order
+## Next phase (agreed November 2026)
+
+The long-term goal is a digital twin that is built from engineering data:
+circuit diagrams and network descriptions (incl. wireless links) describe
+the physical setup, the visualizer shows it as a **2D schematic** with live
+bus messages and status, and can switch from there into the **3D** scene.
+
+Order of work:
+
+| # | Feature | Notes |
+|---|---------|-------|
+| A | **Component database** | parts and their characteristics for simulation, first entry: NUCLEO-G0B1RE; plus a system description (instances, connections, buses) |
+| B | **Bus / schematic view in Unreal** | 2D view of nodes, buses and live messages, switch to 3D; later generated from circuit diagrams incl. wireless traffic |
+| C | **UDS diagnostics** | on top of ISO-TP: server in ECU and gateway, client tool |
+| D | **Scenarios and faults** | record/replay, scripted scenarios, fault injection (loss, delay, bus-off) |
+| E | **More devices and electrical model** | dimmer, sensors, fan/motor; load, current, fuse |
+| F | **Real bus and real time** | transceiver + second node, PREEMPT_RT measurements (needs hardware) |
+
+Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup.
+
+## Order of the post-MVP steps
 
 | # | Step | Size | Why here |
 |---|------|------|----------|
