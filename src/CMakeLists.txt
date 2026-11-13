@@ -1,3 +1,6 @@
 add_subdirectory(core/logger)
+add_subdirectory(core/platform)
+add_subdirectory(core/can)
 add_subdirectory(communication/tcp)
+add_subdirectory(bus)
 add_subdirectory(simulators/can_sim)
