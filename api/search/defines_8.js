@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['send_5ftimeout_5fms_0',['SEND_TIMEOUT_MS',['../bus__server_8c.html#a377c10ddb1999e7e32f9e11499e13734',1,'SEND_TIMEOUT_MS:&#160;bus_server.c'],['../main__can__sim_8c.html#a377c10ddb1999e7e32f9e11499e13734',1,'SEND_TIMEOUT_MS:&#160;main_can_sim.c']]]
+  ['pal_5fns_5fper_5fms_0',['PAL_NS_PER_MS',['../pal__time_8h.html#ae594119f01261f993570723459cbca73',1,'pal_time.h']]],
+  ['pal_5fns_5fper_5fsec_1',['PAL_NS_PER_SEC',['../pal__time_8h.html#aaa104b0955ffbc88d9dc31e3b96bdfbb',1,'pal_time.h']]]
 ];

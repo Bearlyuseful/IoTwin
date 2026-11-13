@@ -1,0 +1,96 @@
+\doxysection{src/bridges/serial\+\_\+bridge/main\+\_\+serial\+\_\+bridge.c File Reference}
+\hypertarget{main__serial__bridge_8c}{}\label{main__serial__bridge_8c}\index{src/bridges/serial\_bridge/main\_serial\_bridge.c@{src/bridges/serial\_bridge/main\_serial\_bridge.c}}
+
+
+serial\+\_\+bridge\+: connects an SLCAN adapter (e.\+g. the \doxylink{classIoTwin}{Io\+Twin} STM32 gateway) to iotwin-\/bus.  
+
+
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}bridge\+\_\+core.\+h"{}}\newline
+{\ttfamily \#include "{}cli.\+h"{}}\newline
+{\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
+{\ttfamily \#include "{}net.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
+{\ttfamily \#include "{}serial\+\_\+port.\+h"{}}\newline
+{\ttfamily \#include "{}slcan.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structOptions}{Options}}
+\item 
+struct \mbox{\hyperlink{structBridge}{Bridge}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main__serial__bridge_8c_a2a7a0b5f8a93ef53544dd65a1392c693}{RETRY\+\_\+\+INTERVAL\+\_\+\+MS}}~1000
+\item 
+\#define \mbox{\hyperlink{main__serial__bridge_8c_af7f929849524a2ae79fdc0e8c9225db7}{SERIAL\+\_\+\+POLL\+\_\+\+MS}}~5
+\item 
+\#define \mbox{\hyperlink{main__serial__bridge_8c_a9f53552ef20c284ad18bd49f4859cacc}{BUS\+\_\+\+POLL\+\_\+\+MS}}~5
+\item 
+\#define \mbox{\hyperlink{main__serial__bridge_8c_aaccae77dd0ec9bf8de503250665c7185}{COMMAND\+\_\+\+TIMEOUT\+\_\+\+MS}}~500
+\item 
+\#define \mbox{\hyperlink{main__serial__bridge_8c_a377c10ddb1999e7e32f9e11499e13734}{SEND\+\_\+\+TIMEOUT\+\_\+\+MS}}~100
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main__serial__bridge_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+serial\+\_\+bridge\+: connects an SLCAN adapter (e.\+g. the \doxylink{classIoTwin}{Io\+Twin} STM32 gateway) to iotwin-\/bus. 
+
+SLCAN adapter \texorpdfstring{$<$}{<}--serial-\/-\/\texorpdfstring{$>$}{>} serial\+\_\+bridge \texorpdfstring{$<$}{<}--TCP-\/-\/\texorpdfstring{$>$}{>} iotwin-\/bus \texorpdfstring{$<$}{<}-\/-\/\texorpdfstring{$>$}{>} other nodes
+
+Single threaded\+: the loop alternates between the serial port and the bus socket with short timeouts (works the same on Windows and Linux). Reconnects to both sides automatically. 
+
+\label{doc-define-members}
+\Hypertarget{main__serial__bridge_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main__serial__bridge_8c_a9f53552ef20c284ad18bd49f4859cacc}\index{main\_serial\_bridge.c@{main\_serial\_bridge.c}!BUS\_POLL\_MS@{BUS\_POLL\_MS}}
+\index{BUS\_POLL\_MS@{BUS\_POLL\_MS}!main\_serial\_bridge.c@{main\_serial\_bridge.c}}
+\doxysubsubsection{\texorpdfstring{BUS\_POLL\_MS}{BUS\_POLL\_MS}}
+{\footnotesize\ttfamily \label{main__serial__bridge_8c_a9f53552ef20c284ad18bd49f4859cacc} 
+\#define BUS\+\_\+\+POLL\+\_\+\+MS~5}
+
+\Hypertarget{main__serial__bridge_8c_aaccae77dd0ec9bf8de503250665c7185}\index{main\_serial\_bridge.c@{main\_serial\_bridge.c}!COMMAND\_TIMEOUT\_MS@{COMMAND\_TIMEOUT\_MS}}
+\index{COMMAND\_TIMEOUT\_MS@{COMMAND\_TIMEOUT\_MS}!main\_serial\_bridge.c@{main\_serial\_bridge.c}}
+\doxysubsubsection{\texorpdfstring{COMMAND\_TIMEOUT\_MS}{COMMAND\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{main__serial__bridge_8c_aaccae77dd0ec9bf8de503250665c7185} 
+\#define COMMAND\+\_\+\+TIMEOUT\+\_\+\+MS~500}
+
+\Hypertarget{main__serial__bridge_8c_a2a7a0b5f8a93ef53544dd65a1392c693}\index{main\_serial\_bridge.c@{main\_serial\_bridge.c}!RETRY\_INTERVAL\_MS@{RETRY\_INTERVAL\_MS}}
+\index{RETRY\_INTERVAL\_MS@{RETRY\_INTERVAL\_MS}!main\_serial\_bridge.c@{main\_serial\_bridge.c}}
+\doxysubsubsection{\texorpdfstring{RETRY\_INTERVAL\_MS}{RETRY\_INTERVAL\_MS}}
+{\footnotesize\ttfamily \label{main__serial__bridge_8c_a2a7a0b5f8a93ef53544dd65a1392c693} 
+\#define RETRY\+\_\+\+INTERVAL\+\_\+\+MS~1000}
+
+\Hypertarget{main__serial__bridge_8c_a377c10ddb1999e7e32f9e11499e13734}\index{main\_serial\_bridge.c@{main\_serial\_bridge.c}!SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}}
+\index{SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}!main\_serial\_bridge.c@{main\_serial\_bridge.c}}
+\doxysubsubsection{\texorpdfstring{SEND\_TIMEOUT\_MS}{SEND\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{main__serial__bridge_8c_a377c10ddb1999e7e32f9e11499e13734} 
+\#define SEND\+\_\+\+TIMEOUT\+\_\+\+MS~100}
+
+\Hypertarget{main__serial__bridge_8c_af7f929849524a2ae79fdc0e8c9225db7}\index{main\_serial\_bridge.c@{main\_serial\_bridge.c}!SERIAL\_POLL\_MS@{SERIAL\_POLL\_MS}}
+\index{SERIAL\_POLL\_MS@{SERIAL\_POLL\_MS}!main\_serial\_bridge.c@{main\_serial\_bridge.c}}
+\doxysubsubsection{\texorpdfstring{SERIAL\_POLL\_MS}{SERIAL\_POLL\_MS}}
+{\footnotesize\ttfamily \label{main__serial__bridge_8c_af7f929849524a2ae79fdc0e8c9225db7} 
+\#define SERIAL\+\_\+\+POLL\+\_\+\+MS~5}
+
+
+
+\label{doc-func-members}
+\Hypertarget{main__serial__bridge_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main__serial__bridge_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{main\_serial\_bridge.c@{main\_serial\_bridge.c}!main@{main}}
+\index{main@{main}!main\_serial\_bridge.c@{main\_serial\_bridge.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main__serial__bridge_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+

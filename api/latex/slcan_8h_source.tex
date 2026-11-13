@@ -1,0 +1,80 @@
+\doxysection{slcan.\+h}
+\hypertarget{slcan_8h_source}{}\label{slcan_8h_source}\index{src/core/can/slcan.h@{src/core/can/slcan.h}}
+\mbox{\hyperlink{slcan_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_SLCAN\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_SLCAN\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00030\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ SLCAN\_MAX\_LINE\ 32}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ SLCAN\_OK\ "{}\(\backslash\)r"{}}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ SLCAN\_ERROR\ "{}\(\backslash\)a"{}}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08ef0b08c4ae1bfd9a9bc2d3f5e87c91}{SLCAN\_CMD\_FRAME}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abba5ea84182cc5d114bf469acdce09a4}{SLCAN\_CMD\_OPEN}},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2ae3aac1a75ef00439a8657f7b9dd212e1}{SLCAN\_CMD\_OPEN\_LOOPBACK}},\ }
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a3f20f87682a51c900b348ef4b3c42a75}{SLCAN\_CMD\_OPEN\_LISTEN}},\ \ \ }
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abdc50ff373f022c554e5628f60b66bcf}{SLCAN\_CMD\_CLOSE}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a148903c24e6c42796724dc4db2116486}{SLCAN\_CMD\_BITRATE}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a41e4c56af2ff7f2476eabf2ba214130c}{SLCAN\_CMD\_VERSION}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a449b7770b3783df0f6c902a8a72a25b6}{SLCAN\_CMD\_SERIAL}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2adfc67844df5d02f5d1c5ce9732059538}{SLCAN\_CMD\_STATUS}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a02aafc4b4b323aa749c861a3a31679f3}{SLCAN\_CMD\_TIMESTAMP}},\ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08fc621cd729b4d36ca81f73c6e51c38}{SLCAN\_CMD\_STATISTICS}}\ \ \ \ \ }
+\DoxyCodeLine{00052\ \}\ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2}{SlcanCommandType}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2}{SlcanCommandType}}\ \mbox{\hyperlink{structSlcanCommand_acd1340a72c0090f46c1eed143f97c446}{type}};}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{structCanFrame}{CanFrame}}\ \mbox{\hyperlink{structSlcanCommand_a34ffacf7a14530b8b73a3c1e1214c0fe}{frame}};\ \ \ }
+\DoxyCodeLine{00058\ \ \ uint32\_t\ \mbox{\hyperlink{structSlcanCommand_a3eca9fb44f086e087976a85b6969720e}{bitrate}};\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structSlcanCommand_ab764477773c004bd5377803cd2271f29}{enable}};\ \ \ \ \ \ }
+\DoxyCodeLine{00060\ \}\ \mbox{\hyperlink{structSlcanCommand}{SlcanCommand}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{slcan_8h_ad5c5cf934528e8bd594c7d07adca8f8f}{slcan\_parse}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length,\ \mbox{\hyperlink{structSlcanCommand}{SlcanCommand}}*\ command);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{slcan_8h_abb6b135e8ae4639c26720690f3ea9b79}{slcan\_format\_frame}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ \textcolor{keywordtype}{char}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ buffer\_size);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ uint32\_t\ \mbox{\hyperlink{slcan_8h_a7fdb13e55e2dde64c1cb48b7ab884c48}{slcan\_bitrate\_from\_index}}(\textcolor{keywordtype}{unsigned}\ index);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{slcan_8h_ad661c42b2945d5bc08bf89abedc13cf6}{slcan\_index\_from\_bitrate}}(uint32\_t\ bitrate);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{slcan_8h_a50789257f41b87b1054579961eb96122}{slcan\_put\_hex}}(\textcolor{keywordtype}{char}*\ out,\ uint32\_t\ value,\ \textcolor{keywordtype}{unsigned}\ digits);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00084\ \textcolor{comment}{/*\ Stream\ splitting\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00085\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{SlcanLineCallback}})(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{void}*\ user\_data);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structSlcanReader_aaf4c84ffa57b9fb3e226772f95765e41}{buffer}}[\mbox{\hyperlink{slcan_8h_a8b72da6e1892fae75e12f923b2495eaa}{SLCAN\_MAX\_LINE}}];}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structSlcanReader_a74fcda0bbba62ef83d6d7ce86bbfe26a}{length}};}
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structSlcanReader_ad2bf1a48c4604ed9c5148456dc74d050}{discarding}};\ \ \ \ \ \ }
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structSlcanReader_acc6c44003870c9b9e18eccf42cabd0b3}{last\_was\_cr}};\ \ \ \ \ }
+\DoxyCodeLine{00101\ \ \ uint32\_t\ \mbox{\hyperlink{structSlcanReader_ae0b8a9719fdbf00de2c94a4ecb43ee62}{overflows}};\ \ \ }
+\DoxyCodeLine{00102\ \}\ \mbox{\hyperlink{structSlcanReader}{SlcanReader}};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{slcan_8h_a04bc784d26583ecb01dbf94dc134f316}{slcan\_reader\_init}}(\mbox{\hyperlink{structSlcanReader}{SlcanReader}}*\ reader);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{slcan_8h_ad1497a9e559dd4d78ecb16d583df1fab}{slcan\_reader\_feed}}(\mbox{\hyperlink{structSlcanReader}{SlcanReader}}*\ reader,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data,\ \textcolor{keywordtype}{size\_t}\ length,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{SlcanLineCallback}}\ callback,\ \textcolor{keywordtype}{void}*\ user\_data);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00111\ \}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_SLCAN\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

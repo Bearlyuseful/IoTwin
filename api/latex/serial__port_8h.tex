@@ -1,0 +1,97 @@
+\doxysection{src/communication/serial/serial\+\_\+port.h File Reference}
+\hypertarget{serial__port_8h}{}\label{serial__port_8h}\index{src/communication/serial/serial\_port.h@{src/communication/serial/serial\_port.h}}
+
+
+Minimal portable serial port (Win32 COM ports / POSIX termios).  
+
+
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Serial\+Port \mbox{\hyperlink{serial__port_8h_ab164b4206a8d6e3e0e1bfe9351daa7cc}{Serial\+Port}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{serial__port_8h_a7374d839fda641cae4435fcf7745097b}{serial\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}name, uint32\+\_\+t baudrate)
+\begin{DoxyCompactList}\small\item\em Opens and configures a port. Returns NULL on failure (see \doxylink{serial__port_8h_a5e06d42a1e2d5f040ae28b45ade6dda1}{serial\+\_\+last\+\_\+error()}). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{serial__port_8h_ac6ffda03d0fe363998a500f4c08dba4d}{serial\+\_\+read}} (\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*}port, void \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size, int timeout\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Reads available bytes, waiting at most {\ttfamily timeout\+\_\+ms} for the first one. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{serial__port_8h_a54c6b7d1c8060f80106ed0ca7ae7e42d}{serial\+\_\+write\+\_\+all}} (\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*}port, const void \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Writes all bytes. Returns 0 on success, -\/1 on error. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{serial__port_8h_a531cc54fca5b748e0a3c54005819b568}{serial\+\_\+close}} (\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*}port)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{serial__port_8h_a5e06d42a1e2d5f040ae28b45ade6dda1}{serial\+\_\+last\+\_\+error}} (void)
+\begin{DoxyCompactList}\small\item\em Text of the last error of the calling thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Minimal portable serial port (Win32 COM ports / POSIX termios). 
+
+8N1, no flow control, raw bytes. Port names\+: "{}\+COM5"{} on Windows, "{}/dev/tty\+ACM0"{} (or a pseudo terminal) on Linux. 
+
+\label{doc-typedef-members}
+\Hypertarget{serial__port_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{serial__port_8h_ab164b4206a8d6e3e0e1bfe9351daa7cc}\index{serial\_port.h@{serial\_port.h}!SerialPort@{SerialPort}}
+\index{SerialPort@{SerialPort}!serial\_port.h@{serial\_port.h}}
+\doxysubsubsection{\texorpdfstring{SerialPort}{SerialPort}}
+{\footnotesize\ttfamily \label{serial__port_8h_ab164b4206a8d6e3e0e1bfe9351daa7cc} 
+typedef struct Serial\+Port Serial\+Port}
+
+
+
+\label{doc-func-members}
+\Hypertarget{serial__port_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{serial__port_8h_a531cc54fca5b748e0a3c54005819b568}\index{serial\_port.h@{serial\_port.h}!serial\_close@{serial\_close}}
+\index{serial\_close@{serial\_close}!serial\_port.h@{serial\_port.h}}
+\doxysubsubsection{\texorpdfstring{serial\_close()}{serial\_close()}}
+{\footnotesize\ttfamily \label{serial__port_8h_a531cc54fca5b748e0a3c54005819b568} 
+void serial\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*}}]{port}{}\end{DoxyParamCaption})}
+
+\Hypertarget{serial__port_8h_a5e06d42a1e2d5f040ae28b45ade6dda1}\index{serial\_port.h@{serial\_port.h}!serial\_last\_error@{serial\_last\_error}}
+\index{serial\_last\_error@{serial\_last\_error}!serial\_port.h@{serial\_port.h}}
+\doxysubsubsection{\texorpdfstring{serial\_last\_error()}{serial\_last\_error()}}
+{\footnotesize\ttfamily \label{serial__port_8h_a5e06d42a1e2d5f040ae28b45ade6dda1} 
+const char \texorpdfstring{$\ast$}{*} serial\+\_\+last\+\_\+error (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Text of the last error of the calling thread. 
+
+\Hypertarget{serial__port_8h_a7374d839fda641cae4435fcf7745097b}\index{serial\_port.h@{serial\_port.h}!serial\_open@{serial\_open}}
+\index{serial\_open@{serial\_open}!serial\_port.h@{serial\_port.h}}
+\doxysubsubsection{\texorpdfstring{serial\_open()}{serial\_open()}}
+{\footnotesize\ttfamily \label{serial__port_8h_a7374d839fda641cae4435fcf7745097b} 
+\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*} serial\+\_\+open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{uint32\+\_\+t}]{baudrate}{}\end{DoxyParamCaption})}
+
+
+
+Opens and configures a port. Returns NULL on failure (see \doxylink{serial__port_8h_a5e06d42a1e2d5f040ae28b45ade6dda1}{serial\+\_\+last\+\_\+error()}). 
+
+\Hypertarget{serial__port_8h_ac6ffda03d0fe363998a500f4c08dba4d}\index{serial\_port.h@{serial\_port.h}!serial\_read@{serial\_read}}
+\index{serial\_read@{serial\_read}!serial\_port.h@{serial\_port.h}}
+\doxysubsubsection{\texorpdfstring{serial\_read()}{serial\_read()}}
+{\footnotesize\ttfamily \label{serial__port_8h_ac6ffda03d0fe363998a500f4c08dba4d} 
+int serial\+\_\+read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*}}]{port}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{, }\item[{int}]{timeout\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Reads available bytes, waiting at most {\ttfamily timeout\+\_\+ms} for the first one. 
+
+\begin{DoxyReturn}{Returns}
+Number of bytes (\texorpdfstring{$>$}{>} 0), 0 on timeout, -\/1 on error (port gone). 
+\end{DoxyReturn}
+\Hypertarget{serial__port_8h_a54c6b7d1c8060f80106ed0ca7ae7e42d}\index{serial\_port.h@{serial\_port.h}!serial\_write\_all@{serial\_write\_all}}
+\index{serial\_write\_all@{serial\_write\_all}!serial\_port.h@{serial\_port.h}}
+\doxysubsubsection{\texorpdfstring{serial\_write\_all()}{serial\_write\_all()}}
+{\footnotesize\ttfamily \label{serial__port_8h_a54c6b7d1c8060f80106ed0ca7ae7e42d} 
+int serial\+\_\+write\+\_\+all (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSerialPort}{Serial\+Port}} \texorpdfstring{$\ast$}{*}}]{port}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Writes all bytes. Returns 0 on success, -\/1 on error. 
+

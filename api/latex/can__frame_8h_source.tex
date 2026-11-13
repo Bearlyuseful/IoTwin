@@ -15,34 +15,39 @@
 \DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{00031\ }
 \DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ CAN\_MAX\_DLEN\ 8\ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ CAN\_SFF\_MASK\ 0x000007FFu\ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ CAN\_EFF\_MASK\ 0x1FFFFFFFu\ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ CAN\_FRAME\_TEXT\_MAX\ 32\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00042\ \ \ uint32\_t\ \mbox{\hyperlink{structCanFrame_aa850629d26a09531d2f40bd2b30b77f7}{id}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structCanFrame_adb8be33b2afccd8e01d490c78fb89596}{extended}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structCanFrame_a837bb392f53185a39b101f1d9ec087e2}{rtr}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00045\ \ \ uint8\_t\ \mbox{\hyperlink{structCanFrame_aa896aaac27a424ba8e46c50e7bdb065d}{dlc}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00046\ \ \ uint8\_t\ \mbox{\hyperlink{structCanFrame_a6cba02a9edd71f7001f2993f0d4df58e}{data}}[\mbox{\hyperlink{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}{CAN\_MAX\_DLEN}}];\ \ }
-\DoxyCodeLine{00047\ \}\ \mbox{\hyperlink{structCanFrame}{CanFrame}};}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00050\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{can__frame_8h_a3cba2b615c62825074ad13f0f62c62cd}{can\_frame\_clear}}(\mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00056\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_a8dc82d098613ee8b871998816fb4b7d0}{can\_frame\_set}}(\mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ uint32\_t\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{bool}\ extended,\ \textcolor{keyword}{const}\ uint8\_t*\ data,\ uint8\_t\ dlc);}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_a5ec36140a3ef5ec7efac0ad5eb5786fc}{can\_frame\_is\_valid}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00062\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_a82d54b7b5fc257c24d92668f9eda6503}{can\_frame\_equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ b);}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00069\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{can__frame_8h_af5cbe2fda93c41fd84c9dc2665ffcdcc}{can\_frame\_to\_text}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ \textcolor{keywordtype}{char}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ buffer\_size);}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00077\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_aaa5128900ed29b8a0b0a57307dfc916c}{can\_frame\_from\_text}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ \textcolor{keywordtype}{size\_t}\ length,\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00080\ \}}
-\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CAN\_FRAME\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00033\ \textcolor{comment}{/*\ Same\ spelling\ as\ <linux/can.h>,\ so\ both\ headers\ can\ be\ included\ together.\ */}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#ifndef\ CAN\_SFF\_MASK}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ CAN\_SFF\_MASK\ 0x000007FFU\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#ifndef\ CAN\_EFF\_MASK}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ CAN\_EFF\_MASK\ 0x1FFFFFFFU\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ CAN\_FRAME\_TEXT\_MAX\ 32\ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00047\ \ \ uint32\_t\ \mbox{\hyperlink{structCanFrame_aa850629d26a09531d2f40bd2b30b77f7}{id}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structCanFrame_adb8be33b2afccd8e01d490c78fb89596}{extended}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structCanFrame_a837bb392f53185a39b101f1d9ec087e2}{rtr}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ uint8\_t\ \mbox{\hyperlink{structCanFrame_aa896aaac27a424ba8e46c50e7bdb065d}{dlc}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ uint8\_t\ \mbox{\hyperlink{structCanFrame_a6cba02a9edd71f7001f2993f0d4df58e}{data}}[\mbox{\hyperlink{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}{CAN\_MAX\_DLEN}}];\ \ }
+\DoxyCodeLine{00052\ \}\ \mbox{\hyperlink{structCanFrame}{CanFrame}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{can__frame_8h_a3cba2b615c62825074ad13f0f62c62cd}{can\_frame\_clear}}(\mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_a8dc82d098613ee8b871998816fb4b7d0}{can\_frame\_set}}(\mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ uint32\_t\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{bool}\ extended,\ \textcolor{keyword}{const}\ uint8\_t*\ data,\ uint8\_t\ dlc);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_a5ec36140a3ef5ec7efac0ad5eb5786fc}{can\_frame\_is\_valid}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_a82d54b7b5fc257c24d92668f9eda6503}{can\_frame\_equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ b);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{can__frame_8h_af5cbe2fda93c41fd84c9dc2665ffcdcc}{can\_frame\_to\_text}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ \textcolor{keywordtype}{char}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ buffer\_size);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__frame_8h_aaa5128900ed29b8a0b0a57307dfc916c}{can\_frame\_from\_text}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ \textcolor{keywordtype}{size\_t}\ length,\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CAN\_FRAME\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

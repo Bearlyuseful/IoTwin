@@ -1,0 +1,1361 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for IoTwin the Digital Twin IoT Simulation Platform">
+      
+      
+        <meta name="author" content="Christian Fleischmann">
+      
+      
+      
+        <link rel="prev" href="../visualizer/">
+      
+      
+        <link rel="next" href="../can_tools/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Firmware (NUCLEO-G0B1RE) - Digital Twin IoT</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#firmware-nucleo-g0b1re-can-gateway" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Digital Twin IoT" class="md-header__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Digital Twin IoT
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Firmware (NUCLEO-G0B1RE)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Bearlyuseful/IoTwin" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Bearlyuseful/IoTwin
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../user/quickstart/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Quickstart
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../build_instructions/" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../adr/0001-choice-of-documentation/" class="md-tabs__link">
+          
+  
+  
+  Architecture Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Digital Twin IoT" class="md-nav__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Digital Twin IoT
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Bearlyuseful/IoTwin" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Bearlyuseful/IoTwin
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build_instructions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bus Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../realtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Real-Time Operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware (NUCLEO-G0B1RE)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware (NUCLEO-G0B1RE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-can-bus-normal-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real CAN bus (normal mode)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flash
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serial-protocol-slcan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial protocol (SLCAN)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests-without-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests without hardware
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0001-choice-of-documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0001 Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0002-bus-server-and-text-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0002 Bus and Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0003-linux-rt-target-windows-best-effort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0003 Platforms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0004 Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="firmware-nucleo-g0b1re-can-gateway">Firmware: NUCLEO-G0B1RE CAN Gateway<a class="headerlink" href="#firmware-nucleo-g0b1re-can-gateway" title="Permanent link">&para;</a></h1>
+<p>The board joins the virtual bus as a real node and turns the STM32's FDCAN
+controller into an SLCAN adapter:</p>
+<div class="highlight"><pre><span></span><code> iotwin-bus &lt;-TCP-&gt; serial_bridge &lt;-USB (ST-LINK VCP, SLCAN)-&gt; NUCLEO-G0B1RE &lt;-FDCAN-&gt; CAN bus
+                                                                   |
+                                                    B1 = wall switch, LD4 = lamp
+</code></pre></div>
+<ul>
+<li>Every frame from the virtual bus is transmitted by the FDCAN controller, every
+  frame received by the controller is reported to the virtual bus.</li>
+<li>The board is also a node of its own: the blue user button <strong>B1</strong> toggles a wall
+  switch (<code>SWITCH_STATE</code>, id <code>0x200</code>), the green LED <strong>LD4</strong> shows the lamp
+  command (<code>LAMP_CMD</code>, id <code>0x100</code>).</li>
+<li>Without a transceiver the controller runs in <strong>internal loopback</strong> mode: frames
+  go through the real CAN peripheral (bit timing, message RAM, interrupts) and
+  are received by the controller itself. These echoes are recognised and not
+  reported a second time.</li>
+</ul>
+<p>Design decisions: <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/">ADR 0004</a>.</p>
+<h2 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Pin</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System clock</td>
+<td>-</td>
+<td>HSI16 → PLL (M=1, N=8, R=2) = 64 MHz, PCLK 64 MHz</td>
+</tr>
+<tr>
+<td>Virtual COM port</td>
+<td>PA2 (TX) / PA3 (RX), USART2 AF1</td>
+<td>115200 8N1 via the ST-LINK USB connection</td>
+</tr>
+<tr>
+<td>FDCAN1</td>
+<td>PA12 (TX) / PA11 (RX), AF3</td>
+<td>morpho connector CN10; kernel clock = PCLK</td>
+</tr>
+<tr>
+<td>User LED LD4</td>
+<td>PA5</td>
+<td>active high</td>
+</tr>
+<tr>
+<td>User button B1</td>
+<td>PC13</td>
+<td>active low</td>
+</tr>
+</tbody>
+</table>
+<p>LED behaviour: <strong>blinking</strong> (1 Hz) = firmware running, channel closed (waiting
+for the bridge); <strong>steady</strong> = channel open, LED follows the lamp command.</p>
+<h3 id="real-can-bus-normal-mode">Real CAN bus (normal mode)<a class="headerlink" href="#real-can-bus-normal-mode" title="Permanent link">&para;</a></h3>
+<p>Connect a 3.3 V CAN transceiver (e.g. SN65HVD230) to PA12 (TXD) and PA11
+(RXD), terminate the bus with 120 Ω at both ends and add at least one other
+node - a CAN frame is only acknowledged by another node. Start the bridge with
+<code>--mode normal</code>. Check the pin positions on CN10 in the board user manual
+(UM2324).</p>
+<h2 id="build">Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h2>
+<p>Requires <code>arm-none-eabi-gcc</code> (+ newlib), CMake and Ninja. On Windows with MSYS2:</p>
+<div class="highlight"><pre><span></span><code>pacman<span class="w"> </span>-S<span class="w"> </span>mingw-w64-ucrt-x86_64-arm-none-eabi-gcc<span class="w"> </span>mingw-w64-ucrt-x86_64-arm-none-eabi-newlib<span class="w"> </span>mingw-w64-ucrt-x86_64-openocd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>firmware
+cmake<span class="w"> </span>--preset<span class="w"> </span>nucleo-g0b1re
+cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class="w"> </span>nucleo-g0b1re
+</code></pre></div>
+<p>Output in <code>firmware/build/nucleo-g0b1re/</code>: <code>iotwin_gateway.elf</code> (debugging),
+<code>.bin</code> / <code>.hex</code> (flashing), <code>.map</code>. Memory use is printed after linking.</p>
+<h2 id="flash">Flash<a class="headerlink" href="#flash" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">./</span><span class="n">tools</span><span class="p">/</span><span class="n">flash-firmware</span><span class="p">.</span><span class="n">ps1</span>              <span class="c"># OpenOCD via ST-LINK, falls back to the drive</span>
+<span class="p">./</span><span class="n">tools</span><span class="p">/</span><span class="n">flash-firmware</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-MassStorage</span> <span class="c"># copy the .bin to the NOD_G0B1RE drive</span>
+</code></pre></div>
+<p>Copying <code>iotwin_gateway.bin</code> to the <code>NOD_G0B1RE</code> USB drive works without any
+debugger driver. Manually with OpenOCD:</p>
+<div class="highlight"><pre><span></span><code>openocd<span class="w"> </span>-f<span class="w"> </span>interface/stlink.cfg<span class="w"> </span>-f<span class="w"> </span>target/stm32g0x.cfg<span class="w"> </span>-c<span class="w"> </span><span class="s2">"program firmware/build/nucleo-g0b1re/iotwin_gateway.elf verify reset exit"</span>
+</code></pre></div>
+<p>Debugging: <code>openocd -f interface/stlink.cfg -f target/stm32g0x.cfg</code> and in a
+second terminal <code>gdb-multiarch firmware/build/nucleo-g0b1re/iotwin_gateway.elf</code>
+→ <code>target extended-remote :3333</code>.</p>
+<h2 id="run">Run<a class="headerlink" href="#run" title="Permanent link">&para;</a></h2>
+<p>Find the COM port ("STMicroelectronics STLink Virtual COM Port" in the Device
+Manager, <code>/dev/ttyACM0</code> on Linux), then:</p>
+<div class="highlight"><pre><span></span><code>iotwin-bus
+can_sim
+serial_bridge<span class="w"> </span>--serial<span class="w"> </span>COM5<span class="w"> </span>--mode<span class="w"> </span>loopback<span class="w"> </span>--stats<span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+<p>or <code>./tools/run-dev.ps1 -SerialPort COM5</code>. Press B1: the bridge forwards
+<code>200#01</code>, <code>can_sim</code> answers with <code>100#01</code>, LD4 turns on and the lamp in the
+visualizer lights up.</p>
+<h2 id="serial-protocol-slcan">Serial protocol (SLCAN)<a class="headerlink" href="#serial-protocol-slcan" title="Permanent link">&para;</a></h2>
+<p>Commands end with CR; the board answers CR (ok) or BEL (error). Frames use the
+same syntax in both directions.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Meaning</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tIIIL&lt;data&gt;</code></td>
+<td>send standard frame, e.g. <code>t1002AA55</code></td>
+<td><code>z</code></td>
+</tr>
+<tr>
+<td><code>TIIIIIIIIL&lt;data&gt;</code></td>
+<td>send extended frame</td>
+<td><code>Z</code></td>
+</tr>
+<tr>
+<td><code>rIIIL</code> / <code>RIIIIIIIIL</code></td>
+<td>send remote frame</td>
+<td><code>z</code> / <code>Z</code></td>
+</tr>
+<tr>
+<td><code>S0</code> … <code>S8</code></td>
+<td>bitrate 10k, 20k, 50k, 100k, 125k, 250k, <strong>500k</strong> (default), 800k, 1M</td>
+<td>CR</td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td>open, normal mode</td>
+<td>CR</td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>open, listen only (bus monitoring)</td>
+<td>CR</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>open, internal loopback <em>(IoTwin extension)</em></td>
+<td>CR</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>close</td>
+<td>CR</td>
+</tr>
+<tr>
+<td><code>V</code> / <code>N</code></td>
+<td>version / serial number</td>
+<td><code>V0100</code> / <code>NG0B1</code></td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>status flags (bit 0 RX queue full, 1 TX queue full, 2 error warning, 3 overrun, 5 error passive, 7 bus error)</td>
+<td><code>Fxx</code></td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>statistics <em>(IoTwin extension)</em>: TX frames, RX frames, loopback echoes (8 hex each), TEC, REC, flags (2 hex each)</td>
+<td><code>Q…</code></td>
+</tr>
+<tr>
+<td><code>Z0</code> / <code>Z1</code></td>
+<td>timestamps - accepted, not implemented</td>
+<td>CR</td>
+</tr>
+</tbody>
+</table>
+<p>Any terminal works for experiments (115200 8N1, send CR): <code>V</code>, <code>S6</code>, <code>l</code>,
+<code>t100101</code> → LD4 on.</p>
+<h2 id="code-structure">Code structure<a class="headerlink" href="#code-structure" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>firmware/board/nucleo_g0b1re/</code></td>
+<td>startup code with vector table (C), linker script, clock/GPIO/SysTick</td>
+</tr>
+<tr>
+<td><code>firmware/drivers/uart.c</code></td>
+<td>USART2 with interrupt driven RX/TX ring buffers</td>
+</tr>
+<tr>
+<td><code>firmware/drivers/fdcan.c</code></td>
+<td>FDCAN1: message RAM, bit timing, Tx FIFO, Rx FIFO 0 interrupt, bus-off recovery</td>
+</tr>
+<tr>
+<td><code>firmware/app/gateway.c</code></td>
+<td>hardware independent application (SLCAN, echo suppression, local node)</td>
+</tr>
+<tr>
+<td><code>firmware/app/main.c</code></td>
+<td>wiring, button debounce, main loop with <code>WFI</code></td>
+</tr>
+<tr>
+<td><code>src/core/can/</code></td>
+<td><code>can_frame</code>, <code>slcan</code>, <code>can_bit_timing</code> - shared with the host</td>
+</tr>
+<tr>
+<td><code>firmware/vendor/</code></td>
+<td>CMSIS core 5.9.0 (ARM) and STM32G0 device headers (ST), Apache-2.0</td>
+</tr>
+</tbody>
+</table>
+<p>Bit timing is calculated at run time from the kernel clock: 500 kbit/s at
+64 MHz → prescaler 8, 16 tq (1 + 13 + 2), sample point 87.5 %, SJW 2.</p>
+<h2 id="tests-without-hardware">Tests without hardware<a class="headerlink" href="#tests-without-hardware" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>tests/test_gateway.cpp</code>: application logic against fake hardware.</li>
+<li><code>tests/test_slcan.cpp</code>, <code>tests/test_can_bit_timing.cpp</code>: shared code.</li>
+<li><code>tests/test_serial_bridge_e2e.cpp</code> (Linux): starts the real <code>serial_bridge</code>,
+  connects it to a pseudo terminal on which the gateway logic runs with a
+  simulated loopback controller, and checks the whole path bus ↔ bridge ↔ board.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.integrate", "search.suggest", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

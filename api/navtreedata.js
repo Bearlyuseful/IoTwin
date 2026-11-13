@@ -30,16 +30,17 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
+        [ "Functions", "globals_func.html", "globals_func" ],
+        [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
@@ -52,8 +53,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "CanFrameTests_8cpp.html",
-"dir_741c4819bb100c36f1784dc2c0763606.html",
-"structSimShared.html#ab0bcc8729de458f28bc2e21297114a54"
+"classUCanFrameLibrary.html",
+"main__bus_8c.html#a3c04138a5bfe5d72780bb7e82a18e627",
+"structDbcSignal.html#a1c5293eb08bd2fe5e794e90a42b44b70"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

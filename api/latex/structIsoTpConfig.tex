@@ -1,0 +1,107 @@
+\doxysection{Iso\+Tp\+Config Struct Reference}
+\hypertarget{structIsoTpConfig}{}\label{structIsoTpConfig}\index{IsoTpConfig@{IsoTpConfig}}
+
+
+{\ttfamily \#include $<$isotp.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structIsoTpConfig_a3fc39ddfa82f00d407457682b88be3b5}{tx\+\_\+id}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structIsoTpConfig_accbb2b621edc08cd786a439869f702eb}{rx\+\_\+id}}
+\item 
+bool \mbox{\hyperlink{structIsoTpConfig_ac1eb44a4ed2deaf2a4fd95bdcc864377}{extended\+\_\+id}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structIsoTpConfig_a4daf05d8f8244282ffbaf846d53c0b58}{block\+\_\+size}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structIsoTpConfig_aa30fe55539d5f5a2464f18d809af1421}{st\+\_\+min}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structIsoTpConfig_a292560a31c0dfeb73d01f0b839d5599e}{timeout\+\_\+us}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structIsoTpConfig_a7d53e72b8d03b6e9bdda7095a012a7b4}{max\+\_\+wait\+\_\+frames}}
+\item 
+bool \mbox{\hyperlink{structIsoTpConfig_a9bbdef628eea860644f4a3b99e560c55}{padding}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{structIsoTpConfig_a7aabb32875c79972010bf79d572e3a2f}{padding\+\_\+byte}}
+\item 
+bool(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structIsoTpConfig_a579e2fd66ee53ba4102f35b000cac8de}{send}} )(void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structIsoTpConfig_ae56d52732b333357110436f724a53a67}{context}}, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structIsoTpConfig_ae56d52732b333357110436f724a53a67}{context}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structIsoTpConfig_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structIsoTpConfig_a4daf05d8f8244282ffbaf846d53c0b58}\index{IsoTpConfig@{IsoTpConfig}!block\_size@{block\_size}}
+\index{block\_size@{block\_size}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{block\_size}{block\_size}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a4daf05d8f8244282ffbaf846d53c0b58} 
+uint8\+\_\+t Iso\+Tp\+Config\+::block\+\_\+size}
+
+BS announced to the sender (0 = no further FC) \Hypertarget{structIsoTpConfig_ae56d52732b333357110436f724a53a67}\index{IsoTpConfig@{IsoTpConfig}!context@{context}}
+\index{context@{context}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_ae56d52732b333357110436f724a53a67} 
+void\texorpdfstring{$\ast$}{*} Iso\+Tp\+Config\+::context}
+
+\Hypertarget{structIsoTpConfig_ac1eb44a4ed2deaf2a4fd95bdcc864377}\index{IsoTpConfig@{IsoTpConfig}!extended\_id@{extended\_id}}
+\index{extended\_id@{extended\_id}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{extended\_id}{extended\_id}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_ac1eb44a4ed2deaf2a4fd95bdcc864377} 
+bool Iso\+Tp\+Config\+::extended\+\_\+id}
+
+\Hypertarget{structIsoTpConfig_a7d53e72b8d03b6e9bdda7095a012a7b4}\index{IsoTpConfig@{IsoTpConfig}!max\_wait\_frames@{max\_wait\_frames}}
+\index{max\_wait\_frames@{max\_wait\_frames}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{max\_wait\_frames}{max\_wait\_frames}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a7d53e72b8d03b6e9bdda7095a012a7b4} 
+uint8\+\_\+t Iso\+Tp\+Config\+::max\+\_\+wait\+\_\+frames}
+
+WFTmax \Hypertarget{structIsoTpConfig_a9bbdef628eea860644f4a3b99e560c55}\index{IsoTpConfig@{IsoTpConfig}!padding@{padding}}
+\index{padding@{padding}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{padding}{padding}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a9bbdef628eea860644f4a3b99e560c55} 
+bool Iso\+Tp\+Config\+::padding}
+
+always send 8 bytes, filled with padding\+\_\+byte \Hypertarget{structIsoTpConfig_a7aabb32875c79972010bf79d572e3a2f}\index{IsoTpConfig@{IsoTpConfig}!padding\_byte@{padding\_byte}}
+\index{padding\_byte@{padding\_byte}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{padding\_byte}{padding\_byte}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a7aabb32875c79972010bf79d572e3a2f} 
+uint8\+\_\+t Iso\+Tp\+Config\+::padding\+\_\+byte}
+
+\Hypertarget{structIsoTpConfig_accbb2b621edc08cd786a439869f702eb}\index{IsoTpConfig@{IsoTpConfig}!rx\_id@{rx\_id}}
+\index{rx\_id@{rx\_id}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{rx\_id}{rx\_id}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_accbb2b621edc08cd786a439869f702eb} 
+uint32\+\_\+t Iso\+Tp\+Config\+::rx\+\_\+id}
+
+CAN id of frames we accept \Hypertarget{structIsoTpConfig_a579e2fd66ee53ba4102f35b000cac8de}\index{IsoTpConfig@{IsoTpConfig}!send@{send}}
+\index{send@{send}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{send}{send}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a579e2fd66ee53ba4102f35b000cac8de} 
+bool(\texorpdfstring{$\ast$}{*} Iso\+Tp\+Config\+::send) (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structIsoTpConfig_ae56d52732b333357110436f724a53a67}{context}}, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)}
+
+false = driver queue full \Hypertarget{structIsoTpConfig_aa30fe55539d5f5a2464f18d809af1421}\index{IsoTpConfig@{IsoTpConfig}!st\_min@{st\_min}}
+\index{st\_min@{st\_min}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{st\_min}{st\_min}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_aa30fe55539d5f5a2464f18d809af1421} 
+uint8\+\_\+t Iso\+Tp\+Config\+::st\+\_\+min}
+
+STmin announced to the sender (raw encoding) \Hypertarget{structIsoTpConfig_a292560a31c0dfeb73d01f0b839d5599e}\index{IsoTpConfig@{IsoTpConfig}!timeout\_us@{timeout\_us}}
+\index{timeout\_us@{timeout\_us}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{timeout\_us}{timeout\_us}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a292560a31c0dfeb73d01f0b839d5599e} 
+uint32\+\_\+t Iso\+Tp\+Config\+::timeout\+\_\+us}
+
+N\+\_\+\+Bs and N\+\_\+\+Cr \Hypertarget{structIsoTpConfig_a3fc39ddfa82f00d407457682b88be3b5}\index{IsoTpConfig@{IsoTpConfig}!tx\_id@{tx\_id}}
+\index{tx\_id@{tx\_id}!IsoTpConfig@{IsoTpConfig}}
+\doxysubsubsection{\texorpdfstring{tx\_id}{tx\_id}}
+{\footnotesize\ttfamily \label{structIsoTpConfig_a3fc39ddfa82f00d407457682b88be3b5} 
+uint32\+\_\+t Iso\+Tp\+Config\+::tx\+\_\+id}
+
+CAN id of frames we send 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/can/\mbox{\hyperlink{isotp_8h}{isotp.\+h}}\end{DoxyCompactItemize}

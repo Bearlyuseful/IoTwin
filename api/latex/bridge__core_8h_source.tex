@@ -1,0 +1,39 @@
+\doxysection{bridge\+\_\+core.\+h}
+\hypertarget{bridge__core_8h_source}{}\label{bridge__core_8h_source}\index{src/bridges/serial\_bridge/bridge\_core.h@{src/bridges/serial\_bridge/bridge\_core.h}}
+\mbox{\hyperlink{bridge__core_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_BRIDGE\_CORE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_BRIDGE\_CORE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a51fe03779fc90c7c02216874ac154f40}{BRIDGE\_MODE\_NORMAL}},\ \ \ }
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a956a2b4ae0daff5339bf91f111f9650c}{BRIDGE\_MODE\_LOOPBACK}},\ }
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092ad947d8b4ac7bf343d46055a50b05fc85}{BRIDGE\_MODE\_LISTEN}}\ \ \ \ }
+\DoxyCodeLine{00022\ \}\ \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{BridgeMode}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bridge__core_8h_ab74abe28fcbb470c1abec612c2f5ab14}{bridge\_parse\_mode}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{BridgeMode}}*\ mode);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{bridge__core_8h_aba8c027e6b37995ddbef767cb1e42a96}{bridge\_open\_command}}(\mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{BridgeMode}}\ mode);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{bridge__core_8h_aec1f855eac235021053832d533baa6ae}{bridge\_bitrate\_command}}(uint32\_t\ bitrate);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{bridge__core_8h_aa81605e3999c883f831f41c04e9fa774}{bridge\_adapter\_to\_bus}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{char}*\ out,\ \textcolor{keywordtype}{size\_t}\ out\_size);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{bridge__core_8h_aaef11f7a8a1fd2064f5236695b7b861d}{bridge\_bus\_to\_adapter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{char}*\ out,\ \textcolor{keywordtype}{size\_t}\ out\_size);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00046\ \}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_BRIDGE\_CORE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

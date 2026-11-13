@@ -1,0 +1,138 @@
+\doxysection{src/core/can/can\+\_\+signal.h File Reference}
+\hypertarget{can__signal_8h}{}\label{can__signal_8h}\index{src/core/can/can\_signal.h@{src/core/can/can\_signal.h}}
+
+
+Encoding and decoding of signals inside a CAN payload (DBC semantics).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCanSignal}{Can\+Signal}}
+\begin{DoxyCompactList}\small\item\em Signal layout and scaling. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ec}{Can\+Byte\+Order}} \{ \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecabcd53dacc51b995a4a050e7770e41939}{CAN\+\_\+\+BYTE\+\_\+\+ORDER\+\_\+\+MOTOROLA}} = 0
+, \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecab1239860ea3815959d5ae7d8ea73582f}{CAN\+\_\+\+BYTE\+\_\+\+ORDER\+\_\+\+INTEL}} = 1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{can__signal_8h_afdf8014450fd7f6f1999f2fb2f7fa02e}{can\+\_\+signal\+\_\+layout\+\_\+valid}} (const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}signal)
+\begin{DoxyCompactList}\small\item\em True if all bits of the signal lie inside an 8 byte payload. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{can__signal_8h_a765ce608299b74e8782a2978f929db7b}{can\+\_\+signal\+\_\+extract\+\_\+raw}} (const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}signal, const uint8\+\_\+t data\mbox{[}8\mbox{]})
+\begin{DoxyCompactList}\small\item\em Raw (unscaled, not sign extended) bits of the signal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{can__signal_8h_a76e0dd2fb2ef705e41f1007d43386c66}{can\+\_\+signal\+\_\+insert\+\_\+raw}} (const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}signal, uint8\+\_\+t data\mbox{[}8\mbox{]}, uint64\+\_\+t raw)
+\begin{DoxyCompactList}\small\item\em Writes {\ttfamily raw} into the signal\textquotesingle{}s bits (other bits unchanged). \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{can__signal_8h_afa94ec375cb5b342b83af24874e40d63}{can\+\_\+signal\+\_\+raw\+\_\+to\+\_\+int}} (const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}signal, uint64\+\_\+t raw)
+\begin{DoxyCompactList}\small\item\em Raw value interpreted with the signal\textquotesingle{}s signedness. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{can__signal_8h_a61096893d22c6fb3583ebb1b68953d94}{can\+\_\+signal\+\_\+decode}} (const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}signal, const uint8\+\_\+t data\mbox{[}8\mbox{]})
+\begin{DoxyCompactList}\small\item\em Physical value of the signal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{can__signal_8h_aa2f9bd0ae432fc7d916cbddf94fc2a64}{can\+\_\+signal\+\_\+encode}} (const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}signal, uint8\+\_\+t data\mbox{[}8\mbox{]}, double physical)
+\begin{DoxyCompactList}\small\item\em Writes a physical value (rounded to the nearest raw step). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Encoding and decoding of signals inside a CAN payload (DBC semantics). 
+
+Bit numbering follows the DBC convention\+: bit n is bit (n \% 8) of byte (n / 8).
+
+
+\begin{DoxyItemize}
+\item Intel (little endian, "{}@1"{})\+: start\+\_\+bit is the least significant bit, the signal grows towards higher bit numbers.
+\item Motorola (big endian, "{}@0"{})\+: start\+\_\+bit is the most significant bit; less significant bits follow downwards in the byte and continue at bit 7 of the next byte ("{}sawtooth"{}).
+\end{DoxyItemize}
+
+physical = raw \texorpdfstring{$\ast$}{*} factor + offset. Portable C without heap use (also usable in firmware). 
+
+\label{doc-enum-members}
+\Hypertarget{can__signal_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ec}\index{can\_signal.h@{can\_signal.h}!CanByteOrder@{CanByteOrder}}
+\index{CanByteOrder@{CanByteOrder}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{CanByteOrder}{CanByteOrder}}
+{\footnotesize\ttfamily \label{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ec} 
+enum \mbox{\hyperlink{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ec}{Can\+Byte\+Order}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAN\_BYTE\_ORDER\_MOTOROLA@{CAN\_BYTE\_ORDER\_MOTOROLA}!can\_signal.h@{can\_signal.h}}\index{can\_signal.h@{can\_signal.h}!CAN\_BYTE\_ORDER\_MOTOROLA@{CAN\_BYTE\_ORDER\_MOTOROLA}}}\Hypertarget{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecabcd53dacc51b995a4a050e7770e41939}\label{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecabcd53dacc51b995a4a050e7770e41939} 
+CAN\+\_\+\+BYTE\+\_\+\+ORDER\+\_\+\+MOTOROLA&big endian, DBC "{}@0"{} \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAN\_BYTE\_ORDER\_INTEL@{CAN\_BYTE\_ORDER\_INTEL}!can\_signal.h@{can\_signal.h}}\index{can\_signal.h@{can\_signal.h}!CAN\_BYTE\_ORDER\_INTEL@{CAN\_BYTE\_ORDER\_INTEL}}}\Hypertarget{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecab1239860ea3815959d5ae7d8ea73582f}\label{can__signal_8h_a0ec1c430118ef2f0b726a3542a7924ecab1239860ea3815959d5ae7d8ea73582f} 
+CAN\+\_\+\+BYTE\+\_\+\+ORDER\+\_\+\+INTEL&little endian, DBC "{}@1"{} \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{can__signal_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{can__signal_8h_a61096893d22c6fb3583ebb1b68953d94}\index{can\_signal.h@{can\_signal.h}!can\_signal\_decode@{can\_signal\_decode}}
+\index{can\_signal\_decode@{can\_signal\_decode}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{can\_signal\_decode()}{can\_signal\_decode()}}
+{\footnotesize\ttfamily \label{can__signal_8h_a61096893d22c6fb3583ebb1b68953d94} 
+double can\+\_\+signal\+\_\+decode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}}]{signal}{, }\item[{const uint8\+\_\+t}]{data}{\mbox{[}8\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Physical value of the signal. 
+
+\Hypertarget{can__signal_8h_aa2f9bd0ae432fc7d916cbddf94fc2a64}\index{can\_signal.h@{can\_signal.h}!can\_signal\_encode@{can\_signal\_encode}}
+\index{can\_signal\_encode@{can\_signal\_encode}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{can\_signal\_encode()}{can\_signal\_encode()}}
+{\footnotesize\ttfamily \label{can__signal_8h_aa2f9bd0ae432fc7d916cbddf94fc2a64} 
+bool can\+\_\+signal\+\_\+encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}}]{signal}{, }\item[{uint8\+\_\+t}]{data}{\mbox{[}8\mbox{]}, }\item[{double}]{physical}{}\end{DoxyParamCaption})}
+
+
+
+Writes a physical value (rounded to the nearest raw step). 
+
+\begin{DoxyReturn}{Returns}
+false (payload unchanged) if the value does not fit into the signal. 
+\end{DoxyReturn}
+\Hypertarget{can__signal_8h_a765ce608299b74e8782a2978f929db7b}\index{can\_signal.h@{can\_signal.h}!can\_signal\_extract\_raw@{can\_signal\_extract\_raw}}
+\index{can\_signal\_extract\_raw@{can\_signal\_extract\_raw}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{can\_signal\_extract\_raw()}{can\_signal\_extract\_raw()}}
+{\footnotesize\ttfamily \label{can__signal_8h_a765ce608299b74e8782a2978f929db7b} 
+uint64\+\_\+t can\+\_\+signal\+\_\+extract\+\_\+raw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}}]{signal}{, }\item[{const uint8\+\_\+t}]{data}{\mbox{[}8\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Raw (unscaled, not sign extended) bits of the signal. 
+
+\Hypertarget{can__signal_8h_a76e0dd2fb2ef705e41f1007d43386c66}\index{can\_signal.h@{can\_signal.h}!can\_signal\_insert\_raw@{can\_signal\_insert\_raw}}
+\index{can\_signal\_insert\_raw@{can\_signal\_insert\_raw}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{can\_signal\_insert\_raw()}{can\_signal\_insert\_raw()}}
+{\footnotesize\ttfamily \label{can__signal_8h_a76e0dd2fb2ef705e41f1007d43386c66} 
+void can\+\_\+signal\+\_\+insert\+\_\+raw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}}]{signal}{, }\item[{uint8\+\_\+t}]{data}{\mbox{[}8\mbox{]}, }\item[{uint64\+\_\+t}]{raw}{}\end{DoxyParamCaption})}
+
+
+
+Writes {\ttfamily raw} into the signal\textquotesingle{}s bits (other bits unchanged). 
+
+\Hypertarget{can__signal_8h_afdf8014450fd7f6f1999f2fb2f7fa02e}\index{can\_signal.h@{can\_signal.h}!can\_signal\_layout\_valid@{can\_signal\_layout\_valid}}
+\index{can\_signal\_layout\_valid@{can\_signal\_layout\_valid}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{can\_signal\_layout\_valid()}{can\_signal\_layout\_valid()}}
+{\footnotesize\ttfamily \label{can__signal_8h_afdf8014450fd7f6f1999f2fb2f7fa02e} 
+bool can\+\_\+signal\+\_\+layout\+\_\+valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}}]{signal}{}\end{DoxyParamCaption})}
+
+
+
+True if all bits of the signal lie inside an 8 byte payload. 
+
+\Hypertarget{can__signal_8h_afa94ec375cb5b342b83af24874e40d63}\index{can\_signal.h@{can\_signal.h}!can\_signal\_raw\_to\_int@{can\_signal\_raw\_to\_int}}
+\index{can\_signal\_raw\_to\_int@{can\_signal\_raw\_to\_int}!can\_signal.h@{can\_signal.h}}
+\doxysubsubsection{\texorpdfstring{can\_signal\_raw\_to\_int()}{can\_signal\_raw\_to\_int()}}
+{\footnotesize\ttfamily \label{can__signal_8h_afa94ec375cb5b342b83af24874e40d63} 
+int64\+\_\+t can\+\_\+signal\+\_\+raw\+\_\+to\+\_\+int (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanSignal}{Can\+Signal}} \texorpdfstring{$\ast$}{*}}]{signal}{, }\item[{uint64\+\_\+t}]{raw}{}\end{DoxyParamCaption})}
+
+
+
+Raw value interpreted with the signal\textquotesingle{}s signedness. 
+

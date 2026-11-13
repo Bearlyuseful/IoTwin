@@ -1,0 +1,67 @@
+\doxysection{Slcan\+Reader Struct Reference}
+\hypertarget{structSlcanReader}{}\label{structSlcanReader}\index{SlcanReader@{SlcanReader}}
+
+
+Splits a byte stream at CR or LF (CR LF counts once).  
+
+
+
+
+{\ttfamily \#include $<$slcan.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{structSlcanReader_aaf4c84ffa57b9fb3e226772f95765e41}{buffer}} \mbox{[}\mbox{\hyperlink{slcan_8h_a8b72da6e1892fae75e12f923b2495eaa}{SLCAN\+\_\+\+MAX\+\_\+\+LINE}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structSlcanReader_a74fcda0bbba62ef83d6d7ce86bbfe26a}{length}}
+\item 
+bool \mbox{\hyperlink{structSlcanReader_ad2bf1a48c4604ed9c5148456dc74d050}{discarding}}
+\item 
+bool \mbox{\hyperlink{structSlcanReader_acc6c44003870c9b9e18eccf42cabd0b3}{last\+\_\+was\+\_\+cr}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structSlcanReader_ae0b8a9719fdbf00de2c94a4ecb43ee62}{overflows}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Splits a byte stream at CR or LF (CR LF counts once). 
+
+\label{doc-variable-members}
+\Hypertarget{structSlcanReader_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structSlcanReader_aaf4c84ffa57b9fb3e226772f95765e41}\index{SlcanReader@{SlcanReader}!buffer@{buffer}}
+\index{buffer@{buffer}!SlcanReader@{SlcanReader}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily \label{structSlcanReader_aaf4c84ffa57b9fb3e226772f95765e41} 
+char Slcan\+Reader\+::buffer\mbox{[}\mbox{\hyperlink{slcan_8h_a8b72da6e1892fae75e12f923b2495eaa}{SLCAN\+\_\+\+MAX\+\_\+\+LINE}}\mbox{]}}
+
+\Hypertarget{structSlcanReader_ad2bf1a48c4604ed9c5148456dc74d050}\index{SlcanReader@{SlcanReader}!discarding@{discarding}}
+\index{discarding@{discarding}!SlcanReader@{SlcanReader}}
+\doxysubsubsection{\texorpdfstring{discarding}{discarding}}
+{\footnotesize\ttfamily \label{structSlcanReader_ad2bf1a48c4604ed9c5148456dc74d050} 
+bool Slcan\+Reader\+::discarding}
+
+Current line too long, skipped until its end. \Hypertarget{structSlcanReader_acc6c44003870c9b9e18eccf42cabd0b3}\index{SlcanReader@{SlcanReader}!last\_was\_cr@{last\_was\_cr}}
+\index{last\_was\_cr@{last\_was\_cr}!SlcanReader@{SlcanReader}}
+\doxysubsubsection{\texorpdfstring{last\_was\_cr}{last\_was\_cr}}
+{\footnotesize\ttfamily \label{structSlcanReader_acc6c44003870c9b9e18eccf42cabd0b3} 
+bool Slcan\+Reader\+::last\+\_\+was\+\_\+cr}
+
+Swallows the LF of a CR LF pair. \Hypertarget{structSlcanReader_a74fcda0bbba62ef83d6d7ce86bbfe26a}\index{SlcanReader@{SlcanReader}!length@{length}}
+\index{length@{length}!SlcanReader@{SlcanReader}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \label{structSlcanReader_a74fcda0bbba62ef83d6d7ce86bbfe26a} 
+size\+\_\+t Slcan\+Reader\+::length}
+
+\Hypertarget{structSlcanReader_ae0b8a9719fdbf00de2c94a4ecb43ee62}\index{SlcanReader@{SlcanReader}!overflows@{overflows}}
+\index{overflows@{overflows}!SlcanReader@{SlcanReader}}
+\doxysubsubsection{\texorpdfstring{overflows}{overflows}}
+{\footnotesize\ttfamily \label{structSlcanReader_ae0b8a9719fdbf00de2c94a4ecb43ee62} 
+uint32\+\_\+t Slcan\+Reader\+::overflows}
+
+Over-\/long lines dropped. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/can/\mbox{\hyperlink{slcan_8h}{slcan.\+h}}\end{DoxyCompactItemize}

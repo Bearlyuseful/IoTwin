@@ -1,0 +1,126 @@
+\doxysection{src/bridges/serial\+\_\+bridge/bridge\+\_\+core.h File Reference}
+\hypertarget{bridge__core_8h}{}\label{bridge__core_8h}\index{src/bridges/serial\_bridge/bridge\_core.h@{src/bridges/serial\_bridge/bridge\_core.h}}
+
+
+Translation between an SLCAN adapter (serial) and iotwin-\/bus (TCP text lines).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{Bridge\+Mode}} \{ \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a51fe03779fc90c7c02216874ac154f40}{BRIDGE\+\_\+\+MODE\+\_\+\+NORMAL}}
+, \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a956a2b4ae0daff5339bf91f111f9650c}{BRIDGE\+\_\+\+MODE\+\_\+\+LOOPBACK}}
+, \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092ad947d8b4ac7bf343d46055a50b05fc85}{BRIDGE\+\_\+\+MODE\+\_\+\+LISTEN}}
+ \}
+\begin{DoxyCompactList}\small\item\em How the adapter\textquotesingle{}s CAN controller is opened. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{bridge__core_8h_ab74abe28fcbb470c1abec612c2f5ab14}{bridge\+\_\+parse\+\_\+mode}} (const char \texorpdfstring{$\ast$}{*}text, \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{Bridge\+Mode}} \texorpdfstring{$\ast$}{*}mode)
+\begin{DoxyCompactList}\small\item\em Parses "{}normal"{}, "{}loopback"{} or "{}listen"{}. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bridge__core_8h_aba8c027e6b37995ddbef767cb1e42a96}{bridge\+\_\+open\+\_\+command}} (\mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{Bridge\+Mode}} mode)
+\begin{DoxyCompactList}\small\item\em Command that opens the channel in {\ttfamily mode} ("{}\+O\textbackslash{}r"{}, "{}l\textbackslash{}r"{} or "{}\+L\textbackslash{}r"{}). \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{bridge__core_8h_aec1f855eac235021053832d533baa6ae}{bridge\+\_\+bitrate\+\_\+command}} (uint32\+\_\+t bitrate)
+\begin{DoxyCompactList}\small\item\em Bitrate command, e.\+g. "{}\+S6\textbackslash{}r"{} for 500 kbit/s. NULL if SLCAN has no index for it. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{bridge__core_8h_aa81605e3999c883f831f41c04e9fa774}{bridge\+\_\+adapter\+\_\+to\+\_\+bus}} (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, char \texorpdfstring{$\ast$}{*}out, size\+\_\+t out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Converts a line from the adapter (without CR) into a bus line (without newline). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{bridge__core_8h_aaef11f7a8a1fd2064f5236695b7b861d}{bridge\+\_\+bus\+\_\+to\+\_\+adapter}} (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, char \texorpdfstring{$\ast$}{*}out, size\+\_\+t out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Converts a bus line into an SLCAN frame command including CR. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Translation between an SLCAN adapter (serial) and iotwin-\/bus (TCP text lines). 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{bridge__core_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}\index{bridge\_core.h@{bridge\_core.h}!BridgeMode@{BridgeMode}}
+\index{BridgeMode@{BridgeMode}!bridge\_core.h@{bridge\_core.h}}
+\doxysubsubsection{\texorpdfstring{BridgeMode}{BridgeMode}}
+{\footnotesize\ttfamily \label{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092} 
+enum \mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{Bridge\+Mode}}}
+
+
+
+How the adapter\textquotesingle{}s CAN controller is opened. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BRIDGE\_MODE\_NORMAL@{BRIDGE\_MODE\_NORMAL}!bridge\_core.h@{bridge\_core.h}}\index{bridge\_core.h@{bridge\_core.h}!BRIDGE\_MODE\_NORMAL@{BRIDGE\_MODE\_NORMAL}}}\Hypertarget{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a51fe03779fc90c7c02216874ac154f40}\label{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a51fe03779fc90c7c02216874ac154f40} 
+BRIDGE\+\_\+\+MODE\+\_\+\+NORMAL&\textquotesingle{}O\textquotesingle{}\+: real bus, needs a transceiver and another node. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BRIDGE\_MODE\_LOOPBACK@{BRIDGE\_MODE\_LOOPBACK}!bridge\_core.h@{bridge\_core.h}}\index{bridge\_core.h@{bridge\_core.h}!BRIDGE\_MODE\_LOOPBACK@{BRIDGE\_MODE\_LOOPBACK}}}\Hypertarget{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a956a2b4ae0daff5339bf91f111f9650c}\label{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092a956a2b4ae0daff5339bf91f111f9650c} 
+BRIDGE\+\_\+\+MODE\+\_\+\+LOOPBACK&\textquotesingle{}l\textquotesingle{}\+: internal loopback, works with a bare board. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BRIDGE\_MODE\_LISTEN@{BRIDGE\_MODE\_LISTEN}!bridge\_core.h@{bridge\_core.h}}\index{bridge\_core.h@{bridge\_core.h}!BRIDGE\_MODE\_LISTEN@{BRIDGE\_MODE\_LISTEN}}}\Hypertarget{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092ad947d8b4ac7bf343d46055a50b05fc85}\label{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092ad947d8b4ac7bf343d46055a50b05fc85} 
+BRIDGE\+\_\+\+MODE\+\_\+\+LISTEN&\textquotesingle{}L\textquotesingle{}\+: listen only. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{bridge__core_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{bridge__core_8h_aa81605e3999c883f831f41c04e9fa774}\index{bridge\_core.h@{bridge\_core.h}!bridge\_adapter\_to\_bus@{bridge\_adapter\_to\_bus}}
+\index{bridge\_adapter\_to\_bus@{bridge\_adapter\_to\_bus}!bridge\_core.h@{bridge\_core.h}}
+\doxysubsubsection{\texorpdfstring{bridge\_adapter\_to\_bus()}{bridge\_adapter\_to\_bus()}}
+{\footnotesize\ttfamily \label{bridge__core_8h_aa81605e3999c883f831f41c04e9fa774} 
+int bridge\+\_\+adapter\+\_\+to\+\_\+bus (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{size\+\_\+t}]{length}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{out\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Converts a line from the adapter (without CR) into a bus line (without newline). 
+
+\begin{DoxyReturn}{Returns}
+Length of the bus line, or -\/1 if the adapter line is not a frame. 
+\end{DoxyReturn}
+\Hypertarget{bridge__core_8h_aec1f855eac235021053832d533baa6ae}\index{bridge\_core.h@{bridge\_core.h}!bridge\_bitrate\_command@{bridge\_bitrate\_command}}
+\index{bridge\_bitrate\_command@{bridge\_bitrate\_command}!bridge\_core.h@{bridge\_core.h}}
+\doxysubsubsection{\texorpdfstring{bridge\_bitrate\_command()}{bridge\_bitrate\_command()}}
+{\footnotesize\ttfamily \label{bridge__core_8h_aec1f855eac235021053832d533baa6ae} 
+const char \texorpdfstring{$\ast$}{*} bridge\+\_\+bitrate\+\_\+command (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{bitrate}{}\end{DoxyParamCaption})}
+
+
+
+Bitrate command, e.\+g. "{}\+S6\textbackslash{}r"{} for 500 kbit/s. NULL if SLCAN has no index for it. 
+
+\Hypertarget{bridge__core_8h_aaef11f7a8a1fd2064f5236695b7b861d}\index{bridge\_core.h@{bridge\_core.h}!bridge\_bus\_to\_adapter@{bridge\_bus\_to\_adapter}}
+\index{bridge\_bus\_to\_adapter@{bridge\_bus\_to\_adapter}!bridge\_core.h@{bridge\_core.h}}
+\doxysubsubsection{\texorpdfstring{bridge\_bus\_to\_adapter()}{bridge\_bus\_to\_adapter()}}
+{\footnotesize\ttfamily \label{bridge__core_8h_aaef11f7a8a1fd2064f5236695b7b861d} 
+int bridge\+\_\+bus\+\_\+to\+\_\+adapter (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{size\+\_\+t}]{length}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{out\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Converts a bus line into an SLCAN frame command including CR. 
+
+\begin{DoxyReturn}{Returns}
+Length, or -\/1 if the bus line is not a valid frame. 
+\end{DoxyReturn}
+\Hypertarget{bridge__core_8h_aba8c027e6b37995ddbef767cb1e42a96}\index{bridge\_core.h@{bridge\_core.h}!bridge\_open\_command@{bridge\_open\_command}}
+\index{bridge\_open\_command@{bridge\_open\_command}!bridge\_core.h@{bridge\_core.h}}
+\doxysubsubsection{\texorpdfstring{bridge\_open\_command()}{bridge\_open\_command()}}
+{\footnotesize\ttfamily \label{bridge__core_8h_aba8c027e6b37995ddbef767cb1e42a96} 
+const char \texorpdfstring{$\ast$}{*} bridge\+\_\+open\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{Bridge\+Mode}}}]{mode}{}\end{DoxyParamCaption})}
+
+
+
+Command that opens the channel in {\ttfamily mode} ("{}\+O\textbackslash{}r"{}, "{}l\textbackslash{}r"{} or "{}\+L\textbackslash{}r"{}). 
+
+\Hypertarget{bridge__core_8h_ab74abe28fcbb470c1abec612c2f5ab14}\index{bridge\_core.h@{bridge\_core.h}!bridge\_parse\_mode@{bridge\_parse\_mode}}
+\index{bridge\_parse\_mode@{bridge\_parse\_mode}!bridge\_core.h@{bridge\_core.h}}
+\doxysubsubsection{\texorpdfstring{bridge\_parse\_mode()}{bridge\_parse\_mode()}}
+{\footnotesize\ttfamily \label{bridge__core_8h_ab74abe28fcbb470c1abec612c2f5ab14} 
+bool bridge\+\_\+parse\+\_\+mode (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{\mbox{\hyperlink{bridge__core_8h_aee7d45f22df1a0e46da6a43773c19092}{Bridge\+Mode}} \texorpdfstring{$\ast$}{*}}]{mode}{}\end{DoxyParamCaption})}
+
+
+
+Parses "{}normal"{}, "{}loopback"{} or "{}listen"{}. 
+

@@ -1,0 +1,113 @@
+\doxysection{src/core/can/slcan.c File Reference}
+\hypertarget{slcan_8c}{}\label{slcan_8c}\index{src/core/can/slcan.c@{src/core/can/slcan.c}}
+{\ttfamily \#include "{}slcan.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{slcan_8c_a5e2442ebcf7309c9db160a0e5cf315b6}{BITRATE\+\_\+\+COUNT}}~(sizeof(g\+\_\+bitrates) / sizeof(g\+\_\+bitrates\mbox{[}0\mbox{]}))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{slcan_8c_a50789257f41b87b1054579961eb96122}{slcan\+\_\+put\+\_\+hex}} (char \texorpdfstring{$\ast$}{*}out, uint32\+\_\+t value, unsigned digits)
+\begin{DoxyCompactList}\small\item\em Writes {\ttfamily value} as {\ttfamily digits} upper-\/case hex characters (no terminator). \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{slcan_8c_a7fdb13e55e2dde64c1cb48b7ab884c48}{slcan\+\_\+bitrate\+\_\+from\+\_\+index}} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Bitrate of S0..S8 (10k, 20k, 50k, 100k, 125k, 250k, 500k, 800k, 1M); 0 if invalid. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{slcan_8c_ad661c42b2945d5bc08bf89abedc13cf6}{slcan\+\_\+index\+\_\+from\+\_\+bitrate}} (uint32\+\_\+t bitrate)
+\begin{DoxyCompactList}\small\item\em Index for an S command, -\/1 if the bitrate has none. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{slcan_8c_ad5c5cf934528e8bd594c7d07adca8f8f}{slcan\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, \mbox{\hyperlink{structSlcanCommand}{Slcan\+Command}} \texorpdfstring{$\ast$}{*}command)
+\begin{DoxyCompactList}\small\item\em Parses one line (without its terminator). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{slcan_8c_abb6b135e8ae4639c26720690f3ea9b79}{slcan\+\_\+format\+\_\+frame}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Encodes {\ttfamily frame} including the trailing CR. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{slcan_8c_a04bc784d26583ecb01dbf94dc134f316}{slcan\+\_\+reader\+\_\+init}} (\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}reader)
+\item 
+void \mbox{\hyperlink{slcan_8c_ad1497a9e559dd4d78ecb16d583df1fab}{slcan\+\_\+reader\+\_\+feed}} (\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}reader, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length, \mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{Slcan\+Line\+Callback}} callback, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Feeds bytes; {\ttfamily callback} runs for every complete line or BEL. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{slcan_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{slcan_8c_a5e2442ebcf7309c9db160a0e5cf315b6}\index{slcan.c@{slcan.c}!BITRATE\_COUNT@{BITRATE\_COUNT}}
+\index{BITRATE\_COUNT@{BITRATE\_COUNT}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{BITRATE\_COUNT}{BITRATE\_COUNT}}
+{\footnotesize\ttfamily \label{slcan_8c_a5e2442ebcf7309c9db160a0e5cf315b6} 
+\#define BITRATE\+\_\+\+COUNT~(sizeof(g\+\_\+bitrates) / sizeof(g\+\_\+bitrates\mbox{[}0\mbox{]}))}
+
+
+
+\label{doc-func-members}
+\Hypertarget{slcan_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{slcan_8c_a7fdb13e55e2dde64c1cb48b7ab884c48}\index{slcan.c@{slcan.c}!slcan\_bitrate\_from\_index@{slcan\_bitrate\_from\_index}}
+\index{slcan\_bitrate\_from\_index@{slcan\_bitrate\_from\_index}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_bitrate\_from\_index()}{slcan\_bitrate\_from\_index()}}
+{\footnotesize\ttfamily \label{slcan_8c_a7fdb13e55e2dde64c1cb48b7ab884c48} 
+uint32\+\_\+t slcan\+\_\+bitrate\+\_\+from\+\_\+index (\begin{DoxyParamCaption}\item[{unsigned}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Bitrate of S0..S8 (10k, 20k, 50k, 100k, 125k, 250k, 500k, 800k, 1M); 0 if invalid. 
+
+\Hypertarget{slcan_8c_abb6b135e8ae4639c26720690f3ea9b79}\index{slcan.c@{slcan.c}!slcan\_format\_frame@{slcan\_format\_frame}}
+\index{slcan\_format\_frame@{slcan\_format\_frame}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_format\_frame()}{slcan\_format\_frame()}}
+{\footnotesize\ttfamily \label{slcan_8c_abb6b135e8ae4639c26720690f3ea9b79} 
+int slcan\+\_\+format\+\_\+frame (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Encodes {\ttfamily frame} including the trailing CR. 
+
+\begin{DoxyReturn}{Returns}
+Number of characters written (excluding NUL), -\/1 if invalid or too small. 
+\end{DoxyReturn}
+\Hypertarget{slcan_8c_ad661c42b2945d5bc08bf89abedc13cf6}\index{slcan.c@{slcan.c}!slcan\_index\_from\_bitrate@{slcan\_index\_from\_bitrate}}
+\index{slcan\_index\_from\_bitrate@{slcan\_index\_from\_bitrate}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_index\_from\_bitrate()}{slcan\_index\_from\_bitrate()}}
+{\footnotesize\ttfamily \label{slcan_8c_ad661c42b2945d5bc08bf89abedc13cf6} 
+int slcan\+\_\+index\+\_\+from\+\_\+bitrate (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{bitrate}{}\end{DoxyParamCaption})}
+
+
+
+Index for an S command, -\/1 if the bitrate has none. 
+
+\Hypertarget{slcan_8c_ad5c5cf934528e8bd594c7d07adca8f8f}\index{slcan.c@{slcan.c}!slcan\_parse@{slcan\_parse}}
+\index{slcan\_parse@{slcan\_parse}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_parse()}{slcan\_parse()}}
+{\footnotesize\ttfamily \label{slcan_8c_ad5c5cf934528e8bd594c7d07adca8f8f} 
+bool slcan\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{structSlcanCommand}{Slcan\+Command}} \texorpdfstring{$\ast$}{*}}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Parses one line (without its terminator). 
+
+\begin{DoxyReturn}{Returns}
+false for unknown commands and malformed frames (answer with BEL). 
+\end{DoxyReturn}
+\Hypertarget{slcan_8c_a50789257f41b87b1054579961eb96122}\index{slcan.c@{slcan.c}!slcan\_put\_hex@{slcan\_put\_hex}}
+\index{slcan\_put\_hex@{slcan\_put\_hex}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_put\_hex()}{slcan\_put\_hex()}}
+{\footnotesize\ttfamily \label{slcan_8c_a50789257f41b87b1054579961eb96122} 
+void slcan\+\_\+put\+\_\+hex (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{uint32\+\_\+t}]{value}{, }\item[{unsigned}]{digits}{}\end{DoxyParamCaption})}
+
+
+
+Writes {\ttfamily value} as {\ttfamily digits} upper-\/case hex characters (no terminator). 
+
+\Hypertarget{slcan_8c_ad1497a9e559dd4d78ecb16d583df1fab}\index{slcan.c@{slcan.c}!slcan\_reader\_feed@{slcan\_reader\_feed}}
+\index{slcan\_reader\_feed@{slcan\_reader\_feed}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_reader\_feed()}{slcan\_reader\_feed()}}
+{\footnotesize\ttfamily \label{slcan_8c_ad1497a9e559dd4d78ecb16d583df1fab} 
+void slcan\+\_\+reader\+\_\+feed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{Slcan\+Line\+Callback}}}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Feeds bytes; {\ttfamily callback} runs for every complete line or BEL. 
+
+\Hypertarget{slcan_8c_a04bc784d26583ecb01dbf94dc134f316}\index{slcan.c@{slcan.c}!slcan\_reader\_init@{slcan\_reader\_init}}
+\index{slcan\_reader\_init@{slcan\_reader\_init}!slcan.c@{slcan.c}}
+\doxysubsubsection{\texorpdfstring{slcan\_reader\_init()}{slcan\_reader\_init()}}
+{\footnotesize\ttfamily \label{slcan_8c_a04bc784d26583ecb01dbf94dc134f316} 
+void slcan\+\_\+reader\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{}\end{DoxyParamCaption})}
+

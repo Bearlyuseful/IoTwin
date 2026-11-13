@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ecansignaldirection_0',['ECanSignalDirection',['../CanSignalComponent_8h.html#a4c933bb48cd6507bbbe3faad1187d601',1,'CanSignalComponent.h']]]
+  ['bridgemode_0',['BridgeMode',['../bridge__core_8h.html#aee7d45f22df1a0e46da6a43773c19092',1,'bridge_core.h']]]
 ];

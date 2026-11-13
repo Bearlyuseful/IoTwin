@@ -1,13 +1,23 @@
 var searchData=
 [
-  ['samples_0',['samples',['../structCycleStats.html#aaa42c9e67547a25ccc6c999c11cf6460',1,'CycleStats']]],
-  ['signal_1',['Signal',['../classAWallSwitchActor.html#a4720137c5b03e98a8cc5a372d96a5a2d',1,'AWallSwitchActor']]],
-  ['slack_2',['Slack',['../classAElectricalCableActor.html#a09c790e63245ff3e39cedd72b2837b45',1,'AElectricalCableActor']]],
-  ['socket_3',['socket',['../structBusClient.html#aa74657afc8ab8c573739d98f0e5f31b9',1,'BusClient::socket'],['../structNetPollFd.html#a273fa5b92c8886ba3fb6c35067ec1cb4',1,'NetPollFd::socket']]],
-  ['standardidmask_4',['StandardIdMask',['../structFCanFrame.html#acd850af02fe7a2bec1112efe9d5d5c5a',1,'FCanFrame']]],
-  ['started_5',['started',['../structLightEcu.html#a2daad4c84d5329da21825b09a8b86ec0',1,'LightEcu']]],
-  ['stats_6',['stats',['../structCycleTimer.html#aa23d2e0116d512f1e188692342547150',1,'CycleTimer']]],
-  ['stats_5finterval_5fs_7',['stats_interval_s',['../structSimOptions.html#abfbf756391334b812fec8e5ba0a62d99',1,'SimOptions']]],
-  ['sum_5flatency_5fns_8',['sum_latency_ns',['../structCycleStats.html#a7e965d639bc83b8aef9fd62adbe58613',1,'CycleStats']]],
-  ['switchcanid_9',['SwitchCanId',['../classAGM__Simulation.html#ab0fb7a43acbf972f33ee188ce579d092',1,'AGM_Simulation']]]
+  ['reader_0',['reader',['../structBridge.html#aaef1a318ed494f0ef9f37b1c183072bf',1,'Bridge::reader'],['../structBusClient.html#adedf9e738f2e79e582944add4ff0f994',1,'BusClient::reader']]],
+  ['relaycanid_1',['RelayCanId',['../classAGM__Simulation.html#ab7f1cc5155a5a2ae1622b31f79d33555',1,'AGM_Simulation']]],
+  ['relaycontrol_2',['RelayControl',['../classAPowerSourceActor.html#a40238d0de62387b2ce509ef50b29627c',1,'APowerSourceActor']]],
+  ['revents_3',['revents',['../structNetPollFd.html#a6b3ebb61d16ac2b92a1e81442bd84328',1,'NetPollFd']]],
+  ['rocker_4',['Rocker',['../classAWallSwitchActor.html#aab75951279166ce04591136c18973e26',1,'AWallSwitchActor']]],
+  ['root_5',['Root',['../classAElectricalCableActor.html#a71635e5bf4eb76cace3a1b87be560438',1,'AElectricalCableActor::Root'],['../classALampActor.html#a77c3bb4be2c18e12d16a75eae0866fea',1,'ALampActor::Root'],['../classAWallSwitchActor.html#a62ed8803f1f9935178d2967bd674cc93',1,'AWallSwitchActor::Root']]],
+  ['rt_6',['rt',['../structSimOptions.html#a32f338f93324bc9da622058f9d96c5b7',1,'SimOptions']]],
+  ['rtr_7',['rtr',['../structCanFrame.html#a837bb392f53185a39b101f1d9ec087e2',1,'CanFrame']]],
+  ['rx_5fblock_5fcount_8',['rx_block_count',['../structIsoTpLink.html#a6f9ead500a85388136c051ce60201b79',1,'IsoTpLink']]],
+  ['rx_5fbuffer_9',['rx_buffer',['../structIsoTpLink.html#aae56353a62ddfe445e5fece5b4e7f9aa',1,'IsoTpLink']]],
+  ['rx_5fcapacity_10',['rx_capacity',['../structIsoTpLink.html#aa30a3f0a429669ff44e0c8a6a7f79bff',1,'IsoTpLink']]],
+  ['rx_5fcomplete_11',['rx_complete',['../structIsoTpLink.html#ae5e2d32223c73e8c301eec7fd21b29c7',1,'IsoTpLink']]],
+  ['rx_5fdeadline_5fus_12',['rx_deadline_us',['../structIsoTpLink.html#ac0d9d917791469fd9619bd6d2ea45906',1,'IsoTpLink']]],
+  ['rx_5ferror_13',['rx_error',['../structIsoTpLink.html#ad968705ecc93705f7867bc0d34997e4a',1,'IsoTpLink']]],
+  ['rx_5fid_14',['rx_id',['../structIsoTpConfig.html#accbb2b621edc08cd786a439869f702eb',1,'IsoTpConfig']]],
+  ['rx_5flength_15',['rx_length',['../structIsoTpLink.html#a4cf0b53d3c85e9272616a56a5b56c408',1,'IsoTpLink']]],
+  ['rx_5foffset_16',['rx_offset',['../structIsoTpLink.html#a095cfeeb0110d0bc0a180f6347cc25b3',1,'IsoTpLink']]],
+  ['rx_5fqueue_17',['rx_queue',['../structSimShared.html#a6d4bad13a4eb7d28ebc8a9f3f43ef81c',1,'SimShared']]],
+  ['rx_5fsequence_18',['rx_sequence',['../structIsoTpLink.html#a6119904256fc6bc3ed99f0f249b025eb',1,'IsoTpLink']]],
+  ['rx_5fstate_19',['rx_state',['../structIsoTpLink.html#a23b41c38ecb9595d0233876f08832e9b',1,'IsoTpLink']]]
 ];

@@ -1,0 +1,90 @@
+\doxysection{src/core/can/can\+\_\+bit\+\_\+timing.h File Reference}
+\hypertarget{can__bit__timing_8h}{}\label{can__bit__timing_8h}\index{src/core/can/can\_bit\_timing.h@{src/core/can/can\_bit\_timing.h}}
+
+
+Calculation of CAN bit timing parameters from a controller clock.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCanBitTiming}{Can\+Bit\+Timing}}
+\begin{DoxyCompactList}\small\item\em Timing parameters in time quanta (not register encoded). \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCanBitTimingLimits}{Can\+Bit\+Timing\+Limits}}
+\begin{DoxyCompactList}\small\item\em Limits of a CAN controller\textquotesingle{}s timing registers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{can__bit__timing_8h_ac8829832c3718c1a9d5be8e3504d4302}{CAN\+\_\+\+BIT\+\_\+\+TIMING\+\_\+\+DEFAULT\+\_\+\+SAMPLE\+\_\+\+POINT}}~875u
+\begin{DoxyCompactList}\small\item\em Sample point recommended by CiA 301 for most bitrates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{can__bit__timing_8h_ab436e6485d42398d557aa3969b4ebc49}{can\+\_\+bit\+\_\+timing\+\_\+calculate}} (uint32\+\_\+t clock\+\_\+hz, uint32\+\_\+t bitrate, uint32\+\_\+t sample\+\_\+point\+\_\+permille, const \mbox{\hyperlink{structCanBitTimingLimits}{Can\+Bit\+Timing\+Limits}} \texorpdfstring{$\ast$}{*}limits, \mbox{\hyperlink{structCanBitTiming}{Can\+Bit\+Timing}} \texorpdfstring{$\ast$}{*}timing)
+\begin{DoxyCompactList}\small\item\em Finds timing parameters for {\ttfamily bitrate}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structCanBitTimingLimits}{Can\+Bit\+Timing\+Limits}} \mbox{\hyperlink{can__bit__timing_8h_aeb4bd19b2102c7d16f9a5bb4bb0eba00}{CAN\+\_\+\+BIT\+\_\+\+TIMING\+\_\+\+LIMITS\+\_\+\+FDCAN\+\_\+\+NOMINAL}}
+\begin{DoxyCompactList}\small\item\em Nominal (arbitration phase) limits of the Bosch M\+\_\+\+CAN / STM32 FDCAN. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Calculation of CAN bit timing parameters from a controller clock. 
+
+A CAN bit is divided into time quanta (tq)\+:
+
+\texorpdfstring{$\vert$}{|} SYNC (1 tq) \texorpdfstring{$\vert$}{|} SEG1 = PROP + PHASE1 \texorpdfstring{$\vert$}{|} SEG2 = PHASE2 \texorpdfstring{$\vert$}{|} \texorpdfstring{$^\wedge$}{\string^} sample point
+
+bitrate = clock / (prescaler \texorpdfstring{$\ast$}{*} (1 + seg1 + seg2)) sample point = (1 + seg1) / (1 + seg1 + seg2)
+
+The calculation only accepts exact bitrates (no rounding error) and picks the solution closest to the requested sample point, preferring more time quanta per bit (finer resynchronisation). Portable C, unit tested on the host and used by the STM32 FDCAN driver. 
+
+\label{doc-define-members}
+\Hypertarget{can__bit__timing_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{can__bit__timing_8h_ac8829832c3718c1a9d5be8e3504d4302}\index{can\_bit\_timing.h@{can\_bit\_timing.h}!CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT@{CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT}}
+\index{CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT@{CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT}!can\_bit\_timing.h@{can\_bit\_timing.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT}{CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT}}
+{\footnotesize\ttfamily \label{can__bit__timing_8h_ac8829832c3718c1a9d5be8e3504d4302} 
+\#define CAN\+\_\+\+BIT\+\_\+\+TIMING\+\_\+\+DEFAULT\+\_\+\+SAMPLE\+\_\+\+POINT~875u}
+
+
+
+Sample point recommended by CiA 301 for most bitrates. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{can__bit__timing_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{can__bit__timing_8h_ab436e6485d42398d557aa3969b4ebc49}\index{can\_bit\_timing.h@{can\_bit\_timing.h}!can\_bit\_timing\_calculate@{can\_bit\_timing\_calculate}}
+\index{can\_bit\_timing\_calculate@{can\_bit\_timing\_calculate}!can\_bit\_timing.h@{can\_bit\_timing.h}}
+\doxysubsubsection{\texorpdfstring{can\_bit\_timing\_calculate()}{can\_bit\_timing\_calculate()}}
+{\footnotesize\ttfamily \label{can__bit__timing_8h_ab436e6485d42398d557aa3969b4ebc49} 
+bool can\+\_\+bit\+\_\+timing\+\_\+calculate (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{clock\+\_\+hz}{, }\item[{uint32\+\_\+t}]{bitrate}{, }\item[{uint32\+\_\+t}]{sample\+\_\+point\+\_\+permille}{, }\item[{const \mbox{\hyperlink{structCanBitTimingLimits}{Can\+Bit\+Timing\+Limits}} \texorpdfstring{$\ast$}{*}}]{limits}{, }\item[{\mbox{\hyperlink{structCanBitTiming}{Can\+Bit\+Timing}} \texorpdfstring{$\ast$}{*}}]{timing}{}\end{DoxyParamCaption})}
+
+
+
+Finds timing parameters for {\ttfamily bitrate}. 
+
+\begin{DoxyReturn}{Returns}
+false if no exact solution exists within {\ttfamily limits}. 
+\end{DoxyReturn}
+
+
+\label{doc-var-members}
+\Hypertarget{can__bit__timing_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{can__bit__timing_8h_aeb4bd19b2102c7d16f9a5bb4bb0eba00}\index{can\_bit\_timing.h@{can\_bit\_timing.h}!CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL@{CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL}}
+\index{CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL@{CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL}!can\_bit\_timing.h@{can\_bit\_timing.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL}{CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL}}
+{\footnotesize\ttfamily \label{can__bit__timing_8h_aeb4bd19b2102c7d16f9a5bb4bb0eba00} 
+const \mbox{\hyperlink{structCanBitTimingLimits}{Can\+Bit\+Timing\+Limits}} CAN\+\_\+\+BIT\+\_\+\+TIMING\+\_\+\+LIMITS\+\_\+\+FDCAN\+\_\+\+NOMINAL\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Nominal (arbitration phase) limits of the Bosch M\+\_\+\+CAN / STM32 FDCAN. 
+

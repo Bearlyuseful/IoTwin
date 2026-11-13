@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../../user/quickstart/">
+        <link rel="prev" href="../../roadmap/">
       
       
         <link rel="next" href="../architecture_overview/">
@@ -233,6 +233,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -395,6 +414,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -414,10 +460,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -435,8 +481,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -559,6 +605,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firmware-nucleo-g0b1re" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firmware (NUCLEO-G0B1RE)
+      
+    </span>
+  </a>
   
 </li>
       
@@ -740,6 +797,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware (NUCLEO-G0B1RE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../packaging/" class="md-nav__link">
         
   
@@ -813,10 +926,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -834,8 +947,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -929,6 +1042,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0004 Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1005,6 +1146,13 @@
 <p>Make sure <code>C:\msys64\ucrt64\bin</code> is on <code>PATH</code> if you build from PowerShell
 or Git Bash. The Windows executables are linked statically and run without
 MSYS2 installed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Git Bash</p>
+<p>Git Bash puts Git's own <code>mingw64/bin</code> in front of <code>PATH</code>. Its older runtime
+DLLs break the compiler of a recent MSYS2 GCC (it fails silently, CMake
+reports "compiler is broken"). Prepend MSYS2 in that shell:
+<code>export PATH="/c/msys64/ucrt64/bin:$PATH"</code>.</p>
+</div>
 <h3 id="build-and-test">Build and test<a class="headerlink" href="#build-and-test" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--preset<span class="w"> </span>gcc-debug<span class="w">          </span><span class="c1"># or gcc-release</span>
 cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class="w"> </span>gcc-debug
@@ -1028,6 +1176,10 @@ ctest<span class="w"> </span>--preset<span class="w"> </span>gcc-debug
 <td>simulated light ECU</td>
 </tr>
 <tr>
+<td><code>serial_bridge</code></td>
+<td>connects an SLCAN adapter (NUCLEO-G0B1RE) to the bus</td>
+</tr>
+<tr>
 <td><code>iotwin_tests</code></td>
 <td>Catch2 test runner (used by <code>ctest</code>)</td>
 </tr>
@@ -1041,6 +1193,14 @@ build/gcc-debug/bin/can_sim<span class="w">        </span><span class="c1"># sec
 </code></pre></div>
 <p>All options: <code>--help</code>. Real-time options are described in
 <a href="../realtime/">Real-Time Operation</a>.</p>
+<hr />
+<h2 id="firmware-nucleo-g0b1re">Firmware (NUCLEO-G0B1RE)<a class="headerlink" href="#firmware-nucleo-g0b1re" title="Permanent link">&para;</a></h2>
+<p>Separate CMake project with an <code>arm-none-eabi-gcc</code> toolchain:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>firmware
+cmake<span class="w"> </span>--preset<span class="w"> </span>nucleo-g0b1re
+cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class="w"> </span>nucleo-g0b1re
+</code></pre></div>
+<p>Flashing, wiring and the serial protocol are described in <a href="../firmware/">Firmware</a>.</p>
 <hr />
 <h2 id="visualizer-unreal-engine">Visualizer (Unreal Engine)<a class="headerlink" href="#visualizer-unreal-engine" title="Permanent link">&para;</a></h2>
 <h3 id="prerequisites_1">Prerequisites<a class="headerlink" href="#prerequisites_1" title="Permanent link">&para;</a></h3>

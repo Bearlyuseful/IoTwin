@@ -1,0 +1,253 @@
+\doxysection{src/core/can/slcan.h File Reference}
+\hypertarget{slcan_8h}{}\label{slcan_8h}\index{src/core/can/slcan.h@{src/core/can/slcan.h}}
+
+
+SLCAN (Lawicel CAN232/\+CANUSB) ASCII protocol used on serial links.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structSlcanCommand}{Slcan\+Command}}
+\begin{DoxyCompactList}\small\item\em A parsed command. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}}
+\begin{DoxyCompactList}\small\item\em Splits a byte stream at CR or LF (CR LF counts once). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{slcan_8h_a8b72da6e1892fae75e12f923b2495eaa}{SLCAN\+\_\+\+MAX\+\_\+\+LINE}}~32
+\item 
+\#define \mbox{\hyperlink{slcan_8h_a26b7c07524761c6415f985f43dea3973}{SLCAN\+\_\+\+OK}}~"{}\textbackslash{}r"{}
+\item 
+\#define \mbox{\hyperlink{slcan_8h_a42d97dbcc96ffcc94403bd759128afc7}{SLCAN\+\_\+\+ERROR}}~"{}\textbackslash{}a"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{Slcan\+Line\+Callback}}) (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Called for each complete line (NUL terminated, without terminator). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2}{Slcan\+Command\+Type}} \{ \newline
+\mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08ef0b08c4ae1bfd9a9bc2d3f5e87c91}{SLCAN\+\_\+\+CMD\+\_\+\+FRAME}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abba5ea84182cc5d114bf469acdce09a4}{SLCAN\+\_\+\+CMD\+\_\+\+OPEN}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2ae3aac1a75ef00439a8657f7b9dd212e1}{SLCAN\+\_\+\+CMD\+\_\+\+OPEN\+\_\+\+LOOPBACK}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a3f20f87682a51c900b348ef4b3c42a75}{SLCAN\+\_\+\+CMD\+\_\+\+OPEN\+\_\+\+LISTEN}}
+, \newline
+\mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abdc50ff373f022c554e5628f60b66bcf}{SLCAN\+\_\+\+CMD\+\_\+\+CLOSE}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a148903c24e6c42796724dc4db2116486}{SLCAN\+\_\+\+CMD\+\_\+\+BITRATE}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a41e4c56af2ff7f2476eabf2ba214130c}{SLCAN\+\_\+\+CMD\+\_\+\+VERSION}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a449b7770b3783df0f6c902a8a72a25b6}{SLCAN\+\_\+\+CMD\+\_\+\+SERIAL}}
+, \newline
+\mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2adfc67844df5d02f5d1c5ce9732059538}{SLCAN\+\_\+\+CMD\+\_\+\+STATUS}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a02aafc4b4b323aa749c861a3a31679f3}{SLCAN\+\_\+\+CMD\+\_\+\+TIMESTAMP}}
+, \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08fc621cd729b4d36ca81f73c6e51c38}{SLCAN\+\_\+\+CMD\+\_\+\+STATISTICS}}
+ \}
+\begin{DoxyCompactList}\small\item\em Command types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{slcan_8h_ad5c5cf934528e8bd594c7d07adca8f8f}{slcan\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, \mbox{\hyperlink{structSlcanCommand}{Slcan\+Command}} \texorpdfstring{$\ast$}{*}command)
+\begin{DoxyCompactList}\small\item\em Parses one line (without its terminator). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{slcan_8h_abb6b135e8ae4639c26720690f3ea9b79}{slcan\+\_\+format\+\_\+frame}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, char \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Encodes {\ttfamily frame} including the trailing CR. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{slcan_8h_a7fdb13e55e2dde64c1cb48b7ab884c48}{slcan\+\_\+bitrate\+\_\+from\+\_\+index}} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Bitrate of S0..S8 (10k, 20k, 50k, 100k, 125k, 250k, 500k, 800k, 1M); 0 if invalid. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{slcan_8h_ad661c42b2945d5bc08bf89abedc13cf6}{slcan\+\_\+index\+\_\+from\+\_\+bitrate}} (uint32\+\_\+t bitrate)
+\begin{DoxyCompactList}\small\item\em Index for an S command, -\/1 if the bitrate has none. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{slcan_8h_a50789257f41b87b1054579961eb96122}{slcan\+\_\+put\+\_\+hex}} (char \texorpdfstring{$\ast$}{*}out, uint32\+\_\+t value, unsigned digits)
+\begin{DoxyCompactList}\small\item\em Writes {\ttfamily value} as {\ttfamily digits} upper-\/case hex characters (no terminator). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{slcan_8h_a04bc784d26583ecb01dbf94dc134f316}{slcan\+\_\+reader\+\_\+init}} (\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}reader)
+\item 
+void \mbox{\hyperlink{slcan_8h_ad1497a9e559dd4d78ecb16d583df1fab}{slcan\+\_\+reader\+\_\+feed}} (\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}reader, const char \texorpdfstring{$\ast$}{*}data, size\+\_\+t length, \mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{Slcan\+Line\+Callback}} callback, void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Feeds bytes; {\ttfamily callback} runs for every complete line or BEL. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+SLCAN (Lawicel CAN232/\+CANUSB) ASCII protocol used on serial links. 
+
+Commands are terminated by a carriage return. The adapter answers with CR (ok) or BEL (0x07, error). Frames use the same syntax in both directions\+:
+
+t1232\+DEAD standard frame, id 0x123, DLC 2, data DE AD T1\+F3344551\+AA extended frame, id 0x1\+F334455, DLC 1 r1230 standard remote frame, DLC 0 R1\+F3344552 extended remote frame, DLC 2
+
+Supported commands\+: O (open), L (listen only), C (close), S0..S8 (bitrate), V (version), N (serial number), F (status flags), Z0/\+Z1 (timestamps, accepted but ignored). \doxylink{classIoTwin}{Io\+Twin} extensions\+: l (open in internal loopback mode) and Q (statistics). Portable C without libc formatting, used by the host bridge and the STM32 firmware. 
+
+\label{doc-define-members}
+\Hypertarget{slcan_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{slcan_8h_a42d97dbcc96ffcc94403bd759128afc7}\index{slcan.h@{slcan.h}!SLCAN\_ERROR@{SLCAN\_ERROR}}
+\index{SLCAN\_ERROR@{SLCAN\_ERROR}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{SLCAN\_ERROR}{SLCAN\_ERROR}}
+{\footnotesize\ttfamily \label{slcan_8h_a42d97dbcc96ffcc94403bd759128afc7} 
+\#define SLCAN\+\_\+\+ERROR~"{}\textbackslash{}a"{}}
+
+\Hypertarget{slcan_8h_a8b72da6e1892fae75e12f923b2495eaa}\index{slcan.h@{slcan.h}!SLCAN\_MAX\_LINE@{SLCAN\_MAX\_LINE}}
+\index{SLCAN\_MAX\_LINE@{SLCAN\_MAX\_LINE}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{SLCAN\_MAX\_LINE}{SLCAN\_MAX\_LINE}}
+{\footnotesize\ttfamily \label{slcan_8h_a8b72da6e1892fae75e12f923b2495eaa} 
+\#define SLCAN\+\_\+\+MAX\+\_\+\+LINE~32}
+
+Longest line including terminator\+: \textquotesingle{}T\textquotesingle{} + 8 id + 1 DLC + 16 data + 4 timestamp + CR. \Hypertarget{slcan_8h_a26b7c07524761c6415f985f43dea3973}\index{slcan.h@{slcan.h}!SLCAN\_OK@{SLCAN\_OK}}
+\index{SLCAN\_OK@{SLCAN\_OK}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{SLCAN\_OK}{SLCAN\_OK}}
+{\footnotesize\ttfamily \label{slcan_8h_a26b7c07524761c6415f985f43dea3973} 
+\#define SLCAN\+\_\+\+OK~"{}\textbackslash{}r"{}}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{slcan_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}\index{slcan.h@{slcan.h}!SlcanLineCallback@{SlcanLineCallback}}
+\index{SlcanLineCallback@{SlcanLineCallback}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{SlcanLineCallback}{SlcanLineCallback}}
+{\footnotesize\ttfamily \label{slcan_8h_acbb851a13d7920cee8fecc418fe84d16} 
+typedef void(\texorpdfstring{$\ast$}{*} Slcan\+Line\+Callback) (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, void \texorpdfstring{$\ast$}{*}user\+\_\+data)}
+
+
+
+Called for each complete line (NUL terminated, without terminator). 
+
+An empty line is a plain CR, i.\+e. an "{}ok"{} answer. A BEL byte is reported as the one-\/character line "{}\textbackslash{}a"{} (error answer); BEL needs no terminator. 
+
+\label{doc-enum-members}
+\Hypertarget{slcan_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2}\index{slcan.h@{slcan.h}!SlcanCommandType@{SlcanCommandType}}
+\index{SlcanCommandType@{SlcanCommandType}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{SlcanCommandType}{SlcanCommandType}}
+{\footnotesize\ttfamily \label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2} 
+enum \mbox{\hyperlink{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2}{Slcan\+Command\+Type}}}
+
+
+
+Command types. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_FRAME@{SLCAN\_CMD\_FRAME}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_FRAME@{SLCAN\_CMD\_FRAME}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08ef0b08c4ae1bfd9a9bc2d3f5e87c91}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08ef0b08c4ae1bfd9a9bc2d3f5e87c91} 
+SLCAN\+\_\+\+CMD\+\_\+\+FRAME&t, T, r, R \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_OPEN@{SLCAN\_CMD\_OPEN}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_OPEN@{SLCAN\_CMD\_OPEN}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abba5ea84182cc5d114bf469acdce09a4}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abba5ea84182cc5d114bf469acdce09a4} 
+SLCAN\+\_\+\+CMD\+\_\+\+OPEN&O \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_OPEN\_LOOPBACK@{SLCAN\_CMD\_OPEN\_LOOPBACK}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_OPEN\_LOOPBACK@{SLCAN\_CMD\_OPEN\_LOOPBACK}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2ae3aac1a75ef00439a8657f7b9dd212e1}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2ae3aac1a75ef00439a8657f7b9dd212e1} 
+SLCAN\+\_\+\+CMD\+\_\+\+OPEN\+\_\+\+LOOPBACK&l (\doxylink{classIoTwin}{Io\+Twin} extension) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_OPEN\_LISTEN@{SLCAN\_CMD\_OPEN\_LISTEN}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_OPEN\_LISTEN@{SLCAN\_CMD\_OPEN\_LISTEN}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a3f20f87682a51c900b348ef4b3c42a75}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a3f20f87682a51c900b348ef4b3c42a75} 
+SLCAN\+\_\+\+CMD\+\_\+\+OPEN\+\_\+\+LISTEN&L \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_CLOSE@{SLCAN\_CMD\_CLOSE}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_CLOSE@{SLCAN\_CMD\_CLOSE}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abdc50ff373f022c554e5628f60b66bcf}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2abdc50ff373f022c554e5628f60b66bcf} 
+SLCAN\+\_\+\+CMD\+\_\+\+CLOSE&C \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_BITRATE@{SLCAN\_CMD\_BITRATE}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_BITRATE@{SLCAN\_CMD\_BITRATE}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a148903c24e6c42796724dc4db2116486}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a148903c24e6c42796724dc4db2116486} 
+SLCAN\+\_\+\+CMD\+\_\+\+BITRATE&S0..S8 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_VERSION@{SLCAN\_CMD\_VERSION}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_VERSION@{SLCAN\_CMD\_VERSION}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a41e4c56af2ff7f2476eabf2ba214130c}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a41e4c56af2ff7f2476eabf2ba214130c} 
+SLCAN\+\_\+\+CMD\+\_\+\+VERSION&V \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_SERIAL@{SLCAN\_CMD\_SERIAL}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_SERIAL@{SLCAN\_CMD\_SERIAL}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a449b7770b3783df0f6c902a8a72a25b6}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a449b7770b3783df0f6c902a8a72a25b6} 
+SLCAN\+\_\+\+CMD\+\_\+\+SERIAL&N \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_STATUS@{SLCAN\_CMD\_STATUS}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_STATUS@{SLCAN\_CMD\_STATUS}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2adfc67844df5d02f5d1c5ce9732059538}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2adfc67844df5d02f5d1c5ce9732059538} 
+SLCAN\+\_\+\+CMD\+\_\+\+STATUS&F \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_TIMESTAMP@{SLCAN\_CMD\_TIMESTAMP}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_TIMESTAMP@{SLCAN\_CMD\_TIMESTAMP}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a02aafc4b4b323aa749c861a3a31679f3}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a02aafc4b4b323aa749c861a3a31679f3} 
+SLCAN\+\_\+\+CMD\+\_\+\+TIMESTAMP&Z0 / Z1 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SLCAN\_CMD\_STATISTICS@{SLCAN\_CMD\_STATISTICS}!slcan.h@{slcan.h}}\index{slcan.h@{slcan.h}!SLCAN\_CMD\_STATISTICS@{SLCAN\_CMD\_STATISTICS}}}\Hypertarget{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08fc621cd729b4d36ca81f73c6e51c38}\label{slcan_8h_af675eaffc6bacf8e26321e2cd58d49a2a08fc621cd729b4d36ca81f73c6e51c38} 
+SLCAN\+\_\+\+CMD\+\_\+\+STATISTICS&Q (\doxylink{classIoTwin}{Io\+Twin} extension) \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{slcan_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{slcan_8h_a7fdb13e55e2dde64c1cb48b7ab884c48}\index{slcan.h@{slcan.h}!slcan\_bitrate\_from\_index@{slcan\_bitrate\_from\_index}}
+\index{slcan\_bitrate\_from\_index@{slcan\_bitrate\_from\_index}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_bitrate\_from\_index()}{slcan\_bitrate\_from\_index()}}
+{\footnotesize\ttfamily \label{slcan_8h_a7fdb13e55e2dde64c1cb48b7ab884c48} 
+uint32\+\_\+t slcan\+\_\+bitrate\+\_\+from\+\_\+index (\begin{DoxyParamCaption}\item[{unsigned}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Bitrate of S0..S8 (10k, 20k, 50k, 100k, 125k, 250k, 500k, 800k, 1M); 0 if invalid. 
+
+\Hypertarget{slcan_8h_abb6b135e8ae4639c26720690f3ea9b79}\index{slcan.h@{slcan.h}!slcan\_format\_frame@{slcan\_format\_frame}}
+\index{slcan\_format\_frame@{slcan\_format\_frame}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_format\_frame()}{slcan\_format\_frame()}}
+{\footnotesize\ttfamily \label{slcan_8h_abb6b135e8ae4639c26720690f3ea9b79} 
+int slcan\+\_\+format\+\_\+frame (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{buffer\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Encodes {\ttfamily frame} including the trailing CR. 
+
+\begin{DoxyReturn}{Returns}
+Number of characters written (excluding NUL), -\/1 if invalid or too small. 
+\end{DoxyReturn}
+\Hypertarget{slcan_8h_ad661c42b2945d5bc08bf89abedc13cf6}\index{slcan.h@{slcan.h}!slcan\_index\_from\_bitrate@{slcan\_index\_from\_bitrate}}
+\index{slcan\_index\_from\_bitrate@{slcan\_index\_from\_bitrate}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_index\_from\_bitrate()}{slcan\_index\_from\_bitrate()}}
+{\footnotesize\ttfamily \label{slcan_8h_ad661c42b2945d5bc08bf89abedc13cf6} 
+int slcan\+\_\+index\+\_\+from\+\_\+bitrate (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{bitrate}{}\end{DoxyParamCaption})}
+
+
+
+Index for an S command, -\/1 if the bitrate has none. 
+
+\Hypertarget{slcan_8h_ad5c5cf934528e8bd594c7d07adca8f8f}\index{slcan.h@{slcan.h}!slcan\_parse@{slcan\_parse}}
+\index{slcan\_parse@{slcan\_parse}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_parse()}{slcan\_parse()}}
+{\footnotesize\ttfamily \label{slcan_8h_ad5c5cf934528e8bd594c7d07adca8f8f} 
+bool slcan\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{structSlcanCommand}{Slcan\+Command}} \texorpdfstring{$\ast$}{*}}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Parses one line (without its terminator). 
+
+\begin{DoxyReturn}{Returns}
+false for unknown commands and malformed frames (answer with BEL). 
+\end{DoxyReturn}
+\Hypertarget{slcan_8h_a50789257f41b87b1054579961eb96122}\index{slcan.h@{slcan.h}!slcan\_put\_hex@{slcan\_put\_hex}}
+\index{slcan\_put\_hex@{slcan\_put\_hex}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_put\_hex()}{slcan\_put\_hex()}}
+{\footnotesize\ttfamily \label{slcan_8h_a50789257f41b87b1054579961eb96122} 
+void slcan\+\_\+put\+\_\+hex (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{uint32\+\_\+t}]{value}{, }\item[{unsigned}]{digits}{}\end{DoxyParamCaption})}
+
+
+
+Writes {\ttfamily value} as {\ttfamily digits} upper-\/case hex characters (no terminator). 
+
+\Hypertarget{slcan_8h_ad1497a9e559dd4d78ecb16d583df1fab}\index{slcan.h@{slcan.h}!slcan\_reader\_feed@{slcan\_reader\_feed}}
+\index{slcan\_reader\_feed@{slcan\_reader\_feed}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_reader\_feed()}{slcan\_reader\_feed()}}
+{\footnotesize\ttfamily \label{slcan_8h_ad1497a9e559dd4d78ecb16d583df1fab} 
+void slcan\+\_\+reader\+\_\+feed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{slcan_8h_acbb851a13d7920cee8fecc418fe84d16}{Slcan\+Line\+Callback}}}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Feeds bytes; {\ttfamily callback} runs for every complete line or BEL. 
+
+\Hypertarget{slcan_8h_a04bc784d26583ecb01dbf94dc134f316}\index{slcan.h@{slcan.h}!slcan\_reader\_init@{slcan\_reader\_init}}
+\index{slcan\_reader\_init@{slcan\_reader\_init}!slcan.h@{slcan.h}}
+\doxysubsubsection{\texorpdfstring{slcan\_reader\_init()}{slcan\_reader\_init()}}
+{\footnotesize\ttfamily \label{slcan_8h_a04bc784d26583ecb01dbf94dc134f316} 
+void slcan\+\_\+reader\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structSlcanReader}{Slcan\+Reader}} \texorpdfstring{$\ast$}{*}}]{reader}{}\end{DoxyParamCaption})}
+

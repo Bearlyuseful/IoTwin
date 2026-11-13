@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['lamp_5fon_0',['lamp_on',['../structLightEcu.html#a69bf377f8868877cfe89b18400dddd1d',1,'LightEcu']]],
-  ['last_5fsend_5fms_1',['last_send_ms',['../structLightEcu.html#a586b43ec34ea02c87c55bd5a72ccf5e0',1,'LightEcu']]],
-  ['last_5ftoggle_5fms_2',['last_toggle_ms',['../structLightEcu.html#a20c6979600f3bcb2eb7f0faafbd85dd5',1,'LightEcu']]],
-  ['length_3',['length',['../structLineReader.html#a0aaa30c60cd0d5bef363a65161f63113',1,'LineReader']]],
-  ['light_4',['Light',['../classALampActor.html#ad71ff753af4e93ac58eb25c1404a3e1c',1,'ALampActor']]],
-  ['listener_5',['listener',['../structBusServer.html#adc75c4fca9b4ffa5458aabb02a48e230',1,'BusServer']]],
-  ['lock_6',['lock',['../structCanBus.html#a54237b138743c3450480e5025eaa1d65',1,'CanBus::lock'],['../structSimShared.html#a875c7673214b76e60b13a1d97311ba26',1,'SimShared::lock']]],
-  ['lock_5fmemory_7',['lock_memory',['../structPalRtConfig.html#a166b0391b35d1f6cff67aea1186e28b8',1,'PalRtConfig']]],
-  ['log_5fframes_8',['log_frames',['../structBusServerConfig.html#ab9aaa40e0fc060322ec0b1754f6c4a74',1,'BusServerConfig']]]
+  ['id_0',['Id',['../structFCanFrame.html#ad143e63f9548139c01555059a0e60566',1,'FCanFrame']]],
+  ['id_1',['id',['../structBusClient.html#a9653991bd4b517bd58c495b5f3ec54d8',1,'BusClient::id'],['../structCanFrame.html#aa850629d26a09531d2f40bd2b30b77f7',1,'CanFrame::id'],['../structDbcMessage.html#a2d343cb7c4636983bad81cf6e6a81054',1,'DbcMessage::id']]],
+  ['interactive_2',['interactive',['../structSimOptions.html#ab4ea81fde4f4dc3a31e96f63a95275af',1,'SimOptions']]],
+  ['is_5fmultiplexed_3',['is_multiplexed',['../structDbcSignal.html#ab2b800a70eb50f8e624147fb446ea8cc',1,'DbcSignal']]],
+  ['is_5fmultiplexer_4',['is_multiplexer',['../structDbcSignal.html#ac468b49ad81a281ebf8a18b307f9eae2',1,'DbcSignal']]],
+  ['is_5fsigned_5',['is_signed',['../structCanSignal.html#a0219ff18f22905243ab508ea64e15576',1,'CanSignal']]]
 ];

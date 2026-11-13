@@ -1,0 +1,47 @@
+\doxysection{can\+\_\+bit\+\_\+timing.\+h}
+\hypertarget{can__bit__timing_8h_source}{}\label{can__bit__timing_8h_source}\index{src/core/can/can\_bit\_timing.h@{src/core/can/can\_bit\_timing.h}}
+\mbox{\hyperlink{can__bit__timing_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_CAN\_BIT\_TIMING\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_CAN\_BIT\_TIMING\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00031\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTiming_a1d8f565d0e53a8273fb20873ff02baf0}{prescaler}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTiming_ab878a45897a233f5cf6ae59c1f8e6af8}{tq\_per\_bit}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTiming_acbc0f880af026996405aedfdcf4dba3c}{seg1}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTiming_a80a1a5457bc247fe632b04d0360e4b79}{seg2}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTiming_ab4af77970f40e27c8154f32a9cd808a9}{sjw}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTiming_a66b5e278acfc8d16da2b318507bcac86}{sample\_point\_permille}};\ }
+\DoxyCodeLine{00037\ \}\ \mbox{\hyperlink{structCanBitTiming}{CanBitTiming}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00041\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTimingLimits_ae74adcb390a5428fc0f27358f62d24df}{max\_prescaler}};}
+\DoxyCodeLine{00042\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTimingLimits_af23fbefd1af8315ee6206bf364e162ae}{max\_seg1}};}
+\DoxyCodeLine{00043\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTimingLimits_a5a331ad6c0e4f35774e95c2660a8b22f}{max\_seg2}};}
+\DoxyCodeLine{00044\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTimingLimits_a820ef8077e42833d06b7bfb9c731a599}{max\_sjw}};}
+\DoxyCodeLine{00045\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTimingLimits_a494718431046b9d1125255d89b0a31a0}{min\_tq\_per\_bit}};}
+\DoxyCodeLine{00046\ \ \ uint32\_t\ \mbox{\hyperlink{structCanBitTimingLimits_ae8ba0a3b25378840aa72166ed2199a79}{max\_tq\_per\_bit}};}
+\DoxyCodeLine{00047\ \}\ \mbox{\hyperlink{structCanBitTimingLimits}{CanBitTimingLimits}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanBitTimingLimits}{CanBitTimingLimits}}\ \mbox{\hyperlink{can__bit__timing_8c_aeb4bd19b2102c7d16f9a5bb4bb0eba00}{CAN\_BIT\_TIMING\_LIMITS\_FDCAN\_NOMINAL}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ CAN\_BIT\_TIMING\_DEFAULT\_SAMPLE\_POINT\ 875u}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{can__bit__timing_8h_ab436e6485d42398d557aa3969b4ebc49}{can\_bit\_timing\_calculate}}(uint32\_t\ clock\_hz,\ uint32\_t\ bitrate,\ uint32\_t\ sample\_point\_permille,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanBitTimingLimits}{CanBitTimingLimits}}*\ limits,\ \mbox{\hyperlink{structCanBitTiming}{CanBitTiming}}*\ timing);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00063\ \}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_CAN\_BIT\_TIMING\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

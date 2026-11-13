@@ -1,13 +1,18 @@
 var searchData=
 [
-  ['data_0',['Data',['../structFCanFrame.html#aaf04cd7a149802a6ee6aa35ad0c4700d',1,'FCanFrame']]],
-  ['data_1',['data',['../structCanFrame.html#a6cba02a9edd71f7001f2993f0d4df58e',1,'CanFrame']]],
-  ['demoorigin_2',['DemoOrigin',['../classAGM__Simulation.html#ab1e72a523ed3167c6478296dcea64936',1,'AGM_Simulation']]],
-  ['demotag_3',['DemoTag',['../classAGM__Simulation.html#a947a2d078317f1614db9e4479fd38e9f',1,'AGM_Simulation']]],
-  ['device_4',['Device',['../classALampActor.html#a483de8992df3799767c441417aae482c',1,'ALampActor']]],
-  ['dirty_5',['dirty',['../structLightEcu.html#a7712dea6d676285b53546cce940e143f',1,'LightEcu']]],
-  ['discarding_6',['discarding',['../structLineReader.html#adde82efe0473809bc547b23e11d97823',1,'LineReader']]],
-  ['dlc_7',['dlc',['../structCanFrame.html#aa896aaac27a424ba8e46c50e7bdb065d',1,'CanFrame']]],
-  ['dropped_8',['dropped',['../structCanBus.html#a78cb41c8d272f0fb41e7b3f071a5547f',1,'CanBus']]],
-  ['dropped_5flines_9',['dropped_lines',['../structLineReader.html#a6b2be1f6fa8a26f275917895bae00e39',1,'LineReader']]]
+  ['cablemesh_0',['CableMesh',['../classAElectricalCableActor.html#ab3ee251eb08417c5d86ea604c0cb9b0e',1,'AElectricalCableActor']]],
+  ['can_5fbit_5ftiming_5flimits_5ffdcan_5fnominal_1',['CAN_BIT_TIMING_LIMITS_FDCAN_NOMINAL',['../can__bit__timing_8c.html#aeb4bd19b2102c7d16f9a5bb4bb0eba00',1,'CAN_BIT_TIMING_LIMITS_FDCAN_NOMINAL:&#160;can_bit_timing.c'],['../can__bit__timing_8h.html#aeb4bd19b2102c7d16f9a5bb4bb0eba00',1,'CAN_BIT_TIMING_LIMITS_FDCAN_NOMINAL:&#160;can_bit_timing.c']]],
+  ['can_5ffd_2',['can_fd',['../structBridge.html#af93c08b05bedf5c44ac750a8a8e9a350',1,'Bridge']]],
+  ['changes_5fonly_3',['changes_only',['../structMonitor.html#a1ec6af78c609795b872d614f5b28aa8b',1,'Monitor']]],
+  ['client_5fcount_4',['client_count',['../structBusServer.html#a8753871ca492d1d1c03db1e61ee3ac85',1,'BusServer']]],
+  ['clients_5',['clients',['../structBusServer.html#ad869e22b9b6d9511f9334729d6883207',1,'BusServer']]],
+  ['clients_5faccepted_6',['clients_accepted',['../structBusServer.html#a75462217efb4e202502b33ea3316e7e4',1,'BusServer::clients_accepted'],['../structBusServerStats.html#a60179e992b6a9a231c2c6e80f72d89f6',1,'BusServerStats::clients_accepted']]],
+  ['closing_7',['closing',['../structBusClient.html#ad3e60b3ac01863a50ba9d6ff615d496d',1,'BusClient']]],
+  ['config_8',['config',['../structBusServer.html#ad4906a15a7e4a0e32676bca9bbd25fa9',1,'BusServer::config'],['../structIsoTpLink.html#ae8241d73685d9ba4ebf6d5822fd41820',1,'IsoTpLink::config']]],
+  ['connected_9',['connected',['../structSimShared.html#a481ba48180eb778f5a3b21a88a0e7a46',1,'SimShared']]],
+  ['context_10',['context',['../structIsoTpConfig.html#ae56d52732b333357110436f724a53a67',1,'IsoTpConfig']]],
+  ['count_11',['count',['../structCanBus.html#a8b4c1d23a0d934d35e1d175836a24fec',1,'CanBus']]],
+  ['cpu_12',['cpu',['../structPalRtConfig.html#ab88d486f4a7cd5ad9c2f74ea9a7af5f3',1,'PalRtConfig']]],
+  ['current_5fsender_13',['current_sender',['../structBusServer.html#a87cc325845a7c543b3b9ee1214bbea7c',1,'BusServer']]],
+  ['cycle_5fms_14',['cycle_ms',['../structLightEcu.html#ac81f06dd52e63e688580150be0e9cac0',1,'LightEcu::cycle_ms'],['../structSimOptions.html#a42cb6f93b7fea410bff9cb8d2083d8f5',1,'SimOptions::cycle_ms']]]
 ];

@@ -1,0 +1,34 @@
+\doxysection{serial\+\_\+port.\+h}
+\hypertarget{serial__port_8h_source}{}\label{serial__port_8h_source}\index{src/communication/serial/serial\_port.h@{src/communication/serial/serial\_port.h}}
+\mbox{\hyperlink{serial__port_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_SERIAL\_PORT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_SERIAL\_PORT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structSerialPort}{SerialPort}}\ \mbox{\hyperlink{structSerialPort}{SerialPort}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \mbox{\hyperlink{structSerialPort}{SerialPort}}*\ \mbox{\hyperlink{serial__port_8h_a7374d839fda641cae4435fcf7745097b}{serial\_open}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ uint32\_t\ baudrate);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{serial__port_8h_ac6ffda03d0fe363998a500f4c08dba4d}{serial\_read}}(\mbox{\hyperlink{structSerialPort}{SerialPort}}*\ port,\ \textcolor{keywordtype}{void}*\ buffer,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keywordtype}{int}\ timeout\_ms);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{serial__port_8h_a54c6b7d1c8060f80106ed0ca7ae7e42d}{serial\_write\_all}}(\mbox{\hyperlink{structSerialPort}{SerialPort}}*\ port,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{serial__port_8h_a531cc54fca5b748e0a3c54005819b568}{serial\_close}}(\mbox{\hyperlink{structSerialPort}{SerialPort}}*\ port);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{serial__port_8h_a5e06d42a1e2d5f040ae28b45ade6dda1}{serial\_last\_error}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_SERIAL\_PORT\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

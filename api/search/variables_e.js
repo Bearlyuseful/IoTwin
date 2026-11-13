@@ -1,6 +1,26 @@
 var searchData=
 [
-  ['tail_0',['tail',['../structCanBus.html#a046b9b44aa4148b3a3f67da67072b847',1,'CanBus']]],
-  ['tick_5fms_1',['tick_ms',['../structSimOptions.html#acc207c8432300de84e8a5db7bcef0fb0',1,'SimOptions']]],
-  ['tx_5fqueue_2',['tx_queue',['../structSimShared.html#a7fbeef5357aaf677d9e90aae7a1e8ce6',1,'SimShared']]]
+  ['sample_5fpoint_5fpermille_0',['sample_point_permille',['../structCanBitTiming.html#a66b5e278acfc8d16da2b318507bcac86',1,'CanBitTiming']]],
+  ['samples_1',['samples',['../structCycleStats.html#aaa42c9e67547a25ccc6c999c11cf6460',1,'CycleStats']]],
+  ['seg1_2',['seg1',['../structCanBitTiming.html#acbc0f880af026996405aedfdcf4dba3c',1,'CanBitTiming']]],
+  ['seg2_3',['seg2',['../structCanBitTiming.html#a80a1a5457bc247fe632b04d0360e4b79',1,'CanBitTiming']]],
+  ['send_4',['send',['../structIsoTpConfig.html#a579e2fd66ee53ba4102f35b000cac8de',1,'IsoTpConfig']]],
+  ['serial_5',['serial',['../structBridge.html#a1b2fdb3f1e6d1258f1b169cbe3bf6c5c',1,'Bridge']]],
+  ['serial_5fname_6',['serial_name',['../structOptions.html#aa55bc48836eb2302bd035e7e68cad809',1,'Options']]],
+  ['signal_7',['Signal',['../classAWallSwitchActor.html#a4720137c5b03e98a8cc5a372d96a5a2d',1,'AWallSwitchActor']]],
+  ['signal_8',['signal',['../structDbcSignal.html#a80f33fc0180d9fa75e493d9dad9e90d9',1,'DbcSignal']]],
+  ['signal_5fcount_9',['signal_count',['../structDbcMessage.html#a2d7f3cbe2897d4b395f2ad360fd08edd',1,'DbcMessage']]],
+  ['signals_10',['signals',['../structDbcMessage.html#a62e0309a17ffb72a046537ecfae16a84',1,'DbcMessage']]],
+  ['sjw_11',['sjw',['../structCanBitTiming.html#ab4af77970f40e27c8154f32a9cd808a9',1,'CanBitTiming']]],
+  ['slack_12',['Slack',['../classAElectricalCableActor.html#a09c790e63245ff3e39cedd72b2837b45',1,'AElectricalCableActor']]],
+  ['slcan_13',['slcan',['../structBridge.html#af1b4a04942626bca037fb079a6b5f75c',1,'Bridge']]],
+  ['socket_14',['socket',['../structBusClient.html#aa74657afc8ab8c573739d98f0e5f31b9',1,'BusClient::socket'],['../structNetPollFd.html#a273fa5b92c8886ba3fb6c35067ec1cb4',1,'NetPollFd::socket']]],
+  ['st_5fmin_15',['st_min',['../structIsoTpConfig.html#aa30fe55539d5f5a2464f18d809af1421',1,'IsoTpConfig']]],
+  ['standardidmask_16',['StandardIdMask',['../structFCanFrame.html#acd850af02fe7a2bec1112efe9d5d5c5a',1,'FCanFrame']]],
+  ['start_5fbit_17',['start_bit',['../structCanSignal.html#ac8bcd3364daf502a87301b7649542a6e',1,'CanSignal']]],
+  ['started_18',['started',['../structLightEcu.html#a2daad4c84d5329da21825b09a8b86ec0',1,'LightEcu']]],
+  ['stats_19',['stats',['../structCycleTimer.html#aa23d2e0116d512f1e188692342547150',1,'CycleTimer']]],
+  ['stats_5finterval_5fs_20',['stats_interval_s',['../structOptions.html#a5d2c36a7615bfbe215ef085fdb6cfc80',1,'Options::stats_interval_s'],['../structSimOptions.html#abfbf756391334b812fec8e5ba0a62d99',1,'SimOptions::stats_interval_s']]],
+  ['sum_5flatency_5fns_21',['sum_latency_ns',['../structCycleStats.html#a7e965d639bc83b8aef9fd62adbe58613',1,'CycleStats']]],
+  ['switchcanid_22',['SwitchCanId',['../classAGM__Simulation.html#ab0fb7a43acbf972f33ee188ce579d092',1,'AGM_Simulation']]]
 ];

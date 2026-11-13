@@ -16,7 +16,7 @@
         <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../../dev/build_instructions/">
+        <link rel="next" href="../../roadmap/">
       
       
         
@@ -236,6 +236,25 @@
   
   
   
+    <li class="md-tabs__item">
+      <a href="../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     
     
       <li class="md-tabs__item">
@@ -442,6 +461,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#with-a-nucleo-g0b1re" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        With a NUCLEO-G0B1RE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#from-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -477,6 +507,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
     
@@ -489,10 +546,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -510,8 +567,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -668,6 +725,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dev/firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware (NUCLEO-G0B1RE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../dev/packaging/" class="md-nav__link">
         
   
@@ -741,10 +854,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -762,8 +875,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -844,6 +957,34 @@
     
   
     ADR 0003 Platforms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0004 Firmware
   
 
     
@@ -948,6 +1089,18 @@ lamp relay  (Visualizer) &lt;--100#01-- iotwin-bus &lt;-- can_sim (light ECU)
 </tr>
 </tbody>
 </table>
+<h2 id="with-a-nucleo-g0b1re">With a NUCLEO-G0B1RE<a class="headerlink" href="#with-a-nucleo-g0b1re" title="Permanent link">&para;</a></h2>
+<p>The board becomes a real CAN node of the demo: its blue button B1 is a second
+wall switch, its green LED LD4 shows the lamp.</p>
+<ol>
+<li>Copy <code>firmware\iotwin_gateway.bin</code> to the <code>NOD_G0B1RE</code> USB drive of the
+   board (LD4 starts blinking: firmware runs, waiting for the PC).</li>
+<li>Look up the COM port ("STMicroelectronics STLink Virtual COM Port" in the
+   Device Manager).</li>
+<li>Run <code>start-demo-hardware.bat COM5</code> (your port).</li>
+</ol>
+<p>Press B1: the lamp in the visualizer and LD4 turn on. Details and wiring for a
+real CAN bus: <a href="../../dev/firmware/">Firmware</a>.</p>
 <h2 id="from-source">From source<a class="headerlink" href="#from-source" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cmake<span class="w"> </span>--preset<span class="w"> </span>gcc-debug
 cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class="w"> </span>gcc-debug

@@ -1,0 +1,75 @@
+\doxysection{Can\+Bit\+Timing Struct Reference}
+\hypertarget{structCanBitTiming}{}\label{structCanBitTiming}\index{CanBitTiming@{CanBitTiming}}
+
+
+Timing parameters in time quanta (not register encoded).  
+
+
+
+
+{\ttfamily \#include $<$can\+\_\+bit\+\_\+timing.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanBitTiming_a1d8f565d0e53a8273fb20873ff02baf0}{prescaler}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanBitTiming_ab878a45897a233f5cf6ae59c1f8e6af8}{tq\+\_\+per\+\_\+bit}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanBitTiming_acbc0f880af026996405aedfdcf4dba3c}{seg1}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanBitTiming_a80a1a5457bc247fe632b04d0360e4b79}{seg2}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanBitTiming_ab4af77970f40e27c8154f32a9cd808a9}{sjw}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structCanBitTiming_a66b5e278acfc8d16da2b318507bcac86}{sample\+\_\+point\+\_\+permille}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Timing parameters in time quanta (not register encoded). 
+
+\label{doc-variable-members}
+\Hypertarget{structCanBitTiming_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structCanBitTiming_a1d8f565d0e53a8273fb20873ff02baf0}\index{CanBitTiming@{CanBitTiming}!prescaler@{prescaler}}
+\index{prescaler@{prescaler}!CanBitTiming@{CanBitTiming}}
+\doxysubsubsection{\texorpdfstring{prescaler}{prescaler}}
+{\footnotesize\ttfamily \label{structCanBitTiming_a1d8f565d0e53a8273fb20873ff02baf0} 
+uint32\+\_\+t Can\+Bit\+Timing\+::prescaler}
+
+Clock divider for one time quantum. \Hypertarget{structCanBitTiming_a66b5e278acfc8d16da2b318507bcac86}\index{CanBitTiming@{CanBitTiming}!sample\_point\_permille@{sample\_point\_permille}}
+\index{sample\_point\_permille@{sample\_point\_permille}!CanBitTiming@{CanBitTiming}}
+\doxysubsubsection{\texorpdfstring{sample\_point\_permille}{sample\_point\_permille}}
+{\footnotesize\ttfamily \label{structCanBitTiming_a66b5e278acfc8d16da2b318507bcac86} 
+uint32\+\_\+t Can\+Bit\+Timing\+::sample\+\_\+point\+\_\+permille}
+
+Resulting sample point, e.\+g. 875 = 87.\+5 \%. \Hypertarget{structCanBitTiming_acbc0f880af026996405aedfdcf4dba3c}\index{CanBitTiming@{CanBitTiming}!seg1@{seg1}}
+\index{seg1@{seg1}!CanBitTiming@{CanBitTiming}}
+\doxysubsubsection{\texorpdfstring{seg1}{seg1}}
+{\footnotesize\ttfamily \label{structCanBitTiming_acbc0f880af026996405aedfdcf4dba3c} 
+uint32\+\_\+t Can\+Bit\+Timing\+::seg1}
+
+Propagation + phase segment 1. \Hypertarget{structCanBitTiming_a80a1a5457bc247fe632b04d0360e4b79}\index{CanBitTiming@{CanBitTiming}!seg2@{seg2}}
+\index{seg2@{seg2}!CanBitTiming@{CanBitTiming}}
+\doxysubsubsection{\texorpdfstring{seg2}{seg2}}
+{\footnotesize\ttfamily \label{structCanBitTiming_a80a1a5457bc247fe632b04d0360e4b79} 
+uint32\+\_\+t Can\+Bit\+Timing\+::seg2}
+
+Phase segment 2. \Hypertarget{structCanBitTiming_ab4af77970f40e27c8154f32a9cd808a9}\index{CanBitTiming@{CanBitTiming}!sjw@{sjw}}
+\index{sjw@{sjw}!CanBitTiming@{CanBitTiming}}
+\doxysubsubsection{\texorpdfstring{sjw}{sjw}}
+{\footnotesize\ttfamily \label{structCanBitTiming_ab4af77970f40e27c8154f32a9cd808a9} 
+uint32\+\_\+t Can\+Bit\+Timing\+::sjw}
+
+Synchronisation jump width. \Hypertarget{structCanBitTiming_ab878a45897a233f5cf6ae59c1f8e6af8}\index{CanBitTiming@{CanBitTiming}!tq\_per\_bit@{tq\_per\_bit}}
+\index{tq\_per\_bit@{tq\_per\_bit}!CanBitTiming@{CanBitTiming}}
+\doxysubsubsection{\texorpdfstring{tq\_per\_bit}{tq\_per\_bit}}
+{\footnotesize\ttfamily \label{structCanBitTiming_ab878a45897a233f5cf6ae59c1f8e6af8} 
+uint32\+\_\+t Can\+Bit\+Timing\+::tq\+\_\+per\+\_\+bit}
+
+1 + seg1 + seg2. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/can/\mbox{\hyperlink{can__bit__timing_8h}{can\+\_\+bit\+\_\+timing.\+h}}\end{DoxyCompactItemize}

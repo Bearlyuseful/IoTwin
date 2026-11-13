@@ -233,6 +233,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -395,6 +414,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -414,10 +460,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -435,8 +481,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -673,6 +719,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware (NUCLEO-G0B1RE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../packaging/" class="md-nav__link">
         
   
@@ -746,10 +848,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -767,8 +869,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -862,6 +964,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0004 Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -893,8 +1023,14 @@
 <div class="highlight"><pre><span></span><code> ┌──────────────┐   TCP, text lines    ┌──────────────┐   TCP    ┌────────────────────┐
  │   can_sim    │ ───────────────────▶ │  iotwin-bus  │ ◀──────▶ │ IoTwin Visualizer  │
  │ (light ECU)  │ ◀─────────────────── │ virtual CAN  │          │ (Unreal Engine 5)  │
- └──────────────┘                      └──────────────┘          └────────────────────┘
-        ▲  further simulators, tools (netcat, tests) can join as additional nodes
+ └──────────────┘                      └──────┬───────┘          └────────────────────┘
+                                              │ TCP
+                                      ┌───────┴────────┐  USB / SLCAN  ┌────────────────┐  FDCAN
+                                      │ serial_bridge  │ ◀───────────▶ │ NUCLEO-G0B1RE  │ ◀──────▶ real CAN bus
+                                      └────────────────┘               │ (gateway, B1,  │
+                                                                       │  LD4)          │
+                                                                       └────────────────┘
+        further simulators, tools (netcat, tests) can join as additional nodes
 </code></pre></div>
 <ul>
 <li><strong>iotwin-bus</strong> (C): owns the bus. Validates, normalises and broadcasts
@@ -904,6 +1040,9 @@
 <li><strong>Visualizer</strong> (Unreal Engine 5.6): a digital twin of the electrical
   installation. It mirrors bus signals into the scene (relay → power → lamp)
   and sends user interactions (wall switch) back to the bus.</li>
+<li><strong>serial_bridge</strong> (C) and the <strong>NUCLEO-G0B1RE firmware</strong>: bring a real
+  microcontroller and its CAN controller onto the virtual bus
+  (<a href="../firmware/">Firmware</a>, <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/">ADR 0004</a>).</li>
 </ul>
 <h2 id="repository-layout">Repository layout<a class="headerlink" href="#repository-layout" title="Permanent link">&para;</a></h2>
 <table>
@@ -924,11 +1063,15 @@
 </tr>
 <tr>
 <td><code>src/core/can</code></td>
-<td><code>CanFrame</code> model + text codec, <code>CanBus</code> FIFO</td>
+<td><code>CanFrame</code> + text codec, <code>CanBus</code> FIFO, SLCAN, bit timing (also used by the firmware)</td>
 </tr>
 <tr>
 <td><code>src/communication/tcp</code></td>
 <td>Portable sockets (<code>net</code>), line framing (<code>line_reader</code>)</td>
+</tr>
+<tr>
+<td><code>src/communication/serial</code></td>
+<td>Portable serial port (Win32 / termios)</td>
 </tr>
 <tr>
 <td><code>src/bus</code></td>
@@ -937,6 +1080,14 @@
 <tr>
 <td><code>src/simulators/can_sim</code></td>
 <td>Light ECU logic and <code>can_sim</code> executable</td>
+</tr>
+<tr>
+<td><code>src/bridges/serial_bridge</code></td>
+<td><code>serial_bridge</code>: SLCAN adapter ↔ bus</td>
+</tr>
+<tr>
+<td><code>firmware</code></td>
+<td>NUCLEO-G0B1RE gateway firmware (separate CMake project)</td>
 </tr>
 <tr>
 <td><code>src/ue/IoTwin</code></td>

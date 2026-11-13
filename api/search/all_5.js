@@ -11,10 +11,13 @@ var searchData=
   ['electricaldevicecomponent_2eh_8',['ElectricalDeviceComponent.h',['../ElectricalDeviceComponent_8h.html',1,'']]],
   ['electricalportcomponent_2ecpp_9',['ElectricalPortComponent.cpp',['../ElectricalPortComponent_8cpp.html',1,'']]],
   ['electricalportcomponent_2eh_10',['ElectricalPortComponent.h',['../ElectricalPortComponent_8h.html',1,'']]],
-  ['enda_11',['EndA',['../classAElectricalCableActor.html#a412eaad48daf53f2d0ad77a3097f8b0d',1,'AElectricalCableActor']]],
-  ['endb_12',['EndB',['../classAElectricalCableActor.html#ac17cf8b2d87dff21de85c0bb74b62447',1,'AElectricalCableActor']]],
-  ['enqueueline_13',['EnqueueLine',['../classFIoTwinBusConnection.html#ab716de12d6d35d894bf33dfb730d5351',1,'FIoTwinBusConnection']]],
-  ['events_14',['events',['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd']]],
-  ['extended_15',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame']]],
-  ['extendedidmask_16',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
+  ['enable_11',['enable',['../structSlcanCommand.html#ab764477773c004bd5377803cd2271f29',1,'SlcanCommand']]],
+  ['enda_12',['EndA',['../classAElectricalCableActor.html#a412eaad48daf53f2d0ad77a3097f8b0d',1,'AElectricalCableActor']]],
+  ['endb_13',['EndB',['../classAElectricalCableActor.html#ac17cf8b2d87dff21de85c0bb74b62447',1,'AElectricalCableActor']]],
+  ['enqueueline_14',['EnqueueLine',['../classFIoTwinBusConnection.html#ab716de12d6d35d894bf33dfb730d5351',1,'FIoTwinBusConnection']]],
+  ['events_15',['events',['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd']]],
+  ['extended_16',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended']]],
+  ['extended_5fflag_17',['EXTENDED_FLAG',['../dbc_8c.html#a280c5f61344ef6a1ca351e540f592c47',1,'dbc.c']]],
+  ['extended_5fid_18',['extended_id',['../structIsoTpConfig.html#ac1eb44a4ed2deaf2a4fd95bdcc864377',1,'IsoTpConfig']]],
+  ['extendedidmask_19',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
 ];

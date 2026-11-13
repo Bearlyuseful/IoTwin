@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['simoptions_0',['SimOptions',['../structSimOptions.html',1,'']]],
-  ['simshared_1',['SimShared',['../structSimShared.html',1,'']]]
+  ['netpollfd_0',['NetPollFd',['../structNetPollFd.html',1,'']]]
 ];

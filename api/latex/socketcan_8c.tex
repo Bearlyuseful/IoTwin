@@ -1,0 +1,69 @@
+\doxysection{src/bridges/socketcan\+\_\+bridge/socketcan.c File Reference}
+\hypertarget{socketcan_8c}{}\label{socketcan_8c}\index{src/bridges/socketcan\_bridge/socketcan.c@{src/bridges/socketcan\_bridge/socketcan.c}}
+{\ttfamily \#include "{}socketcan.\+h"{}}\newline
+{\ttfamily \#include $<$linux/can/raw.\+h$>$}\newline
+{\ttfamily \#include $<$net/if.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{socketcan_8c_a8fb447618db946a9e2a596d9ea18763f}{\+\_\+\+DEFAULT\+\_\+\+SOURCE}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{socketcan_8c_aaa4db6b3cba04380c1d07993046e9781}{socketcan\+\_\+open}} (const char \texorpdfstring{$\ast$}{*}interface\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Opens a CAN\+\_\+\+RAW socket bound to {\ttfamily interface\+\_\+name} (e.\+g. "{}vcan0"{}); -\/1 on error (errno set). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{socketcan_8c_ad32dd07bc389b1f087e298d5532e323b}{socketcan\+\_\+to\+\_\+frame}} (const struct can\+\_\+frame \texorpdfstring{$\ast$}{*}in, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}out)
+\begin{DoxyCompactList}\small\item\em Converts a kernel frame; false for error frames. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{socketcan_8c_a7639fa365e598eb7b4d120392225f072}{socketcan\+\_\+from\+\_\+frame}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}in, struct can\+\_\+frame \texorpdfstring{$\ast$}{*}out)
+\begin{DoxyCompactList}\small\item\em Converts to a kernel frame; false if {\ttfamily in} is invalid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{socketcan_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{socketcan_8c_a8fb447618db946a9e2a596d9ea18763f}\index{socketcan.c@{socketcan.c}!\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}}
+\index{\_DEFAULT\_SOURCE@{\_DEFAULT\_SOURCE}!socketcan.c@{socketcan.c}}
+\doxysubsubsection{\texorpdfstring{\_DEFAULT\_SOURCE}{\_DEFAULT\_SOURCE}}
+{\footnotesize\ttfamily \label{socketcan_8c_a8fb447618db946a9e2a596d9ea18763f} 
+\#define \+\_\+\+DEFAULT\+\_\+\+SOURCE}
+
+
+
+\label{doc-func-members}
+\Hypertarget{socketcan_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{socketcan_8c_a7639fa365e598eb7b4d120392225f072}\index{socketcan.c@{socketcan.c}!socketcan\_from\_frame@{socketcan\_from\_frame}}
+\index{socketcan\_from\_frame@{socketcan\_from\_frame}!socketcan.c@{socketcan.c}}
+\doxysubsubsection{\texorpdfstring{socketcan\_from\_frame()}{socketcan\_from\_frame()}}
+{\footnotesize\ttfamily \label{socketcan_8c_a7639fa365e598eb7b4d120392225f072} 
+bool socketcan\+\_\+from\+\_\+frame (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{in}{, }\item[{struct can\+\_\+frame \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Converts to a kernel frame; false if {\ttfamily in} is invalid. 
+
+\Hypertarget{socketcan_8c_aaa4db6b3cba04380c1d07993046e9781}\index{socketcan.c@{socketcan.c}!socketcan\_open@{socketcan\_open}}
+\index{socketcan\_open@{socketcan\_open}!socketcan.c@{socketcan.c}}
+\doxysubsubsection{\texorpdfstring{socketcan\_open()}{socketcan\_open()}}
+{\footnotesize\ttfamily \label{socketcan_8c_aaa4db6b3cba04380c1d07993046e9781} 
+int socketcan\+\_\+open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{interface\+\_\+name}{}\end{DoxyParamCaption})}
+
+
+
+Opens a CAN\+\_\+\+RAW socket bound to {\ttfamily interface\+\_\+name} (e.\+g. "{}vcan0"{}); -\/1 on error (errno set). 
+
+\Hypertarget{socketcan_8c_ad32dd07bc389b1f087e298d5532e323b}\index{socketcan.c@{socketcan.c}!socketcan\_to\_frame@{socketcan\_to\_frame}}
+\index{socketcan\_to\_frame@{socketcan\_to\_frame}!socketcan.c@{socketcan.c}}
+\doxysubsubsection{\texorpdfstring{socketcan\_to\_frame()}{socketcan\_to\_frame()}}
+{\footnotesize\ttfamily \label{socketcan_8c_ad32dd07bc389b1f087e298d5532e323b} 
+bool socketcan\+\_\+to\+\_\+frame (\begin{DoxyParamCaption}\item[{const struct can\+\_\+frame \texorpdfstring{$\ast$}{*}}]{in}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Converts a kernel frame; false for error frames. 
+

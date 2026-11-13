@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['palrtconfig_0',['PalRtConfig',['../structPalRtConfig.html',1,'']]]
+  ['monitor_0',['Monitor',['../structMonitor.html',1,'']]]
 ];
