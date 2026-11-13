@@ -82,7 +82,9 @@ static void on_line(const char* line, size_t length, void* user_data) {
   if (monitor->changes_only && !changed(monitor, &frame)) {
     return;
   }
-  char time_text[16];
+  /* "HH:MM:SS.mmm" needs 13 bytes, but GCC's -Wformat-truncation (Release, -Werror)
+     sizes the buffer for the full value range of the integer fields. */
+  char time_text[32];
   char raw[CAN_FRAME_TEXT_MAX];
   char decoded[512] = "";
   timestamp(time_text, sizeof(time_text));
