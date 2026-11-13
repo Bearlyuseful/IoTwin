@@ -1,4 +1,4 @@
-add_library(iotwin_light_ecu STATIC light_ecu.c light_ecu.h)
+add_library(iotwin_light_ecu STATIC light_ecu.c light_ecu.h light_ecu_diag.c light_ecu_diag.h)
 target_include_directories(iotwin_light_ecu PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(iotwin_light_ecu PUBLIC iotwin_can PRIVATE iotwin_compile_options)
 
@@ -12,5 +12,7 @@ target_link_libraries(can_sim PRIVATE
     Threads::Threads
     iotwin_compile_options
 )
+
+target_compile_definitions(can_sim PRIVATE IOTWIN_VERSION="${PROJECT_VERSION}")
 
 install(TARGETS can_sim RUNTIME DESTINATION bin)

@@ -2,6 +2,8 @@
 
 void light_ecu_init(LightEcu* ecu, uint32_t cycle_ms) {
   ecu->lamp_on = false;
+  ecu->switch_on = false;
+  ecu->output_inhibit = false;
   ecu->cycle_ms = cycle_ms;
   ecu->blink_period_ms = 0;
   ecu->last_send_ms = 0;
@@ -14,7 +16,8 @@ bool light_ecu_on_frame(LightEcu* ecu, const CanFrame* frame) {
   if (frame->extended || frame->rtr || frame->id != LIGHT_ECU_ID_SWITCH_STATE || frame->dlc < 1) {
     return false;
   }
-  light_ecu_set_lamp(ecu, (frame->data[0] & 0x01u) != 0);
+  ecu->switch_on = (frame->data[0] & 0x01u) != 0;
+  light_ecu_set_lamp(ecu, ecu->switch_on);
   return true;
 }
 
@@ -30,6 +33,15 @@ void light_ecu_set_blink(LightEcu* ecu, uint32_t period_ms) {
   ecu->blink_period_ms = period_ms;
   ecu->started = ecu->started && period_ms == 0; /* restart the blink phase on the next step */
 }
+
+void light_ecu_set_output_inhibit(LightEcu* ecu, bool inhibit) {
+  if (ecu->output_inhibit != inhibit) {
+    ecu->output_inhibit = inhibit;
+    ecu->dirty = ecu->dirty || ecu->lamp_on; /* the output changes only if the lamp is commanded on */
+  }
+}
+
+bool light_ecu_output(const LightEcu* ecu) { return ecu->lamp_on && !ecu->output_inhibit; }
 
 void light_ecu_request_send(LightEcu* ecu) { ecu->dirty = true; }
 
@@ -60,7 +72,7 @@ bool light_ecu_step(LightEcu* ecu, uint64_t now_ms, CanFrame* out, bool* state_c
     return false;
   }
 
-  const uint8_t payload = ecu->lamp_on ? 0x01u : 0x00u;
+  const uint8_t payload = light_ecu_output(ecu) ? 0x01u : 0x00u;
   can_frame_set(out, LIGHT_ECU_ID_LAMP_CMD, false, &payload, 1);
   ecu->last_send_ms = now_ms;
   ecu->dirty = false;

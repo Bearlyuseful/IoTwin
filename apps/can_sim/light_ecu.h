@@ -32,6 +32,8 @@ extern "C" {
 /** @brief ECU state. */
 typedef struct {
   bool lamp_on;             /**< Commanded lamp state. */
+  bool switch_on;           /**< Last position reported by SWITCH_STATE. */
+  bool output_inhibit;      /**< Output switched off by a protection (e.g. short circuit). */
   uint32_t cycle_ms;        /**< Period of the cyclic LAMP_CMD message (0 = only on change). */
   uint32_t blink_period_ms; /**< Toggle period while blinking, 0 = not blinking. */
   uint64_t last_send_ms;    /**< Time of the last LAMP_CMD. */
@@ -54,6 +56,12 @@ void light_ecu_set_lamp(LightEcu* ecu, bool on);
 
 /** @brief Starts blinking with the given toggle period; 0 stops blinking. */
 void light_ecu_set_blink(LightEcu* ecu, uint32_t period_ms);
+
+/** @brief Switches the output off regardless of the command (protection), or releases it. */
+void light_ecu_set_output_inhibit(LightEcu* ecu, bool inhibit);
+
+/** @brief State of the lamp output: commanded and not inhibited. */
+bool light_ecu_output(const LightEcu* ecu);
 
 /** @brief Forces LAMP_CMD to be sent in the next step (e.g. after reconnecting). */
 void light_ecu_request_send(LightEcu* ecu);
