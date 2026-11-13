@@ -25,7 +25,7 @@ digital-twin features.
 | SocketCAN bridge | step 4 | ✅ `socketcan_bridge` ([CAN Tools](dev/can_tools.md)); live test needs `vcan0` |
 | Real-time measurements on PREEMPT_RT | step 4 | ❌ needs PREEMPT_RT hardware |
 | DBC, ISO-TP, UDS | step 5 | ✅ DBC reader + `can_monitor`, ISO-TP, UDS server in ECU and gateway, `uds_client` ([Diagnostics](dev/diagnostics.md)) |
-| Scenarios, more devices, extensions | Oct 2025 outlook | ❌ |
+| Scenarios, more devices, extensions | Oct 2025 outlook | scenarios ✅ ([Scenarios and Faults](dev/scenarios.md)), more devices open |
 
 ## Next phase (agreed November 2026)
 
@@ -41,7 +41,7 @@ Order of work:
 | A | **Component database** ✅ (structure + NUCLEO-G0B1RE) | parts and their characteristics for simulation, first entry: NUCLEO-G0B1RE; plus a system description (instances, connections, buses) |
 | B | **Bus / schematic view in Unreal** ✅ (first version) | 2D view of nodes, buses and live messages, switch to 3D ([Visualizer](dev/visualizer.md#schematic-view-sourceiotwinschematic)); open: generated from circuit diagrams, wireless traffic, jump to the matching 3D object |
 | C | **UDS diagnostics** ✅ | on top of ISO-TP: server in ECU and gateway, `uds_client`, injectable faults as DTCs ([Diagnostics](dev/diagnostics.md)); open: SecurityAccess, RoutineControl, flashing |
-| D | **Scenarios and faults** | record/replay, scripted scenarios, fault injection (loss, delay, bus-off) |
+| D | **Scenarios and faults** ✅ | record/replay (candump format), scripted scenarios as tests, bus faults (loss, delay, silence), test bench faults in the ECU ([Scenarios and Faults](dev/scenarios.md)); faults shown in the schematic view; open: per-node bus-off and error frames |
 | E | **More devices and electrical model** | dimmer, sensors, fan/motor; load, current, fuse |
 | F | **Real bus and real time** | transceiver + second node, PREEMPT_RT measurements (needs hardware) |
 

@@ -9,6 +9,7 @@
 #include "IoTwin.h"
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
+#include "HAL/PlatformTime.h"
 
 void UIoTwinBusSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -116,11 +117,39 @@ bool UIoTwinBusSubsystem::Tick(float DeltaSeconds)
 		bWasConnected = bConnectedNow;
 		AddTraffic(TEXT("--"), bConnectedNow ? TEXT("connected") : TEXT("disconnected"));
 		OnConnectionChanged.Broadcast(bConnectedNow);
+		BusStatus = FIoTwinBusStatus();
+		UnansweredStatus = 0;
+		bStatusSupported = true;
+		if (bConnectedNow && !NodeName.IsEmpty())
+		{
+			Connection->EnqueueLine(TEXT("!name ") + NodeName);
+		}
+	}
+
+	// Poll counters and injected faults; an older bus without "!status" never answers.
+	const double Now = FPlatformTime::Seconds();
+	if (bConnectedNow && bStatusSupported && Now >= NextStatusQuery)
+	{
+		NextStatusQuery = Now + StatusIntervalSeconds;
+		if (++UnansweredStatus > MaxUnansweredStatus)
+		{
+			bStatusSupported = false;
+			UE_LOG(LogIoTwinBus, Log, TEXT("iotwin-bus does not answer !status (older version), fault display off"));
+		}
+		else
+		{
+			Connection->EnqueueLine(TEXT("!status"));
+		}
 	}
 
 	FString Line;
 	for (int32 Count = 0; Count < MaxFramesPerTick && Connection->DequeueLine(Line); ++Count)
 	{
+		if (Line.StartsWith(TEXT("!")) || Line.StartsWith(TEXT("@")))
+		{
+			HandleControlLine(Line);
+			continue;
+		}
 		FCanFrame Frame;
 		if (!FCanFrame::Parse(Line, Frame))
 		{
@@ -133,6 +162,28 @@ bool UIoTwinBusSubsystem::Tick(float DeltaSeconds)
 		OnFrameReceived.Broadcast(Frame);
 	}
 	return true;
+}
+
+void UIoTwinBusSubsystem::HandleControlLine(const FString& Line)
+{
+	FIoTwinBusStatus Status;
+	if (FIoTwinBusStatus::Parse(Line, Status))
+	{
+		BusStatus = Status;
+		LastStatusTime = FPlatformTime::Seconds();
+		UnansweredStatus = 0;
+	}
+	else if (Line.StartsWith(TEXT("!error")))
+	{
+		UE_LOG(LogIoTwinBus, Log, TEXT("iotwin-bus: %s"), *Line);
+	}
+}
+
+FIoTwinBusStatus UIoTwinBusSubsystem::GetBusStatus() const
+{
+	FIoTwinBusStatus Status = BusStatus;
+	Status.bValid = Status.bValid && IsConnected() && FPlatformTime::Seconds() - LastStatusTime < StatusStaleSeconds;
+	return Status;
 }
 
 void UIoTwinBusSubsystem::AddTraffic(const TCHAR* Direction, const FString& Line)

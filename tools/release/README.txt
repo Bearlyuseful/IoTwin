@@ -45,6 +45,16 @@ Inject a fault in the CAN-Sim window ("fault short on") and read it with
 "uds_client dtc"; "uds_client clear" deletes the trouble codes.
 With the NUCLEO: bin\uds_client --target gateway scan
 
+Scenarios and faults
+--------------------
+Scripted tests with fault injection, while the demo runs:
+
+  bin\can_scenario data\scenarios\light-demo\lamp-short-dtc.scn
+  bin\can_scenario -e "bus drop 50"       lose half of all frames
+  bin\can_scenario -e "bus clear"         back to normal
+
+Record and replay: bin\can_monitor --log drive.log, then bin\can_replay drive.log
+
 With a NUCLEO-G0B1RE
 --------------------
 1. Copy firmware\iotwin_gateway.bin to the NOD_G0B1RE drive of the board.

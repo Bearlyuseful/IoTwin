@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Bus/BusStatus.h"
 #include "Bus/CanFrame.h"
 #include "Bus/IoTwinBusConnection.h"
 #include "Containers/Ticker.h"
@@ -44,6 +45,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "IoTwin|Bus")
 	bool GetLastFrame(int32 Id, bool bExtended, FCanFrame& OutFrame) const;
 
+	/** Counters and injected faults of iotwin-bus (polled with "!status" once per second). */
+	UFUNCTION(BlueprintPure, Category = "IoTwin|Bus")
+	FIoTwinBusStatus GetBusStatus() const;
+
 	/** Most recent traffic, newest last ("RX 100#01", "TX 200#00"). */
 	const TArray<FString>& GetRecentTraffic() const { return RecentTraffic; }
 
@@ -68,6 +73,10 @@ public:
 	UPROPERTY(Config, EditAnywhere, Category = "IoTwin|Bus")
 	bool bEnabled = true;
 
+	/** Name of this node in the bus log ("!name"). */
+	UPROPERTY(Config, EditAnywhere, Category = "IoTwin|Bus")
+	FString NodeName = TEXT("visualizer");
+
 private:
 	bool Tick(float DeltaSeconds);
 	void AddTraffic(const TCHAR* Direction, const FString& Line);
@@ -77,7 +86,12 @@ private:
 		return (static_cast<int64>(bExtended) << 32) | static_cast<uint32>(Id);
 	}
 
+	void HandleControlLine(const FString& Line);
+
 	static constexpr int32 MaxRecentTraffic = 10;
+	static constexpr double StatusIntervalSeconds = 1.0;
+	static constexpr double StatusStaleSeconds = 3.5;
+	static constexpr int32 MaxUnansweredStatus = 3;
 	static constexpr int32 MaxFramesPerTick = 1024;
 
 	TUniquePtr<FIoTwinBusConnection> Connection;
@@ -85,4 +99,10 @@ private:
 	TMap<int64, FCanFrame> LastFrames;
 	TArray<FString> RecentTraffic;
 	bool bWasConnected = false;
+
+	FIoTwinBusStatus BusStatus;
+	double LastStatusTime = 0.0;
+	double NextStatusQuery = 0.0;
+	int32 UnansweredStatus = 0;
+	bool bStatusSupported = true;
 };

@@ -22,6 +22,22 @@ The syntax is the compact format of the Linux can-utils (`cansend`, `candump`):
 - At most 8 data bytes (classic CAN). CAN FD (`##`) is not supported.
 - Lines longer than 255 characters are discarded.
 
+## Control lines and test bench
+
+Lines that start with `!` or `@` are not CAN traffic:
+
+| Line | Meaning |
+|------|---------|
+| `!name ecu` | name of the node in the bus log |
+| `!testbench on` | the node wants to receive test bench lines |
+| `!status` | counters and active faults: `!status nodes=3 routed=120 dropped=4 ...` |
+| `!fault drop P [ID[/MASK]]`, `!fault delay MS [JITTER]`, `!fault silence MS`, `!fault seed N`, `!fault clear` | fault injection of the medium, see [Scenarios](scenarios.md#bus-faults) |
+| `@<node> <command>` | test bench command, forwarded only to nodes with `!testbench on` |
+
+The bus answers `!` commands only to their sender (`!ok`, `!error <reason>`,
+`!status ...`). Nodes that never send `!` lines never see any of this, so
+existing nodes (visualizer, `serial_bridge`) are not affected.
+
 ## Signals of the light demo
 
 | Id    | Name           | Sender               | Payload                               |
