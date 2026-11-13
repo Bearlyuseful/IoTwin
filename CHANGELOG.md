@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Schematic view (visualizer)
+- TAB switches between the 3D scene and a 2D schematic built from
+  `data/systems/light-demo.json`: nodes, CAN bus with members, USB link.
+- Live traffic: every frame decoded with the DBC (value tables, Intel and
+  Motorola signals) at the node that sent it, animated from producer to
+  consumers, node status, frame rate and message log.
+- Detail panel per node incl. characteristics from the component database
+  (unverified values marked).
+- The release package now contains the whole `data/` folder (replaces `config/`).
+- Automation tests for DBC reader, system description and component catalog.
+
 ### Component database
 - `data/components/`: parts with characteristics for simulation (value or
   min/typ/max, unit, source, verified flag), interfaces, ports and contained

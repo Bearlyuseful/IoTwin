@@ -14,6 +14,7 @@ public class IoTwin : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
 		// Sockets/Networking: TCP connection to iotwin-bus. CableComponent: visual cables.
-		PrivateDependencyModuleNames.AddRange(new string[] { "Sockets", "Networking", "CableComponent" });
+		// Json: system descriptions (data/systems) for the schematic view.
+		PrivateDependencyModuleNames.AddRange(new string[] { "Sockets", "Networking", "CableComponent", "Json" });
 	}
 }

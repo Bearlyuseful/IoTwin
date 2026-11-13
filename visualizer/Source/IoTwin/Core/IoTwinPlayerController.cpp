@@ -4,6 +4,7 @@
 
 #include "Components/InputComponent.h"
 #include "EngineUtils.h"
+#include "Schematic/IoTwinSchematicSubsystem.h"
 #include "Systems/WallSwitchActor.h"
 
 AIoTwinPlayerController::AIoTwinPlayerController()
@@ -32,6 +33,7 @@ void AIoTwinPlayerController::SetupInputComponent()
 	if (InputComponent)
 	{
 		InputComponent->BindKey(EKeys::SpaceBar, IE_Pressed, this, &AIoTwinPlayerController::HandleToggleKey);
+		InputComponent->BindKey(EKeys::Tab, IE_Pressed, this, &AIoTwinPlayerController::HandleViewKey);
 	}
 }
 
@@ -41,5 +43,13 @@ void AIoTwinPlayerController::HandleToggleKey(FKey Key)
 	{
 		It->Toggle();
 		break;
+	}
+}
+
+void AIoTwinPlayerController::HandleViewKey(FKey Key)
+{
+	if (UIoTwinSchematicSubsystem* Schematic = UIoTwinSchematicSubsystem::Get(this))
+	{
+		Schematic->ToggleView();
 	}
 }
