@@ -38,7 +38,7 @@ Order of work:
 
 | # | Feature | Notes |
 |---|---------|-------|
-| A | **Component database** | parts and their characteristics for simulation, first entry: NUCLEO-G0B1RE; plus a system description (instances, connections, buses) |
+| A | **Component database** ✅ (structure + NUCLEO-G0B1RE) | parts and their characteristics for simulation, first entry: NUCLEO-G0B1RE; plus a system description (instances, connections, buses) |
 | B | **Bus / schematic view in Unreal** | 2D view of nodes, buses and live messages, switch to 3D; later generated from circuit diagrams incl. wireless traffic |
 | C | **UDS diagnostics** | on top of ISO-TP: server in ECU and gateway, client tool |
 | D | **Scenarios and faults** | record/replay, scripted scenarios, fault injection (loss, delay, bus-off) |

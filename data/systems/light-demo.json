@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/system.schema.json",
+  "id": "light-demo",
+  "name": "IoTwin light demo",
+  "description": "Light ECU switches a lamp via CAN; wall switches in the visualizer and on the NUCLEO-G0B1RE report their position.",
+  "nodes": [
+    {
+      "id": "ecu",
+      "kind": "virtual",
+      "label": "Light ECU",
+      "program": "can_sim",
+      "description": "Simulated control unit, follows SWITCH_STATE and commands LAMP_CMD"
+    },
+    {
+      "id": "visualizer",
+      "kind": "virtual",
+      "label": "Visualizer",
+      "program": "IoTwin (Unreal Engine)",
+      "description": "Digital twin: relay, lamp and wall switch"
+    },
+    {
+      "id": "gateway",
+      "kind": "physical",
+      "label": "NUCLEO-G0B1RE gateway",
+      "component": "st.nucleo-g0b1re",
+      "firmware": "firmware/ (iotwin_gateway)",
+      "description": "Real CAN controller (FDCAN1, internal loopback without transceiver), B1 = wall switch, LD4 = lamp"
+    },
+    {
+      "id": "pc",
+      "kind": "physical",
+      "label": "Host PC",
+      "description": "Runs iotwin-bus, can_sim, serial_bridge and the visualizer"
+    }
+  ],
+  "buses": [
+    {
+      "id": "can-demo",
+      "type": "can",
+      "bitrate": 500000,
+      "dbc": "../dbc/iotwin.dbc",
+      "transport": "iotwin-bus tcp://127.0.0.1:8080",
+      "members": ["ecu", "visualizer", "gateway"]
+    }
+  ],
+  "links": [
+    {
+      "id": "gateway-usb",
+      "type": "usb",
+      "from": "gateway:ST-LINK USB",
+      "to": "pc",
+      "carries": "SLCAN over virtual COM port, 115200 8N1 (serial_bridge)"
+    }
+  ],
+  "messages": [
+    { "name": "LAMP_CMD", "producers": ["ecu"], "consumers": ["visualizer", "gateway"] },
+    { "name": "SWITCH_STATE", "producers": ["visualizer", "gateway"], "consumers": ["ecu"] }
+  ]
+}

@@ -128,7 +128,7 @@ jobs:
           pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-git-revision-date-localized-plugin
 
       - name: Generate Doxygen API docs
-        run: doxygen doxygen/Doxyfile
+        run: doxygen docs/Doxyfile
 
       - name: Build MkDocs site
         run: mkdocs build

@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+### Component database
+- `data/components/`: parts with characteristics for simulation (value or
+  min/typ/max, unit, source, verified flag), interfaces, ports and contained
+  parts; first entries: STM32G0B1RET6 and NUCLEO-G0B1RE.
+- `data/systems/light-demo.json`: nodes, buses, links and messages of the
+  demo - the input for the planned schematic view.
+- JSON schemas for editor support and `tools/validate_data.py` (CTest).
+
+### Repository
+- Flat layout: `libs/` (shared C libraries), `apps/` (programs), `firmware/`,
+  `visualizer/` (Unreal project, was `src/ue/IoTwin`), `data/` (was `config/`),
+  see ADR 0005. User-specific Rider `.idea` files are no longer tracked.
+
 ## 0.2.0 - 2026-11-13
 
 Roadmap steps 1-3: a real microcontroller on the virtual bus.

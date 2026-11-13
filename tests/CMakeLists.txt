@@ -54,8 +54,17 @@ endif()
 add_dependencies(iotwin_tests serial_bridge)
 target_compile_definitions(iotwin_tests PRIVATE
     SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>"
-    IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/config/can/iotwin.dbc"
+    IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/data/dbc/iotwin.dbc"
 )
+
+# Engineering data (data/components, data/systems) must stay consistent.
+find_package(Python3 COMPONENTS Interpreter)
+if(Python3_Interpreter_FOUND)
+    add_test(NAME data_validation
+             COMMAND ${Python3_EXECUTABLE} ${PROJECT_SOURCE_DIR}/tools/validate_data.py ${PROJECT_SOURCE_DIR}/data)
+else()
+    message(STATUS "Python 3 not found - data validation test disabled")
+endif()
 
 # register with CTest
 include(Catch)

@@ -35,7 +35,7 @@ build/gcc-debug/bin/iotwin-bus     # terminal 1
 build/gcc-debug/bin/can_sim        # terminal 2 (type 'help')
 ```
 
-Then open `src/ue/IoTwin/IoTwin.uproject` in Unreal Engine 5.6 and press **Play**.
+Then open `visualizer/IoTwin.uproject` in Unreal Engine 5.6 and press **Play**.
 
 ---
 
@@ -47,6 +47,15 @@ Then open `src/ue/IoTwin/IoTwin.uproject` in Unreal Engine 5.6 and press **Play*
 - **Tests:** Catch2 (unit + socket integration), Unreal automation tests
 - **Documentation:** MkDocs + Doxygen + ADRs (`docs/`)
 
+```
+libs/        shared C libraries (can, net, serial, platform, log)
+apps/        iotwin-bus, can_sim, serial_bridge, socketcan_bridge, can_monitor
+firmware/    NUCLEO-G0B1RE CAN gateway
+visualizer/  Unreal Engine project
+data/        DBC files, component database, system descriptions
+tests/  tools/  docs/
+```
+
 | Topic | Document |
 |-------|----------|
 | Run the demo | [Quickstart](docs/user/quickstart.md) |
@@ -55,6 +64,7 @@ Then open `src/ue/IoTwin/IoTwin.uproject` in Unreal Engine 5.6 and press **Play*
 | Real-time | [Real-Time Operation](docs/dev/realtime.md) |
 | Unreal side | [Visualizer](docs/dev/visualizer.md) |
 | Microcontroller | [Firmware](docs/dev/firmware.md) |
+| Parts and setups | [Component Database](docs/dev/component_database.md) |
 | DBC, ISO-TP, SocketCAN | [CAN Tools](docs/dev/can_tools.md) |
 | Release | [Packaging](docs/dev/packaging.md) |
 | Next steps | [Roadmap](docs/roadmap.md) |

@@ -1,0 +1,116 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "st.stm32g0b1ret6",
+  "name": "STM32G0B1RET6",
+  "category": "microcontroller",
+  "manufacturer": "STMicroelectronics",
+  "description": "Arm Cortex-M0+ MCU, 512 KiB flash, 144 KiB SRAM, 2x FDCAN, USB, LQFP64. MCU of the NUCLEO-G0B1RE.",
+  "sources": [
+    {
+      "id": "ds13560",
+      "title": "STM32G0B1xB/xC/xE datasheet (DS13560)",
+      "url": "https://www.st.com/resource/en/datasheet/stm32g0b1re.pdf"
+    },
+    {
+      "id": "st-product-page",
+      "title": "STM32G0B1RE product overview",
+      "url": "https://www.st.com/en/microcontrollers-microprocessors/stm32g0b1re.html"
+    },
+    {
+      "id": "rm0444",
+      "title": "STM32G0x1 reference manual (RM0444)",
+      "url": "https://www.st.com/resource/en/reference_manual/rm0444-stm32g0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"
+    },
+    {
+      "id": "iotwin-measured",
+      "title": "Measured / verified in IoTwin on the hardware",
+      "url": "../../../docs/dev/firmware.md"
+    }
+  ],
+  "properties": {
+    "core": "Arm Cortex-M0+",
+    "architecture": "ARMv6-M",
+    "package": "LQFP64",
+    "temperature_grade": "6 (ordering code suffix)"
+  },
+  "parameters": {
+    "core_clock": { "max": 64000000, "unit": "Hz", "source": "st-product-page", "verified": true },
+    "flash_size": { "value": 524288, "unit": "B", "source": "st-product-page", "verified": true },
+    "sram_size": {
+      "value": 147456,
+      "unit": "B",
+      "source": "st-product-page",
+      "verified": true,
+      "note": "128 KiB of it with hardware parity check"
+    },
+    "supply_voltage": { "min": 1.7, "max": 3.6, "unit": "V", "source": "st-product-page", "verified": true },
+    "io_supply_voltage_vddio2": { "min": 1.65, "max": 3.6, "unit": "V", "source": "st-product-page", "verified": true },
+    "ambient_temperature": {
+      "min": -40,
+      "max": 85,
+      "unit": "°C",
+      "source": "ds13560",
+      "verified": false,
+      "note": "range of temperature grade 6 - confirm in the ordering information"
+    },
+    "run_current_64mhz": {
+      "typ": null,
+      "unit": "A",
+      "source": "ds13560",
+      "verified": false,
+      "note": "to fill from the table 'Current consumption in Run mode' (needed for power simulation)"
+    },
+    "stop_current": {
+      "typ": null,
+      "unit": "A",
+      "source": "ds13560",
+      "verified": false,
+      "note": "to fill from the Stop 0/1 current table"
+    },
+    "hsi_frequency": { "value": 16000000, "unit": "Hz", "source": "rm0444", "verified": true }
+  },
+  "interfaces": [
+    {
+      "type": "fdcan",
+      "count": 2,
+      "instances": ["FDCAN1", "FDCAN2"],
+      "source": "st-product-page",
+      "verified": true,
+      "parameters": {
+        "nominal_bitrate_tested": {
+          "value": 500000,
+          "unit": "bit/s",
+          "source": "iotwin-measured",
+          "verified": true,
+          "note": "internal loopback, 64 MHz kernel clock, prescaler 8, 1+13+2 tq, sample point 87.5 %"
+        },
+        "message_ram_per_instance": { "value": 848, "unit": "B", "source": "rm0444", "verified": true }
+      }
+    },
+    {
+      "type": "usart",
+      "count": null,
+      "source": "ds13560",
+      "verified": false,
+      "note": "USART2 used as ST-LINK virtual COM port; number of USART/LPUART instances to confirm",
+      "parameters": {
+        "baudrate_tested": { "value": 115200, "unit": "bit/s", "source": "iotwin-measured", "verified": true }
+      }
+    },
+    { "type": "usb", "count": 1, "source": "st-product-page", "verified": false, "note": "USB 2.0 full speed - confirm device/host capability" }
+  ],
+  "ports": [
+    { "id": "PA2", "kind": "gpio", "functions": ["USART2_TX (AF1)"] },
+    { "id": "PA3", "kind": "gpio", "functions": ["USART2_RX (AF1)"] },
+    { "id": "PA5", "kind": "gpio", "functions": ["GPIO"] },
+    { "id": "PA11", "kind": "gpio", "functions": ["FDCAN1_RX (AF3)"] },
+    { "id": "PA12", "kind": "gpio", "functions": ["FDCAN1_TX (AF3)"] },
+    { "id": "PC13", "kind": "gpio", "functions": ["GPIO"] },
+    { "id": "VDD", "kind": "power" },
+    { "id": "VSS", "kind": "ground" }
+  ],
+  "simulation": {
+    "model": "iotwin.gateway-firmware",
+    "notes": "Behaviour of the IoTwin gateway firmware: SLCAN adapter + local node (button = 0x200, LED = 0x100)."
+  }
+}

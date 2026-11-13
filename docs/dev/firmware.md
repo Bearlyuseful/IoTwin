@@ -124,7 +124,7 @@ Any terminal works for experiments (115200 8N1, send CR): `V`, `S6`, `l`,
 | `firmware/drivers/fdcan.c` | FDCAN1: message RAM, bit timing, Tx FIFO, Rx FIFO 0 interrupt, bus-off recovery |
 | `firmware/app/gateway.c` | hardware independent application (SLCAN, echo suppression, local node) |
 | `firmware/app/main.c` | wiring, button debounce, main loop with `WFI` |
-| `src/core/can/` | `can_frame`, `slcan`, `can_bit_timing` - shared with the host |
+| `libs/can/` | `can_frame`, `slcan`, `can_bit_timing` - shared with the host |
 | `firmware/vendor/` | CMSIS core 5.9.0 (ARM) and STM32G0 device headers (ST), Apache-2.0 |
 
 Bit timing is calculated at run time from the kernel clock: 500 kbit/s at

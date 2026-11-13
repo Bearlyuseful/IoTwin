@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "st.nucleo-g0b1re",
+  "name": "NUCLEO-G0B1RE",
+  "category": "board",
+  "manufacturer": "STMicroelectronics",
+  "description": "STM32 Nucleo-64 development board (MB1360) with STM32G0B1RET6 and on-board ST-LINK/V2-1 debugger.",
+  "sources": [
+    {
+      "id": "um2324",
+      "title": "STM32 Nucleo-64 boards (MB1360) user manual (UM2324)",
+      "url": "https://www.st.com/resource/en/user_manual/um2324-stm32-nucleo64-boards-mb1360-stmicroelectronics.pdf"
+    },
+    {
+      "id": "zephyr-board",
+      "title": "Zephyr board documentation nucleo_g0b1re",
+      "url": "https://docs.zephyrproject.org/latest/boards/st/nucleo_g0b1re/doc/index.html"
+    },
+    {
+      "id": "iotwin-measured",
+      "title": "Measured / verified in IoTwin on the hardware",
+      "url": "../../../docs/dev/firmware.md"
+    }
+  ],
+  "properties": {
+    "board_id": "MB1360",
+    "debugger": "ST-LINK/V2-1",
+    "debugger_usb": "Micro-B",
+    "usb_id": "0483:374B",
+    "mass_storage_label": "NOD_G0B1RE"
+  },
+  "contains": [
+    { "instance": "mcu", "component": "st.stm32g0b1ret6" }
+  ],
+  "parameters": {
+    "usb_supply_voltage": { "value": 5.0, "unit": "V", "source": "zephyr-board", "verified": true, "note": "default supply via the ST-LINK USB connector" },
+    "vin_voltage": { "min": 7, "max": 12, "unit": "V", "source": "zephyr-board", "verified": true, "note": "VIN on Arduino / morpho connector" },
+    "e5v_voltage": { "value": 5.0, "unit": "V", "source": "zephyr-board", "verified": true, "note": "external 5 V on the morpho connector" },
+    "board_supply_current": {
+      "typ": null,
+      "unit": "A",
+      "source": "um2324",
+      "verified": false,
+      "note": "to measure (USB meter) - board incl. ST-LINK in IoTwin gateway operation"
+    }
+  },
+  "interfaces": [
+    {
+      "type": "usb-vcp",
+      "count": 1,
+      "source": "iotwin-measured",
+      "verified": true,
+      "note": "ST-LINK virtual COM port, wired to USART2 (PA2/PA3); appears as COM port on the PC"
+    },
+    {
+      "type": "usb-mass-storage",
+      "count": 1,
+      "source": "iotwin-measured",
+      "verified": true,
+      "note": "drag-and-drop flashing of .bin files"
+    }
+  ],
+  "ports": [
+    { "id": "LD4", "kind": "led", "connects_to": "mcu.PA5", "description": "green user LED, active high" },
+    { "id": "B1", "kind": "button", "connects_to": "mcu.PC13", "description": "blue user button, active low" },
+    { "id": "ST-LINK USB", "kind": "usb", "description": "debugger, virtual COM port, mass storage" },
+    { "id": "CN10.FDCAN1_RX", "kind": "connector", "connects_to": "mcu.PA11", "description": "morpho connector CN10 - pin number per UM2324" },
+    { "id": "CN10.FDCAN1_TX", "kind": "connector", "connects_to": "mcu.PA12", "description": "morpho connector CN10 - pin number per UM2324" }
+  ]
+}

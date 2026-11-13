@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Bearlyuseful/IoTwin/data/schema/system.schema.json",
+  "title": "IoTwin system description",
+  "description": "A concrete setup: which nodes exist, which buses connect them and which messages they exchange. Source for the schematic view.",
+  "type": "object",
+  "required": ["id", "name", "nodes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "label"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "kind": { "type": "string", "enum": ["physical", "virtual"] },
+          "label": { "type": "string" },
+          "component": { "type": "string", "description": "id of a component in data/components" },
+          "program": { "type": "string" },
+          "firmware": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "buses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "members"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["can", "can-fd", "lin", "ethernet", "wifi", "ble", "zigbee", "other"] },
+          "bitrate": { "type": "integer", "minimum": 1 },
+          "dbc": { "type": "string", "description": "path relative to this file" },
+          "transport": { "type": "string" },
+          "members": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "description": "Point-to-point connections (USB, serial, power, wireless, ...)",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "from", "to"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "from": { "type": "string", "description": "<node> or <node>:<port>" },
+          "to": { "type": "string", "description": "<node> or <node>:<port>" },
+          "carries": { "type": "string" }
+        }
+      }
+    },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "producers", "consumers"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "description": "message name in the bus DBC" },
+          "producers": { "type": "array", "items": { "type": "string" } },
+          "consumers": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

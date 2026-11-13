@@ -61,7 +61,7 @@ Then on Windows:
 ./tools/run-dev.ps1          # starts iotwin-bus and can_sim
 ```
 
-and open `src/ue/IoTwin/IoTwin.uproject` in Unreal Engine 5.6 and press
+and open `visualizer/IoTwin.uproject` in Unreal Engine 5.6 and press
 **Play**. See the [Build Instructions](../dev/build_instructions.md) for details.
 
 ## Core on Linux, visualizer on Windows

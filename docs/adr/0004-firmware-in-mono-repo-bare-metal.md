@@ -19,7 +19,7 @@ protocol runs on the serial link.
    ST are vendored (`firmware/vendor`). Startup code, linker script, clock, UART
    and FDCAN drivers are written against the registers - no HAL, no RTOS.
 3. **Portable core code is shared and host tested:** `can_frame`, `slcan` and
-   `can_bit_timing` (in `src/core/can`) and the application logic
+   `can_bit_timing` (in `libs/can`) and the application logic
    (`firmware/app/gateway.c`, hardware access only through function pointers)
    compile for the PC and the MCU and are unit tested on the host.
 4. **SLCAN (Lawicel) on the serial link**, with two documented extensions:

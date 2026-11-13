@@ -2,7 +2,7 @@
 
 ## DBC and `can_monitor`
 
-`config/can/iotwin.dbc` describes the signals of the light demo:
+`data/dbc/iotwin.dbc` describes the signals of the light demo:
 
 | Id | Message | Signal | Values |
 |----|---------|--------|--------|
@@ -12,7 +12,7 @@
 `can_monitor` shows the bus traffic decoded with a DBC file:
 
 ```bash
-can_monitor --dbc config/can/iotwin.dbc --changes
+can_monitor --dbc data/dbc/iotwin.dbc --changes
 ```
 
 ```
@@ -23,7 +23,7 @@ can_monitor --dbc config/can/iotwin.dbc --changes
 
 `--changes` hides cyclic repetitions with unchanged payload.
 
-### Library (`src/core/can`)
+### Library (`libs/can`)
 
 - `can_signal.h` – signal codec, portable and heap-free (usable in firmware):
   Intel (little endian) and Motorola (big endian, DBC sawtooth numbering)
@@ -35,7 +35,7 @@ can_monitor --dbc config/can/iotwin.dbc --changes
 
 ## ISO-TP (ISO 15765-2)
 
-`src/core/can/isotp.h` transports messages of up to 4095 bytes over classic
+`libs/can/isotp.h` transports messages of up to 4095 bytes over classic
 CAN frames (normal addressing), e.g. for UDS diagnostics:
 
 | Frame | PCI | Content |
