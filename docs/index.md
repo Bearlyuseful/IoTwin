@@ -9,10 +9,10 @@ Its goal is to bridge **physical embedded systems** and **virtual simulations** 
 
 IoTwin consists of two main components:
 
-1. **IoTwin Core (Backend + Simulators)**  
-   - Written in C++ with a modular architecture  
-   - Provides simulation logic for electrical systems, sensors, and communication modules  
-   - Built using CMake for cross-platform compatibility  
+1. **IoTwin Core (Bus + Simulators)**  
+   - Written in C11 with a small platform layer (Linux with PREEMPT_RT as real-time target, Windows best effort)  
+   - `iotwin-bus` is a virtual CAN bus over TCP, `can_sim` a simulated ECU  
+   - Built using CMake, tested with Catch2  
 
 2. **IoTwin Visualizer (Unreal Engine Project)**  
    - Provides real-time visualization of simulated devices and environments  
@@ -31,16 +31,17 @@ IoTwin consists of two main components:
 
 ## 🚀 Getting Started
 
-1. Follow the [Build Instructions](build_instructions.md) to set up your system.
-2. Build and run the **IoTwin Core** simulator.  
-3. Open the **IoTwin Visualizer** in Unreal Engine to view and interact with simulations.
+- **Just run the demo:** see the [Quickstart](user/quickstart.md).
+- **Develop:** follow the [Build Instructions](dev/build_instructions.md), then read the
+  [Architecture Overview](dev/architecture_overview.md) and the [Bus Protocol](dev/protocol.md).
 
 ---
 
 ## 📖 Further Documentation
 
-- [Build Instructions](build_instructions.md)
-- [Module Development Guide](modules.md) *(coming soon)*
-- [Simulation Configuration](simulation_config.md) *(coming soon)*
+- [Build Instructions](dev/build_instructions.md)
+- [Real-Time Operation](dev/realtime.md)
+- [Visualizer](dev/visualizer.md)
+- [Packaging](dev/packaging.md)
 
 ---
