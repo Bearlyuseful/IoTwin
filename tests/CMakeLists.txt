@@ -7,19 +7,33 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(catch2)
 
+# Firmware application logic is hardware independent and tested on the host.
+add_library(iotwin_gateway_logic STATIC ${PROJECT_SOURCE_DIR}/firmware/app/gateway.c)
+target_include_directories(iotwin_gateway_logic PUBLIC ${PROJECT_SOURCE_DIR}/firmware/app)
+target_link_libraries(iotwin_gateway_logic PUBLIC iotwin_can PRIVATE iotwin_compile_options)
+
 # ---- Test Executable ----
 add_executable(iotwin_tests
     test_can_bus.cpp
     test_can_frame.cpp
+    test_can_bit_timing.cpp
+    test_slcan.cpp
     test_line_reader.cpp
     test_light_ecu.cpp
     test_cycle_timer.cpp
     test_bus_server.cpp
+    test_gateway.cpp
+    test_bridge_core.cpp
+    test_serial_port.cpp
+    test_serial_bridge_e2e.cpp
 )
 
 target_link_libraries(iotwin_tests PRIVATE
     iotwin_bus_server
     iotwin_light_ecu
+    iotwin_gateway_logic
+    iotwin_bridge_core
+    iotwin_serial
     iotwin_can
     iotwin_net
     iotwin_platform
@@ -27,6 +41,12 @@ target_link_libraries(iotwin_tests PRIVATE
     Threads::Threads
     Catch2::Catch2WithMain
 )
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_link_libraries(iotwin_tests PRIVATE util) # openpty for the serial port tests
+endif()
+# The end-to-end test starts the real serial_bridge executable.
+add_dependencies(iotwin_tests serial_bridge)
+target_compile_definitions(iotwin_tests PRIVATE SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>")
 
 # register with CTest
 include(Catch)

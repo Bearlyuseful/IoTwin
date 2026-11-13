@@ -17,14 +17,16 @@
 param(
     # Engine folder of the Unreal installation (contains Build\BatchFiles\RunUAT.bat).
     [string]$EngineDir = $env:UE_ENGINE_DIR,
-    [string]$Version = "0.1.0",
+    [string]$Version = "0.2.0",
     [ValidateSet("Development", "Shipping")]
     [string]$Configuration = "Development",
     # Reuse an existing cooked visualizer from a previous run.
     [switch]$SkipVisualizer,
     # Keep the .pdb debug symbols of the visualizer (adds ~350 MB).
     [switch]$IncludeDebugInfo,
-    [switch]$SkipTests
+    [switch]$SkipTests,
+    # Do not build the NUCLEO-G0B1RE firmware (needs arm-none-eabi-gcc).
+    [switch]$SkipFirmware
 )
 
 $ErrorActionPreference = "Stop"
@@ -58,6 +60,24 @@ try {
 }
 $CoreBin = Join-Path $RepoRoot "build\gcc-release\bin"
 
+# --- 1b. Firmware ------------------------------------------------------------
+$FirmwareBuild = Join-Path $RepoRoot "firmware\build\nucleo-g0b1re"
+if (-not $SkipFirmware) {
+    if (Get-Command arm-none-eabi-gcc -ErrorAction SilentlyContinue) {
+        Step "Building the NUCLEO-G0B1RE gateway firmware"
+        Push-Location (Join-Path $RepoRoot "firmware")
+        try {
+            Invoke-Checked cmake @("--preset", "nucleo-g0b1re")
+            Invoke-Checked cmake @("--build", "--preset", "nucleo-g0b1re")
+        } finally {
+            Pop-Location
+        }
+    } else {
+        Write-Warning "arm-none-eabi-gcc not found - the package will not contain the firmware."
+        $SkipFirmware = $true
+    }
+}
+
 # --- 2. Visualizer -----------------------------------------------------------
 if (-not $SkipVisualizer) {
     if (-not $EngineDir -or -not (Test-Path (Join-Path $EngineDir "Build\BatchFiles\RunUAT.bat"))) {
@@ -84,9 +104,13 @@ if (-not (Test-Path (Join-Path $VisualizerStage "IoTwin.exe"))) {
 Step "Assembling $PackageName"
 if (Test-Path $PackageDir) { Remove-Item $PackageDir -Recurse -Force }
 New-Item -ItemType Directory -Force (Join-Path $PackageDir "bin") | Out-Null
-Copy-Item (Join-Path $CoreBin "iotwin-bus.exe"), (Join-Path $CoreBin "can_sim.exe") (Join-Path $PackageDir "bin")
+Copy-Item (Join-Path $CoreBin "iotwin-bus.exe"), (Join-Path $CoreBin "can_sim.exe"), (Join-Path $CoreBin "serial_bridge.exe") (Join-Path $PackageDir "bin")
 Copy-Item $VisualizerStage (Join-Path $PackageDir "Visualizer") -Recurse
-Copy-Item (Join-Path $PSScriptRoot "release\start-demo.bat") $PackageDir
+Copy-Item (Join-Path $PSScriptRoot "release\start-demo.bat"), (Join-Path $PSScriptRoot "release\start-demo-hardware.bat") $PackageDir
+if (-not $SkipFirmware) {
+    $FirmwareTarget = New-Item -ItemType Directory -Force (Join-Path $PackageDir "firmware")
+    Copy-Item (Join-Path $FirmwareBuild "iotwin_gateway.bin"), (Join-Path $FirmwareBuild "iotwin_gateway.hex") $FirmwareTarget
+}
 Copy-Item (Join-Path $PSScriptRoot "release\README.txt") $PackageDir
 Copy-Item (Join-Path $RepoRoot "LICENSE") $PackageDir
 

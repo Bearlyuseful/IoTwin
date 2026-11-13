@@ -4,8 +4,14 @@
  ┌──────────────┐   TCP, text lines    ┌──────────────┐   TCP    ┌────────────────────┐
  │   can_sim    │ ───────────────────▶ │  iotwin-bus  │ ◀──────▶ │ IoTwin Visualizer  │
  │ (light ECU)  │ ◀─────────────────── │ virtual CAN  │          │ (Unreal Engine 5)  │
- └──────────────┘                      └──────────────┘          └────────────────────┘
-        ▲  further simulators, tools (netcat, tests) can join as additional nodes
+ └──────────────┘                      └──────┬───────┘          └────────────────────┘
+                                              │ TCP
+                                      ┌───────┴────────┐  USB / SLCAN  ┌────────────────┐  FDCAN
+                                      │ serial_bridge  │ ◀───────────▶ │ NUCLEO-G0B1RE  │ ◀──────▶ real CAN bus
+                                      └────────────────┘               │ (gateway, B1,  │
+                                                                       │  LD4)          │
+                                                                       └────────────────┘
+        further simulators, tools (netcat, tests) can join as additional nodes
 ```
 
 - **iotwin-bus** (C): owns the bus. Validates, normalises and broadcasts
@@ -15,6 +21,9 @@
 - **Visualizer** (Unreal Engine 5.6): a digital twin of the electrical
   installation. It mirrors bus signals into the scene (relay → power → lamp)
   and sends user interactions (wall switch) back to the bus.
+- **serial_bridge** (C) and the **NUCLEO-G0B1RE firmware**: bring a real
+  microcontroller and its CAN controller onto the virtual bus
+  ([Firmware](firmware.md), [ADR 0004](../adr/0004-firmware-in-mono-repo-bare-metal.md)).
 
 ## Repository layout
 
@@ -22,10 +31,13 @@
 |-----------------------------------|----------------------------------------------------------|
 | `src/core/logger`                 | Thread-safe logger                                       |
 | `src/core/platform`               | Time, cycle timer, real-time setup, CLI helpers          |
-| `src/core/can`                    | `CanFrame` model + text codec, `CanBus` FIFO             |
+| `src/core/can`                    | `CanFrame` + text codec, `CanBus` FIFO, SLCAN, bit timing (also used by the firmware) |
 | `src/communication/tcp`           | Portable sockets (`net`), line framing (`line_reader`)   |
+| `src/communication/serial`        | Portable serial port (Win32 / termios)                   |
 | `src/bus`                         | `iotwin-bus` server                                      |
 | `src/simulators/can_sim`          | Light ECU logic and `can_sim` executable                 |
+| `src/bridges/serial_bridge`       | `serial_bridge`: SLCAN adapter ↔ bus                     |
+| `firmware`                        | NUCLEO-G0B1RE gateway firmware (separate CMake project)  |
 | `src/ue/IoTwin`                   | Unreal Engine project (visualizer)                       |
 | `tests`                           | Catch2 unit and socket integration tests                 |
 | `tools`                           | Run and packaging scripts                                |

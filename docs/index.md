@@ -43,5 +43,6 @@ IoTwin consists of two main components:
 - [Real-Time Operation](dev/realtime.md)
 - [Visualizer](dev/visualizer.md)
 - [Packaging](dev/packaging.md)
+- [Roadmap](roadmap.md)
 
 ---

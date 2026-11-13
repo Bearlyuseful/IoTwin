@@ -33,15 +33,18 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Quickstart: user/quickstart.md
+  - Roadmap: roadmap.md
   - Developer Guide:
       - Build Instructions: dev/build_instructions.md
       - Architecture Overview: dev/architecture_overview.md
       - Bus Protocol: dev/protocol.md
       - Real-Time Operation: dev/realtime.md
       - Visualizer: dev/visualizer.md
+      - Firmware (NUCLEO-G0B1RE): dev/firmware.md
       - Packaging: dev/packaging.md
   - API Reference: api/index.html
   - Architecture Decisions:
       - ADR 0001 Documentation: adr/0001-choice-of-documentation.md
       - ADR 0002 Bus and Protocol: adr/0002-bus-server-and-text-protocol.md
       - ADR 0003 Platforms: adr/0003-linux-rt-target-windows-best-effort.md
+      - ADR 0004 Firmware: adr/0004-firmware-in-mono-repo-bare-metal.md

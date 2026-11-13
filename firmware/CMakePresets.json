@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 22,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "nucleo-g0b1re",
+            "displayName": "NUCLEO-G0B1RE (arm-none-eabi-gcc)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/arm-none-eabi.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "MinSizeRel"
+            }
+        }
+    ],
+    "buildPresets": [
+        { "name": "nucleo-g0b1re", "configurePreset": "nucleo-g0b1re" }
+    ]
+}

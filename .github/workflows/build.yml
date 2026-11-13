@@ -36,6 +36,7 @@ jobs:
           path: |
             build/gcc-release/bin/iotwin-bus
             build/gcc-release/bin/can_sim
+            build/gcc-release/bin/serial_bridge
 
   core-windows:
     name: Core (Windows, MSYS2 GCC)
@@ -74,10 +75,39 @@ jobs:
           path: |
             build/gcc-release/bin/iotwin-bus.exe
             build/gcc-release/bin/can_sim.exe
+            build/gcc-release/bin/serial_bridge.exe
+
+  firmware:
+    name: Firmware (NUCLEO-G0B1RE)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: firmware
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install ARM toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi ninja-build
+
+      - name: Configure
+        run: cmake --preset nucleo-g0b1re -DIOTWIN_WARNINGS_AS_ERRORS=ON
+
+      - name: Build
+        run: cmake --build --preset nucleo-g0b1re
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: iotwin-gateway-nucleo-g0b1re
+          path: |
+            firmware/build/nucleo-g0b1re/iotwin_gateway.elf
+            firmware/build/nucleo-g0b1re/iotwin_gateway.bin
+            firmware/build/nucleo-g0b1re/iotwin_gateway.hex
 
   docs:
     name: Documentation
-    needs: [core-linux, core-windows]
+    needs: [core-linux, core-windows, firmware]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
