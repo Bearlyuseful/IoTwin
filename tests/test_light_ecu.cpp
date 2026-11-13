@@ -21,8 +21,9 @@ TEST_CASE("Light ECU announces its initial state immediately", "[light_ecu]") {
   REQUIRE(light_ecu_step(&ecu, 1000, &out, &changed));
   CHECK(changed);
   CHECK(out.id == LIGHT_ECU_ID_LAMP_CMD);
-  CHECK(out.dlc == 1);
+  CHECK(out.dlc == 2);
   CHECK(out.data[0] == 0);
+  CHECK(out.data[1] == LIGHT_ECU_DEFAULT_LEVEL);
 }
 
 TEST_CASE("Light ECU sends LAMP_CMD cyclically", "[light_ecu]") {
@@ -62,7 +63,7 @@ TEST_CASE("Light ECU ignores unrelated and malformed frames", "[light_ecu]") {
   CanFrame frame;
   const uint8_t data[1] = {1};
 
-  can_frame_set(&frame, 0x201, false, data, 1);
+  can_frame_set(&frame, 0x202, false, data, 1);
   CHECK_FALSE(light_ecu_on_frame(&ecu, &frame));
 
   can_frame_set(&frame, LIGHT_ECU_ID_SWITCH_STATE, false, nullptr, 0);
@@ -105,4 +106,27 @@ TEST_CASE("Light ECU resends on request", "[light_ecu]") {
   CHECK_FALSE(light_ecu_step(&ecu, 10, &out, nullptr));
   light_ecu_request_send(&ecu);
   CHECK(light_ecu_step(&ecu, 20, &out, nullptr));
+}
+
+TEST_CASE("Light ECU dims with DIMMER_CMD and reports the level in LAMP_CMD", "[light_ecu]") {
+  LightEcu ecu;
+  light_ecu_init(&ecu, LIGHT_ECU_DEFAULT_CYCLE_MS);
+  CanFrame out;
+  light_ecu_step(&ecu, 0, &out, nullptr);
+
+  CanFrame dimmer;
+  const uint8_t half = 50;
+  REQUIRE(can_frame_set(&dimmer, LIGHT_ECU_ID_DIMMER_CMD, false, &half, 1));
+  CHECK(light_ecu_on_frame(&ecu, &dimmer));
+  CHECK(ecu.level == 50);
+  REQUIRE(light_ecu_step(&ecu, 10, &out, nullptr));  // change is sent at once
+  CHECK(out.data[0] == 0);
+  CHECK(out.data[1] == 50);
+
+  const uint8_t too_bright = 250;
+  REQUIRE(can_frame_set(&dimmer, LIGHT_ECU_ID_DIMMER_CMD, false, &too_bright, 1));
+  light_ecu_on_frame(&ecu, &dimmer);
+  CHECK(ecu.level == 100);  // clamped
+  REQUIRE(can_frame_set(&dimmer, LIGHT_ECU_ID_DIMMER_CMD, false, nullptr, 0));
+  CHECK_FALSE(light_ecu_on_frame(&ecu, &dimmer));
 }

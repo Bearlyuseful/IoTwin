@@ -142,12 +142,14 @@ TEST_CASE("The IoTwin demo DBC describes the light demo", "[dbc]") {
   REQUIRE(dbc_load_file(IOTWIN_DBC_PATH, &db, error, sizeof(error)));
   CanFrame frame{};
   frame.id = 0x100;
-  frame.dlc = 1;
+  frame.dlc = 2;
   frame.data[0] = 1;
-  char text[96];
+  frame.data[1] = 60;
+  char text[160];
   REQUIRE(dbc_describe_frame(&db, &frame, text, sizeof(text)) > 0);
-  CHECK(std::string(text) == "LAMP_CMD LampOn=1 (On)");
+  CHECK(std::string(text) == "LAMP_CMD LampOn=1 (On) LampLevel=60 %");
   frame.id = 0x200;
+  frame.dlc = 1;
   frame.data[0] = 0;
   REQUIRE(dbc_describe_frame(&db, &frame, text, sizeof(text)) > 0);
   CHECK(std::string(text) == "SWITCH_STATE SwitchOn=0 (Off)");

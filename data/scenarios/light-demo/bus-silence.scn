@@ -1,6 +1,6 @@
 name Bus silence: nothing gets through, the ECU keeps its state
 send 200#01
-expect 100#01 within 300
+expect 100#01* within 300
 bus silence 1500
 expect-not 100#* for 1200
-expect 100#01 within 1500                       # cyclic LAMP_CMD again after the silence
+expect 100#01* within 1500                       # cyclic LAMP_CMD again after the silence

@@ -84,8 +84,10 @@ static void print_console_help(void) {
   printf("Commands:\n"
          "  lamp on|off|toggle   set the lamp command\n"
          "  blink <ms>|off       let the ECU blink the lamp\n"
+         "  dim <0..100>         brightness in percent (PWM of the output)\n"
          "  send <frame>         put any frame on the bus, e.g. send 123#DEADBEEF\n"
-         "  fault <f> on|off     inject a fault: short | open | supply (fault clear: all off)\n"
+         "  fault <f> on|off     inject a fault: short | open | supply | overload (fault clear: all off)\n"
+         "  fuse replace         put in a new lamp fuse after it blew\n"
          "  dtc                  show the trouble codes of the ECU\n"
          "  status               show the current state\n"
          "  help                 show this help\n"
@@ -151,11 +153,26 @@ static void handle_command(SimShared* shared, char* line) {
     } else if (!can_bus_send(&shared->tx_queue, &frame)) {
       printf("send queue full, frame dropped\n");
     }
+  } else if (strcmp(command, "dim") == 0 && argument != NULL) {
+    long level = 0;
+    if (!cli_parse_long(argument, 0, 100, &level)) {
+      printf("usage: dim <0..100>\n");
+    } else {
+      pthread_mutex_lock(&shared->lock);
+      light_ecu_set_level(&shared->ecu, (uint32_t)level);
+      pthread_mutex_unlock(&shared->lock);
+    }
+  } else if (strcmp(command, "fuse") == 0 && argument != NULL && strcmp(argument, "replace") == 0) {
+    pthread_mutex_lock(&shared->lock);
+    light_ecu_diag_replace_fuse(&shared->diag);
+    pthread_mutex_unlock(&shared->lock);
+    log_info("lamp fuse replaced");
   } else if (strcmp(command, "fault") == 0 && argument != NULL && strcmp(argument, "clear") == 0) {
     pthread_mutex_lock(&shared->lock);
     light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_LAMP_SHORT, false);
     light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_LAMP_OPEN, false);
     light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_SUPPLY_LOW, false);
+    light_ecu_diag_set_fault(&shared->diag, LIGHT_FAULT_OVERLOAD, false);
     pthread_mutex_unlock(&shared->lock);
     log_info("all injected faults removed");
   } else if (strcmp(command, "fault") == 0 && argument != NULL) {
@@ -167,7 +184,7 @@ static void handle_command(SimShared* shared, char* line) {
     }
     if (state == NULL || !light_ecu_fault_from_name(argument, &fault) ||
         (strcmp(state, "on") != 0 && strcmp(state, "off") != 0)) {
-      printf("usage: fault short|open|supply on|off\n");
+      printf("usage: fault short|open|supply|overload on|off\n");
     } else {
       const bool active = strcmp(state, "on") == 0;
       pthread_mutex_lock(&shared->lock);
@@ -188,19 +205,24 @@ static void handle_command(SimShared* shared, char* line) {
              (dtcs[i].status & UDS_DTC_TEST_FAILED) ? "  failed" : "",
              (dtcs[i].status & UDS_DTC_CONFIRMED) ? "  confirmed" : "");
     }
-    printf("injected faults: %s%s%s%s\n", faults == 0 ? "none" : "",
+    printf("injected faults: %s%s%s%s%s\n", faults == 0 ? "none" : "",
            (faults & LIGHT_FAULT_LAMP_SHORT) ? "short " : "", (faults & LIGHT_FAULT_LAMP_OPEN) ? "open " : "",
-           (faults & LIGHT_FAULT_SUPPLY_LOW) ? "supply" : "");
+           (faults & LIGHT_FAULT_SUPPLY_LOW) ? "supply " : "", (faults & LIGHT_FAULT_OVERLOAD) ? "overload" : "");
   } else if (strcmp(command, "status") == 0) {
     pthread_mutex_lock(&shared->lock);
     bool lamp = shared->ecu.lamp_on;
     bool output = light_ecu_output(&shared->ecu);
     uint32_t blink = shared->ecu.blink_period_ms;
+    const unsigned level = shared->ecu.level;
+    const PowerReading reading = shared->diag.reading;
     const UdsSession session = uds_server_session(&shared->diag.uds);
     pthread_mutex_unlock(&shared->lock);
-    printf("lamp: %s%s%s | diag session: %s | bus: %s | sent: %llu | received: %llu\n", lamp ? "ON" : "OFF",
-           blink ? " (blinking)" : "", lamp && !output ? " (output inhibited)" : "",
-           uds_session_name((uint8_t)session), atomic_load(&shared->connected) ? "connected" : "offline",
+    printf("lamp: %s %u %%%s%s | %.3f A, %.2f V, %.1f W%s%s\n", lamp ? "ON" : "OFF", level,
+           blink ? " (blinking)" : "", lamp && !output ? " (output off: protection)" : "", reading.current_a,
+           reading.supply_v, reading.power_w, reading.fuse_blown ? " | FUSE BLOWN" : "",
+           reading.tripped ? " | short circuit shutdown" : "");
+    printf("diag session: %s | bus: %s | sent: %llu | received: %llu\n", uds_session_name((uint8_t)session),
+           atomic_load(&shared->connected) ? "connected" : "offline",
            (unsigned long long)atomic_load(&shared->frames_sent),
            (unsigned long long)atomic_load(&shared->frames_received));
   } else {
@@ -424,6 +446,7 @@ int main(int argc, char** argv) {
   uint64_t next_connect_ms = 0;
   bool offline_reported = false;
   bool last_reported_lamp = false;
+  bool last_fuse_blown = false;
   bool lamp_reported = false;
 
   CycleTimer timer;
@@ -499,7 +522,11 @@ int main(int argc, char** argv) {
       if (light_ecu_diag_on_frame(&shared.diag, &frame, now_ms)) {
         log_debug("RX %s (diag)", text);
       } else if (light_ecu_on_frame(&shared.ecu, &frame)) {
-        log_info("RX %-12s switch -> %s", text, (frame.data[0] & 1u) ? "ON" : "OFF");
+        if (frame.id == LIGHT_ECU_ID_DIMMER_CMD) {
+          log_info("RX %-12s dimmer -> %u %%", text, (unsigned)shared.ecu.level);
+        } else {
+          log_info("RX %-12s switch -> %s", text, (frame.data[0] & 1u) ? "ON" : "OFF");
+        }
       } else {
         log_debug("RX %s", text);
       }
@@ -511,8 +538,17 @@ int main(int argc, char** argv) {
     }
     send_output = light_ecu_step(&shared.ecu, now_ms, &output, &state_changed);
     const bool lamp_output = light_ecu_output(&shared.ecu);
+    CanFrame status;
+    const bool send_status = light_ecu_diag_status(&shared.diag, now_ms, &status);
+    const bool fuse_blown = shared.diag.reading.fuse_blown;
     pthread_mutex_unlock(&shared.lock);
     const bool lamp_on = lamp_output;
+    if (fuse_blown != last_fuse_blown) {
+      last_fuse_blown = fuse_blown;
+      if (fuse_blown) {
+        log_warn("lamp fuse blown (overcurrent) - 'fuse replace' puts in a new one");
+      }
+    }
 
     /* --- send --- */
     if (send_output) {
@@ -528,6 +564,7 @@ int main(int argc, char** argv) {
     }
     if (socket != NET_INVALID_SOCKET) {
       bool ok = !send_output || send_frame(socket, &shared, &output);
+      ok = ok && (!send_status || send_frame(socket, &shared, &status));
       while (ok && can_bus_receive(&shared.diag_queue, &frame)) {
         char text[CAN_FRAME_TEXT_MAX];
         can_frame_to_text(&frame, text, sizeof(text));

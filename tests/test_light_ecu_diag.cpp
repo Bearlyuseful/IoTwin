@@ -80,7 +80,8 @@ TEST_CASE("Light ECU diagnostics: short circuit switches the output off", "[ligh
   CHECK(f.request({0x19, 0x02, 0x09}) == Bytes{0x59, 0x02, 0x7F, 0x90, 0x01, 0x11, 0x2F});
 
   light_ecu_diag_set_fault(&f.diag, LIGHT_FAULT_LAMP_SHORT, false);
-  CHECK(f.step() == 1);
+  CHECK(f.step() == -1);     // the smart switch retries only every 100 ms
+  CHECK(f.step(100) == 1);   // retry succeeds, lamp back
   CHECK(f.dtc_status(LIGHT_ECU_DTC_LAMP_SHORT) == 0x2E);  // stays confirmed until cleared
   CHECK(f.request({0x14, 0xFF, 0xFF, 0xFF}) == Bytes{0x54});
   CHECK(f.request({0x19, 0x02, 0x09}) == Bytes{0x59, 0x02, 0x7F});
@@ -141,6 +142,96 @@ TEST_CASE("Light ECU diagnostics: fault names", "[light_ecu_diag]") {
   CHECK(fault == LIGHT_FAULT_LAMP_SHORT);
   CHECK(light_ecu_fault_from_name("supply", &fault));
   CHECK(fault == LIGHT_FAULT_SUPPLY_LOW);
+  CHECK(light_ecu_fault_from_name("overload", &fault));
+  CHECK(fault == LIGHT_FAULT_OVERLOAD);
   CHECK_FALSE(light_ecu_fault_from_name("smoke", &fault));
   CHECK(std::string(light_ecu_fault_name(LIGHT_FAULT_LAMP_OPEN)) == "lamp output open circuit");
+}
+
+TEST_CASE("Light ECU output stage: current follows the brightness", "[light_ecu_diag][power]") {
+  Fixture f;
+  light_ecu_set_lamp(&f.ecu, true);
+  f.step();
+  // 12.6 V / (6.857 + 0.05 + 0.02) Ohm = 1.819 A at 100 %
+  CHECK(f.diag.reading.current_a == Catch::Approx(1.819).epsilon(0.002));
+  CHECK(f.diag.reading.supply_v == Catch::Approx(12.6 - 1.819 * 0.05).epsilon(0.001));
+  CHECK(f.request({0x22, 0x01, 0x06}) == Bytes{0x62, 0x01, 0x06, 0x07, 0x1B});  // 1819 mA
+
+  light_ecu_set_level(&f.ecu, 25);
+  f.step();
+  CHECK(f.diag.reading.current_a == Catch::Approx(1.819 * 0.25).epsilon(0.002));
+  CHECK(f.request({0x22, 0x01, 0x05}) == Bytes{0x62, 0x01, 0x05, 25});
+
+  f.request({0x10, 0x03});
+  CHECK(f.request({0x2E, 0x01, 0x05, 60}) == Bytes{0x6E, 0x01, 0x05});
+  CHECK(f.ecu.level == 60);
+  CHECK(f.request({0x2E, 0x01, 0x05, 101}) == Bytes{0x7F, 0x2E, 0x31});
+
+  light_ecu_set_lamp(&f.ecu, false);
+  f.step();
+  CHECK(f.diag.reading.current_a == 0.0);
+  CHECK(f.dtc_status(LIGHT_ECU_DTC_OVERCURRENT) == 0x00);
+  CHECK(f.dtc_status(LIGHT_ECU_DTC_FUSE_BLOWN) == 0x00);
+}
+
+TEST_CASE("Light ECU output stage: overload heats the fuse until it blows", "[light_ecu_diag][power]") {
+  Fixture f;
+  light_ecu_set_lamp(&f.ecu, true);
+  light_ecu_diag_set_fault(&f.diag, LIGHT_FAULT_OVERLOAD, true);
+  f.step();
+  CHECK(f.diag.reading.current_a == Catch::Approx(5.35).epsilon(0.01));  // 63 W bulb
+  for (int i = 0; i < 25; i++) {
+    f.step();
+  }
+  CHECK((f.dtc_status(LIGHT_ECU_DTC_OVERCURRENT) & UDS_DTC_CONFIRMED) != 0);  // after 200 ms
+  CHECK_FALSE(f.diag.reading.fuse_blown);
+
+  int steps = 0;
+  int lamp_cmd = -1;
+  while (!f.diag.reading.fuse_blown && steps < 500) {
+    lamp_cmd = f.step();
+    steps++;
+  }
+  REQUIRE(f.diag.reading.fuse_blown);
+  // (5.35^2 - 3^2) A^2 = 19.6 A^2 per second against 40 A^2 s: about two seconds
+  CHECK(steps * 10 + 260 > 1700);
+  CHECK(steps * 10 + 260 < 2500);
+  CHECK(lamp_cmd == 0);  // lamp dark, reported in LAMP_CMD right away
+  CHECK((f.dtc_status(LIGHT_ECU_DTC_FUSE_BLOWN) & UDS_DTC_TEST_FAILED) != 0);
+  CHECK(f.request({0x22, 0x01, 0x07}) == Bytes{0x62, 0x01, 0x07, 0x01, 100});
+
+  f.step();  // the step that blew the fuse still conducted part of the time
+  CanFrame status;
+  f.diag.last_status_ms = 0;
+  REQUIRE(light_ecu_diag_status(&f.diag, f.now_ms, &status));
+  CHECK(status.id == LIGHT_ECU_ID_LAMP_STATUS);
+  CHECK(status.dlc == 6);
+  CHECK(status.data[0] == 0);  // no current
+  CHECK((status.data[5] & LIGHT_ECU_STATUS_FUSE_BLOWN) != 0);
+
+  // Removing the overload alone does not help: the fuse has to be replaced.
+  light_ecu_diag_set_fault(&f.diag, LIGHT_FAULT_OVERLOAD, false);
+  f.step();
+  CHECK(f.diag.reading.fuse_blown);
+  light_ecu_diag_replace_fuse(&f.diag);
+  CHECK(f.step() == 1);
+  CHECK((f.dtc_status(LIGHT_ECU_DTC_FUSE_BLOWN) & UDS_DTC_TEST_FAILED) == 0);
+  CHECK((f.dtc_status(LIGHT_ECU_DTC_FUSE_BLOWN) & UDS_DTC_CONFIRMED) != 0);
+}
+
+TEST_CASE("Light ECU output stage: LAMP_STATUS every 200 ms", "[light_ecu_diag][power]") {
+  Fixture f;
+  light_ecu_set_lamp(&f.ecu, true);
+  light_ecu_set_level(&f.ecu, 50);
+  f.step();
+  CanFrame status;
+  REQUIRE(light_ecu_diag_status(&f.diag, f.now_ms, &status));
+  const unsigned current_ma = status.data[0] | (status.data[1] << 8);
+  const unsigned supply_mv = status.data[2] | (status.data[3] << 8);
+  CHECK(current_ma == Catch::Approx(910).margin(3));
+  CHECK(supply_mv == Catch::Approx(12555).margin(3));
+  CHECK(status.data[4] == 50);
+  CHECK(status.data[5] == 0);
+  CHECK_FALSE(light_ecu_diag_status(&f.diag, f.now_ms + 199, &status));
+  CHECK(light_ecu_diag_status(&f.diag, f.now_ms + 200, &status));
 }

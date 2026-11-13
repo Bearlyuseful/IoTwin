@@ -4,6 +4,7 @@ void light_ecu_init(LightEcu* ecu, uint32_t cycle_ms) {
   ecu->lamp_on = false;
   ecu->switch_on = false;
   ecu->output_inhibit = false;
+  ecu->level = LIGHT_ECU_DEFAULT_LEVEL;
   ecu->cycle_ms = cycle_ms;
   ecu->blink_period_ms = 0;
   ecu->last_send_ms = 0;
@@ -13,7 +14,14 @@ void light_ecu_init(LightEcu* ecu, uint32_t cycle_ms) {
 }
 
 bool light_ecu_on_frame(LightEcu* ecu, const CanFrame* frame) {
-  if (frame->extended || frame->rtr || frame->id != LIGHT_ECU_ID_SWITCH_STATE || frame->dlc < 1) {
+  if (frame->extended || frame->rtr || frame->dlc < 1) {
+    return false;
+  }
+  if (frame->id == LIGHT_ECU_ID_DIMMER_CMD) {
+    light_ecu_set_level(ecu, frame->data[0]);
+    return true;
+  }
+  if (frame->id != LIGHT_ECU_ID_SWITCH_STATE) {
     return false;
   }
   ecu->switch_on = (frame->data[0] & 0x01u) != 0;
@@ -25,6 +33,14 @@ void light_ecu_set_lamp(LightEcu* ecu, bool on) {
   ecu->blink_period_ms = 0;
   if (ecu->lamp_on != on) {
     ecu->lamp_on = on;
+    ecu->dirty = true;
+  }
+}
+
+void light_ecu_set_level(LightEcu* ecu, uint32_t percent) {
+  const uint8_t level = (uint8_t)(percent > 100u ? 100u : percent);
+  if (ecu->level != level) {
+    ecu->level = level;
     ecu->dirty = true;
   }
 }
@@ -72,8 +88,8 @@ bool light_ecu_step(LightEcu* ecu, uint64_t now_ms, CanFrame* out, bool* state_c
     return false;
   }
 
-  const uint8_t payload = light_ecu_output(ecu) ? 0x01u : 0x00u;
-  can_frame_set(out, LIGHT_ECU_ID_LAMP_CMD, false, &payload, 1);
+  const uint8_t payload[2] = {light_ecu_output(ecu) ? 0x01u : 0x00u, ecu->level};
+  can_frame_set(out, LIGHT_ECU_ID_LAMP_CMD, false, payload, 2);
   ecu->last_send_ms = now_ms;
   ecu->dirty = false;
   return true;

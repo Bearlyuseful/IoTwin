@@ -39,8 +39,11 @@ comment). Times are in milliseconds.
 | `uds <target> <request> [expect <response>]` | UDS request to `ecu`, `gateway` or `TX:RX` (hex ids) |
 | `log <text>` | print a note |
 
-Before every action (`send`, `bench`, `bus`, `uds`) the runner discards what
-has arrived so far, so an `expect` only sees frames that follow the action.
+An `expect` sees the frames since the start of the last action (`send`,
+`bench`, `bus`, `uds`), including those that arrived while the action was
+still running (e.g. a reaction sent before the UDS response), and consumes
+them up to its match, so two `expect` in a row need two frames. `wait`
+discards what arrives during the wait.
 
 **Frame patterns:** `100#01` exact payload, `100#01*` payload starting with
 `01`, `100#*` any payload, `100#XX01` `XX` = any byte, `100#R` remote frame,

@@ -9,7 +9,7 @@
       "kind": "virtual",
       "label": "Light ECU",
       "program": "can_sim",
-      "description": "Simulated control unit, follows SWITCH_STATE and commands LAMP_CMD"
+      "description": "Simulated control unit with a dimmable 21 W output (PWM, 3 A fuse, smart switch); follows SWITCH_STATE and DIMMER_CMD, commands LAMP_CMD, reports LAMP_STATUS"
     },
     {
       "id": "visualizer",
@@ -61,6 +61,8 @@
   ],
   "messages": [
     { "name": "LAMP_CMD", "producers": ["ecu"], "consumers": ["visualizer", "gateway"] },
+    { "name": "LAMP_STATUS", "producers": ["ecu"], "consumers": ["visualizer", "tester"] },
+    { "name": "DIMMER_CMD", "producers": ["visualizer"], "consumers": ["ecu"] },
     { "name": "SWITCH_STATE", "producers": ["visualizer", "gateway"], "consumers": ["ecu"] },
     { "name": "DIAG_FUNCTIONAL_REQ", "protocol": "uds", "producers": ["tester"], "consumers": ["ecu", "gateway"] },
     { "name": "DIAG_ECU_REQ", "protocol": "uds", "producers": ["tester"], "consumers": ["ecu"] },
