@@ -1,0 +1,1439 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for IoTwin the Digital Twin IoT Simulation Platform">
+      
+      
+        <meta name="author" content="Christian Fleischmann">
+      
+      
+      
+        <link rel="prev" href="../diagnostics/">
+      
+      
+        <link rel="next" href="../component_database/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Scenarios and Faults - Digital Twin IoT</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#scenarios-and-faults" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Digital Twin IoT" class="md-header__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Digital Twin IoT
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Scenarios and Faults
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Bearlyuseful/IoTwin" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Bearlyuseful/IoTwin
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../user/quickstart/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Quickstart
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../roadmap/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../build_instructions/" class="md-tabs__link">
+          
+  
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../adr/0001-choice-of-documentation/" class="md-tabs__link">
+          
+  
+  
+  Architecture Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Digital Twin IoT" class="md-nav__button md-logo" aria-label="Digital Twin IoT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Digital Twin IoT
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Bearlyuseful/IoTwin" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Bearlyuseful/IoTwin
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build_instructions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bus Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../realtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Real-Time Operation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visualizer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware (NUCLEO-G0B1RE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../can_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAN Tools (DBC, ISO-TP, SocketCAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagnostics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagnostics (UDS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios and Faults
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios and Faults
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scenario-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario scripts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bus-faults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bus faults
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-bench-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test bench commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recording-and-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recording and replay
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenarios-of-the-light-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenarios of the light demo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocol-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol details
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../component_database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0001-choice-of-documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0001 Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0002-bus-server-and-text-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0002 Bus and Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0003-linux-rt-target-windows-best-effort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0003 Platforms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0004-firmware-in-mono-repo-bare-metal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0004 Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0005-repository-layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0005 Repository Layout
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="scenarios-and-faults">Scenarios and Faults<a class="headerlink" href="#scenarios-and-faults" title="Permanent link">&para;</a></h1>
+<p>IoTwin can disturb the virtual bus on purpose and check how the nodes react,
+like a hardware-in-the-loop test bench:</p>
+<ul>
+<li><strong>Fault injection of the medium</strong> in <code>iotwin-bus</code>: lost frames, delay and
+  jitter, a silent bus.</li>
+<li><strong>Test bench commands</strong> to simulated nodes, e.g. a short circuit at the
+  lamp output of the light ECU.</li>
+<li><strong>Recording and replay</strong> in the can-utils <code>candump -L</code> format.</li>
+<li><strong>Scenario scripts</strong> (<code>can_scenario</code>) that drive all of this and check the
+  reactions, including UDS diagnostics. They run as automatic tests.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>iotwin-bus
+can_sim
+can_scenario<span class="w"> </span>data/scenarios/light-demo/lamp-short-dtc.scn
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>RUN  Short circuit of the lamp output becomes DTC B1001-11
+PASS Short circuit of the lamp output becomes DTC B1001-11 (12 steps, 124 ms)
+</code></pre></div>
+<h2 id="scenario-scripts">Scenario scripts<a class="headerlink" href="#scenario-scripts" title="Permanent link">&para;</a></h2>
+<p>One step per line, <code>#</code> starts a comment (<code>200#01</code> inside a frame is not a
+comment). Times are in milliseconds.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name &lt;text&gt;</code></td>
+<td>name shown in the output (default: file name)</td>
+</tr>
+<tr>
+<td><code>send &lt;frame&gt;</code></td>
+<td>put a frame on the bus, e.g. <code>send 200#01</code></td>
+</tr>
+<tr>
+<td><code>expect &lt;pattern&gt; [within &lt;ms&gt;]</code></td>
+<td>a matching frame must arrive (default 1000 ms)</td>
+</tr>
+<tr>
+<td><code>expect-not &lt;pattern&gt; for &lt;ms&gt;</code></td>
+<td>no matching frame may arrive</td>
+</tr>
+<tr>
+<td><code>wait &lt;ms&gt;</code></td>
+<td>let time pass</td>
+</tr>
+<tr>
+<td><code>bench &lt;node&gt; &lt;command&gt;</code></td>
+<td>test bench command to a simulated node, e.g. <code>bench ecu fault short on</code></td>
+</tr>
+<tr>
+<td><code>bus &lt;fault&gt;</code></td>
+<td>fault of the bus: <code>drop</code>, <code>delay</code>, <code>silence</code>, <code>seed</code>, <code>clear</code> (see below)</td>
+</tr>
+<tr>
+<td><code>uds &lt;target&gt; &lt;request&gt; [expect &lt;response&gt;]</code></td>
+<td>UDS request to <code>ecu</code>, <code>gateway</code> or <code>TX:RX</code> (hex ids)</td>
+</tr>
+<tr>
+<td><code>log &lt;text&gt;</code></td>
+<td>print a note</td>
+</tr>
+</tbody>
+</table>
+<p>Before every action (<code>send</code>, <code>bench</code>, <code>bus</code>, <code>uds</code>) the runner discards what
+has arrived so far, so an <code>expect</code> only sees frames that follow the action.</p>
+<p><strong>Frame patterns:</strong> <code>100#01</code> exact payload, <code>100#01*</code> payload starting with
+<code>01</code>, <code>100#*</code> any payload, <code>100#XX01</code> <code>XX</code> = any byte, <code>100#R</code> remote frame,
+8-digit ids for extended frames.</p>
+<p><strong>UDS:</strong> request and expected response are hex bytes (spaces allowed); a
+trailing <code>*</code> allows more bytes. Without <code>expect</code> the step needs a positive
+response. Example: <code>uds ecu 190209 expect 59027F9001112F</code> - exactly the DTC
+<code>B1001-11</code> with status <code>2F</code>. Services and identifiers: <a href="../diagnostics/">Diagnostics</a>.</p>
+<p>Exit code 0 when all scenarios passed, 1 if one failed, 2 for a syntax error.
+A failure names the line and what was seen instead:</p>
+<div class="highlight"><pre><span></span><code>  FAIL line 1: expect 100#01 within 600 ms
+       not seen within 600 ms (last frames: 100#00)
+</code></pre></div>
+<p>Single steps without a file: <code>can_scenario -e "bus drop 20" -e "bus delay 30 10"</code>.
+<code>--verbose</code> prints every step and every frame.</p>
+<h2 id="bus-faults">Bus faults<a class="headerlink" href="#bus-faults" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><code>bus ...</code></th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>drop &lt;percent&gt; [&lt;id&gt;[/&lt;mask&gt;]]</code></td>
+<td>lose frames; optionally only matching ids (hex), e.g. <code>drop 100 200</code> drops every <code>0x200</code></td>
+</tr>
+<tr>
+<td><code>delay &lt;ms&gt; [&lt;jitter ms&gt;]</code></td>
+<td>deliver late; frames never overtake each other (as on CAN)</td>
+</tr>
+<tr>
+<td><code>silence &lt;ms&gt;</code></td>
+<td>nothing gets through, e.g. a disturbed or short-circuited bus</td>
+</tr>
+<tr>
+<td><code>seed &lt;n&gt;</code></td>
+<td>start value of the random generator: the same seed loses the same frames</td>
+</tr>
+<tr>
+<td><code>clear</code></td>
+<td>remove all faults (frames still delayed keep their place)</td>
+</tr>
+</tbody>
+</table>
+<p>Faults affect every node, including the scenario runner. The bus logs who
+injected what; <code>!status</code> (see <a href="../protocol/#control-lines-and-test-bench">Bus Protocol</a>)
+reports the counters of dropped and delayed frames.</p>
+<h2 id="test-bench-commands">Test bench commands<a class="headerlink" href="#test-bench-commands" title="Permanent link">&para;</a></h2>
+<p><code>bench &lt;node&gt; &lt;command&gt;</code> sends <code>@&lt;node&gt; &lt;command&gt;</code> over the bus. Only nodes
+that registered for the test bench receive it, never the CAN nodes.
+<code>can_sim</code> registers as <code>ecu</code> (<code>--name</code> changes it) and runs the command like
+one typed on its console:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fault short on/off</code></td>
+<td>lamp output short to ground: output switched off, DTC <code>B1001-11</code></td>
+</tr>
+<tr>
+<td><code>fault open on/off</code></td>
+<td>open load: DTC <code>B1001-13</code> while the lamp is on</td>
+</tr>
+<tr>
+<td><code>fault supply on/off</code></td>
+<td>supply voltage low: DTC <code>B1002-16</code></td>
+</tr>
+<tr>
+<td><code>fault clear</code></td>
+<td>remove all injected faults</td>
+</tr>
+<tr>
+<td><code>lamp on/off/toggle</code>, <code>blink &lt;ms&gt;/off</code></td>
+<td>operate the ECU directly</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recording-and-replay">Recording and replay<a class="headerlink" href="#recording-and-replay" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>can_monitor<span class="w"> </span>--log<span class="w"> </span>drive.log<span class="w"> </span>--quiet<span class="w">      </span><span class="c1"># record everything on the bus</span>
+can_replay<span class="w"> </span>drive.log<span class="w">                     </span><span class="c1"># play it back with the original timing</span>
+can_replay<span class="w"> </span>--speed<span class="w"> </span><span class="m">4</span><span class="w"> </span>--loop<span class="w"> </span>--filter<span class="w"> </span><span class="m">100</span><span class="w"> </span>drive.log
+</code></pre></div>
+<p>The log format is the one of <code>candump -L</code>, so logs from a real bus (can-utils
+on Linux, <code>candump -L can0 &gt; drive.log</code>) can be replayed onto iotwin-bus and
+IoTwin logs can be played on a real bus with <code>canplayer</code>:</p>
+<div class="highlight"><pre><span></span><code>(1794606835.444395) iotwin 200#01
+(1794606835.445622) iotwin 100#01
+</code></pre></div>
+<h2 id="scenarios-of-the-light-demo">Scenarios of the light demo<a class="headerlink" href="#scenarios-of-the-light-demo" title="Permanent link">&para;</a></h2>
+<p><code>data/scenarios/light-demo/</code> (automatic test <code>scenarios</code> in CTest):</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>switch-controls-lamp</code></td>
+<td><code>SWITCH_STATE</code> -&gt; <code>LAMP_CMD</code> within 300 ms</td>
+</tr>
+<tr>
+<td><code>cyclic-lamp-cmd</code></td>
+<td>500 ms cycle; cycle 0 via UDS = only on change</td>
+</tr>
+<tr>
+<td><code>diagnostics-identification</code></td>
+<td>VIN, sessions, write protection, blink via UDS, reset</td>
+</tr>
+<tr>
+<td><code>lamp-short-dtc</code></td>
+<td>injected short: output off, DTC failed and confirmed, cleared</td>
+</tr>
+<tr>
+<td><code>frame-loss</code></td>
+<td>lost <code>SWITCH_STATE</code>: the lamp does not react</td>
+</tr>
+<tr>
+<td><code>bus-delay</code></td>
+<td>250 ms delay adds up in both directions</td>
+</tr>
+<tr>
+<td><code>bus-silence</code></td>
+<td>silent bus: nothing arrives, the ECU continues afterwards</td>
+</tr>
+</tbody>
+</table>
+<p><code>tools/run_scenarios.py</code> starts a fresh <code>iotwin-bus</code> (free port) and <code>can_sim</code>
+for every scenario, so faults, DTCs and settings never leak into the next one:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>tools/run_scenarios.py<span class="w"> </span>--bin<span class="w"> </span>build/gcc-debug/bin<span class="w"> </span>data/scenarios/light-demo
+</code></pre></div>
+<p><code>data/scenarios/hardware/gateway-diagnostics.scn</code> checks the NUCLEO gateway
+and needs the board with <code>serial_bridge</code>; it is not part of the automatic tests.</p>
+<h2 id="protocol-details">Protocol details<a class="headerlink" href="#protocol-details" title="Permanent link">&para;</a></h2>
+<p>The control and test bench lines extend the bus protocol without affecting
+existing nodes: a node only receives them after it has sent a <code>!</code> command
+itself or registered with <code>!testbench on</code>. See <a href="../protocol/">Bus Protocol</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "toc.integrate", "search.suggest", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

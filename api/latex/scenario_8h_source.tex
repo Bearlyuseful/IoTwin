@@ -1,0 +1,86 @@
+\doxysection{scenario.\+h}
+\hypertarget{scenario_8h_source}{}\label{scenario_8h_source}\index{apps/can\_scenario/scenario.h@{apps/can\_scenario/scenario.h}}
+\mbox{\hyperlink{scenario_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_SCENARIO\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_SCENARIO\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ SCENARIO\_MAX\_STEPS\ 256}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ SCENARIO\_TEXT\_MAX\ 160}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ SCENARIO\_UDS\_MAX\ 64}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ SCENARIO\_DEFAULT\_TIMEOUT\_MS\ 1000u}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba55dc6a28e56fe88a29b17a9cf3700568}{STEP\_SEND}},}
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60badb1e51a833bc5e78a09408059c510807}{STEP\_EXPECT}},}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba81ca0f6298e98ad56d2fd42198e9389c}{STEP\_EXPECT\_NOT}},}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba6e05cde7de9ac8e47c4ad608eea7ac67}{STEP\_WAIT}},}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba397e45f9da9e2a1375c4eee31bee6387}{STEP\_BENCH}},}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba2368fea8561a9b535139d65119175324}{STEP\_BUS}},}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60baebf1c74858d2b2cf43a106bab7b7f2a8}{STEP\_UDS}},}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba503895d56233647b9434f319b9732ec7}{STEP\_LOG}}}
+\DoxyCodeLine{00052\ \}\ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60b}{ScenarioStepType}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00055\ \ \ uint32\_t\ \mbox{\hyperlink{structFramePattern_afae0ed96878b2d3437bbf18ac6900a1b}{id}};}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFramePattern_ad13450fff5fa7ff0f2fb951d9ee4b2c0}{extended}};}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFramePattern_a5b9935c2292fb339b71206fce70a73dd}{rtr}};}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFramePattern_a0f6a22b11f2fd701827c16667a9b3593}{any\_payload}};\ \ \ \textcolor{comment}{/*\ "{}\#*"{}\ */}}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFramePattern_a42a9fef8f8bece18777a24e5725d6e67}{prefix}};\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ trailing\ '*':\ at\ least\ these\ bytes,\ more\ allowed\ */}}
+\DoxyCodeLine{00060\ \ \ uint8\_t\ \mbox{\hyperlink{structFramePattern_a45a3b248765c2aca9587c83bee097fb0}{length}};\ \ \ \ \ \textcolor{comment}{/*\ number\ of\ payload\ bytes\ in\ the\ pattern\ */}}
+\DoxyCodeLine{00061\ \ \ uint8\_t\ \mbox{\hyperlink{structFramePattern_a9754773015f1d1fe742a3801435e9a03}{data}}[\mbox{\hyperlink{can__frame_8h_af64b4fdfe44fc19065702d1eedb9ab43}{CAN\_MAX\_DLEN}}];}
+\DoxyCodeLine{00062\ \ \ uint8\_t\ \mbox{\hyperlink{structFramePattern_a04e0ecca0cd26e3dca25a88d2c84b4d2}{wildcard}};\ \ \ \textcolor{comment}{/*\ bit\ i\ set:\ byte\ i\ is\ "{}XX"{}\ */}}
+\DoxyCodeLine{00063\ \}\ \mbox{\hyperlink{structFramePattern}{FramePattern}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60b}{ScenarioStepType}}\ \mbox{\hyperlink{structScenarioStep_ad250f2eacf2755461cd1e67cd9aba636}{type}};}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structScenarioStep_ab273576bf1db82f35cbde68a164e687f}{line}};}
+\DoxyCodeLine{00068\ \ \ uint32\_t\ \mbox{\hyperlink{structScenarioStep_ae6010c8ce318880c8d6431b57a0b176b}{ms}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ expect:\ within,\ expect-\/not:\ for,\ wait\ */}}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{structCanFrame}{CanFrame}}\ \mbox{\hyperlink{structScenarioStep_afc545cecc0a2a5476067f682eccfd708}{frame}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ send\ */}}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{structFramePattern}{FramePattern}}\ \mbox{\hyperlink{structScenarioStep_a374bd7a9f2d10bccaf716de8be8a0289}{pattern}};\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ expect,\ expect-\/not\ */}}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structScenarioStep_a60fd3180d43973d32b339cd0f23f82ee}{text}}[\mbox{\hyperlink{scenario_8h_a50683d8c0ecec6e431b37137e7883100}{SCENARIO\_TEXT\_MAX}}];\ \ \ \textcolor{comment}{/*\ bench:\ "{}@target\ cmd"{},\ bus:\ "{}fault\ ..."{},\ log,\ source\ text\ of\ the\ step\ */}}
+\DoxyCodeLine{00072\ \ \ uint32\_t\ \mbox{\hyperlink{structScenarioStep_a1f64413734c8efbf8a4ab961cc0ae5a4}{uds\_tx}};}
+\DoxyCodeLine{00073\ \ \ uint32\_t\ \mbox{\hyperlink{structScenarioStep_af816c1585a10efec0dbfbc0dbfbccd1f}{uds\_rx}};}
+\DoxyCodeLine{00074\ \ \ uint8\_t\ \mbox{\hyperlink{structScenarioStep_a81aad5ac6b956007b252a2a28ef6279b}{uds\_request}}[\mbox{\hyperlink{scenario_8h_a122410968a1869242e79c452431d8808}{SCENARIO\_UDS\_MAX}}];}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structScenarioStep_ae50e0f7171787ab38ccd4d9e801025f2}{uds\_request\_length}};}
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structScenarioStep_a864994cecb0a1e365a6d9e6a0a113d36}{uds\_expect\_given}};}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structScenarioStep_ab97ab65a82ce520353dd986da9877716}{uds\_expect\_prefix}};}
+\DoxyCodeLine{00078\ \ \ uint8\_t\ \mbox{\hyperlink{structScenarioStep_aa7a440497eac074951270fbc1de08f78}{uds\_expect}}[\mbox{\hyperlink{scenario_8h_a122410968a1869242e79c452431d8808}{SCENARIO\_UDS\_MAX}}];}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structScenarioStep_a09bbd0b54a4a5c102938e9a2510ef037}{uds\_expect\_length}};}
+\DoxyCodeLine{00080\ \}\ \mbox{\hyperlink{structScenarioStep}{ScenarioStep}};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structScenario_af02ae0e30ac4a6367d50632bf24aaf10}{name}}[\mbox{\hyperlink{scenario_8h_a50683d8c0ecec6e431b37137e7883100}{SCENARIO\_TEXT\_MAX}}];}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{structScenarioStep}{ScenarioStep}}\ \mbox{\hyperlink{structScenario_a97267d2f842db93959b6b3627778302e}{steps}}[\mbox{\hyperlink{scenario_8h_a5a28b5c66c920b90810be1dadf6ea010}{SCENARIO\_MAX\_STEPS}}];}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structScenario_a3b75499284752fcec4646b4058791ba2}{count}};}
+\DoxyCodeLine{00086\ \}\ \mbox{\hyperlink{structScenario}{Scenario}};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{scenario_8h_a678fa76b913d488b3046f41cb2ff75fb}{scenario\_init}}(\mbox{\hyperlink{structScenario}{Scenario}}*\ scenario);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{scenario_8h_ac7a2e430006c17685535959cc6a3a59a}{scenario\_parse\_line}}(\mbox{\hyperlink{structScenario}{Scenario}}*\ scenario,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{int}\ line\_number,\ \textcolor{keywordtype}{char}*\ error,\ \textcolor{keywordtype}{size\_t}\ error\_size);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00094\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{scenario_8h_a66a269d8bbfc7841adac6d62e27773ee}{scenario\_load}}(\mbox{\hyperlink{structScenario}{Scenario}}*\ scenario,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \textcolor{keywordtype}{char}*\ error,\ \textcolor{keywordtype}{size\_t}\ error\_size);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{scenario_8h_a093ff8ba04d10549efe317dbc060435d}{frame\_pattern\_parse}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ \mbox{\hyperlink{structFramePattern}{FramePattern}}*\ pattern);}
+\DoxyCodeLine{00097\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{scenario_8h_ac446ebc3b091b6cfc2e761ce9ab77e05}{frame\_pattern\_matches}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFramePattern}{FramePattern}}*\ pattern,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{scenario_8h_ac22cb9e90f16b9ba38aaecd02925efb8}{scenario\_parse\_hex}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ uint8\_t*\ out,\ \textcolor{keywordtype}{size\_t}\ capacity,\ \textcolor{keywordtype}{bool}*\ trailing\_star);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00103\ \}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_SCENARIO\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

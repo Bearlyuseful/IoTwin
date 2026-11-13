@@ -1,6 +1,7 @@
 \doxysection{apps/bus/bus\+\_\+server.c File Reference}
 \hypertarget{bus__server_8c}{}\label{bus__server_8c}\index{apps/bus/bus\_server.c@{apps/bus/bus\_server.c}}
 {\ttfamily \#include "{}bus\+\_\+server.\+h"{}}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
 {\ttfamily \#include $<$stdatomic.\+h$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
@@ -9,10 +10,15 @@
 {\ttfamily \#include "{}line\+\_\+reader.\+h"{}}\newline
 {\ttfamily \#include "{}log.\+h"{}}\newline
 {\ttfamily \#include "{}net.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structBusClient}{Bus\+Client}}
+\item 
+struct \mbox{\hyperlink{structPendingFrame}{Pending\+Frame}}
+\item 
+struct \mbox{\hyperlink{structBusFaults}{Bus\+Faults}}
 \item 
 struct \mbox{\hyperlink{structBusServer}{Bus\+Server}}
 \end{DoxyCompactItemize}
@@ -20,6 +26,12 @@ struct \mbox{\hyperlink{structBusServer}{Bus\+Server}}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{bus__server_8c_a377c10ddb1999e7e32f9e11499e13734}{SEND\+\_\+\+TIMEOUT\+\_\+\+MS}}~200
+\item 
+\#define \mbox{\hyperlink{bus__server_8c_ac64541bdd81c961304b9babef1402640}{NAME\+\_\+\+MAX}}~32
+\item 
+\#define \mbox{\hyperlink{bus__server_8c_a42ad198e3e68bcade63e8454f1097575}{MAX\+\_\+\+DELAY\+\_\+\+MS}}~10000u
+\item 
+\#define \mbox{\hyperlink{bus__server_8c_aeaddace79507f3db82a455b774c0a37c}{MAX\+\_\+\+SILENCE\+\_\+\+MS}}~600000u
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -43,6 +55,24 @@ void \mbox{\hyperlink{bus__server_8c_a846e70f1895f6c60a0e680c8c941636d}{bus\+\_\
 \label{doc-define-members}
 \Hypertarget{bus__server_8c_doc-define-members}
 \doxysubsection{Macro Definition Documentation}
+\Hypertarget{bus__server_8c_a42ad198e3e68bcade63e8454f1097575}\index{bus\_server.c@{bus\_server.c}!MAX\_DELAY\_MS@{MAX\_DELAY\_MS}}
+\index{MAX\_DELAY\_MS@{MAX\_DELAY\_MS}!bus\_server.c@{bus\_server.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_DELAY\_MS}{MAX\_DELAY\_MS}}
+{\footnotesize\ttfamily \label{bus__server_8c_a42ad198e3e68bcade63e8454f1097575} 
+\#define MAX\+\_\+\+DELAY\+\_\+\+MS~10000u}
+
+\Hypertarget{bus__server_8c_aeaddace79507f3db82a455b774c0a37c}\index{bus\_server.c@{bus\_server.c}!MAX\_SILENCE\_MS@{MAX\_SILENCE\_MS}}
+\index{MAX\_SILENCE\_MS@{MAX\_SILENCE\_MS}!bus\_server.c@{bus\_server.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_SILENCE\_MS}{MAX\_SILENCE\_MS}}
+{\footnotesize\ttfamily \label{bus__server_8c_aeaddace79507f3db82a455b774c0a37c} 
+\#define MAX\+\_\+\+SILENCE\+\_\+\+MS~600000u}
+
+\Hypertarget{bus__server_8c_ac64541bdd81c961304b9babef1402640}\index{bus\_server.c@{bus\_server.c}!NAME\_MAX@{NAME\_MAX}}
+\index{NAME\_MAX@{NAME\_MAX}!bus\_server.c@{bus\_server.c}}
+\doxysubsubsection{\texorpdfstring{NAME\_MAX}{NAME\_MAX}}
+{\footnotesize\ttfamily \label{bus__server_8c_ac64541bdd81c961304b9babef1402640} 
+\#define NAME\+\_\+\+MAX~32}
+
 \Hypertarget{bus__server_8c_a377c10ddb1999e7e32f9e11499e13734}\index{bus\_server.c@{bus\_server.c}!SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}}
 \index{SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}!bus\_server.c@{bus\_server.c}}
 \doxysubsubsection{\texorpdfstring{SEND\_TIMEOUT\_MS}{SEND\_TIMEOUT\_MS}}

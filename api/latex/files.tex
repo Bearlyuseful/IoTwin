@@ -4,6 +4,10 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{apps/bus/\mbox{\hyperlink{bus__server_8h}{bus\+\_\+server.\+h}} \\*Virtual CAN bus over TCP }{\pageref{bus__server_8h}}{}
 \item\contentsline{section}{apps/bus/\mbox{\hyperlink{main__bus_8c}{main\+\_\+bus.\+c}} \\*Iotwin-\/bus\+: virtual CAN bus server (command line front end) }{\pageref{main__bus_8c}}{}
 \item\contentsline{section}{apps/can\+\_\+monitor/\mbox{\hyperlink{main__can__monitor_8c}{main\+\_\+can\+\_\+monitor.\+c}} \\*Can\+\_\+monitor\+: prints the traffic of iotwin-\/bus, decoded with a DBC file }{\pageref{main__can__monitor_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+replay/\mbox{\hyperlink{main__can__replay_8c}{main\+\_\+can\+\_\+replay.\+c}} \\*Can\+\_\+replay\+: plays a recorded log (candump -\/L format) onto iotwin-\/bus }{\pageref{main__can__replay_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+scenario/\mbox{\hyperlink{main__can__scenario_8c}{main\+\_\+can\+\_\+scenario.\+c}} \\*Can\+\_\+scenario\+: runs scenario scripts against the nodes on iotwin-\/bus }{\pageref{main__can__scenario_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+scenario/\mbox{\hyperlink{scenario_8c}{scenario.\+c}} }{\pageref{scenario_8c}}{}
+\item\contentsline{section}{apps/can\+\_\+scenario/\mbox{\hyperlink{scenario_8h}{scenario.\+h}} \\*\doxylink{structScenario}{Scenario} scripts for can\+\_\+scenario (see docs/dev/scenarios.\+md) }{\pageref{scenario_8h}}{}
 \item\contentsline{section}{apps/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8c}{light\+\_\+ecu.\+c}} }{\pageref{light__ecu_8c}}{}
 \item\contentsline{section}{apps/can\+\_\+sim/\mbox{\hyperlink{light__ecu_8h}{light\+\_\+ecu.\+h}} \\*Simulated light control unit (the demo ECU of can\+\_\+sim) }{\pageref{light__ecu_8h}}{}
 \item\contentsline{section}{apps/can\+\_\+sim/\mbox{\hyperlink{light__ecu__diag_8c}{light\+\_\+ecu\+\_\+diag.\+c}} }{\pageref{light__ecu__diag_8c}}{}
@@ -34,6 +38,8 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{can__frame_8h}{can\+\_\+frame.\+h}} \\*Message-\/level model of classic CAN frames and their text encoding }{\pageref{can__frame_8h}}{}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{can__signal_8c}{can\+\_\+signal.\+c}} }{\pageref{can__signal_8c}}{}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{can__signal_8h}{can\+\_\+signal.\+h}} \\*Encoding and decoding of signals inside a CAN payload (DBC semantics) }{\pageref{can__signal_8h}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{candump__log_8c}{candump\+\_\+log.\+c}} }{\pageref{candump__log_8c}}{}
+\item\contentsline{section}{libs/can/\mbox{\hyperlink{candump__log_8h}{candump\+\_\+log.\+h}} \\*Log file lines in the can-\/utils "{}candump -\/\+L"{} format }{\pageref{candump__log_8h}}{}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{dbc_8c}{dbc.\+c}} }{\pageref{dbc_8c}}{}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{dbc_8h}{dbc.\+h}} \\*Reader for the DBC subset needed to name CAN traffic }{\pageref{dbc_8h}}{}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{isotp_8c}{isotp.\+c}} }{\pageref{isotp_8c}}{}
@@ -44,6 +50,8 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{libs/can/\mbox{\hyperlink{uds_8h}{uds.\+h}} \\*Unified Diagnostic Services (ISO 14229-\/1) server on top of ISO-\/\+TP }{\pageref{uds_8h}}{}
 \item\contentsline{section}{libs/log/\mbox{\hyperlink{log_8c}{log.\+c}} }{\pageref{log_8c}}{}
 \item\contentsline{section}{libs/log/\mbox{\hyperlink{log_8h}{log.\+h}} \\*Small thread-\/safe logger with severity levels and timestamps }{\pageref{log_8h}}{}
+\item\contentsline{section}{libs/net/\mbox{\hyperlink{bus__link_8c}{bus\+\_\+link.\+c}} }{\pageref{bus__link_8c}}{}
+\item\contentsline{section}{libs/net/\mbox{\hyperlink{bus__link_8h}{bus\+\_\+link.\+h}} \\*\doxylink{structClient}{Client} connection to iotwin-\/bus for tools (replay, scenarios) }{\pageref{bus__link_8h}}{}
 \item\contentsline{section}{libs/net/\mbox{\hyperlink{line__reader_8c}{line\+\_\+reader.\+c}} }{\pageref{line__reader_8c}}{}
 \item\contentsline{section}{libs/net/\mbox{\hyperlink{line__reader_8h}{line\+\_\+reader.\+h}} \\*Splits a TCP byte stream into newline terminated lines }{\pageref{line__reader_8h}}{}
 \item\contentsline{section}{libs/net/\mbox{\hyperlink{net_8c}{net.\+c}} }{\pageref{net_8c}}{}
@@ -61,6 +69,8 @@ Here is a list of all files with brief descriptions\+:\begin{DoxyCompactList}
 \item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8Build_8cs}{Io\+Twin.\+Build.\+cs}} }{\pageref{IoTwin_8Build_8cs}}{}
 \item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8cpp}{Io\+Twin.\+cpp}} }{\pageref{IoTwin_8cpp}}{}
 \item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\mbox{\hyperlink{IoTwin_8h}{Io\+Twin.\+h}} }{\pageref{IoTwin_8h}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{BusStatus_8cpp}{Bus\+Status.\+cpp}} }{\pageref{BusStatus_8cpp}}{}
+\item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{BusStatus_8h}{Bus\+Status.\+h}} }{\pageref{BusStatus_8h}}{}
 \item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8cpp}{Can\+Frame.\+cpp}} }{\pageref{CanFrame_8cpp}}{}
 \item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanFrame_8h}{Can\+Frame.\+h}} }{\pageref{CanFrame_8h}}{}
 \item\contentsline{section}{visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{CanSignalComponent_8cpp}{Can\+Signal\+Component.\+cpp}} }{\pageref{CanSignalComponent_8cpp}}{}

@@ -16,6 +16,10 @@ uint64\+\_\+t \mbox{\hyperlink{structBusServerStats_ae420829dd0f15d492376cf9d17e
 \item 
 uint64\+\_\+t \mbox{\hyperlink{structBusServerStats_a81d7f7d7798db00b42afa5884c8610c2}{frames\+\_\+rejected}}
 \item 
+uint64\+\_\+t \mbox{\hyperlink{structBusServerStats_ab0b2819c31bb5e18eeb5aaefefea4100}{frames\+\_\+dropped}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structBusServerStats_acadbcdcee7ef46916a3481a0f03b4aa8}{frames\+\_\+delayed}}
+\item 
 uint64\+\_\+t \mbox{\hyperlink{structBusServerStats_a60179e992b6a9a231c2c6e80f72d89f6}{clients\+\_\+accepted}}
 \end{DoxyCompactItemize}
 
@@ -32,7 +36,19 @@ Counters since start.
 {\footnotesize\ttfamily \label{structBusServerStats_a60179e992b6a9a231c2c6e80f72d89f6} 
 uint64\+\_\+t Bus\+Server\+Stats\+::clients\+\_\+accepted}
 
-Connections accepted in total. \Hypertarget{structBusServerStats_a81d7f7d7798db00b42afa5884c8610c2}\index{BusServerStats@{BusServerStats}!frames\_rejected@{frames\_rejected}}
+Connections accepted in total. \Hypertarget{structBusServerStats_acadbcdcee7ef46916a3481a0f03b4aa8}\index{BusServerStats@{BusServerStats}!frames\_delayed@{frames\_delayed}}
+\index{frames\_delayed@{frames\_delayed}!BusServerStats@{BusServerStats}}
+\doxysubsubsection{\texorpdfstring{frames\_delayed}{frames\_delayed}}
+{\footnotesize\ttfamily \label{structBusServerStats_acadbcdcee7ef46916a3481a0f03b4aa8} 
+uint64\+\_\+t Bus\+Server\+Stats\+::frames\+\_\+delayed}
+
+Valid frames held back by an injected delay. \Hypertarget{structBusServerStats_ab0b2819c31bb5e18eeb5aaefefea4100}\index{BusServerStats@{BusServerStats}!frames\_dropped@{frames\_dropped}}
+\index{frames\_dropped@{frames\_dropped}!BusServerStats@{BusServerStats}}
+\doxysubsubsection{\texorpdfstring{frames\_dropped}{frames\_dropped}}
+{\footnotesize\ttfamily \label{structBusServerStats_ab0b2819c31bb5e18eeb5aaefefea4100} 
+uint64\+\_\+t Bus\+Server\+Stats\+::frames\+\_\+dropped}
+
+Valid frames lost by an injected fault (drop, silence). \Hypertarget{structBusServerStats_a81d7f7d7798db00b42afa5884c8610c2}\index{BusServerStats@{BusServerStats}!frames\_rejected@{frames\_rejected}}
 \index{frames\_rejected@{frames\_rejected}!BusServerStats@{BusServerStats}}
 \doxysubsubsection{\texorpdfstring{frames\_rejected}{frames\_rejected}}
 {\footnotesize\ttfamily \label{structBusServerStats_a81d7f7d7798db00b42afa5884c8610c2} 

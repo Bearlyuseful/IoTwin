@@ -1,0 +1,57 @@
+\doxysection{bus\+\_\+link.\+h}
+\hypertarget{bus__link_8h_source}{}\label{bus__link_8h_source}\index{libs/net/bus\_link.h@{libs/net/bus\_link.h}}
+\mbox{\hyperlink{bus__link_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_BUS\_LINK\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_BUS\_LINK\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{line__reader_8h}{line\_reader.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{net_8h}{net.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00022\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00026\ \ \ void\ (*\mbox{\hyperlink{structBusLinkHandlers_a7e7da1daa6d354499569c48a75475c1c}{on\_frame}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structBusLinkHandlers_a02dd5281f9d62f67bae7f873f23869e2}{context}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00027\ \ \ void\ (*\mbox{\hyperlink{structBusLinkHandlers_aa37fdee35d27f3cb0214aafb2da8699a}{on\_control}})(\textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structBusLinkHandlers_a02dd5281f9d62f67bae7f873f23869e2}{context}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{structBusLinkHandlers_a02dd5281f9d62f67bae7f873f23869e2}{context}};}
+\DoxyCodeLine{00029\ \}\ \mbox{\hyperlink{structBusLinkHandlers}{BusLinkHandlers}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{net_8h_ac55f128edf45073869b140a7daf019ce}{net\_socket\_t}}\ \mbox{\hyperlink{structBusLink_abb80cc7b082e62a1ebba90306e1e4648}{socket}};}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{structLineReader}{LineReader}}\ \mbox{\hyperlink{structBusLink_a5afc3d7fc77410163a49fbc502e16290}{reader}};}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structBusLink_a74cd9d6abbbabbb3a7089a4fa8cbc558}{lost}};}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structBusLinkHandlers}{BusLinkHandlers}}*\ \mbox{\hyperlink{structBusLink_ae1a69d3856d91ef25cc6dae7737c5e9b}{handlers}};}
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{/*\ answer\ capture\ for\ bus\_link\_command()\ */}}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structBusLink_a2482511c5819119379bca56dcc78761b}{answer}};}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structBusLink_ad62a5aab8c80449ac46c60425fd1c00f}{answer\_size}};}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structBusLink_a1b5c66438934c464aba622d5b4e0ff82}{answered}};}
+\DoxyCodeLine{00040\ \}\ \mbox{\hyperlink{structBusLink}{BusLink}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bus__link_8h_a7558e986bd73fd89c9ec771f03742f38}{bus\_link\_open}}(\mbox{\hyperlink{structBusLink}{BusLink}}*\ link,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ host,\ uint16\_t\ port);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bus__link_8h_abcb9e4826766c1129032450e4e9973dd}{bus\_link\_close}}(\mbox{\hyperlink{structBusLink}{BusLink}}*\ link);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bus__link_8h_a96c959f6ff1adb61a36d950e6fe006d7}{bus\_link\_send\_frame}}(\mbox{\hyperlink{structBusLink}{BusLink}}*\ link,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bus__link_8h_a67e9cf4e797036b230c523095ac4a065}{bus\_link\_send\_line}}(\mbox{\hyperlink{structBusLink}{BusLink}}*\ link,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bus__link_8h_a9097ba90d7363509b1f2fdbe5114306a}{bus\_link\_poll}}(\mbox{\hyperlink{structBusLink}{BusLink}}*\ link,\ \textcolor{keywordtype}{int}\ timeout\_ms,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structBusLinkHandlers}{BusLinkHandlers}}*\ handlers);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00064\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{bus__link_8h_ab6f3331047f3ff97e839dcb38258b1ff}{bus\_link\_command}}(\mbox{\hyperlink{structBusLink}{BusLink}}*\ link,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ command,\ \textcolor{keywordtype}{char}*\ answer,\ \textcolor{keywordtype}{size\_t}\ answer\_size,\ \textcolor{keywordtype}{int}\ timeout\_ms,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structBusLinkHandlers}{BusLinkHandlers}}*\ handlers);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_BUS\_LINK\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

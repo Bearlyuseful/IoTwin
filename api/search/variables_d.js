@@ -1,15 +1,13 @@
 var searchData=
 [
-  ['offset_0',['Offset',['../structFCanSignalDef.html#a0e0e7767d60dfbefeabdec84576d06fe',1,'FCanSignalDef']]],
-  ['offset_1',['offset',['../structCanSignal.html#a36ad6156fc1db4773620f288cf568cb7',1,'CanSignal']]],
-  ['onconnectionchanged_2',['OnConnectionChanged',['../classUIoTwinBusSubsystem.html#a7d56d1d5ad14799bf928c30f1d336a5e',1,'UIoTwinBusSubsystem']]],
-  ['onframereceived_3',['OnFrameReceived',['../classUIoTwinBusSubsystem.html#af9cfda99d41b7601c963ffa006e11481',1,'UIoTwinBusSubsystem']]],
-  ['onframesent_4',['OnFrameSent',['../classUIoTwinBusSubsystem.html#acbb7c208537522194bac1656c5006fae',1,'UIoTwinBusSubsystem']]],
-  ['onrelaychanged_5',['OnRelayChanged',['../classAPowerSourceActor.html#a1f2c215f80fb8bdb152db7f8d70c1969',1,'APowerSourceActor']]],
-  ['onviewchanged_6',['OnViewChanged',['../classUIoTwinSchematicSubsystem.html#a634bf3bedfda0ca6e1c1e842550139f0',1,'UIoTwinSchematicSubsystem']]],
-  ['open_7',['open',['../structGateway.html#a576e5425a73342206a139c54a175ca97',1,'Gateway']]],
-  ['options_8',['options',['../structBridge.html#ad66819c118f8cec9a4abd6c67e39730b',1,'Bridge']]],
-  ['output_5finhibit_9',['output_inhibit',['../structLightEcu.html#a5de29a874ebf7f6f7ed198f13df44be6',1,'LightEcu']]],
-  ['overflows_10',['overflows',['../structSlcanReader.html#ae0b8a9719fdbf00de2c94a4ecb43ee62',1,'SlcanReader']]],
-  ['overruns_11',['overruns',['../structCycleStats.html#a37de80ea296e3f9edebf43092196dd83',1,'CycleStats']]]
+  ['name_0',['Name',['../structFCanSignalDef.html#a5b066c1051e7e1dce7beee8f82c6644f',1,'FCanSignalDef::Name'],['../structFCanMessageDef.html#a0657b4a8a57fbc85faf3559115ae8d3a',1,'FCanMessageDef::Name'],['../structFComponentParameter.html#ac595f961e0ab2f0c53c4138fab9880b2',1,'FComponentParameter::Name'],['../structFComponentInfo.html#a0c474def033f8f9862c62c4735e6c6ff',1,'FComponentInfo::Name'],['../structFSchematicHitBox.html#a534ceaf9577ef0c587aac1de212dd1f0',1,'FSchematicHitBox::Name'],['../structFSystemMessage.html#ae31d6ee218457d68cf5600a028ddabe4',1,'FSystemMessage::Name'],['../classFSystemDescription.html#a3fdb73b204df0ccd5848406210513ac3',1,'FSystemDescription::Name']]],
+  ['name_1',['name',['../structDbcSignal.html#a310401a4e8c7b83245ce293d1713ddc7',1,'DbcSignal::name'],['../structDbcMessage.html#a62316d346cef61e0f715afa1c47844d0',1,'DbcMessage::name'],['../structBusClient.html#acd39e5ba1ac95d19004e6fb4945c856b',1,'BusClient::name'],['../structScenario.html#af02ae0e30ac4a6367d50632bf24aaf10',1,'Scenario::name'],['../structSimOptions.html#ab2af3125f9e8cd3e872b3df579465e0f',1,'SimOptions::name'],['../structSimShared.html#a617ef3b4dfd8010d16762f01900e3f12',1,'SimShared::name'],['../structDidInfo.html#a500b926e4b504cbcbc034eeae9f7ae9e',1,'DidInfo::name']]],
+  ['negative_5fresponses_2',['negative_responses',['../structUdsServer.html#aaeaf5a26bf14592e12f139e200a5f8c9',1,'UdsServer']]],
+  ['next_5fclient_5fid_3',['next_client_id',['../structBusServer.html#a7a97f71eefa900cf415039cdff6c25ae',1,'BusServer']]],
+  ['next_5fdeadline_5fns_4',['next_deadline_ns',['../structCycleTimer.html#ad2f01921defca96707858cc87e63f383',1,'CycleTimer']]],
+  ['nodeboxprefix_5',['NodeBoxPrefix',['../classFSchematicRenderer.html#a760ca5e30a892a882ffaf942b383bd86',1,'FSchematicRenderer']]],
+  ['nodeid_6',['NodeId',['../structFSchematicLogEntry.html#a7cbc5224482fdde5b6e4aad51a0fc871',1,'FSchematicLogEntry']]],
+  ['nodename_7',['NodeName',['../classUIoTwinBusSubsystem.html#a6816823ba5f4f581c31481291a474099',1,'UIoTwinBusSubsystem']]],
+  ['nodes_8',['Nodes',['../structFIoTwinBusStatus.html#a542622fa8a073a87c439cc2dbf9455fe',1,'FIoTwinBusStatus::Nodes'],['../classFSystemDescription.html#ab7bd5cc6aa28517bf281a4314daa0f88',1,'FSystemDescription::Nodes']]],
+  ['now_5fms_9',['now_ms',['../structGateway.html#a1b4995096b389749282db25f448873fb',1,'Gateway']]]
 ];

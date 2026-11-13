@@ -5,52 +5,55 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_BUS\_SERVER\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_BUS\_SERVER\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00023\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ BUS\_SERVER\_DEFAULT\_PORT\ 8080}}
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ BUS\_SERVER\_MAX\_CLIENTS\ 64}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00030\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structBusServerConfig_a0dac1f838a3d2359881e00e08eb071bc}{bind\_address}};\ }
-\DoxyCodeLine{00032\ \ \ uint16\_t\ \mbox{\hyperlink{structBusServerConfig_ad8c847ff8691a7174b721e76c8a65b6e}{port}};\ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structBusServerConfig_aeafec274535cb89520365e1bb5794beb}{max\_clients}};\ \ \ \ \ \ \ }
-\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structBusServerConfig_a6fe5cb73bae4d810cee062f8d391d7c8}{echo}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structBusServerConfig_ab9aaa40e0fc060322ec0b1754f6c4a74}{log\_frames}};\ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \}\ \mbox{\hyperlink{structBusServerConfig}{BusServerConfig}};}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ BUS\_SERVER\_DEFAULT\_PORT\ 8080}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ BUS\_SERVER\_MAX\_CLIENTS\ 64}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ BUS\_SERVER\_MAX\_PENDING\ 4096\ }\textcolor{preprocessor}{}}
 \DoxyCodeLine{00037\ }
 \DoxyCodeLine{00039\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00040\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_ae420829dd0f15d492376cf9d17e4c28f}{frames\_routed}};\ \ \ \ \ \ }
-\DoxyCodeLine{00041\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_a81d7f7d7798db00b42afa5884c8610c2}{frames\_rejected}};\ \ \ \ }
-\DoxyCodeLine{00042\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_a60179e992b6a9a231c2c6e80f72d89f6}{clients\_accepted}};\ \ \ }
-\DoxyCodeLine{00043\ \}\ \mbox{\hyperlink{structBusServerStats}{BusServerStats}};}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structBusServer}{BusServer}}\ \mbox{\hyperlink{structBusServer}{BusServer}};}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structBusServerConfig_a0dac1f838a3d2359881e00e08eb071bc}{bind\_address}};\ }
+\DoxyCodeLine{00041\ \ \ uint16\_t\ \mbox{\hyperlink{structBusServerConfig_ad8c847ff8691a7174b721e76c8a65b6e}{port}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structBusServerConfig_aeafec274535cb89520365e1bb5794beb}{max\_clients}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structBusServerConfig_a6fe5cb73bae4d810cee062f8d391d7c8}{echo}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structBusServerConfig_ab9aaa40e0fc060322ec0b1754f6c4a74}{log\_frames}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00045\ \}\ \mbox{\hyperlink{structBusServerConfig}{BusServerConfig}};}
 \DoxyCodeLine{00046\ }
-\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bus__server_8h_a50ce920559025870425f865499475b90}{bus\_server\_default\_config}}(\mbox{\hyperlink{structBusServerConfig}{BusServerConfig}}*\ \mbox{\hyperlink{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9}{config}});}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00051\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ \mbox{\hyperlink{bus__server_8h_ad64505e36af75d92aaf59a1c4fde3b58}{bus\_server\_create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServerConfig}{BusServerConfig}}*\ \mbox{\hyperlink{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9}{config}});}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00054\ uint16\_t\ \mbox{\hyperlink{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb}{bus\_server\_port}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
+\DoxyCodeLine{00048\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00049\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_ae420829dd0f15d492376cf9d17e4c28f}{frames\_routed}};\ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_a81d7f7d7798db00b42afa5884c8610c2}{frames\_rejected}};\ \ \ \ }
+\DoxyCodeLine{00051\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_ab0b2819c31bb5e18eeb5aaefefea4100}{frames\_dropped}};\ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_acadbcdcee7ef46916a3481a0f03b4aa8}{frames\_delayed}};\ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ uint64\_t\ \mbox{\hyperlink{structBusServerStats_a60179e992b6a9a231c2c6e80f72d89f6}{clients\_accepted}};\ \ \ }
+\DoxyCodeLine{00054\ \}\ \mbox{\hyperlink{structBusServerStats}{BusServerStats}};}
 \DoxyCodeLine{00055\ }
-\DoxyCodeLine{00060\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277}{bus\_server\_poll}}(\mbox{\hyperlink{structBusServer}{BusServer}}*\ server,\ \textcolor{keywordtype}{int}\ timeout\_ms);}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00063\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5}{bus\_server\_client\_count}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00066\ \mbox{\hyperlink{structBusServerStats}{BusServerStats}}\ \mbox{\hyperlink{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49}{bus\_server\_get\_stats}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00069\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bus__server_8h_a846e70f1895f6c60a0e680c8c941636d}{bus\_server\_destroy}}(\mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00072\ \}}
-\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_BUS\_SERVER\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00056\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structBusServer}{BusServer}}\ \mbox{\hyperlink{structBusServer}{BusServer}};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bus__server_8h_a50ce920559025870425f865499475b90}{bus\_server\_default\_config}}(\mbox{\hyperlink{structBusServerConfig}{BusServerConfig}}*\ \mbox{\hyperlink{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9}{config}});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ \mbox{\hyperlink{bus__server_8h_ad64505e36af75d92aaf59a1c4fde3b58}{bus\_server\_create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServerConfig}{BusServerConfig}}*\ \mbox{\hyperlink{structBusServer_ad4906a15a7e4a0e32676bca9bbd25fa9}{config}});}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00065\ uint16\_t\ \mbox{\hyperlink{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb}{bus\_server\_port}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277}{bus\_server\_poll}}(\mbox{\hyperlink{structBusServer}{BusServer}}*\ server,\ \textcolor{keywordtype}{int}\ timeout\_ms);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5}{bus\_server\_client\_count}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \mbox{\hyperlink{structBusServerStats}{BusServerStats}}\ \mbox{\hyperlink{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49}{bus\_server\_get\_stats}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{bus__server_8h_a846e70f1895f6c60a0e680c8c941636d}{bus\_server\_destroy}}(\mbox{\hyperlink{structBusServer}{BusServer}}*\ server);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_BUS\_SERVER\_H\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

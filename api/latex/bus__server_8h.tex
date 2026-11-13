@@ -21,6 +21,8 @@ struct \mbox{\hyperlink{structBusServerStats}{Bus\+Server\+Stats}}
 \#define \mbox{\hyperlink{bus__server_8h_ad0847debb1fd581c6ce7344e734ce4ef}{BUS\+\_\+\+SERVER\+\_\+\+DEFAULT\+\_\+\+PORT}}~8080
 \item 
 \#define \mbox{\hyperlink{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS}}~64
+\item 
+\#define \mbox{\hyperlink{bus__server_8h_af88bb13dc6fbb7cf2f03d4d3a3fd5add}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+PENDING}}~4096
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -51,6 +53,12 @@ Virtual CAN bus over TCP.
 
 Every connected client (simulator, visualizer, test tool) is a node on the bus. A frame received from one node is validated, normalised and forwarded to all other nodes -\/ like a broadcast on a physical CAN bus. Invalid lines are counted and dropped. See docs/dev/protocol.\+md.
 
+Besides frames, clients may send
+\begin{DoxyItemize}
+\item control commands "{}!name ecu"{}, "{}!testbench on"{}, "{}!status"{} and the fault injection of the medium\+: "{}!fault drop 10 200/7\+FF"{}, "{}!fault delay 50 10"{}, "{}!fault silence 2000"{}, "{}!fault seed 1"{}, "{}!fault clear"{}; the server answers the sender with "{}!ok"{}, "{}!error ..."{} or "{}!status ..."{};
+\item test bench lines "{}@$<$target$>$ $<$command$>$"{}, forwarded only to nodes that sent "{}!testbench on"{} (e.\+g. can\+\_\+sim executes "{}@ecu fault short on"{}).
+\end{DoxyItemize}
+
 The server is single threaded\+: call \doxylink{bus__server_8h_af0c8b52525ef74ebf7f1ff95a6825277}{bus\+\_\+server\+\_\+poll()} in a loop. \doxylink{bus__server_8h_aa3f74a060dbfd568d4019369650e9bbb}{bus\+\_\+server\+\_\+port()}, \doxylink{bus__server_8h_a27404fa633d7ead7fbb20ed610fa78a5}{bus\+\_\+server\+\_\+client\+\_\+count()} and \doxylink{bus__server_8h_a070d80b79cad3620cb1b1819f1106a49}{bus\+\_\+server\+\_\+get\+\_\+stats()} may be called from other threads. 
 
 \label{doc-define-members}
@@ -68,7 +76,13 @@ The server is single threaded\+: call \doxylink{bus__server_8h_af0c8b52525ef74eb
 {\footnotesize\ttfamily \label{bus__server_8h_a30a1dcd77f4603b9b1be5cedac0174c3} 
 \#define BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+CLIENTS~64}
 
+\Hypertarget{bus__server_8h_af88bb13dc6fbb7cf2f03d4d3a3fd5add}\index{bus\_server.h@{bus\_server.h}!BUS\_SERVER\_MAX\_PENDING@{BUS\_SERVER\_MAX\_PENDING}}
+\index{BUS\_SERVER\_MAX\_PENDING@{BUS\_SERVER\_MAX\_PENDING}!bus\_server.h@{bus\_server.h}}
+\doxysubsubsection{\texorpdfstring{BUS\_SERVER\_MAX\_PENDING}{BUS\_SERVER\_MAX\_PENDING}}
+{\footnotesize\ttfamily \label{bus__server_8h_af88bb13dc6fbb7cf2f03d4d3a3fd5add} 
+\#define BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+PENDING~4096}
 
+Frames held back by the "{}delay"{} fault. 
 
 \label{doc-typedef-members}
 \Hypertarget{bus__server_8h_doc-typedef-members}

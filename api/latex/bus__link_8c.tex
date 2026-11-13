@@ -1,0 +1,104 @@
+\doxysection{libs/net/bus\+\_\+link.c File Reference}
+\hypertarget{bus__link_8c}{}\label{bus__link_8c}\index{libs/net/bus\_link.c@{libs/net/bus\_link.c}}
+{\ttfamily \#include "{}bus\+\_\+link.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{bus__link_8c_a377c10ddb1999e7e32f9e11499e13734}{SEND\+\_\+\+TIMEOUT\+\_\+\+MS}}~200
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{bus__link_8c_a7558e986bd73fd89c9ec771f03742f38}{bus\+\_\+link\+\_\+open}} (\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}link, const char \texorpdfstring{$\ast$}{*}host, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Connects (blocking), then switches to non-\/blocking I/O. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bus__link_8c_abcb9e4826766c1129032450e4e9973dd}{bus\+\_\+link\+\_\+close}} (\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}link)
+\item 
+bool \mbox{\hyperlink{bus__link_8c_a67e9cf4e797036b230c523095ac4a065}{bus\+\_\+link\+\_\+send\+\_\+line}} (\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}link, const char \texorpdfstring{$\ast$}{*}line)
+\begin{DoxyCompactList}\small\item\em Sends a raw line (a line break is added), e.\+g. "{}@ecu fault short on"{}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bus__link_8c_a96c959f6ff1adb61a36d950e6fe006d7}{bus\+\_\+link\+\_\+send\+\_\+frame}} (\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}link, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\begin{DoxyCompactList}\small\item\em Sends one frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bus__link_8c_a9097ba90d7363509b1f2fdbe5114306a}{bus\+\_\+link\+\_\+poll}} (\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}link, int timeout\+\_\+ms, const \mbox{\hyperlink{structBusLinkHandlers}{Bus\+Link\+Handlers}} \texorpdfstring{$\ast$}{*}handlers)
+\begin{DoxyCompactList}\small\item\em Waits up to {\ttfamily timeout\+\_\+ms} for data and dispatches all complete lines. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{bus__link_8c_ab6f3331047f3ff97e839dcb38258b1ff}{bus\+\_\+link\+\_\+command}} (\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}link, const char \texorpdfstring{$\ast$}{*}command, char \texorpdfstring{$\ast$}{*}answer, size\+\_\+t answer\+\_\+size, int timeout\+\_\+ms, const \mbox{\hyperlink{structBusLinkHandlers}{Bus\+Link\+Handlers}} \texorpdfstring{$\ast$}{*}handlers)
+\begin{DoxyCompactList}\small\item\em Sends "{}!$<$command$>$"{} and waits for the server\textquotesingle{}s answer line. Frames arriving meanwhile are dispatched to {\ttfamily handlers}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{bus__link_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{bus__link_8c_a377c10ddb1999e7e32f9e11499e13734}\index{bus\_link.c@{bus\_link.c}!SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}}
+\index{SEND\_TIMEOUT\_MS@{SEND\_TIMEOUT\_MS}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{SEND\_TIMEOUT\_MS}{SEND\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{bus__link_8c_a377c10ddb1999e7e32f9e11499e13734} 
+\#define SEND\+\_\+\+TIMEOUT\+\_\+\+MS~200}
+
+
+
+\label{doc-func-members}
+\Hypertarget{bus__link_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{bus__link_8c_abcb9e4826766c1129032450e4e9973dd}\index{bus\_link.c@{bus\_link.c}!bus\_link\_close@{bus\_link\_close}}
+\index{bus\_link\_close@{bus\_link\_close}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{bus\_link\_close()}{bus\_link\_close()}}
+{\footnotesize\ttfamily \label{bus__link_8c_abcb9e4826766c1129032450e4e9973dd} 
+void bus\+\_\+link\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}}]{link}{}\end{DoxyParamCaption})}
+
+\Hypertarget{bus__link_8c_ab6f3331047f3ff97e839dcb38258b1ff}\index{bus\_link.c@{bus\_link.c}!bus\_link\_command@{bus\_link\_command}}
+\index{bus\_link\_command@{bus\_link\_command}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{bus\_link\_command()}{bus\_link\_command()}}
+{\footnotesize\ttfamily \label{bus__link_8c_ab6f3331047f3ff97e839dcb38258b1ff} 
+bool bus\+\_\+link\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}}]{link}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{command}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{answer}{, }\item[{size\+\_\+t}]{answer\+\_\+size}{, }\item[{int}]{timeout\+\_\+ms}{, }\item[{const \mbox{\hyperlink{structBusLinkHandlers}{Bus\+Link\+Handlers}} \texorpdfstring{$\ast$}{*}}]{handlers}{}\end{DoxyParamCaption})}
+
+
+
+Sends "{}!$<$command$>$"{} and waits for the server\textquotesingle{}s answer line. Frames arriving meanwhile are dispatched to {\ttfamily handlers}. 
+
+\begin{DoxyReturn}{Returns}
+true if an answer starting with "{}!ok"{} or "{}!status"{} arrived; {\ttfamily answer} gets the line. 
+\end{DoxyReturn}
+\Hypertarget{bus__link_8c_a7558e986bd73fd89c9ec771f03742f38}\index{bus\_link.c@{bus\_link.c}!bus\_link\_open@{bus\_link\_open}}
+\index{bus\_link\_open@{bus\_link\_open}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{bus\_link\_open()}{bus\_link\_open()}}
+{\footnotesize\ttfamily \label{bus__link_8c_a7558e986bd73fd89c9ec771f03742f38} 
+bool bus\+\_\+link\+\_\+open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}}]{link}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{host}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Connects (blocking), then switches to non-\/blocking I/O. 
+
+\Hypertarget{bus__link_8c_a9097ba90d7363509b1f2fdbe5114306a}\index{bus\_link.c@{bus\_link.c}!bus\_link\_poll@{bus\_link\_poll}}
+\index{bus\_link\_poll@{bus\_link\_poll}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{bus\_link\_poll()}{bus\_link\_poll()}}
+{\footnotesize\ttfamily \label{bus__link_8c_a9097ba90d7363509b1f2fdbe5114306a} 
+bool bus\+\_\+link\+\_\+poll (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}}]{link}{, }\item[{int}]{timeout\+\_\+ms}{, }\item[{const \mbox{\hyperlink{structBusLinkHandlers}{Bus\+Link\+Handlers}} \texorpdfstring{$\ast$}{*}}]{handlers}{}\end{DoxyParamCaption})}
+
+
+
+Waits up to {\ttfamily timeout\+\_\+ms} for data and dispatches all complete lines. 
+
+\begin{DoxyReturn}{Returns}
+false if the connection is lost. 
+\end{DoxyReturn}
+\Hypertarget{bus__link_8c_a96c959f6ff1adb61a36d950e6fe006d7}\index{bus\_link.c@{bus\_link.c}!bus\_link\_send\_frame@{bus\_link\_send\_frame}}
+\index{bus\_link\_send\_frame@{bus\_link\_send\_frame}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{bus\_link\_send\_frame()}{bus\_link\_send\_frame()}}
+{\footnotesize\ttfamily \label{bus__link_8c_a96c959f6ff1adb61a36d950e6fe006d7} 
+bool bus\+\_\+link\+\_\+send\+\_\+frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}}]{link}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+
+
+Sends one frame. 
+
+\Hypertarget{bus__link_8c_a67e9cf4e797036b230c523095ac4a065}\index{bus\_link.c@{bus\_link.c}!bus\_link\_send\_line@{bus\_link\_send\_line}}
+\index{bus\_link\_send\_line@{bus\_link\_send\_line}!bus\_link.c@{bus\_link.c}}
+\doxysubsubsection{\texorpdfstring{bus\_link\_send\_line()}{bus\_link\_send\_line()}}
+{\footnotesize\ttfamily \label{bus__link_8c_a67e9cf4e797036b230c523095ac4a065} 
+bool bus\+\_\+link\+\_\+send\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBusLink}{Bus\+Link}} \texorpdfstring{$\ast$}{*}}]{link}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{}\end{DoxyParamCaption})}
+
+
+
+Sends a raw line (a line break is added), e.\+g. "{}@ecu fault short on"{}. 
+

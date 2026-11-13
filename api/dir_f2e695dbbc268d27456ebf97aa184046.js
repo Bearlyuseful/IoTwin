@@ -8,6 +8,8 @@ var dir_f2e695dbbc268d27456ebf97aa184046 =
     [ "can_frame.h", "can__frame_8h.html", "can__frame_8h" ],
     [ "can_signal.c", "can__signal_8c.html", "can__signal_8c" ],
     [ "can_signal.h", "can__signal_8h.html", "can__signal_8h" ],
+    [ "candump_log.c", "candump__log_8c.html", "candump__log_8c" ],
+    [ "candump_log.h", "candump__log_8h.html", "candump__log_8h" ],
     [ "dbc.c", "dbc_8c.html", "dbc_8c" ],
     [ "dbc.h", "dbc_8h.html", "dbc_8h" ],
     [ "isotp.c", "isotp_8c.html", "isotp_8c" ],

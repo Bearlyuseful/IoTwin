@@ -102,9 +102,16 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a8753871ca492d1d1c03db1e61ee3ac85" id="r_a8753871ca492d1d1c03db1e61ee3ac85"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8753871ca492d1d1c03db1e61ee3ac85">client_count</a></td></tr>
 <tr class="memitem:a7a97f71eefa900cf415039cdff6c25ae" id="r_a7a97f71eefa900cf415039cdff6c25ae"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a97f71eefa900cf415039cdff6c25ae">next_client_id</a></td></tr>
 <tr class="memitem:a87cc325845a7c543b3b9ee1214bbea7c" id="r_a87cc325845a7c543b3b9ee1214bbea7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBusClient.html">BusClient</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87cc325845a7c543b3b9ee1214bbea7c">current_sender</a></td></tr>
+<tr class="memitem:aa0bc63a41fdc1a1e883d9967367d9fc8" id="r_aa0bc63a41fdc1a1e883d9967367d9fc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBusFaults.html">BusFaults</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0bc63a41fdc1a1e883d9967367d9fc8">faults</a></td></tr>
+<tr class="memitem:ac5a5b905dea2d46882aa3bb9a2f1044a" id="r_ac5a5b905dea2d46882aa3bb9a2f1044a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPendingFrame.html">PendingFrame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5a5b905dea2d46882aa3bb9a2f1044a">pending</a> [<a class="el" href="bus__server_8h.html#af88bb13dc6fbb7cf2f03d4d3a3fd5add">BUS_SERVER_MAX_PENDING</a>]</td></tr>
+<tr class="memitem:a67d6d10bce9c7d50bb61584f01370bbe" id="r_a67d6d10bce9c7d50bb61584f01370bbe"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67d6d10bce9c7d50bb61584f01370bbe">pending_head</a></td></tr>
+<tr class="memitem:a5896ffec38fc539815ec694faacc49cb" id="r_a5896ffec38fc539815ec694faacc49cb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5896ffec38fc539815ec694faacc49cb">pending_count</a></td></tr>
+<tr class="memitem:a3de9357cea37a5d0fd5cb8b1df658be0" id="r_a3de9357cea37a5d0fd5cb8b1df658be0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3de9357cea37a5d0fd5cb8b1df658be0">last_due_ms</a></td></tr>
 <tr class="memitem:a522d475a583f963f819fa57af3ca1ff9" id="r_a522d475a583f963f819fa57af3ca1ff9"><td class="memItemLeft" align="right" valign="top">atomic_size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a522d475a583f963f819fa57af3ca1ff9">published_client_count</a></td></tr>
 <tr class="memitem:a6934545c91a933bd41df3585ebc66485" id="r_a6934545c91a933bd41df3585ebc66485"><td class="memItemLeft" align="right" valign="top">atomic_uint_fast64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6934545c91a933bd41df3585ebc66485">frames_routed</a></td></tr>
 <tr class="memitem:aa915b8a490ffc378fe36df21ce62815c" id="r_aa915b8a490ffc378fe36df21ce62815c"><td class="memItemLeft" align="right" valign="top">atomic_uint_fast64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa915b8a490ffc378fe36df21ce62815c">frames_rejected</a></td></tr>
+<tr class="memitem:a2d7c65ea51c78fbef2ec677961cf7de8" id="r_a2d7c65ea51c78fbef2ec677961cf7de8"><td class="memItemLeft" align="right" valign="top">atomic_uint_fast64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d7c65ea51c78fbef2ec677961cf7de8">frames_dropped</a></td></tr>
+<tr class="memitem:a89fcc8405f1732c916338495cb76ec54" id="r_a89fcc8405f1732c916338495cb76ec54"><td class="memItemLeft" align="right" valign="top">atomic_uint_fast64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89fcc8405f1732c916338495cb76ec54">frames_delayed</a></td></tr>
 <tr class="memitem:a75462217efb4e202502b33ea3316e7e4" id="r_a75462217efb4e202502b33ea3316e7e4"><td class="memItemLeft" align="right" valign="top">atomic_uint_fast64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75462217efb4e202502b33ea3316e7e4">clients_accepted</a></td></tr>
 </table>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
@@ -192,6 +199,48 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa0bc63a41fdc1a1e883d9967367d9fc8" name="aa0bc63a41fdc1a1e883d9967367d9fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0bc63a41fdc1a1e883d9967367d9fc8">&#9670;&#160;</a></span>faults</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBusFaults.html">BusFaults</a> BusServer::faults</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a89fcc8405f1732c916338495cb76ec54" name="a89fcc8405f1732c916338495cb76ec54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89fcc8405f1732c916338495cb76ec54">&#9670;&#160;</a></span>frames_delayed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">atomic_uint_fast64_t BusServer::frames_delayed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2d7c65ea51c78fbef2ec677961cf7de8" name="a2d7c65ea51c78fbef2ec677961cf7de8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d7c65ea51c78fbef2ec677961cf7de8">&#9670;&#160;</a></span>frames_dropped</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">atomic_uint_fast64_t BusServer::frames_dropped</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa915b8a490ffc378fe36df21ce62815c" name="aa915b8a490ffc378fe36df21ce62815c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa915b8a490ffc378fe36df21ce62815c">&#9670;&#160;</a></span>frames_rejected</h2>
 
@@ -220,6 +269,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3de9357cea37a5d0fd5cb8b1df658be0" name="a3de9357cea37a5d0fd5cb8b1df658be0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de9357cea37a5d0fd5cb8b1df658be0">&#9670;&#160;</a></span>last_due_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t BusServer::last_due_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adc75c4fca9b4ffa5458aabb02a48e230" name="adc75c4fca9b4ffa5458aabb02a48e230"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc75c4fca9b4ffa5458aabb02a48e230">&#9670;&#160;</a></span>listener</h2>
 
@@ -242,6 +305,48 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">unsigned BusServer::next_client_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5a5b905dea2d46882aa3bb9a2f1044a" name="ac5a5b905dea2d46882aa3bb9a2f1044a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5a5b905dea2d46882aa3bb9a2f1044a">&#9670;&#160;</a></span>pending</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPendingFrame.html">PendingFrame</a> BusServer::pending[<a class="el" href="bus__server_8h.html#af88bb13dc6fbb7cf2f03d4d3a3fd5add">BUS_SERVER_MAX_PENDING</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5896ffec38fc539815ec694faacc49cb" name="a5896ffec38fc539815ec694faacc49cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5896ffec38fc539815ec694faacc49cb">&#9670;&#160;</a></span>pending_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t BusServer::pending_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67d6d10bce9c7d50bb61584f01370bbe" name="a67d6d10bce9c7d50bb61584f01370bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67d6d10bce9c7d50bb61584f01370bbe">&#9670;&#160;</a></span>pending_head</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t BusServer::pending_head</td>
         </tr>
       </table>
 </div><div class="memdoc">

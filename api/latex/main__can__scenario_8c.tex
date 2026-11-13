@@ -1,0 +1,71 @@
+\doxysection{apps/can\+\_\+scenario/main\+\_\+can\+\_\+scenario.c File Reference}
+\hypertarget{main__can__scenario_8c}{}\label{main__can__scenario_8c}\index{apps/can\_scenario/main\_can\_scenario.c@{apps/can\_scenario/main\_can\_scenario.c}}
+
+
+can\+\_\+scenario\+: runs scenario scripts against the nodes on iotwin-\/bus.  
+
+
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}bus\+\_\+link.\+h"{}}\newline
+{\ttfamily \#include "{}cli.\+h"{}}\newline
+{\ttfamily \#include "{}isotp.\+h"{}}\newline
+{\ttfamily \#include "{}log.\+h"{}}\newline
+{\ttfamily \#include "{}net.\+h"{}}\newline
+{\ttfamily \#include "{}pal\+\_\+time.\+h"{}}\newline
+{\ttfamily \#include "{}scenario.\+h"{}}\newline
+{\ttfamily \#include "{}uds.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structRunner}{Runner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main__can__scenario_8c_ab9357b353e4d63406d593a7ca8dc25cd}{RECENT\+\_\+\+FRAMES}}~6
+\item 
+\#define \mbox{\hyperlink{main__can__scenario_8c_aaccae77dd0ec9bf8de503250665c7185}{COMMAND\+\_\+\+TIMEOUT\+\_\+\+MS}}~1000
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main__can__scenario_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+can\+\_\+scenario\+: runs scenario scripts against the nodes on iotwin-\/bus. 
+
+can\+\_\+scenario data/scenarios/light-\/demo/switch-\/controls-\/lamp.\+scn can\+\_\+scenario -\/e "{}bus drop 20"{} -\/e "{}bus delay 30 10"{} (one-\/off steps)
+
+Exit code 0 when every scenario passed, 1 otherwise; usable as test. 
+
+\label{doc-define-members}
+\Hypertarget{main__can__scenario_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main__can__scenario_8c_aaccae77dd0ec9bf8de503250665c7185}\index{main\_can\_scenario.c@{main\_can\_scenario.c}!COMMAND\_TIMEOUT\_MS@{COMMAND\_TIMEOUT\_MS}}
+\index{COMMAND\_TIMEOUT\_MS@{COMMAND\_TIMEOUT\_MS}!main\_can\_scenario.c@{main\_can\_scenario.c}}
+\doxysubsubsection{\texorpdfstring{COMMAND\_TIMEOUT\_MS}{COMMAND\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{main__can__scenario_8c_aaccae77dd0ec9bf8de503250665c7185} 
+\#define COMMAND\+\_\+\+TIMEOUT\+\_\+\+MS~1000}
+
+\Hypertarget{main__can__scenario_8c_ab9357b353e4d63406d593a7ca8dc25cd}\index{main\_can\_scenario.c@{main\_can\_scenario.c}!RECENT\_FRAMES@{RECENT\_FRAMES}}
+\index{RECENT\_FRAMES@{RECENT\_FRAMES}!main\_can\_scenario.c@{main\_can\_scenario.c}}
+\doxysubsubsection{\texorpdfstring{RECENT\_FRAMES}{RECENT\_FRAMES}}
+{\footnotesize\ttfamily \label{main__can__scenario_8c_ab9357b353e4d63406d593a7ca8dc25cd} 
+\#define RECENT\+\_\+\+FRAMES~6}
+
+
+
+\label{doc-func-members}
+\Hypertarget{main__can__scenario_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main__can__scenario_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{main\_can\_scenario.c@{main\_can\_scenario.c}!main@{main}}
+\index{main@{main}!main\_can\_scenario.c@{main\_can\_scenario.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main__can__scenario_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+

@@ -19,11 +19,25 @@ unsigned \mbox{\hyperlink{structBusServer_a7a97f71eefa900cf415039cdff6c25ae}{nex
 \item 
 \mbox{\hyperlink{structBusClient}{Bus\+Client}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structBusServer_a87cc325845a7c543b3b9ee1214bbea7c}{current\+\_\+sender}}
 \item 
+\mbox{\hyperlink{structBusFaults}{Bus\+Faults}} \mbox{\hyperlink{structBusServer_aa0bc63a41fdc1a1e883d9967367d9fc8}{faults}}
+\item 
+\mbox{\hyperlink{structPendingFrame}{Pending\+Frame}} \mbox{\hyperlink{structBusServer_ac5a5b905dea2d46882aa3bb9a2f1044a}{pending}} \mbox{[}\mbox{\hyperlink{bus__server_8h_af88bb13dc6fbb7cf2f03d4d3a3fd5add}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+PENDING}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structBusServer_a67d6d10bce9c7d50bb61584f01370bbe}{pending\+\_\+head}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structBusServer_a5896ffec38fc539815ec694faacc49cb}{pending\+\_\+count}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structBusServer_a3de9357cea37a5d0fd5cb8b1df658be0}{last\+\_\+due\+\_\+ms}}
+\item 
 atomic\+\_\+size\+\_\+t \mbox{\hyperlink{structBusServer_a522d475a583f963f819fa57af3ca1ff9}{published\+\_\+client\+\_\+count}}
 \item 
 atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_a6934545c91a933bd41df3585ebc66485}{frames\+\_\+routed}}
 \item 
 atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_aa915b8a490ffc378fe36df21ce62815c}{frames\+\_\+rejected}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_a2d7c65ea51c78fbef2ec677961cf7de8}{frames\+\_\+dropped}}
+\item 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_a89fcc8405f1732c916338495cb76ec54}{frames\+\_\+delayed}}
 \item 
 atomic\+\_\+uint\+\_\+fast64\+\_\+t \mbox{\hyperlink{structBusServer_a75462217efb4e202502b33ea3316e7e4}{clients\+\_\+accepted}}
 \end{DoxyCompactItemize}
@@ -68,6 +82,24 @@ atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::clients\+\_\+accepted}
 {\footnotesize\ttfamily \label{structBusServer_a87cc325845a7c543b3b9ee1214bbea7c} 
 \mbox{\hyperlink{structBusClient}{Bus\+Client}}\texorpdfstring{$\ast$}{*} Bus\+Server\+::current\+\_\+sender}
 
+\Hypertarget{structBusServer_aa0bc63a41fdc1a1e883d9967367d9fc8}\index{BusServer@{BusServer}!faults@{faults}}
+\index{faults@{faults}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{faults}{faults}}
+{\footnotesize\ttfamily \label{structBusServer_aa0bc63a41fdc1a1e883d9967367d9fc8} 
+\mbox{\hyperlink{structBusFaults}{Bus\+Faults}} Bus\+Server\+::faults}
+
+\Hypertarget{structBusServer_a89fcc8405f1732c916338495cb76ec54}\index{BusServer@{BusServer}!frames\_delayed@{frames\_delayed}}
+\index{frames\_delayed@{frames\_delayed}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{frames\_delayed}{frames\_delayed}}
+{\footnotesize\ttfamily \label{structBusServer_a89fcc8405f1732c916338495cb76ec54} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+delayed}
+
+\Hypertarget{structBusServer_a2d7c65ea51c78fbef2ec677961cf7de8}\index{BusServer@{BusServer}!frames\_dropped@{frames\_dropped}}
+\index{frames\_dropped@{frames\_dropped}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{frames\_dropped}{frames\_dropped}}
+{\footnotesize\ttfamily \label{structBusServer_a2d7c65ea51c78fbef2ec677961cf7de8} 
+atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+dropped}
+
 \Hypertarget{structBusServer_aa915b8a490ffc378fe36df21ce62815c}\index{BusServer@{BusServer}!frames\_rejected@{frames\_rejected}}
 \index{frames\_rejected@{frames\_rejected}!BusServer@{BusServer}}
 \doxysubsubsection{\texorpdfstring{frames\_rejected}{frames\_rejected}}
@@ -80,6 +112,12 @@ atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+rejected}
 {\footnotesize\ttfamily \label{structBusServer_a6934545c91a933bd41df3585ebc66485} 
 atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+routed}
 
+\Hypertarget{structBusServer_a3de9357cea37a5d0fd5cb8b1df658be0}\index{BusServer@{BusServer}!last\_due\_ms@{last\_due\_ms}}
+\index{last\_due\_ms@{last\_due\_ms}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{last\_due\_ms}{last\_due\_ms}}
+{\footnotesize\ttfamily \label{structBusServer_a3de9357cea37a5d0fd5cb8b1df658be0} 
+uint64\+\_\+t Bus\+Server\+::last\+\_\+due\+\_\+ms}
+
 \Hypertarget{structBusServer_adc75c4fca9b4ffa5458aabb02a48e230}\index{BusServer@{BusServer}!listener@{listener}}
 \index{listener@{listener}!BusServer@{BusServer}}
 \doxysubsubsection{\texorpdfstring{listener}{listener}}
@@ -91,6 +129,24 @@ atomic\+\_\+uint\+\_\+fast64\+\_\+t Bus\+Server\+::frames\+\_\+routed}
 \doxysubsubsection{\texorpdfstring{next\_client\_id}{next\_client\_id}}
 {\footnotesize\ttfamily \label{structBusServer_a7a97f71eefa900cf415039cdff6c25ae} 
 unsigned Bus\+Server\+::next\+\_\+client\+\_\+id}
+
+\Hypertarget{structBusServer_ac5a5b905dea2d46882aa3bb9a2f1044a}\index{BusServer@{BusServer}!pending@{pending}}
+\index{pending@{pending}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{pending}{pending}}
+{\footnotesize\ttfamily \label{structBusServer_ac5a5b905dea2d46882aa3bb9a2f1044a} 
+\mbox{\hyperlink{structPendingFrame}{Pending\+Frame}} Bus\+Server\+::pending\mbox{[}\mbox{\hyperlink{bus__server_8h_af88bb13dc6fbb7cf2f03d4d3a3fd5add}{BUS\+\_\+\+SERVER\+\_\+\+MAX\+\_\+\+PENDING}}\mbox{]}}
+
+\Hypertarget{structBusServer_a5896ffec38fc539815ec694faacc49cb}\index{BusServer@{BusServer}!pending\_count@{pending\_count}}
+\index{pending\_count@{pending\_count}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{pending\_count}{pending\_count}}
+{\footnotesize\ttfamily \label{structBusServer_a5896ffec38fc539815ec694faacc49cb} 
+size\+\_\+t Bus\+Server\+::pending\+\_\+count}
+
+\Hypertarget{structBusServer_a67d6d10bce9c7d50bb61584f01370bbe}\index{BusServer@{BusServer}!pending\_head@{pending\_head}}
+\index{pending\_head@{pending\_head}!BusServer@{BusServer}}
+\doxysubsubsection{\texorpdfstring{pending\_head}{pending\_head}}
+{\footnotesize\ttfamily \label{structBusServer_a67d6d10bce9c7d50bb61584f01370bbe} 
+size\+\_\+t Bus\+Server\+::pending\+\_\+head}
 
 \Hypertarget{structBusServer_ac1ac4c77e5017947c978340f9c00bd73}\index{BusServer@{BusServer}!port@{port}}
 \index{port@{port}!BusServer@{BusServer}}

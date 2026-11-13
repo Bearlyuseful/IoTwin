@@ -1,0 +1,76 @@
+\doxysection{apps/can\+\_\+scenario/scenario.c File Reference}
+\hypertarget{scenario_8c}{}\label{scenario_8c}\index{apps/can\_scenario/scenario.c@{apps/can\_scenario/scenario.c}}
+{\ttfamily \#include "{}scenario.\+h"{}}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{scenario_8c_a678fa76b913d488b3046f41cb2ff75fb}{scenario\+\_\+init}} (\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}scenario)
+\item 
+int \mbox{\hyperlink{scenario_8c_ac22cb9e90f16b9ba38aaecd02925efb8}{scenario\+\_\+parse\+\_\+hex}} (const char \texorpdfstring{$\ast$}{*}text, uint8\+\_\+t \texorpdfstring{$\ast$}{*}out, size\+\_\+t capacity, bool \texorpdfstring{$\ast$}{*}trailing\+\_\+star)
+\begin{DoxyCompactList}\small\item\em Hex bytes "{}22\+F190"{} (spaces and dots allowed); returns the count or -\/1. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{scenario_8c_a093ff8ba04d10549efe317dbc060435d}{frame\+\_\+pattern\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}text, \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}pattern)
+\item 
+bool \mbox{\hyperlink{scenario_8c_ac446ebc3b091b6cfc2e761ce9ab77e05}{frame\+\_\+pattern\+\_\+matches}} (const \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}pattern, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\item 
+bool \mbox{\hyperlink{scenario_8c_ac7a2e430006c17685535959cc6a3a59a}{scenario\+\_\+parse\+\_\+line}} (\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}scenario, const char \texorpdfstring{$\ast$}{*}line, int line\+\_\+number, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Adds the step in {\ttfamily line} (comments and empty lines are accepted). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{scenario_8c_a66a269d8bbfc7841adac6d62e27773ee}{scenario\+\_\+load}} (\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}scenario, const char \texorpdfstring{$\ast$}{*}path, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Loads a file; the name defaults to the file name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{scenario_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{scenario_8c_ac446ebc3b091b6cfc2e761ce9ab77e05}\index{scenario.c@{scenario.c}!frame\_pattern\_matches@{frame\_pattern\_matches}}
+\index{frame\_pattern\_matches@{frame\_pattern\_matches}!scenario.c@{scenario.c}}
+\doxysubsubsection{\texorpdfstring{frame\_pattern\_matches()}{frame\_pattern\_matches()}}
+{\footnotesize\ttfamily \label{scenario_8c_ac446ebc3b091b6cfc2e761ce9ab77e05} 
+bool frame\+\_\+pattern\+\_\+matches (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}}]{pattern}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+\Hypertarget{scenario_8c_a093ff8ba04d10549efe317dbc060435d}\index{scenario.c@{scenario.c}!frame\_pattern\_parse@{frame\_pattern\_parse}}
+\index{frame\_pattern\_parse@{frame\_pattern\_parse}!scenario.c@{scenario.c}}
+\doxysubsubsection{\texorpdfstring{frame\_pattern\_parse()}{frame\_pattern\_parse()}}
+{\footnotesize\ttfamily \label{scenario_8c_a093ff8ba04d10549efe317dbc060435d} 
+bool frame\+\_\+pattern\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{\mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}}]{pattern}{}\end{DoxyParamCaption})}
+
+\Hypertarget{scenario_8c_a678fa76b913d488b3046f41cb2ff75fb}\index{scenario.c@{scenario.c}!scenario\_init@{scenario\_init}}
+\index{scenario\_init@{scenario\_init}!scenario.c@{scenario.c}}
+\doxysubsubsection{\texorpdfstring{scenario\_init()}{scenario\_init()}}
+{\footnotesize\ttfamily \label{scenario_8c_a678fa76b913d488b3046f41cb2ff75fb} 
+void scenario\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}}]{scenario}{}\end{DoxyParamCaption})}
+
+\Hypertarget{scenario_8c_a66a269d8bbfc7841adac6d62e27773ee}\index{scenario.c@{scenario.c}!scenario\_load@{scenario\_load}}
+\index{scenario\_load@{scenario\_load}!scenario.c@{scenario.c}}
+\doxysubsubsection{\texorpdfstring{scenario\_load()}{scenario\_load()}}
+{\footnotesize\ttfamily \label{scenario_8c_a66a269d8bbfc7841adac6d62e27773ee} 
+bool scenario\+\_\+load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}}]{scenario}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Loads a file; the name defaults to the file name. 
+
+\Hypertarget{scenario_8c_ac22cb9e90f16b9ba38aaecd02925efb8}\index{scenario.c@{scenario.c}!scenario\_parse\_hex@{scenario\_parse\_hex}}
+\index{scenario\_parse\_hex@{scenario\_parse\_hex}!scenario.c@{scenario.c}}
+\doxysubsubsection{\texorpdfstring{scenario\_parse\_hex()}{scenario\_parse\_hex()}}
+{\footnotesize\ttfamily \label{scenario_8c_ac22cb9e90f16b9ba38aaecd02925efb8} 
+int scenario\+\_\+parse\+\_\+hex (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{capacity}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{trailing\+\_\+star}{}\end{DoxyParamCaption})}
+
+
+
+Hex bytes "{}22\+F190"{} (spaces and dots allowed); returns the count or -\/1. 
+
+\Hypertarget{scenario_8c_ac7a2e430006c17685535959cc6a3a59a}\index{scenario.c@{scenario.c}!scenario\_parse\_line@{scenario\_parse\_line}}
+\index{scenario\_parse\_line@{scenario\_parse\_line}!scenario.c@{scenario.c}}
+\doxysubsubsection{\texorpdfstring{scenario\_parse\_line()}{scenario\_parse\_line()}}
+{\footnotesize\ttfamily \label{scenario_8c_ac7a2e430006c17685535959cc6a3a59a} 
+bool scenario\+\_\+parse\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}}]{scenario}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{int}]{line\+\_\+number}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Adds the step in {\ttfamily line} (comments and empty lines are accepted). 
+

@@ -842,6 +842,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../scenarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios and Faults
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../component_database/" class="md-nav__link">
         
   
@@ -1201,7 +1229,13 @@ schematic of the system:</p>
   rate, message log;</li>
 <li>click a node for details: description, messages it sends/receives, links
   and the characteristics from the component database (unverified values
-  are marked).</li>
+  are marked);</li>
+<li>diagnostic frames (<code>"protocol": "uds"</code> in the system description) are
+  decoded as ISO-TP/UDS, e.g. <code>DIAG_ECU_REQ SF ReadDataByIdentifier F190</code>;</li>
+<li>faults injected into the bus (see <a href="../scenarios/">Scenarios</a>) turn the bus
+  red with the active faults and the number of lost and delayed frames. The
+  visualizer asks iotwin-bus with <code>!status</code> once per second and registers as
+  <code>visualizer</code> (<code>NodeName</code> in <code>[/Script/IoTwin.IoTwinBusSubsystem]</code>).</li>
 </ul>
 <table>
 <thead>

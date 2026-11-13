@@ -26,7 +26,7 @@ var searchData=
   ['error_5fpassive_23',['error_passive',['../structGatewayCanStatus.html#a3154ab76fcb1d2c52df534b3410ba19f',1,'GatewayCanStatus::error_passive'],['../structFdcanStatus.html#a62a3337e056bcbf0783835359e99bcd7',1,'FdcanStatus::error_passive']]],
   ['error_5fwarning_24',['error_warning',['../structGatewayCanStatus.html#af062e032204801ee146c5b1d7a633ac2',1,'GatewayCanStatus::error_warning'],['../structFdcanStatus.html#a46b5900caeb8825880db49f91b2f315f',1,'FdcanStatus::error_warning']]],
   ['events_25',['events',['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd']]],
-  ['extended_26',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended']]],
+  ['extended_26',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended'],['../structFramePattern.html#ad13450fff5fa7ff0f2fb951d9ee4b2c0',1,'FramePattern::extended']]],
   ['extended_5fflag_27',['EXTENDED_FLAG',['../dbc_8c.html#a280c5f61344ef6a1ca351e540f592c47',1,'dbc.c']]],
   ['extended_5fid_28',['extended_id',['../structIsoTpConfig.html#ac1eb44a4ed2deaf2a4fd95bdcc864377',1,'IsoTpConfig::extended_id'],['../structUdsServerConfig.html#a88232a490fda5d8f802635f81a8ad452',1,'UdsServerConfig::extended_id']]],
   ['extendedidmask_29',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]],

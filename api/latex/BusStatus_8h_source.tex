@@ -1,0 +1,55 @@
+\doxysection{Bus\+Status.\+h}
+\hypertarget{BusStatus_8h_source}{}\label{BusStatus_8h_source}\index{visualizer/Source/IoTwin/Bus/BusStatus.h@{visualizer/Source/IoTwin/Bus/BusStatus.h}}
+\mbox{\hyperlink{BusStatus_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ state\ of\ iotwin-\/bus\ reported\ by\ "{}!status"{}\ (counters\ and\ injected\ faults).}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}BusStatus.generated.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00009\ USTRUCT(BlueprintType)}
+\DoxyCodeLine{00010\ struct\ IOTWIN\_API\ \mbox{\hyperlink{structFIoTwinBusStatus}{FIoTwinBusStatus}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00016\ \ \ \ \ bool\ \mbox{\hyperlink{structFIoTwinBusStatus_a232f210673ee02d2b062a0f68057bdd1}{bValid}}\ =\ false;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00019\ \ \ \ \ int32\ \mbox{\hyperlink{structFIoTwinBusStatus_a542622fa8a073a87c439cc2dbf9455fe}{Nodes}}\ =\ 0;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00022\ \ \ \ \ int64\ \mbox{\hyperlink{structFIoTwinBusStatus_ac4ad466aa7adbc9753f730a735fa97ce}{FramesRouted}}\ =\ 0;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00026\ \ \ \ \ int64\ \mbox{\hyperlink{structFIoTwinBusStatus_a6ed6b6651506e2f9a5a442353ed88f69}{FramesDropped}}\ =\ 0;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00029\ \ \ \ \ int64\ \mbox{\hyperlink{structFIoTwinBusStatus_aad9cb259057fec2198dc25bf71519f1f}{FramesDelayed}}\ =\ 0;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structFIoTwinBusStatus_aa5d5f0eda642bb322f519f433e8b4d93}{DropPercent}}\ =\ 0.0f;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFIoTwinBusStatus_a5caf9f20d480648aa86b9be9b49c46da}{bDropFiltered}}\ =\ false;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00039\ \ \ \ \ int32\ \mbox{\hyperlink{structFIoTwinBusStatus_a85b07e643e3cf97f0b164c5cee2430f9}{DelayMs}}\ =\ 0;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00042\ \ \ \ \ int32\ \mbox{\hyperlink{structFIoTwinBusStatus_a6ee1f8c1997776199e079d3dffdeaad9}{JitterMs}}\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}IoTwin|Bus"{}})}
+\DoxyCodeLine{00046\ \ \ \ \ int32\ \mbox{\hyperlink{structFIoTwinBusStatus_a18c0c61f0fd8cc8d3a848472ad9aeb3c}{SilenceMs}}\ =\ 0;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFIoTwinBusStatus_a1a47046b2ab282ef367b25d77cd02a34}{HasFaults}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structFIoTwinBusStatus_aa5d5f0eda642bb322f519f433e8b4d93}{DropPercent}}\ >\ 0.0f\ ||\ \mbox{\hyperlink{structFIoTwinBusStatus_a85b07e643e3cf97f0b164c5cee2430f9}{DelayMs}}\ >\ 0\ ||\ \mbox{\hyperlink{structFIoTwinBusStatus_a6ee1f8c1997776199e079d3dffdeaad9}{JitterMs}}\ >\ 0\ ||\ \mbox{\hyperlink{structFIoTwinBusStatus_a18c0c61f0fd8cc8d3a848472ad9aeb3c}{SilenceMs}}\ >\ 0;\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ FString\ DescribeFaults()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ Parse(\textcolor{keyword}{const}\ FString\&\ Line,\ \mbox{\hyperlink{structFIoTwinBusStatus}{FIoTwinBusStatus}}\&\ OutStatus);}
+\DoxyCodeLine{00055\ \};}
+
+\end{DoxyCode}

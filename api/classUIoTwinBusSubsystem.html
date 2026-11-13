@@ -108,6 +108,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e1a28b7cb33c5d9487c85022eae6e22" id="r_a3e1a28b7cb33c5d9487c85022eae6e22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e1a28b7cb33c5d9487c85022eae6e22">IsConnected</a> () const</td></tr>
 <tr class="memitem:a7192d00cc2de173c824029ea2aac8425" id="r_a7192d00cc2de173c824029ea2aac8425"><td class="memItemLeft" align="right" valign="top">FString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7192d00cc2de173c824029ea2aac8425">GetEndpoint</a> () const</td></tr>
 <tr class="memitem:a22c5feb9488d7d3edd5149bfc238ef57" id="r_a22c5feb9488d7d3edd5149bfc238ef57"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22c5feb9488d7d3edd5149bfc238ef57">GetLastFrame</a> (int32 Id, bool bExtended, <a class="el" href="structFCanFrame.html">FCanFrame</a> &amp;OutFrame) const</td></tr>
+<tr class="memitem:a52e26e198ff49d3a0fe7d5cd8111b86c" id="r_a52e26e198ff49d3a0fe7d5cd8111b86c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structFIoTwinBusStatus.html">FIoTwinBusStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52e26e198ff49d3a0fe7d5cd8111b86c">GetBusStatus</a> () const</td></tr>
 <tr class="memitem:ac03153ea778e165fc8ddc99d721b1cd0" id="r_ac03153ea778e165fc8ddc99d721b1cd0"><td class="memItemLeft" align="right" valign="top">const TArray&lt; FString &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac03153ea778e165fc8ddc99d721b1cd0">GetRecentTraffic</a> () const</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -122,6 +123,7 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ab2bb3f119e740984fa0280911980b522" id="r_ab2bb3f119e740984fa0280911980b522"><td class="memItemLeft" align="right" valign="top">FString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2bb3f119e740984fa0280911980b522">Host</a> = TEXT(&quot;127.0.0.1&quot;)</td></tr>
 <tr class="memitem:a568d350ea363fb45b5be2fc65f562f2f" id="r_a568d350ea363fb45b5be2fc65f562f2f"><td class="memItemLeft" align="right" valign="top">int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a568d350ea363fb45b5be2fc65f562f2f">Port</a> = 8080</td></tr>
 <tr class="memitem:a0b6433f9fe7eb282a27f9a4a297377ca" id="r_a0b6433f9fe7eb282a27f9a4a297377ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b6433f9fe7eb282a27f9a4a297377ca">bEnabled</a> = true</td></tr>
+<tr class="memitem:a6816823ba5f4f581c31481291a474099" id="r_a6816823ba5f4f581c31481291a474099"><td class="memItemLeft" align="right" valign="top">FString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6816823ba5f4f581c31481291a474099">NodeName</a> = TEXT(&quot;visualizer&quot;)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Connects the game to iotwin-bus and makes the CAN traffic available on the game thread. Configure in DefaultGame.ini ([/Script/IoTwin.IoTwinBusSubsystem]) or per run with -IoTwinBusHost=, -IoTwinBusPort=, -IoTwinBusDisabled. </p>
@@ -174,6 +176,24 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Convenience accessor, returns nullptr outside of a game world. </p>
+
+</div>
+</div>
+<a id="a52e26e198ff49d3a0fe7d5cd8111b86c" name="a52e26e198ff49d3a0fe7d5cd8111b86c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52e26e198ff49d3a0fe7d5cd8111b86c">&#9670;&#160;</a></span>GetBusStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structFIoTwinBusStatus.html">FIoTwinBusStatus</a> UIoTwinBusSubsystem::GetBusStatus </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Counters and injected faults of iotwin-bus (polled with "!status" once per second). </p>
 
 </div>
 </div>
@@ -334,6 +354,21 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6816823ba5f4f581c31481291a474099" name="a6816823ba5f4f581c31481291a474099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6816823ba5f4f581c31481291a474099">&#9670;&#160;</a></span>NodeName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FString UIoTwinBusSubsystem::NodeName = TEXT(&quot;visualizer&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Name of this node in the bus log ("!name"). </p>
 
 </div>
 </div>

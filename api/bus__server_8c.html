@@ -92,6 +92,7 @@ $(function(){initNavTree('bus__server_8c.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="bus__server_8h_source.html">bus_server.h</a>&quot;</code><br />
+<code>#include &lt;stdarg.h&gt;</code><br />
 <code>#include &lt;stdatomic.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -100,15 +101,21 @@ $(function(){initNavTree('bus__server_8c.html','',''); });
 <code>#include &quot;<a class="el" href="line__reader_8h_source.html">line_reader.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="log_8h_source.html">log.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="net_8h_source.html">net.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pal__time_8h_source.html">pal_time.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:BusClient" id="r_BusClient"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBusClient.html">BusClient</a></td></tr>
+<tr class="memitem:PendingFrame" id="r_PendingFrame"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPendingFrame.html">PendingFrame</a></td></tr>
+<tr class="memitem:BusFaults" id="r_BusFaults"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBusFaults.html">BusFaults</a></td></tr>
 <tr class="memitem:BusServer" id="r_BusServer"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBusServer.html">BusServer</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a377c10ddb1999e7e32f9e11499e13734" id="r_a377c10ddb1999e7e32f9e11499e13734"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a377c10ddb1999e7e32f9e11499e13734">SEND_TIMEOUT_MS</a>&#160;&#160;&#160;200</td></tr>
+<tr class="memitem:ac64541bdd81c961304b9babef1402640" id="r_ac64541bdd81c961304b9babef1402640"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac64541bdd81c961304b9babef1402640">NAME_MAX</a>&#160;&#160;&#160;32</td></tr>
+<tr class="memitem:a42ad198e3e68bcade63e8454f1097575" id="r_a42ad198e3e68bcade63e8454f1097575"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42ad198e3e68bcade63e8454f1097575">MAX_DELAY_MS</a>&#160;&#160;&#160;10000u</td></tr>
+<tr class="memitem:aeaddace79507f3db82a455b774c0a37c" id="r_aeaddace79507f3db82a455b774c0a37c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaddace79507f3db82a455b774c0a37c">MAX_SILENCE_MS</a>&#160;&#160;&#160;600000u</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -128,6 +135,48 @@ Functions</h2></td></tr>
 <tr class="memdesc:a846e70f1895f6c60a0e680c8c941636d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disconnects all clients and frees the server.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a42ad198e3e68bcade63e8454f1097575" name="a42ad198e3e68bcade63e8454f1097575"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42ad198e3e68bcade63e8454f1097575">&#9670;&#160;</a></span>MAX_DELAY_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_DELAY_MS&#160;&#160;&#160;10000u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeaddace79507f3db82a455b774c0a37c" name="aeaddace79507f3db82a455b774c0a37c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaddace79507f3db82a455b774c0a37c">&#9670;&#160;</a></span>MAX_SILENCE_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_SILENCE_MS&#160;&#160;&#160;600000u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac64541bdd81c961304b9babef1402640" name="ac64541bdd81c961304b9babef1402640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac64541bdd81c961304b9babef1402640">&#9670;&#160;</a></span>NAME_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NAME_MAX&#160;&#160;&#160;32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a377c10ddb1999e7e32f9e11499e13734" name="a377c10ddb1999e7e32f9e11499e13734"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a377c10ddb1999e7e32f9e11499e13734">&#9670;&#160;</a></span>SEND_TIMEOUT_MS</h2>
 

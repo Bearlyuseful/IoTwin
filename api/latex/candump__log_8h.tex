@@ -1,0 +1,109 @@
+\doxysection{libs/can/candump\+\_\+log.h File Reference}
+\hypertarget{candump__log_8h}{}\label{candump__log_8h}\index{libs/can/candump\_log.h@{libs/can/candump\_log.h}}
+
+
+Log file lines in the can-\/utils "{}candump -\/\+L"{} format.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{candump__log_8h_ac62d1463de3e0c27d5db4dd5190c0b74}{CANDUMP\+\_\+\+LOG\+\_\+\+LINE\+\_\+\+MAX}}~96
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{Candump\+Line\+Type}} \{ \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064af672d2b7a2b450aa613b309a03e545c9}{CANDUMP\+\_\+\+LINE\+\_\+\+FRAME}}
+, \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a2f37b4d86113ca46964168b1ae720d3f}{CANDUMP\+\_\+\+LINE\+\_\+\+SKIP}}
+, \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a4624238b76eea955e2e53679e9a90c21}{CANDUMP\+\_\+\+LINE\+\_\+\+ERROR}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{candump__log_8h_ab8f068200cb038db95f314b9e93b9c32}{candump\+\_\+log\+\_\+format}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t time\+\_\+us, const char \texorpdfstring{$\ast$}{*}interface, char \texorpdfstring{$\ast$}{*}out, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Formats "{}(sec.\+usec) interface frame"{} without line break. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{Candump\+Line\+Type}} \mbox{\hyperlink{candump__log_8h_ab57379d70e012c94ec232514e96444f2}{candump\+\_\+log\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t \texorpdfstring{$\ast$}{*}time\+\_\+us, bool \texorpdfstring{$\ast$}{*}has\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Parses one line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Log file lines in the can-\/utils "{}candump -\/\+L"{} format. 
+
+(1700000000.\+123456) iotwin 123\#\+DEADBEEF
+
+Files written by can\+\_\+monitor --log can be replayed with can\+\_\+replay or canplayer (can-\/utils), and candump logs from a real bus can be replayed onto iotwin-\/bus. On input the timestamp and the interface are optional, so plain "{}123\#\+DEAD"{} lines work too; empty lines and lines starting with \textquotesingle{}\#\textquotesingle{} or \textquotesingle{};\textquotesingle{} are skipped. 
+
+\label{doc-define-members}
+\Hypertarget{candump__log_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{candump__log_8h_ac62d1463de3e0c27d5db4dd5190c0b74}\index{candump\_log.h@{candump\_log.h}!CANDUMP\_LOG\_LINE\_MAX@{CANDUMP\_LOG\_LINE\_MAX}}
+\index{CANDUMP\_LOG\_LINE\_MAX@{CANDUMP\_LOG\_LINE\_MAX}!candump\_log.h@{candump\_log.h}}
+\doxysubsubsection{\texorpdfstring{CANDUMP\_LOG\_LINE\_MAX}{CANDUMP\_LOG\_LINE\_MAX}}
+{\footnotesize\ttfamily \label{candump__log_8h_ac62d1463de3e0c27d5db4dd5190c0b74} 
+\#define CANDUMP\+\_\+\+LOG\+\_\+\+LINE\+\_\+\+MAX~96}
+
+Buffer size for a formatted line incl. NUL. 
+
+\label{doc-enum-members}
+\Hypertarget{candump__log_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}\index{candump\_log.h@{candump\_log.h}!CandumpLineType@{CandumpLineType}}
+\index{CandumpLineType@{CandumpLineType}!candump\_log.h@{candump\_log.h}}
+\doxysubsubsection{\texorpdfstring{CandumpLineType}{CandumpLineType}}
+{\footnotesize\ttfamily \label{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064} 
+enum \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{Candump\+Line\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CANDUMP\_LINE\_FRAME@{CANDUMP\_LINE\_FRAME}!candump\_log.h@{candump\_log.h}}\index{candump\_log.h@{candump\_log.h}!CANDUMP\_LINE\_FRAME@{CANDUMP\_LINE\_FRAME}}}\Hypertarget{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064af672d2b7a2b450aa613b309a03e545c9}\label{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064af672d2b7a2b450aa613b309a03e545c9} 
+CANDUMP\+\_\+\+LINE\+\_\+\+FRAME&A frame was parsed. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CANDUMP\_LINE\_SKIP@{CANDUMP\_LINE\_SKIP}!candump\_log.h@{candump\_log.h}}\index{candump\_log.h@{candump\_log.h}!CANDUMP\_LINE\_SKIP@{CANDUMP\_LINE\_SKIP}}}\Hypertarget{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a2f37b4d86113ca46964168b1ae720d3f}\label{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a2f37b4d86113ca46964168b1ae720d3f} 
+CANDUMP\+\_\+\+LINE\+\_\+\+SKIP&Empty line or comment. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CANDUMP\_LINE\_ERROR@{CANDUMP\_LINE\_ERROR}!candump\_log.h@{candump\_log.h}}\index{candump\_log.h@{candump\_log.h}!CANDUMP\_LINE\_ERROR@{CANDUMP\_LINE\_ERROR}}}\Hypertarget{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a4624238b76eea955e2e53679e9a90c21}\label{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a4624238b76eea955e2e53679e9a90c21} 
+CANDUMP\+\_\+\+LINE\+\_\+\+ERROR&Not a valid log line. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{candump__log_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{candump__log_8h_ab8f068200cb038db95f314b9e93b9c32}\index{candump\_log.h@{candump\_log.h}!candump\_log\_format@{candump\_log\_format}}
+\index{candump\_log\_format@{candump\_log\_format}!candump\_log.h@{candump\_log.h}}
+\doxysubsubsection{\texorpdfstring{candump\_log\_format()}{candump\_log\_format()}}
+{\footnotesize\ttfamily \label{candump__log_8h_ab8f068200cb038db95f314b9e93b9c32} 
+int candump\+\_\+log\+\_\+format (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t}]{time\+\_\+us}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{interface}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Formats "{}(sec.\+usec) interface frame"{} without line break. 
+
+\begin{DoxyReturn}{Returns}
+Length, or -\/1 if the frame is invalid or {\ttfamily size} too small. 
+\end{DoxyReturn}
+\Hypertarget{candump__log_8h_ab57379d70e012c94ec232514e96444f2}\index{candump\_log.h@{candump\_log.h}!candump\_log\_parse@{candump\_log\_parse}}
+\index{candump\_log\_parse@{candump\_log\_parse}!candump\_log.h@{candump\_log.h}}
+\doxysubsubsection{\texorpdfstring{candump\_log\_parse()}{candump\_log\_parse()}}
+{\footnotesize\ttfamily \label{candump__log_8h_ab57379d70e012c94ec232514e96444f2} 
+\mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{Candump\+Line\+Type}} candump\+\_\+log\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t \texorpdfstring{$\ast$}{*}}]{time\+\_\+us}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{has\+\_\+time}{}\end{DoxyParamCaption})}
+
+
+
+Parses one line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+us} & Receives the timestamp in microseconds (0 if the line has none). \\
+\hline
+{\em has\+\_\+time} & Optional, set to true if the line had a timestamp. \\
+\hline
+\end{DoxyParams}

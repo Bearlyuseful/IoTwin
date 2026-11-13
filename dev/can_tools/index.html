@@ -766,6 +766,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recording-and-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recording and replay
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#uds-diagnostics" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -811,6 +822,34 @@
     
   
     Diagnostics (UDS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scenarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios and Faults
   
 
     
@@ -1227,6 +1266,11 @@ so it runs on the host and on a microcontroller alike.</p>
 </code></pre></div>
 <p>Tests (<code>tests/test_isotp.cpp</code>) run two links against each other on a simulated
 bus with simulated time.</p>
+<h2 id="recording-and-replay">Recording and replay<a class="headerlink" href="#recording-and-replay" title="Permanent link">&para;</a></h2>
+<p><code>can_monitor --log FILE</code> records every frame in the <code>candump -L</code> format,
+<code>can_replay FILE</code> plays it back with the original timing (<code>--speed</code>, <code>--loop</code>,
+<code>--filter</code>). Logs of a real bus recorded with can-utils work too. Details and
+scripted scenarios with fault injection: <a href="../scenarios/">Scenarios and Faults</a>.</p>
 <h2 id="uds-diagnostics">UDS diagnostics<a class="headerlink" href="#uds-diagnostics" title="Permanent link">&para;</a></h2>
 <p>The UDS server (<code>libs/can/uds.c</code>) and the tester <code>uds_client</code> build on this
 ISO-TP layer; services, identifiers and trouble codes of the light ECU and

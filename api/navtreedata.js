@@ -55,12 +55,13 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"CanDatabase_8cpp.html",
-"classAPowerSourceActor.html#a3cfceccc77ab1c960d2fc9a5b394fc4a",
-"functions_vars_t.html",
-"main__uds__client_8c.html#aee636dcee16cce6de674508a781e9d41",
-"structDbcMessage.html#a15c999b6c29bb6ed1eb9f1ba51596a16",
-"structSimOptions.html#a32f338f93324bc9da622058f9d96c5b7"
+"BusStatus_8cpp.html",
+"classAElectricalDevice.html#afd9a8f9ff69f771280d9fb3bad5de329",
+"functions.html",
+"log_8h.html#aca1fd1d8935433e6ba2e3918214e07f9a5b40f003febbc3b535649d63f4b8a44f",
+"structBusFaults.html#a3d00b43502a9f44d3077704548eab805",
+"structGateway.html",
+"uds_8c.html#a124fca5f3fb151771c54384adbbb71e7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

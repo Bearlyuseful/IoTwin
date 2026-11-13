@@ -5,5 +5,7 @@ var structMonitor =
     [ "frames", "structMonitor.html#ac3926d594c38ccd1423feaebf67247a4", null ],
     [ "have_dbc", "structMonitor.html#a88bf6177a96f38d70186068b2300df55", null ],
     [ "last", "structMonitor.html#a0071ae41c3cea19aba30fd888d326d03", null ],
-    [ "last_count", "structMonitor.html#a7f3370056f967b69a47607deb9a0dbee", null ]
+    [ "last_count", "structMonitor.html#a7f3370056f967b69a47607deb9a0dbee", null ],
+    [ "log", "structMonitor.html#a3f0ed45d7295a0908730569833fce6fe", null ],
+    [ "quiet", "structMonitor.html#a779c310b3f7716697d7084efe55d7041", null ]
 ];

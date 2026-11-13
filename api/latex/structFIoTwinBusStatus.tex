@@ -1,0 +1,138 @@
+\doxysection{FIo\+Twin\+Bus\+Status Struct Reference}
+\hypertarget{structFIoTwinBusStatus}{}\label{structFIoTwinBusStatus}\index{FIoTwinBusStatus@{FIoTwinBusStatus}}
+
+
+{\ttfamily \#include $<$Bus\+Status.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structFIoTwinBusStatus_a1a47046b2ab282ef367b25d77cd02a34}{Has\+Faults}} () const
+\item 
+FString \mbox{\hyperlink{structFIoTwinBusStatus_ae73a0518e9beeb3ad60e7fdf4d7225cd}{Describe\+Faults}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{structFIoTwinBusStatus_aeb0dba0ae8551d0ec9202ba3fe4babd5}{Parse}} (const FString \&Line, \mbox{\hyperlink{structFIoTwinBusStatus}{FIo\+Twin\+Bus\+Status}} \&Out\+Status)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structFIoTwinBusStatus_a232f210673ee02d2b062a0f68057bdd1}{b\+Valid}} = false
+\item 
+int32 \mbox{\hyperlink{structFIoTwinBusStatus_a542622fa8a073a87c439cc2dbf9455fe}{Nodes}} = 0
+\item 
+int64 \mbox{\hyperlink{structFIoTwinBusStatus_ac4ad466aa7adbc9753f730a735fa97ce}{Frames\+Routed}} = 0
+\item 
+int64 \mbox{\hyperlink{structFIoTwinBusStatus_a6ed6b6651506e2f9a5a442353ed88f69}{Frames\+Dropped}} = 0
+\item 
+int64 \mbox{\hyperlink{structFIoTwinBusStatus_aad9cb259057fec2198dc25bf71519f1f}{Frames\+Delayed}} = 0
+\item 
+float \mbox{\hyperlink{structFIoTwinBusStatus_aa5d5f0eda642bb322f519f433e8b4d93}{Drop\+Percent}} = 0.\+0f
+\item 
+bool \mbox{\hyperlink{structFIoTwinBusStatus_a5caf9f20d480648aa86b9be9b49c46da}{b\+Drop\+Filtered}} = false
+\item 
+int32 \mbox{\hyperlink{structFIoTwinBusStatus_a85b07e643e3cf97f0b164c5cee2430f9}{Delay\+Ms}} = 0
+\item 
+int32 \mbox{\hyperlink{structFIoTwinBusStatus_a6ee1f8c1997776199e079d3dffdeaad9}{Jitter\+Ms}} = 0
+\item 
+int32 \mbox{\hyperlink{structFIoTwinBusStatus_a18c0c61f0fd8cc8d3a848472ad9aeb3c}{Silence\+Ms}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Answer of iotwin-\/bus to "{}!status"{}, see docs/dev/protocol.\+md. 
+
+\label{doc-func-members}
+\Hypertarget{structFIoTwinBusStatus_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structFIoTwinBusStatus_ae73a0518e9beeb3ad60e7fdf4d7225cd}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!DescribeFaults@{DescribeFaults}}
+\index{DescribeFaults@{DescribeFaults}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{DescribeFaults()}{DescribeFaults()}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_ae73a0518e9beeb3ad60e7fdf4d7225cd} 
+FString FIo\+Twin\+Bus\+Status\+::\+Describe\+Faults (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+"{}drop 100 \% (filtered), delay 250 +-\/50 ms, silent 1.\+2 s"{} or empty. \Hypertarget{structFIoTwinBusStatus_a1a47046b2ab282ef367b25d77cd02a34}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!HasFaults@{HasFaults}}
+\index{HasFaults@{HasFaults}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{HasFaults()}{HasFaults()}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a1a47046b2ab282ef367b25d77cd02a34} 
+bool FIo\+Twin\+Bus\+Status\+::\+Has\+Faults (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structFIoTwinBusStatus_aeb0dba0ae8551d0ec9202ba3fe4babd5}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!Parse@{Parse}}
+\index{Parse@{Parse}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_aeb0dba0ae8551d0ec9202ba3fe4babd5} 
+bool FIo\+Twin\+Bus\+Status\+::\+Parse (\begin{DoxyParamCaption}\item[{const FString \&}]{Line}{, }\item[{\mbox{\hyperlink{structFIoTwinBusStatus}{FIo\+Twin\+Bus\+Status}} \&}]{Out\+Status}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Parses "{}!status nodes=2 routed=10 dropped=0 delayed=0 drop=0.\+0\% delay=0 jitter=0 silence=0"{}. 
+
+\label{doc-variable-members}
+\Hypertarget{structFIoTwinBusStatus_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structFIoTwinBusStatus_a5caf9f20d480648aa86b9be9b49c46da}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!bDropFiltered@{bDropFiltered}}
+\index{bDropFiltered@{bDropFiltered}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{bDropFiltered}{bDropFiltered}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a5caf9f20d480648aa86b9be9b49c46da} 
+bool FIo\+Twin\+Bus\+Status\+::b\+Drop\+Filtered = false}
+
+Drop applies only to frames matching an id filter. \Hypertarget{structFIoTwinBusStatus_a232f210673ee02d2b062a0f68057bdd1}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!bValid@{bValid}}
+\index{bValid@{bValid}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{bValid}{bValid}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a232f210673ee02d2b062a0f68057bdd1} 
+bool FIo\+Twin\+Bus\+Status\+::b\+Valid = false}
+
+A status line was received recently. \Hypertarget{structFIoTwinBusStatus_a85b07e643e3cf97f0b164c5cee2430f9}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!DelayMs@{DelayMs}}
+\index{DelayMs@{DelayMs}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{DelayMs}{DelayMs}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a85b07e643e3cf97f0b164c5cee2430f9} 
+int32 FIo\+Twin\+Bus\+Status\+::\+Delay\+Ms = 0}
+
+\Hypertarget{structFIoTwinBusStatus_aa5d5f0eda642bb322f519f433e8b4d93}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!DropPercent@{DropPercent}}
+\index{DropPercent@{DropPercent}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{DropPercent}{DropPercent}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_aa5d5f0eda642bb322f519f433e8b4d93} 
+float FIo\+Twin\+Bus\+Status\+::\+Drop\+Percent = 0.\+0f}
+
+\Hypertarget{structFIoTwinBusStatus_aad9cb259057fec2198dc25bf71519f1f}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!FramesDelayed@{FramesDelayed}}
+\index{FramesDelayed@{FramesDelayed}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{FramesDelayed}{FramesDelayed}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_aad9cb259057fec2198dc25bf71519f1f} 
+int64 FIo\+Twin\+Bus\+Status\+::\+Frames\+Delayed = 0}
+
+\Hypertarget{structFIoTwinBusStatus_a6ed6b6651506e2f9a5a442353ed88f69}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!FramesDropped@{FramesDropped}}
+\index{FramesDropped@{FramesDropped}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{FramesDropped}{FramesDropped}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a6ed6b6651506e2f9a5a442353ed88f69} 
+int64 FIo\+Twin\+Bus\+Status\+::\+Frames\+Dropped = 0}
+
+Frames lost by injected faults (drop, silence). \Hypertarget{structFIoTwinBusStatus_ac4ad466aa7adbc9753f730a735fa97ce}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!FramesRouted@{FramesRouted}}
+\index{FramesRouted@{FramesRouted}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{FramesRouted}{FramesRouted}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_ac4ad466aa7adbc9753f730a735fa97ce} 
+int64 FIo\+Twin\+Bus\+Status\+::\+Frames\+Routed = 0}
+
+\Hypertarget{structFIoTwinBusStatus_a6ee1f8c1997776199e079d3dffdeaad9}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!JitterMs@{JitterMs}}
+\index{JitterMs@{JitterMs}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{JitterMs}{JitterMs}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a6ee1f8c1997776199e079d3dffdeaad9} 
+int32 FIo\+Twin\+Bus\+Status\+::\+Jitter\+Ms = 0}
+
+\Hypertarget{structFIoTwinBusStatus_a542622fa8a073a87c439cc2dbf9455fe}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{Nodes}{Nodes}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a542622fa8a073a87c439cc2dbf9455fe} 
+int32 FIo\+Twin\+Bus\+Status\+::\+Nodes = 0}
+
+\Hypertarget{structFIoTwinBusStatus_a18c0c61f0fd8cc8d3a848472ad9aeb3c}\index{FIoTwinBusStatus@{FIoTwinBusStatus}!SilenceMs@{SilenceMs}}
+\index{SilenceMs@{SilenceMs}!FIoTwinBusStatus@{FIoTwinBusStatus}}
+\doxysubsubsection{\texorpdfstring{SilenceMs}{SilenceMs}}
+{\footnotesize\ttfamily \label{structFIoTwinBusStatus_a18c0c61f0fd8cc8d3a848472ad9aeb3c} 
+int32 FIo\+Twin\+Bus\+Status\+::\+Silence\+Ms = 0}
+
+Remaining time of an injected silence. 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{BusStatus_8h}{Bus\+Status.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Bus/\mbox{\hyperlink{BusStatus_8cpp}{Bus\+Status.\+cpp}}\end{DoxyCompactItemize}

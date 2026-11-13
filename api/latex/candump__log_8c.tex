@@ -1,0 +1,47 @@
+\doxysection{libs/can/candump\+\_\+log.c File Reference}
+\hypertarget{candump__log_8c}{}\label{candump__log_8c}\index{libs/can/candump\_log.c@{libs/can/candump\_log.c}}
+{\ttfamily \#include "{}candump\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{candump__log_8c_ab8f068200cb038db95f314b9e93b9c32}{candump\+\_\+log\+\_\+format}} (const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t time\+\_\+us, const char \texorpdfstring{$\ast$}{*}interface, char \texorpdfstring{$\ast$}{*}out, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Formats "{}(sec.\+usec) interface frame"{} without line break. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{Candump\+Line\+Type}} \mbox{\hyperlink{candump__log_8c_ab57379d70e012c94ec232514e96444f2}{candump\+\_\+log\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}line, size\+\_\+t length, \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame, uint64\+\_\+t \texorpdfstring{$\ast$}{*}time\+\_\+us, bool \texorpdfstring{$\ast$}{*}has\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Parses one line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{candump__log_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{candump__log_8c_ab8f068200cb038db95f314b9e93b9c32}\index{candump\_log.c@{candump\_log.c}!candump\_log\_format@{candump\_log\_format}}
+\index{candump\_log\_format@{candump\_log\_format}!candump\_log.c@{candump\_log.c}}
+\doxysubsubsection{\texorpdfstring{candump\_log\_format()}{candump\_log\_format()}}
+{\footnotesize\ttfamily \label{candump__log_8c_ab8f068200cb038db95f314b9e93b9c32} 
+int candump\+\_\+log\+\_\+format (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t}]{time\+\_\+us}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{interface}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Formats "{}(sec.\+usec) interface frame"{} without line break. 
+
+\begin{DoxyReturn}{Returns}
+Length, or -\/1 if the frame is invalid or {\ttfamily size} too small. 
+\end{DoxyReturn}
+\Hypertarget{candump__log_8c_ab57379d70e012c94ec232514e96444f2}\index{candump\_log.c@{candump\_log.c}!candump\_log\_parse@{candump\_log\_parse}}
+\index{candump\_log\_parse@{candump\_log\_parse}!candump\_log.c@{candump\_log.c}}
+\doxysubsubsection{\texorpdfstring{candump\_log\_parse()}{candump\_log\_parse()}}
+{\footnotesize\ttfamily \label{candump__log_8c_ab57379d70e012c94ec232514e96444f2} 
+\mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{Candump\+Line\+Type}} candump\+\_\+log\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{size\+\_\+t}]{length}{, }\item[{\mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{, }\item[{uint64\+\_\+t \texorpdfstring{$\ast$}{*}}]{time\+\_\+us}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{has\+\_\+time}{}\end{DoxyParamCaption})}
+
+
+
+Parses one line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+\_\+us} & Receives the timestamp in microseconds (0 if the line has none). \\
+\hline
+{\em has\+\_\+time} & Optional, set to true if the line had a timestamp. \\
+\hline
+\end{DoxyParams}

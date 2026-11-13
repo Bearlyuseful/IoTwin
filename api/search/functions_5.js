@@ -15,5 +15,7 @@ var searchData=
   ['fiotwinbusconnection_12',['FIoTwinBusConnection',['../classFIoTwinBusConnection.html#a1daec294f78dd023123525a59c4f02f3',1,'FIoTwinBusConnection']]],
   ['formatparameter_13',['FormatParameter',['../classFComponentCatalog.html#afc8a78ffa8c9859aa8fdd74878b52f89',1,'FComponentCatalog']]],
   ['formatquantity_14',['FormatQuantity',['../classFComponentCatalog.html#a2a6e64bea5e8e50ff93855c4861b1961',1,'FComponentCatalog']]],
-  ['fschematicrenderer_15',['FSchematicRenderer',['../classFSchematicRenderer.html#a93df9099c9abe40ced2c5096c9df0bbc',1,'FSchematicRenderer']]]
+  ['frame_5fpattern_5fmatches_15',['frame_pattern_matches',['../scenario_8c.html#ac446ebc3b091b6cfc2e761ce9ab77e05',1,'frame_pattern_matches(const FramePattern *pattern, const CanFrame *frame):&#160;scenario.c'],['../scenario_8h.html#ac446ebc3b091b6cfc2e761ce9ab77e05',1,'frame_pattern_matches(const FramePattern *pattern, const CanFrame *frame):&#160;scenario.c']]],
+  ['frame_5fpattern_5fparse_16',['frame_pattern_parse',['../scenario_8c.html#a093ff8ba04d10549efe317dbc060435d',1,'frame_pattern_parse(const char *text, FramePattern *pattern):&#160;scenario.c'],['../scenario_8h.html#a093ff8ba04d10549efe317dbc060435d',1,'frame_pattern_parse(const char *text, FramePattern *pattern):&#160;scenario.c']]],
+  ['fschematicrenderer_17',['FSchematicRenderer',['../classFSchematicRenderer.html#a93df9099c9abe40ced2c5096c9df0bbc',1,'FSchematicRenderer']]]
 ];

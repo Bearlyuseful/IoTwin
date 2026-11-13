@@ -18,6 +18,9 @@ var hierarchy =
     ] ],
     [ "Bridge", "structBridge.html", null ],
     [ "BusClient", "structBusClient.html", null ],
+    [ "BusFaults", "structBusFaults.html", null ],
+    [ "BusLink", "structBusLink.html", null ],
+    [ "BusLinkHandlers", "structBusLinkHandlers.html", null ],
     [ "BusServer", "structBusServer.html", null ],
     [ "BusServerConfig", "structBusServerConfig.html", null ],
     [ "BusServerStats", "structBusServerStats.html", null ],
@@ -44,6 +47,8 @@ var hierarchy =
     [ "FComponentParameter", "structFComponentParameter.html", null ],
     [ "FComponentPart", "structFComponentPart.html", null ],
     [ "FdcanStatus", "structFdcanStatus.html", null ],
+    [ "FIoTwinBusStatus", "structFIoTwinBusStatus.html", null ],
+    [ "FramePattern", "structFramePattern.html", null ],
     [ "FRunnable", null, [
       [ "FIoTwinBusConnection", "classFIoTwinBusConnection.html", null ]
     ] ],
@@ -68,6 +73,7 @@ var hierarchy =
     [ "LightEcu", "structLightEcu.html", null ],
     [ "LightEcuDiag", "structLightEcuDiag.html", null ],
     [ "LineReader", "structLineReader.html", null ],
+    [ "LogEntry", "structLogEntry.html", null ],
     [ "ModuleRules", null, [
       [ "IoTwin", "classIoTwin.html", null ]
     ] ],
@@ -75,6 +81,10 @@ var hierarchy =
     [ "NetPollFd", "structNetPollFd.html", null ],
     [ "Options", "structOptions.html", null ],
     [ "PalRtConfig", "structPalRtConfig.html", null ],
+    [ "PendingFrame", "structPendingFrame.html", null ],
+    [ "Runner", "structRunner.html", null ],
+    [ "Scenario", "structScenario.html", null ],
+    [ "ScenarioStep", "structScenarioStep.html", null ],
     [ "SerialPort", "structSerialPort.html", null ],
     [ "SimOptions", "structSimOptions.html", null ],
     [ "SimShared", "structSimShared.html", null ],

@@ -1,0 +1,38 @@
+\doxysection{candump\+\_\+log.\+h}
+\hypertarget{candump__log_8h_source}{}\label{candump__log_8h_source}\index{libs/can/candump\_log.h@{libs/can/candump\_log.h}}
+\mbox{\hyperlink{candump__log_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_CANDUMP\_LOG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_CANDUMP\_LOG\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{can__frame_8h}{can\_frame.h}}"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ CANDUMP\_LOG\_LINE\_MAX\ 96\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064af672d2b7a2b450aa613b309a03e545c9}{CANDUMP\_LINE\_FRAME}},\ }
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a2f37b4d86113ca46964168b1ae720d3f}{CANDUMP\_LINE\_SKIP}},\ \ }
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064a4624238b76eea955e2e53679e9a90c21}{CANDUMP\_LINE\_ERROR}}\ \ }
+\DoxyCodeLine{00033\ \}\ \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{CandumpLineType}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{candump__log_8h_ab8f068200cb038db95f314b9e93b9c32}{candump\_log\_format}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ uint64\_t\ time\_us,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ interface,\ \textcolor{keywordtype}{char}*\ out,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \mbox{\hyperlink{candump__log_8h_ab5d12729ef0e0a4fb6319149a8deb064}{CandumpLineType}}\ \mbox{\hyperlink{candump__log_8h_ab57379d70e012c94ec232514e96444f2}{candump\_log\_parse}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ line,\ \textcolor{keywordtype}{size\_t}\ length,\ \mbox{\hyperlink{structCanFrame}{CanFrame}}*\ frame,\ uint64\_t*\ time\_us,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}*\ has\_time);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_CANDUMP\_LOG\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

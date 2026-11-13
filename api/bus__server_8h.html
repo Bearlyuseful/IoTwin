@@ -111,6 +111,7 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ad0847debb1fd581c6ce7344e734ce4ef" id="r_ad0847debb1fd581c6ce7344e734ce4ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0847debb1fd581c6ce7344e734ce4ef">BUS_SERVER_DEFAULT_PORT</a>&#160;&#160;&#160;8080</td></tr>
 <tr class="memitem:a30a1dcd77f4603b9b1be5cedac0174c3" id="r_a30a1dcd77f4603b9b1be5cedac0174c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30a1dcd77f4603b9b1be5cedac0174c3">BUS_SERVER_MAX_CLIENTS</a>&#160;&#160;&#160;64</td></tr>
+<tr class="memitem:af88bb13dc6fbb7cf2f03d4d3a3fd5add" id="r_af88bb13dc6fbb7cf2f03d4d3a3fd5add"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af88bb13dc6fbb7cf2f03d4d3a3fd5add">BUS_SERVER_MAX_PENDING</a>&#160;&#160;&#160;4096</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -136,6 +137,10 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Virtual CAN bus over TCP. </p>
 <p>Every connected client (simulator, visualizer, test tool) is a node on the bus. A frame received from one node is validated, normalised and forwarded to all other nodes - like a broadcast on a physical CAN bus. Invalid lines are counted and dropped. See docs/dev/protocol.md.</p>
+<p>Besides frames, clients may send</p><ul>
+<li>control commands "!name ecu", "!testbench on", "!status" and the fault injection of the medium: "!fault drop 10 200/7FF", "!fault delay 50 10", "!fault silence 2000", "!fault seed 1", "!fault clear"; the server answers the sender with "!ok", "!error ..." or "!status ...";</li>
+<li>test bench lines "@&lt;target&gt; &lt;command&gt;", forwarded only to nodes that sent "!testbench on" (e.g. can_sim executes "@ecu fault short on").</li>
+</ul>
 <p>The server is single threaded: call <a class="el" href="#af0c8b52525ef74ebf7f1ff95a6825277" title="Waits up to timeout_ms for network activity and processes it.">bus_server_poll()</a> in a loop. <a class="el" href="#aa3f74a060dbfd568d4019369650e9bbb" title="Port the server listens on (useful with port 0).">bus_server_port()</a>, <a class="el" href="#a27404fa633d7ead7fbb20ed610fa78a5" title="Number of currently connected clients.">bus_server_client_count()</a> and <a class="el" href="#a070d80b79cad3620cb1b1819f1106a49" title="Snapshot of the counters.">bus_server_get_stats()</a> may be called from other threads. </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="ad0847debb1fd581c6ce7344e734ce4ef" name="ad0847debb1fd581c6ce7344e734ce4ef"></a>
@@ -163,6 +168,21 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="af88bb13dc6fbb7cf2f03d4d3a3fd5add" name="af88bb13dc6fbb7cf2f03d4d3a3fd5add"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af88bb13dc6fbb7cf2f03d4d3a3fd5add">&#9670;&#160;</a></span>BUS_SERVER_MAX_PENDING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUS_SERVER_MAX_PENDING&#160;&#160;&#160;4096</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Frames held back by the "delay" fault. </p>
 
 </div>
 </div>

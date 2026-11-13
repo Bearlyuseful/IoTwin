@@ -56,7 +56,9 @@ Threads\+:
 
 The control loop never blocks on the network while connected\+: it reads whatever arrived, runs the ECU step, sends the outputs and sleeps until the next absolute deadline.
 
-Diagnostics\+: UDS server on 0x7\+E0/0x7\+E8 (functional 0x7\+DF), faults can be injected on the console (see \doxylink{light__ecu__diag_8h}{light\+\_\+ecu\+\_\+diag.\+h}, docs/dev/diagnostics.\+md). 
+Diagnostics\+: UDS server on 0x7\+E0/0x7\+E8 (functional 0x7\+DF), faults can be injected on the console (see \doxylink{light__ecu__diag_8h}{light\+\_\+ecu\+\_\+diag.\+h}, docs/dev/diagnostics.\+md).
+
+Test bench\+: the simulator registers on the bus as "{}-\/-\/name"{} (default "{}ecu"{}) and executes test bench lines "{}@ecu $<$console command$>$"{} sent by can\+\_\+scenario (see docs/dev/scenarios.\+md). 
 
 \label{doc-define-members}
 \Hypertarget{main__can__sim_8c_doc-define-members}

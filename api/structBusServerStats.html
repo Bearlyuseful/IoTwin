@@ -101,6 +101,8 @@ $(function(){initNavTree('structBusServerStats.html','','structBusServerStats-me
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae420829dd0f15d492376cf9d17e4c28f" id="r_ae420829dd0f15d492376cf9d17e4c28f"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae420829dd0f15d492376cf9d17e4c28f">frames_routed</a></td></tr>
 <tr class="memitem:a81d7f7d7798db00b42afa5884c8610c2" id="r_a81d7f7d7798db00b42afa5884c8610c2"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81d7f7d7798db00b42afa5884c8610c2">frames_rejected</a></td></tr>
+<tr class="memitem:ab0b2819c31bb5e18eeb5aaefefea4100" id="r_ab0b2819c31bb5e18eeb5aaefefea4100"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0b2819c31bb5e18eeb5aaefefea4100">frames_dropped</a></td></tr>
+<tr class="memitem:acadbcdcee7ef46916a3481a0f03b4aa8" id="r_acadbcdcee7ef46916a3481a0f03b4aa8"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acadbcdcee7ef46916a3481a0f03b4aa8">frames_delayed</a></td></tr>
 <tr class="memitem:a60179e992b6a9a231c2c6e80f72d89f6" id="r_a60179e992b6a9a231c2c6e80f72d89f6"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60179e992b6a9a231c2c6e80f72d89f6">clients_accepted</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -118,6 +120,36 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Connections accepted in total. </p>
+
+</div>
+</div>
+<a id="acadbcdcee7ef46916a3481a0f03b4aa8" name="acadbcdcee7ef46916a3481a0f03b4aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acadbcdcee7ef46916a3481a0f03b4aa8">&#9670;&#160;</a></span>frames_delayed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t BusServerStats::frames_delayed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Valid frames held back by an injected delay. </p>
+
+</div>
+</div>
+<a id="ab0b2819c31bb5e18eeb5aaefefea4100" name="ab0b2819c31bb5e18eeb5aaefefea4100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b2819c31bb5e18eeb5aaefefea4100">&#9670;&#160;</a></span>frames_dropped</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t BusServerStats::frames_dropped</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Valid frames lost by an injected fault (drop, silence). </p>
 
 </div>
 </div>

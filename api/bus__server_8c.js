@@ -1,7 +1,12 @@
 var bus__server_8c =
 [
     [ "BusClient", "structBusClient.html", "structBusClient" ],
+    [ "PendingFrame", "structPendingFrame.html", "structPendingFrame" ],
+    [ "BusFaults", "structBusFaults.html", "structBusFaults" ],
     [ "BusServer", "structBusServer.html", "structBusServer" ],
+    [ "MAX_DELAY_MS", "bus__server_8c.html#a42ad198e3e68bcade63e8454f1097575", null ],
+    [ "MAX_SILENCE_MS", "bus__server_8c.html#aeaddace79507f3db82a455b774c0a37c", null ],
+    [ "NAME_MAX", "bus__server_8c.html#ac64541bdd81c961304b9babef1402640", null ],
     [ "SEND_TIMEOUT_MS", "bus__server_8c.html#a377c10ddb1999e7e32f9e11499e13734", null ],
     [ "bus_server_client_count", "bus__server_8c.html#a27404fa633d7ead7fbb20ed610fa78a5", null ],
     [ "bus_server_create", "bus__server_8c.html#ad64505e36af75d92aaf59a1c4fde3b58", null ],

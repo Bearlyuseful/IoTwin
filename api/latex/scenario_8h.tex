@@ -1,0 +1,199 @@
+\doxysection{apps/can\+\_\+scenario/scenario.h File Reference}
+\hypertarget{scenario_8h}{}\label{scenario_8h}\index{apps/can\_scenario/scenario.h@{apps/can\_scenario/scenario.h}}
+
+
+\doxylink{structScenario}{Scenario} scripts for can\+\_\+scenario (see docs/dev/scenarios.\+md).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}can\+\_\+frame.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}}
+\item 
+struct \mbox{\hyperlink{structScenarioStep}{Scenario\+Step}}
+\item 
+struct \mbox{\hyperlink{structScenario}{Scenario}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{scenario_8h_a5a28b5c66c920b90810be1dadf6ea010}{SCENARIO\+\_\+\+MAX\+\_\+\+STEPS}}~256
+\item 
+\#define \mbox{\hyperlink{scenario_8h_a50683d8c0ecec6e431b37137e7883100}{SCENARIO\+\_\+\+TEXT\+\_\+\+MAX}}~160
+\item 
+\#define \mbox{\hyperlink{scenario_8h_a122410968a1869242e79c452431d8808}{SCENARIO\+\_\+\+UDS\+\_\+\+MAX}}~64
+\item 
+\#define \mbox{\hyperlink{scenario_8h_a2772c5bcd920c142f21bb3fef9a342fa}{SCENARIO\+\_\+\+DEFAULT\+\_\+\+TIMEOUT\+\_\+\+MS}}~1000u
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60b}{Scenario\+Step\+Type}} \{ \newline
+\mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba55dc6a28e56fe88a29b17a9cf3700568}{STEP\+\_\+\+SEND}}
+, \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60badb1e51a833bc5e78a09408059c510807}{STEP\+\_\+\+EXPECT}}
+, \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba81ca0f6298e98ad56d2fd42198e9389c}{STEP\+\_\+\+EXPECT\+\_\+\+NOT}}
+, \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba6e05cde7de9ac8e47c4ad608eea7ac67}{STEP\+\_\+\+WAIT}}
+, \newline
+\mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba397e45f9da9e2a1375c4eee31bee6387}{STEP\+\_\+\+BENCH}}
+, \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba2368fea8561a9b535139d65119175324}{STEP\+\_\+\+BUS}}
+, \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60baebf1c74858d2b2cf43a106bab7b7f2a8}{STEP\+\_\+\+UDS}}
+, \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba503895d56233647b9434f319b9732ec7}{STEP\+\_\+\+LOG}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{scenario_8h_a678fa76b913d488b3046f41cb2ff75fb}{scenario\+\_\+init}} (\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}scenario)
+\item 
+bool \mbox{\hyperlink{scenario_8h_ac7a2e430006c17685535959cc6a3a59a}{scenario\+\_\+parse\+\_\+line}} (\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}scenario, const char \texorpdfstring{$\ast$}{*}line, int line\+\_\+number, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Adds the step in {\ttfamily line} (comments and empty lines are accepted). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{scenario_8h_a66a269d8bbfc7841adac6d62e27773ee}{scenario\+\_\+load}} (\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}scenario, const char \texorpdfstring{$\ast$}{*}path, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Loads a file; the name defaults to the file name. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{scenario_8h_a093ff8ba04d10549efe317dbc060435d}{frame\+\_\+pattern\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}text, \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}pattern)
+\item 
+bool \mbox{\hyperlink{scenario_8h_ac446ebc3b091b6cfc2e761ce9ab77e05}{frame\+\_\+pattern\+\_\+matches}} (const \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}pattern, const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}frame)
+\item 
+int \mbox{\hyperlink{scenario_8h_ac22cb9e90f16b9ba38aaecd02925efb8}{scenario\+\_\+parse\+\_\+hex}} (const char \texorpdfstring{$\ast$}{*}text, uint8\+\_\+t \texorpdfstring{$\ast$}{*}out, size\+\_\+t capacity, bool \texorpdfstring{$\ast$}{*}trailing\+\_\+star)
+\begin{DoxyCompactList}\small\item\em Hex bytes "{}22\+F190"{} (spaces and dots allowed); returns the count or -\/1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{structScenario}{Scenario} scripts for can\+\_\+scenario (see docs/dev/scenarios.\+md). 
+
+One step per line, \textquotesingle{}\#\textquotesingle{} starts a comment\+:
+
+name Lamp follows the wall switch send 200\#01 put a frame on the bus expect 100\#01 within 300 a matching frame must arrive (default 1000 ms) expect-\/not 100\#01 for 500 no matching frame for 500 ms wait 200 let time pass (ms) bench ecu fault short on test bench command to node "{}ecu"{} (can\+\_\+sim) bus drop 100 200 fault of the bus\+: drop \texorpdfstring{$\vert$}{|} delay \texorpdfstring{$\vert$}{|} silence \texorpdfstring{$\vert$}{|} seed \texorpdfstring{$\vert$}{|} clear uds ecu 190209 expect 59027F900111\texorpdfstring{$\ast$}{*} UDS request (ecu, gateway or TX\+:RX ids) log any text printed while running
+
+Frame patterns\+: "{}100\#01"{} exact, "{}100\#01\texorpdfstring{$\ast$}{*}"{} payload starting with 01, "{}100\#\texorpdfstring{$\ast$}{*}"{} any payload, "{}100\#\+XX01"{} XX = any byte, "{}100\#\+R"{} remote frame. UDS expectations are hex bytes, "{}\texorpdfstring{$\ast$}{*}"{} at the end allows more bytes; without "{}expect"{} a positive response is required.
+
+Parsing is free of I/O so it is unit tested; \doxylink{main__can__scenario_8c}{main\+\_\+can\+\_\+scenario.\+c} runs it. 
+
+\label{doc-define-members}
+\Hypertarget{scenario_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{scenario_8h_a2772c5bcd920c142f21bb3fef9a342fa}\index{scenario.h@{scenario.h}!SCENARIO\_DEFAULT\_TIMEOUT\_MS@{SCENARIO\_DEFAULT\_TIMEOUT\_MS}}
+\index{SCENARIO\_DEFAULT\_TIMEOUT\_MS@{SCENARIO\_DEFAULT\_TIMEOUT\_MS}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{SCENARIO\_DEFAULT\_TIMEOUT\_MS}{SCENARIO\_DEFAULT\_TIMEOUT\_MS}}
+{\footnotesize\ttfamily \label{scenario_8h_a2772c5bcd920c142f21bb3fef9a342fa} 
+\#define SCENARIO\+\_\+\+DEFAULT\+\_\+\+TIMEOUT\+\_\+\+MS~1000u}
+
+\Hypertarget{scenario_8h_a5a28b5c66c920b90810be1dadf6ea010}\index{scenario.h@{scenario.h}!SCENARIO\_MAX\_STEPS@{SCENARIO\_MAX\_STEPS}}
+\index{SCENARIO\_MAX\_STEPS@{SCENARIO\_MAX\_STEPS}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{SCENARIO\_MAX\_STEPS}{SCENARIO\_MAX\_STEPS}}
+{\footnotesize\ttfamily \label{scenario_8h_a5a28b5c66c920b90810be1dadf6ea010} 
+\#define SCENARIO\+\_\+\+MAX\+\_\+\+STEPS~256}
+
+\Hypertarget{scenario_8h_a50683d8c0ecec6e431b37137e7883100}\index{scenario.h@{scenario.h}!SCENARIO\_TEXT\_MAX@{SCENARIO\_TEXT\_MAX}}
+\index{SCENARIO\_TEXT\_MAX@{SCENARIO\_TEXT\_MAX}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{SCENARIO\_TEXT\_MAX}{SCENARIO\_TEXT\_MAX}}
+{\footnotesize\ttfamily \label{scenario_8h_a50683d8c0ecec6e431b37137e7883100} 
+\#define SCENARIO\+\_\+\+TEXT\+\_\+\+MAX~160}
+
+\Hypertarget{scenario_8h_a122410968a1869242e79c452431d8808}\index{scenario.h@{scenario.h}!SCENARIO\_UDS\_MAX@{SCENARIO\_UDS\_MAX}}
+\index{SCENARIO\_UDS\_MAX@{SCENARIO\_UDS\_MAX}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{SCENARIO\_UDS\_MAX}{SCENARIO\_UDS\_MAX}}
+{\footnotesize\ttfamily \label{scenario_8h_a122410968a1869242e79c452431d8808} 
+\#define SCENARIO\+\_\+\+UDS\+\_\+\+MAX~64}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{scenario_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60b}\index{scenario.h@{scenario.h}!ScenarioStepType@{ScenarioStepType}}
+\index{ScenarioStepType@{ScenarioStepType}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{ScenarioStepType}{ScenarioStepType}}
+{\footnotesize\ttfamily \label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60b} 
+enum \mbox{\hyperlink{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60b}{Scenario\+Step\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_SEND@{STEP\_SEND}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_SEND@{STEP\_SEND}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba55dc6a28e56fe88a29b17a9cf3700568}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba55dc6a28e56fe88a29b17a9cf3700568} 
+STEP\+\_\+\+SEND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_EXPECT@{STEP\_EXPECT}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_EXPECT@{STEP\_EXPECT}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60badb1e51a833bc5e78a09408059c510807}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60badb1e51a833bc5e78a09408059c510807} 
+STEP\+\_\+\+EXPECT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_EXPECT\_NOT@{STEP\_EXPECT\_NOT}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_EXPECT\_NOT@{STEP\_EXPECT\_NOT}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba81ca0f6298e98ad56d2fd42198e9389c}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba81ca0f6298e98ad56d2fd42198e9389c} 
+STEP\+\_\+\+EXPECT\+\_\+\+NOT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_WAIT@{STEP\_WAIT}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_WAIT@{STEP\_WAIT}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba6e05cde7de9ac8e47c4ad608eea7ac67}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba6e05cde7de9ac8e47c4ad608eea7ac67} 
+STEP\+\_\+\+WAIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_BENCH@{STEP\_BENCH}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_BENCH@{STEP\_BENCH}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba397e45f9da9e2a1375c4eee31bee6387}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba397e45f9da9e2a1375c4eee31bee6387} 
+STEP\+\_\+\+BENCH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_BUS@{STEP\_BUS}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_BUS@{STEP\_BUS}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba2368fea8561a9b535139d65119175324}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba2368fea8561a9b535139d65119175324} 
+STEP\+\_\+\+BUS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_UDS@{STEP\_UDS}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_UDS@{STEP\_UDS}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60baebf1c74858d2b2cf43a106bab7b7f2a8}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60baebf1c74858d2b2cf43a106bab7b7f2a8} 
+STEP\+\_\+\+UDS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STEP\_LOG@{STEP\_LOG}!scenario.h@{scenario.h}}\index{scenario.h@{scenario.h}!STEP\_LOG@{STEP\_LOG}}}\Hypertarget{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba503895d56233647b9434f319b9732ec7}\label{scenario_8h_ad7939f1ea4c50395534d3ffdb919c60ba503895d56233647b9434f319b9732ec7} 
+STEP\+\_\+\+LOG&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{scenario_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{scenario_8h_ac446ebc3b091b6cfc2e761ce9ab77e05}\index{scenario.h@{scenario.h}!frame\_pattern\_matches@{frame\_pattern\_matches}}
+\index{frame\_pattern\_matches@{frame\_pattern\_matches}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{frame\_pattern\_matches()}{frame\_pattern\_matches()}}
+{\footnotesize\ttfamily \label{scenario_8h_ac446ebc3b091b6cfc2e761ce9ab77e05} 
+bool frame\+\_\+pattern\+\_\+matches (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}}]{pattern}{, }\item[{const \mbox{\hyperlink{structCanFrame}{Can\+Frame}} \texorpdfstring{$\ast$}{*}}]{frame}{}\end{DoxyParamCaption})}
+
+\Hypertarget{scenario_8h_a093ff8ba04d10549efe317dbc060435d}\index{scenario.h@{scenario.h}!frame\_pattern\_parse@{frame\_pattern\_parse}}
+\index{frame\_pattern\_parse@{frame\_pattern\_parse}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{frame\_pattern\_parse()}{frame\_pattern\_parse()}}
+{\footnotesize\ttfamily \label{scenario_8h_a093ff8ba04d10549efe317dbc060435d} 
+bool frame\+\_\+pattern\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{\mbox{\hyperlink{structFramePattern}{Frame\+Pattern}} \texorpdfstring{$\ast$}{*}}]{pattern}{}\end{DoxyParamCaption})}
+
+\Hypertarget{scenario_8h_a678fa76b913d488b3046f41cb2ff75fb}\index{scenario.h@{scenario.h}!scenario\_init@{scenario\_init}}
+\index{scenario\_init@{scenario\_init}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{scenario\_init()}{scenario\_init()}}
+{\footnotesize\ttfamily \label{scenario_8h_a678fa76b913d488b3046f41cb2ff75fb} 
+void scenario\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}}]{scenario}{}\end{DoxyParamCaption})}
+
+\Hypertarget{scenario_8h_a66a269d8bbfc7841adac6d62e27773ee}\index{scenario.h@{scenario.h}!scenario\_load@{scenario\_load}}
+\index{scenario\_load@{scenario\_load}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{scenario\_load()}{scenario\_load()}}
+{\footnotesize\ttfamily \label{scenario_8h_a66a269d8bbfc7841adac6d62e27773ee} 
+bool scenario\+\_\+load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}}]{scenario}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Loads a file; the name defaults to the file name. 
+
+\Hypertarget{scenario_8h_ac22cb9e90f16b9ba38aaecd02925efb8}\index{scenario.h@{scenario.h}!scenario\_parse\_hex@{scenario\_parse\_hex}}
+\index{scenario\_parse\_hex@{scenario\_parse\_hex}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{scenario\_parse\_hex()}{scenario\_parse\_hex()}}
+{\footnotesize\ttfamily \label{scenario_8h_ac22cb9e90f16b9ba38aaecd02925efb8} 
+int scenario\+\_\+parse\+\_\+hex (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{out}{, }\item[{size\+\_\+t}]{capacity}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{trailing\+\_\+star}{}\end{DoxyParamCaption})}
+
+
+
+Hex bytes "{}22\+F190"{} (spaces and dots allowed); returns the count or -\/1. 
+
+\Hypertarget{scenario_8h_ac7a2e430006c17685535959cc6a3a59a}\index{scenario.h@{scenario.h}!scenario\_parse\_line@{scenario\_parse\_line}}
+\index{scenario\_parse\_line@{scenario\_parse\_line}!scenario.h@{scenario.h}}
+\doxysubsubsection{\texorpdfstring{scenario\_parse\_line()}{scenario\_parse\_line()}}
+{\footnotesize\ttfamily \label{scenario_8h_ac7a2e430006c17685535959cc6a3a59a} 
+bool scenario\+\_\+parse\+\_\+line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structScenario}{Scenario}} \texorpdfstring{$\ast$}{*}}]{scenario}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{line}{, }\item[{int}]{line\+\_\+number}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Adds the step in {\ttfamily line} (comments and empty lines are accepted). 
+

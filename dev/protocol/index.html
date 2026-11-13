@@ -626,6 +626,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#control-lines-and-test-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control lines and test bench
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#signals-of-the-light-demo" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -794,6 +805,34 @@
     
   
     Diagnostics (UDS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scenarios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenarios and Faults
   
 
     
@@ -1157,6 +1196,41 @@ connected nodes and drops invalid lines.</p>
 <li>At most 8 data bytes (classic CAN). CAN FD (<code>##</code>) is not supported.</li>
 <li>Lines longer than 255 characters are discarded.</li>
 </ul>
+<h2 id="control-lines-and-test-bench">Control lines and test bench<a class="headerlink" href="#control-lines-and-test-bench" title="Permanent link">&para;</a></h2>
+<p>Lines that start with <code>!</code> or <code>@</code> are not CAN traffic:</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!name ecu</code></td>
+<td>name of the node in the bus log</td>
+</tr>
+<tr>
+<td><code>!testbench on</code></td>
+<td>the node wants to receive test bench lines</td>
+</tr>
+<tr>
+<td><code>!status</code></td>
+<td>counters and active faults: <code>!status nodes=3 routed=120 dropped=4 ...</code></td>
+</tr>
+<tr>
+<td><code>!fault drop P [ID[/MASK]]</code>, <code>!fault delay MS [JITTER]</code>, <code>!fault silence MS</code>, <code>!fault seed N</code>, <code>!fault clear</code></td>
+<td>fault injection of the medium, see <a href="../scenarios/#bus-faults">Scenarios</a></td>
+</tr>
+<tr>
+<td><code>@&lt;node&gt; &lt;command&gt;</code></td>
+<td>test bench command, forwarded only to nodes with <code>!testbench on</code></td>
+</tr>
+</tbody>
+</table>
+<p>The bus answers <code>!</code> commands only to their sender (<code>!ok</code>, <code>!error &lt;reason&gt;</code>,
+<code>!status ...</code>). Nodes that never send <code>!</code> lines never see any of this, so
+existing nodes (visualizer, <code>serial_bridge</code>) are not affected.</p>
 <h2 id="signals-of-the-light-demo">Signals of the light demo<a class="headerlink" href="#signals-of-the-light-demo" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
