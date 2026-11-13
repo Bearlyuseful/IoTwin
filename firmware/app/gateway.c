@@ -4,6 +4,11 @@
 
 #define VERSION_REPLY "V0100\r"     /* hardware 01, software 00 */
 #define SERIAL_REPLY "NG0B1\r"
+#define SPARE_PART_NUMBER "NUCLEO-G0B1RE-GW"
+
+#ifndef IOTWIN_FIRMWARE_VERSION
+#define IOTWIN_FIRMWARE_VERSION "dev"
+#endif
 
 static void reply(Gateway* gw, const char* text) {
   gw->io.serial_write(gw->io.context, text, strlen(text));
@@ -22,8 +27,11 @@ static void report_frame(Gateway* gw, const CanFrame* frame) {
   }
 }
 
-/* Local node: the LED mirrors the lamp command on the bus. */
+/* Local node: diagnostics, and the LED mirrors the lamp command on the bus. */
 static void local_node_receive(Gateway* gw, const CanFrame* frame) {
+  if (uds_server_on_frame(&gw->uds, frame, (uint64_t)gw->now_ms * 1000u)) {
+    return;
+  }
   if (frame->extended || frame->rtr || frame->id != GATEWAY_ID_LAMP_CMD || frame->dlc < 1) {
     return;
   }
@@ -76,6 +84,133 @@ static bool transmit(Gateway* gw, const CanFrame* frame) {
     echo_push(gw, frame);
   }
   return true;
+}
+
+/* ------------------------------------------------------------------------- */
+/* Diagnostics                                                                */
+/* ------------------------------------------------------------------------- */
+
+/* UDS responses: the tester may sit on the serial side or on the CAN bus. */
+static bool uds_send(void* context, const CanFrame* frame) {
+  Gateway* gw = (Gateway*)context;
+  if (!gw->open) {
+    return false;
+  }
+  /* CAN first: if its FIFO is full, ISO-TP retries later and the host does not see the frame twice.
+   * In listen mode the gateway must not drive the bus, only the serial side gets the response. */
+  if (gw->mode != GATEWAY_CAN_LISTEN && !transmit(gw, frame)) {
+    return false;
+  }
+  report_frame(gw, frame);
+  return true;
+}
+
+static void put_u32(uint8_t* out, uint32_t value) {
+  out[0] = (uint8_t)(value >> 24);
+  out[1] = (uint8_t)(value >> 16);
+  out[2] = (uint8_t)(value >> 8);
+  out[3] = (uint8_t)value;
+}
+
+static int read_did(void* context, uint16_t did, uint8_t* out, size_t capacity) {
+  Gateway* gw = (Gateway*)context;
+  if (capacity < 16) {
+    return -(int)UDS_NRC_RESPONSE_TOO_LONG;
+  }
+  switch (did) {
+    case UDS_DID_SPARE_PART_NUMBER:
+      memcpy(out, SPARE_PART_NUMBER, sizeof(SPARE_PART_NUMBER) - 1u);
+      return (int)sizeof(SPARE_PART_NUMBER) - 1;
+    case UDS_DID_SOFTWARE_VERSION: {
+      const size_t length = strlen(IOTWIN_FIRMWARE_VERSION);
+      if (length > capacity) {
+        return -(int)UDS_NRC_RESPONSE_TOO_LONG;
+      }
+      memcpy(out, IOTWIN_FIRMWARE_VERSION, length);
+      return (int)length;
+    }
+    case UDS_DID_SERIAL_NUMBER:
+      if (gw->io.unique_id == NULL) {
+        return -(int)UDS_NRC_REQUEST_OUT_OF_RANGE;
+      }
+      gw->io.unique_id(gw->io.context, out);
+      return 12;
+    case GATEWAY_DID_LAMP:
+      out[0] = gw->lamp_on ? 1u : 0u;
+      return 1;
+    case GATEWAY_DID_SWITCH:
+      out[0] = gw->switch_on ? 1u : 0u;
+      return 1;
+    case GATEWAY_DID_CAN_ERRORS: {
+      GatewayCanStatus status;
+      memset(&status, 0, sizeof(status));
+      if (gw->open) {
+        gw->io.can_status(gw->io.context, &status);
+      }
+      out[0] = status.tx_error_count;
+      out[1] = status.rx_error_count;
+      out[2] = status.bus_off ? 3u : status.error_passive ? 2u : status.error_warning ? 1u : 0u;
+      return 3;
+    }
+    case GATEWAY_DID_COUNTERS:
+      put_u32(&out[0], gw->tx_frames);
+      put_u32(&out[4], gw->rx_frames);
+      put_u32(&out[8], gw->echoes);
+      return 12;
+    case GATEWAY_DID_UPTIME:
+      put_u32(out, gw->now_ms);
+      return 4;
+    case GATEWAY_DID_CHANNEL:
+      out[0] = gw->open ? 1u : 0u;
+      out[1] = (uint8_t)gw->mode;
+      put_u32(&out[2], gw->bitrate);
+      return 6;
+    default:
+      return -(int)UDS_NRC_REQUEST_OUT_OF_RANGE;
+  }
+}
+
+static void uds_reset(void* context, uint8_t type) {
+  Gateway* gw = (Gateway*)context;
+  if (type == UDS_RESET_HARD && gw->io.system_reset != NULL) {
+    gw->reset_scheduled = true;
+    gw->reset_due_ms = gw->now_ms + GATEWAY_RESET_DELAY_MS;
+    return;
+  }
+  /* Soft reset: restart the application state, keep the channel to the host open. */
+  gw->tx_frames = 0;
+  gw->rx_frames = 0;
+  gw->echoes = 0;
+  gw->sticky_flags = 0;
+  for (size_t i = 0; i < GATEWAY_DTC_COUNT; i++) {
+    uds_dtc_start_operation_cycle(&gw->dtcs[i]);
+  }
+  gw->soft_resets++;
+}
+
+static void diag_init(Gateway* gw) {
+  uds_dtc_init(&gw->dtcs[0], GATEWAY_DTC_BUS_OFF);
+  UdsServerConfig config;
+  uds_server_default_config(&config, GATEWAY_DIAG_REQUEST_ID, GATEWAY_DIAG_RESPONSE_ID);
+  config.send = uds_send;
+  config.send_context = gw;
+  config.handlers.read_did = read_did;
+  config.handlers.reset = uds_reset;
+  config.handlers.context = gw;
+  config.dtcs = gw->dtcs;
+  config.dtc_count = GATEWAY_DTC_COUNT;
+  uds_server_init(&gw->uds, &config);
+}
+
+/* Monitors: bus off is only tested while the controller takes part in the bus. */
+static void diag_monitors(Gateway* gw) {
+  if (!gw->open || gw->mode == GATEWAY_CAN_LISTEN) {
+    return;
+  }
+  GatewayCanStatus status;
+  memset(&status, 0, sizeof(status));
+  gw->io.can_status(gw->io.context, &status);
+  uds_dtc_report(&gw->dtcs[0], status.bus_off);
 }
 
 static uint8_t status_flags(Gateway* gw) {
@@ -222,6 +357,7 @@ void gateway_init(Gateway* gateway, const GatewayIo* io) {
   gateway->io = *io;
   gateway->bitrate = GATEWAY_DEFAULT_BITRATE;
   slcan_reader_init(&gateway->reader);
+  diag_init(gateway);
   set_led(gateway, false);
 }
 
@@ -259,6 +395,14 @@ void gateway_on_rx_overrun(Gateway* gateway) {
 }
 
 void gateway_tick(Gateway* gateway, uint32_t now_ms) {
+  gateway->now_ms = now_ms;
+  uds_server_poll(&gateway->uds, (uint64_t)now_ms * 1000u);
+  diag_monitors(gateway);
+  if (gateway->reset_scheduled && (int32_t)(now_ms - gateway->reset_due_ms) >= 0) {
+    gateway->reset_scheduled = false;
+    gateway->io.system_reset(gateway->io.context);
+  }
+
   if (gateway->open) {
     return;
   }

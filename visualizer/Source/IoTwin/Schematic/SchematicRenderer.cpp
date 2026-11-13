@@ -560,11 +560,11 @@ void FSchematicRenderer::DrawLinks() const
 		FVector2D End;
 		if (FMath::IsNearlyEqual(A->Position.Y, B->Position.Y))
 		{
-			const FNodeSlot* Left = A->Position.X < B->Position.X ? A : B;
-			const FNodeSlot* Right = Left == A ? B : A;
-			const double Y = Left->Position.Y + Left->Size.Y * 0.5;
-			Start = FVector2D(Left->Position.X + Left->Size.X, Y);
-			End = FVector2D(Right->Position.X, Y);
+			const FNodeSlot* LeftSlot = A->Position.X < B->Position.X ? A : B;
+			const FNodeSlot* RightSlot = LeftSlot == A ? B : A;
+			const double Y = LeftSlot->Position.Y + LeftSlot->Size.Y * 0.5;
+			Start = FVector2D(LeftSlot->Position.X + LeftSlot->Size.X, Y);
+			End = FVector2D(RightSlot->Position.X, Y);
 		}
 		else
 		{
@@ -622,11 +622,11 @@ void FSchematicRenderer::DrawNodes(TArray<FSchematicHitBox>& OutHitBoxes) const
 		}
 
 		const float Inner = static_cast<float>(Size.X) - 24.0f;
-		const float Left = static_cast<float>(Position.X) + 12.0f;
+		const float TextLeft = static_cast<float>(Position.X) + 12.0f;
 		const float MaxY = static_cast<float>(Position.Y + Size.Y) - 6.0f;
 		float Y = static_cast<float>(Position.Y) + 12.0f;
 
-		Text(Fit(Node.Label.IsEmpty() ? Node.Id : Node.Label, Inner - 16.0f, 0.82f), FVector2D(Left, Y), Hex(Palette::Text), 0.82f);
+		Text(Fit(Node.Label.IsEmpty() ? Node.Id : Node.Label, Inner - 16.0f, 0.82f), FVector2D(TextLeft, Y), Hex(Palette::Text), 0.82f);
 		if (Slot->Bus != INDEX_NONE)
 		{
 			Dot(FVector2D(Position.X + Size.X - 16.0f, Y + LineHeight(0.82f) * 0.5f), 5.0f, ActivityColor(Node.Id));
@@ -636,23 +636,23 @@ void FSchematicRenderer::DrawNodes(TArray<FSchematicHitBox>& OutHitBoxes) const
 		const FComponentInfo* Component = Node.Component.IsEmpty() ? nullptr : Schematic.GetComponents().Find(Node.Component);
 		const FString What = Component ? Component->Name : (Node.Component.IsEmpty() ? Node.Program : Node.Component);
 		const FString Subtitle = What.IsEmpty() ? Node.Kind : Node.Kind + TEXT("  -  ") + What;
-		Text(Fit(Subtitle, Inner, 0.62f), FVector2D(Left, Y), Hex(Palette::Dim), 0.62f);
+		Text(Fit(Subtitle, Inner, 0.62f), FVector2D(TextLeft, Y), Hex(Palette::Dim), 0.62f);
 		Y += LineHeight(0.62f) + 10.0f;
 
 		if (Slot->Bus == INDEX_NONE)
 		{
-			Paragraph(Node.Description, FVector2D(Left, Y), Inner, Hex(Palette::Dim), 0.6f, MaxY);
+			Paragraph(Node.Description, FVector2D(TextLeft, Y), Inner, Hex(Palette::Dim), 0.6f, MaxY);
 		}
 		else if (Activity == nullptr)
 		{
-			Text(TEXT("no frames sent yet"), FVector2D(Left, Y), Hex(Palette::Dim), 0.62f);
+			Text(TEXT("no frames sent yet"), FVector2D(TextLeft, Y), Hex(Palette::Dim), 0.62f);
 		}
 		else
 		{
-			Text(Fit(Activity->LastMessage, Inner, 0.68f), FVector2D(Left, Y), Hex(Palette::Text), 0.68f);
+			Text(Fit(Activity->LastMessage, Inner, 0.68f), FVector2D(TextLeft, Y), Hex(Palette::Text), 0.68f);
 			Y += LineHeight(0.68f) + 4.0f;
 			Text(Fit(FString::Printf(TEXT("%s  -  last %s ago"), *FrameCount(Activity->FrameCount), *FormatAge(Age)), Inner, 0.6f),
-				FVector2D(Left, Y), Hex(Palette::Dim), 0.6f);
+				FVector2D(TextLeft, Y), Hex(Palette::Dim), 0.6f);
 		}
 
 		FSchematicHitBox& HitBox = OutHitBoxes.AddDefaulted_GetRef();
@@ -771,30 +771,30 @@ void FSchematicRenderer::DrawSystemOverview(float X, float Y, float Width, float
 void FSchematicRenderer::DrawNodeDetails(const FSystemNode& Node, float X, float Y, float Width, float MaxY) const
 {
 	const FSystemDescription& System = Schematic.GetSystem();
-	const FLinearColor TextColor = Hex(Palette::Text);
-	const FLinearColor DimColor = Hex(Palette::Dim);
+	const FLinearColor PrimaryColor = Hex(Palette::Text);
+	const FLinearColor SecondaryColor = Hex(Palette::Dim);
 	const float Small = 0.62f;
 	const float Step = LineHeight(Small);
 
-	Text(TEXT("NODE"), FVector2D(X, Y), DimColor, 0.58f);
+	Text(TEXT("NODE"), FVector2D(X, Y), SecondaryColor, 0.58f);
 	Y += LineHeight(0.58f) + 2.0f;
 	Text(Fit(Node.Label.IsEmpty() ? Node.Id : Node.Label, Width, 0.9f), FVector2D(X, Y), AccentOf(Node.Id), 0.9f);
 	Y += LineHeight(0.9f) + 2.0f;
-	Text(Fit(FString::Printf(TEXT("id %s  -  %s"), *Node.Id, *Node.Kind), Width, Small), FVector2D(X, Y), DimColor, Small);
+	Text(Fit(FString::Printf(TEXT("id %s  -  %s"), *Node.Id, *Node.Kind), Width, Small), FVector2D(X, Y), SecondaryColor, Small);
 	Y += Step;
 	if (!Node.Program.IsEmpty())
 	{
-		Text(Fit(TEXT("Program: ") + Node.Program, Width, Small), FVector2D(X, Y), TextColor, Small);
+		Text(Fit(TEXT("Program: ") + Node.Program, Width, Small), FVector2D(X, Y), PrimaryColor, Small);
 		Y += Step;
 	}
-	Y = Paragraph(Node.Description, FVector2D(X, Y + 2.0f), Width, TextColor, 0.64f, MaxY) + 6.0f;
+	Y = Paragraph(Node.Description, FVector2D(X, Y + 2.0f), Width, PrimaryColor, 0.64f, MaxY) + 6.0f;
 
 	if (const FSchematicNodeActivity* Activity = Schematic.FindActivity(Node.Id); Activity && Y + 2.0f * Step <= MaxY)
 	{
 		Text(Fit(FString::Printf(TEXT("%s sent, last %s ago"), *FrameCount(Activity->FrameCount),
 			*FormatAge(Now - Activity->LastSeen)), Width, Small), FVector2D(X, Y), ActivityColor(Node.Id), Small);
 		Y += Step;
-		Text(Fit(TEXT("Last: ") + Activity->LastMessage, Width, Small), FVector2D(X, Y), TextColor, Small);
+		Text(Fit(TEXT("Last: ") + Activity->LastMessage, Width, Small), FVector2D(X, Y), PrimaryColor, Small);
 		Y += Step;
 	}
 
@@ -813,12 +813,12 @@ void FSchematicRenderer::DrawNodeDetails(const FSystemNode& Node, float X, float
 	}
 	if (Sends.Num() > 0 && Y + Step <= MaxY)
 	{
-		Text(Fit(TEXT("Sends: ") + FString::Join(Sends, TEXT(", ")), Width, Small), FVector2D(X, Y), TextColor, Small);
+		Text(Fit(TEXT("Sends: ") + FString::Join(Sends, TEXT(", ")), Width, Small), FVector2D(X, Y), PrimaryColor, Small);
 		Y += Step;
 	}
 	if (Receives.Num() > 0 && Y + Step <= MaxY)
 	{
-		Text(Fit(TEXT("Receives: ") + FString::Join(Receives, TEXT(", ")), Width, Small), FVector2D(X, Y), TextColor, Small);
+		Text(Fit(TEXT("Receives: ") + FString::Join(Receives, TEXT(", ")), Width, Small), FVector2D(X, Y), PrimaryColor, Small);
 		Y += Step;
 	}
 
@@ -925,8 +925,10 @@ void FSchematicRenderer::DrawLog(const FBox2D& Area) const
 		Text(FormatAge(Now - Entry.Time), FVector2D(X, Y), Hex(Palette::Dim), 0.56f);
 		Text(Fit(Entry.NodeId.IsEmpty() ? TEXT("?") : Entry.NodeId, NodeWidth - 6.0f, Scale), FVector2D(X + AgeWidth, Y),
 			AccentOf(Entry.NodeId), Scale);
-		const float RawWidth = TextWidth(Entry.Raw, 0.56f);
-		Text(Entry.Raw, FVector2D(X + Width - RawWidth, Y), Hex(Palette::Dim), 0.56f);
+		// Raw frame on the right, shortened for long (e.g. diagnostic) frames so the decoded text stays readable.
+		const FString Raw = Fit(Entry.Raw, Width * 0.22f, 0.56f);
+		const float RawWidth = TextWidth(Raw, 0.56f);
+		Text(Raw, FVector2D(X + Width - RawWidth, Y), Hex(Palette::Dim), 0.56f);
 		const FString Decoded = Entry.Decoded.IsEmpty() ? TEXT("(not in DBC)") : Entry.Decoded;
 		Text(Fit(Decoded, Width - AgeWidth - NodeWidth - RawWidth - 10.0f, Scale), FVector2D(X + AgeWidth + NodeWidth, Y),
 			Entry.Decoded.IsEmpty() ? Hex(Palette::Dim) : Hex(Palette::Text), Scale);

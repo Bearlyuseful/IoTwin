@@ -20,9 +20,11 @@ add_executable(iotwin_tests
     test_can_signal.cpp
     test_dbc.cpp
     test_isotp.cpp
+    test_uds.cpp
     test_slcan.cpp
     test_line_reader.cpp
     test_light_ecu.cpp
+    test_light_ecu_diag.cpp
     test_cycle_timer.cpp
     test_bus_server.cpp
     test_gateway.cpp

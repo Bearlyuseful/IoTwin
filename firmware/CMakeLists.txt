@@ -24,6 +24,8 @@ add_executable(iotwin_gateway
     ${REPO_ROOT}/libs/can/can_frame.c
     ${REPO_ROOT}/libs/can/can_bit_timing.c
     ${REPO_ROOT}/libs/can/slcan.c
+    ${REPO_ROOT}/libs/can/isotp.c
+    ${REPO_ROOT}/libs/can/uds.c
 )
 set_target_properties(iotwin_gateway PROPERTIES SUFFIX ".elf")
 
@@ -35,7 +37,7 @@ target_include_directories(iotwin_gateway PRIVATE
     vendor/cmsis_core
     vendor/cmsis_device_g0
 )
-target_compile_definitions(iotwin_gateway PRIVATE STM32G0B1xx)
+target_compile_definitions(iotwin_gateway PRIVATE STM32G0B1xx IOTWIN_FIRMWARE_VERSION="${PROJECT_VERSION}")
 
 set(MCU_FLAGS -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft)
 target_compile_options(iotwin_gateway PRIVATE

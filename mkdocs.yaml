@@ -42,6 +42,7 @@ nav:
       - Visualizer: dev/visualizer.md
       - Firmware (NUCLEO-G0B1RE): dev/firmware.md
       - CAN Tools (DBC, ISO-TP, SocketCAN): dev/can_tools.md
+      - Diagnostics (UDS): dev/diagnostics.md
       - Component Database: dev/component_database.md
       - Packaging: dev/packaging.md
   - API Reference: api/index.html

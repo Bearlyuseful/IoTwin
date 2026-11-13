@@ -9,6 +9,9 @@
  * The control loop never blocks on the network while connected: it reads
  * whatever arrived, runs the ECU step, sends the outputs and sleeps until
  * the next absolute deadline.
+ *
+ * Diagnostics: UDS server on 0x7E0/0x7E8 (functional 0x7DF), faults can be
+ * injected on the console (see light_ecu_diag.h, docs/dev/diagnostics.md).
  */
 
 #include <pthread.h>
@@ -23,6 +26,7 @@
 #include "cli.h"
 #include "cycle_timer.h"
 #include "light_ecu.h"
+#include "light_ecu_diag.h"
 #include "line_reader.h"
 #include "log.h"
 #include "net.h"
@@ -31,6 +35,10 @@
 
 #define RECONNECT_INTERVAL_MS 1000
 #define SEND_TIMEOUT_MS 50
+
+#ifndef IOTWIN_VERSION
+#define IOTWIN_VERSION "dev"
+#endif
 
 typedef struct {
   const char* host;
@@ -44,8 +52,10 @@ typedef struct {
 } SimOptions;
 
 typedef struct {
-  pthread_mutex_t lock; /* protects ecu */
+  pthread_mutex_t lock; /* protects ecu and diag */
   LightEcu ecu;
+  LightEcuDiag diag;
+  CanBus diag_queue; /* UDS responses, sent by the control loop */
   CanBus rx_queue; /* frames from the network, drained by the control loop */
   CanBus tx_queue; /* frames typed on the console, sent by the control loop */
   atomic_bool connected;
@@ -69,6 +79,8 @@ static void print_console_help(void) {
          "  lamp on|off|toggle   set the lamp command\n"
          "  blink <ms>|off       let the ECU blink the lamp\n"
          "  send <frame>         put any frame on the bus, e.g. send 123#DEADBEEF\n"
+         "  fault <f> on|off     inject a fault: short | open | supply\n"
+         "  dtc                  show the trouble codes of the ECU\n"
          "  status               show the current state\n"
          "  help                 show this help\n"
          "  quit                 stop the simulator\n");
@@ -133,13 +145,49 @@ static void handle_command(SimShared* shared, char* line) {
     } else if (!can_bus_send(&shared->tx_queue, &frame)) {
       printf("send queue full, frame dropped\n");
     }
+  } else if (strcmp(command, "fault") == 0 && argument != NULL) {
+    char* state = strchr(argument, ' ');
+    LightEcuFault fault;
+    if (state != NULL) {
+      *state++ = '\0';
+      state = trim(state);
+    }
+    if (state == NULL || !light_ecu_fault_from_name(argument, &fault) ||
+        (strcmp(state, "on") != 0 && strcmp(state, "off") != 0)) {
+      printf("usage: fault short|open|supply on|off\n");
+    } else {
+      const bool active = strcmp(state, "on") == 0;
+      pthread_mutex_lock(&shared->lock);
+      light_ecu_diag_set_fault(&shared->diag, fault, active);
+      pthread_mutex_unlock(&shared->lock);
+      log_info("fault %s: %s", active ? "injected" : "removed", light_ecu_fault_name(fault));
+    }
+  } else if (strcmp(command, "dtc") == 0) {
+    pthread_mutex_lock(&shared->lock);
+    UdsDtc dtcs[LIGHT_ECU_DTC_COUNT];
+    memcpy(dtcs, shared->diag.dtcs, sizeof(dtcs));
+    const uint8_t faults = shared->diag.faults;
+    pthread_mutex_unlock(&shared->lock);
+    for (size_t i = 0; i < LIGHT_ECU_DTC_COUNT; i++) {
+      char code[16];
+      uds_format_dtc(dtcs[i].code, code, sizeof(code));
+      printf("%s  status %02X%s%s\n", code, dtcs[i].status,
+             (dtcs[i].status & UDS_DTC_TEST_FAILED) ? "  failed" : "",
+             (dtcs[i].status & UDS_DTC_CONFIRMED) ? "  confirmed" : "");
+    }
+    printf("injected faults: %s%s%s%s\n", faults == 0 ? "none" : "",
+           (faults & LIGHT_FAULT_LAMP_SHORT) ? "short " : "", (faults & LIGHT_FAULT_LAMP_OPEN) ? "open " : "",
+           (faults & LIGHT_FAULT_SUPPLY_LOW) ? "supply" : "");
   } else if (strcmp(command, "status") == 0) {
     pthread_mutex_lock(&shared->lock);
     bool lamp = shared->ecu.lamp_on;
+    bool output = light_ecu_output(&shared->ecu);
     uint32_t blink = shared->ecu.blink_period_ms;
+    const UdsSession session = uds_server_session(&shared->diag.uds);
     pthread_mutex_unlock(&shared->lock);
-    printf("lamp: %s%s | bus: %s | sent: %llu | received: %llu\n", lamp ? "ON" : "OFF",
-           blink ? " (blinking)" : "", atomic_load(&shared->connected) ? "connected" : "offline",
+    printf("lamp: %s%s%s | diag session: %s | bus: %s | sent: %llu | received: %llu\n", lamp ? "ON" : "OFF",
+           blink ? " (blinking)" : "", lamp && !output ? " (output inhibited)" : "",
+           uds_session_name((uint8_t)session), atomic_load(&shared->connected) ? "connected" : "offline",
            (unsigned long long)atomic_load(&shared->frames_sent),
            (unsigned long long)atomic_load(&shared->frames_received));
   } else {
@@ -174,6 +222,10 @@ static void on_line(const char* line, size_t length, void* user_data) {
   }
 }
 
+static bool queue_diag_frame(void* context, const CanFrame* frame) {
+  return can_bus_send((CanBus*)context, frame);
+}
+
 static bool send_frame(net_socket_t socket, SimShared* shared, const CanFrame* frame) {
   char text[CAN_FRAME_TEXT_MAX + 1];
   int length = can_frame_to_text(frame, text, CAN_FRAME_TEXT_MAX);
@@ -195,7 +247,8 @@ static bool send_frame(net_socket_t socket, SimShared* shared, const CanFrame* f
 static void print_usage(const char* program) {
   printf("Usage: %s [options]\n\n"
          "Simulated light control ECU. Connects to iotwin-bus, sends LAMP_CMD (0x100)\n"
-         "and follows the wall switch SWITCH_STATE (0x200).\n\n"
+         "and follows the wall switch SWITCH_STATE (0x200). UDS diagnostics on\n"
+         "0x7E0 -> 0x7E8 (functional 0x7DF), try: uds_client scan\n\n"
          "Options:\n"
          "  --host HOST           bus server host (default 127.0.0.1)\n"
          "  --port PORT           bus server port (default 8080)\n"
@@ -298,6 +351,8 @@ int main(int argc, char** argv) {
   }
   can_bus_init(&shared.rx_queue);
   can_bus_init(&shared.tx_queue);
+  can_bus_init(&shared.diag_queue);
+  light_ecu_diag_init(&shared.diag, &shared.ecu, queue_diag_frame, &shared.diag_queue, IOTWIN_VERSION);
   atomic_init(&shared.connected, false);
   atomic_init(&shared.frames_sent, 0);
   atomic_init(&shared.frames_received, 0);
@@ -385,15 +440,23 @@ int main(int argc, char** argv) {
       atomic_fetch_add(&shared.frames_received, 1);
       char text[CAN_FRAME_TEXT_MAX];
       can_frame_to_text(&frame, text, sizeof(text));
-      if (light_ecu_on_frame(&shared.ecu, &frame)) {
+      if (light_ecu_diag_on_frame(&shared.diag, &frame, now_ms)) {
+        log_debug("RX %s (diag)", text);
+      } else if (light_ecu_on_frame(&shared.ecu, &frame)) {
         log_info("RX %-12s switch -> %s", text, (frame.data[0] & 1u) ? "ON" : "OFF");
       } else {
         log_debug("RX %s", text);
       }
     }
+    const uint32_t resets_before = shared.diag.resets;
+    light_ecu_diag_step(&shared.diag, now_ms);
+    if (shared.diag.resets != resets_before) {
+      log_info("ECU reset requested by the tester, application restarted");
+    }
     send_output = light_ecu_step(&shared.ecu, now_ms, &output, &state_changed);
-    const bool lamp_on = shared.ecu.lamp_on;
+    const bool lamp_output = light_ecu_output(&shared.ecu);
     pthread_mutex_unlock(&shared.lock);
+    const bool lamp_on = lamp_output;
 
     /* --- send --- */
     if (send_output) {
@@ -409,6 +472,12 @@ int main(int argc, char** argv) {
     }
     if (socket != NET_INVALID_SOCKET) {
       bool ok = !send_output || send_frame(socket, &shared, &output);
+      while (ok && can_bus_receive(&shared.diag_queue, &frame)) {
+        char text[CAN_FRAME_TEXT_MAX];
+        can_frame_to_text(&frame, text, sizeof(text));
+        log_debug("TX %s (diag)", text);
+        ok = send_frame(socket, &shared, &frame);
+      }
       while (ok && can_bus_receive(&shared.tx_queue, &frame)) {
         char text[CAN_FRAME_TEXT_MAX];
         can_frame_to_text(&frame, text, sizeof(text));
@@ -443,6 +512,7 @@ int main(int argc, char** argv) {
   net_cleanup();
   can_bus_destroy(&shared.rx_queue);
   can_bus_destroy(&shared.tx_queue);
+  can_bus_destroy(&shared.diag_queue);
   /* The console thread may still block in fgets(); exiting the process ends it. */
   return 0;
 }

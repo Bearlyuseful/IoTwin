@@ -33,6 +33,18 @@ Components can also be started separately; every program has --help.
 Visualizer options: -IoTwinBusHost=<host> -IoTwinBusPort=<port>
                     -IoTwinView=Schematic -IoTwinSystem=<system json>
 
+Diagnostics (UDS)
+-----------------
+bin\uds_client.exe talks to the ECU like a workshop tester:
+
+  bin\uds_client scan             identification (part number, version, VIN)
+  bin\uds_client dtc              trouble codes
+  bin\uds_client                  interactive, type help
+
+Inject a fault in the CAN-Sim window ("fault short on") and read it with
+"uds_client dtc"; "uds_client clear" deletes the trouble codes.
+With the NUCLEO: bin\uds_client --target gateway scan
+
 With a NUCLEO-G0B1RE
 --------------------
 1. Copy firmware\iotwin_gateway.bin to the NOD_G0B1RE drive of the board.

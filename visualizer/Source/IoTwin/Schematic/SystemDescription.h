@@ -40,6 +40,8 @@ struct IOTWIN_API FSystemMessage
 	FString Name;
 	TArray<FString> Producers;
 	TArray<FString> Consumers;
+	/** Higher protocol in the frames, e.g. "uds" (UDS over ISO-TP); empty for plain signals. */
+	FString Protocol;
 };
 
 class IOTWIN_API FSystemDescription

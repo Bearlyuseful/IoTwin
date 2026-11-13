@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+### UDS diagnostics
+- `libs/can/uds`: ISO 14229-1 server on ISO-TP, portable C without heap (host
+  and STM32): session control, ECU reset, read/write data by identifier,
+  read/clear DTCs, tester present; functional addressing (0x7DF), suppress
+  positive response, S3 timeout.
+- Light ECU (`can_sim`, 0x7E0/0x7E8): identification, live data, writable
+  cycle and blink time; console command `fault short|open|supply on|off`
+  injects faults that the ECU detects as DTCs (a short switches the output off).
+- Gateway firmware (0x7E1/0x7E9): identification incl. STM32 unique id, CAN
+  error and frame counters, uptime, DTC U0073-88 bus off, soft/hard reset.
+- `uds_client`: tester for iotwin-bus, one-shot (`scan`, `read`, `write`,
+  `dtc`, `clear`, `reset`, `raw`, chained with `+`) or interactive with
+  automatic TesterPresent.
+- `serial_bridge` configures the adapter again after the board was reset.
+- Diagnostic messages in the DBC and the system description
+  (`"protocol": "uds"`); the schematic view decodes them and shows the tester.
+
+### Component database
+- STM32G0B1: USART, LPUART, SPI, I2C, UCPD and USB instances verified from
+  the ST device header.
+
 ### Schematic view (visualizer)
 - TAB switches between the 3D scene and a 2D schematic built from
   `data/systems/light-demo.json`: nodes, CAN bus with members, USB link.

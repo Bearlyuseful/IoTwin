@@ -24,7 +24,7 @@ digital-twin features.
 | STM32 as CAN controller | Mar 2026, phase 3 | ✅ FDCAN driver, internal loopback; ⚠️ real bus needs a transceiver + second node |
 | SocketCAN bridge | step 4 | ✅ `socketcan_bridge` ([CAN Tools](dev/can_tools.md)); live test needs `vcan0` |
 | Real-time measurements on PREEMPT_RT | step 4 | ❌ needs PREEMPT_RT hardware |
-| DBC, ISO-TP | step 5 | ✅ DBC reader + `can_monitor`, ISO-TP library; UDS services open |
+| DBC, ISO-TP, UDS | step 5 | ✅ DBC reader + `can_monitor`, ISO-TP, UDS server in ECU and gateway, `uds_client` ([Diagnostics](dev/diagnostics.md)) |
 | Scenarios, more devices, extensions | Oct 2025 outlook | ❌ |
 
 ## Next phase (agreed November 2026)
@@ -40,7 +40,7 @@ Order of work:
 |---|---------|-------|
 | A | **Component database** ✅ (structure + NUCLEO-G0B1RE) | parts and their characteristics for simulation, first entry: NUCLEO-G0B1RE; plus a system description (instances, connections, buses) |
 | B | **Bus / schematic view in Unreal** ✅ (first version) | 2D view of nodes, buses and live messages, switch to 3D ([Visualizer](dev/visualizer.md#schematic-view-sourceiotwinschematic)); open: generated from circuit diagrams, wireless traffic, jump to the matching 3D object |
-| C | **UDS diagnostics** | on top of ISO-TP: server in ECU and gateway, client tool |
+| C | **UDS diagnostics** ✅ | on top of ISO-TP: server in ECU and gateway, `uds_client`, injectable faults as DTCs ([Diagnostics](dev/diagnostics.md)); open: SecurityAccess, RoutineControl, flashing |
 | D | **Scenarios and faults** | record/replay, scripted scenarios, fault injection (loss, delay, bus-off) |
 | E | **More devices and electrical model** | dimmer, sensors, fan/motor; load, current, fuse |
 | F | **Real bus and real time** | transceiver + second node, PREEMPT_RT measurements (needs hardware) |
@@ -56,7 +56,7 @@ Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch clean
 | 2 | **Phase 2b – `serial_bridge` on the PC** ✅ | S–M | connects the MCU to the virtual bus |
 | 3 | **Phase 3 – STM32 as CAN controller** ✅ (loopback) | L | real hardware nodes in the digital twin |
 | 4 | **Real-time Linux and SocketCAN** (SocketCAN ✅, RT measurement open) | M | can run in parallel to 3 |
-| 5 | **Protocols on CAN** (DBC ✅, ISO-TP ✅, UDS open) | M–L | builds on 3 and 4 |
+| 5 | **Protocols on CAN** ✅ (DBC, ISO-TP, UDS) | M–L | builds on 3 and 4 |
 | 6 | **Deeper digital twin** | ongoing | lower priority for the learning goal |
 
 ### 0. Close the MVP

@@ -19,6 +19,7 @@ struct FakeBoard {
   bool tx_full = false;
   bool led = false;
   int led_changes = 0;
+  int system_resets = 0;
   GatewayCanStatus status{};
 
   static FakeBoard& self(void* context) { return *static_cast<FakeBoard*>(context); }
@@ -47,6 +48,13 @@ struct FakeBoard {
     io.led_set = [](void* ctx, bool on) {
       self(ctx).led = on;
       self(ctx).led_changes++;
+    };
+    io.system_reset = [](void* ctx) { self(ctx).system_resets++; };
+    io.unique_id = [](void* ctx, uint8_t out[12]) {
+      (void)ctx;
+      for (uint8_t i = 0; i < 12; i++) {
+        out[i] = static_cast<uint8_t>(0xA0 + i);
+      }
     };
     return io;
   }
@@ -214,4 +222,94 @@ TEST_CASE_METHOD(Fixture, "Gateway blinks while the channel is closed", "[gatewa
   const int open_changes = board.led_changes;
   gateway_tick(&gw, 5000);
   CHECK(board.led_changes == open_changes);
+}
+
+// --- Diagnostics (UDS on 0x7E1 -> 0x7E9) ------------------------------------
+
+TEST_CASE_METHOD(Fixture, "Gateway answers UDS requests from the serial side", "[gateway][uds]") {
+  serial("l\r");
+  board.take_output();
+  // ReadDataByIdentifier 0100 (lamp): single frame, padded with 0xCC.
+  serial("t7E18" "03220100CCCCCCCC\r");
+  CHECK(board.take_output() == "t7E980462010000CCCCCC\rz\r");
+  // The response also went to the CAN bus; its loopback echo is suppressed.
+  REQUIRE(board.sent.size() == 2);
+  CHECK(board.sent[1].id == GATEWAY_DIAG_RESPONSE_ID);
+  loop_back_sent();
+  CHECK(board.take_output().empty());
+
+  // Functional TesterPresent on 0x7DF.
+  serial("t7DF8023E00CCCCCCCCCC\r");
+  CHECK(board.take_output() == "t7E98027E00CCCCCCCCCC\rz\r");
+  // Not addressed to the gateway: plain SLCAN forwarding.
+  serial("t7E08023E00CCCCCCCCCC\r");
+  CHECK(board.take_output() == "z\r");
+}
+
+TEST_CASE_METHOD(Fixture, "Gateway sends long UDS responses with flow control", "[gateway][uds]") {
+  serial("O\r");
+  board.take_output();
+  gateway_tick(&gw, 1);
+  // Serial number = 12-byte unique id -> 15 byte response: first frame, wait for flow control.
+  serial("t7E18" "0322F18CCCCCCCCC\r");
+  CHECK(board.take_output() == "t7E98100F62F18CA0A1A2\rz\r");
+  // FC: continue, no block limit, STmin 0 -> the consecutive frames follow right away.
+  serial("t7E18300000CCCCCCCCCC\r");
+  CHECK(board.take_output() == "t7E9821A3A4A5A6A7A8A9\rt7E98" "22AAABCCCCCCCCCC\rz\r");
+  gateway_tick(&gw, 2);
+  CHECK(board.take_output().empty());
+}
+
+TEST_CASE_METHOD(Fixture, "Gateway reports bus off as DTC U0073-88", "[gateway][uds]") {
+  serial("O\r");
+  board.take_output();
+  gateway_tick(&gw, 1);
+  serial("t7E18" "03190209CCCCCCCC\r");  // DTCs with status failed or confirmed
+  CHECK(board.take_output() == "t7E98" "0359027FCCCCCCCC\rz\r");
+
+  board.status.bus_off = true;
+  gateway_tick(&gw, 2);
+  serial("t7E18" "03190209CCCCCCCC\r");
+  CHECK(board.take_output() == "t7E980759027FC073882F\rz\r");
+
+  // Live data: TEC, REC, state 3 = bus off.
+  board.status.tx_error_count = 0xF8;
+  serial("t7E18" "03220200CCCCCCCC\r");
+  CHECK(board.take_output() == "t7E980662020" "0F80003CC\rz\r");
+}
+
+TEST_CASE_METHOD(Fixture, "Gateway ECUReset: soft resets counters, hard restarts the MCU later", "[gateway][uds]") {
+  serial("O\r");
+  serial("t1000\r");
+  board.take_output();
+  REQUIRE(gw.tx_frames == 1);
+
+  serial("t7E18021103CCCCCCCCCC\r");  // soft reset
+  CHECK(board.take_output() == "t7E980251" "03CCCCCCCCCC\rz\r");
+  gateway_tick(&gw, 10);
+  CHECK(gw.soft_resets == 1);
+  CHECK(gw.tx_frames == 0);
+  CHECK(board.system_resets == 0);
+
+  serial("t7E18021101CCCCCCCCCC\r");  // hard reset
+  board.take_output();
+  gateway_tick(&gw, 20);  // response is out, reset scheduled
+  gateway_tick(&gw, 69);
+  CHECK(board.system_resets == 0);
+  gateway_tick(&gw, 70);
+  CHECK(board.system_resets == 1);
+}
+
+TEST_CASE_METHOD(Fixture, "Gateway answers testers on the CAN bus, not while closed", "[gateway][uds]") {
+  can_rx(0x7E1, {0x03, 0x22, 0x01, 0x01, 0xCC, 0xCC, 0xCC, 0xCC});
+  CHECK(board.take_output().empty());  // channel closed: no response anywhere
+  CHECK(board.sent.empty());
+
+  serial("O\r");
+  board.take_output();
+  can_rx(0x7E1, {0x03, 0x22, 0x01, 0x01, 0xCC, 0xCC, 0xCC, 0xCC});
+  // The request itself is reported to the host like any CAN frame, then the response.
+  CHECK(board.take_output() == "t7E1803220101CCCCCCCC\rt7E980462010100CCCCCC\r");
+  REQUIRE(board.sent.size() == 1);
+  CHECK(board.sent[0].id == GATEWAY_DIAG_RESPONSE_ID);
 }

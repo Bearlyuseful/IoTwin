@@ -27,10 +27,17 @@
       "description": "Real CAN controller (FDCAN1, internal loopback without transceiver), B1 = wall switch, LD4 = lamp"
     },
     {
+      "id": "tester",
+      "kind": "virtual",
+      "label": "Diagnostic tester",
+      "program": "uds_client",
+      "description": "UDS tester (ISO 14229 over ISO-TP): identification, live data, trouble codes, reset"
+    },
+    {
       "id": "pc",
       "kind": "physical",
       "label": "Host PC",
-      "description": "Runs iotwin-bus, can_sim, serial_bridge and the visualizer"
+      "description": "Runs iotwin-bus, can_sim, serial_bridge, uds_client and the visualizer"
     }
   ],
   "buses": [
@@ -40,7 +47,7 @@
       "bitrate": 500000,
       "dbc": "../dbc/iotwin.dbc",
       "transport": "iotwin-bus tcp://127.0.0.1:8080",
-      "members": ["ecu", "visualizer", "gateway"]
+      "members": ["ecu", "visualizer", "tester", "gateway"]
     }
   ],
   "links": [
@@ -54,6 +61,11 @@
   ],
   "messages": [
     { "name": "LAMP_CMD", "producers": ["ecu"], "consumers": ["visualizer", "gateway"] },
-    { "name": "SWITCH_STATE", "producers": ["visualizer", "gateway"], "consumers": ["ecu"] }
+    { "name": "SWITCH_STATE", "producers": ["visualizer", "gateway"], "consumers": ["ecu"] },
+    { "name": "DIAG_FUNCTIONAL_REQ", "protocol": "uds", "producers": ["tester"], "consumers": ["ecu", "gateway"] },
+    { "name": "DIAG_ECU_REQ", "protocol": "uds", "producers": ["tester"], "consumers": ["ecu"] },
+    { "name": "DIAG_ECU_RESP", "protocol": "uds", "producers": ["ecu"], "consumers": ["tester"] },
+    { "name": "DIAG_GW_REQ", "protocol": "uds", "producers": ["tester"], "consumers": ["gateway"] },
+    { "name": "DIAG_GW_RESP", "protocol": "uds", "producers": ["gateway"], "consumers": ["tester"] }
   ]
 }

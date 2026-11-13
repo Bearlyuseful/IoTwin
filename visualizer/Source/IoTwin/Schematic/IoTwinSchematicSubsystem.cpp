@@ -11,6 +11,7 @@
 #include "Misc/CommandLine.h"
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
+#include "Schematic/UdsText.h"
 
 void UIoTwinSchematicSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -164,7 +165,14 @@ FString UIoTwinSchematicSubsystem::Describe(const FCanFrame& Frame, FString* Out
 		{
 			*OutMessageName = Message->Name;
 		}
-		return LiveDatabase.Describe(Frame);
+		FString Text = LiveDatabase.Describe(Frame);
+		// Messages without signals that carry a protocol (diagnostics): decode the transport content.
+		const FSystemMessage* SystemMessage = System.FindMessage(Message->Name);
+		if (SystemMessage && SystemMessage->Protocol == TEXT("uds"))
+		{
+			Text += TEXT(" ") + FUdsText::Describe(Frame.Data);
+		}
+		return Text;
 	}
 	return FString();
 }

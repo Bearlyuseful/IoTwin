@@ -22,6 +22,11 @@
       "url": "https://www.st.com/resource/en/reference_manual/rm0444-stm32g0x1-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"
     },
     {
+      "id": "cmsis-device-g0",
+      "title": "ST CMSIS device header stm32g0b1xx.h (peripheral instances), vendored in firmware/vendor",
+      "url": "https://github.com/STMicroelectronics/cmsis-device-g0/blob/master/Include/stm32g0b1xx.h"
+    },
+    {
       "id": "iotwin-measured",
       "title": "Measured / verified in IoTwin on the hardware",
       "url": "../../../docs/dev/firmware.md"
@@ -89,15 +94,27 @@
     },
     {
       "type": "usart",
-      "count": null,
-      "source": "ds13560",
-      "verified": false,
-      "note": "USART2 used as ST-LINK virtual COM port; number of USART/LPUART instances to confirm",
+      "count": 6,
+      "instances": ["USART1", "USART2", "USART3", "USART4", "USART5", "USART6"],
+      "source": "cmsis-device-g0",
+      "verified": true,
+      "note": "USART2 used as ST-LINK virtual COM port",
       "parameters": {
         "baudrate_tested": { "value": 115200, "unit": "bit/s", "source": "iotwin-measured", "verified": true }
       }
     },
-    { "type": "usb", "count": 1, "source": "st-product-page", "verified": false, "note": "USB 2.0 full speed - confirm device/host capability" }
+    { "type": "lpuart", "count": 2, "instances": ["LPUART1", "LPUART2"], "source": "cmsis-device-g0", "verified": true },
+    { "type": "spi", "count": 3, "instances": ["SPI1", "SPI2", "SPI3"], "source": "cmsis-device-g0", "verified": true },
+    { "type": "i2c", "count": 3, "instances": ["I2C1", "I2C2", "I2C3"], "source": "cmsis-device-g0", "verified": true },
+    { "type": "ucpd", "count": 2, "instances": ["UCPD1", "UCPD2"], "source": "cmsis-device-g0", "verified": true, "note": "USB Type-C power delivery controllers" },
+    {
+      "type": "usb",
+      "count": 1,
+      "instances": ["USB_DRD_FS"],
+      "source": "cmsis-device-g0",
+      "verified": true,
+      "note": "USB 2.0 full speed dual-role (device and host) controller, 2 KiB packet memory"
+    }
   ],
   "ports": [
     { "id": "PA2", "kind": "gpio", "functions": ["USART2_TX (AF1)"] },
