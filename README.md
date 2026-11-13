@@ -64,6 +64,7 @@ tests/  tools/  docs/
 | Real-time | [Real-Time Operation](docs/dev/realtime.md) |
 | Unreal side | [Visualizer](docs/dev/visualizer.md) |
 | Microcontroller | [Firmware](docs/dev/firmware.md) |
+| Parts and setups | [Component Database](docs/dev/component_database.md) |
 | DBC, ISO-TP, SocketCAN | [CAN Tools](docs/dev/can_tools.md) |
 | Release | [Packaging](docs/dev/packaging.md) |
 | Next steps | [Roadmap](docs/roadmap.md) |

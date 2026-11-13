@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Bearlyuseful/IoTwin/data/schema/component.schema.json",
+  "title": "IoTwin component",
+  "description": "A part with its characteristics for simulation. One file per component in data/components/<category>/.",
+  "type": "object",
+  "required": ["id", "name", "category", "sources", "parameters"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9][a-z0-9-]*)+$",
+      "description": "Unique id <vendor>.<part>, lower case, e.g. st.stm32g0b1ret6"
+    },
+    "name": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": ["microcontroller", "board", "transceiver", "sensor", "actuator", "lamp", "relay", "switch",
+               "power-supply", "cable", "connector", "ecu", "passive", "other"]
+    },
+    "manufacturer": { "type": "string" },
+    "description": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "description": "Non-numeric facts (core, package, ...)",
+      "additionalProperties": { "type": "string" }
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Numeric characteristics, keyed by snake_case name",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "$ref": "#/definitions/parameter" }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "type": "string" },
+          "count": { "type": ["integer", "null"], "minimum": 0 },
+          "instances": { "type": "array", "items": { "type": "string" } },
+          "source": { "type": "string" },
+          "verified": { "type": "boolean" },
+          "note": { "type": "string" },
+          "parameters": { "type": "object", "additionalProperties": { "$ref": "#/definitions/parameter" } }
+        }
+      }
+    },
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "type": "string", "enum": ["gpio", "power", "ground", "led", "button", "usb", "connector", "bus", "analog", "other"] },
+          "functions": { "type": "array", "items": { "type": "string" } },
+          "connects_to": { "type": "string", "description": "<contained instance>.<port id>" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "contains": {
+      "type": "array",
+      "description": "Sub-components, e.g. the MCU on a board",
+      "items": {
+        "type": "object",
+        "required": ["instance", "component"],
+        "additionalProperties": false,
+        "properties": {
+          "instance": { "type": "string" },
+          "component": { "type": "string" }
+        }
+      }
+    },
+    "simulation": { "type": "object", "description": "Model hints for the simulators / visualizer" }
+  },
+  "definitions": {
+    "parameter": {
+      "type": "object",
+      "required": ["unit", "source", "verified"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": ["number", "null"] },
+        "min": { "type": ["number", "null"] },
+        "typ": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "unit": { "type": "string", "enum": ["V", "A", "W", "Hz", "B", "bit/s", "°C", "s", "Ω", "F", "H", "lm", "%", "1"] },
+        "source": { "type": "string", "description": "id of an entry in sources" },
+        "verified": { "type": "boolean", "description": "false = to be confirmed or still to be filled in" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}
