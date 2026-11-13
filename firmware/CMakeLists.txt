@@ -21,9 +21,9 @@ add_executable(iotwin_gateway
     app/gateway.c
     app/main.c
     # portable code shared with the host (unit tested there)
-    ${REPO_ROOT}/src/core/can/can_frame.c
-    ${REPO_ROOT}/src/core/can/can_bit_timing.c
-    ${REPO_ROOT}/src/core/can/slcan.c
+    ${REPO_ROOT}/libs/can/can_frame.c
+    ${REPO_ROOT}/libs/can/can_bit_timing.c
+    ${REPO_ROOT}/libs/can/slcan.c
 )
 set_target_properties(iotwin_gateway PROPERTIES SUFFIX ".elf")
 
@@ -31,7 +31,7 @@ target_include_directories(iotwin_gateway PRIVATE
     ${BOARD_DIR}
     drivers
     app
-    ${REPO_ROOT}/src/core/can
+    ${REPO_ROOT}/libs/can
     vendor/cmsis_core
     vendor/cmsis_device_g0
 )

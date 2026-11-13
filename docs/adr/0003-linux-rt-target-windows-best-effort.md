@@ -15,7 +15,7 @@ one Windows machine makes development and testing much easier.
   implemented for Linux only: `SCHED_FIFO` priorities, CPU pinning,
   `mlockall()` and drift-free cycles with `clock_nanosleep(TIMER_ABSTIME)`.
 - The same sources build on Windows with MSYS2 GCC through a thin platform
-  layer (`src/core/platform`, `src/communication/tcp/net.*`). On Windows the
+  layer (`libs/platform`, `libs/net/net.*`). On Windows the
   programs run *best effort*: correct behaviour, but no timing guarantees.
 - Simulation logic (e.g. `light_ecu.c`) is free of platform code and time
   sources so it stays portable and unit-testable.

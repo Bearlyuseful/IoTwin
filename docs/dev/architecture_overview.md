@@ -27,20 +27,26 @@
 
 ## Repository layout
 
-| Path                              | Content                                                  |
-|-----------------------------------|----------------------------------------------------------|
-| `src/core/logger`                 | Thread-safe logger                                       |
-| `src/core/platform`               | Time, cycle timer, real-time setup, CLI helpers          |
-| `src/core/can`                    | `CanFrame` + text codec, `CanBus` FIFO, SLCAN, bit timing (also used by the firmware) |
-| `src/communication/tcp`           | Portable sockets (`net`), line framing (`line_reader`)   |
-| `src/communication/serial`        | Portable serial port (Win32 / termios)                   |
-| `src/bus`                         | `iotwin-bus` server                                      |
-| `src/simulators/can_sim`          | Light ECU logic and `can_sim` executable                 |
-| `src/bridges/serial_bridge`       | `serial_bridge`: SLCAN adapter ↔ bus                     |
-| `firmware`                        | NUCLEO-G0B1RE gateway firmware (separate CMake project)  |
-| `src/ue/IoTwin`                   | Unreal Engine project (visualizer)                       |
-| `tests`                           | Catch2 unit and socket integration tests                 |
-| `tools`                           | Run and packaging scripts                                |
+One repository with flat, role-based directories ([ADR 0005](../adr/0005-repository-layout.md)):
+
+| Path | Content |
+|------|---------|
+| `libs/can` | `CanFrame` + text codec, `CanBus` FIFO, SLCAN, bit timing, signals/DBC, ISO-TP (partly compiled into the firmware) |
+| `libs/net` | portable sockets (`net`), line framing (`line_reader`) |
+| `libs/serial` | portable serial port (Win32 / termios) |
+| `libs/platform` | time, cycle timer, real-time setup, CLI helpers |
+| `libs/log` | thread-safe logger |
+| `apps/bus` | `iotwin-bus` server |
+| `apps/can_sim` | light ECU and `can_sim` |
+| `apps/serial_bridge` | SLCAN adapter ↔ bus |
+| `apps/socketcan_bridge` | Linux SocketCAN ↔ bus |
+| `apps/can_monitor` | live bus view with DBC decoding |
+| `firmware` | NUCLEO-G0B1RE gateway firmware (separate CMake project) |
+| `visualizer` | Unreal Engine project |
+| `data` | DBC files, component database, system descriptions |
+| `tests` | Catch2 unit, socket and end-to-end tests |
+| `tools` | run, flash and packaging scripts |
+| `docs` | this documentation, ADRs, `Doxyfile` |
 
 ## can_sim threads
 

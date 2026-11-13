@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Repository
+- Flat layout: `libs/` (shared C libraries), `apps/` (programs), `firmware/`,
+  `visualizer/` (Unreal project, was `src/ue/IoTwin`), `data/` (was `config/`),
+  see ADR 0005. User-specific Rider `.idea` files are no longer tracked.
+
 ## 0.2.0 - 2026-11-13
 
 Roadmap steps 1-3: a real microcontroller on the virtual bus.

@@ -100,7 +100,7 @@ static void print_usage(const char* program) {
   printf("Usage: %s [options]\n\n"
          "Prints all frames on iotwin-bus, decoded with a DBC file.\n\n"
          "Options:\n"
-         "  --dbc FILE            DBC file for decoding (e.g. config/can/iotwin.dbc)\n"
+         "  --dbc FILE            DBC file for decoding (e.g. data/dbc/iotwin.dbc)\n"
          "  --host HOST           bus server host (default 127.0.0.1)\n"
          "  --port PORT           bus server port (default 8080)\n"
          "  --changes             only print frames whose payload changed (hides cyclic repeats)\n"

@@ -49,3 +49,4 @@ nav:
       - ADR 0002 Bus and Protocol: adr/0002-bus-server-and-text-protocol.md
       - ADR 0003 Platforms: adr/0003-linux-rt-target-windows-best-effort.md
       - ADR 0004 Firmware: adr/0004-firmware-in-mono-repo-bare-metal.md
+      - ADR 0005 Repository Layout: adr/0005-repository-layout.md

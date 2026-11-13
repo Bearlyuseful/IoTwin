@@ -54,7 +54,7 @@ endif()
 add_dependencies(iotwin_tests serial_bridge)
 target_compile_definitions(iotwin_tests PRIVATE
     SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>"
-    IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/config/can/iotwin.dbc"
+    IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/data/dbc/iotwin.dbc"
 )
 
 # register with CTest

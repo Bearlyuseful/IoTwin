@@ -35,7 +35,7 @@ build/gcc-debug/bin/iotwin-bus     # terminal 1
 build/gcc-debug/bin/can_sim        # terminal 2 (type 'help')
 ```
 
-Then open `src/ue/IoTwin/IoTwin.uproject` in Unreal Engine 5.6 and press **Play**.
+Then open `visualizer/IoTwin.uproject` in Unreal Engine 5.6 and press **Play**.
 
 ---
 
@@ -46,6 +46,15 @@ Then open `src/ue/IoTwin/IoTwin.uproject` in Unreal Engine 5.6 and press **Play*
 - **Communication:** TCP, text line protocol ([protocol](docs/dev/protocol.md))
 - **Tests:** Catch2 (unit + socket integration), Unreal automation tests
 - **Documentation:** MkDocs + Doxygen + ADRs (`docs/`)
+
+```
+libs/        shared C libraries (can, net, serial, platform, log)
+apps/        iotwin-bus, can_sim, serial_bridge, socketcan_bridge, can_monitor
+firmware/    NUCLEO-G0B1RE CAN gateway
+visualizer/  Unreal Engine project
+data/        DBC files, component database, system descriptions
+tests/  tools/  docs/
+```
 
 | Topic | Document |
 |-------|----------|

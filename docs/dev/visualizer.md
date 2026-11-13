@@ -1,6 +1,6 @@
 # Visualizer (Unreal Engine)
 
-The Unreal project lives in `src/ue/IoTwin` (UE 5.6, C++ module `IoTwin`).
+The Unreal project lives in `visualizer` (UE 5.6, C++ module `IoTwin`).
 
 ## Bus integration (`Source/IoTwin/Bus`)
 
@@ -63,10 +63,10 @@ and select it as *GameMode Override* in the map's World Settings.
 
 ```powershell
 # Automation tests (CAN codec)
-UnrealEditor-Cmd.exe src/ue/IoTwin/IoTwin.uproject -ExecCmds="Automation RunTests IoTwin;Quit" -unattended -nullrhi
+UnrealEditor-Cmd.exe visualizer/IoTwin.uproject -ExecCmds="Automation RunTests IoTwin;Quit" -unattended -nullrhi
 
 # Unattended game run: screenshot after 10 s, quit after 15 s
-UnrealEditor.exe src/ue/IoTwin/IoTwin.uproject -game -IoTwinScreenshot=10 -IoTwinQuitAfter=15
+UnrealEditor.exe visualizer/IoTwin.uproject -game -IoTwinScreenshot=10 -IoTwinQuitAfter=15
 ```
 
 The screenshot is written to `Saved/Screenshots/IoTwinDemo.png`.

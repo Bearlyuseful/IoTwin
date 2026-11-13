@@ -37,8 +37,8 @@ if ($SerialPort) {
 if ($Visualizer) {
     $Editor = Join-Path $EngineDir "Binaries\Win64\UnrealEditor.exe"
     if (-not (Test-Path $Editor)) { throw "UnrealEditor.exe not found, pass -EngineDir <UE_5.6>\Engine" }
-    $Project = Join-Path $RepoRoot "src\ue\IoTwin\IoTwin.uproject"
+    $Project = Join-Path $RepoRoot "visualizer\IoTwin.uproject"
     Start-Process -FilePath $Editor -ArgumentList "`"$Project`"", "-game", "-windowed", "-ResX=1600", "-ResY=900", "-IoTwinBusPort=$Port"
 } else {
-    Write-Host "Bus and simulator started on port $Port. Open src/ue/IoTwin/IoTwin.uproject and press Play."
+    Write-Host "Bus and simulator started on port $Port. Open visualizer/IoTwin.uproject and press Play."
 }

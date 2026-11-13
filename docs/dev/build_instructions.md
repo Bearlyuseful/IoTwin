@@ -3,7 +3,7 @@
 IoTwin has two parts that are built separately:
 
 1. **Core** (C, CMake): `iotwin-bus`, `can_sim` and the tests.
-2. **Visualizer** (Unreal Engine 5.6 project in `src/ue/IoTwin`).
+2. **Visualizer** (Unreal Engine 5.6 project in `visualizer`).
 
 ---
 
@@ -95,7 +95,7 @@ Flashing, wiring and the serial protocol are described in [Firmware](firmware.md
 
 ### Open in the editor
 
-Open `src/ue/IoTwin/IoTwin.uproject`. On first open Unreal asks to rebuild
+Open `visualizer/IoTwin.uproject`. On first open Unreal asks to rebuild
 the `IoTwin` module - confirm with *Yes*. Start the core first, then press
 *Play*: the demo scene connects to `127.0.0.1:8080`.
 
@@ -103,7 +103,7 @@ the `IoTwin` module - confirm with *Yes*. Start the core first, then press
 
 ```powershell
 & "<UE>\Engine\Build\BatchFiles\Build.bat" IoTwinEditor Win64 Development `
-    -Project="$PWD\src\ue\IoTwin\IoTwin.uproject" -WaitMutex
+    -Project="$PWD\visualizer\IoTwin.uproject" -WaitMutex
 ```
 
 Packaging a standalone build is described in [Packaging](packaging.md).
