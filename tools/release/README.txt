@@ -57,6 +57,18 @@ Scripted tests with fault injection, while the demo runs:
 
 Record and replay: bin\can_monitor --log drive.log, then bin\can_replay drive.log
 
+Electrical simulation
+---------------------
+bin\iotwin-sim.exe simulates the wiring of a flat (data\installations\demo-flat.json):
+breakers, RCD, faults and measurements, without the visualizer.
+
+  bin\iotwin-sim --data data
+  sim> fault socket_kitchen:L socket_kitchen:N      short circuit, F2 trips
+  sim> clear
+  sim> reset f2
+  sim> fault kettle:L kettle:PE 2000                insulation fault, the RCD trips
+  sim> z socket_kitchen:L socket_kitchen:PE         loop impedance
+
 With a NUCLEO-G0B1RE
 --------------------
 1. Copy firmware\iotwin_gateway.bin to the NOD_G0B1RE drive of the board.

@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+### Electrical simulation core
+- ADR 0006: one core for three products (test platform, renovation game,
+  electrician training); ADR 0007: the electrical simulation owns all
+  electrical results, Unreal displays them.
+- `libs/elsim`: installation model with devices, terminals, conductors and
+  cables; network solver with complex phasors (modified nodal analysis);
+  supply in TN-S, TN-C-S and TT; circuit breakers (magnetic and thermal),
+  fuses (I²t) and RCDs incl. test button; faults (impedance between any two
+  terminals, interrupted conductors); measurements of voltage, loop
+  impedance and insulation resistance (refused while live).
+- `data/installations/demo-flat.json` with schema; new components: circuit
+  breakers B10/B16, RCD 40 A / 30 mA, fuse gG 16 A, lamp, kettle.
+  `tools/validate_data.py` checks installations as well.
+- `libs/json`: small JSON reader for the C core.
+- `iotwin-sim`: command line simulator, interactive or as a script with
+  `expect` checks (CTest `electrical_demo`); included in the release package.
+
 ## 0.3.0 - 2026-11-13
 
 Next phase, features A-E: component database, 2D schematic view, UDS

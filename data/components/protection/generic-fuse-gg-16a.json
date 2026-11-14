@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "generic.fuse-gg-16a",
+  "name": "Fuse gG 16 A",
+  "category": "protection",
+  "description": "Generic general-purpose fuse link, 16 A.",
+  "parameters": {
+    "rated_current": {
+      "value": 16,
+      "unit": "A",
+      "source": "iec-60269",
+      "verified": true
+    },
+    "melting_i2t": {
+      "value": 1000,
+      "unit": "A²s",
+      "source": "iotwin-model",
+      "verified": false,
+      "note": "integral of (I^2 - In^2) dt until the link melts"
+    },
+    "contact_resistance": {
+      "value": 0.003,
+      "unit": "Ω",
+      "source": "iotwin-model",
+      "verified": false
+    }
+  },
+  "sources": [
+    {
+      "id": "iec-60269",
+      "title": "IEC 60269 - low-voltage fuses (gG general purpose)"
+    },
+    {
+      "id": "iotwin-model",
+      "title": "IoTwin simulation parameter of the simplified model (see docs/dev/electrical.md)",
+      "url": "../../../docs/dev/electrical.md"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+# iotwin-sim script for data/installations/demo-flat.json (CTest "electrical_demo").
+# The physics behind the expected values: docs/dev/electrical.md
+
+expect lamp powered
+expect kettle powered
+expect u lamp:L lamp:N 225 231
+expect u kettle:L kettle:N 220 230
+
+# Loop impedance at the kitchen socket and the light: Ze 0.35 Ohm plus the conductors
+expect z socket_kitchen:L socket_kitchen:PE 0.5 0.65
+expect z lamp:L lamp:PE 0.55 0.9
+
+# Light switch
+off s1
+expect lamp unpowered
+on s1
+expect lamp powered
+
+# Short circuit L-N at the kitchen socket: F2 trips magnetically, the light stays on
+fault socket_kitchen:L socket_kitchen:N
+expect f2 tripped
+expect rcd on
+expect lamp powered
+expect kettle unpowered
+clear
+reset f2
+expect kettle powered
+
+# Insulation fault in the kettle (2 kOhm to its housing): the RCD trips - both circuits are dark
+fault kettle:L kettle:PE 2000
+expect rcd tripped
+expect f2 on
+expect lamp unpowered
+clear
+on rcd
+expect lamp powered
+
+# Measuring insulation needs a dead circuit: refused while live, the kettle must be unplugged
+off f2
+unplug kettle
+expect u socket_kitchen:L socket_kitchen:N 0 1
+on f2
+plug kettle socket_kitchen
+expect kettle powered
+
+# Interrupted neutral of the kitchen circuit: kettle dead, N at line potential
+open kitchen-n
+expect kettle unpowered
+expect u socket_kitchen:N socket_kitchen:PE 200 240
+close kitchen-n
+expect kettle powered
+
+# RCD test button
+test rcd
+expect rcd tripped
+on rcd
+expect rcd on

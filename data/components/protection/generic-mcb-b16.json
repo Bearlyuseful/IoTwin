@@ -1,0 +1,50 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "generic.mcb-b16",
+  "name": "Miniature circuit breaker B16",
+  "category": "protection",
+  "description": "Generic 1-pole circuit breaker, characteristic B, rated current 16 A.",
+  "properties": {
+    "characteristic": "B",
+    "poles": "1"
+  },
+  "parameters": {
+    "rated_current": {
+      "value": 16,
+      "unit": "A",
+      "source": "iec-60898-1",
+      "verified": true
+    },
+    "magnetic_trip_multiple": {
+      "value": 5,
+      "unit": "1",
+      "source": "iec-60898-1",
+      "verified": true,
+      "note": "upper limit of the B range: trips at the latest at 5 x In"
+    },
+    "thermal_limit": {
+      "value": 60,
+      "unit": "s",
+      "source": "iotwin-model",
+      "verified": false,
+      "note": "integral of ((I/In)^2 - 1) dt until the thermal release trips"
+    },
+    "contact_resistance": {
+      "value": 0.002,
+      "unit": "Ω",
+      "source": "iotwin-model",
+      "verified": false
+    }
+  },
+  "sources": [
+    {
+      "id": "iec-60898-1",
+      "title": "IEC 60898-1 - circuit-breakers for overcurrent protection for household installations (instantaneous tripping B: 3-5 x In, C: 5-10 x In, D: 10-20 x In)"
+    },
+    {
+      "id": "iotwin-model",
+      "title": "IoTwin simulation parameter of the simplified model (see docs/dev/electrical.md)",
+      "url": "../../../docs/dev/electrical.md"
+    }
+  ]
+}

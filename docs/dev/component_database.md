@@ -22,7 +22,7 @@ One JSON file per part. Example: `data/components/boards/st-nucleo-g0b1re.json`.
 | Field | Meaning |
 |-------|---------|
 | `id` | unique `<vendor>.<part>`, e.g. `st.stm32g0b1ret6` |
-| `category` | microcontroller, board, transceiver, sensor, actuator, lamp, relay, switch, power-supply, ... |
+| `category` | microcontroller, board, transceiver, sensor, actuator, lamp, relay, switch, power-supply, protection, appliance, ... |
 | `sources` | datasheets and manuals; every value refers to one of them |
 | `properties` | non-numeric facts (core, package, debugger, ...) |
 | `parameters` | numeric characteristics (see below) |
@@ -41,7 +41,7 @@ A parameter has a value **or** a range, a unit, a source and a `verified` flag:
 
 `verified: false` marks values that still have to be confirmed or filled in -
 the database never pretends to know more than its sources say. Units: `V`, `A`,
-`W`, `Hz`, `B`, `bit/s`, `°C`, `s`, `Ω`, `F`, `H`, `lm`, `%`, `1`.
+`W`, `Hz`, `B`, `bit/s`, `°C`, `s`, `Ω`, `F`, `H`, `lm`, `%`, `1`, `A²s`.
 
 ### Current entries
 
@@ -49,6 +49,10 @@ the database never pretends to know more than its sources say. Units: `V`, `A`,
 |-----------|--------|
 | `st.stm32g0b1ret6` | clock, memory, supply ranges, FDCAN (incl. 500 kbit/s measured in IoTwin), used pins; open: run/stop currents, USART count |
 | `st.nucleo-g0b1re` | supply inputs, ST-LINK interfaces (VCP, mass storage), LD4/B1/FDCAN pins; open: measured board current, CN10 pin numbers |
+| `generic.mcb-b10`, `generic.mcb-b16` | circuit breakers B10/B16 for the [electrical simulation](electrical.md): trip multiples from IEC 60898-1, simplified thermal limit |
+| `generic.rcd-40a-30ma` | RCD 40 A / 30 mA (IEC 61008-1) |
+| `generic.fuse-gg-16a` | fuse gG 16 A, simplified melting I²t |
+| `generic.lamp-60w`, `generic.kettle-2000w` | resistive loads from the nameplate |
 
 ## Systems
 
