@@ -120,6 +120,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1189886881016a360fd7eaae3b9f9b09" id="r_a1189886881016a360fd7eaae3b9f9b09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1189886881016a360fd7eaae3b9f9b09">tripped</a></td></tr>
 <tr class="memitem:a479ff6e380b72aabec74a2a53531c312" id="r_a479ff6e380b72aabec74a2a53531c312"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a479ff6e380b72aabec74a2a53531c312">heat</a></td></tr>
 <tr class="memitem:ae9c30d4f70cb9938c874db5329d3309d" id="r_ae9c30d4f70cb9938c874db5329d3309d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9c30d4f70cb9938c874db5329d3309d">test_pressed</a></td></tr>
+<tr class="memitem:a2d37751978c9ce7dc5207c223be56877" id="r_a2d37751978c9ce7dc5207c223be56877"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d37751978c9ce7dc5207c223be56877">level</a></td></tr>
+<tr class="memitem:abccf655aa40f1505b9fa167705cf5138" id="r_abccf655aa40f1505b9fa167705cf5138"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abccf655aa40f1505b9fa167705cf5138">reactance_ohm</a></td></tr>
 <tr class="memitem:a0cd3da77e1c33f912be92b3231e4d76e" id="r_a0cd3da77e1c33f912be92b3231e4d76e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0cd3da77e1c33f912be92b3231e4d76e">current_a</a></td></tr>
 <tr class="memitem:af48f5fc69b08624ba187d2568d35dc23" id="r_af48f5fc69b08624ba187d2568d35dc23"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af48f5fc69b08624ba187d2568d35dc23">residual_a</a></td></tr>
 <tr class="memitem:a30eaf7fe381171a6e313e598fccb9813" id="r_a30eaf7fe381171a6e313e598fccb9813"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30eaf7fe381171a6e313e598fccb9813">voltage_v_measured</a></td></tr>
@@ -152,7 +154,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>breaker, fuse, rcd pole, switch contact </p>
+<p>breaker, fuse, rcd pole, switch/dimmer contact </p>
 
 </div>
 </div>
@@ -304,6 +306,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a2d37751978c9ce7dc5207c223be56877" name="a2d37751978c9ce7dc5207c223be56877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d37751978c9ce7dc5207c223be56877">&#9670;&#160;</a></span>level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ElDevice::level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dimmer: 0..1 (share of the full power of its load) </p>
+
+</div>
+</div>
 <a id="ae2897da05192d04fae0b924f62918cdf" name="ae2897da05192d04fae0b924f62918cdf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2897da05192d04fae0b924f62918cdf">&#9670;&#160;</a></span>loop_impedance_ohm</h2>
 
@@ -406,6 +423,21 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>load </p>
+
+</div>
+</div>
+<a id="abccf655aa40f1505b9fa167705cf5138" name="abccf655aa40f1505b9fa167705cf5138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abccf655aa40f1505b9fa167705cf5138">&#9670;&#160;</a></span>reactance_ohm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ElDevice::reactance_ohm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>dimmer: series reactance that sets the level (computed) </p>
 
 </div>
 </div>
@@ -553,7 +585,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>load: across L-N </p>
+<p>load, socket, junction: across L-N </p>
 
 </div>
 </div>

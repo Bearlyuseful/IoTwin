@@ -10,6 +10,8 @@ Linear AC network solver\+: modified nodal analysis with complex phasors.
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+struct \mbox{\hyperlink{structElPhasor}{El\+Phasor}}
+\item 
 struct \mbox{\hyperlink{structElElement}{El\+Element}}
 \item 
 struct \mbox{\hyperlink{structElCircuit}{El\+Circuit}}
@@ -17,12 +19,9 @@ struct \mbox{\hyperlink{structElCircuit}{El\+Circuit}}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{el__circuit_8h_a3012e70fd0668c9eecf0289961243486}{EL\+\_\+\+GMIN}}~1e-\/9
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Typedefs}
-\begin{DoxyCompactItemize}
+\#define \mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}}~static inline
 \item 
-typedef double \+\_\+\+Complex \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}
+\#define \mbox{\hyperlink{el__circuit_8h_a3012e70fd0668c9eecf0289961243486}{EL\+\_\+\+GMIN}}~1e-\/9
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -35,40 +34,56 @@ enum \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6}{El\+Elem
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+double \mbox{\hyperlink{el__circuit_8h_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\+\_\+abs}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} value)
+\begin{DoxyCompactList}\small\item\em Magnitude \texorpdfstring{$\vert$}{|}z\texorpdfstring{$\vert$}{|}, overflow-\/safe. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{el__circuit_8h_a304ba7a951f2d06a166a2a18b5a6e1eb}{el\+\_\+angle\+\_\+deg}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} value)
+\begin{DoxyCompactList}\small\item\em Phase angle in degrees. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_a677ff6b008cbe1b748037cd3a19c2ab0}{el\+\_\+polar}} (double magnitude, double degrees)
+\begin{DoxyCompactList}\small\item\em Phasor from RMS magnitude and angle in degrees. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{el__circuit_8h_a62c7a6f47abdcce85724b320c45b4a50}{el\+\_\+circuit\+\_\+init}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int nodes)
 \item 
 void \mbox{\hyperlink{el__circuit_8h_a00eb846edc75b9940b3ce2837012fefd}{el\+\_\+circuit\+\_\+free}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit)
 \item 
 void \mbox{\hyperlink{el__circuit_8h_a768a15ac6aad2f8ce889490fd5c24b9d}{el\+\_\+circuit\+\_\+clear}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit)
-\begin{DoxyCompactList}\small\item\em Removes all elements, keeps the node count. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{el__circuit_8h_a7c61493953820dc19b26f13d76142dc5}{el\+\_\+circuit\+\_\+add\+\_\+admittance}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} admittance)
+\begin{DoxyCompactList}\small\item\em Removes all elements, keeps the node count and the allocated memory. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{el__circuit_8h_a7c61493953820dc19b26f13d76142dc5}{el\+\_\+circuit\+\_\+add\+\_\+admittance}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} admittance)
 \item 
-int \mbox{\hyperlink{el__circuit_8h_a45adc8ec37724e3c0bbd6857034e7095}{el\+\_\+circuit\+\_\+add\+\_\+impedance}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} impedance)
+int \mbox{\hyperlink{el__circuit_8h_a45adc8ec37724e3c0bbd6857034e7095}{el\+\_\+circuit\+\_\+add\+\_\+impedance}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} impedance)
 \item 
-int \mbox{\hyperlink{el__circuit_8h_ae4feaeaff528a4b65be07f77810fff69}{el\+\_\+circuit\+\_\+add\+\_\+voltage\+\_\+source}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} voltage)
+int \mbox{\hyperlink{el__circuit_8h_aa856fcc86775dd59fd4109040cddb331}{el\+\_\+circuit\+\_\+add\+\_\+resistance}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, double ohm)
+\begin{DoxyCompactList}\small\item\em Resistive impedance (convenience for el\+\_\+circuit\+\_\+add\+\_\+impedance). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{el__circuit_8h_ae4feaeaff528a4b65be07f77810fff69}{el\+\_\+circuit\+\_\+add\+\_\+voltage\+\_\+source}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} voltage)
 \item 
-int \mbox{\hyperlink{el__circuit_8h_a4c47c7c49005ad928a0cbf1ed8a07337}{el\+\_\+circuit\+\_\+add\+\_\+current\+\_\+source}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} current)
+int \mbox{\hyperlink{el__circuit_8h_a4c47c7c49005ad928a0cbf1ed8a07337}{el\+\_\+circuit\+\_\+add\+\_\+current\+\_\+source}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int a, int b, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} current)
 \item 
 bool \mbox{\hyperlink{el__circuit_8h_a70d6c19633c7e5d90345a6cad44f00dd}{el\+\_\+circuit\+\_\+solve}} (\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, double gmin)
 \begin{DoxyCompactList}\small\item\em Solves the network. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\+\_\+circuit\+\_\+voltage}} (const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int node)
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\+\_\+circuit\+\_\+voltage}} (const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int node)
 \item 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\+\_\+circuit\+\_\+current}} (const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int element)
-\begin{DoxyCompactList}\small\item\em Current through an element from a to b. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_a677ff6b008cbe1b748037cd3a19c2ab0}{el\+\_\+polar}} (double magnitude, double degrees)
-\begin{DoxyCompactList}\small\item\em Phasor from RMS magnitude and angle in degrees. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\begin{Indent}\textbf{ Phasor helpers (usable from C++)}\par
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\+\_\+circuit\+\_\+current}} (const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}circuit, int element)
+\begin{DoxyCompactList}\small\item\em Current through an element from a to b. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Phasor arithmetic}\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_af9df7f8c0d715d33f32a293f5e5dfe7d}{el\+\_\+phasor}} (double real, double imaginary)
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\+\_\+phasor}} (double re, double im)
 \item 
-double \mbox{\hyperlink{el__circuit_8h_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\+\_\+abs}} (\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} value)
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\+\_\+add}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} b)
 \item 
-double \mbox{\hyperlink{el__circuit_8h_a5c2dd2ba59067596c56c0fb14feda81d}{el\+\_\+real}} (\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} value)
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\+\_\+sub}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} b)
 \item 
-double \mbox{\hyperlink{el__circuit_8h_ac433dc03a14eb20912a6c15bfd5bc432}{el\+\_\+imag}} (\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} value)
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\+\_\+mul}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} b)
 \item 
-double \mbox{\hyperlink{el__circuit_8h_a304ba7a951f2d06a166a2a18b5a6e1eb}{el\+\_\+angle\+\_\+deg}} (\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} value)
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\+\_\+div}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} b)
+\item 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_acbd894f65d806fda72d76be8273696d2}{el\+\_\+scale}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a, double factor)
+\item 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \mbox{\hyperlink{el__circuit_8h_a0f53531e718a877faaa53fd9e979adb9}{el\+\_\+conj}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a)
+\item 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} double \mbox{\hyperlink{el__circuit_8h_a1f63f693662489afbe4565c1c57c3ec1}{el\+\_\+real}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a)
+\item 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} double \mbox{\hyperlink{el__circuit_8h_aec79395205be81afbd4eeab3d6459349}{el\+\_\+imag}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a)
+\item 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} double \mbox{\hyperlink{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b}{el\+\_\+abs2}} (\mbox{\hyperlink{structElPhasor}{El\+Phasor}} a)
 \end{DoxyCompactItemize}
 \end{Indent}
 
@@ -83,7 +98,9 @@ Node 0 is the reference (earth). Elements\+:
 \item ideal current source\+: value flows from node a to node b through the source. The current of every element is reported in the direction a -\/\texorpdfstring{$>$}{>} b.
 \end{DoxyItemize}
 
-A small conductance gmin from every node to earth keeps floating parts of the network (open breakers, unconnected terminals) solvable; it also models a very high insulation resistance. Dense Gaussian elimination with partial pivoting -\/ networks of a house have a few hundred nodes at most. 
+A small conductance gmin from every node to earth keeps floating parts of the network (open breakers, unconnected terminals) solvable; it also models a very high insulation resistance. Dense Gaussian elimination with partial pivoting.
+
+Portable C99 without C99 complex numbers (MSVC has no complex arithmetic), so the same sources compile with GCC, Clang and MSVC, also inside the Unreal visualizer (ADR 0008). After the first solution of a network size the solver does not allocate memory any more. 
 
 \label{doc-define-members}
 \Hypertarget{el__circuit_8h_doc-define-members}
@@ -94,16 +111,11 @@ A small conductance gmin from every node to earth keeps floating parts of the ne
 {\footnotesize\ttfamily \label{el__circuit_8h_a3012e70fd0668c9eecf0289961243486} 
 \#define EL\+\_\+\+GMIN~1e-\/9}
 
-Siemens from every node to earth (1 GOhm). 
-
-\label{doc-typedef-members}
-\Hypertarget{el__circuit_8h_doc-typedef-members}
-\doxysubsection{Typedef Documentation}
-\Hypertarget{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}\index{el\_circuit.h@{el\_circuit.h}!ElPhasor@{ElPhasor}}
-\index{ElPhasor@{ElPhasor}!el\_circuit.h@{el\_circuit.h}}
-\doxysubsubsection{\texorpdfstring{ElPhasor}{ElPhasor}}
-{\footnotesize\ttfamily \label{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281} 
-typedef double \+\_\+\+Complex \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}
+Siemens from every node to earth (1 GOhm). \Hypertarget{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}\index{el\_circuit.h@{el\_circuit.h}!EL\_INLINE@{EL\_INLINE}}
+\index{EL\_INLINE@{EL\_INLINE}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{EL\_INLINE}{EL\_INLINE}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f} 
+\#define EL\+\_\+\+INLINE~static inline}
 
 
 
@@ -139,19 +151,39 @@ EL\+\_\+\+CURRENT\+\_\+\+SOURCE&\\
 \index{el\_abs@{el\_abs}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_abs()}{el\_abs()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_a2b708d8e154ccd8a1b91a2e3a3c16d9d} 
-double el\+\_\+abs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+double el\+\_\+abs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Magnitude \texorpdfstring{$\vert$}{|}z\texorpdfstring{$\vert$}{|}, overflow-\/safe. 
+
+\Hypertarget{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b}\index{el\_circuit.h@{el\_circuit.h}!el\_abs2@{el\_abs2}}
+\index{el\_abs2@{el\_abs2}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_abs2()}{el\_abs2()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} double el\+\_\+abs2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}\index{el\_circuit.h@{el\_circuit.h}!el\_add@{el\_add}}
+\index{el\_add@{el\_add}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_add()}{el\_add()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{b}{}\end{DoxyParamCaption})}
 
 \Hypertarget{el__circuit_8h_a304ba7a951f2d06a166a2a18b5a6e1eb}\index{el\_circuit.h@{el\_circuit.h}!el\_angle\_deg@{el\_angle\_deg}}
 \index{el\_angle\_deg@{el\_angle\_deg}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_angle\_deg()}{el\_angle\_deg()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_a304ba7a951f2d06a166a2a18b5a6e1eb} 
-double el\+\_\+angle\+\_\+deg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+double el\+\_\+angle\+\_\+deg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Phase angle in degrees. 
 
 \Hypertarget{el__circuit_8h_a7c61493953820dc19b26f13d76142dc5}\index{el\_circuit.h@{el\_circuit.h}!el\_circuit\_add\_admittance@{el\_circuit\_add\_admittance}}
 \index{el\_circuit\_add\_admittance@{el\_circuit\_add\_admittance}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_circuit\_add\_admittance()}{el\_circuit\_add\_admittance()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_a7c61493953820dc19b26f13d76142dc5} 
-int el\+\_\+circuit\+\_\+add\+\_\+admittance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{admittance}{}\end{DoxyParamCaption})}
+int el\+\_\+circuit\+\_\+add\+\_\+admittance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{admittance}{}\end{DoxyParamCaption})}
 
 \begin{DoxyReturn}{Returns}
 Element index, -\/1 if out of memory or a node is out of range. 
@@ -160,19 +192,29 @@ Element index, -\/1 if out of memory or a node is out of range.
 \index{el\_circuit\_add\_current\_source@{el\_circuit\_add\_current\_source}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_circuit\_add\_current\_source()}{el\_circuit\_add\_current\_source()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_a4c47c7c49005ad928a0cbf1ed8a07337} 
-int el\+\_\+circuit\+\_\+add\+\_\+current\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{current}{}\end{DoxyParamCaption})}
+int el\+\_\+circuit\+\_\+add\+\_\+current\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{current}{}\end{DoxyParamCaption})}
 
 \Hypertarget{el__circuit_8h_a45adc8ec37724e3c0bbd6857034e7095}\index{el\_circuit.h@{el\_circuit.h}!el\_circuit\_add\_impedance@{el\_circuit\_add\_impedance}}
 \index{el\_circuit\_add\_impedance@{el\_circuit\_add\_impedance}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_circuit\_add\_impedance()}{el\_circuit\_add\_impedance()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_a45adc8ec37724e3c0bbd6857034e7095} 
-int el\+\_\+circuit\+\_\+add\+\_\+impedance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{impedance}{}\end{DoxyParamCaption})}
+int el\+\_\+circuit\+\_\+add\+\_\+impedance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{impedance}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_aa856fcc86775dd59fd4109040cddb331}\index{el\_circuit.h@{el\_circuit.h}!el\_circuit\_add\_resistance@{el\_circuit\_add\_resistance}}
+\index{el\_circuit\_add\_resistance@{el\_circuit\_add\_resistance}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_circuit\_add\_resistance()}{el\_circuit\_add\_resistance()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_aa856fcc86775dd59fd4109040cddb331} 
+int el\+\_\+circuit\+\_\+add\+\_\+resistance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{double}]{ohm}{}\end{DoxyParamCaption})}
+
+
+
+Resistive impedance (convenience for el\+\_\+circuit\+\_\+add\+\_\+impedance). 
 
 \Hypertarget{el__circuit_8h_ae4feaeaff528a4b65be07f77810fff69}\index{el\_circuit.h@{el\_circuit.h}!el\_circuit\_add\_voltage\_source@{el\_circuit\_add\_voltage\_source}}
 \index{el\_circuit\_add\_voltage\_source@{el\_circuit\_add\_voltage\_source}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_circuit\_add\_voltage\_source()}{el\_circuit\_add\_voltage\_source()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_ae4feaeaff528a4b65be07f77810fff69} 
-int el\+\_\+circuit\+\_\+add\+\_\+voltage\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{voltage}{}\end{DoxyParamCaption})}
+int el\+\_\+circuit\+\_\+add\+\_\+voltage\+\_\+source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{a}{, }\item[{int}]{b}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{voltage}{}\end{DoxyParamCaption})}
 
 \Hypertarget{el__circuit_8h_a768a15ac6aad2f8ce889490fd5c24b9d}\index{el\_circuit.h@{el\_circuit.h}!el\_circuit\_clear@{el\_circuit\_clear}}
 \index{el\_circuit\_clear@{el\_circuit\_clear}!el\_circuit.h@{el\_circuit.h}}
@@ -182,13 +224,13 @@ void el\+\_\+circuit\+\_\+clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink
 
 
 
-Removes all elements, keeps the node count. 
+Removes all elements, keeps the node count and the allocated memory. 
 
 \Hypertarget{el__circuit_8h_ad1a2590e3f0e6970b6b0d6fec3cbf839}\index{el\_circuit.h@{el\_circuit.h}!el\_circuit\_current@{el\_circuit\_current}}
 \index{el\_circuit\_current@{el\_circuit\_current}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_circuit\_current()}{el\_circuit\_current()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_ad1a2590e3f0e6970b6b0d6fec3cbf839} 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} el\+\_\+circuit\+\_\+current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{element}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+circuit\+\_\+current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{element}{}\end{DoxyParamCaption})}
 
 
 
@@ -223,33 +265,63 @@ false if it is singular even with gmin.
 \index{el\_circuit\_voltage@{el\_circuit\_voltage}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_circuit\_voltage()}{el\_circuit\_voltage()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_ace9acacd9f3a6ed71f5d57953d3d7bad} 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} el\+\_\+circuit\+\_\+voltage (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{node}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+circuit\+\_\+voltage (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElCircuit}{El\+Circuit}} \texorpdfstring{$\ast$}{*}}]{circuit}{, }\item[{int}]{node}{}\end{DoxyParamCaption})}
 
-\Hypertarget{el__circuit_8h_ac433dc03a14eb20912a6c15bfd5bc432}\index{el\_circuit.h@{el\_circuit.h}!el\_imag@{el\_imag}}
+\Hypertarget{el__circuit_8h_a0f53531e718a877faaa53fd9e979adb9}\index{el\_circuit.h@{el\_circuit.h}!el\_conj@{el\_conj}}
+\index{el\_conj@{el\_conj}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_conj()}{el\_conj()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a0f53531e718a877faaa53fd9e979adb9} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+conj (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}\index{el\_circuit.h@{el\_circuit.h}!el\_div@{el\_div}}
+\index{el\_div@{el\_div}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_div()}{el\_div()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+div (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{b}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_aec79395205be81afbd4eeab3d6459349}\index{el\_circuit.h@{el\_circuit.h}!el\_imag@{el\_imag}}
 \index{el\_imag@{el\_imag}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_imag()}{el\_imag()}}
-{\footnotesize\ttfamily \label{el__circuit_8h_ac433dc03a14eb20912a6c15bfd5bc432} 
-double el\+\_\+imag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{el__circuit_8h_aec79395205be81afbd4eeab3d6459349} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} double el\+\_\+imag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{}\end{DoxyParamCaption})}
 
-\Hypertarget{el__circuit_8h_af9df7f8c0d715d33f32a293f5e5dfe7d}\index{el\_circuit.h@{el\_circuit.h}!el\_phasor@{el\_phasor}}
+\Hypertarget{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}\index{el\_circuit.h@{el\_circuit.h}!el\_mul@{el\_mul}}
+\index{el\_mul@{el\_mul}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_mul()}{el\_mul()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{b}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}\index{el\_circuit.h@{el\_circuit.h}!el\_phasor@{el\_phasor}}
 \index{el\_phasor@{el\_phasor}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_phasor()}{el\_phasor()}}
-{\footnotesize\ttfamily \label{el__circuit_8h_af9df7f8c0d715d33f32a293f5e5dfe7d} 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} el\+\_\+phasor (\begin{DoxyParamCaption}\item[{double}]{real}{, }\item[{double}]{imaginary}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+phasor (\begin{DoxyParamCaption}\item[{double}]{re}{, }\item[{double}]{im}{}\end{DoxyParamCaption})}
 
 \Hypertarget{el__circuit_8h_a677ff6b008cbe1b748037cd3a19c2ab0}\index{el\_circuit.h@{el\_circuit.h}!el\_polar@{el\_polar}}
 \index{el\_polar@{el\_polar}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_polar()}{el\_polar()}}
 {\footnotesize\ttfamily \label{el__circuit_8h_a677ff6b008cbe1b748037cd3a19c2ab0} 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} el\+\_\+polar (\begin{DoxyParamCaption}\item[{double}]{magnitude}{, }\item[{double}]{degrees}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+polar (\begin{DoxyParamCaption}\item[{double}]{magnitude}{, }\item[{double}]{degrees}{}\end{DoxyParamCaption})}
 
 
 
 Phasor from RMS magnitude and angle in degrees. 
 
-\Hypertarget{el__circuit_8h_a5c2dd2ba59067596c56c0fb14feda81d}\index{el\_circuit.h@{el\_circuit.h}!el\_real@{el\_real}}
+\Hypertarget{el__circuit_8h_a1f63f693662489afbe4565c1c57c3ec1}\index{el\_circuit.h@{el\_circuit.h}!el\_real@{el\_real}}
 \index{el\_real@{el\_real}!el\_circuit.h@{el\_circuit.h}}
 \doxysubsubsection{\texorpdfstring{el\_real()}{el\_real()}}
-{\footnotesize\ttfamily \label{el__circuit_8h_a5c2dd2ba59067596c56c0fb14feda81d} 
-double el\+\_\+real (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{el__circuit_8h_a1f63f693662489afbe4565c1c57c3ec1} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} double el\+\_\+real (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_acbd894f65d806fda72d76be8273696d2}\index{el\_circuit.h@{el\_circuit.h}!el\_scale@{el\_scale}}
+\index{el\_scale@{el\_scale}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_scale()}{el\_scale()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_acbd894f65d806fda72d76be8273696d2} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{, }\item[{double}]{factor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}\index{el\_circuit.h@{el\_circuit.h}!el\_sub@{el\_sub}}
+\index{el\_sub@{el\_sub}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{el\_sub()}{el\_sub()}}
+{\footnotesize\ttfamily \label{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41} 
+\mbox{\hyperlink{el__circuit_8h_a02f7e9bd0458f7f38d9c408ca87b790f}{EL\+\_\+\+INLINE}} \mbox{\hyperlink{structElPhasor}{El\+Phasor}} el\+\_\+sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{a}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{b}{}\end{DoxyParamCaption})}
 

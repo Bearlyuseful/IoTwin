@@ -7,6 +7,7 @@ var structElModel =
     [ "connections", "structElModel.html#a6f39a1b9998776274aa393d6d7ba5c65", null ],
     [ "device_count", "structElModel.html#a4beacf0a5e70e54487fe539deef066c8", null ],
     [ "devices", "structElModel.html#ac90530245178bdf007c4833c049629c5", null ],
+    [ "dimmer_revision", "structElModel.html#ad8965f63daf726f98493d19a71bd28ce", null ],
     [ "event_count", "structElModel.html#ad229d7ee42ede16b13e5e0c6ededad4f", null ],
     [ "event_head", "structElModel.html#a0e738da033477999b0bf8a8af47b39bd", null ],
     [ "events", "structElModel.html#a8903037c40f2563b322e0e888ae37de0", null ],
@@ -15,5 +16,6 @@ var structElModel =
     [ "id", "structElModel.html#ade705d0860566984eae3f6a1f3941620", null ],
     [ "name", "structElModel.html#adb139da1deeb8a453dcc4f19d35bda78", null ],
     [ "node_count", "structElModel.html#aa743b299f44fabd5d08a438317e4034f", null ],
+    [ "revision", "structElModel.html#a25f148570c659bdb56caaea7a63c596f", null ],
     [ "time_s", "structElModel.html#a1fa4c2bbcc8ecb7cbce923845b740934", null ]
 ];

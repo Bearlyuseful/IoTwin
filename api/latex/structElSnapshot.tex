@@ -1,0 +1,78 @@
+\doxysection{El\+Snapshot Struct Reference}
+\hypertarget{structElSnapshot}{}\label{structElSnapshot}\index{ElSnapshot@{ElSnapshot}}
+
+
+{\ttfamily \#include $<$el\+\_\+session.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structElSnapshot_a39eb775497ff57e1348c87d8aa2c1d57}{step}}
+\item 
+double \mbox{\hyperlink{structElSnapshot_abb9f8d81af9e4a05ca8c39a055ee4e8a}{time\+\_\+s}}
+\item 
+bool \mbox{\hyperlink{structElSnapshot_a199fdaa206e806fa2bcaf9907783e148}{solved}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElSnapshot_a0259a139f79203d0a2997600161b9653}{device\+\_\+count}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElSnapshot_ab0826b5139f071862c4fed03fbb429b1}{connection\+\_\+count}}
+\item 
+\mbox{\hyperlink{structElDeviceState}{El\+Device\+State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}{devices}}
+\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}{connection\+\_\+current\+\_\+a}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Complete electrical state after a step. Arrays are indexed like \doxylink{structElModel_ac90530245178bdf007c4833c049629c5}{El\+Model.\+devices} / connections. 
+
+\label{doc-variable-members}
+\Hypertarget{structElSnapshot_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structElSnapshot_ab0826b5139f071862c4fed03fbb429b1}\index{ElSnapshot@{ElSnapshot}!connection\_count@{connection\_count}}
+\index{connection\_count@{connection\_count}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{connection\_count}{connection\_count}}
+{\footnotesize\ttfamily \label{structElSnapshot_ab0826b5139f071862c4fed03fbb429b1} 
+size\+\_\+t El\+Snapshot\+::connection\+\_\+count}
+
+\Hypertarget{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}\index{ElSnapshot@{ElSnapshot}!connection\_current\_a@{connection\_current\_a}}
+\index{connection\_current\_a@{connection\_current\_a}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{connection\_current\_a}{connection\_current\_a}}
+{\footnotesize\ttfamily \label{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5} 
+double\texorpdfstring{$\ast$}{*} El\+Snapshot\+::connection\+\_\+current\+\_\+a}
+
+\Hypertarget{structElSnapshot_a0259a139f79203d0a2997600161b9653}\index{ElSnapshot@{ElSnapshot}!device\_count@{device\_count}}
+\index{device\_count@{device\_count}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{device\_count}{device\_count}}
+{\footnotesize\ttfamily \label{structElSnapshot_a0259a139f79203d0a2997600161b9653} 
+size\+\_\+t El\+Snapshot\+::device\+\_\+count}
+
+\Hypertarget{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}\index{ElSnapshot@{ElSnapshot}!devices@{devices}}
+\index{devices@{devices}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{devices}{devices}}
+{\footnotesize\ttfamily \label{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda} 
+\mbox{\hyperlink{structElDeviceState}{El\+Device\+State}}\texorpdfstring{$\ast$}{*} El\+Snapshot\+::devices}
+
+\Hypertarget{structElSnapshot_a199fdaa206e806fa2bcaf9907783e148}\index{ElSnapshot@{ElSnapshot}!solved@{solved}}
+\index{solved@{solved}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{solved}{solved}}
+{\footnotesize\ttfamily \label{structElSnapshot_a199fdaa206e806fa2bcaf9907783e148} 
+bool El\+Snapshot\+::solved}
+
+false if the network could not be solved \Hypertarget{structElSnapshot_a39eb775497ff57e1348c87d8aa2c1d57}\index{ElSnapshot@{ElSnapshot}!step@{step}}
+\index{step@{step}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{step}{step}}
+{\footnotesize\ttfamily \label{structElSnapshot_a39eb775497ff57e1348c87d8aa2c1d57} 
+uint64\+\_\+t El\+Snapshot\+::step}
+
+steps since the start; 0 = nothing computed yet \Hypertarget{structElSnapshot_abb9f8d81af9e4a05ca8c39a055ee4e8a}\index{ElSnapshot@{ElSnapshot}!time\_s@{time\_s}}
+\index{time\_s@{time\_s}!ElSnapshot@{ElSnapshot}}
+\doxysubsubsection{\texorpdfstring{time\_s}{time\_s}}
+{\footnotesize\ttfamily \label{structElSnapshot_abb9f8d81af9e4a05ca8c39a055ee4e8a} 
+double El\+Snapshot\+::time\+\_\+s}
+
+simulated time 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/elsim/\mbox{\hyperlink{el__session_8h}{el\+\_\+session.\+h}}\end{DoxyCompactItemize}

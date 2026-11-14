@@ -1,0 +1,91 @@
+\doxysection{el\+\_\+session.\+h}
+\hypertarget{el__session_8h_source}{}\label{el__session_8h_source}\index{libs/elsim/el\_session.h@{libs/elsim/el\_session.h}}
+\mbox{\hyperlink{el__session_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_EL\_SESSION\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_EL\_SESSION\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{elsim_8h}{elsim.h}}"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00032\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ EL\_SESSION\_QUEUE\ 256\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2aec6738945c9239baf05a610b8d3a90e8}{EL\_CMD\_SET\_ON}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a968ee9c6f57606397e8c5248b6c082e4}{EL\_CMD\_RESET}},\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a48f7ea4a25b6987f36b6b95b4061b801}{EL\_CMD\_PRESS\_TEST}},\ \ \ }
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a65e63d87f505e3d61470c08f3fe01a35}{EL\_CMD\_SET\_LEVEL}},\ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2aaade51271bf9b2564076cf72709545cc}{EL\_CMD\_ADD\_FAULT}},\ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a6da6705b85964265499c931cdc371503}{EL\_CMD\_CLEAR\_FAULTS}},\ }
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2afe6af40db14cf7316af3ba3545ed9156}{EL\_CMD\_SET\_OPEN}},\ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2ad0f15dffd18fa9b126805d5e01bf5f62}{EL\_CMD\_PLUG}}\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{ElCommandType}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{ElCommandType}}\ \mbox{\hyperlink{structElCommand_aef7a689503bb8c66179aaf084c2bf8a1}{type}};}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElCommand_a89a9f4e7e5428943db941af81e113bba}{value}};}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}}[\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\_ID\_MAX}}];}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}}[\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\_ID\_MAX}}];}
+\DoxyCodeLine{00053\ \}\ \mbox{\hyperlink{structElCommand}{ElCommand}};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \mbox{\hyperlink{structElCommand}{ElCommand}}\ \mbox{\hyperlink{el__session_8h_a22967f3776a66a898e74c5392a293480}{el\_command}}(\mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{ElCommandType}}\ type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ target,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ other,\ \textcolor{keywordtype}{double}\ value);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ EL\_STATE\_ON\ 0x01u\ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ EL\_STATE\_TRIPPED\ 0x02u\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ EL\_STATE\_POWERED\ 0x04u\ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElDeviceState_af034d05fc7196d1db2c5cb6703cfb6b8}{voltage\_v}};\ \ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElDeviceState_a281830e2589cb972ffa258baf409bd4e}{current\_a}};\ \ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElDeviceState_a9253a6c79fe3d9cf2b8c6aee1fd90ac7}{power\_w}};\ \ \ \ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElDeviceState_a2cae02ad2a7d73438ee6722f8708b242}{residual\_a}};\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElDeviceState_a9802277008ff079327037892a420218f}{level}};\ \ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ uint32\_t\ \mbox{\hyperlink{structElDeviceState_a1200f3fc9d65e9bc2065ecc89aa1267c}{flags}};\ \ \ \ }
+\DoxyCodeLine{00070\ \}\ \mbox{\hyperlink{structElDeviceState}{ElDeviceState}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00074\ \ \ uint64\_t\ \mbox{\hyperlink{structElSnapshot_a39eb775497ff57e1348c87d8aa2c1d57}{step}};\ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structElSnapshot_abb9f8d81af9e4a05ca8c39a055ee4e8a}{time\_s}};\ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structElSnapshot_a199fdaa206e806fa2bcaf9907783e148}{solved}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structElSnapshot_a0259a139f79203d0a2997600161b9653}{device\_count}};}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structElSnapshot_ab0826b5139f071862c4fed03fbb429b1}{connection\_count}};}
+\DoxyCodeLine{00079\ \ \ \mbox{\hyperlink{structElDeviceState}{ElDeviceState}}*\ \mbox{\hyperlink{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}{devices}};}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}{connection\_current\_a}};}
+\DoxyCodeLine{00081\ \}\ \mbox{\hyperlink{structElSnapshot}{ElSnapshot}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structElSession}{ElSession}}\ \mbox{\hyperlink{structElSession}{ElSession}};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \mbox{\hyperlink{structElSession}{ElSession}}*\ \mbox{\hyperlink{el__session_8h_ab231a9dc3408506497265b3a4a1eef47}{el\_session\_create}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ \mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}});}
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__session_8h_aed7d6c5b1c2ebef7e02e8a6fd652657c}{el\_session\_destroy}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{el__session_8h_a97f8681fb41d2f0d85ba5ef5e4ad3f01}{el\_session\_device\_count}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session);}
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__session_8h_a6e34490c3de0cae701ea84f04e206bdc}{el\_session\_find\_device}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00097\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{el__session_8h_aa7ee7134f6c5a8e900ebb955d1fd80c0}{el\_session\_device\_id}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00098\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ \mbox{\hyperlink{el__session_8h_a73ce2da8a8b16062adf3debf1649f5cb}{el\_session\_device\_type}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{el__session_8h_a3c6f0cf45420c2c3495d2bab5c72958b}{el\_session\_rated\_power}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__session_8h_a52c1159df76a452a746dd7e6010ba798}{el\_session\_send}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCommand}{ElCommand}}*\ command);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__session_8h_af5fe6544d701f01e1d7c18736c514f2a}{el\_session\_step}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{double}\ dt\_s);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00114\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElSnapshot}{ElSnapshot}}*\ \mbox{\hyperlink{el__session_8h_ae639925d599aa90426a4a24a90d01d64}{el\_session\_snapshot}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00117\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__session_8h_a182ad2f0e344f96dbda98fdaaccab337}{el\_session\_next\_event}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \mbox{\hyperlink{structElEvent}{ElEvent}}*\ event);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{el__session_8h_a1fcdf66861f88220a7b9638370c26e65}{el\_session\_dropped\_events}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00123\ \}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_EL\_SESSION\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,27 @@
+var classUIoTwinElectricalSubsystem =
+[
+    [ "AddFault", "classUIoTwinElectricalSubsystem.html#a939b7d181021a75c8dd9ab268be15535", null ],
+    [ "ClearFaults", "classUIoTwinElectricalSubsystem.html#a86be4e477cfcbc0b9d972daf0cfa20f7", null ],
+    [ "Deinitialize", "classUIoTwinElectricalSubsystem.html#af3830254ce6875161f121cd629352401", null ],
+    [ "DoesSupportWorldType", "classUIoTwinElectricalSubsystem.html#ace327255aede39712421587ea8682d71", null ],
+    [ "GetDeviceCount", "classUIoTwinElectricalSubsystem.html#a5cc3de216d99848b109be2ceea4cd02a", null ],
+    [ "GetDeviceState", "classUIoTwinElectricalSubsystem.html#a0d9de7c50c6dd000e11029d515b24113", null ],
+    [ "GetLastStepMicroseconds", "classUIoTwinElectricalSubsystem.html#abb6eda7a0cec867bcb9844ddcf912fe9", null ],
+    [ "GetPortDeviceId", "classUIoTwinElectricalSubsystem.html#a3b05165368e32c8e14551d29e93932fd", null ],
+    [ "GetPortVoltage", "classUIoTwinElectricalSubsystem.html#a1482beaac3c96437dd6e22471c3ecf96", null ],
+    [ "GetRecentEvents", "classUIoTwinElectricalSubsystem.html#a8e971060f75228ce932fee5b78b07d2d", null ],
+    [ "GetSimulatedTime", "classUIoTwinElectricalSubsystem.html#af53623d642f3e547f1445e3efa666e0e", null ],
+    [ "GetStatId", "classUIoTwinElectricalSubsystem.html#a83c09af05dbc588787fcf9e7017833fb", null ],
+    [ "HasShortCircuit", "classUIoTwinElectricalSubsystem.html#a544f58e800fc9bdd8cd08030a1f6b27a", null ],
+    [ "Initialize", "classUIoTwinElectricalSubsystem.html#a5c02e4fa465ecef1ec46079a9d6870f9", null ],
+    [ "IsRunning", "classUIoTwinElectricalSubsystem.html#a691a4460cc2c81fd7481dcfc81509315", null ],
+    [ "NotifyTopologyChanged", "classUIoTwinElectricalSubsystem.html#a65f7391664368aeefda62389c9227f44", null ],
+    [ "ResetProtection", "classUIoTwinElectricalSubsystem.html#aa0152c5e1669db01fa251f061bfbe5d3", null ],
+    [ "SendCommand", "classUIoTwinElectricalSubsystem.html#a01615be7602720e745a4b5e34a9d8203", null ],
+    [ "SetDeviceOn", "classUIoTwinElectricalSubsystem.html#a6f6405a552493ea624609af660072f06", null ],
+    [ "SetDimmerLevel", "classUIoTwinElectricalSubsystem.html#af749f1426104408a4bdfb618894d0a1b", null ],
+    [ "Tick", "classUIoTwinElectricalSubsystem.html#a10262752ca4df549343ad50903b15e6c", null ],
+    [ "ToggleShortCircuit", "classUIoTwinElectricalSubsystem.html#a2de75bd9bcbdab6d6ba4d5c66acce044", null ],
+    [ "OnElectricalEvent", "classUIoTwinElectricalSubsystem.html#a566e2e2ac221fad378b713740b35ba56", null ],
+    [ "StepSeconds", "classUIoTwinElectricalSubsystem.html#aedad85f175a4c0f5f6aac7bd27d41fcb", null ]
+];

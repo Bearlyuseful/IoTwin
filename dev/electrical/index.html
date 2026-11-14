@@ -894,10 +894,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#limits-of-the-first-version-and-next-steps" class="md-nav__link">
+  <a href="#session-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Limits of the first version and next steps
+        Session interface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limits-and-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limits and next steps
       
     </span>
   </a>
@@ -1249,6 +1260,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0008-simulation-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0008 Simulation Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1281,7 +1320,8 @@
 voltages, currents and power, circuit breakers, fuses and RCDs, faults, and
 the measurements an electrician makes. It is the shared core of the three
 products (<a href="../../adr/0006-one-core-three-products/">ADR 0006</a>); its design is
-in <a href="../../adr/0007-electrical-simulation-core/">ADR 0007</a>.</p>
+in <a href="../../adr/0007-electrical-simulation-core/">ADR 0007</a>, its interface to
+Unreal and other frontends in <a href="../../adr/0008-simulation-interface/">ADR 0008</a>.</p>
 <div class="highlight"><pre><span></span><code>iotwin-sim<span class="w">                       </span><span class="c1"># demo flat, interactive</span>
 sim&gt;<span class="w"> </span>state
 sim&gt;<span class="w"> </span>fault<span class="w"> </span>socket_kitchen:L<span class="w"> </span>socket_kitchen:N
@@ -1308,6 +1348,14 @@ sim&gt;<span class="w"> </span>z<span class="w"> </span>socket_kitchen:L<span cl
 <tr>
 <td>Loading installations and components from <code>data/</code></td>
 <td><code>libs/elsim/el_install.*</code></td>
+</tr>
+<tr>
+<td>Session: commands in, snapshots and events out, lock-free between threads</td>
+<td><code>libs/elsim/el_session.*</code></td>
+</tr>
+<tr>
+<td>In the visualizer (compiled in, own thread)</td>
+<td><code>visualizer/Source/IoTwin/Electrical</code> (<a href="../visualizer/#electrical-simulation-sourceiotwinelectrical">Visualizer</a>)</td>
 </tr>
 <tr>
 <td>JSON reader</td>
@@ -1386,6 +1434,16 @@ written <code>device:terminal</code>:</p>
 <td><code>L N PE</code></td>
 <td>–</td>
 </tr>
+<tr>
+<td><code>junction</code></td>
+<td><code>L N PE</code></td>
+<td>– (junction box, terminal block; a port in Unreal)</td>
+</tr>
+<tr>
+<td><code>dimmer</code></td>
+<td><code>in out</code></td>
+<td><code>level</code> 0..1, <code>contact_resistance</code>; starts <strong>off</strong> unless <code>"on": true</code></td>
+</tr>
 </tbody>
 </table>
 <p>Parameters are taken from the type defaults, then from the referenced
@@ -1406,6 +1464,16 @@ components and sockets (CTest <code>data_validation</code>).</p>
   the star point to its own earth (<code>source_earth</code>, 1 Ω).</li>
 <li>Every node has 1 GΩ to earth, so open breakers and loose terminals stay
   solvable; it also limits insulation readings (two floating nodes read 500 MΩ).</li>
+<li><strong>Dimmer:</strong> an ideal (lossless) series reactance X chosen so that the RMS
+  current is √level and the power of a resistive load level × the full value,
+  as with a phase-cut or PWM dimmer. X follows from the Thevenin impedance
+  Z = A + jB the dimmer sees: |Z + jX| = |Z| / √level. It is recomputed only
+  when the network changes (<code>ElModel.revision</code>). The supply sees reactive
+  power instead of the distortion power of a real dimmer.</li>
+<li>A load counts as <strong>powered</strong> when it gets at least 1 % of its rated power.</li>
+<li>Portable C99: phasors are a small struct (<code>ElPhasor</code>) instead of C99 complex
+  numbers, so MSVC compiles the core (inside Unreal); after the first solution
+  of a network the solver does not allocate memory.</li>
 </ul>
 <h2 id="protection">Protection<a class="headerlink" href="#protection" title="Permanent link">&para;</a></h2>
 <p>Evaluated after every solution; a trip changes the network, which is solved
@@ -1473,6 +1541,10 @@ the lessons a trainee should learn, for example:</p>
 <td>operate switches, breakers, RCDs, appliances</td>
 </tr>
 <tr>
+<td><code>level &lt;dimmer&gt; &lt;percent&gt;</code></td>
+<td>dimmer level</td>
+</tr>
+<tr>
 <td><code>fault &lt;a&gt; &lt;b&gt; [ohm]</code>, <code>open/close &lt;conn&gt;</code>, <code>clear</code></td>
 <td>faults</td>
 </tr>
@@ -1495,14 +1567,29 @@ the lessons a trainee should learn, for example:</p>
 </tbody>
 </table>
 <p>With <code>--script</code> the exit code is 1 if an <code>expect</code> fails (CTest <code>electrical_demo</code>).</p>
-<h2 id="limits-of-the-first-version-and-next-steps">Limits of the first version and next steps<a class="headerlink" href="#limits-of-the-first-version-and-next-steps" title="Permanent link">&para;</a></h2>
+<h2 id="session-interface">Session interface<a class="headerlink" href="#session-interface" title="Permanent link">&para;</a></h2>
+<p><code>el_session.h</code> is what every frontend uses (<a href="../../adr/0008-simulation-interface/">ADR 0008</a>):</p>
+<div class="highlight"><pre><span></span><code><span class="n">ElSession</span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">el_session_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">model</span><span class="p">);</span><span class="w">                 </span><span class="cm">/* takes over the model */</span>
+<span class="n">ElCommand</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">el_command</span><span class="p">(</span><span class="n">EL_CMD_SET_LEVEL</span><span class="p">,</span><span class="w"> </span><span class="s">"relay"</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">);</span>
+<span class="n">el_session_send</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span><span class="w">                                   </span><span class="cm">/* command thread */</span>
+<span class="n">el_session_step</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">);</span><span class="w">                                 </span><span class="cm">/* simulation thread, every 10 ms */</span>
+<span class="k">const</span><span class="w"> </span><span class="n">ElSnapshot</span><span class="o">*</span><span class="w"> </span><span class="n">snap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">el_session_snapshot</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w">          </span><span class="cm">/* reader: newest complete state */</span>
+<span class="n">ElEvent</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">el_session_next_event</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* "F1 tripped (short circuit, 503 A = 50.3 x In)" */</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>One thread sends commands, one steps, one reads (sender and reader may be
+the same). Queues and the snapshot exchange are lock-free and wait-free, so a
+real-time simulation thread never waits for a slow reader. Rejected commands
+come back as events ("command rejected: ...").</p>
+<h2 id="limits-and-next-steps">Limits and next steps<a class="headerlink" href="#limits-and-next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Resistive loads only; reactive loads (motors, power factor) and three-phase
   devices need only new element types, the solver already uses complex numbers.</li>
 <li>Simplified trip curves and no conductor heating.</li>
-<li>No connection to Unreal yet: the interface (gRPC or JSON/protobuf over TCP)
-  is the next decision (ADR 0007). Unreal then shows what the simulator
-  computes instead of deciding "powered" itself.</li>
+<li>Dense solver: about 30 µs per step for the demo scene; whole houses
+  (about 1000 nodes) need a sparse LU solver.</li>
+<li>Out-of-process adapter (Zenoh, shared memory) with a FlatBuffers schema for
+  a simulator on a separate (real-time) machine and several clients.</li>
 <li>Fault generator and rule checks for the electrician training build on the
   fault and measurement functions.</li>
 </ul>

@@ -100,8 +100,11 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0a99ea5e7d12da8d3ddb8f4c62f88166" id="r_a0a99ea5e7d12da8d3ddb8f4c62f88166"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structElElement.html">ElElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a99ea5e7d12da8d3ddb8f4c62f88166">elements</a></td></tr>
 <tr class="memitem:a9dd0c25a8fe9548427095ec7690d6bd0" id="r_a9dd0c25a8fe9548427095ec7690d6bd0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dd0c25a8fe9548427095ec7690d6bd0">count</a></td></tr>
 <tr class="memitem:ad2995199a0ed196640e298abbca791ad" id="r_ad2995199a0ed196640e298abbca791ad"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2995199a0ed196640e298abbca791ad">capacity</a></td></tr>
-<tr class="memitem:a0d572044cdf19d3f9e94a7fb789ecd1f" id="r_a0d572044cdf19d3f9e94a7fb789ecd1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d572044cdf19d3f9e94a7fb789ecd1f">voltages</a></td></tr>
-<tr class="memitem:ad056e072d14b92e676662096d0302afa" id="r_ad056e072d14b92e676662096d0302afa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad056e072d14b92e676662096d0302afa">source_currents</a></td></tr>
+<tr class="memitem:a0d572044cdf19d3f9e94a7fb789ecd1f" id="r_a0d572044cdf19d3f9e94a7fb789ecd1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structElPhasor.html">ElPhasor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d572044cdf19d3f9e94a7fb789ecd1f">voltages</a></td></tr>
+<tr class="memitem:ad056e072d14b92e676662096d0302afa" id="r_ad056e072d14b92e676662096d0302afa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structElPhasor.html">ElPhasor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad056e072d14b92e676662096d0302afa">source_currents</a></td></tr>
+<tr class="memitem:a63cba923586aef88ccf7cb9e652507df" id="r_a63cba923586aef88ccf7cb9e652507df"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63cba923586aef88ccf7cb9e652507df">result_capacity</a></td></tr>
+<tr class="memitem:ac79685419c1910bcc752b7595f13158a" id="r_ac79685419c1910bcc752b7595f13158a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structElPhasor.html">ElPhasor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac79685419c1910bcc752b7595f13158a">matrix</a></td></tr>
+<tr class="memitem:a066a8f721f1bb99cc08c917cf0c3110b" id="r_a066a8f721f1bb99cc08c917cf0c3110b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a066a8f721f1bb99cc08c917cf0c3110b">matrix_capacity</a></td></tr>
 <tr class="memitem:a7e1524d621eb13750e50d479d72927c5" id="r_a7e1524d621eb13750e50d479d72927c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e1524d621eb13750e50d479d72927c5">solved</a></td></tr>
 </table>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
@@ -147,6 +150,35 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac79685419c1910bcc752b7595f13158a" name="ac79685419c1910bcc752b7595f13158a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac79685419c1910bcc752b7595f13158a">&#9670;&#160;</a></span>matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structElPhasor.html">ElPhasor</a>* ElCircuit::matrix</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Work matrix, reused between solutions. </p>
+
+</div>
+</div>
+<a id="a066a8f721f1bb99cc08c917cf0c3110b" name="a066a8f721f1bb99cc08c917cf0c3110b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066a8f721f1bb99cc08c917cf0c3110b">&#9670;&#160;</a></span>matrix_capacity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ElCircuit::matrix_capacity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3e8c7b22a83d3af2bdd9cd9f04df212e" name="a3e8c7b22a83d3af2bdd9cd9f04df212e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e8c7b22a83d3af2bdd9cd9f04df212e">&#9670;&#160;</a></span>nodes</h2>
 
@@ -159,6 +191,21 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Including node 0 (earth). </p>
+
+</div>
+</div>
+<a id="a63cba923586aef88ccf7cb9e652507df" name="a63cba923586aef88ccf7cb9e652507df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63cba923586aef88ccf7cb9e652507df">&#9670;&#160;</a></span>result_capacity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ElCircuit::result_capacity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Size of source_currents. </p>
 
 </div>
 </div>
@@ -183,7 +230,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a>* ElCircuit::source_currents</td>
+          <td class="memname"><a class="el" href="structElPhasor.html">ElPhasor</a>* ElCircuit::source_currents</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -198,7 +245,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a>* ElCircuit::voltages</td>
+          <td class="memname"><a class="el" href="structElPhasor.html">ElPhasor</a>* ElCircuit::voltages</td>
         </tr>
       </table>
 </div><div class="memdoc">

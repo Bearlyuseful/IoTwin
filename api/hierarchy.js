@@ -42,12 +42,17 @@ var hierarchy =
     [ "DtcInfo", "structDtcInfo.html", null ],
     [ "ElCable", "structElCable.html", null ],
     [ "ElCircuit", "structElCircuit.html", null ],
+    [ "ElCommand", "structElCommand.html", null ],
     [ "ElConnection", "structElConnection.html", null ],
     [ "ElDevice", "structElDevice.html", null ],
+    [ "ElDeviceState", "structElDeviceState.html", null ],
     [ "ElElement", "structElElement.html", null ],
     [ "ElEvent", "structElEvent.html", null ],
     [ "ElFault", "structElFault.html", null ],
     [ "ElModel", "structElModel.html", null ],
+    [ "ElPhasor", "structElPhasor.html", null ],
+    [ "ElSession", "structElSession.html", null ],
+    [ "ElSnapshot", "structElSnapshot.html", null ],
     [ "FCanDatabase", "classFCanDatabase.html", null ],
     [ "FCanFrame", "structFCanFrame.html", null ],
     [ "FCanMessageDef", "structFCanMessageDef.html", null ],
@@ -57,9 +62,13 @@ var hierarchy =
     [ "FComponentParameter", "structFComponentParameter.html", null ],
     [ "FComponentPart", "structFComponentPart.html", null ],
     [ "FdcanStatus", "structFdcanStatus.html", null ],
+    [ "FElectricalDeviceRef", "structFElectricalDeviceRef.html", null ],
+    [ "FElectricalModelBuilder", "classFElectricalModelBuilder.html", null ],
     [ "FIoTwinBusStatus", "structFIoTwinBusStatus.html", null ],
+    [ "FIoTwinElectricalState", "structFIoTwinElectricalState.html", null ],
     [ "FramePattern", "structFramePattern.html", null ],
     [ "FRunnable", null, [
+      [ "FElectricalSimulationThread", "classFElectricalSimulationThread.html", null ],
       [ "FIoTwinBusConnection", "classFIoTwinBusConnection.html", null ]
     ] ],
     [ "FSchematicHitBox", "structFSchematicHitBox.html", null ],
@@ -77,6 +86,10 @@ var hierarchy =
     [ "Gateway", "structGateway.html", null ],
     [ "GatewayCanStatus", "structGatewayCanStatus.html", null ],
     [ "GatewayIo", "structGatewayIo.html", null ],
+    [ "IElectricalElement", "classIElectricalElement.html", [
+      [ "AElectricalCableActor", "classAElectricalCableActor.html", null ],
+      [ "APowerSourceActor", "classAPowerSourceActor.html", null ]
+    ] ],
     [ "InputQueue", "structInputQueue.html", null ],
     [ "IPowerInterface", "classIPowerInterface.html", null ],
     [ "IsoTpConfig", "structIsoTpConfig.html", null ],
@@ -121,6 +134,10 @@ var hierarchy =
       [ "UIoTwinSchematicSubsystem", "classUIoTwinSchematicSubsystem.html", null ]
     ] ],
     [ "UInterface", null, [
+      [ "UElectricalElement", "classUElectricalElement.html", null ],
       [ "UPowerInterface", "classUPowerInterface.html", null ]
+    ] ],
+    [ "UTickableWorldSubsystem", null, [
+      [ "UIoTwinElectricalSubsystem", "classUIoTwinElectricalSubsystem.html", null ]
     ] ]
 ];

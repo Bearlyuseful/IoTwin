@@ -1316,6 +1316,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adr/0008-simulation-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0008 Simulation Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1379,7 +1407,12 @@ digital-twin features.</p>
 <tr>
 <td>Electrical / load simulation</td>
 <td>Oct 2025</td>
-<td>✅ core: installation as data, phasor network solver, breakers, fuses, RCDs, faults and measurements, <code>iotwin-sim</code> (<a href="../dev/electrical/">Electrical Simulation</a>); ⚠️ not yet connected to Unreal</td>
+<td>✅ core: installation as data, phasor network solver, breakers, fuses, RCDs, faults and measurements, <code>iotwin-sim</code> (<a href="../dev/electrical/">Electrical Simulation</a>); ✅ runs inside the visualizer (<a href="../adr/0008-simulation-interface/">ADR 0008</a>)</td>
+</tr>
+<tr>
+<td>Communication layer for the simulation (gRPC idea)</td>
+<td>Oct 2025</td>
+<td>decided: session interface with adapters - in-process first, Zenoh next (<a href="../adr/0008-simulation-interface/">ADR 0008</a>)</td>
 </tr>
 <tr>
 <td>ADR: repository structure (mono vs multi repo)</td>
@@ -1485,8 +1518,10 @@ Release 0.3.0 contains features A-E.</p>
 </ol>
 <p>All three need an electrical simulation that owns the results, with Unreal
 only displaying them. Its core is done (<a href="../adr/0007-electrical-simulation-core/">ADR 0007</a>,
-<a href="../dev/electrical/">Electrical Simulation</a>); next are the interface to
-Unreal, reactive and three-phase loads, and the fault generator.</p>
+<a href="../dev/electrical/">Electrical Simulation</a>) and runs inside the visualizer
+(<a href="../adr/0008-simulation-interface/">ADR 0008</a>); next are a sparse solver for
+whole houses, the Zenoh adapter, reactive and three-phase loads, and the
+fault generator.</p>
 <h2 id="order-of-the-post-mvp-steps">Order of the post-MVP steps<a class="headerlink" href="#order-of-the-post-mvp-steps" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

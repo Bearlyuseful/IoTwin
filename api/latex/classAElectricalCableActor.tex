@@ -15,9 +15,18 @@ Inheritance diagram for AElectrical\+Cable\+Actor\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{classAElectricalCableActor_a1e5fe5ec72bdc6ffb909e8fe49e177f6}{AElectrical\+Cable\+Actor}} ()
 \item 
+float \mbox{\hyperlink{classAElectricalCableActor_a0c791863ea4e75872815f093e7eb7202}{Get\+Length\+Meters}} () const
+\item 
+virtual void \mbox{\hyperlink{classAElectricalCableActor_a8a403d8801bb4335e4e22ae3c10da692}{Describe\+Electrical}} (\mbox{\hyperlink{classFElectricalModelBuilder}{FElectrical\+Model\+Builder}} \&Builder) override
+\item 
 void \mbox{\hyperlink{classAElectricalCableActor_aecd164719faf96e7ae1216c44b003c92}{Connect\+Between}} (UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}A, UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}B)
 \item 
 void \mbox{\hyperlink{classAElectricalCableActor_afa3c0bc685f87a3732b09d34f97f99ca}{Refresh\+Cable}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classIElectricalElement}{IElectrical\+Element}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d}{Apply\+Electrical}} (const \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \&Simulation)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -31,6 +40,8 @@ UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAE
 UCable\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classAElectricalCableActor_ab3ee251eb08417c5d86ea604c0cb9b0e}{Cable\+Mesh}}
 \item 
 float \mbox{\hyperlink{classAElectricalCableActor_a09c790e63245ff3e39cedd72b2837b45}{Slack}} = 1.\+15f
+\item 
+float \mbox{\hyperlink{classAElectricalCableActor_aa695a8802daabac35760c7521e00b051}{Cross\+Section}} = 1.\+5f
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -38,6 +49,9 @@ float \mbox{\hyperlink{classAElectricalCableActor_a09c790e63245ff3e39cedd72b2837
 virtual void \mbox{\hyperlink{classAElectricalCableActor_a3a880086aa16f27ea49d33120753be5e}{On\+Construction}} (const FTransform \&Transform) override
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+In the electrical simulation\+: a three-\/core copper cable (L, N, PE) between its ends. 
 
 \label{doc-constructors}
 \Hypertarget{classAElectricalCableActor_doc-constructors}
@@ -59,7 +73,23 @@ AElectrical\+Cable\+Actor\+::\+AElectrical\+Cable\+Actor (\begin{DoxyParamCaptio
 {\footnotesize\ttfamily \label{classAElectricalCableActor_aecd164719faf96e7ae1216c44b003c92} 
 void AElectrical\+Cable\+Actor\+::\+Connect\+Between (\begin{DoxyParamCaption}\item[{UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{B}{}\end{DoxyParamCaption})}
 
-Moves the cable ends to A and B and wires them (A -\/ EndA ... EndB -\/ B). \Hypertarget{classAElectricalCableActor_a3a880086aa16f27ea49d33120753be5e}\index{AElectricalCableActor@{AElectricalCableActor}!OnConstruction@{OnConstruction}}
+Moves the cable ends to A and B and wires them (A -\/ EndA ... EndB -\/ B). \Hypertarget{classAElectricalCableActor_a8a403d8801bb4335e4e22ae3c10da692}\index{AElectricalCableActor@{AElectricalCableActor}!DescribeElectrical@{DescribeElectrical}}
+\index{DescribeElectrical@{DescribeElectrical}!AElectricalCableActor@{AElectricalCableActor}}
+\doxysubsubsection{\texorpdfstring{DescribeElectrical()}{DescribeElectrical()}}
+{\footnotesize\ttfamily \label{classAElectricalCableActor_a8a403d8801bb4335e4e22ae3c10da692} 
+void AElectrical\+Cable\+Actor\+::\+Describe\+Electrical (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFElectricalModelBuilder}{FElectrical\+Model\+Builder}} \&}]{Builder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce}{IElectrical\+Element}}.
+
+\Hypertarget{classAElectricalCableActor_a0c791863ea4e75872815f093e7eb7202}\index{AElectricalCableActor@{AElectricalCableActor}!GetLengthMeters@{GetLengthMeters}}
+\index{GetLengthMeters@{GetLengthMeters}!AElectricalCableActor@{AElectricalCableActor}}
+\doxysubsubsection{\texorpdfstring{GetLengthMeters()}{GetLengthMeters()}}
+{\footnotesize\ttfamily \label{classAElectricalCableActor_a0c791863ea4e75872815f093e7eb7202} 
+float AElectrical\+Cable\+Actor\+::\+Get\+Length\+Meters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Length in m used by the simulation\+: distance of the ends times Slack. \Hypertarget{classAElectricalCableActor_a3a880086aa16f27ea49d33120753be5e}\index{AElectricalCableActor@{AElectricalCableActor}!OnConstruction@{OnConstruction}}
 \index{OnConstruction@{OnConstruction}!AElectricalCableActor@{AElectricalCableActor}}
 \doxysubsubsection{\texorpdfstring{OnConstruction()}{OnConstruction()}}
 {\footnotesize\ttfamily \label{classAElectricalCableActor_a3a880086aa16f27ea49d33120753be5e} 
@@ -82,7 +112,13 @@ Updates the visual cable after moving an end.
 {\footnotesize\ttfamily \label{classAElectricalCableActor_ab3ee251eb08417c5d86ea604c0cb9b0e} 
 UCable\+Component\texorpdfstring{$\ast$}{*} AElectrical\+Cable\+Actor\+::\+Cable\+Mesh}
 
-Visual cable from EndA to EndB. \Hypertarget{classAElectricalCableActor_a412eaad48daf53f2d0ad77a3097f8b0d}\index{AElectricalCableActor@{AElectricalCableActor}!EndA@{EndA}}
+Visual cable from EndA to EndB. \Hypertarget{classAElectricalCableActor_aa695a8802daabac35760c7521e00b051}\index{AElectricalCableActor@{AElectricalCableActor}!CrossSection@{CrossSection}}
+\index{CrossSection@{CrossSection}!AElectricalCableActor@{AElectricalCableActor}}
+\doxysubsubsection{\texorpdfstring{CrossSection}{CrossSection}}
+{\footnotesize\ttfamily \label{classAElectricalCableActor_aa695a8802daabac35760c7521e00b051} 
+float AElectrical\+Cable\+Actor\+::\+Cross\+Section = 1.\+5f}
+
+Cross-\/section of each conductor in mm\texorpdfstring{$^\wedge$}{\string^}2 (NYM-\/J 3x1.\+5 = 1.\+5). \Hypertarget{classAElectricalCableActor_a412eaad48daf53f2d0ad77a3097f8b0d}\index{AElectricalCableActor@{AElectricalCableActor}!EndA@{EndA}}
 \index{EndA@{EndA}!AElectricalCableActor@{AElectricalCableActor}}
 \doxysubsubsection{\texorpdfstring{EndA}{EndA}}
 {\footnotesize\ttfamily \label{classAElectricalCableActor_a412eaad48daf53f2d0ad77a3097f8b0d} 

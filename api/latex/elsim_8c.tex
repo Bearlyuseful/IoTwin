@@ -1,7 +1,6 @@
 \doxysection{libs/elsim/elsim.c File Reference}
 \hypertarget{elsim_8c}{}\label{elsim_8c}\index{libs/elsim/elsim.c@{libs/elsim/elsim.c}}
 {\ttfamily \#include "{}elsim.\+h"{}}\newline
-{\ttfamily \#include $<$complex.\+h$>$}\newline
 {\ttfamily \#include $<$math.\+h$>$}\newline
 {\ttfamily \#include $<$stdarg.\+h$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
@@ -21,6 +20,12 @@
 \#define \mbox{\hyperlink{elsim_8c_aac27b7a66a902a08bae3e791dae14a33}{BREAKER\+\_\+\+COOLING}}~1.\+0     /\texorpdfstring{$\ast$}{*} normalised heat units per second below In \texorpdfstring{$\ast$}{*}/
 \item 
 \#define \mbox{\hyperlink{elsim_8c_aa6094c815d6c61ae1c5d183ddd905a13}{MAX\+\_\+\+TRIP\+\_\+\+ITERATIONS}}~8
+\item 
+\#define \mbox{\hyperlink{elsim_8c_ab1d32844a9d6a4929fa257bb56c176c7}{DIMMER\+\_\+\+OFF\+\_\+\+LEVEL}}~0.\+001  /\texorpdfstring{$\ast$}{*} below\+: open \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{elsim_8c_ad79de2b7a0b3478b13f91d08647f4e0d}{DIMMER\+\_\+\+FULL\+\_\+\+LEVEL}}~0.\+999 /\texorpdfstring{$\ast$}{*} above\+: fully on, contact only \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{elsim_8c_a9fa3a2691d158f872f8f2eb65f1cc8ea}{DIMMER\+\_\+\+MAX\+\_\+\+REACTANCE}}~1e9
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -61,7 +66,7 @@ int \mbox{\hyperlink{elsim_8c_a401986eb56f38c799cb740e2e8a71c87}{el\+\_\+termina
 const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{elsim_8c_a04f97b62bc5a7684db889c63af4f5683}{el\+\_\+terminal\+\_\+name}} (\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} type, int terminal)
 \item 
 bool \mbox{\hyperlink{elsim_8c_a41e7669610c3deeaa75fbea913a91e41}{el\+\_\+device\+\_\+powered}} (const \mbox{\hyperlink{structElDevice}{El\+Device}} \texorpdfstring{$\ast$}{*}device)
-\begin{DoxyCompactList}\small\item\em Load is supplied\+: at least half its rated voltage across L-\/N. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Load is supplied\+: switched on and at least 1 \% of its rated power (dimmed loads count). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{elsim_8c_a444ac75de223acfbc26478ca6055a9df}{el\+\_\+model\+\_\+init}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
 \item 
 void \mbox{\hyperlink{elsim_8c_a74283f8847141cdcd0990f7ebc9fff6c}{el\+\_\+model\+\_\+free}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
@@ -88,6 +93,10 @@ bool \mbox{\hyperlink{elsim_8c_a7d6e6daed5801cde90d825cedde34fde}{el\+\_\+model\
 \begin{DoxyCompactList}\small\item\em Re-\/arms a tripped breaker/\+RCD (handle on) or replaces a blown fuse. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{elsim_8c_af3a6854fc33f6f01f735fb65831cb8d6}{el\+\_\+model\+\_\+press\+\_\+test}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id)
 \begin{DoxyCompactList}\small\item\em Presses the test button of an RCD for one step. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{elsim_8c_a044c0f55a5338ccc11fc271eb0e23a9a}{el\+\_\+model\+\_\+set\+\_\+level}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, double level)
+\begin{DoxyCompactList}\small\item\em Level of a dimmer, 0..1 (clamped). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{elsim_8c_a32f31f16a4deaeac4fa6d0d289266957}{el\+\_\+model\+\_\+touch}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
+\begin{DoxyCompactList}\small\item\em Marks the network as changed after writing device fields directly. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{elsim_8c_a4716a4011b8c83134128e711975c56ec}{el\+\_\+model\+\_\+add\+\_\+fault}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, double resistance\+\_\+ohm, const char \texorpdfstring{$\ast$}{*}description)
 \item 
 bool \mbox{\hyperlink{elsim_8c_a158f6aa26b17484ae9b4c9637ca0b43e}{el\+\_\+model\+\_\+set\+\_\+connection\+\_\+open}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, bool open)
@@ -96,9 +105,9 @@ void \mbox{\hyperlink{elsim_8c_a77ba76faa9ceda6dc982462de7b089a3}{el\+\_\+model\
 \item 
 bool \mbox{\hyperlink{elsim_8c_aab5e45876d1ab22015c30e1e4609ffe1}{el\+\_\+model\+\_\+step}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, double dt\+\_\+s)
 \begin{DoxyCompactList}\small\item\em Advances the time by {\ttfamily dt\+\_\+s\+:} solve, protection, results, events. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{elsim_8c_a69822dfb463ef5dd0f7801d636118c8b}{el\+\_\+model\+\_\+measure\+\_\+voltage}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}voltage)
+bool \mbox{\hyperlink{elsim_8c_a69822dfb463ef5dd0f7801d636118c8b}{el\+\_\+model\+\_\+measure\+\_\+voltage}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*}voltage)
 \begin{DoxyCompactList}\small\item\em Voltage V(a) -\/ V(b) of the present state. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{elsim_8c_a2c8c0828d3e64648482e7d14b298c0c4}{el\+\_\+model\+\_\+measure\+\_\+impedance}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}impedance)
+bool \mbox{\hyperlink{elsim_8c_a2c8c0828d3e64648482e7d14b298c0c4}{el\+\_\+model\+\_\+measure\+\_\+impedance}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*}impedance)
 \begin{DoxyCompactList}\small\item\em Impedance seen between a and b (loop impedance, continuity), sources as in the network. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{elsim_8c_aeccf98c941e94923c407172da97f9f6a}{el\+\_\+model\+\_\+measure\+\_\+insulation}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, double \texorpdfstring{$\ast$}{*}ohm)
 \begin{DoxyCompactList}\small\item\em Insulation resistance between a and b. Like a real tester it refuses (returns false) while a voltage above EL\+\_\+\+SAFE\+\_\+\+VOLTAGE is present. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -112,6 +121,24 @@ bool \mbox{\hyperlink{elsim_8c_aeccf98c941e94923c407172da97f9f6a}{el\+\_\+model\
 \doxysubsubsection{\texorpdfstring{BREAKER\_COOLING}{BREAKER\_COOLING}}
 {\footnotesize\ttfamily \label{elsim_8c_aac27b7a66a902a08bae3e791dae14a33} 
 \#define BREAKER\+\_\+\+COOLING~1.\+0     /\texorpdfstring{$\ast$}{*} normalised heat units per second below In \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{elsim_8c_ad79de2b7a0b3478b13f91d08647f4e0d}\index{elsim.c@{elsim.c}!DIMMER\_FULL\_LEVEL@{DIMMER\_FULL\_LEVEL}}
+\index{DIMMER\_FULL\_LEVEL@{DIMMER\_FULL\_LEVEL}!elsim.c@{elsim.c}}
+\doxysubsubsection{\texorpdfstring{DIMMER\_FULL\_LEVEL}{DIMMER\_FULL\_LEVEL}}
+{\footnotesize\ttfamily \label{elsim_8c_ad79de2b7a0b3478b13f91d08647f4e0d} 
+\#define DIMMER\+\_\+\+FULL\+\_\+\+LEVEL~0.\+999 /\texorpdfstring{$\ast$}{*} above\+: fully on, contact only \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{elsim_8c_a9fa3a2691d158f872f8f2eb65f1cc8ea}\index{elsim.c@{elsim.c}!DIMMER\_MAX\_REACTANCE@{DIMMER\_MAX\_REACTANCE}}
+\index{DIMMER\_MAX\_REACTANCE@{DIMMER\_MAX\_REACTANCE}!elsim.c@{elsim.c}}
+\doxysubsubsection{\texorpdfstring{DIMMER\_MAX\_REACTANCE}{DIMMER\_MAX\_REACTANCE}}
+{\footnotesize\ttfamily \label{elsim_8c_a9fa3a2691d158f872f8f2eb65f1cc8ea} 
+\#define DIMMER\+\_\+\+MAX\+\_\+\+REACTANCE~1e9}
+
+\Hypertarget{elsim_8c_ab1d32844a9d6a4929fa257bb56c176c7}\index{elsim.c@{elsim.c}!DIMMER\_OFF\_LEVEL@{DIMMER\_OFF\_LEVEL}}
+\index{DIMMER\_OFF\_LEVEL@{DIMMER\_OFF\_LEVEL}!elsim.c@{elsim.c}}
+\doxysubsubsection{\texorpdfstring{DIMMER\_OFF\_LEVEL}{DIMMER\_OFF\_LEVEL}}
+{\footnotesize\ttfamily \label{elsim_8c_ab1d32844a9d6a4929fa257bb56c176c7} 
+\#define DIMMER\+\_\+\+OFF\+\_\+\+LEVEL~0.\+001  /\texorpdfstring{$\ast$}{*} below\+: open \texorpdfstring{$\ast$}{*}/}
 
 \Hypertarget{elsim_8c_aa6094c815d6c61ae1c5d183ddd905a13}\index{elsim.c@{elsim.c}!MAX\_TRIP\_ITERATIONS@{MAX\_TRIP\_ITERATIONS}}
 \index{MAX\_TRIP\_ITERATIONS@{MAX\_TRIP\_ITERATIONS}!elsim.c@{elsim.c}}
@@ -241,7 +268,7 @@ bool el\+\_\+device\+\_\+powered (\begin{DoxyParamCaption}\item[{const \mbox{\hy
 
 
 
-Load is supplied\+: at least half its rated voltage across L-\/N. 
+Load is supplied\+: switched on and at least 1 \% of its rated power (dimmed loads count). 
 
 \Hypertarget{elsim_8c_af48408bad4050f77ffd7853f775389c4}\index{elsim.c@{elsim.c}!el\_device\_type\_from\_name@{el\_device\_type\_from\_name}}
 \index{el\_device\_type\_from\_name@{el\_device\_type\_from\_name}!elsim.c@{elsim.c}}
@@ -322,7 +349,7 @@ void el\+\_\+model\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{st
 \index{el\_model\_measure\_impedance@{el\_model\_measure\_impedance}!elsim.c@{elsim.c}}
 \doxysubsubsection{\texorpdfstring{el\_model\_measure\_impedance()}{el\_model\_measure\_impedance()}}
 {\footnotesize\ttfamily \label{elsim_8c_a2c8c0828d3e64648482e7d14b298c0c4} 
-bool el\+\_\+model\+\_\+measure\+\_\+impedance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{impedance}{}\end{DoxyParamCaption})}
+bool el\+\_\+model\+\_\+measure\+\_\+impedance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{impedance}{}\end{DoxyParamCaption})}
 
 
 
@@ -342,7 +369,7 @@ Insulation resistance between a and b. Like a real tester it refuses (returns fa
 \index{el\_model\_measure\_voltage@{el\_model\_measure\_voltage}!elsim.c@{elsim.c}}
 \doxysubsubsection{\texorpdfstring{el\_model\_measure\_voltage()}{el\_model\_measure\_voltage()}}
 {\footnotesize\ttfamily \label{elsim_8c_a69822dfb463ef5dd0f7801d636118c8b} 
-bool el\+\_\+model\+\_\+measure\+\_\+voltage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{voltage}{}\end{DoxyParamCaption})}
+bool el\+\_\+model\+\_\+measure\+\_\+voltage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{voltage}{}\end{DoxyParamCaption})}
 
 
 
@@ -398,6 +425,16 @@ bool el\+\_\+model\+\_\+set\+\_\+connection\+\_\+open (\begin{DoxyParamCaption}\
 
 Interrupts (or restores) a conductor. 
 
+\Hypertarget{elsim_8c_a044c0f55a5338ccc11fc271eb0e23a9a}\index{elsim.c@{elsim.c}!el\_model\_set\_level@{el\_model\_set\_level}}
+\index{el\_model\_set\_level@{el\_model\_set\_level}!elsim.c@{elsim.c}}
+\doxysubsubsection{\texorpdfstring{el\_model\_set\_level()}{el\_model\_set\_level()}}
+{\footnotesize\ttfamily \label{elsim_8c_a044c0f55a5338ccc11fc271eb0e23a9a} 
+bool el\+\_\+model\+\_\+set\+\_\+level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{double}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Level of a dimmer, 0..1 (clamped). 
+
 \Hypertarget{elsim_8c_ae877b07c9479efb60cf47f091ccd89a1}\index{elsim.c@{elsim.c}!el\_model\_set\_on@{el\_model\_set\_on}}
 \index{el\_model\_set\_on@{el\_model\_set\_on}!elsim.c@{elsim.c}}
 \doxysubsubsection{\texorpdfstring{el\_model\_set\_on()}{el\_model\_set\_on()}}
@@ -430,6 +467,16 @@ int el\+\_\+model\+\_\+terminal\+\_\+node (\begin{DoxyParamCaption}\item[{const 
 
 
 Node of "{}device\+:terminal"{}, -\/1 if unknown. 
+
+\Hypertarget{elsim_8c_a32f31f16a4deaeac4fa6d0d289266957}\index{elsim.c@{elsim.c}!el\_model\_touch@{el\_model\_touch}}
+\index{el\_model\_touch@{el\_model\_touch}!elsim.c@{elsim.c}}
+\doxysubsubsection{\texorpdfstring{el\_model\_touch()}{el\_model\_touch()}}
+{\footnotesize\ttfamily \label{elsim_8c_a32f31f16a4deaeac4fa6d0d289266957} 
+void el\+\_\+model\+\_\+touch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Marks the network as changed after writing device fields directly. 
 
 \Hypertarget{elsim_8c_a401986eb56f38c799cb740e2e8a71c87}\index{elsim.c@{elsim.c}!el\_terminal\_count@{el\_terminal\_count}}
 \index{el\_terminal\_count@{el\_terminal\_count}!elsim.c@{elsim.c}}

@@ -130,6 +130,9 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="#a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91">EL_SWITCH</a>
 , <a class="el" href="#a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d">EL_LOAD</a>
 , <a class="el" href="#a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3">EL_SOCKET</a>
+, <a class="el" href="#a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc">EL_JUNCTION</a>
+, <br />
+&#160;&#160;<a class="el" href="#a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449">EL_DIMMER</a>
 , <a class="el" href="#a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55">EL_DEVICE_TYPES</a>
 <br />
  }</td></tr>
@@ -162,7 +165,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a401986eb56f38c799cb740e2e8a71c87" id="r_a401986eb56f38c799cb740e2e8a71c87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a401986eb56f38c799cb740e2e8a71c87">el_terminal_count</a> (<a class="el" href="#a80059183db089c9f33dcabaf5cb941d0">ElDeviceType</a> type)</td></tr>
 <tr class="memitem:a04f97b62bc5a7684db889c63af4f5683" id="r_a04f97b62bc5a7684db889c63af4f5683"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04f97b62bc5a7684db889c63af4f5683">el_terminal_name</a> (<a class="el" href="#a80059183db089c9f33dcabaf5cb941d0">ElDeviceType</a> type, int terminal)</td></tr>
 <tr class="memitem:a41e7669610c3deeaa75fbea913a91e41" id="r_a41e7669610c3deeaa75fbea913a91e41"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41e7669610c3deeaa75fbea913a91e41">el_device_powered</a> (const <a class="el" href="structElDevice.html">ElDevice</a> *device)</td></tr>
-<tr class="memdesc:a41e7669610c3deeaa75fbea913a91e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load is supplied: at least half its rated voltage across L-N.  <br /></td></tr>
+<tr class="memdesc:a41e7669610c3deeaa75fbea913a91e41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load is supplied: switched on and at least 1 % of its rated power (dimmed loads count).  <br /></td></tr>
 <tr id="func-members-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Operating the installation (takes effect in the next step)</div></td></tr>
 <tr class="memitem:ae877b07c9479efb60cf47f091ccd89a1" id="r_ae877b07c9479efb60cf47f091ccd89a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae877b07c9479efb60cf47f091ccd89a1">el_model_set_on</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *id, bool on)</td></tr>
 <tr class="memdesc:ae877b07c9479efb60cf47f091ccd89a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch, breaker or RCD handle, a load's own switch.  <br /></td></tr>
@@ -170,14 +173,18 @@ Functions</h2></td></tr>
 <tr class="memdesc:a7d6e6daed5801cde90d825cedde34fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-arms a tripped breaker/RCD (handle on) or replaces a blown fuse.  <br /></td></tr>
 <tr class="memitem:af3a6854fc33f6f01f735fb65831cb8d6" id="r_af3a6854fc33f6f01f735fb65831cb8d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3a6854fc33f6f01f735fb65831cb8d6">el_model_press_test</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *id)</td></tr>
 <tr class="memdesc:af3a6854fc33f6f01f735fb65831cb8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Presses the test button of an RCD for one step.  <br /></td></tr>
+<tr class="memitem:a044c0f55a5338ccc11fc271eb0e23a9a" id="r_a044c0f55a5338ccc11fc271eb0e23a9a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a044c0f55a5338ccc11fc271eb0e23a9a">el_model_set_level</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *id, double level)</td></tr>
+<tr class="memdesc:a044c0f55a5338ccc11fc271eb0e23a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Level of a dimmer, 0..1 (clamped).  <br /></td></tr>
+<tr class="memitem:a32f31f16a4deaeac4fa6d0d289266957" id="r_a32f31f16a4deaeac4fa6d0d289266957"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32f31f16a4deaeac4fa6d0d289266957">el_model_touch</a> (<a class="el" href="structElModel.html">ElModel</a> *model)</td></tr>
+<tr class="memdesc:a32f31f16a4deaeac4fa6d0d289266957"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks the network as changed after writing device fields directly.  <br /></td></tr>
 <tr class="memitem:a4716a4011b8c83134128e711975c56ec" id="r_a4716a4011b8c83134128e711975c56ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4716a4011b8c83134128e711975c56ec">el_model_add_fault</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *a, const char *b, double resistance_ohm, const char *description)</td></tr>
 <tr class="memitem:a158f6aa26b17484ae9b4c9637ca0b43e" id="r_a158f6aa26b17484ae9b4c9637ca0b43e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a158f6aa26b17484ae9b4c9637ca0b43e">el_model_set_connection_open</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *id, bool open)</td></tr>
 <tr class="memdesc:a158f6aa26b17484ae9b4c9637ca0b43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupts (or restores) a conductor.  <br /></td></tr>
 <tr class="memitem:a77ba76faa9ceda6dc982462de7b089a3" id="r_a77ba76faa9ceda6dc982462de7b089a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77ba76faa9ceda6dc982462de7b089a3">el_model_clear_faults</a> (<a class="el" href="structElModel.html">ElModel</a> *model)</td></tr>
 <tr id="func-members-3" class="groupHeader"><td colspan="2"><div class="groupHeader">Measurements (no time passes)</div></td></tr>
-<tr class="memitem:a69822dfb463ef5dd0f7801d636118c8b" id="r_a69822dfb463ef5dd0f7801d636118c8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69822dfb463ef5dd0f7801d636118c8b">el_model_measure_voltage</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *a, const char *b, <a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a> *voltage)</td></tr>
+<tr class="memitem:a69822dfb463ef5dd0f7801d636118c8b" id="r_a69822dfb463ef5dd0f7801d636118c8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69822dfb463ef5dd0f7801d636118c8b">el_model_measure_voltage</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *a, const char *b, <a class="el" href="structElPhasor.html">ElPhasor</a> *voltage)</td></tr>
 <tr class="memdesc:a69822dfb463ef5dd0f7801d636118c8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage V(a) - V(b) of the present state.  <br /></td></tr>
-<tr class="memitem:a2c8c0828d3e64648482e7d14b298c0c4" id="r_a2c8c0828d3e64648482e7d14b298c0c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8c0828d3e64648482e7d14b298c0c4">el_model_measure_impedance</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *a, const char *b, <a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a> *impedance)</td></tr>
+<tr class="memitem:a2c8c0828d3e64648482e7d14b298c0c4" id="r_a2c8c0828d3e64648482e7d14b298c0c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8c0828d3e64648482e7d14b298c0c4">el_model_measure_impedance</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *a, const char *b, <a class="el" href="structElPhasor.html">ElPhasor</a> *impedance)</td></tr>
 <tr class="memdesc:a2c8c0828d3e64648482e7d14b298c0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impedance seen between a and b (loop impedance, continuity), sources as in the network.  <br /></td></tr>
 <tr class="memitem:aeccf98c941e94923c407172da97f9f6a" id="r_aeccf98c941e94923c407172da97f9f6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeccf98c941e94923c407172da97f9f6a">el_model_measure_insulation</a> (<a class="el" href="structElModel.html">ElModel</a> *model, const char *a, const char *b, double *ohm)</td></tr>
 <tr class="memdesc:aeccf98c941e94923c407172da97f9f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insulation resistance between a and b. Like a real tester it refuses (returns false) while a voltage above EL_SAFE_VOLTAGE is present.  <br /></td></tr>
@@ -191,7 +198,8 @@ Functions</h2></td></tr>
 <li><a class="el" href="#aab5e45876d1ab22015c30e1e4609ffe1" title="Advances the time by dt_s: solve, protection, results, events.">el_model_step()</a> solves the network (complex phasors, 50 Hz), evaluates breakers, fuses and RCDs, re-solves after a trip and records events.</li>
 <li>Measurements see the same network: voltage and Thevenin impedance between two terminals (loop impedance, continuity, insulation).</li>
 </ul>
-<p>Terminals per type: supply L1 L2 L3 N PE breaker, fuse, switch in out rcd L_in N_in L_out N_out load L N PE socket L N PE </p>
+<p>Terminals per type: supply L1 L2 L3 N PE breaker, fuse, switch, dimmer in out rcd L_in N_in L_out N_out load L N PE socket, junction L N PE</p>
+<p>Change the state only through the el_model_* functions: they mark the network as changed (<a class="el" href="structElModel.html#a25f148570c659bdb56caaea7a63c596f">ElModel.revision</a>), which dimmers need. For running the model in its own (real-time) thread see <a class="el" href="el__session_8h.html" title="Transport-independent interface of the electrical simulation (ADR 0008).">el_session.h</a>. </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a4e2a20b4f87a060dd28cf448b33c9efe" name="a4e2a20b4f87a060dd28cf448b33c9efe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e2a20b4f87a060dd28cf448b33c9efe">&#9670;&#160;</a></span>EL_COPPER_RESISTIVITY</h2>
@@ -314,6 +322,10 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91" name="a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91"></a>EL_SWITCH&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d" name="a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d"></a>EL_LOAD&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3" name="a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3"></a>EL_SOCKET&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc" name="a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc"></a>EL_JUNCTION&#160;</td><td class="fielddoc"><p>junction box / terminal block: L N PE, no internal elements </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449" name="a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449"></a>EL_DIMMER&#160;</td><td class="fielddoc"><p>series dimmer in/out with a level 0..1 </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55" name="a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55"></a>EL_DEVICE_TYPES&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -354,7 +366,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Load is supplied: at least half its rated voltage across L-N. </p>
+<p>Load is supplied: switched on and at least 1 % of its rated power (dimmed loads count). </p>
 
 </div>
 </div>
@@ -655,7 +667,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a> *</td>          <td class="paramname"><span class="paramname"><em>impedance</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structElPhasor.html">ElPhasor</a> *</td>          <td class="paramname"><span class="paramname"><em>impedance</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -721,7 +733,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281">ElPhasor</a> *</td>          <td class="paramname"><span class="paramname"><em>voltage</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structElPhasor.html">ElPhasor</a> *</td>          <td class="paramname"><span class="paramname"><em>voltage</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -855,6 +867,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a044c0f55a5338ccc11fc271eb0e23a9a" name="a044c0f55a5338ccc11fc271eb0e23a9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a044c0f55a5338ccc11fc271eb0e23a9a">&#9670;&#160;</a></span>el_model_set_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool el_model_set_level </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structElModel.html">ElModel</a> *</td>          <td class="paramname"><span class="paramname"><em>model</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>level</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Level of a dimmer, 0..1 (clamped). </p>
+
+</div>
+</div>
 <a id="ae877b07c9479efb60cf47f091ccd89a1" name="ae877b07c9479efb60cf47f091ccd89a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae877b07c9479efb60cf47f091ccd89a1">&#9670;&#160;</a></span>el_model_set_on()</h2>
 
@@ -927,6 +967,25 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Node of "device:terminal", -1 if unknown. </p>
+
+</div>
+</div>
+<a id="a32f31f16a4deaeac4fa6d0d289266957" name="a32f31f16a4deaeac4fa6d0d289266957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f31f16a4deaeac4fa6d0d289266957">&#9670;&#160;</a></span>el_model_touch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void el_model_touch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structElModel.html">ElModel</a> *</td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Marks the network as changed after writing device fields directly. </p>
 
 </div>
 </div>

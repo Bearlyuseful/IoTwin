@@ -1,0 +1,119 @@
+\doxysection{El\+Session Struct Reference}
+\hypertarget{structElSession}{}\label{structElSession}\index{ElSession@{ElSession}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structElModel}{El\+Model}} \mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}
+\item 
+\mbox{\hyperlink{structElSnapshot}{El\+Snapshot}} \mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}} \mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} \mbox{\hyperlink{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}{middle}}
+\item 
+long \mbox{\hyperlink{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}{back}}
+\item 
+long \mbox{\hyperlink{structElSession_a763d0a3b3c3d10cc2114ae465a187008}{front}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{structElSession_a8ebb11b16c322d23faf6ef2948cf4916}{steps}}
+\item 
+\mbox{\hyperlink{structElCommand}{El\+Command}} \mbox{\hyperlink{structElSession_a100ada21114e738025829b3450fd82e6}{commands}} \mbox{[}\mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\+\_\+\+SESSION\+\_\+\+QUEUE}}\mbox{]}
+\item 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} \mbox{\hyperlink{structElSession_af43e774b072c8ceca9ec2906425fe76d}{command\+\_\+head}}
+\item 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} \mbox{\hyperlink{structElSession_acb02609b45c75bce9dc8f03f93c13633}{command\+\_\+tail}}
+\item 
+\mbox{\hyperlink{structElEvent}{El\+Event}} \mbox{\hyperlink{structElSession_aa37a46ecc50c94b84a38a4168372cd5b}{events}} \mbox{[}\mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\+\_\+\+SESSION\+\_\+\+QUEUE}}\mbox{]}
+\item 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} \mbox{\hyperlink{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db}{event\+\_\+head}}
+\item 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} \mbox{\hyperlink{structElSession_a6bf37a3ee15c7e1a8518632ca385d439}{event\+\_\+tail}}
+\item 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} \mbox{\hyperlink{structElSession_aac9845b84edb4916a5f1bbb958a37afe}{dropped\+\_\+events}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structElSession_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}\index{ElSession@{ElSession}!back@{back}}
+\index{back@{back}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{back}{back}}
+{\footnotesize\ttfamily \label{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966} 
+long El\+Session\+::back}
+
+\Hypertarget{structElSession_ae08c07bd12f66afa50f785de497ab2d1}\index{ElSession@{ElSession}!buffers@{buffers}}
+\index{buffers@{buffers}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{buffers}{buffers}}
+{\footnotesize\ttfamily \label{structElSession_ae08c07bd12f66afa50f785de497ab2d1} 
+\mbox{\hyperlink{structElSnapshot}{El\+Snapshot}} El\+Session\+::buffers\mbox{[}3\mbox{]}}
+
+\Hypertarget{structElSession_af43e774b072c8ceca9ec2906425fe76d}\index{ElSession@{ElSession}!command\_head@{command\_head}}
+\index{command\_head@{command\_head}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{command\_head}{command\_head}}
+{\footnotesize\ttfamily \label{structElSession_af43e774b072c8ceca9ec2906425fe76d} 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} El\+Session\+::command\+\_\+head}
+
+\Hypertarget{structElSession_acb02609b45c75bce9dc8f03f93c13633}\index{ElSession@{ElSession}!command\_tail@{command\_tail}}
+\index{command\_tail@{command\_tail}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{command\_tail}{command\_tail}}
+{\footnotesize\ttfamily \label{structElSession_acb02609b45c75bce9dc8f03f93c13633} 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} El\+Session\+::command\+\_\+tail}
+
+\Hypertarget{structElSession_a100ada21114e738025829b3450fd82e6}\index{ElSession@{ElSession}!commands@{commands}}
+\index{commands@{commands}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{commands}{commands}}
+{\footnotesize\ttfamily \label{structElSession_a100ada21114e738025829b3450fd82e6} 
+\mbox{\hyperlink{structElCommand}{El\+Command}} El\+Session\+::commands\mbox{[}\mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\+\_\+\+SESSION\+\_\+\+QUEUE}}\mbox{]}}
+
+\Hypertarget{structElSession_aac9845b84edb4916a5f1bbb958a37afe}\index{ElSession@{ElSession}!dropped\_events@{dropped\_events}}
+\index{dropped\_events@{dropped\_events}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{dropped\_events}{dropped\_events}}
+{\footnotesize\ttfamily \label{structElSession_aac9845b84edb4916a5f1bbb958a37afe} 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} El\+Session\+::dropped\+\_\+events}
+
+\Hypertarget{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db}\index{ElSession@{ElSession}!event\_head@{event\_head}}
+\index{event\_head@{event\_head}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{event\_head}{event\_head}}
+{\footnotesize\ttfamily \label{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db} 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} El\+Session\+::event\+\_\+head}
+
+\Hypertarget{structElSession_a6bf37a3ee15c7e1a8518632ca385d439}\index{ElSession@{ElSession}!event\_tail@{event\_tail}}
+\index{event\_tail@{event\_tail}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{event\_tail}{event\_tail}}
+{\footnotesize\ttfamily \label{structElSession_a6bf37a3ee15c7e1a8518632ca385d439} 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} El\+Session\+::event\+\_\+tail}
+
+\Hypertarget{structElSession_aa37a46ecc50c94b84a38a4168372cd5b}\index{ElSession@{ElSession}!events@{events}}
+\index{events@{events}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily \label{structElSession_aa37a46ecc50c94b84a38a4168372cd5b} 
+\mbox{\hyperlink{structElEvent}{El\+Event}} El\+Session\+::events\mbox{[}\mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\+\_\+\+SESSION\+\_\+\+QUEUE}}\mbox{]}}
+
+\Hypertarget{structElSession_a763d0a3b3c3d10cc2114ae465a187008}\index{ElSession@{ElSession}!front@{front}}
+\index{front@{front}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{front}{front}}
+{\footnotesize\ttfamily \label{structElSession_a763d0a3b3c3d10cc2114ae465a187008} 
+long El\+Session\+::front}
+
+\Hypertarget{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}\index{ElSession@{ElSession}!middle@{middle}}
+\index{middle@{middle}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{middle}{middle}}
+{\footnotesize\ttfamily \label{structElSession_a2284ae072ee51ca10bf73f33d1e937ec} 
+\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{El\+Atomic}} El\+Session\+::middle}
+
+\Hypertarget{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}\index{ElSession@{ElSession}!model@{model}}
+\index{model@{model}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \label{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6} 
+\mbox{\hyperlink{structElModel}{El\+Model}} El\+Session\+::model}
+
+\Hypertarget{structElSession_a8ebb11b16c322d23faf6ef2948cf4916}\index{ElSession@{ElSession}!steps@{steps}}
+\index{steps@{steps}!ElSession@{ElSession}}
+\doxysubsubsection{\texorpdfstring{steps}{steps}}
+{\footnotesize\ttfamily \label{structElSession_a8ebb11b16c322d23faf6ef2948cf4916} 
+uint64\+\_\+t El\+Session\+::steps}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/elsim/\mbox{\hyperlink{el__session_8c}{el\+\_\+session.\+c}}\end{DoxyCompactItemize}

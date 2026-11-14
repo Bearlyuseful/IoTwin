@@ -18,9 +18,10 @@ var searchData=
   ['error_5fsize_15',['error_size',['../structParser.html#ab873439e73a103d785c737f2c576ca47',1,'Parser']]],
   ['error_5fwarning_16',['error_warning',['../structGatewayCanStatus.html#af062e032204801ee146c5b1d7a633ac2',1,'GatewayCanStatus::error_warning'],['../structFdcanStatus.html#a46b5900caeb8825880db49f91b2f315f',1,'FdcanStatus::error_warning']]],
   ['event_5fcount_17',['event_count',['../structElModel.html#ad229d7ee42ede16b13e5e0c6ededad4f',1,'ElModel']]],
-  ['event_5fhead_18',['event_head',['../structElModel.html#a0e738da033477999b0bf8a8af47b39bd',1,'ElModel']]],
-  ['events_19',['events',['../structElModel.html#a8903037c40f2563b322e0e888ae37de0',1,'ElModel::events'],['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd::events']]],
-  ['extended_20',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended'],['../structFramePattern.html#ad13450fff5fa7ff0f2fb951d9ee4b2c0',1,'FramePattern::extended']]],
-  ['extended_5fid_21',['extended_id',['../structIsoTpConfig.html#ac1eb44a4ed2deaf2a4fd95bdcc864377',1,'IsoTpConfig::extended_id'],['../structUdsServerConfig.html#a88232a490fda5d8f802635f81a8ad452',1,'UdsServerConfig::extended_id']]],
-  ['extendedidmask_22',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
+  ['event_5fhead_18',['event_head',['../structElSession.html#a55ebf71042f1f5a6cbd1561c42e3b0db',1,'ElSession::event_head'],['../structElModel.html#a0e738da033477999b0bf8a8af47b39bd',1,'ElModel::event_head']]],
+  ['event_5ftail_19',['event_tail',['../structElSession.html#a6bf37a3ee15c7e1a8518632ca385d439',1,'ElSession']]],
+  ['events_20',['events',['../structElSession.html#aa37a46ecc50c94b84a38a4168372cd5b',1,'ElSession::events'],['../structElModel.html#a8903037c40f2563b322e0e888ae37de0',1,'ElModel::events'],['../structNetPollFd.html#a8d17260def323bcf334317030b0b9773',1,'NetPollFd::events']]],
+  ['extended_21',['extended',['../structCanFrame.html#adb8be33b2afccd8e01d490c78fb89596',1,'CanFrame::extended'],['../structDbcMessage.html#a67da37c7a048e5819c73aa2243b55fe4',1,'DbcMessage::extended'],['../structFramePattern.html#ad13450fff5fa7ff0f2fb951d9ee4b2c0',1,'FramePattern::extended']]],
+  ['extended_5fid_22',['extended_id',['../structIsoTpConfig.html#ac1eb44a4ed2deaf2a4fd95bdcc864377',1,'IsoTpConfig::extended_id'],['../structUdsServerConfig.html#a88232a490fda5d8f802635f81a8ad452',1,'UdsServerConfig::extended_id']]],
+  ['extendedidmask_23',['ExtendedIdMask',['../structFCanFrame.html#a9dbbd0f454b9e9b50edd26002b434c13',1,'FCanFrame']]]
 ];

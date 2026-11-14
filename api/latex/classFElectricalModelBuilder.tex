@@ -1,0 +1,127 @@
+\doxysection{FElectrical\+Model\+Builder Class Reference}
+\hypertarget{classFElectricalModelBuilder}{}\label{classFElectricalModelBuilder}\index{FElectricalModelBuilder@{FElectricalModelBuilder}}
+
+
+{\ttfamily \#include $<$Electrical\+Model\+Builder.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFElectricalModelBuilder_a8399483c141c2105ac4258e72a24ae61}{FElectrical\+Model\+Builder}} (\mbox{\hyperlink{structElModel}{El\+Model}} \&In\+Model)
+\item 
+FString \mbox{\hyperlink{classFElectricalModelBuilder_a1a98954a471a84d957fce01b37d99897}{Make\+Id}} (const UObject \texorpdfstring{$\ast$}{*}Object, const FString \&Suffix=FString()) const
+\item 
+\mbox{\hyperlink{structFElectricalDeviceRef}{FElectrical\+Device\+Ref}} \mbox{\hyperlink{classFElectricalModelBuilder_a429fde1c4c2c053c24db0332db8ffb8d}{Add\+Device}} (const FString \&Id, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} Type, const FString \&Label=FString())
+\item 
+FString \mbox{\hyperlink{classFElectricalModelBuilder_ad521e80f562951aba6e0b8275a7650ad}{Add\+Cable}} (const FString \&Id, double Cross\+Section\+Mm2, double LengthM)
+\item 
+bool \mbox{\hyperlink{classFElectricalModelBuilder_a4409912898a9d0505370ef180059fab6}{Connect}} (const FString \&From, const FString \&To, const TCHAR \texorpdfstring{$\ast$}{*}Role, const FString \&Cable=FString())
+\item 
+bool \mbox{\hyperlink{classFElectricalModelBuilder_a1b31f5f7d662e3797ce972ced8c04926}{Connect\+To\+Port}} (const FString \&Device, const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}Port, const FString \&Cable=FString())
+\item 
+FString \mbox{\hyperlink{classFElectricalModelBuilder_a39115cc37e64240ad385f4f8ecbbfdc2}{Port\+Id}} (const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}Port) const
+\item 
+void \mbox{\hyperlink{classFElectricalModelBuilder_a8db884a811987f0b6c61a5bf6996153f}{Claim\+Wire}} (const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}A, const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}B)
+\item 
+FString \mbox{\hyperlink{classFElectricalModelBuilder_ae6a1519d1d9cfd15dcb8ea26573dd4c7}{Add\+Port}} (const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}Port)
+\item 
+bool \mbox{\hyperlink{classFElectricalModelBuilder_adcacecd8eeec8908caa64a2940c28926}{Is\+Wire\+Claimed}} (const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}A, const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}B) const
+\item 
+int32 \mbox{\hyperlink{classFElectricalModelBuilder_a4d50d1d64d1c31a9372e5eb0a050e89d}{Get\+Failures}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static FString \mbox{\hyperlink{classFElectricalModelBuilder_ad7b5c6cc2d2e5cd23973e6e786706d04}{Sanitize\+Id}} (const FString \&Id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Collects devices, cables and conductors for an \doxylink{structElModel}{El\+Model} (libs/elsim). Ids are "{}$<$actor$>$.$<$part$>$"{}, limited to the characters and length the core accepts; every port is a junction with the terminals L, N and PE. 
+
+\label{doc-constructors}
+\Hypertarget{classFElectricalModelBuilder_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFElectricalModelBuilder_a8399483c141c2105ac4258e72a24ae61}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\index{FElectricalModelBuilder@{FElectricalModelBuilder}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{FElectricalModelBuilder()}{FElectricalModelBuilder()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a8399483c141c2105ac4258e72a24ae61} 
+FElectrical\+Model\+Builder\+::\+FElectrical\+Model\+Builder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \&}]{In\+Model}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classFElectricalModelBuilder_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFElectricalModelBuilder_ad521e80f562951aba6e0b8275a7650ad}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!AddCable@{AddCable}}
+\index{AddCable@{AddCable}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{AddCable()}{AddCable()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_ad521e80f562951aba6e0b8275a7650ad} 
+FString FElectrical\+Model\+Builder\+::\+Add\+Cable (\begin{DoxyParamCaption}\item[{const FString \&}]{Id}{, }\item[{double}]{Cross\+Section\+Mm2}{, }\item[{double}]{LengthM}{}\end{DoxyParamCaption})}
+
+Adds a copper cable; returns its id (empty on failure). \Hypertarget{classFElectricalModelBuilder_a429fde1c4c2c053c24db0332db8ffb8d}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!AddDevice@{AddDevice}}
+\index{AddDevice@{AddDevice}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{AddDevice()}{AddDevice()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a429fde1c4c2c053c24db0332db8ffb8d} 
+\mbox{\hyperlink{structFElectricalDeviceRef}{FElectrical\+Device\+Ref}} FElectrical\+Model\+Builder\+::\+Add\+Device (\begin{DoxyParamCaption}\item[{const FString \&}]{Id}{, }\item[{\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}}}]{Type}{, }\item[{const FString \&}]{Label}{ = {\ttfamily FString()}}\end{DoxyParamCaption})}
+
+Adds a device; an empty ref if the id exists. Parameters can be set through the ref while building. \Hypertarget{classFElectricalModelBuilder_ae6a1519d1d9cfd15dcb8ea26573dd4c7}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!AddPort@{AddPort}}
+\index{AddPort@{AddPort}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{AddPort()}{AddPort()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_ae6a1519d1d9cfd15dcb8ea26573dd4c7} 
+FString FElectrical\+Model\+Builder\+::\+Add\+Port (\begin{DoxyParamCaption}\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{Port}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classFElectricalModelBuilder_a8db884a811987f0b6c61a5bf6996153f}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!ClaimWire@{ClaimWire}}
+\index{ClaimWire@{ClaimWire}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{ClaimWire()}{ClaimWire()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a8db884a811987f0b6c61a5bf6996153f} 
+void FElectrical\+Model\+Builder\+::\+Claim\+Wire (\begin{DoxyParamCaption}\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{B}{}\end{DoxyParamCaption})}
+
+The wire between A and B is described by the caller (e.\+g. as a cable), not as a short link. \Hypertarget{classFElectricalModelBuilder_a4409912898a9d0505370ef180059fab6}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!Connect@{Connect}}
+\index{Connect@{Connect}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a4409912898a9d0505370ef180059fab6} 
+bool FElectrical\+Model\+Builder\+::\+Connect (\begin{DoxyParamCaption}\item[{const FString \&}]{From}{, }\item[{const FString \&}]{To}{, }\item[{const TCHAR \texorpdfstring{$\ast$}{*}}]{Role}{, }\item[{const FString \&}]{Cable}{ = {\ttfamily FString()}}\end{DoxyParamCaption})}
+
+Conductor between two terminals ("{}device\+:terminal"{}); Cable empty = short internal link. \Hypertarget{classFElectricalModelBuilder_a1b31f5f7d662e3797ce972ced8c04926}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!ConnectToPort@{ConnectToPort}}
+\index{ConnectToPort@{ConnectToPort}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{ConnectToPort()}{ConnectToPort()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a1b31f5f7d662e3797ce972ced8c04926} 
+bool FElectrical\+Model\+Builder\+::\+Connect\+To\+Port (\begin{DoxyParamCaption}\item[{const FString \&}]{Device}{, }\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{Port}{, }\item[{const FString \&}]{Cable}{ = {\ttfamily FString()}}\end{DoxyParamCaption})}
+
+Connects L, N and PE of a three-\/terminal device (load, socket, junction) with the port. \Hypertarget{classFElectricalModelBuilder_a4d50d1d64d1c31a9372e5eb0a050e89d}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!GetFailures@{GetFailures}}
+\index{GetFailures@{GetFailures}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{GetFailures()}{GetFailures()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a4d50d1d64d1c31a9372e5eb0a050e89d} 
+int32 FElectrical\+Model\+Builder\+::\+Get\+Failures (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classFElectricalModelBuilder_adcacecd8eeec8908caa64a2940c28926}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!IsWireClaimed@{IsWireClaimed}}
+\index{IsWireClaimed@{IsWireClaimed}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{IsWireClaimed()}{IsWireClaimed()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_adcacecd8eeec8908caa64a2940c28926} 
+bool FElectrical\+Model\+Builder\+::\+Is\+Wire\+Claimed (\begin{DoxyParamCaption}\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{A}{, }\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{B}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classFElectricalModelBuilder_a1a98954a471a84d957fce01b37d99897}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!MakeId@{MakeId}}
+\index{MakeId@{MakeId}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{MakeId()}{MakeId()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a1a98954a471a84d957fce01b37d99897} 
+FString FElectrical\+Model\+Builder\+::\+Make\+Id (\begin{DoxyParamCaption}\item[{const UObject \texorpdfstring{$\ast$}{*}}]{Object}{, }\item[{const FString \&}]{Suffix}{ = {\ttfamily FString()}}\end{DoxyParamCaption}) const}
+
+Id for a part of an object\+: "{}$<$actor$>$.$<$suffix$>$"{} (or "{}$<$actor$>$.$<$component$>$"{} without suffix). \Hypertarget{classFElectricalModelBuilder_a39115cc37e64240ad385f4f8ecbbfdc2}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!PortId@{PortId}}
+\index{PortId@{PortId}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{PortId()}{PortId()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_a39115cc37e64240ad385f4f8ecbbfdc2} 
+FString FElectrical\+Model\+Builder\+::\+Port\+Id (\begin{DoxyParamCaption}\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{Port}{}\end{DoxyParamCaption}) const}
+
+Junction id of a port; empty if the port is not part of the model. \Hypertarget{classFElectricalModelBuilder_ad7b5c6cc2d2e5cd23973e6e786706d04}\index{FElectricalModelBuilder@{FElectricalModelBuilder}!SanitizeId@{SanitizeId}}
+\index{SanitizeId@{SanitizeId}!FElectricalModelBuilder@{FElectricalModelBuilder}}
+\doxysubsubsection{\texorpdfstring{SanitizeId()}{SanitizeId()}}
+{\footnotesize\ttfamily \label{classFElectricalModelBuilder_ad7b5c6cc2d2e5cd23973e6e786706d04} 
+FString FElectrical\+Model\+Builder\+::\+Sanitize\+Id (\begin{DoxyParamCaption}\item[{const FString \&}]{Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Replaces characters the core does not accept and shortens to its id length. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{ElectricalModelBuilder_8h}{Electrical\+Model\+Builder.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{ElectricalModelBuilder_8cpp}{Electrical\+Model\+Builder.\+cpp}}\end{DoxyCompactItemize}

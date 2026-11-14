@@ -91,49 +91,72 @@ $(function(){initNavTree('ElectricalDeviceComponent_8h_source.html','',''); });
   <div class="headertitle"><div class="title">ElectricalDeviceComponent.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ElectricalDeviceComponent_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// IoTwin - consumer that is powered through its input port.</span></div>
+<a href="ElectricalDeviceComponent_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// IoTwin - consumer (load) that is supplied through its input port.</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;CoreMinimal.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Components/ActorComponent.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ElectricalPortComponent_8h.html">ElectricalPortComponent.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;ElectricalDeviceComponent.generated.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">   10</a></span><a class="code hl_function" href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</a>(FOnPoweredChanged, <span class="keywordtype">bool</span>, bPowered);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="ElectricalDeviceComponent_8h.html#a62e2e2f1d6585937bb53a21c65286ec1">   11</a></span><a class="code hl_function" href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</a>(FOnPowerLevelChanged, <span class="keywordtype">float</span>, Level);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>UCLASS(ClassGroup=(Electric), meta=(BlueprintSpawnableComponent))</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">class </span>IOTWIN_API UElectricalDeviceComponent : <span class="keyword">public</span> UActorComponent</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    GENERATED_BODY()</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>public:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    UElectricalDeviceComponent();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    virtual <span class="keywordtype">void</span> TickComponent(<span class="keywordtype">float</span> DeltaTime, ELevelTick TickType,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                               FActorComponentTickFunction* ThisTickFunction) override;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ElectricalElement_8h.html">Electrical/ElectricalElement.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="ElectricalPortComponent_8h.html">ElectricalPortComponent.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;ElectricalDeviceComponent.generated.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">   11</a></span><a class="code hl_function" href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</a>(FOnPoweredChanged, <span class="keywordtype">bool</span>, bPowered);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="ElectricalDeviceComponent_8h.html#a62e2e2f1d6585937bb53a21c65286ec1">   12</a></span><a class="code hl_function" href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</a>(FOnPowerLevelChanged, <span class="keywordtype">float</span>, Level);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>UCLASS(ClassGroup=(Electric), meta=(BlueprintSpawnableComponent))</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">class </span>IOTWIN_API UElectricalDeviceComponent : <span class="keyword">public</span> UActorComponent, <span class="keyword">public</span> <a class="code hl_class" href="classIElectricalElement.html">IElectricalElement</a></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    GENERATED_BODY()</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    UElectricalPortComponent* InputPort;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> bIsPowered = false;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    UPROPERTY(BlueprintAssignable, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    FOnPoweredChanged OnPoweredChanged;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">float</span> PowerLevel = 0.0f;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    UPROPERTY(BlueprintAssignable, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    FOnPowerLevelChanged OnPowerLevelChanged;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>private:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">bool</span> bInitialised = false;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>public:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    UElectricalDeviceComponent();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    virtual <span class="keywordtype">void</span> DescribeElectrical(<a class="code hl_class" href="classFElectricalModelBuilder.html">FElectricalModelBuilder</a>&amp; Builder) override;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    virtual <span class="keywordtype">void</span> ApplyElectrical(const <a class="code hl_class" href="classUIoTwinElectricalSubsystem.html">UIoTwinElectricalSubsystem</a>&amp; Simulation) override;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    UElectricalPortComponent* InputPort;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=<span class="stringliteral">&quot;Power&quot;</span>, meta=(ClampMin=0.1))</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">float</span> RatedPower = 60.0f;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=<span class="stringliteral">&quot;Power&quot;</span>, meta=(ClampMin=1.0))</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">float</span> RatedVoltage = 230.0f;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">bool</span> bIsPowered = false;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    UPROPERTY(BlueprintAssignable, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    FOnPoweredChanged OnPoweredChanged;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">float</span> PowerLevel = 0.0f;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    UPROPERTY(BlueprintAssignable, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    FOnPowerLevelChanged OnPowerLevelChanged;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">float</span> Voltage = 0.0f;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">float</span> Current = 0.0f;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">float</span> Power = 0.0f;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category=<span class="stringliteral">&quot;Power&quot;</span>)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    FString SimulationId;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>private:</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">bool</span> bInitialised = false;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
 <div class="ttc" id="aElectricalDeviceComponent_8h_html_afab940b140dae748118914d01326c12e"><div class="ttname"><a href="ElectricalDeviceComponent_8h.html#afab940b140dae748118914d01326c12e">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam</a></div><div class="ttdeci">DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPoweredChanged, bool, bPowered)</div></div>
+<div class="ttc" id="aElectricalElement_8h_html"><div class="ttname"><a href="ElectricalElement_8h.html">ElectricalElement.h</a></div></div>
 <div class="ttc" id="aElectricalPortComponent_8h_html"><div class="ttname"><a href="ElectricalPortComponent_8h.html">ElectricalPortComponent.h</a></div></div>
+<div class="ttc" id="aclassFElectricalModelBuilder_html"><div class="ttname"><a href="classFElectricalModelBuilder.html">FElectricalModelBuilder</a></div><div class="ttdef"><b>Definition</b> ElectricalModelBuilder.h:31</div></div>
+<div class="ttc" id="aclassIElectricalElement_html"><div class="ttname"><a href="classIElectricalElement.html">IElectricalElement</a></div><div class="ttdef"><b>Definition</b> ElectricalElement.h:32</div></div>
+<div class="ttc" id="aclassUIoTwinElectricalSubsystem_html"><div class="ttname"><a href="classUIoTwinElectricalSubsystem.html">UIoTwinElectricalSubsystem</a></div><div class="ttdef"><b>Definition</b> IoTwinElectricalSubsystem.h:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -2,46 +2,65 @@
 \hypertarget{ElectricalDeviceComponent_8h_source}{}\label{ElectricalDeviceComponent_8h_source}\index{visualizer/Source/IoTwin/Systems/ElectricalDeviceComponent.h@{visualizer/Source/IoTwin/Systems/ElectricalDeviceComponent.h}}
 \mbox{\hyperlink{ElectricalDeviceComponent_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ consumer\ that\ is\ powered\ through\ its\ input\ port.}}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ consumer\ (load)\ that\ is\ supplied\ through\ its\ input\ port.}}
 \DoxyCodeLine{00002\ }
 \DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00004\ }
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Components/ActorComponent.h"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}ElectricalDeviceComponent.generated.h"{}}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \mbox{\hyperlink{ElectricalDeviceComponent_8h_afab940b140dae748118914d01326c12e}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnPoweredChanged,\ \textcolor{keywordtype}{bool},\ bPowered);}
-\DoxyCodeLine{00011\ \mbox{\hyperlink{ElectricalDeviceComponent_8h_afab940b140dae748118914d01326c12e}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnPowerLevelChanged,\ \textcolor{keywordtype}{float},\ Level);}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ UCLASS(ClassGroup=(Electric),\ meta=(BlueprintSpawnableComponent))}
-\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }IOTWIN\_API\ UElectricalDeviceComponent\ :\ \textcolor{keyword}{public}\ UActorComponent}
-\DoxyCodeLine{00015\ \{}
-\DoxyCodeLine{00016\ \ \ \ \ GENERATED\_BODY()}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ public:}
-\DoxyCodeLine{00019\ \ \ \ \ UElectricalDeviceComponent();}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ TickComponent(\textcolor{keywordtype}{float}\ DeltaTime,\ ELevelTick\ TickType,}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FActorComponentTickFunction*\ ThisTickFunction)\ override;}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalElement_8h}{Electrical/ElectricalElement.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}ElectricalDeviceComponent.generated.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \mbox{\hyperlink{ElectricalDeviceComponent_8h_afab940b140dae748118914d01326c12e}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnPoweredChanged,\ \textcolor{keywordtype}{bool},\ bPowered);}
+\DoxyCodeLine{00012\ \mbox{\hyperlink{ElectricalDeviceComponent_8h_afab940b140dae748118914d01326c12e}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnPowerLevelChanged,\ \textcolor{keywordtype}{float},\ Level);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00019\ UCLASS(ClassGroup=(Electric),\ meta=(BlueprintSpawnableComponent))}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }IOTWIN\_API\ UElectricalDeviceComponent\ :\ \textcolor{keyword}{public}\ UActorComponent,\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classIElectricalElement}{IElectricalElement}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ GENERATED\_BODY()}
 \DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00025\ \ \ \ \ UElectricalPortComponent*\ InputPort;}
+\DoxyCodeLine{00024\ public:}
+\DoxyCodeLine{00025\ \ \ \ \ UElectricalDeviceComponent();}
 \DoxyCodeLine{00026\ }
-\DoxyCodeLine{00028\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ bIsPowered\ =\ false;}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00032\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00033\ \ \ \ \ FOnPoweredChanged\ OnPoweredChanged;}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00036\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ PowerLevel\ =\ 0.0f;}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00040\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
-\DoxyCodeLine{00041\ \ \ \ \ FOnPowerLevelChanged\ OnPowerLevelChanged;}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ private:}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ bInitialised\ =\ false;}
-\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00027\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ DescribeElectrical(\mbox{\hyperlink{classFElectricalModelBuilder}{FElectricalModelBuilder}}\&\ Builder)\ override;}
+\DoxyCodeLine{00028\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ ApplyElectrical(const\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIoTwinElectricalSubsystem}}\&\ Simulation)\ override;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00031\ \ \ \ \ UElectricalPortComponent*\ InputPort;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}},\ meta=(ClampMin=0.1))}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ RatedPower\ =\ 60.0f;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}},\ meta=(ClampMin=1.0))}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ RatedVoltage\ =\ 230.0f;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ bIsPowered\ =\ false;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00046\ \ \ \ \ FOnPoweredChanged\ OnPoweredChanged;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{float}\ PowerLevel\ =\ 0.0f;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00054\ \ \ \ \ FOnPowerLevelChanged\ OnPowerLevelChanged;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{float}\ Voltage\ =\ 0.0f;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{float}\ Current\ =\ 0.0f;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{float}\ Power\ =\ 0.0f;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \ \ \ \ UPROPERTY(VisibleInstanceOnly,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Power"{}})}
+\DoxyCodeLine{00068\ \ \ \ \ FString\ SimulationId;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ private:}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ bInitialised\ =\ false;}
+\DoxyCodeLine{00072\ \};}
 
 \end{DoxyCode}

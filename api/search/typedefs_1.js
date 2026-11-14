@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['elphasor_0',['ElPhasor',['../el__circuit_8h.html#ab48e1d2afddb8a3f0154ca23a36c2281',1,'el_circuit.h']]]
+  ['elatomic_0',['ElAtomic',['../el__atomic_8h.html#ab564a92383517046377bc93209bed492',1,'el_atomic.h']]],
+  ['elsession_1',['ElSession',['../el__session_8h.html#afa85796d0f9864e59ee055d10d55ddea',1,'el_session.h']]]
 ];

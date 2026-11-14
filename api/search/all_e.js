@@ -43,9 +43,10 @@ var searchData=
   ['nodes_40',['Nodes',['../structFIoTwinBusStatus.html#a542622fa8a073a87c439cc2dbf9455fe',1,'FIoTwinBusStatus::Nodes'],['../classFSystemDescription.html#ab7bd5cc6aa28517bf281a4314daa0f88',1,'FSystemDescription::Nodes']]],
   ['nodes_41',['nodes',['../structElCircuit.html#a3e8c7b22a83d3af2bdd9cd9f04df212e',1,'ElCircuit']]],
   ['notifyhitboxclick_42',['NotifyHitBoxClick',['../classAIoTwinHUD.html#a646c77983ad193dca9038df31ff07c94',1,'AIoTwinHUD']]],
-  ['now_5fms_43',['now_ms',['../structGateway.html#a1b4995096b389749282db25f448873fb',1,'Gateway']]],
-  ['nrcname_44',['NrcName',['../structFUdsText.html#a14439db1f3ed81dceb802699b579fea1',1,'FUdsText']]],
-  ['num_45',['Num',['../classFComponentCatalog.html#a8ac8ae234bbaaf2c9f82283061e56ebb',1,'FComponentCatalog']]],
-  ['number_46',['number',['../structJsonValue.html#ab0a53783bb5e5841b072ae1949d3b5c3',1,'JsonValue']]],
-  ['nummessages_47',['NumMessages',['../classFCanDatabase.html#a923f31dc13caf9d9631c87a14cb7873b',1,'FCanDatabase']]]
+  ['notifytopologychanged_43',['NotifyTopologyChanged',['../classUIoTwinElectricalSubsystem.html#a65f7391664368aeefda62389c9227f44',1,'UIoTwinElectricalSubsystem']]],
+  ['now_5fms_44',['now_ms',['../structGateway.html#a1b4995096b389749282db25f448873fb',1,'Gateway']]],
+  ['nrcname_45',['NrcName',['../structFUdsText.html#a14439db1f3ed81dceb802699b579fea1',1,'FUdsText']]],
+  ['num_46',['Num',['../classFComponentCatalog.html#a8ac8ae234bbaaf2c9f82283061e56ebb',1,'FComponentCatalog']]],
+  ['number_47',['number',['../structJsonValue.html#ab0a53783bb5e5841b072ae1949d3b5c3',1,'JsonValue']]],
+  ['nummessages_48',['NumMessages',['../classFCanDatabase.html#a923f31dc13caf9d9631c87a14cb7873b',1,'FCanDatabase']]]
 ];

@@ -16,6 +16,8 @@
         <link rel="prev" href="../0006-one-core-three-products/">
       
       
+        <link rel="next" href="../0008-simulation-interface/">
+      
       
         
       
@@ -1144,6 +1146,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0008-simulation-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0008 Simulation Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1173,7 +1203,7 @@
 
 <h1 id="adr-0007-electrical-simulation-core">ADR 0007: Electrical Simulation Core<a class="headerlink" href="#adr-0007-electrical-simulation-core" title="Permanent link">&para;</a></h1>
 <p><strong>Date:</strong> 2026-11-14
-<strong>Status:</strong> Accepted (interface to Unreal: open, see below)</p>
+<strong>Status:</strong> Accepted (interface to Unreal: decided in <a href="../0008-simulation-interface/">ADR 0008</a>)</p>
 <p><strong>Context:</strong>
 The original concept puts the electrical behaviour of the house into a
 separate simulator; Unreal shows the result. Today Unreal decides itself
@@ -1210,15 +1240,15 @@ electrician makes.</p>
 <li><strong>Faults</strong> are changes to the network: an impedance between two terminals
    (short circuit, insulation fault, earth fault) or an open connection.</li>
 </ol>
-<p><strong>Interface to Unreal (open):</strong> the first version is a C library plus the
-command line simulator <code>iotwin-sim</code>. How Unreal talks to it - gRPC as
-considered in the original concept, or JSON/protobuf over the existing TCP
-transport - is decided before the Unreal integration.</p>
+<p><strong>Interface to Unreal:</strong> the first version is a C library plus the
+command line simulator <code>iotwin-sim</code>. The interface to Unreal and other
+frontends is decided in <a href="../0008-simulation-interface/">ADR 0008</a>: a
+transport-independent session API, first used in-process in Unreal.</p>
 <p><strong>Consequences:</strong></p>
 <ul>
 <li><code>libs/elsim</code> is tested without Unreal; the installation files are
   validated in CI like the other engineering data.</li>
-<li>Unreal's own "powered" search is replaced once the interface exists.</li>
+<li>Unreal's own "powered" search is replaced by the simulator (ADR 0008).</li>
 <li><code>libs/power</code> (the light ECU's DC output) stays as a small special case
   until the ECU itself is placed into an installation.</li>
 </ul>

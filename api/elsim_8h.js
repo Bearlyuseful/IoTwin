@@ -21,6 +21,8 @@ var elsim_8h =
       [ "EL_SWITCH", "elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91", null ],
       [ "EL_LOAD", "elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d", null ],
       [ "EL_SOCKET", "elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3", null ],
+      [ "EL_JUNCTION", "elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc", null ],
+      [ "EL_DIMMER", "elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449", null ],
       [ "EL_DEVICE_TYPES", "elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55", null ]
     ] ],
     [ "ElEarthing", "elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064", [
@@ -48,9 +50,11 @@ var elsim_8h =
     [ "el_model_press_test", "elsim_8h.html#af3a6854fc33f6f01f735fb65831cb8d6", null ],
     [ "el_model_reset", "elsim_8h.html#a7d6e6daed5801cde90d825cedde34fde", null ],
     [ "el_model_set_connection_open", "elsim_8h.html#a158f6aa26b17484ae9b4c9637ca0b43e", null ],
+    [ "el_model_set_level", "elsim_8h.html#a044c0f55a5338ccc11fc271eb0e23a9a", null ],
     [ "el_model_set_on", "elsim_8h.html#ae877b07c9479efb60cf47f091ccd89a1", null ],
     [ "el_model_step", "elsim_8h.html#aab5e45876d1ab22015c30e1e4609ffe1", null ],
     [ "el_model_terminal_node", "elsim_8h.html#a0ec2b9e8c89f95bd820968e3cf7bc27d", null ],
+    [ "el_model_touch", "elsim_8h.html#a32f31f16a4deaeac4fa6d0d289266957", null ],
     [ "el_terminal_count", "elsim_8h.html#a401986eb56f38c799cb740e2e8a71c87", null ],
     [ "el_terminal_name", "elsim_8h.html#a04f97b62bc5a7684db889c63af4f5683", null ]
 ];

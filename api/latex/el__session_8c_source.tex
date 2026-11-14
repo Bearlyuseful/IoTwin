@@ -1,0 +1,283 @@
+\doxysection{el\+\_\+session.\+c}
+\hypertarget{el__session_8c_source}{}\label{el__session_8c_source}\index{libs/elsim/el\_session.c@{libs/elsim/el\_session.c}}
+\mbox{\hyperlink{el__session_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{el__session_8h}{el\_session.h}}"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{el__atomic_8h}{el\_atomic.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ Queues:\ single\ producer,\ single\ consumer\ rings.\ Positions\ run\ modulo}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ 2\ x\ capacity,\ so\ "{}full"{}\ and\ "{}empty"{}\ can\ be\ told\ apart\ without\ a\ counter.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Snapshots:\ triple\ buffer.\ The\ simulation\ thread\ fills\ "{}back"{}\ and\ exchanges}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ it\ with\ "{}middle"{}\ (marked\ fresh);\ the\ reader\ exchanges\ "{}front"{}\ with\ "{}middle"{}}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ when\ it\ is\ fresh.\ Neither\ side\ ever\ waits.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ RING\ (2L\ *\ EL\_SESSION\_QUEUE)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ FRESH\ 0x4L}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ INDEX\_MASK\ 0x3L}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structElSession}{ElSession}}\ \{}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{structElModel}{ElModel}}\ \mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}};}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structElSnapshot}{ElSnapshot}}\ \mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}}[3];}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}\ \mbox{\hyperlink{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}{middle}};\ \textcolor{comment}{/*\ buffer\ index\ |\ FRESH\ */}}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}{back}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ simulation\ thread\ only\ */}}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structElSession_a763d0a3b3c3d10cc2114ae465a187008}{front}};\ \ \ \ \ \ \textcolor{comment}{/*\ reader\ thread\ only\ */}}
+\DoxyCodeLine{00028\ \ \ uint64\_t\ \mbox{\hyperlink{structElSession_a8ebb11b16c322d23faf6ef2948cf4916}{steps}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{structElCommand}{ElCommand}}\ \mbox{\hyperlink{structElSession_a100ada21114e738025829b3450fd82e6}{commands}}[\mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}}];}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}\ \mbox{\hyperlink{structElSession_af43e774b072c8ceca9ec2906425fe76d}{command\_head}};\ \textcolor{comment}{/*\ advanced\ by\ the\ simulation\ thread\ */}}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}\ \mbox{\hyperlink{structElSession_acb02609b45c75bce9dc8f03f93c13633}{command\_tail}};\ \textcolor{comment}{/*\ advanced\ by\ the\ command\ thread\ */}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{structElEvent}{ElEvent}}\ \mbox{\hyperlink{structElSession_aa37a46ecc50c94b84a38a4168372cd5b}{events}}[\mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}}];}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}\ \mbox{\hyperlink{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db}{event\_head}};\ \textcolor{comment}{/*\ advanced\ by\ the\ reader\ */}}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}\ \mbox{\hyperlink{structElSession_a6bf37a3ee15c7e1a8518632ca385d439}{event\_tail}};\ \textcolor{comment}{/*\ advanced\ by\ the\ simulation\ thread\ */}}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}\ \mbox{\hyperlink{structElSession_aac9845b84edb4916a5f1bbb958a37afe}{dropped\_events}};}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ copy\_text(\textcolor{keywordtype}{char}*\ out,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text)\ \{\ snprintf(out,\ size,\ \textcolor{stringliteral}{"{}\%s"{}},\ text\ ?\ text\ :\ \textcolor{stringliteral}{"{}"{}});\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \mbox{\hyperlink{structElCommand}{ElCommand}}\ \mbox{\hyperlink{el__session_8c_a22967f3776a66a898e74c5392a293480}{el\_command}}(\mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{ElCommandType}}\ type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ target,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ other,\ \textcolor{keywordtype}{double}\ value)\ \{}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{structElCommand}{ElCommand}}\ command;}
+\DoxyCodeLine{00044\ \ \ memset(\&command,\ 0,\ \textcolor{keyword}{sizeof}(command));}
+\DoxyCodeLine{00045\ \ \ command.\mbox{\hyperlink{structElCommand_aef7a689503bb8c66179aaf084c2bf8a1}{type}}\ =\ type;}
+\DoxyCodeLine{00046\ \ \ command.\mbox{\hyperlink{structElCommand_a89a9f4e7e5428943db941af81e113bba}{value}}\ =\ value;}
+\DoxyCodeLine{00047\ \ \ copy\_text(command.\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ \textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}}),\ target);}
+\DoxyCodeLine{00048\ \ \ copy\_text(command.\mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}},\ \textcolor{keyword}{sizeof}(command.\mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}}),\ other);}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordflow}{return}\ command;}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{long}\ ring\_count(\textcolor{keywordtype}{long}\ head,\ \textcolor{keywordtype}{long}\ tail)\ \{\ \textcolor{keywordflow}{return}\ (tail\ -\/\ head\ +\ \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}})\ \%\ \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}};\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ alloc\_snapshot(\mbox{\hyperlink{structElSnapshot}{ElSnapshot}}*\ s,\ \textcolor{keywordtype}{size\_t}\ devices,\ \textcolor{keywordtype}{size\_t}\ connections)\ \{}
+\DoxyCodeLine{00055\ \ \ memset(s,\ 0,\ \textcolor{keyword}{sizeof}(*s));}
+\DoxyCodeLine{00056\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_a0259a139f79203d0a2997600161b9653}{device\_count}}\ =\ devices;}
+\DoxyCodeLine{00057\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_ab0826b5139f071862c4fed03fbb429b1}{connection\_count}}\ =\ connections;}
+\DoxyCodeLine{00058\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}{devices}}\ =\ (\mbox{\hyperlink{structElDeviceState}{ElDeviceState}}*)calloc(devices\ ?\ devices\ :\ 1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElDeviceState}{ElDeviceState}}));}
+\DoxyCodeLine{00059\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}{connection\_current\_a}}\ =\ (\textcolor{keywordtype}{double}*)calloc(connections\ ?\ connections\ :\ 1,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordflow}{return}\ s-\/>\mbox{\hyperlink{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}{devices}}\ !=\ NULL\ \&\&\ s-\/>\mbox{\hyperlink{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}{connection\_current\_a}}\ !=\ NULL;}
+\DoxyCodeLine{00061\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \mbox{\hyperlink{structElSession}{ElSession}}*\ \mbox{\hyperlink{el__session_8c_ab231a9dc3408506497265b3a4a1eef47}{el\_session\_create}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{structElSession}{ElSession}}*\ session\ =\ (\mbox{\hyperlink{structElSession}{ElSession}}*)calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElSession}{ElSession}}));}
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordflow}{if}\ (session\ ==\ NULL)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{elsim_8c_a74283f8847141cdcd0990f7ebc9fff6c}{el\_model\_free}}(model);}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00068\ \ \ \}}
+\DoxyCodeLine{00069\ \ \ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}\ =\ *model;}
+\DoxyCodeLine{00070\ \ \ memset(model,\ 0,\ \textcolor{keyword}{sizeof}(*model));}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 3;\ i++)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ ok\ =\ alloc\_snapshot(\&session-\/>\mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}}[i],\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}},\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}})\ \&\&\ ok;}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{if}\ (!ok)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{el__session_8c_aed7d6c5b1c2ebef7e02e8a6fd652657c}{el\_session\_destroy}}(session);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00078\ \ \ \}}
+\DoxyCodeLine{00079\ \ \ session-\/>\mbox{\hyperlink{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}{back}}\ =\ 0;}
+\DoxyCodeLine{00080\ \ \ session-\/>\mbox{\hyperlink{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}{middle}}\ =\ 1;}
+\DoxyCodeLine{00081\ \ \ session-\/>\mbox{\hyperlink{structElSession_a763d0a3b3c3d10cc2114ae465a187008}{front}}\ =\ 2;}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordflow}{return}\ session;}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__session_8c_aed7d6c5b1c2ebef7e02e8a6fd652657c}{el\_session\_destroy}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session)\ \{}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{if}\ (session\ ==\ NULL)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00088\ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 3;\ i++)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ free(session-\/>\mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}}[i].\mbox{\hyperlink{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}{devices}});}
+\DoxyCodeLine{00091\ \ \ \ \ free(session-\/>\mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}}[i].\mbox{\hyperlink{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}{connection\_current\_a}});}
+\DoxyCodeLine{00092\ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{elsim_8c_a74283f8847141cdcd0990f7ebc9fff6c}{el\_model\_free}}(\&session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}});}
+\DoxyCodeLine{00094\ \ \ free(session);}
+\DoxyCodeLine{00095\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{el__session_8c_a97f8681fb41d2f0d85ba5ef5e4ad3f01}{el\_session\_device\_count}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session)\ \{\ \textcolor{keywordflow}{return}\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__session_8c_a6e34490c3de0cae701ea84f04e206bdc}{el\_session\_find\_device}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(\&session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}},\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00101\ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{el__session_8c_aa7ee7134f6c5a8e900ebb955d1fd80c0}{el\_session\_device\_id}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{size\_t}\ index)\ \{}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordflow}{return}\ index\ <\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}}\ ?\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index].\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}}\ :\ NULL;}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ \mbox{\hyperlink{el__session_8c_a73ce2da8a8b16062adf3debf1649f5cb}{el\_session\_device\_type}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{size\_t}\ index)\ \{}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordflow}{return}\ index\ <\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}}\ ?\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index].\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ :\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}};}
+\DoxyCodeLine{00109\ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{el__session_8c_a3c6f0cf45420c2c3495d2bab5c72958b}{el\_session\_rated\_power}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{size\_t}\ index)\ \{}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{return}\ index\ <\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}}\ ?\ session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}}.\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index].\mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\_power\_w}}\ :\ 0.0;}
+\DoxyCodeLine{00113\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00116\ \textcolor{comment}{/*\ Commands\ (command\ thread\ -\/>\ simulation\ thread)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00117\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__session_8c_a52c1159df76a452a746dd7e6010ba798}{el\_session\_send}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCommand}{ElCommand}}*\ command)\ \{}
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ tail\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_acb02609b45c75bce9dc8f03f93c13633}{command\_tail}});}
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ head\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_af43e774b072c8ceca9ec2906425fe76d}{command\_head}});}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}\ (ring\_count(head,\ tail)\ >=\ \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}})\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00124\ \ \ \}}
+\DoxyCodeLine{00125\ \ \ session-\/>\mbox{\hyperlink{structElSession_a100ada21114e738025829b3450fd82e6}{commands}}[tail\ \%\ \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}}]\ =\ *command;}
+\DoxyCodeLine{00126\ \ \ el\_atomic\_store(\&session-\/>\mbox{\hyperlink{structElSession_acb02609b45c75bce9dc8f03f93c13633}{command\_tail}},\ (tail\ +\ 1)\ \%\ \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}});}
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00128\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ next\_command(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \mbox{\hyperlink{structElCommand}{ElCommand}}*\ command)\ \{}
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ head\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_af43e774b072c8ceca9ec2906425fe76d}{command\_head}});}
+\DoxyCodeLine{00132\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ tail\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_acb02609b45c75bce9dc8f03f93c13633}{command\_tail}});}
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordflow}{if}\ (head\ ==\ tail)\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00135\ \ \ \}}
+\DoxyCodeLine{00136\ \ \ *command\ =\ session-\/>\mbox{\hyperlink{structElSession_a100ada21114e738025829b3450fd82e6}{commands}}[head\ \%\ \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}}];}
+\DoxyCodeLine{00137\ \ \ el\_atomic\_store(\&session-\/>\mbox{\hyperlink{structElSession_af43e774b072c8ceca9ec2906425fe76d}{command\_head}},\ (head\ +\ 1)\ \%\ \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}});}
+\DoxyCodeLine{00138\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00139\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00142\ \textcolor{comment}{/*\ Events\ (simulation\ thread\ -\/>\ reader)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00143\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ publish\_event(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElEvent}{ElEvent}}*\ event)\ \{}
+\DoxyCodeLine{00146\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ tail\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_a6bf37a3ee15c7e1a8518632ca385d439}{event\_tail}});}
+\DoxyCodeLine{00147\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ head\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db}{event\_head}});}
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordflow}{if}\ (ring\_count(head,\ tail)\ >=\ \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}})\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ el\_atomic\_store(\&session-\/>\mbox{\hyperlink{structElSession_aac9845b84edb4916a5f1bbb958a37afe}{dropped\_events}},\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_aac9845b84edb4916a5f1bbb958a37afe}{dropped\_events}})\ +\ 1);}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00151\ \ \ \}}
+\DoxyCodeLine{00152\ \ \ session-\/>\mbox{\hyperlink{structElSession_aa37a46ecc50c94b84a38a4168372cd5b}{events}}[tail\ \%\ \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}}]\ =\ *event;}
+\DoxyCodeLine{00153\ \ \ el\_atomic\_store(\&session-\/>\mbox{\hyperlink{structElSession_a6bf37a3ee15c7e1a8518632ca385d439}{event\_tail}},\ (tail\ +\ 1)\ \%\ \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}});}
+\DoxyCodeLine{00154\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__session_8c_a182ad2f0e344f96dbda98fdaaccab337}{el\_session\_next\_event}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \mbox{\hyperlink{structElEvent}{ElEvent}}*\ event)\ \{}
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ head\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db}{event\_head}});}
+\DoxyCodeLine{00158\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ tail\ =\ el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_a6bf37a3ee15c7e1a8518632ca385d439}{event\_tail}});}
+\DoxyCodeLine{00159\ \ \ \textcolor{keywordflow}{if}\ (head\ ==\ tail)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00161\ \ \ \}}
+\DoxyCodeLine{00162\ \ \ *\textcolor{keyword}{event}\ =\ session-\/>\mbox{\hyperlink{structElSession_aa37a46ecc50c94b84a38a4168372cd5b}{events}}[head\ \%\ \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\_SESSION\_QUEUE}}];}
+\DoxyCodeLine{00163\ \ \ el\_atomic\_store(\&session-\/>\mbox{\hyperlink{structElSession_a55ebf71042f1f5a6cbd1561c42e3b0db}{event\_head}},\ (head\ +\ 1)\ \%\ \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}});}
+\DoxyCodeLine{00164\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00165\ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{el__session_8c_a1fcdf66861f88220a7b9638370c26e65}{el\_session\_dropped\_events}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session)\ \{}
+\DoxyCodeLine{00168\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long})el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_aac9845b84edb4916a5f1bbb958a37afe}{dropped\_events}});}
+\DoxyCodeLine{00169\ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00172\ \textcolor{comment}{/*\ Simulation\ thread\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00173\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ command\_name(\mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{ElCommandType}}\ type)\ \{}
+\DoxyCodeLine{00176\ \ \ \textcolor{keywordflow}{switch}\ (type)\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2aec6738945c9239baf05a610b8d3a90e8}{EL\_CMD\_SET\_ON}}:}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}set\_on"{}};}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a968ee9c6f57606397e8c5248b6c082e4}{EL\_CMD\_RESET}}:}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}reset"{}};}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a48f7ea4a25b6987f36b6b95b4061b801}{EL\_CMD\_PRESS\_TEST}}:}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}test"{}};}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a65e63d87f505e3d61470c08f3fe01a35}{EL\_CMD\_SET\_LEVEL}}:}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}level"{}};}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2aaade51271bf9b2564076cf72709545cc}{EL\_CMD\_ADD\_FAULT}}:}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}fault"{}};}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a6da6705b85964265499c931cdc371503}{EL\_CMD\_CLEAR\_FAULTS}}:}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}clear"{}};}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2afe6af40db14cf7316af3ba3545ed9156}{EL\_CMD\_SET\_OPEN}}:}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}open"{}};}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2ad0f15dffd18fa9b126805d5e01bf5f62}{EL\_CMD\_PLUG}}:}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}plug"{}};}
+\DoxyCodeLine{00193\ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}?"{}};}
+\DoxyCodeLine{00195\ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ apply(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCommand}{ElCommand}}*\ c)\ \{}
+\DoxyCodeLine{00198\ \ \ \mbox{\hyperlink{structElModel}{ElModel}}*\ m\ =\ \&session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}};}
+\DoxyCodeLine{00199\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00200\ \ \ \textcolor{keywordflow}{switch}\ (c-\/>\mbox{\hyperlink{structElCommand_aef7a689503bb8c66179aaf084c2bf8a1}{type}})\ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2aec6738945c9239baf05a610b8d3a90e8}{EL\_CMD\_SET\_ON}}:}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_ae877b07c9479efb60cf47f091ccd89a1}{el\_model\_set\_on}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ c-\/>\mbox{\hyperlink{structElCommand_a89a9f4e7e5428943db941af81e113bba}{value}}\ !=\ 0.0);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a968ee9c6f57606397e8c5248b6c082e4}{EL\_CMD\_RESET}}:}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_a7d6e6daed5801cde90d825cedde34fde}{el\_model\_reset}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}});}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a48f7ea4a25b6987f36b6b95b4061b801}{EL\_CMD\_PRESS\_TEST}}:}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_af3a6854fc33f6f01f735fb65831cb8d6}{el\_model\_press\_test}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}});}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a65e63d87f505e3d61470c08f3fe01a35}{EL\_CMD\_SET\_LEVEL}}:}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_a044c0f55a5338ccc11fc271eb0e23a9a}{el\_model\_set\_level}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ c-\/>\mbox{\hyperlink{structElCommand_a89a9f4e7e5428943db941af81e113bba}{value}});}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2aaade51271bf9b2564076cf72709545cc}{EL\_CMD\_ADD\_FAULT}}:}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_a4716a4011b8c83134128e711975c56ec}{el\_model\_add\_fault}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ c-\/>\mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}},\ c-\/>\mbox{\hyperlink{structElCommand_a89a9f4e7e5428943db941af81e113bba}{value}},\ NULL)\ >=\ 0;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2a6da6705b85964265499c931cdc371503}{EL\_CMD\_CLEAR\_FAULTS}}:}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \mbox{\hyperlink{elsim_8c_a77ba76faa9ceda6dc982462de7b089a3}{el\_model\_clear\_faults}}(m);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2afe6af40db14cf7316af3ba3545ed9156}{EL\_CMD\_SET\_OPEN}}:}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_a158f6aa26b17484ae9b4c9637ca0b43e}{el\_model\_set\_connection\_open}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ c-\/>\mbox{\hyperlink{structElCommand_a89a9f4e7e5428943db941af81e113bba}{value}}\ !=\ 0.0);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2ad0f15dffd18fa9b126805d5e01bf5f62}{EL\_CMD\_PLUG}}:}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{elsim_8c_a0e89def0283c91ed424ec20868089c9c}{el\_model\_plug}}(m,\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ c-\/>\mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}}[0]\ ?\ c-\/>\mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}}\ :\ NULL);}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00226\ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \textcolor{keywordflow}{if}\ (!ok)\ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \mbox{\hyperlink{structElEvent}{ElEvent}}\ event;}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keyword}{event}.\mbox{\hyperlink{structElEvent_ae1684de76c842d97d83177b1e5cc9929}{time\_s}}\ =\ m-\/>\mbox{\hyperlink{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}{time\_s}};}
+\DoxyCodeLine{00230\ \ \ \ \ snprintf(event.\mbox{\hyperlink{structElEvent_a4dbb2cca16ae7e4825493b6dbefd35a7}{text}},\ \textcolor{keyword}{sizeof}(event.\mbox{\hyperlink{structElEvent_a4dbb2cca16ae7e4825493b6dbefd35a7}{text}}),\ \textcolor{stringliteral}{"{}command\ rejected:\ \%s\ \%s\ \%s"{}},\ command\_name(c-\/>\mbox{\hyperlink{structElCommand_aef7a689503bb8c66179aaf084c2bf8a1}{type}}),\ c-\/>\mbox{\hyperlink{structElCommand_a4dc19d38cf3dac1814310f414859232a}{target}},\ c-\/>\mbox{\hyperlink{structElCommand_aa01c6167d8c6d5bf7e68db9f282d4d77}{other}});}
+\DoxyCodeLine{00231\ \ \ \ \ publish\_event(session,\ \&event);}
+\DoxyCodeLine{00232\ \ \ \}}
+\DoxyCodeLine{00233\ \}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ fill\_snapshot(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \mbox{\hyperlink{structElSnapshot}{ElSnapshot}}*\ s,\ \textcolor{keywordtype}{bool}\ solved)\ \{}
+\DoxyCodeLine{00236\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElModel}{ElModel}}*\ m\ =\ \&session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}};}
+\DoxyCodeLine{00237\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_a39eb775497ff57e1348c87d8aa2c1d57}{step}}\ =\ session-\/>\mbox{\hyperlink{structElSession_a8ebb11b16c322d23faf6ef2948cf4916}{steps}};}
+\DoxyCodeLine{00238\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_abb9f8d81af9e4a05ca8c39a055ee4e8a}{time\_s}}\ =\ m-\/>\mbox{\hyperlink{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}{time\_s}};}
+\DoxyCodeLine{00239\ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_a199fdaa206e806fa2bcaf9907783e148}{solved}}\ =\ solved;}
+\DoxyCodeLine{00240\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ m-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&m-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i];}
+\DoxyCodeLine{00242\ \ \ \ \ \mbox{\hyperlink{structElDeviceState}{ElDeviceState}}*\ state\ =\ \&s-\/>\mbox{\hyperlink{structElSnapshot_a5b1a1440ad4f3ec82d3e4b196b74fbda}{devices}}[i];}
+\DoxyCodeLine{00243\ \ \ \ \ state-\/>\mbox{\hyperlink{structElDeviceState_af034d05fc7196d1db2c5cb6703cfb6b8}{voltage\_v}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_a30eaf7fe381171a6e313e598fccb9813}{voltage\_v\_measured}};}
+\DoxyCodeLine{00244\ \ \ \ \ state-\/>\mbox{\hyperlink{structElDeviceState_a281830e2589cb972ffa258baf409bd4e}{current\_a}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}};}
+\DoxyCodeLine{00245\ \ \ \ \ state-\/>\mbox{\hyperlink{structElDeviceState_a9253a6c79fe3d9cf2b8c6aee1fd90ac7}{power\_w}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_ab0eeef3989fbeade232ab0e06563adef}{power\_w}};}
+\DoxyCodeLine{00246\ \ \ \ \ state-\/>\mbox{\hyperlink{structElDeviceState_a2cae02ad2a7d73438ee6722f8708b242}{residual\_a}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\_a}};}
+\DoxyCodeLine{00247\ \ \ \ \ state-\/>\mbox{\hyperlink{structElDeviceState_a9802277008ff079327037892a420218f}{level}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}};}
+\DoxyCodeLine{00248\ \ \ \ \ state-\/>\mbox{\hyperlink{structElDeviceState_a1200f3fc9d65e9bc2065ecc89aa1267c}{flags}}\ =\ (d-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}\ ?\ \mbox{\hyperlink{el__session_8h_a68c1e8540bdc18639c5994d38297e51b}{EL\_STATE\_ON}}\ :\ 0u)\ |\ (d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ ?\ \mbox{\hyperlink{el__session_8h_ac620d28c4d0709d1bc1419ebd7ea7ede}{EL\_STATE\_TRIPPED}}\ :\ 0u)\ |}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{elsim_8c_a41e7669610c3deeaa75fbea913a91e41}{el\_device\_powered}}(d)\ ?\ \mbox{\hyperlink{el__session_8h_a30f9a647c2be1e1fdc91e487f9f38882}{EL\_STATE\_POWERED}}\ :\ 0u);}
+\DoxyCodeLine{00250\ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ m-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}};\ i++)\ \{}
+\DoxyCodeLine{00252\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSnapshot_a63f7c53f1761ed8a609440d152ac85b5}{connection\_current\_a}}[i]\ =\ m-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}[i].\mbox{\hyperlink{structElConnection_af4633009afa5216ef8280b51fccca06b}{current\_a}};}
+\DoxyCodeLine{00253\ \ \ \}}
+\DoxyCodeLine{00254\ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__session_8c_af5fe6544d701f01e1d7c18736c514f2a}{el\_session\_step}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session,\ \textcolor{keywordtype}{double}\ dt\_s)\ \{}
+\DoxyCodeLine{00257\ \ \ \mbox{\hyperlink{structElCommand}{ElCommand}}\ command;}
+\DoxyCodeLine{00258\ \ \ \textcolor{keywordflow}{while}\ (next\_command(session,\ \&command))\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ apply(session,\ \&command);}
+\DoxyCodeLine{00260\ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ ok\ =\ \mbox{\hyperlink{elsim_8c_aab5e45876d1ab22015c30e1e4609ffe1}{el\_model\_step}}(\&session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}},\ dt\_s);}
+\DoxyCodeLine{00262\ \ \ session-\/>\mbox{\hyperlink{structElSession_a8ebb11b16c322d23faf6ef2948cf4916}{steps}}++;}
+\DoxyCodeLine{00263\ \ \ \mbox{\hyperlink{structElEvent}{ElEvent}}\ event;}
+\DoxyCodeLine{00264\ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{elsim_8c_a273f6c26a5e91b2ecf9342503878e345}{el\_model\_next\_event}}(\&session-\/>\mbox{\hyperlink{structElSession_a5200b3f47e0faa5c742f414bcfaff4a6}{model}},\ \&event))\ \{}
+\DoxyCodeLine{00265\ \ \ \ \ publish\_event(session,\ \&event);}
+\DoxyCodeLine{00266\ \ \ \}}
+\DoxyCodeLine{00267\ \ \ fill\_snapshot(session,\ \&session-\/>\mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}}[session-\/>\mbox{\hyperlink{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}{back}}],\ ok);}
+\DoxyCodeLine{00268\ \ \ session-\/>\mbox{\hyperlink{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}{back}}\ =\ el\_atomic\_exchange(\&session-\/>\mbox{\hyperlink{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}{middle}},\ session-\/>\mbox{\hyperlink{structElSession_aa227e1fe4ed9fcd00dd7b54f21fe8966}{back}}\ |\ \mbox{\hyperlink{el__session_8c_a3ffb43caba990d161d16af9240557238}{FRESH}})\ \&\ \mbox{\hyperlink{el__session_8c_a29f839928f4752b73c8858d6dbb55294}{INDEX\_MASK}};}
+\DoxyCodeLine{00269\ \ \ \textcolor{keywordflow}{return}\ ok;}
+\DoxyCodeLine{00270\ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElSnapshot}{ElSnapshot}}*\ \mbox{\hyperlink{el__session_8c_ae639925d599aa90426a4a24a90d01d64}{el\_session\_snapshot}}(\mbox{\hyperlink{structElSession}{ElSession}}*\ session)\ \{}
+\DoxyCodeLine{00273\ \ \ \textcolor{keywordflow}{if}\ (el\_atomic\_load(\&session-\/>\mbox{\hyperlink{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}{middle}})\ \&\ \mbox{\hyperlink{el__session_8c_a3ffb43caba990d161d16af9240557238}{FRESH}})\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ session-\/>\mbox{\hyperlink{structElSession_a763d0a3b3c3d10cc2114ae465a187008}{front}}\ =\ el\_atomic\_exchange(\&session-\/>\mbox{\hyperlink{structElSession_a2284ae072ee51ca10bf73f33d1e937ec}{middle}},\ session-\/>\mbox{\hyperlink{structElSession_a763d0a3b3c3d10cc2114ae465a187008}{front}})\ \&\ \mbox{\hyperlink{el__session_8c_a29f839928f4752b73c8858d6dbb55294}{INDEX\_MASK}};}
+\DoxyCodeLine{00275\ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \textcolor{keywordflow}{return}\ \&session-\/>\mbox{\hyperlink{structElSession_ae08c07bd12f66afa50f785de497ab2d1}{buffers}}[session-\/>\mbox{\hyperlink{structElSession_a763d0a3b3c3d10cc2114ae465a187008}{front}}];}
+\DoxyCodeLine{00277\ \}}
+
+\end{DoxyCode}

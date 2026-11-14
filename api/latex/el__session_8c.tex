@@ -1,0 +1,197 @@
+\doxysection{libs/elsim/el\+\_\+session.c File Reference}
+\hypertarget{el__session_8c}{}\label{el__session_8c}\index{libs/elsim/el\_session.c@{libs/elsim/el\_session.c}}
+{\ttfamily \#include "{}el\+\_\+session.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}el\+\_\+atomic.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structElSession}{El\+Session}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}{RING}}~(2L \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\+\_\+\+SESSION\+\_\+\+QUEUE}})
+\item 
+\#define \mbox{\hyperlink{el__session_8c_a3ffb43caba990d161d16af9240557238}{FRESH}}~0x4L
+\item 
+\#define \mbox{\hyperlink{el__session_8c_a29f839928f4752b73c8858d6dbb55294}{INDEX\+\_\+\+MASK}}~0x3L
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structElCommand}{El\+Command}} \mbox{\hyperlink{el__session_8c_a22967f3776a66a898e74c5392a293480}{el\+\_\+command}} (\mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{El\+Command\+Type}} type, const char \texorpdfstring{$\ast$}{*}target, const char \texorpdfstring{$\ast$}{*}other, double value)
+\begin{DoxyCompactList}\small\item\em Fills a command (target/other may be NULL). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{el__session_8c_ab231a9dc3408506497265b3a4a1eef47}{el\+\_\+session\+\_\+create}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
+\begin{DoxyCompactList}\small\item\em Starts a session and takes over the model (it is moved\+: the caller\textquotesingle{}s struct is left empty and must not be used except for el\+\_\+model\+\_\+init). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{el__session_8c_aed7d6c5b1c2ebef7e02e8a6fd652657c}{el\+\_\+session\+\_\+destroy}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session)
+\item 
+size\+\_\+t \mbox{\hyperlink{el__session_8c_a97f8681fb41d2f0d85ba5ef5e4ad3f01}{el\+\_\+session\+\_\+device\+\_\+count}} (const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session)
+\item 
+int \mbox{\hyperlink{el__session_8c_a6e34490c3de0cae701ea84f04e206bdc}{el\+\_\+session\+\_\+find\+\_\+device}} (const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, const char \texorpdfstring{$\ast$}{*}id)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{el__session_8c_aa7ee7134f6c5a8e900ebb955d1fd80c0}{el\+\_\+session\+\_\+device\+\_\+id}} (const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, size\+\_\+t index)
+\item 
+\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} \mbox{\hyperlink{el__session_8c_a73ce2da8a8b16062adf3debf1649f5cb}{el\+\_\+session\+\_\+device\+\_\+type}} (const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, size\+\_\+t index)
+\item 
+double \mbox{\hyperlink{el__session_8c_a3c6f0cf45420c2c3495d2bab5c72958b}{el\+\_\+session\+\_\+rated\+\_\+power}} (const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Rated power of a load (W) -\/ a fixed parameter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{el__session_8c_a52c1159df76a452a746dd7e6010ba798}{el\+\_\+session\+\_\+send}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, const \mbox{\hyperlink{structElCommand}{El\+Command}} \texorpdfstring{$\ast$}{*}command)
+\begin{DoxyCompactList}\small\item\em Command thread\+: queues a command for the next step. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{el__session_8c_a182ad2f0e344f96dbda98fdaaccab337}{el\+\_\+session\+\_\+next\+\_\+event}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, \mbox{\hyperlink{structElEvent}{El\+Event}} \texorpdfstring{$\ast$}{*}event)
+\begin{DoxyCompactList}\small\item\em Reader thread\+: oldest unread event. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{el__session_8c_a1fcdf66861f88220a7b9638370c26e65}{el\+\_\+session\+\_\+dropped\+\_\+events}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session)
+\begin{DoxyCompactList}\small\item\em Events lost because the reader did not keep up. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{el__session_8c_af5fe6544d701f01e1d7c18736c514f2a}{el\+\_\+session\+\_\+step}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session, double dt\+\_\+s)
+\begin{DoxyCompactList}\small\item\em Simulation thread\+: applies the queued commands, advances the time by {\ttfamily dt\+\_\+s}, publishes a snapshot and the events of this step. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structElSnapshot}{El\+Snapshot}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{el__session_8c_ae639925d599aa90426a4a24a90d01d64}{el\+\_\+session\+\_\+snapshot}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}session)
+\begin{DoxyCompactList}\small\item\em Reader thread\+: newest complete snapshot; valid until the next call. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{el__session_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{el__session_8c_a3ffb43caba990d161d16af9240557238}\index{el\_session.c@{el\_session.c}!FRESH@{FRESH}}
+\index{FRESH@{FRESH}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{FRESH}{FRESH}}
+{\footnotesize\ttfamily \label{el__session_8c_a3ffb43caba990d161d16af9240557238} 
+\#define FRESH~0x4L}
+
+\Hypertarget{el__session_8c_a29f839928f4752b73c8858d6dbb55294}\index{el\_session.c@{el\_session.c}!INDEX\_MASK@{INDEX\_MASK}}
+\index{INDEX\_MASK@{INDEX\_MASK}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{INDEX\_MASK}{INDEX\_MASK}}
+{\footnotesize\ttfamily \label{el__session_8c_a29f839928f4752b73c8858d6dbb55294} 
+\#define INDEX\+\_\+\+MASK~0x3L}
+
+\Hypertarget{el__session_8c_ad527dfe00a4d572cfea624cab49cab47}\index{el\_session.c@{el\_session.c}!RING@{RING}}
+\index{RING@{RING}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{RING}{RING}}
+{\footnotesize\ttfamily \label{el__session_8c_ad527dfe00a4d572cfea624cab49cab47} 
+\#define RING~(2L \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{el__session_8h_a1496f86212567b4eb8f14a857a099962}{EL\+\_\+\+SESSION\+\_\+\+QUEUE}})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{el__session_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{el__session_8c_a22967f3776a66a898e74c5392a293480}\index{el\_session.c@{el\_session.c}!el\_command@{el\_command}}
+\index{el\_command@{el\_command}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_command()}{el\_command()}}
+{\footnotesize\ttfamily \label{el__session_8c_a22967f3776a66a898e74c5392a293480} 
+\mbox{\hyperlink{structElCommand}{El\+Command}} el\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{el__session_8h_ae0781b3be605a84ab0931bdd2bca28f2}{El\+Command\+Type}}}]{type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{target}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{other}{, }\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Fills a command (target/other may be NULL). 
+
+\Hypertarget{el__session_8c_ab231a9dc3408506497265b3a4a1eef47}\index{el\_session.c@{el\_session.c}!el\_session\_create@{el\_session\_create}}
+\index{el\_session\_create@{el\_session\_create}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_create()}{el\_session\_create()}}
+{\footnotesize\ttfamily \label{el__session_8c_ab231a9dc3408506497265b3a4a1eef47} 
+\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*} el\+\_\+session\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Starts a session and takes over the model (it is moved\+: the caller\textquotesingle{}s struct is left empty and must not be used except for el\+\_\+model\+\_\+init). 
+
+\begin{DoxyReturn}{Returns}
+NULL if memory runs out (the model is freed then). 
+\end{DoxyReturn}
+\Hypertarget{el__session_8c_aed7d6c5b1c2ebef7e02e8a6fd652657c}\index{el\_session.c@{el\_session.c}!el\_session\_destroy@{el\_session\_destroy}}
+\index{el\_session\_destroy@{el\_session\_destroy}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_destroy()}{el\_session\_destroy()}}
+{\footnotesize\ttfamily \label{el__session_8c_aed7d6c5b1c2ebef7e02e8a6fd652657c} 
+void el\+\_\+session\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__session_8c_a97f8681fb41d2f0d85ba5ef5e4ad3f01}\index{el\_session.c@{el\_session.c}!el\_session\_device\_count@{el\_session\_device\_count}}
+\index{el\_session\_device\_count@{el\_session\_device\_count}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_device\_count()}{el\_session\_device\_count()}}
+{\footnotesize\ttfamily \label{el__session_8c_a97f8681fb41d2f0d85ba5ef5e4ad3f01} 
+size\+\_\+t el\+\_\+session\+\_\+device\+\_\+count (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__session_8c_aa7ee7134f6c5a8e900ebb955d1fd80c0}\index{el\_session.c@{el\_session.c}!el\_session\_device\_id@{el\_session\_device\_id}}
+\index{el\_session\_device\_id@{el\_session\_device\_id}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_device\_id()}{el\_session\_device\_id()}}
+{\footnotesize\ttfamily \label{el__session_8c_aa7ee7134f6c5a8e900ebb955d1fd80c0} 
+const char \texorpdfstring{$\ast$}{*} el\+\_\+session\+\_\+device\+\_\+id (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__session_8c_a73ce2da8a8b16062adf3debf1649f5cb}\index{el\_session.c@{el\_session.c}!el\_session\_device\_type@{el\_session\_device\_type}}
+\index{el\_session\_device\_type@{el\_session\_device\_type}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_device\_type()}{el\_session\_device\_type()}}
+{\footnotesize\ttfamily \label{el__session_8c_a73ce2da8a8b16062adf3debf1649f5cb} 
+\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} el\+\_\+session\+\_\+device\+\_\+type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__session_8c_a1fcdf66861f88220a7b9638370c26e65}\index{el\_session.c@{el\_session.c}!el\_session\_dropped\_events@{el\_session\_dropped\_events}}
+\index{el\_session\_dropped\_events@{el\_session\_dropped\_events}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_dropped\_events()}{el\_session\_dropped\_events()}}
+{\footnotesize\ttfamily \label{el__session_8c_a1fcdf66861f88220a7b9638370c26e65} 
+unsigned long el\+\_\+session\+\_\+dropped\+\_\+events (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{}\end{DoxyParamCaption})}
+
+
+
+Events lost because the reader did not keep up. 
+
+\Hypertarget{el__session_8c_a6e34490c3de0cae701ea84f04e206bdc}\index{el\_session.c@{el\_session.c}!el\_session\_find\_device@{el\_session\_find\_device}}
+\index{el\_session\_find\_device@{el\_session\_find\_device}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_find\_device()}{el\_session\_find\_device()}}
+{\footnotesize\ttfamily \label{el__session_8c_a6e34490c3de0cae701ea84f04e206bdc} 
+int el\+\_\+session\+\_\+find\+\_\+device (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__session_8c_a182ad2f0e344f96dbda98fdaaccab337}\index{el\_session.c@{el\_session.c}!el\_session\_next\_event@{el\_session\_next\_event}}
+\index{el\_session\_next\_event@{el\_session\_next\_event}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_next\_event()}{el\_session\_next\_event()}}
+{\footnotesize\ttfamily \label{el__session_8c_a182ad2f0e344f96dbda98fdaaccab337} 
+bool el\+\_\+session\+\_\+next\+\_\+event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{\mbox{\hyperlink{structElEvent}{El\+Event}} \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption})}
+
+
+
+Reader thread\+: oldest unread event. 
+
+\Hypertarget{el__session_8c_a3c6f0cf45420c2c3495d2bab5c72958b}\index{el\_session.c@{el\_session.c}!el\_session\_rated\_power@{el\_session\_rated\_power}}
+\index{el\_session\_rated\_power@{el\_session\_rated\_power}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_rated\_power()}{el\_session\_rated\_power()}}
+{\footnotesize\ttfamily \label{el__session_8c_a3c6f0cf45420c2c3495d2bab5c72958b} 
+double el\+\_\+session\+\_\+rated\+\_\+power (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Rated power of a load (W) -\/ a fixed parameter. 
+
+\Hypertarget{el__session_8c_a52c1159df76a452a746dd7e6010ba798}\index{el\_session.c@{el\_session.c}!el\_session\_send@{el\_session\_send}}
+\index{el\_session\_send@{el\_session\_send}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_send()}{el\_session\_send()}}
+{\footnotesize\ttfamily \label{el__session_8c_a52c1159df76a452a746dd7e6010ba798} 
+bool el\+\_\+session\+\_\+send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{const \mbox{\hyperlink{structElCommand}{El\+Command}} \texorpdfstring{$\ast$}{*}}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Command thread\+: queues a command for the next step. 
+
+\begin{DoxyReturn}{Returns}
+false if the queue is full. 
+\end{DoxyReturn}
+\Hypertarget{el__session_8c_ae639925d599aa90426a4a24a90d01d64}\index{el\_session.c@{el\_session.c}!el\_session\_snapshot@{el\_session\_snapshot}}
+\index{el\_session\_snapshot@{el\_session\_snapshot}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_snapshot()}{el\_session\_snapshot()}}
+{\footnotesize\ttfamily \label{el__session_8c_ae639925d599aa90426a4a24a90d01d64} 
+const \mbox{\hyperlink{structElSnapshot}{El\+Snapshot}} \texorpdfstring{$\ast$}{*} el\+\_\+session\+\_\+snapshot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{}\end{DoxyParamCaption})}
+
+
+
+Reader thread\+: newest complete snapshot; valid until the next call. 
+
+\Hypertarget{el__session_8c_af5fe6544d701f01e1d7c18736c514f2a}\index{el\_session.c@{el\_session.c}!el\_session\_step@{el\_session\_step}}
+\index{el\_session\_step@{el\_session\_step}!el\_session.c@{el\_session.c}}
+\doxysubsubsection{\texorpdfstring{el\_session\_step()}{el\_session\_step()}}
+{\footnotesize\ttfamily \label{el__session_8c_af5fe6544d701f01e1d7c18736c514f2a} 
+bool el\+\_\+session\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{session}{, }\item[{double}]{dt\+\_\+s}{}\end{DoxyParamCaption})}
+
+
+
+Simulation thread\+: applies the queued commands, advances the time by {\ttfamily dt\+\_\+s}, publishes a snapshot and the events of this step. 
+
+\begin{DoxyReturn}{Returns}
+false if the network could not be solved. 
+\end{DoxyReturn}

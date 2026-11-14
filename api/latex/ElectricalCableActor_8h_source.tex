@@ -8,43 +8,52 @@
 \DoxyCodeLine{00004\ }
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalPortComponent_8h}{ElectricalPortComponent.h}}"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}ElectricalCableActor.generated.h"{}}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }UCableComponent;}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ UCLASS()}
-\DoxyCodeLine{00013\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAElectricalCableActor_a1e5fe5ec72bdc6ffb909e8fe49e177f6}{AElectricalCableActor}}\ :\ public\ AActor}
-\DoxyCodeLine{00014\ \{}
-\DoxyCodeLine{00015\ \ \ \ \ GENERATED\_BODY()}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
-\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classAElectricalCableActor_a1e5fe5ec72bdc6ffb909e8fe49e177f6}{AElectricalCableActor}}();}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Cable"{}})}
-\DoxyCodeLine{00022\ \ \ \ \ USceneComponent*\ \mbox{\hyperlink{classAElectricalCableActor_a71635e5bf4eb76cace3a1b87be560438}{Root}};}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
-\DoxyCodeLine{00025\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classAElectricalCableActor_a412eaad48daf53f2d0ad77a3097f8b0d}{EndA}};}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
-\DoxyCodeLine{00028\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classAElectricalCableActor_ac17cf8b2d87dff21de85c0bb74b62447}{EndB}};}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00031\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
-\DoxyCodeLine{00032\ \ \ \ \ UCableComponent*\ \mbox{\hyperlink{classAElectricalCableActor_ab3ee251eb08417c5d86ea604c0cb9b0e}{CableMesh}};}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00035\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}},\ meta=(ClampMin=1.0))}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classAElectricalCableActor_a09c790e63245ff3e39cedd72b2837b45}{Slack}}\ =\ 1.15f;}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00039\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_aecd164719faf96e7ae1216c44b003c92}{ConnectBetween}}(UElectricalPortComponent*\ A,\ UElectricalPortComponent*\ B);}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00043\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_afa3c0bc685f87a3732b09d34f97f99ca}{RefreshCable}}();}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ protected:}
-\DoxyCodeLine{00047\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_a3a880086aa16f27ea49d33120753be5e}{OnConstruction}}(const\ FTransform\&\ Transform)\ override;}
-\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ElectricalElement_8h}{Electrical/ElectricalElement.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}ElectricalCableActor.generated.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }UCableComponent;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ UCLASS()}
+\DoxyCodeLine{00015\ class\ IOTWIN\_API\ \mbox{\hyperlink{classAElectricalCableActor_a1e5fe5ec72bdc6ffb909e8fe49e177f6}{AElectricalCableActor}}\ :\ public\ AActor,\ public\ \mbox{\hyperlink{classIElectricalElement}{IElectricalElement}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ Sets\ default\ values\ for\ this\ actor's\ properties}}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classAElectricalCableActor_a1e5fe5ec72bdc6ffb909e8fe49e177f6}{AElectricalCableActor}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ \textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00024\ \ \ \ \ USceneComponent*\ \mbox{\hyperlink{classAElectricalCableActor_a71635e5bf4eb76cace3a1b87be560438}{Root}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00027\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classAElectricalCableActor_a412eaad48daf53f2d0ad77a3097f8b0d}{EndA}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00030\ \ \ \ \ UElectricalPortComponent*\ \mbox{\hyperlink{classAElectricalCableActor_ac17cf8b2d87dff21de85c0bb74b62447}{EndB}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00034\ \ \ \ \ UCableComponent*\ \mbox{\hyperlink{classAElectricalCableActor_ab3ee251eb08417c5d86ea604c0cb9b0e}{CableMesh}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00037\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}},\ meta=(ClampMin=1.0))}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classAElectricalCableActor_a09c790e63245ff3e39cedd72b2837b45}{Slack}}\ =\ 1.15f;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadWrite,\ Category=\textcolor{stringliteral}{"{}Cable"{}},\ meta=(ClampMin=0.5))}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classAElectricalCableActor_aa695a8802daabac35760c7521e00b051}{CrossSection}}\ =\ 1.5f;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classAElectricalCableActor_a0c791863ea4e75872815f093e7eb7202}{GetLengthMeters}}()\ const;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_a8a403d8801bb4335e4e22ae3c10da692}{DescribeElectrical}}(\mbox{\hyperlink{classFElectricalModelBuilder}{FElectricalModelBuilder}}\&\ Builder)\ override;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_aecd164719faf96e7ae1216c44b003c92}{ConnectBetween}}(UElectricalPortComponent*\ A,\ UElectricalPortComponent*\ B);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}Cable"{}})}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_afa3c0bc685f87a3732b09d34f97f99ca}{RefreshCable}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ protected:}
+\DoxyCodeLine{00059\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElectricalCableActor_a3a880086aa16f27ea49d33120753be5e}{OnConstruction}}(const\ FTransform\&\ Transform)\ override;}
+\DoxyCodeLine{00060\ \};}
 
 \end{DoxyCode}

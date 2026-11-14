@@ -20,6 +20,16 @@ void \mbox{\hyperlink{classAPowerSourceActor_aac2b771a76e833f027fbbd2630fb367b}{
 bool \mbox{\hyperlink{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}{Is\+Output\+Enabled}} () const
 \item 
 float \mbox{\hyperlink{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f}{Get\+Output\+Level}} () const
+\item 
+bool \mbox{\hyperlink{classAPowerSourceActor_aca0eba5a136f8ca42da03b9f5694036a}{Is\+Breaker\+Tripped}} () const
+\item 
+const \mbox{\hyperlink{structFIoTwinElectricalState}{FIo\+Twin\+Electrical\+State}} \& \mbox{\hyperlink{classAPowerSourceActor_a334890583b68aada1c49182384638598}{Get\+Breaker\+State}} () const
+\item 
+const FString \& \mbox{\hyperlink{classAPowerSourceActor_adb5bf71043a5404a4d9a68a9ef9fa20d}{Get\+Breaker\+Id}} () const
+\item 
+virtual void \mbox{\hyperlink{classAPowerSourceActor_af2cac76619ba70a606113418bb78ca3b}{Describe\+Electrical}} (\mbox{\hyperlink{classFElectricalModelBuilder}{FElectrical\+Model\+Builder}} \&Builder) override
+\item 
+virtual void \mbox{\hyperlink{classAPowerSourceActor_ae8f9d1dbb1082c72ed8394fe8eb7f6a2}{Apply\+Electrical}} (const \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \&Simulation) override
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -39,6 +49,10 @@ int32 \mbox{\hyperlink{classAPowerSourceActor_a696aab603a86094f0937381b753a1f59}
 bool \mbox{\hyperlink{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129}{b\+Output\+Enabled}} = true
 \item 
 FOn\+Relay\+Changed \mbox{\hyperlink{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}{On\+Relay\+Changed}}
+\item 
+float \mbox{\hyperlink{classAPowerSourceActor_a6e8a3942a2b3a7ffd5fc4ff401e59d1d}{Breaker\+Rated\+Current}} = 10.\+0f
+\item 
+float \mbox{\hyperlink{classAPowerSourceActor_a8fc54d7e35a5dc72fcd54a7be22e38dc}{Loop\+Impedance}} = 0.\+35f
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -46,6 +60,9 @@ FOn\+Relay\+Changed \mbox{\hyperlink{classAPowerSourceActor_a1f2c215f80fb8bdb152
 virtual void \mbox{\hyperlink{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929}{Begin\+Play}} () override
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+In the electrical simulation\+: house connection (230 V, TN-\/S, loop impedance Ze) -\/\texorpdfstring{$>$}{>} circuit breaker F1 -\/\texorpdfstring{$>$}{>} relay output (a dimmer\+: on/off and level from LAMP\+\_\+\+CMD) -\/\texorpdfstring{$>$}{>} the port. 
 
 \label{doc-constructors}
 \Hypertarget{classAPowerSourceActor_doc-constructors}
@@ -61,11 +78,43 @@ APower\+Source\+Actor\+::\+APower\+Source\+Actor (\begin{DoxyParamCaption}{}{}\e
 \label{doc-func-members}
 \Hypertarget{classAPowerSourceActor_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classAPowerSourceActor_ae8f9d1dbb1082c72ed8394fe8eb7f6a2}\index{APowerSourceActor@{APowerSourceActor}!ApplyElectrical@{ApplyElectrical}}
+\index{ApplyElectrical@{ApplyElectrical}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{ApplyElectrical()}{ApplyElectrical()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_ae8f9d1dbb1082c72ed8394fe8eb7f6a2} 
+void APower\+Source\+Actor\+::\+Apply\+Electrical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \&}]{Simulation}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d}{IElectrical\+Element}}.
+
 \Hypertarget{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929}\index{APowerSourceActor@{APowerSourceActor}!BeginPlay@{BeginPlay}}
 \index{BeginPlay@{BeginPlay}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{BeginPlay()}{BeginPlay()}}
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a8bc4b8989f483e3b803965030e783929} 
 void APower\+Source\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classAPowerSourceActor_af2cac76619ba70a606113418bb78ca3b}\index{APowerSourceActor@{APowerSourceActor}!DescribeElectrical@{DescribeElectrical}}
+\index{DescribeElectrical@{DescribeElectrical}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{DescribeElectrical()}{DescribeElectrical()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_af2cac76619ba70a606113418bb78ca3b} 
+void APower\+Source\+Actor\+::\+Describe\+Electrical (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFElectricalModelBuilder}{FElectrical\+Model\+Builder}} \&}]{Builder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce}{IElectrical\+Element}}.
+
+\Hypertarget{classAPowerSourceActor_adb5bf71043a5404a4d9a68a9ef9fa20d}\index{APowerSourceActor@{APowerSourceActor}!GetBreakerId@{GetBreakerId}}
+\index{GetBreakerId@{GetBreakerId}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{GetBreakerId()}{GetBreakerId()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_adb5bf71043a5404a4d9a68a9ef9fa20d} 
+const FString \& APower\+Source\+Actor\+::\+Get\+Breaker\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classAPowerSourceActor_a334890583b68aada1c49182384638598}\index{APowerSourceActor@{APowerSourceActor}!GetBreakerState@{GetBreakerState}}
+\index{GetBreakerState@{GetBreakerState}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{GetBreakerState()}{GetBreakerState()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a334890583b68aada1c49182384638598} 
+const \mbox{\hyperlink{structFIoTwinElectricalState}{FIo\+Twin\+Electrical\+State}} \& APower\+Source\+Actor\+::\+Get\+Breaker\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f}\index{APowerSourceActor@{APowerSourceActor}!GetOutputLevel@{GetOutputLevel}}
 \index{GetOutputLevel@{GetOutputLevel}!APowerSourceActor@{APowerSourceActor}}
@@ -73,7 +122,13 @@ void APower\+Source\+Actor\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{Do
 {\footnotesize\ttfamily \label{classAPowerSourceActor_af506aa2e41ee9abb860feec86d9e459f} 
 float APower\+Source\+Actor\+::\+Get\+Output\+Level (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Output level 0..1 (dimming). \Hypertarget{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}\index{APowerSourceActor@{APowerSourceActor}!IsOutputEnabled@{IsOutputEnabled}}
+Output level 0..1 (dimming). \Hypertarget{classAPowerSourceActor_aca0eba5a136f8ca42da03b9f5694036a}\index{APowerSourceActor@{APowerSourceActor}!IsBreakerTripped@{IsBreakerTripped}}
+\index{IsBreakerTripped@{IsBreakerTripped}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{IsBreakerTripped()}{IsBreakerTripped()}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_aca0eba5a136f8ca42da03b9f5694036a} 
+bool APower\+Source\+Actor\+::\+Is\+Breaker\+Tripped (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+State of F1 and the relay output according to the simulation. \Hypertarget{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511}\index{APowerSourceActor@{APowerSourceActor}!IsOutputEnabled@{IsOutputEnabled}}
 \index{IsOutputEnabled@{IsOutputEnabled}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{IsOutputEnabled()}{IsOutputEnabled()}}
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a4ca57b51ec19162748ab86b26d667511} 
@@ -102,7 +157,13 @@ If true the output relay follows Relay\+Control; it stays open until a frame arr
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a119460e295069e388a78c0411ac8b129} 
 bool APower\+Source\+Actor\+::b\+Output\+Enabled = true}
 
-Relay state when not controlled by CAN. \Hypertarget{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a}\index{APowerSourceActor@{APowerSourceActor}!Housing@{Housing}}
+Relay state when not controlled by CAN. \Hypertarget{classAPowerSourceActor_a6e8a3942a2b3a7ffd5fc4ff401e59d1d}\index{APowerSourceActor@{APowerSourceActor}!BreakerRatedCurrent@{BreakerRatedCurrent}}
+\index{BreakerRatedCurrent@{BreakerRatedCurrent}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{BreakerRatedCurrent}{BreakerRatedCurrent}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a6e8a3942a2b3a7ffd5fc4ff401e59d1d} 
+float APower\+Source\+Actor\+::\+Breaker\+Rated\+Current = 10.\+0f}
+
+Rated current of the circuit breaker F1 (characteristic B). \Hypertarget{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a}\index{APowerSourceActor@{APowerSourceActor}!Housing@{Housing}}
 \index{Housing@{Housing}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{Housing}{Housing}}
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a3cfceccc77ab1c960d2fc9a5b394fc4a} 
@@ -120,7 +181,13 @@ Material with a "{}\+Color"{} vector parameter used for the housing. \Hypertarge
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a696aab603a86094f0937381b753a1f59} 
 int32 APower\+Source\+Actor\+::\+Level\+Byte\+Index = 1}
 
-Byte of the relay frame with the brightness 0..100 \% (LAMP\+\_\+\+CMD byte 1), -\/1 = not dimmable. \Hypertarget{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}\index{APowerSourceActor@{APowerSourceActor}!OnRelayChanged@{OnRelayChanged}}
+Byte of the relay frame with the brightness 0..100 \% (LAMP\+\_\+\+CMD byte 1), -\/1 = not dimmable. \Hypertarget{classAPowerSourceActor_a8fc54d7e35a5dc72fcd54a7be22e38dc}\index{APowerSourceActor@{APowerSourceActor}!LoopImpedance@{LoopImpedance}}
+\index{LoopImpedance@{LoopImpedance}!APowerSourceActor@{APowerSourceActor}}
+\doxysubsubsection{\texorpdfstring{LoopImpedance}{LoopImpedance}}
+{\footnotesize\ttfamily \label{classAPowerSourceActor_a8fc54d7e35a5dc72fcd54a7be22e38dc} 
+float APower\+Source\+Actor\+::\+Loop\+Impedance = 0.\+35f}
+
+External loop impedance Ze of the house connection in Ohm. \Hypertarget{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969}\index{APowerSourceActor@{APowerSourceActor}!OnRelayChanged@{OnRelayChanged}}
 \index{OnRelayChanged@{OnRelayChanged}!APowerSourceActor@{APowerSourceActor}}
 \doxysubsubsection{\texorpdfstring{OnRelayChanged}{OnRelayChanged}}
 {\footnotesize\ttfamily \label{classAPowerSourceActor_a1f2c215f80fb8bdb152db7f8d70c1969} 

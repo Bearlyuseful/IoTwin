@@ -55,6 +55,10 @@ double \mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}
 \item 
 bool \mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\+\_\+pressed}}
 \item 
+double \mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}
+\item 
+double \mbox{\hyperlink{structElDevice_abccf655aa40f1505b9fa167705cf5138}{reactance\+\_\+ohm}}
+\item 
 double \mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\+\_\+a}}
 \item 
 double \mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\+\_\+a}}
@@ -82,7 +86,7 @@ char El\+Device\+::component\mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9
 {\footnotesize\ttfamily \label{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4} 
 double El\+Device\+::contact\+\_\+ohm}
 
-breaker, fuse, rcd pole, switch contact \Hypertarget{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}\index{ElDevice@{ElDevice}!current\_a@{current\_a}}
+breaker, fuse, rcd pole, switch/dimmer contact \Hypertarget{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}\index{ElDevice@{ElDevice}!current\_a@{current\_a}}
 \index{current\_a@{current\_a}!ElDevice@{ElDevice}}
 \doxysubsubsection{\texorpdfstring{current\_a}{current\_a}}
 {\footnotesize\ttfamily \label{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e} 
@@ -142,7 +146,13 @@ First internal node (supply only). \Hypertarget{structElDevice_aa0ffc1d6c46d9cd2
 {\footnotesize\ttfamily \label{structElDevice_aa0ffc1d6c46d9cd29d8780c3494a3d70} 
 char El\+Device\+::label\mbox{[}\mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}{EL\+\_\+\+TEXT\+\_\+\+MAX}}\mbox{]}}
 
-\Hypertarget{structElDevice_ae2897da05192d04fae0b924f62918cdf}\index{ElDevice@{ElDevice}!loop\_impedance\_ohm@{loop\_impedance\_ohm}}
+\Hypertarget{structElDevice_a2d37751978c9ce7dc5207c223be56877}\index{ElDevice@{ElDevice}!level@{level}}
+\index{level@{level}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily \label{structElDevice_a2d37751978c9ce7dc5207c223be56877} 
+double El\+Device\+::level}
+
+dimmer\+: 0..1 (share of the full power of its load) \Hypertarget{structElDevice_ae2897da05192d04fae0b924f62918cdf}\index{ElDevice@{ElDevice}!loop\_impedance\_ohm@{loop\_impedance\_ohm}}
 \index{loop\_impedance\_ohm@{loop\_impedance\_ohm}!ElDevice@{ElDevice}}
 \doxysubsubsection{\texorpdfstring{loop\_impedance\_ohm}{loop\_impedance\_ohm}}
 {\footnotesize\ttfamily \label{structElDevice_ae2897da05192d04fae0b924f62918cdf} 
@@ -184,7 +194,13 @@ breaker, fuse, rcd \Hypertarget{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce
 {\footnotesize\ttfamily \label{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce} 
 double El\+Device\+::rated\+\_\+power\+\_\+w}
 
-load \Hypertarget{structElDevice_af48f5fc69b08624ba187d2568d35dc23}\index{ElDevice@{ElDevice}!residual\_a@{residual\_a}}
+load \Hypertarget{structElDevice_abccf655aa40f1505b9fa167705cf5138}\index{ElDevice@{ElDevice}!reactance\_ohm@{reactance\_ohm}}
+\index{reactance\_ohm@{reactance\_ohm}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{reactance\_ohm}{reactance\_ohm}}
+{\footnotesize\ttfamily \label{structElDevice_abccf655aa40f1505b9fa167705cf5138} 
+double El\+Device\+::reactance\+\_\+ohm}
+
+dimmer\+: series reactance that sets the level (computed) \Hypertarget{structElDevice_af48f5fc69b08624ba187d2568d35dc23}\index{ElDevice@{ElDevice}!residual\_a@{residual\_a}}
 \index{residual\_a@{residual\_a}!ElDevice@{ElDevice}}
 \doxysubsubsection{\texorpdfstring{residual\_a}{residual\_a}}
 {\footnotesize\ttfamily \label{structElDevice_af48f5fc69b08624ba187d2568d35dc23} 
@@ -244,7 +260,7 @@ supply\+: phase voltage; load\+: rated voltage \Hypertarget{structElDevice_a30ea
 {\footnotesize\ttfamily \label{structElDevice_a30eaf7fe381171a6e313e598fccb9813} 
 double El\+Device\+::voltage\+\_\+v\+\_\+measured}
 
-load\+: across L-\/N 
+load, socket, junction\+: across L-\/N 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

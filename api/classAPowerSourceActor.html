@@ -97,8 +97,11 @@ $(function(){initNavTree('classAPowerSourceActor.html','','classAPowerSourceActo
 Inheritance diagram for APowerSourceActor:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classAPowerSourceActor.png" alt=""/>
- </div></div>
+  <img src="classAPowerSourceActor.png" usemap="#APowerSourceActor_map" alt=""/>
+  <map id="APowerSourceActor_map" name="APowerSourceActor_map">
+<area href="classIElectricalElement.html" alt="IElectricalElement" shape="rect" coords="139,0,268,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,6 +109,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aac2b771a76e833f027fbbd2630fb367b" id="r_aac2b771a76e833f027fbbd2630fb367b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac2b771a76e833f027fbbd2630fb367b">SetOutputEnabled</a> (bool bEnabled)</td></tr>
 <tr class="memitem:a4ca57b51ec19162748ab86b26d667511" id="r_a4ca57b51ec19162748ab86b26d667511"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ca57b51ec19162748ab86b26d667511">IsOutputEnabled</a> () const</td></tr>
 <tr class="memitem:af506aa2e41ee9abb860feec86d9e459f" id="r_af506aa2e41ee9abb860feec86d9e459f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af506aa2e41ee9abb860feec86d9e459f">GetOutputLevel</a> () const</td></tr>
+<tr class="memitem:aca0eba5a136f8ca42da03b9f5694036a" id="r_aca0eba5a136f8ca42da03b9f5694036a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca0eba5a136f8ca42da03b9f5694036a">IsBreakerTripped</a> () const</td></tr>
+<tr class="memitem:a334890583b68aada1c49182384638598" id="r_a334890583b68aada1c49182384638598"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structFIoTwinElectricalState.html">FIoTwinElectricalState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a334890583b68aada1c49182384638598">GetBreakerState</a> () const</td></tr>
+<tr class="memitem:adb5bf71043a5404a4d9a68a9ef9fa20d" id="r_adb5bf71043a5404a4d9a68a9ef9fa20d"><td class="memItemLeft" align="right" valign="top">const FString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb5bf71043a5404a4d9a68a9ef9fa20d">GetBreakerId</a> () const</td></tr>
+<tr class="memitem:af2cac76619ba70a606113418bb78ca3b" id="r_af2cac76619ba70a606113418bb78ca3b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2cac76619ba70a606113418bb78ca3b">DescribeElectrical</a> (<a class="el" href="classFElectricalModelBuilder.html">FElectricalModelBuilder</a> &amp;Builder) override</td></tr>
+<tr class="memitem:ae8f9d1dbb1082c72ed8394fe8eb7f6a2" id="r_ae8f9d1dbb1082c72ed8394fe8eb7f6a2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8f9d1dbb1082c72ed8394fe8eb7f6a2">ApplyElectrical</a> (const <a class="el" href="classUIoTwinElectricalSubsystem.html">UIoTwinElectricalSubsystem</a> &amp;Simulation) override</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -117,12 +125,16 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a696aab603a86094f0937381b753a1f59" id="r_a696aab603a86094f0937381b753a1f59"><td class="memItemLeft" align="right" valign="top">int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a696aab603a86094f0937381b753a1f59">LevelByteIndex</a> = 1</td></tr>
 <tr class="memitem:a119460e295069e388a78c0411ac8b129" id="r_a119460e295069e388a78c0411ac8b129"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a119460e295069e388a78c0411ac8b129">bOutputEnabled</a> = true</td></tr>
 <tr class="memitem:a1f2c215f80fb8bdb152db7f8d70c1969" id="r_a1f2c215f80fb8bdb152db7f8d70c1969"><td class="memItemLeft" align="right" valign="top">FOnRelayChanged&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f2c215f80fb8bdb152db7f8d70c1969">OnRelayChanged</a></td></tr>
+<tr class="memitem:a6e8a3942a2b3a7ffd5fc4ff401e59d1d" id="r_a6e8a3942a2b3a7ffd5fc4ff401e59d1d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e8a3942a2b3a7ffd5fc4ff401e59d1d">BreakerRatedCurrent</a> = 10.0f</td></tr>
+<tr class="memitem:a8fc54d7e35a5dc72fcd54a7be22e38dc" id="r_a8fc54d7e35a5dc72fcd54a7be22e38dc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fc54d7e35a5dc72fcd54a7be22e38dc">LoopImpedance</a> = 0.35f</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8bc4b8989f483e3b803965030e783929" id="r_a8bc4b8989f483e3b803965030e783929"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bc4b8989f483e3b803965030e783929">BeginPlay</a> () override</td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>In the electrical simulation: house connection (230 V, TN-S, loop impedance Ze) -&gt; circuit breaker F1 -&gt; relay output (a dimmer: on/off and level from LAMP_CMD) -&gt; the port. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3f6f8ae7c44cc508d9455343deb13448" name="a3f6f8ae7c44cc508d9455343deb13448"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3f6f8ae7c44cc508d9455343deb13448">&#9670;&#160;</a></span>APowerSourceActor()</h2>
 
@@ -141,6 +153,33 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ae8f9d1dbb1082c72ed8394fe8eb7f6a2" name="ae8f9d1dbb1082c72ed8394fe8eb7f6a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f9d1dbb1082c72ed8394fe8eb7f6a2">&#9670;&#160;</a></span>ApplyElectrical()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void APowerSourceActor::ApplyElectrical </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classUIoTwinElectricalSubsystem.html">UIoTwinElectricalSubsystem</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>Simulation</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classIElectricalElement.html#a6bab038e29705a8fdac3960d7d2c229d">IElectricalElement</a>.</p>
+
+</div>
+</div>
 <a id="a8bc4b8989f483e3b803965030e783929" name="a8bc4b8989f483e3b803965030e783929"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8bc4b8989f483e3b803965030e783929">&#9670;&#160;</a></span>BeginPlay()</h2>
 
@@ -160,6 +199,83 @@ Protected Member Functions</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel override">override</span><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2cac76619ba70a606113418bb78ca3b" name="af2cac76619ba70a606113418bb78ca3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2cac76619ba70a606113418bb78ca3b">&#9670;&#160;</a></span>DescribeElectrical()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void APowerSourceActor::DescribeElectrical </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classFElectricalModelBuilder.html">FElectricalModelBuilder</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>Builder</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classIElectricalElement.html#a105c29291eb0200efd15d0b67c6e69ce">IElectricalElement</a>.</p>
+
+</div>
+</div>
+<a id="adb5bf71043a5404a4d9a68a9ef9fa20d" name="adb5bf71043a5404a4d9a68a9ef9fa20d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5bf71043a5404a4d9a68a9ef9fa20d">&#9670;&#160;</a></span>GetBreakerId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const FString &amp; APowerSourceActor::GetBreakerId </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a334890583b68aada1c49182384638598" name="a334890583b68aada1c49182384638598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a334890583b68aada1c49182384638598">&#9670;&#160;</a></span>GetBreakerState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structFIoTwinElectricalState.html">FIoTwinElectricalState</a> &amp; APowerSourceActor::GetBreakerState </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -189,6 +305,32 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Output level 0..1 (dimming). </p>
+
+</div>
+</div>
+<a id="aca0eba5a136f8ca42da03b9f5694036a" name="aca0eba5a136f8ca42da03b9f5694036a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca0eba5a136f8ca42da03b9f5694036a">&#9670;&#160;</a></span>IsBreakerTripped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool APowerSourceActor::IsBreakerTripped </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>State of F1 and the relay output according to the simulation. </p>
 
 </div>
 </div>
@@ -265,6 +407,21 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a6e8a3942a2b3a7ffd5fc4ff401e59d1d" name="a6e8a3942a2b3a7ffd5fc4ff401e59d1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e8a3942a2b3a7ffd5fc4ff401e59d1d">&#9670;&#160;</a></span>BreakerRatedCurrent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float APowerSourceActor::BreakerRatedCurrent = 10.0f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Rated current of the circuit breaker F1 (characteristic B). </p>
+
+</div>
+</div>
 <a id="a3cfceccc77ab1c960d2fc9a5b394fc4a" name="a3cfceccc77ab1c960d2fc9a5b394fc4a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3cfceccc77ab1c960d2fc9a5b394fc4a">&#9670;&#160;</a></span>Housing</h2>
 
@@ -307,6 +464,21 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Byte of the relay frame with the brightness 0..100 % (LAMP_CMD byte 1), -1 = not dimmable. </p>
+
+</div>
+</div>
+<a id="a8fc54d7e35a5dc72fcd54a7be22e38dc" name="a8fc54d7e35a5dc72fcd54a7be22e38dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fc54d7e35a5dc72fcd54a7be22e38dc">&#9670;&#160;</a></span>LoopImpedance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float APowerSourceActor::LoopImpedance = 0.35f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>External loop impedance Ze of the house connection in Ohm. </p>
 
 </div>
 </div>

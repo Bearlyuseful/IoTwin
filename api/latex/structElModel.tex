@@ -38,6 +38,10 @@ double \mbox{\hyperlink{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}{time\+\
 size\+\_\+t \mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\+\_\+head}}
 \item 
 size\+\_\+t \mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\+\_\+count}}
+\item 
+unsigned \mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}
+\item 
+unsigned \mbox{\hyperlink{structElModel_ad8965f63daf726f98493d19a71bd28ce}{dimmer\+\_\+revision}}
 \end{DoxyCompactItemize}
 
 
@@ -86,7 +90,13 @@ size\+\_\+t El\+Model\+::device\+\_\+count}
 {\footnotesize\ttfamily \label{structElModel_ac90530245178bdf007c4833c049629c5} 
 \mbox{\hyperlink{structElDevice}{El\+Device}}\texorpdfstring{$\ast$}{*} El\+Model\+::devices}
 
-\Hypertarget{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}\index{ElModel@{ElModel}!event\_count@{event\_count}}
+\Hypertarget{structElModel_ad8965f63daf726f98493d19a71bd28ce}\index{ElModel@{ElModel}!dimmer\_revision@{dimmer\_revision}}
+\index{dimmer\_revision@{dimmer\_revision}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{dimmer\_revision}{dimmer\_revision}}
+{\footnotesize\ttfamily \label{structElModel_ad8965f63daf726f98493d19a71bd28ce} 
+unsigned El\+Model\+::dimmer\+\_\+revision}
+
+revision the dimmer reactances were computed for \Hypertarget{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}\index{ElModel@{ElModel}!event\_count@{event\_count}}
 \index{event\_count@{event\_count}!ElModel@{ElModel}}
 \doxysubsubsection{\texorpdfstring{event\_count}{event\_count}}
 {\footnotesize\ttfamily \label{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f} 
@@ -134,7 +144,13 @@ char El\+Model\+::name\mbox{[}\mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d
 {\footnotesize\ttfamily \label{structElModel_aa743b299f44fabd5d08a438317e4034f} 
 int El\+Model\+::node\+\_\+count}
 
-incl. node 0 (earth) \Hypertarget{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}\index{ElModel@{ElModel}!time\_s@{time\_s}}
+incl. node 0 (earth) \Hypertarget{structElModel_a25f148570c659bdb56caaea7a63c596f}\index{ElModel@{ElModel}!revision@{revision}}
+\index{revision@{revision}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{revision}{revision}}
+{\footnotesize\ttfamily \label{structElModel_a25f148570c659bdb56caaea7a63c596f} 
+unsigned El\+Model\+::revision}
+
+incremented by every change of the network \Hypertarget{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}\index{ElModel@{ElModel}!time\_s@{time\_s}}
 \index{time\_s@{time\_s}!ElModel@{ElModel}}
 \doxysubsubsection{\texorpdfstring{time\_s}{time\_s}}
 {\footnotesize\ttfamily \label{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934} 

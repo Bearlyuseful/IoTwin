@@ -1,0 +1,719 @@
+\doxysection{elsim.\+c}
+\hypertarget{elsim_8c_source}{}\label{elsim_8c_source}\index{libs/elsim/elsim.c@{libs/elsim/elsim.c}}
+\mbox{\hyperlink{elsim_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{elsim_8h}{elsim.h}}"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdarg.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ SUPPLY\_INTERNAL\_NODES\ 4\ }\textcolor{comment}{/*\ star\ point\ S\ and\ three\ source\ nodes\ E1..E3\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ RCD\_TRIP\_FRACTION\ 0.8\ \ \ }\textcolor{comment}{/*\ trips\ between\ 0.5\ and\ 1.0\ x\ I\ delta\ n,\ here\ at\ 0.8\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ RCD\_TEST\_MULTIPLE\ 2.0\ \ \ }\textcolor{comment}{/*\ test\ button\ draws\ about\ twice\ I\ delta\ n\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ PLUG\_CONTACT\_OHM\ 0.005}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BREAKER\_COOLING\ 1.0\ \ \ \ \ }\textcolor{comment}{/*\ normalised\ heat\ units\ per\ second\ below\ In\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ MAX\_TRIP\_ITERATIONS\ 8}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ DIMMER\_OFF\_LEVEL\ 0.001\ \ }\textcolor{comment}{/*\ below:\ open\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ DIMMER\_FULL\_LEVEL\ 0.999\ }\textcolor{comment}{/*\ above:\ fully\ on,\ contact\ only\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ DIMMER\_MAX\_REACTANCE\ 1e9}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ kTypeNames[\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}}]\ =\ \{\textcolor{stringliteral}{"{}supply"{}},\ \textcolor{stringliteral}{"{}breaker"{}},\ \textcolor{stringliteral}{"{}fuse"{}},\ \ \ \ \ \textcolor{stringliteral}{"{}rcd"{}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}switch"{}},\ \textcolor{stringliteral}{"{}load"{}},\ \ \ \ \textcolor{stringliteral}{"{}socket"{}},\ \textcolor{stringliteral}{"{}junction"{}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}dimmer"{}}\};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ kTerminals[\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}}][\mbox{\hyperlink{elsim_8h_a4b3fb4becf42f710a135bf09e183b5c3}{EL\_MAX\_TERMINALS}}]\ =\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \{\textcolor{stringliteral}{"{}L1"{}},\ \textcolor{stringliteral}{"{}L2"{}},\ \textcolor{stringliteral}{"{}L3"{}},\ \textcolor{stringliteral}{"{}N"{}},\ \textcolor{stringliteral}{"{}PE"{}}\},}
+\DoxyCodeLine{00025\ \ \ \ \ \{\textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}out"{}}\},}
+\DoxyCodeLine{00026\ \ \ \ \ \{\textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}out"{}}\},}
+\DoxyCodeLine{00027\ \ \ \ \ \{\textcolor{stringliteral}{"{}L\_in"{}},\ \textcolor{stringliteral}{"{}N\_in"{}},\ \textcolor{stringliteral}{"{}L\_out"{}},\ \textcolor{stringliteral}{"{}N\_out"{}}\},}
+\DoxyCodeLine{00028\ \ \ \ \ \{\textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}out"{}}\},}
+\DoxyCodeLine{00029\ \ \ \ \ \{\textcolor{stringliteral}{"{}L"{}},\ \textcolor{stringliteral}{"{}N"{}},\ \textcolor{stringliteral}{"{}PE"{}}\},}
+\DoxyCodeLine{00030\ \ \ \ \ \{\textcolor{stringliteral}{"{}L"{}},\ \textcolor{stringliteral}{"{}N"{}},\ \textcolor{stringliteral}{"{}PE"{}}\},}
+\DoxyCodeLine{00031\ \ \ \ \ \{\textcolor{stringliteral}{"{}L"{}},\ \textcolor{stringliteral}{"{}N"{}},\ \textcolor{stringliteral}{"{}PE"{}}\},}
+\DoxyCodeLine{00032\ \ \ \ \ \{\textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}out"{}}\},}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ kTerminalCount[\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}}]\ =\ \{5,\ 2,\ 2,\ 4,\ 2,\ 3,\ 3,\ 3,\ 2\};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9aa9829cc4681ab1f37ae9f8283358ece5}{SUPPLY\_L1}},\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9a1ea15a582d5305204962a7bc5a30ebfd}{SUPPLY\_L2}},\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9a0710f61c9151b27f07c7ca8404024a3e}{SUPPLY\_L3}},\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9ac96e556d4849d048802d3ad0f184f334}{SUPPLY\_N}},\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9ac37e6ea99f322ec897c721aaa1dc9d26}{SUPPLY\_PE}}\ \};}
+\DoxyCodeLine{00037\ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a69b9592270ee18b5ec6b87ba1cff4fb0}{TWO\_IN}},\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a574a025aa8e652fbc0a6f1b881ad9495}{TWO\_OUT}}\ \};}
+\DoxyCodeLine{00038\ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015a4bae542bf59ec5eb9a708a1d957627e4}{RCD\_L\_IN}},\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015af2e4f3361124d704f677e46f15569da4}{RCD\_N\_IN}},\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015a0e2ba6951e88e18e73db558abf694d65}{RCD\_L\_OUT}},\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015ae7df2b542f96733bc0b98701898ede25}{RCD\_N\_OUT}}\ \};}
+\DoxyCodeLine{00039\ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2a144c25a46f11ee66d1f6998550a046f3}{LOAD\_L}},\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2a2a09a8931de6a4a0c0b6bfc341c22ade}{LOAD\_N}},\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2aec6974ba8118067dbe792fe5b177f76e}{LOAD\_PE}}\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{elsim_8c_a6fea83409d3639e52103c3cdb4055e26}{el\_device\_type\_name}}(\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ type)\ \{}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{return}\ (type\ >=\ 0\ \&\&\ type\ <\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}})\ ?\ kTypeNames[type]\ :\ \textcolor{stringliteral}{"{}unknown"{}};}
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_af48408bad4050f77ffd7853f775389c4}{el\_device\_type\_from\_name}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}*\ type)\ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}};\ i++)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(name,\ kTypeNames[i])\ ==\ 0)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ *type\ =\ (\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}})i;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_a401986eb56f38c799cb740e2e8a71c87}{el\_terminal\_count}}(\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ type)\ \{\ \textcolor{keywordflow}{return}\ (type\ >=\ 0\ \&\&\ type\ <\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}})\ ?\ kTerminalCount[type]\ :\ 0;\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{elsim_8c_a04f97b62bc5a7684db889c63af4f5683}{el\_terminal\_name}}(\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ type,\ \textcolor{keywordtype}{int}\ terminal)\ \{}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordflow}{return}\ (terminal\ >=\ 0\ \&\&\ terminal\ <\ \mbox{\hyperlink{elsim_8c_a401986eb56f38c799cb740e2e8a71c87}{el\_terminal\_count}}(type))\ ?\ kTerminals[type][terminal]\ :\ NULL;}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a41e7669610c3deeaa75fbea913a91e41}{el\_device\_powered}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ device)\ \{}
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordflow}{return}\ device-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\_LOAD}}\ \&\&\ device-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}\ \&\&\ device-\/>\mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\_power\_w}}\ >\ 0.0\ \&\&}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ device-\/>\mbox{\hyperlink{structElDevice_ab0eeef3989fbeade232ab0e06563adef}{power\_w}}\ >=\ 0.01\ *\ device-\/>\mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\_power\_w}};}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00067\ \textcolor{comment}{/*\ Building\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00068\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{elsim_8c_a444ac75de223acfbc26478ca6055a9df}{el\_model\_init}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00071\ \ \ memset(model,\ 0,\ \textcolor{keyword}{sizeof}(*model));}
+\DoxyCodeLine{00072\ \ \ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}}\ =\ 1;\ \textcolor{comment}{/*\ node\ 0\ =\ earth\ */}}
+\DoxyCodeLine{00073\ \ \ model-\/>\mbox{\hyperlink{structElModel_ad8965f63daf726f98493d19a71bd28ce}{dimmer\_revision}}\ =\ \string~0u;\ \textcolor{comment}{/*\ computed\ in\ the\ first\ step\ */}}
+\DoxyCodeLine{00074\ \ \ \mbox{\hyperlink{el__circuit_8c_a62c7a6f47abdcce85724b320c45b4a50}{el\_circuit\_init}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ 1);}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{elsim_8c_a74283f8847141cdcd0990f7ebc9fff6c}{el\_model\_free}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00078\ \ \ free(model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}});}
+\DoxyCodeLine{00079\ \ \ free(model-\/>\mbox{\hyperlink{structElModel_a383681a9008e097491a3a725109e56f2}{cables}});}
+\DoxyCodeLine{00080\ \ \ free(model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}});}
+\DoxyCodeLine{00081\ \ \ free(model-\/>\mbox{\hyperlink{structElModel_a39a26ae9a001afca12107e9390c3c106}{faults}});}
+\DoxyCodeLine{00082\ \ \ \mbox{\hyperlink{el__circuit_8c_a00eb846edc75b9940b3ce2837012fefd}{el\_circuit\_free}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}});}
+\DoxyCodeLine{00083\ \ \ memset(model,\ 0,\ \textcolor{keyword}{sizeof}(*model));}
+\DoxyCodeLine{00084\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ copy\_id(\textcolor{keywordtype}{char}*\ out,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text)\ \{\ snprintf(out,\ size,\ \textcolor{stringliteral}{"{}\%s"{}},\ text\ ?\ text\ :\ \textcolor{stringliteral}{"{}"{}});\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{comment}{/*\ Grows\ an\ array\ of\ fixed-\/size\ records\ by\ one;\ returns\ the\ new\ element\ or\ NULL.\ */}}
+\DoxyCodeLine{00089\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}*\ grow(\textcolor{keywordtype}{void}**\ items,\ \textcolor{keywordtype}{size\_t}*\ count,\ \textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{void}*\ grown\ =\ realloc(*items,\ (*count\ +\ 1)\ *\ size);}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00093\ \ \ \}}
+\DoxyCodeLine{00094\ \ \ *items\ =\ grown;}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordtype}{void}*\ item\ =\ (\textcolor{keywordtype}{char}*)grown\ +\ *count\ *\ size;}
+\DoxyCodeLine{00096\ \ \ memset(item,\ 0,\ size);}
+\DoxyCodeLine{00097\ \ \ (*count)++;}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordflow}{return}\ item;}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i].\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}},\ \textcolor{keywordtype}{id})\ ==\ 0)\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})i;}
+\DoxyCodeLine{00105\ \ \ \ \ \}}
+\DoxyCodeLine{00106\ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00108\ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_a9ddfd8e555c19c67486620e2113aa4ae}{el\_model\_find\_connection}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}};\ i++)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}[i].\mbox{\hyperlink{structElConnection_ae1cd6b98006ea4d4eb4b839a127109df}{id}},\ \textcolor{keywordtype}{id})\ ==\ 0)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})i;}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ find\_cable(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_aeb3662d9b11d7f7238af1f13ce673243}{cable\_count}};\ i++)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(model-\/>\mbox{\hyperlink{structElModel_a383681a9008e097491a3a725109e56f2}{cables}}[i].\mbox{\hyperlink{structElCable_a09a252a876789448d46c8e14f298fbe0}{id}},\ \textcolor{keywordtype}{id})\ ==\ 0)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})i;}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00126\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ set\_defaults(\mbox{\hyperlink{structElDevice}{ElDevice}}*\ d)\ \{}
+\DoxyCodeLine{00129\ \ \ d-\/>\mbox{\hyperlink{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}{plugged\_into}}\ =\ -\/1;}
+\DoxyCodeLine{00130\ \ \ d-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91}{EL\_SWITCH}}\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449}{EL\_DIMMER}};\ \textcolor{comment}{/*\ switches\ start\ open,\ the\ rest\ is\ on\ */}}
+\DoxyCodeLine{00131\ \ \ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ =\ 1.0;}
+\DoxyCodeLine{00132\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 3;\ i++)\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[i]\ =\ -\/1;}
+\DoxyCodeLine{00134\ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{switch}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}})\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73}{EL\_SUPPLY}}:}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adea2229359d9a62d83165e45b653c9ec}{voltage\_v}}\ =\ 230.0;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_af642e972b19693986ba8ae72e6c6e124}{frequency\_hz}}\ =\ 50.0;}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_ae2897da05192d04fae0b924f62918cdf}{loop\_impedance\_ohm}}\ =\ 0.35;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a5eb85454a397b4caa2b2a9a80af6facf}{earthing}}\ =\ \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a9641e879371007213d23afbd171c353c}{EL\_TN\_S}};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6915669443ac49a322475df985576423}{earth\_electrode\_ohm}}\ =\ 30.0;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a094c949d71181d8de09b7bffc7e58f16}{source\_earth\_ohm}}\ =\ 1.0;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\_BREAKER}}:}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ =\ 16.0;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a2467e609f2233d995e6025cec114d8e0}{magnetic\_multiple}}\ =\ 5.0;\ \textcolor{comment}{/*\ characteristic\ B:\ 3..5\ In\ */}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a7e481940b5ef3b3051670ed35c5421dc}{thermal\_limit}}\ =\ 60.0;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}}\ =\ 0.002;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\_FUSE}}:}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ =\ 16.0;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a7e481940b5ef3b3051670ed35c5421dc}{thermal\_limit}}\ =\ 1000.0;\ \textcolor{comment}{/*\ A\string^2\ s\ above\ the\ rating\ */}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}}\ =\ 0.003;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}}:}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ =\ 40.0;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a}{residual\_rated\_a}}\ =\ 0.03;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}}\ =\ 0.002;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91}{EL\_SWITCH}}:}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ =\ 10.0;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}}\ =\ 0.005;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\_LOAD}}:}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adea2229359d9a62d83165e45b653c9ec}{voltage\_v}}\ =\ 230.0;}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\_power\_w}}\ =\ 100.0;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449}{EL\_DIMMER}}:}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ =\ 2.0;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}}\ =\ 0.01;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}{EL\_SOCKET}}:}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc}{EL\_JUNCTION}}:}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}}:}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00176\ \ \ \}}
+\DoxyCodeLine{00177\ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_aadd58facde02955b37e96d98e7c7534c}{el\_model\_add\_device}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ type)\ \{}
+\DoxyCodeLine{00180\ \ \ \textcolor{keywordflow}{if}\ (type\ <\ 0\ ||\ type\ >=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}}\ ||\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ \textcolor{keywordtype}{id})\ >=\ 0)\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ grow((\textcolor{keywordtype}{void}**)\&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}},\ \&model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElDevice}{ElDevice}}));}
+\DoxyCodeLine{00184\ \ \ \textcolor{keywordflow}{if}\ (d\ ==\ NULL)\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00186\ \ \ \}}
+\DoxyCodeLine{00187\ \ \ copy\_id(d-\/>\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}},\ \textcolor{keyword}{sizeof}(d-\/>\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}}),\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00188\ \ \ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ =\ type;}
+\DoxyCodeLine{00189\ \ \ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}}\ =\ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}};}
+\DoxyCodeLine{00190\ \ \ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}}\ +=\ kTerminalCount[type];}
+\DoxyCodeLine{00191\ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6b739f7d9220892b08d8dfd52ef59601}{internal\_node}}\ =\ -\/1;}
+\DoxyCodeLine{00192\ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73}{EL\_SUPPLY}})\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6b739f7d9220892b08d8dfd52ef59601}{internal\_node}}\ =\ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}};}
+\DoxyCodeLine{00194\ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}}\ +=\ \mbox{\hyperlink{elsim_8c_a960696fcc5f8f6d616034d0f1134e268}{SUPPLY\_INTERNAL\_NODES}};}
+\DoxyCodeLine{00195\ \ \ \}}
+\DoxyCodeLine{00196\ \ \ set\_defaults(d);}
+\DoxyCodeLine{00197\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00198\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}}\ -\/\ 1;}
+\DoxyCodeLine{00199\ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_a113e7cd11459fa12bd8deba61e29ad9a}{el\_model\_add\_cable}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ type,\ \textcolor{keywordtype}{double}\ cross\_section\_mm2,\ \textcolor{keywordtype}{double}\ length\_m)\ \{}
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordflow}{if}\ (find\_cable(model,\ \textcolor{keywordtype}{id})\ >=\ 0\ ||\ cross\_section\_mm2\ <=\ 0.0\ ||\ length\_m\ <\ 0.0)\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00204\ \ \ \}}
+\DoxyCodeLine{00205\ \ \ \mbox{\hyperlink{structElCable}{ElCable}}*\ c\ =\ grow((\textcolor{keywordtype}{void}**)\&model-\/>\mbox{\hyperlink{structElModel_a383681a9008e097491a3a725109e56f2}{cables}},\ \&model-\/>\mbox{\hyperlink{structElModel_aeb3662d9b11d7f7238af1f13ce673243}{cable\_count}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElCable}{ElCable}}));}
+\DoxyCodeLine{00206\ \ \ \textcolor{keywordflow}{if}\ (c\ ==\ NULL)\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00208\ \ \ \}}
+\DoxyCodeLine{00209\ \ \ copy\_id(c-\/>\mbox{\hyperlink{structElCable_a09a252a876789448d46c8e14f298fbe0}{id}},\ \textcolor{keyword}{sizeof}(c-\/>\mbox{\hyperlink{structElCable_a09a252a876789448d46c8e14f298fbe0}{id}}),\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00210\ \ \ copy\_id(c-\/>\mbox{\hyperlink{structElCable_adf3b31943b257b4c585ff01fe8587242}{type}},\ \textcolor{keyword}{sizeof}(c-\/>\mbox{\hyperlink{structElCable_adf3b31943b257b4c585ff01fe8587242}{type}}),\ type);}
+\DoxyCodeLine{00211\ \ \ c-\/>\mbox{\hyperlink{structElCable_adce5138cc1a7f6a130382f6772f04ad6}{cross\_section\_mm2}}\ =\ cross\_section\_mm2;}
+\DoxyCodeLine{00212\ \ \ c-\/>\mbox{\hyperlink{structElCable_a18dd7db4e18908333a6c55f1d634d7fe}{length\_m}}\ =\ length\_m;}
+\DoxyCodeLine{00213\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})model-\/>\mbox{\hyperlink{structElModel_aeb3662d9b11d7f7238af1f13ce673243}{cable\_count}}\ -\/\ 1;}
+\DoxyCodeLine{00214\ \}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ reference)\ \{}
+\DoxyCodeLine{00217\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ colon\ =\ reference\ ?\ strchr(reference,\ \textcolor{charliteral}{':'})\ :\ NULL;}
+\DoxyCodeLine{00218\ \ \ \textcolor{keywordflow}{if}\ (colon\ ==\ NULL)\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00220\ \ \ \}}
+\DoxyCodeLine{00221\ \ \ \textcolor{keywordtype}{char}\ device\_id[\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\_ID\_MAX}}];}
+\DoxyCodeLine{00222\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ length\ =\ (size\_t)(colon\ -\/\ reference);}
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordflow}{if}\ (length\ ==\ 0\ ||\ length\ >=\ \textcolor{keyword}{sizeof}(device\_id))\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00225\ \ \ \}}
+\DoxyCodeLine{00226\ \ \ memcpy(device\_id,\ reference,\ length);}
+\DoxyCodeLine{00227\ \ \ device\_id[length]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00228\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ device\_id);}
+\DoxyCodeLine{00229\ \ \ \textcolor{keywordflow}{if}\ (index\ <\ 0)\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00231\ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index];}
+\DoxyCodeLine{00233\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ t\ =\ 0;\ t\ <\ kTerminalCount[d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}];\ t++)\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(kTerminals[d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}][t],\ colon\ +\ 1)\ ==\ 0)\ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}}\ +\ t;}
+\DoxyCodeLine{00236\ \ \ \ \ \}}
+\DoxyCodeLine{00237\ \ \ \}}
+\DoxyCodeLine{00238\ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00239\ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_a190981392692c3b3f0dfa781370fa8b9}{el\_model\_connect}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ from,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ to,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ role,}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ cable)\ \{}
+\DoxyCodeLine{00243\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ from);}
+\DoxyCodeLine{00244\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ b\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ to);}
+\DoxyCodeLine{00245\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cable\_index\ =\ (cable\ !=\ NULL\ \&\&\ cable[0]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'})\ ?\ find\_cable(model,\ cable)\ :\ -\/1;}
+\DoxyCodeLine{00246\ \ \ \textcolor{keywordflow}{if}\ (a\ <\ 0\ ||\ b\ <\ 0\ ||\ a\ ==\ b\ ||\ (cable\ !=\ NULL\ \&\&\ cable[0]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'}\ \&\&\ cable\_index\ <\ 0))\ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00248\ \ \ \}}
+\DoxyCodeLine{00249\ \ \ \textcolor{keywordtype}{char}\ generated[\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\_ID\_MAX}}];}
+\DoxyCodeLine{00250\ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{id}\ ==\ NULL\ ||\ \textcolor{keywordtype}{id}[0]\ ==\ \textcolor{charliteral}{'\(\backslash\)0'})\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ snprintf(generated,\ \textcolor{keyword}{sizeof}(generated),\ \textcolor{stringliteral}{"{}c\%zu"{}},\ model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}}\ +\ 1);}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordtype}{id}\ =\ generated;}
+\DoxyCodeLine{00253\ \ \ \}}
+\DoxyCodeLine{00254\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{elsim_8c_a9ddfd8e555c19c67486620e2113aa4ae}{el\_model\_find\_connection}}(model,\ \textcolor{keywordtype}{id})\ >=\ 0)\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00256\ \ \ \}}
+\DoxyCodeLine{00257\ \ \ \mbox{\hyperlink{structElConnection}{ElConnection}}*\ c\ =\ grow((\textcolor{keywordtype}{void}**)\&model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}},\ \&model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElConnection}{ElConnection}}));}
+\DoxyCodeLine{00258\ \ \ \textcolor{keywordflow}{if}\ (c\ ==\ NULL)\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00260\ \ \ \}}
+\DoxyCodeLine{00261\ \ \ copy\_id(c-\/>\mbox{\hyperlink{structElConnection_ae1cd6b98006ea4d4eb4b839a127109df}{id}},\ \textcolor{keyword}{sizeof}(c-\/>\mbox{\hyperlink{structElConnection_ae1cd6b98006ea4d4eb4b839a127109df}{id}}),\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00262\ \ \ copy\_id(c-\/>\mbox{\hyperlink{structElConnection_abfed40e41f1d2b9c2ab2eca76da7de81}{role}},\ \textcolor{keyword}{sizeof}(c-\/>\mbox{\hyperlink{structElConnection_abfed40e41f1d2b9c2ab2eca76da7de81}{role}}),\ role);}
+\DoxyCodeLine{00263\ \ \ c-\/>\mbox{\hyperlink{structElConnection_a2684a185287526b35cb8c36b61d8e606}{a}}\ =\ a;}
+\DoxyCodeLine{00264\ \ \ c-\/>\mbox{\hyperlink{structElConnection_afc984dbe828ce7f585ef8c4567f83701}{b}}\ =\ b;}
+\DoxyCodeLine{00265\ \ \ c-\/>\mbox{\hyperlink{structElConnection_a2314ba3662e87a7a7f751a9471aa6b60}{cable}}\ =\ cable\_index;}
+\DoxyCodeLine{00266\ \ \ c-\/>\mbox{\hyperlink{structElConnection_ab1e39ed97ee7f2691544a543581e6d7c}{element}}\ =\ -\/1;}
+\DoxyCodeLine{00267\ \ \ \textcolor{keywordflow}{if}\ (cable\_index\ >=\ 0)\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCable}{ElCable}}*\ k\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a383681a9008e097491a3a725109e56f2}{cables}}[cable\_index];}
+\DoxyCodeLine{00269\ \ \ \ \ c-\/>\mbox{\hyperlink{structElConnection_abc7b2ffd744ebb1b8daa9c6abcd458d9}{resistance\_ohm}}\ =\ \mbox{\hyperlink{elsim_8h_a4e2a20b4f87a060dd28cf448b33c9efe}{EL\_COPPER\_RESISTIVITY}}\ *\ k-\/>\mbox{\hyperlink{structElCable_a18dd7db4e18908333a6c55f1d634d7fe}{length\_m}}\ /\ k-\/>\mbox{\hyperlink{structElCable_adce5138cc1a7f6a130382f6772f04ad6}{cross\_section\_mm2}};}
+\DoxyCodeLine{00270\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ c-\/>\mbox{\hyperlink{structElConnection_abc7b2ffd744ebb1b8daa9c6abcd458d9}{resistance\_ohm}}\ =\ \mbox{\hyperlink{elsim_8h_a7529c34344def98d3678bc09b3d39b6c}{EL\_LINK\_OHM}};}
+\DoxyCodeLine{00272\ \ \ \}}
+\DoxyCodeLine{00273\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00274\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}}\ -\/\ 1;}
+\DoxyCodeLine{00275\ \}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a0e89def0283c91ed424ec20868089c9c}{el\_model\_plug}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ load,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ socket)\ \{}
+\DoxyCodeLine{00278\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ l\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ load);}
+\DoxyCodeLine{00279\ \ \ \textcolor{keywordflow}{if}\ (l\ <\ 0\ ||\ model-\/>devices[l].type\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\_LOAD}})\ \{}
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00281\ \ \ \}}
+\DoxyCodeLine{00282\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00283\ \ \ \textcolor{keywordflow}{if}\ (socket\ ==\ NULL)\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[l].\mbox{\hyperlink{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}{plugged\_into}}\ =\ -\/1;}
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00286\ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ s\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ socket);}
+\DoxyCodeLine{00288\ \ \ \textcolor{keywordflow}{if}\ (s\ <\ 0\ ||\ model-\/>devices[s].type\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}{EL\_SOCKET}})\ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00290\ \ \ \}}
+\DoxyCodeLine{00291\ \ \ model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[l].\mbox{\hyperlink{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}{plugged\_into}}\ =\ s;}
+\DoxyCodeLine{00292\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00293\ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00296\ \textcolor{comment}{/*\ Operation\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00297\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ push\_event(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ format,\ ...)\ \{}
+\DoxyCodeLine{00300\ \ \ \mbox{\hyperlink{structElEvent}{ElEvent}}*\ e\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a8903037c40f2563b322e0e888ae37de0}{events}}[(model-\/>\mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\_head}}\ +\ model-\/>\mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\_count}})\ \%\ \mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\_MAX\_EVENTS}}];}
+\DoxyCodeLine{00301\ \ \ \textcolor{keywordflow}{if}\ (model-\/>\mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\_count}}\ ==\ \mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\_MAX\_EVENTS}})\ \{}
+\DoxyCodeLine{00302\ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\_head}}\ =\ (model-\/>\mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\_head}}\ +\ 1)\ \%\ \mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\_MAX\_EVENTS}};\ \textcolor{comment}{/*\ drop\ the\ oldest\ */}}
+\DoxyCodeLine{00303\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00304\ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\_count}}++;}
+\DoxyCodeLine{00305\ \ \ \}}
+\DoxyCodeLine{00306\ \ \ e-\/>\mbox{\hyperlink{structElEvent_ae1684de76c842d97d83177b1e5cc9929}{time\_s}}\ =\ model-\/>\mbox{\hyperlink{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}{time\_s}};}
+\DoxyCodeLine{00307\ \ \ va\_list\ args;}
+\DoxyCodeLine{00308\ \ \ va\_start(args,\ format);}
+\DoxyCodeLine{00309\ \ \ vsnprintf(e-\/>\mbox{\hyperlink{structElEvent_a4dbb2cca16ae7e4825493b6dbefd35a7}{text}},\ \textcolor{keyword}{sizeof}(e-\/>\mbox{\hyperlink{structElEvent_a4dbb2cca16ae7e4825493b6dbefd35a7}{text}}),\ format,\ args);}
+\DoxyCodeLine{00310\ \ \ va\_end(args);}
+\DoxyCodeLine{00311\ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a273f6c26a5e91b2ecf9342503878e345}{el\_model\_next\_event}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \mbox{\hyperlink{structElEvent}{ElEvent}}*\ event)\ \{}
+\DoxyCodeLine{00314\ \ \ \textcolor{keywordflow}{if}\ (model-\/>\mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\_count}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00316\ \ \ \}}
+\DoxyCodeLine{00317\ \ \ *\textcolor{keyword}{event}\ =\ model-\/>\mbox{\hyperlink{structElModel_a8903037c40f2563b322e0e888ae37de0}{events}}[model-\/>\mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\_head}}];}
+\DoxyCodeLine{00318\ \ \ model-\/>\mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\_head}}\ =\ (model-\/>\mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\_head}}\ +\ 1)\ \%\ \mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\_MAX\_EVENTS}};}
+\DoxyCodeLine{00319\ \ \ model-\/>\mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\_count}}-\/-\/;}
+\DoxyCodeLine{00320\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00321\ \}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_ae877b07c9479efb60cf47f091ccd89a1}{el\_model\_set\_on}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{bool}\ on)\ \{}
+\DoxyCodeLine{00324\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00325\ \ \ \textcolor{keywordflow}{if}\ (index\ <\ 0)\ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00327\ \ \ \}}
+\DoxyCodeLine{00328\ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index];}
+\DoxyCodeLine{00329\ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73}{EL\_SUPPLY}}\ ||\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}{EL\_SOCKET}})\ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00331\ \ \ \}}
+\DoxyCodeLine{00332\ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\_FUSE}}\ \&\&\ on\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}})\ \{}
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \textcolor{comment}{/*\ a\ blown\ fuse\ has\ to\ be\ replaced\ */}}
+\DoxyCodeLine{00334\ \ \ \}}
+\DoxyCodeLine{00335\ \ \ d-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}\ =\ on;}
+\DoxyCodeLine{00336\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00337\ \ \ \textcolor{keywordflow}{if}\ (on\ \&\&\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\_BREAKER}}\ ||\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}}))\ \{}
+\DoxyCodeLine{00338\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{/*\ switching\ the\ handle\ back\ on\ re-\/arms\ it\ */}}
+\DoxyCodeLine{00339\ \ \ \}}
+\DoxyCodeLine{00340\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00341\ \}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a7d6e6daed5801cde90d825cedde34fde}{el\_model\_reset}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00344\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00345\ \ \ \textcolor{keywordflow}{if}\ (index\ <\ 0)\ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00347\ \ \ \}}
+\DoxyCodeLine{00348\ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index];}
+\DoxyCodeLine{00349\ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\_BREAKER}}\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\_FUSE}}\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}})\ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00351\ \ \ \}}
+\DoxyCodeLine{00352\ \ \ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00353\ \ \ d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ =\ 0.0;}
+\DoxyCodeLine{00354\ \ \ d-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00355\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00356\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00357\ \}}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_af3a6854fc33f6f01f735fb65831cb8d6}{el\_model\_press\_test}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00360\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00361\ \ \ \textcolor{keywordflow}{if}\ (index\ <\ 0\ ||\ model-\/>devices[index].type\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}})\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00363\ \ \ \}}
+\DoxyCodeLine{00364\ \ \ model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index].\mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\_pressed}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00365\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00366\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00367\ \}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a044c0f55a5338ccc11fc271eb0e23a9a}{el\_model\_set\_level}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{double}\ level)\ \{}
+\DoxyCodeLine{00370\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{elsim_8c_ac77d510ad80ba9a8888bffa71867c43d}{el\_model\_find\_device}}(model,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00371\ \ \ \textcolor{keywordflow}{if}\ (index\ <\ 0\ ||\ model-\/>devices[index].type\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449}{EL\_DIMMER}}\ ||\ level\ !=\ level)\ \{}
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00373\ \ \ \}}
+\DoxyCodeLine{00374\ \ \ model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[index].\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ =\ level\ <\ 0.0\ ?\ 0.0\ :\ level\ >\ 1.0\ ?\ 1.0\ :\ level;}
+\DoxyCodeLine{00375\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00376\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00377\ \}}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{elsim_8c_a32f31f16a4deaeac4fa6d0d289266957}{el\_model\_touch}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{\ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;\ \}}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{elsim_8c_a4716a4011b8c83134128e711975c56ec}{el\_model\_add\_fault}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ b,\ \textcolor{keywordtype}{double}\ resistance\_ohm,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ description)\ \{}
+\DoxyCodeLine{00382\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ na\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ a);}
+\DoxyCodeLine{00383\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nb\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ b);}
+\DoxyCodeLine{00384\ \ \ \textcolor{keywordflow}{if}\ (na\ <\ 0\ ||\ nb\ <\ 0\ ||\ na\ ==\ nb\ ||\ resistance\_ohm\ <\ 0.0)\ \{}
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00386\ \ \ \}}
+\DoxyCodeLine{00387\ \ \ \mbox{\hyperlink{structElFault}{ElFault}}*\ f\ =\ grow((\textcolor{keywordtype}{void}**)\&model-\/>\mbox{\hyperlink{structElModel_a39a26ae9a001afca12107e9390c3c106}{faults}},\ \&model-\/>\mbox{\hyperlink{structElModel_a3bb02b034962b2833aea0759097022ea}{fault\_count}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElFault}{ElFault}}));}
+\DoxyCodeLine{00388\ \ \ \textcolor{keywordflow}{if}\ (f\ ==\ NULL)\ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00390\ \ \ \}}
+\DoxyCodeLine{00391\ \ \ f-\/>\mbox{\hyperlink{structElFault_a26de6c7f7fe4da90e4c514e110572545}{a}}\ =\ na;}
+\DoxyCodeLine{00392\ \ \ f-\/>\mbox{\hyperlink{structElFault_ae85cf3978013b5f82fa125c2080002ff}{b}}\ =\ nb;}
+\DoxyCodeLine{00393\ \ \ f-\/>\mbox{\hyperlink{structElFault_a869f833c8127e0837f4182c9a614ea9a}{resistance\_ohm}}\ =\ resistance\_ohm;}
+\DoxyCodeLine{00394\ \ \ f-\/>\mbox{\hyperlink{structElFault_a740e32447d548f238b18b98a8f24f2fa}{element}}\ =\ -\/1;}
+\DoxyCodeLine{00395\ \ \ \textcolor{keywordflow}{if}\ (description\ !=\ NULL\ \&\&\ description[0]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'})\ \{}
+\DoxyCodeLine{00396\ \ \ \ \ copy\_id(f-\/>\mbox{\hyperlink{structElFault_a0b8fc3c6efe38e289187121611f4db93}{description}},\ \textcolor{keyword}{sizeof}(f-\/>\mbox{\hyperlink{structElFault_a0b8fc3c6efe38e289187121611f4db93}{description}}),\ description);}
+\DoxyCodeLine{00397\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00398\ \ \ \ \ snprintf(f-\/>\mbox{\hyperlink{structElFault_a0b8fc3c6efe38e289187121611f4db93}{description}},\ \textcolor{keyword}{sizeof}(f-\/>\mbox{\hyperlink{structElFault_a0b8fc3c6efe38e289187121611f4db93}{description}}),\ \textcolor{stringliteral}{"{}\%s\ -\/\ \%s,\ \%g\ Ohm"{}},\ a,\ b,\ resistance\_ohm);}
+\DoxyCodeLine{00399\ \ \ \}}
+\DoxyCodeLine{00400\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00401\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})model-\/>\mbox{\hyperlink{structElModel_a3bb02b034962b2833aea0759097022ea}{fault\_count}}\ -\/\ 1;}
+\DoxyCodeLine{00402\ \}}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00404\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a158f6aa26b17484ae9b4c9637ca0b43e}{el\_model\_set\_connection\_open}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{bool}\ open)\ \{}
+\DoxyCodeLine{00405\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{elsim_8c_a9ddfd8e555c19c67486620e2113aa4ae}{el\_model\_find\_connection}}(model,\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordflow}{if}\ (index\ <\ 0)\ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00408\ \ \ \}}
+\DoxyCodeLine{00409\ \ \ model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}[index].\mbox{\hyperlink{structElConnection_a1a6f22014dba36d80f42dd4c9ba6f604}{open}}\ =\ open;}
+\DoxyCodeLine{00410\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00411\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00412\ \}}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{elsim_8c_a77ba76faa9ceda6dc982462de7b089a3}{el\_model\_clear\_faults}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00415\ \ \ model-\/>\mbox{\hyperlink{structElModel_a3bb02b034962b2833aea0759097022ea}{fault\_count}}\ =\ 0;}
+\DoxyCodeLine{00416\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}};\ i++)\ \{}
+\DoxyCodeLine{00417\ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}[i].\mbox{\hyperlink{structElConnection_a1a6f22014dba36d80f42dd4c9ba6f604}{open}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00418\ \ \ \}}
+\DoxyCodeLine{00419\ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00420\ \}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00423\ \textcolor{comment}{/*\ Network\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00424\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ conducting(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d)\ \{\ \textcolor{keywordflow}{return}\ d-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}\ \&\&\ !d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}};\ \}}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ load\_ohm(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d)\ \{}
+\DoxyCodeLine{00429\ \ \ \textcolor{keywordflow}{return}\ d-\/>\mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\_power\_w}}\ >\ 0.0\ ?\ d-\/>\mbox{\hyperlink{structElDevice_adea2229359d9a62d83165e45b653c9ec}{voltage\_v}}\ *\ d-\/>\mbox{\hyperlink{structElDevice_adea2229359d9a62d83165e45b653c9ec}{voltage\_v}}\ /\ d-\/>\mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\_power\_w}}\ :\ 1e12;}
+\DoxyCodeLine{00430\ \}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ *\ Builds\ the\ network\ of\ the\ present\ state.\ With\ zero\_sources\ all\ voltage}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ *\ sources\ are\ 0\ V\ (for\ Thevenin\ measurements);\ inject\_a/inject\_b\ >=\ 0\ add\ a}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\ *\ 1\ A\ test\ current\ that\ enters\ node\ a\ and\ leaves\ node\ b.\ The\ device\ with}}
+\DoxyCodeLine{00436\ \textcolor{comment}{\ *\ index\ exclude\ (>=\ 0)\ is\ left\ out\ (a\ dimmer\ measuring\ its\ surroundings).}}
+\DoxyCodeLine{00437\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00438\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ build\_and\_solve(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keywordtype}{bool}\ zero\_sources,\ \textcolor{keywordtype}{int}\ inject\_a,\ \textcolor{keywordtype}{int}\ inject\_b,\ \textcolor{keywordtype}{int}\ exclude)\ \{}
+\DoxyCodeLine{00439\ \ \ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ c\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}};}
+\DoxyCodeLine{00440\ \ \ \textcolor{keywordflow}{if}\ (c-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ !=\ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}})\ \{}
+\DoxyCodeLine{00441\ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_a00eb846edc75b9940b3ce2837012fefd}{el\_circuit\_free}}(c);}
+\DoxyCodeLine{00442\ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_a62c7a6f47abdcce85724b320c45b4a50}{el\_circuit\_init}}(c,\ model-\/>\mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\_count}});}
+\DoxyCodeLine{00443\ \ \ \}}
+\DoxyCodeLine{00444\ \ \ \mbox{\hyperlink{el__circuit_8c_a768a15ac6aad2f8ce889490fd5c24b9d}{el\_circuit\_clear}}(c);}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}};\ i++)\ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \mbox{\hyperlink{structElConnection}{ElConnection}}*\ k\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}[i];}
+\DoxyCodeLine{00448\ \ \ \ \ k-\/>\mbox{\hyperlink{structElConnection_ab1e39ed97ee7f2691544a543581e6d7c}{element}}\ =\ k-\/>\mbox{\hyperlink{structElConnection_a1a6f22014dba36d80f42dd4c9ba6f604}{open}}\ ?\ -\/1\ :\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ k-\/>\mbox{\hyperlink{structElConnection_a2684a185287526b35cb8c36b61d8e606}{a}},\ k-\/>\mbox{\hyperlink{structElConnection_afc984dbe828ce7f585ef8c4567f83701}{b}},\ k-\/>\mbox{\hyperlink{structElConnection_abc7b2ffd744ebb1b8daa9c6abcd458d9}{resistance\_ohm}});}
+\DoxyCodeLine{00449\ \ \ \}}
+\DoxyCodeLine{00450\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a3bb02b034962b2833aea0759097022ea}{fault\_count}};\ i++)\ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \mbox{\hyperlink{structElFault}{ElFault}}*\ f\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a39a26ae9a001afca12107e9390c3c106}{faults}}[i];}
+\DoxyCodeLine{00452\ \ \ \ \ f-\/>\mbox{\hyperlink{structElFault_a740e32447d548f238b18b98a8f24f2fa}{element}}\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ f-\/>\mbox{\hyperlink{structElFault_a26de6c7f7fe4da90e4c514e110572545}{a}},\ f-\/>\mbox{\hyperlink{structElFault_ae85cf3978013b5f82fa125c2080002ff}{b}},\ f-\/>\mbox{\hyperlink{structElFault_a869f833c8127e0837f4182c9a614ea9a}{resistance\_ohm}});}
+\DoxyCodeLine{00453\ \ \ \}}
+\DoxyCodeLine{00454\ }
+\DoxyCodeLine{00455\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00456\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i];}
+\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ t\ =\ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}};}
+\DoxyCodeLine{00458\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ =\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[1]\ =\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[2]\ =\ -\/1;}
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordflow}{if}\ ((\textcolor{keywordtype}{int})i\ ==\ exclude)\ \{}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00461\ \ \ \ \ \}}
+\DoxyCodeLine{00462\ \ \ \ \ \textcolor{keywordflow}{switch}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}})\ \{}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73}{EL\_SUPPLY}}:\ \{}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ star\ =\ d-\/>\mbox{\hyperlink{structElDevice_a6b739f7d9220892b08d8dfd52ef59601}{internal\_node}};}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ half\ =\ d-\/>\mbox{\hyperlink{structElDevice_ae2897da05192d04fae0b924f62918cdf}{loop\_impedance\_ohm}}\ /\ 2.0;}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ phase\ =\ 0;\ phase\ <\ 3;\ phase++)\ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ source\ =\ d-\/>\mbox{\hyperlink{structElDevice_a6b739f7d9220892b08d8dfd52ef59601}{internal\_node}}\ +\ 1\ +\ phase;}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ u\ =\ zero\_sources\ ?\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0)\ :\ \mbox{\hyperlink{el__circuit_8c_a677ff6b008cbe1b748037cd3a19c2ab0}{el\_polar}}(d-\/>voltage\_v,\ -\/120.0\ *\ phase);}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_ae4feaeaff528a4b65be07f77810fff69}{el\_circuit\_add\_voltage\_source}}(c,\ source,\ star,\ u);}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ element\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ source,\ t\ +\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9aa9829cc4681ab1f37ae9f8283358ece5}{SUPPLY\_L1}}\ +\ phase,\ half);}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (phase\ ==\ 0)\ \{}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ =\ element;}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[1]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9ac96e556d4849d048802d3ad0f184f334}{SUPPLY\_N}},\ star,\ half);}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ star,\ 0,\ d-\/>\mbox{\hyperlink{structElDevice_a094c949d71181d8de09b7bffc7e58f16}{source\_earth\_ohm}});}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a5eb85454a397b4caa2b2a9a80af6facf}{earthing}}\ ==\ \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064ad108dd3d3320d2237f2113d78a027dff}{EL\_TT}})\ \{}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[2]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9ac37e6ea99f322ec897c721aaa1dc9d26}{SUPPLY\_PE}},\ 0,\ d-\/>\mbox{\hyperlink{structElDevice_a6915669443ac49a322475df985576423}{earth\_electrode\_ohm}});}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[2]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_a21ae3f45cb6806d10f267a39ea3c33b9ac37e6ea99f322ec897c721aaa1dc9d26}{SUPPLY\_PE}},\ star,\ half);}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\_BREAKER}}:}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\_FUSE}}:}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91}{EL\_SWITCH}}:}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conducting(d))\ \{}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a69b9592270ee18b5ec6b87ba1cff4fb0}{TWO\_IN}},\ t\ +\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a574a025aa8e652fbc0a6f1b881ad9495}{TWO\_OUT}},\ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}});}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}}:}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conducting(d))\ \{}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015a4bae542bf59ec5eb9a708a1d957627e4}{RCD\_L\_IN}},\ t\ +\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015a0e2ba6951e88e18e73db558abf694d65}{RCD\_L\_OUT}},\ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}});}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[1]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015af2e4f3361124d704f677e46f15569da4}{RCD\_N\_IN}},\ t\ +\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015ae7df2b542f96733bc0b98701898ede25}{RCD\_N\_OUT}},\ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}});}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\_pressed}}\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a}{residual\_rated\_a}}\ >\ 0.0)\ \{}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ test\ circuit\ bypasses\ the\ N\ pole,\ so\ its\ current\ is\ residual\ current.\ */}}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ohm\ =\ 230.0\ /\ (\mbox{\hyperlink{elsim_8c_ac846b16facc48c49c6547e31b3160d08}{RCD\_TEST\_MULTIPLE}}\ *\ d-\/>\mbox{\hyperlink{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a}{residual\_rated\_a}});}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015a0e2ba6951e88e18e73db558abf694d65}{RCD\_L\_OUT}},\ t\ +\ \mbox{\hyperlink{elsim_8c_af578b85ec97e2010f84281c19a2fb015af2e4f3361124d704f677e46f15569da4}{RCD\_N\_IN}},\ ohm);}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\_LOAD}}:}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}{plugged\_into}}\ >=\ 0)\ \{}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ s\ =\ model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[d-\/>\mbox{\hyperlink{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}{plugged\_into}}].\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}};}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 3;\ k++)\ \{}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ k,\ s\ +\ k,\ \mbox{\hyperlink{elsim_8c_a154305d13ec00aa82c8bc60fb5556ab8}{PLUG\_CONTACT\_OHM}});}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}})\ \{}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ =\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2a144c25a46f11ee66d1f6998550a046f3}{LOAD\_L}},\ t\ +\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2a2a09a8931de6a4a0c0b6bfc341c22ade}{LOAD\_N}},\ load\_ohm(d));}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449}{EL\_DIMMER}}:}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conducting(d)\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ >\ \mbox{\hyperlink{elsim_8c_ab1d32844a9d6a4929fa257bb56c176c7}{DIMMER\_OFF\_LEVEL}})\ \{}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ x\ =\ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ >=\ \mbox{\hyperlink{elsim_8c_ad79de2b7a0b3478b13f91d08647f4e0d}{DIMMER\_FULL\_LEVEL}}\ ?\ 0.0\ :\ d-\/>\mbox{\hyperlink{structElDevice_abccf655aa40f1505b9fa167705cf5138}{reactance\_ohm}};}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ =\ \mbox{\hyperlink{el__circuit_8c_a45adc8ec37724e3c0bbd6857034e7095}{el\_circuit\_add\_impedance}}(c,\ t\ +\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a69b9592270ee18b5ec6b87ba1cff4fb0}{TWO\_IN}},\ t\ +\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a574a025aa8e652fbc0a6f1b881ad9495}{TWO\_OUT}},\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}},\ x));}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}{EL\_SOCKET}}:}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc}{EL\_JUNCTION}}:}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\_DEVICE\_TYPES}}:}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00523\ \ \ \ \ \}}
+\DoxyCodeLine{00524\ \ \ \}}
+\DoxyCodeLine{00525\ }
+\DoxyCodeLine{00526\ \ \ \textcolor{keywordflow}{if}\ (inject\_a\ >=\ 0\ \&\&\ inject\_b\ >=\ 0)\ \{}
+\DoxyCodeLine{00527\ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_a4c47c7c49005ad928a0cbf1ed8a07337}{el\_circuit\_add\_current\_source}}(c,\ inject\_b,\ inject\_a,\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(1.0,\ 0.0));}
+\DoxyCodeLine{00528\ \ \ \}}
+\DoxyCodeLine{00529\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8c_a70d6c19633c7e5d90345a6cad44f00dd}{el\_circuit\_solve}}(c,\ \mbox{\hyperlink{el__circuit_8h_a3012e70fd0668c9eecf0289961243486}{EL\_GMIN}});}
+\DoxyCodeLine{00530\ \}}
+\DoxyCodeLine{00531\ }
+\DoxyCodeLine{00532\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ read\_results(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00533\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ c\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}};}
+\DoxyCodeLine{00534\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\_count}};\ i++)\ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \mbox{\hyperlink{structElConnection}{ElConnection}}*\ k\ =\ \&model-\/>\mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}[i];}
+\DoxyCodeLine{00536\ \ \ \ \ k-\/>\mbox{\hyperlink{structElConnection_af4633009afa5216ef8280b51fccca06b}{current\_a}}\ =\ k-\/>\mbox{\hyperlink{structElConnection_ab1e39ed97ee7f2691544a543581e6d7c}{element}}\ >=\ 0\ ?\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(\mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(c,\ k-\/>\mbox{\hyperlink{structElConnection_ab1e39ed97ee7f2691544a543581e6d7c}{element}}))\ :\ 0.0;}
+\DoxyCodeLine{00537\ \ \ \}}
+\DoxyCodeLine{00538\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a3bb02b034962b2833aea0759097022ea}{fault\_count}};\ i++)\ \{}
+\DoxyCodeLine{00539\ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_a39a26ae9a001afca12107e9390c3c106}{faults}}[i].\mbox{\hyperlink{structElFault_ac1b162a738509c9b0e655bfc77337d92}{current\_a}}\ =\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(\mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(c,\ model-\/>\mbox{\hyperlink{structElModel_a39a26ae9a001afca12107e9390c3c106}{faults}}[i].\mbox{\hyperlink{structElFault_a740e32447d548f238b18b98a8f24f2fa}{element}}));}
+\DoxyCodeLine{00540\ \ \ \}}
+\DoxyCodeLine{00541\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00542\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i];}
+\DoxyCodeLine{00543\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}}\ =\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ >=\ 0\ ?\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(\mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(c,\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]))\ :\ 0.0;}
+\DoxyCodeLine{00544\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\_a}}\ =\ 0.0;}
+\DoxyCodeLine{00545\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_ab0eeef3989fbeade232ab0e06563adef}{power\_w}}\ =\ 0.0;}
+\DoxyCodeLine{00546\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a30eaf7fe381171a6e313e598fccb9813}{voltage\_v\_measured}}\ =\ 0.0;}
+\DoxyCodeLine{00547\ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}}\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ >=\ 0)\ \{}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\_a}}\ =\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(\mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(c,\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]),\ \mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(c,\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[1])));}
+\DoxyCodeLine{00549\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\_LOAD}}\ ||\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}{EL\_SOCKET}}\ ||\ d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a940f37a7bfa7c0583ee68348a1c476bc}{EL\_JUNCTION}})\ \{}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ u\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(c,\ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}}\ +\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2a144c25a46f11ee66d1f6998550a046f3}{LOAD\_L}}),\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(c,\ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}}\ +\ \mbox{\hyperlink{elsim_8c_a349c6843fe3de3e206e06cbc0f4a3ed2a2a09a8931de6a4a0c0b6bfc341c22ade}{LOAD\_N}}));}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a30eaf7fe381171a6e313e598fccb9813}{voltage\_v\_measured}}\ =\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(u);}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\_LOAD}}\ \&\&\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]\ >=\ 0)\ \{}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ current\ =\ \mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(c,\ d-\/>\mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}}[0]);}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_ab0eeef3989fbeade232ab0e06563adef}{power\_w}}\ =\ \mbox{\hyperlink{el__circuit_8h_a1f63f693662489afbe4565c1c57c3ec1}{el\_real}}(\mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(u,\ \mbox{\hyperlink{el__circuit_8h_a0f53531e718a877faaa53fd9e979adb9}{el\_conj}}(current)));}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00556\ \ \ \ \ \}}
+\DoxyCodeLine{00557\ \ \ \}}
+\DoxyCodeLine{00558\ \}}
+\DoxyCodeLine{00559\ }
+\DoxyCodeLine{00560\ \textcolor{comment}{/*\ Thermal\ state:\ once\ per\ step\ with\ the\ currents\ before\ any\ trip\ of\ this\ step.\ */}}
+\DoxyCodeLine{00561\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ update\_heat(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keywordtype}{double}\ dt)\ \{}
+\DoxyCodeLine{00562\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i];}
+\DoxyCodeLine{00564\ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ <=\ 0.0)\ \{}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00566\ \ \ \ \ \}}
+\DoxyCodeLine{00567\ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\_BREAKER}})\ \{}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ratio\ =\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}}\ /\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}};}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ =\ ratio\ >\ 1.0\ ?\ d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ +\ (ratio\ *\ ratio\ -\/\ 1.0)\ *\ dt\ :\ fmax(0.0,\ d-\/>heat\ -\/\ \mbox{\hyperlink{elsim_8c_aac27b7a66a902a08bae3e791dae14a33}{BREAKER\_COOLING}}\ *\ dt);}
+\DoxyCodeLine{00570\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\_FUSE}})\ \{}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ excess\ =\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}}\ *\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}}\ -\/\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ *\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}};}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ =\ excess\ >\ 0.0\ ?\ d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ +\ excess\ *\ dt}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ fmax(0.0,\ d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ -\/\ 0.1\ *\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ *\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ *\ dt);}
+\DoxyCodeLine{00574\ \ \ \ \ \}}
+\DoxyCodeLine{00575\ \ \ \}}
+\DoxyCodeLine{00576\ \}}
+\DoxyCodeLine{00577\ }
+\DoxyCodeLine{00578\ \textcolor{comment}{/*\ Checks\ all\ protective\ devices;\ returns\ true\ if\ one\ tripped.\ */}}
+\DoxyCodeLine{00579\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ check\_protection(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00580\ \ \ \textcolor{keywordtype}{bool}\ any\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00581\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00582\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i];}
+\DoxyCodeLine{00583\ \ \ \ \ \textcolor{keywordflow}{if}\ (!conducting(d))\ \{}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00585\ \ \ \ \ \}}
+\DoxyCodeLine{00586\ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\_BREAKER}})\ \{}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ratio\ =\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ >\ 0.0\ ?\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}}\ /\ d-\/>\mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\_current\_a}}\ :\ 0.0;}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ratio\ >=\ d-\/>\mbox{\hyperlink{structElDevice_a2467e609f2233d995e6025cec114d8e0}{magnetic\_multiple}})\ \{}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ push\_event(model,\ \textcolor{stringliteral}{"{}\%s\ tripped\ (short\ circuit,\ \%.0f\ A\ =\ \%.1f\ x\ In)"{}},\ d-\/>\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}},\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}},\ ratio);}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ >=\ d-\/>\mbox{\hyperlink{structElDevice_a7e481940b5ef3b3051670ed35c5421dc}{thermal\_limit}})\ \{}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ push\_event(model,\ \textcolor{stringliteral}{"{}\%s\ tripped\ (overload,\ \%.1f\ A\ =\ \%.2f\ x\ In)"{}},\ d-\/>\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}},\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}},\ ratio);}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00595\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\_FUSE}})\ \{}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}\ >=\ d-\/>\mbox{\hyperlink{structElDevice_a7e481940b5ef3b3051670ed35c5421dc}{thermal\_limit}})\ \{}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ push\_event(model,\ \textcolor{stringliteral}{"{}\%s\ blown\ (\%.1f\ A)"{}},\ d-\/>\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}},\ d-\/>\mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\_a}});}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00600\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ ==\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\_RCD}})\ \{}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\_a}}\ >=\ \mbox{\hyperlink{elsim_8c_ac42bb4179ee76ae62bbd7d6bd46150a9}{RCD\_TRIP\_FRACTION}}\ *\ d-\/>\mbox{\hyperlink{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a}{residual\_rated\_a}})\ \{}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ push\_event(model,\ \textcolor{stringliteral}{"{}\%s\ tripped\ (residual\ current\ \%.1f\ mA\%s)"{}},\ d-\/>\mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}},\ d-\/>\mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\_a}}\ *\ 1000.0,}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\_pressed}}\ ?\ \textcolor{stringliteral}{"{},\ test\ button"{}}\ :\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00606\ \ \ \ \ \}}
+\DoxyCodeLine{00607\ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}})\ \{}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ any\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00610\ \ \ \ \ \}}
+\DoxyCodeLine{00611\ \ \ \}}
+\DoxyCodeLine{00612\ \ \ \textcolor{keywordflow}{return}\ any;}
+\DoxyCodeLine{00613\ \}}
+\DoxyCodeLine{00614\ }
+\DoxyCodeLine{00615\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00616\ \textcolor{comment}{\ *\ Dimmer:\ an\ ideal\ (lossless)\ series\ reactance\ X\ chosen\ so\ that\ the\ current}}
+\DoxyCodeLine{00617\ \textcolor{comment}{\ *\ is\ sqrt(level)\ and\ the\ power\ of\ a\ resistive\ load\ level\ x\ the\ full\ value\ -\/}}
+\DoxyCodeLine{00618\ \textcolor{comment}{\ *\ the\ RMS\ values\ of\ a\ phase-\/cut\ or\ PWM\ dimmer.\ With\ the\ Thevenin\ impedance}}
+\DoxyCodeLine{00619\ \textcolor{comment}{\ *\ Z\ =\ A\ +\ jB\ the\ dimmer\ sees\ (contact\ included),\ |Z\ +\ jX|\ =\ |Z|\ /\ sqrt(level).}}
+\DoxyCodeLine{00620\ \textcolor{comment}{\ *\ Recomputed\ only\ when\ the\ network\ changed.}}
+\DoxyCodeLine{00621\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00622\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ update\_dimmers(\mbox{\hyperlink{structElModel}{ElModel}}*\ model)\ \{}
+\DoxyCodeLine{00623\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00624\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ d\ =\ \&model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i];}
+\DoxyCodeLine{00625\ \ \ \ \ \textcolor{keywordflow}{if}\ (d-\/>\mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}\ !=\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a63fbae8ff3950a599df11de4033fb449}{EL\_DIMMER}}\ ||\ !conducting(d)\ ||\ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ <=\ \mbox{\hyperlink{elsim_8c_ab1d32844a9d6a4929fa257bb56c176c7}{DIMMER\_OFF\_LEVEL}}\ ||\ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ >=\ \mbox{\hyperlink{elsim_8c_ad79de2b7a0b3478b13f91d08647f4e0d}{DIMMER\_FULL\_LEVEL}})\ \{}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00627\ \ \ \ \ \}}
+\DoxyCodeLine{00628\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ in\ =\ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}}\ +\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a69b9592270ee18b5ec6b87ba1cff4fb0}{TWO\_IN}};}
+\DoxyCodeLine{00629\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ out\ =\ d-\/>\mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\_node}}\ +\ \mbox{\hyperlink{elsim_8c_a0249269d9370e7f075e7c7072befbd32a574a025aa8e652fbc0a6f1b881ad9495}{TWO\_OUT}};}
+\DoxyCodeLine{00630\ \ \ \ \ \textcolor{keywordflow}{if}\ (!build\_and\_solve(model,\ \textcolor{keyword}{true},\ in,\ out,\ (\textcolor{keywordtype}{int})i))\ \{}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00632\ \ \ \ \ \}}
+\DoxyCodeLine{00633\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ z\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ in),\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ out));}
+\DoxyCodeLine{00634\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ a\ =\ z.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ +\ d-\/>\mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\_ohm}};}
+\DoxyCodeLine{00635\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ b\ =\ z.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}};}
+\DoxyCodeLine{00636\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ x\ =\ -\/b\ +\ sqrt(fmax(0.0,\ (a\ *\ a\ +\ b\ *\ b)\ /\ d-\/>\mbox{\hyperlink{structElDevice_a2d37751978c9ce7dc5207c223be56877}{level}}\ -\/\ a\ *\ a));}
+\DoxyCodeLine{00637\ \ \ \ \ d-\/>\mbox{\hyperlink{structElDevice_abccf655aa40f1505b9fa167705cf5138}{reactance\_ohm}}\ =\ fmin(fmax(x,\ 0.0),\ \mbox{\hyperlink{elsim_8c_a9fa3a2691d158f872f8f2eb65f1cc8ea}{DIMMER\_MAX\_REACTANCE}});}
+\DoxyCodeLine{00638\ \ \ \}}
+\DoxyCodeLine{00639\ \ \ model-\/>\mbox{\hyperlink{structElModel_ad8965f63daf726f98493d19a71bd28ce}{dimmer\_revision}}\ =\ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}};}
+\DoxyCodeLine{00640\ \}}
+\DoxyCodeLine{00641\ }
+\DoxyCodeLine{00642\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_aab5e45876d1ab22015c30e1e4609ffe1}{el\_model\_step}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keywordtype}{double}\ dt\_s)\ \{}
+\DoxyCodeLine{00643\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00644\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ iteration\ =\ 0;\ iteration\ <\ \mbox{\hyperlink{elsim_8c_aa6094c815d6c61ae1c5d183ddd905a13}{MAX\_TRIP\_ITERATIONS}};\ iteration++)\ \{}
+\DoxyCodeLine{00645\ \ \ \ \ \textcolor{keywordflow}{if}\ (model-\/>\mbox{\hyperlink{structElModel_ad8965f63daf726f98493d19a71bd28ce}{dimmer\_revision}}\ !=\ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}})\ \{}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ update\_dimmers(model);}
+\DoxyCodeLine{00647\ \ \ \ \ \}}
+\DoxyCodeLine{00648\ \ \ \ \ \textcolor{keywordflow}{if}\ (!build\_and\_solve(model,\ \textcolor{keyword}{false},\ -\/1,\ -\/1,\ -\/1))\ \{}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00651\ \ \ \ \ \}}
+\DoxyCodeLine{00652\ \ \ \ \ read\_results(model);}
+\DoxyCodeLine{00653\ \ \ \ \ \textcolor{keywordflow}{if}\ (iteration\ ==\ 0)\ \{}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ update\_heat(model,\ dt\_s);}
+\DoxyCodeLine{00655\ \ \ \ \ \}}
+\DoxyCodeLine{00656\ \ \ \ \ \textcolor{keywordflow}{if}\ (!check\_protection(model))\ \{}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00658\ \ \ \ \ \}}
+\DoxyCodeLine{00659\ \ \ \}}
+\DoxyCodeLine{00660\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ model-\/>\mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\_count}};\ i++)\ \{}
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keywordflow}{if}\ (model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i].\mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\_pressed}})\ \{}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}[i].\mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\_pressed}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ model-\/>\mbox{\hyperlink{structElModel_a25f148570c659bdb56caaea7a63c596f}{revision}}++;}
+\DoxyCodeLine{00664\ \ \ \ \ \}}
+\DoxyCodeLine{00665\ \ \ \}}
+\DoxyCodeLine{00666\ \ \ model-\/>\mbox{\hyperlink{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}{time\_s}}\ +=\ dt\_s;}
+\DoxyCodeLine{00667\ \ \ \textcolor{keywordflow}{return}\ ok;}
+\DoxyCodeLine{00668\ \}}
+\DoxyCodeLine{00669\ }
+\DoxyCodeLine{00670\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00671\ \textcolor{comment}{/*\ Measurements\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00672\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00673\ }
+\DoxyCodeLine{00674\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a69822dfb463ef5dd0f7801d636118c8b}{el\_model\_measure\_voltage}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ voltage)\ \{}
+\DoxyCodeLine{00675\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ na\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ a);}
+\DoxyCodeLine{00676\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nb\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ b);}
+\DoxyCodeLine{00677\ \ \ \textcolor{keywordflow}{if}\ (na\ <\ 0\ ||\ nb\ <\ 0\ ||\ !build\_and\_solve(model,\ \textcolor{keyword}{false},\ -\/1,\ -\/1,\ -\/1))\ \{}
+\DoxyCodeLine{00678\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00679\ \ \ \}}
+\DoxyCodeLine{00680\ \ \ *voltage\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ na),\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ nb));}
+\DoxyCodeLine{00681\ \ \ read\_results(model);}
+\DoxyCodeLine{00682\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00683\ \}}
+\DoxyCodeLine{00684\ }
+\DoxyCodeLine{00685\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_a2c8c0828d3e64648482e7d14b298c0c4}{el\_model\_measure\_impedance}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ impedance)\ \{}
+\DoxyCodeLine{00686\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ na\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ a);}
+\DoxyCodeLine{00687\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nb\ =\ \mbox{\hyperlink{elsim_8c_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\_model\_terminal\_node}}(model,\ b);}
+\DoxyCodeLine{00688\ \ \ \textcolor{keywordflow}{if}\ (na\ <\ 0\ ||\ nb\ <\ 0\ ||\ na\ ==\ nb)\ \{}
+\DoxyCodeLine{00689\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00690\ \ \ \}}
+\DoxyCodeLine{00691\ \ \ \textcolor{comment}{/*\ Linear\ network:\ the\ Thevenin\ impedance\ does\ not\ depend\ on\ the\ sources.\ */}}
+\DoxyCodeLine{00692\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ ok\ =\ build\_and\_solve(model,\ \textcolor{keyword}{true},\ na,\ nb,\ -\/1);}
+\DoxyCodeLine{00693\ \ \ \textcolor{keywordflow}{if}\ (ok)\ \{}
+\DoxyCodeLine{00694\ \ \ \ \ *impedance\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ na),\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\&model-\/>\mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}},\ nb));}
+\DoxyCodeLine{00695\ \ \ \}}
+\DoxyCodeLine{00696\ \ \ \textcolor{comment}{/*\ Restore\ the\ normal\ solution\ for\ later\ readings.\ */}}
+\DoxyCodeLine{00697\ \ \ build\_and\_solve(model,\ \textcolor{keyword}{false},\ -\/1,\ -\/1,\ -\/1);}
+\DoxyCodeLine{00698\ \ \ read\_results(model);}
+\DoxyCodeLine{00699\ \ \ \textcolor{keywordflow}{return}\ ok;}
+\DoxyCodeLine{00700\ \}}
+\DoxyCodeLine{00701\ }
+\DoxyCodeLine{00702\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{elsim_8c_aeccf98c941e94923c407172da97f9f6a}{el\_model\_measure\_insulation}}(\mbox{\hyperlink{structElModel}{ElModel}}*\ model,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ b,\ \textcolor{keywordtype}{double}*\ ohm)\ \{}
+\DoxyCodeLine{00703\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ voltage;}
+\DoxyCodeLine{00704\ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{elsim_8c_a69822dfb463ef5dd0f7801d636118c8b}{el\_model\_measure\_voltage}}(model,\ a,\ b,\ \&voltage)\ ||\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(voltage)\ >\ \mbox{\hyperlink{elsim_8h_a993e60cb377b29b2e0dbd9a7ae646796}{EL\_SAFE\_VOLTAGE}})\ \{}
+\DoxyCodeLine{00705\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00706\ \ \ \}}
+\DoxyCodeLine{00707\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ impedance;}
+\DoxyCodeLine{00708\ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{elsim_8c_a2c8c0828d3e64648482e7d14b298c0c4}{el\_model\_measure\_impedance}}(model,\ a,\ b,\ \&impedance))\ \{}
+\DoxyCodeLine{00709\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00710\ \ \ \}}
+\DoxyCodeLine{00711\ \ \ *ohm\ =\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(impedance);}
+\DoxyCodeLine{00712\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00713\ \}}
+
+\end{DoxyCode}

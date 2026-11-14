@@ -1,0 +1,252 @@
+\doxysection{UIo\+Twin\+Electrical\+Subsystem Class Reference}
+\hypertarget{classUIoTwinElectricalSubsystem}{}\label{classUIoTwinElectricalSubsystem}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+
+
+{\ttfamily \#include $<$Io\+Twin\+Electrical\+Subsystem.\+h$>$}
+
+Inheritance diagram for UIo\+Twin\+Electrical\+Subsystem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classUIoTwinElectricalSubsystem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a5c02e4fa465ecef1ec46079a9d6870f9}{Initialize}} (FSubsystem\+Collection\+Base \&Collection) override
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinElectricalSubsystem_af3830254ce6875161f121cd629352401}{Deinitialize}} () override
+\item 
+virtual void \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a10262752ca4df549343ad50903b15e6c}{Tick}} (float Delta\+Time) override
+\item 
+virtual TStat\+Id \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a83c09af05dbc588787fcf9e7017833fb}{Get\+Stat\+Id}} () const override
+\item 
+void \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a65f7391664368aeefda62389c9227f44}{Notify\+Topology\+Changed}} ()
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a01615be7602720e745a4b5e34a9d8203}{Send\+Command}} (const \mbox{\hyperlink{structElCommand}{El\+Command}} \&Command)
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a0d9de7c50c6dd000e11029d515b24113}{Get\+Device\+State}} (const FString \&Device\+Id, \mbox{\hyperlink{structFIoTwinElectricalState}{FIo\+Twin\+Electrical\+State}} \&Out\+State) const
+\item 
+float \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a1482beaac3c96437dd6e22471c3ecf96}{Get\+Port\+Voltage}} (const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}Port) const
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a6f6405a552493ea624609af660072f06}{Set\+Device\+On}} (const FString \&Device\+Id, bool b\+On)
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_af749f1426104408a4bdfb618894d0a1b}{Set\+Dimmer\+Level}} (const FString \&Device\+Id, float Level)
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a939b7d181021a75c8dd9ab268be15535}{Add\+Fault}} (const FString \&TerminalA, const FString \&TerminalB, float Ohm=0.\+0f)
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a86be4e477cfcbc0b9d972daf0cfa20f7}{Clear\+Faults}} ()
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a2de75bd9bcbdab6d6ba4d5c66acce044}{Toggle\+Short\+Circuit}} (UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}Port)
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a544f58e800fc9bdd8cd08030a1f6b27a}{Has\+Short\+Circuit}} () const
+\item 
+int32 \mbox{\hyperlink{classUIoTwinElectricalSubsystem_aa0152c5e1669db01fa251f061bfbe5d3}{Reset\+Protection}} ()
+\item 
+FString \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a3b05165368e32c8e14551d29e93932fd}{Get\+Port\+Device\+Id}} (const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}Port) const
+\item 
+bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a691a4460cc2c81fd7481dcfc81509315}{Is\+Running}} () const
+\item 
+double \mbox{\hyperlink{classUIoTwinElectricalSubsystem_af53623d642f3e547f1445e3efa666e0e}{Get\+Simulated\+Time}} () const
+\item 
+float \mbox{\hyperlink{classUIoTwinElectricalSubsystem_abb6eda7a0cec867bcb9844ddcf912fe9}{Get\+Last\+Step\+Microseconds}} () const
+\item 
+int32 \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a5cc3de216d99848b109be2ceea4cd02a}{Get\+Device\+Count}} () const
+\item 
+const TArray$<$ FString $>$ \& \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a8e971060f75228ce932fee5b78b07d2d}{Get\+Recent\+Events}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a2912b84a98a9bc88cc8b24fe39aad06a}{Get}} (const UObject \texorpdfstring{$\ast$}{*}World\+Context\+Object)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+FOn\+Electrical\+Event \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a566e2e2ac221fad378b713740b35ba56}{On\+Electrical\+Event}}
+\item 
+float \mbox{\hyperlink{classUIoTwinElectricalSubsystem_aedad85f175a4c0f5f6aac7bd27d41fcb}{Step\+Seconds}} = 0.\+01f
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{classUIoTwinElectricalSubsystem_ace327255aede39712421587ea8682d71}{Does\+Support\+World\+Type}} (const EWorld\+Type\+::\+Type World\+Type) const override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Runs the electrical simulation core (libs/elsim) for the scene\+:
+
+
+\begin{DoxyItemize}
+\item builds the model from the scene (ports become junctions, \doxylink{classIElectricalElement}{IElectrical\+Element} actors and components add devices and cables) and rebuilds it when the wiring changes;
+\item steps it in its own thread with a fixed time step (default 10 ms), independent of the frame rate;
+\item takes the newest snapshot and the events every frame and hands them to the elements; commands (switch, dim, faults, reset) go the other way.
+\end{DoxyItemize}
+
+Unreal owns the topology, the simulator every electrical value. -\/Io\+Twin\+Electrical\+Disabled switches it off, -\/Io\+Twin\+Short\+Circuit\+After=\sout{ puts a short circuit on the first load after s seconds (smoke tests). }
+
+\label{doc-func-members}
+\Hypertarget{classUIoTwinElectricalSubsystem_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classUIoTwinElectricalSubsystem_a939b7d181021a75c8dd9ab268be15535}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!AddFault@{AddFault}}
+\index{AddFault@{AddFault}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{AddFault()}{AddFault()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a939b7d181021a75c8dd9ab268be15535} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Add\+Fault (\begin{DoxyParamCaption}\item[{const FString \&}]{TerminalA}{, }\item[{const FString \&}]{TerminalB}{, }\item[{float}]{Ohm}{ = {\ttfamily 0.0f}}\end{DoxyParamCaption})}
+
+Impedance between two terminals ("{}device\+:terminal"{}), 0 Ohm = short circuit. \Hypertarget{classUIoTwinElectricalSubsystem_a86be4e477cfcbc0b9d972daf0cfa20f7}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!ClearFaults@{ClearFaults}}
+\index{ClearFaults@{ClearFaults}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{ClearFaults()}{ClearFaults()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a86be4e477cfcbc0b9d972daf0cfa20f7} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Clear\+Faults (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_af3830254ce6875161f121cd629352401}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!Deinitialize@{Deinitialize}}
+\index{Deinitialize@{Deinitialize}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{Deinitialize()}{Deinitialize()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_af3830254ce6875161f121cd629352401} 
+void UIo\+Twin\+Electrical\+Subsystem\+::\+Deinitialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_ace327255aede39712421587ea8682d71}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!DoesSupportWorldType@{DoesSupportWorldType}}
+\index{DoesSupportWorldType@{DoesSupportWorldType}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{DoesSupportWorldType()}{DoesSupportWorldType()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_ace327255aede39712421587ea8682d71} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Does\+Support\+World\+Type (\begin{DoxyParamCaption}\item[{const EWorld\+Type\+::\+Type}]{World\+Type}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a2912b84a98a9bc88cc8b24fe39aad06a}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!Get@{Get}}
+\index{Get@{Get}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a2912b84a98a9bc88cc8b24fe39aad06a} 
+\mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \texorpdfstring{$\ast$}{*} UIo\+Twin\+Electrical\+Subsystem\+::\+Get (\begin{DoxyParamCaption}\item[{const UObject \texorpdfstring{$\ast$}{*}}]{World\+Context\+Object}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a5cc3de216d99848b109be2ceea4cd02a}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetDeviceCount@{GetDeviceCount}}
+\index{GetDeviceCount@{GetDeviceCount}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetDeviceCount()}{GetDeviceCount()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a5cc3de216d99848b109be2ceea4cd02a} 
+int32 UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Device\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a0d9de7c50c6dd000e11029d515b24113}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetDeviceState@{GetDeviceState}}
+\index{GetDeviceState@{GetDeviceState}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetDeviceState()}{GetDeviceState()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a0d9de7c50c6dd000e11029d515b24113} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Device\+State (\begin{DoxyParamCaption}\item[{const FString \&}]{Device\+Id}{, }\item[{\mbox{\hyperlink{structFIoTwinElectricalState}{FIo\+Twin\+Electrical\+State}} \&}]{Out\+State}{}\end{DoxyParamCaption}) const}
+
+Newest state of a device; false if unknown or not computed yet. \Hypertarget{classUIoTwinElectricalSubsystem_abb6eda7a0cec867bcb9844ddcf912fe9}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetLastStepMicroseconds@{GetLastStepMicroseconds}}
+\index{GetLastStepMicroseconds@{GetLastStepMicroseconds}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetLastStepMicroseconds()}{GetLastStepMicroseconds()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_abb6eda7a0cec867bcb9844ddcf912fe9} 
+float UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Last\+Step\+Microseconds (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Duration of the last simulation step in microseconds (the real-\/time budget is the step). \Hypertarget{classUIoTwinElectricalSubsystem_a3b05165368e32c8e14551d29e93932fd}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetPortDeviceId@{GetPortDeviceId}}
+\index{GetPortDeviceId@{GetPortDeviceId}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetPortDeviceId()}{GetPortDeviceId()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a3b05165368e32c8e14551d29e93932fd} 
+FString UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Port\+Device\+Id (\begin{DoxyParamCaption}\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{Port}{}\end{DoxyParamCaption}) const}
+
+Junction id of a port in the model (for faults\+: "{}$<$id$>$\+:\+L"{}). \Hypertarget{classUIoTwinElectricalSubsystem_a1482beaac3c96437dd6e22471c3ecf96}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetPortVoltage@{GetPortVoltage}}
+\index{GetPortVoltage@{GetPortVoltage}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetPortVoltage()}{GetPortVoltage()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a1482beaac3c96437dd6e22471c3ecf96} 
+float UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Port\+Voltage (\begin{DoxyParamCaption}\item[{const UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{Port}{}\end{DoxyParamCaption}) const}
+
+Voltage L-\/N at a port (0 if the port is not part of the model). \Hypertarget{classUIoTwinElectricalSubsystem_a8e971060f75228ce932fee5b78b07d2d}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetRecentEvents@{GetRecentEvents}}
+\index{GetRecentEvents@{GetRecentEvents}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetRecentEvents()}{GetRecentEvents()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a8e971060f75228ce932fee5b78b07d2d} 
+const TArray$<$ FString $>$ \& UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Recent\+Events (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Latest events, newest last ("{}1.\+20 s  F1 tripped (...)"{}). \Hypertarget{classUIoTwinElectricalSubsystem_af53623d642f3e547f1445e3efa666e0e}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetSimulatedTime@{GetSimulatedTime}}
+\index{GetSimulatedTime@{GetSimulatedTime}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetSimulatedTime()}{GetSimulatedTime()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_af53623d642f3e547f1445e3efa666e0e} 
+double UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Simulated\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Simulated time in s. \Hypertarget{classUIoTwinElectricalSubsystem_a83c09af05dbc588787fcf9e7017833fb}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!GetStatId@{GetStatId}}
+\index{GetStatId@{GetStatId}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{GetStatId()}{GetStatId()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a83c09af05dbc588787fcf9e7017833fb} 
+TStat\+Id UIo\+Twin\+Electrical\+Subsystem\+::\+Get\+Stat\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a544f58e800fc9bdd8cd08030a1f6b27a}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!HasShortCircuit@{HasShortCircuit}}
+\index{HasShortCircuit@{HasShortCircuit}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{HasShortCircuit()}{HasShortCircuit()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a544f58e800fc9bdd8cd08030a1f6b27a} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Has\+Short\+Circuit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a5c02e4fa465ecef1ec46079a9d6870f9}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a5c02e4fa465ecef1ec46079a9d6870f9} 
+void UIo\+Twin\+Electrical\+Subsystem\+::\+Initialize (\begin{DoxyParamCaption}\item[{FSubsystem\+Collection\+Base \&}]{Collection}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a691a4460cc2c81fd7481dcfc81509315}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a691a4460cc2c81fd7481dcfc81509315} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a65f7391664368aeefda62389c9227f44}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!NotifyTopologyChanged@{NotifyTopologyChanged}}
+\index{NotifyTopologyChanged@{NotifyTopologyChanged}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{NotifyTopologyChanged()}{NotifyTopologyChanged()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a65f7391664368aeefda62389c9227f44} 
+void UIo\+Twin\+Electrical\+Subsystem\+::\+Notify\+Topology\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The wiring changed\+: the model is rebuilt in the next frame (electrical state starts fresh). \Hypertarget{classUIoTwinElectricalSubsystem_aa0152c5e1669db01fa251f061bfbe5d3}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!ResetProtection@{ResetProtection}}
+\index{ResetProtection@{ResetProtection}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{ResetProtection()}{ResetProtection()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_aa0152c5e1669db01fa251f061bfbe5d3} 
+int32 UIo\+Twin\+Electrical\+Subsystem\+::\+Reset\+Protection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Re-\/arms every tripped breaker/\+RCD and replaces blown fuses. \Hypertarget{classUIoTwinElectricalSubsystem_a01615be7602720e745a4b5e34a9d8203}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!SendCommand@{SendCommand}}
+\index{SendCommand@{SendCommand}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{SendCommand()}{SendCommand()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a01615be7602720e745a4b5e34a9d8203} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Send\+Command (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElCommand}{El\+Command}} \&}]{Command}{}\end{DoxyParamCaption})}
+
+Queues a command for the next simulation step. \Hypertarget{classUIoTwinElectricalSubsystem_a6f6405a552493ea624609af660072f06}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!SetDeviceOn@{SetDeviceOn}}
+\index{SetDeviceOn@{SetDeviceOn}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{SetDeviceOn()}{SetDeviceOn()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a6f6405a552493ea624609af660072f06} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Set\+Device\+On (\begin{DoxyParamCaption}\item[{const FString \&}]{Device\+Id}{, }\item[{bool}]{b\+On}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_af749f1426104408a4bdfb618894d0a1b}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!SetDimmerLevel@{SetDimmerLevel}}
+\index{SetDimmerLevel@{SetDimmerLevel}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{SetDimmerLevel()}{SetDimmerLevel()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_af749f1426104408a4bdfb618894d0a1b} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Set\+Dimmer\+Level (\begin{DoxyParamCaption}\item[{const FString \&}]{Device\+Id}{, }\item[{float}]{Level}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a10262752ca4df549343ad50903b15e6c}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!Tick@{Tick}}
+\index{Tick@{Tick}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{Tick()}{Tick()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a10262752ca4df549343ad50903b15e6c} 
+void UIo\+Twin\+Electrical\+Subsystem\+::\+Tick (\begin{DoxyParamCaption}\item[{float}]{Delta\+Time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_a2de75bd9bcbdab6d6ba4d5c66acce044}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!ToggleShortCircuit@{ToggleShortCircuit}}
+\index{ToggleShortCircuit@{ToggleShortCircuit}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{ToggleShortCircuit()}{ToggleShortCircuit()}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a2de75bd9bcbdab6d6ba4d5c66acce044} 
+bool UIo\+Twin\+Electrical\+Subsystem\+::\+Toggle\+Short\+Circuit (\begin{DoxyParamCaption}\item[{UElectrical\+Port\+Component \texorpdfstring{$\ast$}{*}}]{Port}{}\end{DoxyParamCaption})}
+
+Short circuit L-\/N at a port, or removes all faults if one was set this way. 
+
+\label{doc-variable-members}
+\Hypertarget{classUIoTwinElectricalSubsystem_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classUIoTwinElectricalSubsystem_a566e2e2ac221fad378b713740b35ba56}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!OnElectricalEvent@{OnElectricalEvent}}
+\index{OnElectricalEvent@{OnElectricalEvent}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{OnElectricalEvent}{OnElectricalEvent}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_a566e2e2ac221fad378b713740b35ba56} 
+FOn\+Electrical\+Event UIo\+Twin\+Electrical\+Subsystem\+::\+On\+Electrical\+Event}
+
+\Hypertarget{classUIoTwinElectricalSubsystem_aedad85f175a4c0f5f6aac7bd27d41fcb}\index{UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}!StepSeconds@{StepSeconds}}
+\index{StepSeconds@{StepSeconds}!UIoTwinElectricalSubsystem@{UIoTwinElectricalSubsystem}}
+\doxysubsubsection{\texorpdfstring{StepSeconds}{StepSeconds}}
+{\footnotesize\ttfamily \label{classUIoTwinElectricalSubsystem_aedad85f175a4c0f5f6aac7bd27d41fcb} 
+float UIo\+Twin\+Electrical\+Subsystem\+::\+Step\+Seconds = 0.\+01f}
+
+Simulated time per step in s. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{IoTwinElectricalSubsystem_8h}{Io\+Twin\+Electrical\+Subsystem.\+h}}\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{IoTwinElectricalSubsystem_8cpp}{Io\+Twin\+Electrical\+Subsystem.\+cpp}}\end{DoxyCompactItemize}

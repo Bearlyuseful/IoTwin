@@ -1,0 +1,59 @@
+\doxysection{Electrical\+Model\+Builder.\+h}
+\hypertarget{ElectricalModelBuilder_8h_source}{}\label{ElectricalModelBuilder_8h_source}\index{visualizer/Source/IoTwin/Electrical/ElectricalModelBuilder.h@{visualizer/Source/IoTwin/Electrical/ElectricalModelBuilder.h}}
+\mbox{\hyperlink{ElectricalModelBuilder_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ builds\ the\ model\ of\ the\ electrical\ simulation\ from\ the\ scene.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{elsim_8h}{elsim.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }UElectricalPortComponent;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFElectricalDeviceRef}{FElectricalDeviceRef}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{structElModel}{ElModel}}*\ \mbox{\hyperlink{structFElectricalDeviceRef_a60477cf2a38905a9513d566e0bc8ff63}{Model}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00018\ \ \ \ \ int32\ \mbox{\hyperlink{structFElectricalDeviceRef_af1aa1d6a22a8f1320acb3f3d17a668a8}{Index}}\ =\ -\/1;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}*\ \mbox{\hyperlink{structFElectricalDeviceRef_a7435762574570a76c7da528e560cdc79}{operator-\/>}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{structFElectricalDeviceRef_a60477cf2a38905a9513d566e0bc8ff63}{Model}}-\/>devices[\mbox{\hyperlink{structFElectricalDeviceRef_af1aa1d6a22a8f1320acb3f3d17a668a8}{Index}}];\ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{structElDevice}{ElDevice}}\&\ \mbox{\hyperlink{structFElectricalDeviceRef_a24653e7e3dbe8aad5c4f118b477a8f56}{operator*}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structFElectricalDeviceRef_a60477cf2a38905a9513d566e0bc8ff63}{Model}}-\/>devices[\mbox{\hyperlink{structFElectricalDeviceRef_af1aa1d6a22a8f1320acb3f3d17a668a8}{Index}}];\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structFElectricalDeviceRef_a60477cf2a38905a9513d566e0bc8ff63}{Model}}\ !=\ \textcolor{keyword}{nullptr}\ \&\&\ \mbox{\hyperlink{structFElectricalDeviceRef_af1aa1d6a22a8f1320acb3f3d17a668a8}{Index}}\ >=\ 0;\ \}}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classFElectricalModelBuilder_a8399483c141c2105ac4258e72a24ae61}{FElectricalModelBuilder}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classFElectricalModelBuilder_a8399483c141c2105ac4258e72a24ae61}{FElectricalModelBuilder}}(\mbox{\hyperlink{structElModel}{ElModel}}\&\ InModel)\ :\ Model(InModel)\ \{\}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ FString\ MakeId(\textcolor{keyword}{const}\ UObject*\ Object,\ \textcolor{keyword}{const}\ FString\&\ Suffix\ =\ FString())\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{structFElectricalDeviceRef}{FElectricalDeviceRef}}\ AddDevice(\textcolor{keyword}{const}\ FString\&\ Id,\ \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{ElDeviceType}}\ Type,\ \textcolor{keyword}{const}\ FString\&\ Label\ =\ FString());}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ FString\ AddCable(\textcolor{keyword}{const}\ FString\&\ Id,\ \textcolor{keywordtype}{double}\ CrossSectionMm2,\ \textcolor{keywordtype}{double}\ LengthM);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ Connect(\textcolor{keyword}{const}\ FString\&\ From,\ \textcolor{keyword}{const}\ FString\&\ To,\ \textcolor{keyword}{const}\ TCHAR*\ Role,\ \textcolor{keyword}{const}\ FString\&\ Cable\ =\ FString());}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ ConnectToPort(\textcolor{keyword}{const}\ FString\&\ Device,\ \textcolor{keyword}{const}\ UElectricalPortComponent*\ Port,\ \textcolor{keyword}{const}\ FString\&\ Cable\ =\ FString());}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ FString\ PortId(\textcolor{keyword}{const}\ UElectricalPortComponent*\ Port)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ ClaimWire(\textcolor{keyword}{const}\ UElectricalPortComponent*\ A,\ \textcolor{keyword}{const}\ UElectricalPortComponent*\ B);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Used\ by\ the\ subsystem.}}
+\DoxyCodeLine{00057\ \ \ \ \ FString\ AddPort(\textcolor{keyword}{const}\ UElectricalPortComponent*\ Port);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsWireClaimed(\textcolor{keyword}{const}\ UElectricalPortComponent*\ A,\ \textcolor{keyword}{const}\ UElectricalPortComponent*\ B)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ \ \ int32\ \mbox{\hyperlink{classFElectricalModelBuilder_a4d50d1d64d1c31a9372e5eb0a050e89d}{GetFailures}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Failures;\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ FString\ SanitizeId(\textcolor{keyword}{const}\ FString\&\ Id);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{structElModel}{ElModel}}\&\ Model;}
+\DoxyCodeLine{00066\ \ \ \ \ TMap<const\ UElectricalPortComponent*,\ FString>\ Ports;}
+\DoxyCodeLine{00067\ \ \ \ \ TSet<TPair<const\ UElectricalPortComponent*,\ const\ UElectricalPortComponent*>>\ ClaimedWires;}
+\DoxyCodeLine{00068\ \ \ \ \ int32\ Failures\ =\ 0;}
+\DoxyCodeLine{00069\ \ \ \ \ int32\ Counter\ =\ 0;}
+\DoxyCodeLine{00070\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,60 @@
+\doxysection{IElectrical\+Element Class Reference}
+\hypertarget{classIElectricalElement}{}\label{classIElectricalElement}\index{IElectricalElement@{IElectricalElement}}
+
+
+{\ttfamily \#include $<$Electrical\+Element.\+h$>$}
+
+Inheritance diagram for IElectrical\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIElectricalElement}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce}{Describe\+Electrical}} (\mbox{\hyperlink{classFElectricalModelBuilder}{FElectrical\+Model\+Builder}} \&Builder)=0
+\item 
+virtual void \mbox{\hyperlink{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d}{Apply\+Electrical}} (const \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \&Simulation)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An actor or component that contributes devices and conductors to the electrical simulation (ADR 0008). Unreal owns the topology, the simulator computes every electrical value\+:
+
+
+\begin{DoxyItemize}
+\item \doxylink{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce}{Describe\+Electrical()} adds the element to the model when the subsystem (re)builds it, e.\+g. a load connected to its port, or a cable between its ends.
+\item \doxylink{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d}{Apply\+Electrical()} is called every frame with the newest results.
+\end{DoxyItemize}
+
+Ports (UElectrical\+Port\+Component) become junctions with the terminals L, N and PE automatically; wires between ports become short links unless an element describes them (Claim\+Wire). 
+
+\label{doc-func-members}
+\Hypertarget{classIElectricalElement_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d}\index{IElectricalElement@{IElectricalElement}!ApplyElectrical@{ApplyElectrical}}
+\index{ApplyElectrical@{ApplyElectrical}!IElectricalElement@{IElectricalElement}}
+\doxysubsubsection{\texorpdfstring{ApplyElectrical()}{ApplyElectrical()}}
+{\footnotesize\ttfamily \label{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d} 
+virtual void IElectrical\+Element\+::\+Apply\+Electrical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIo\+Twin\+Electrical\+Subsystem}} \&}]{Simulation}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classAPowerSourceActor_ae8f9d1dbb1082c72ed8394fe8eb7f6a2}{APower\+Source\+Actor}}.
+
+\Hypertarget{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce}\index{IElectricalElement@{IElectricalElement}!DescribeElectrical@{DescribeElectrical}}
+\index{DescribeElectrical@{DescribeElectrical}!IElectricalElement@{IElectricalElement}}
+\doxysubsubsection{\texorpdfstring{DescribeElectrical()}{DescribeElectrical()}}
+{\footnotesize\ttfamily \label{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce} 
+virtual void IElectrical\+Element\+::\+Describe\+Electrical (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classFElectricalModelBuilder}{FElectrical\+Model\+Builder}} \&}]{Builder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classAElectricalCableActor_a8a403d8801bb4335e4e22ae3c10da692}{AElectrical\+Cable\+Actor}}, and \mbox{\hyperlink{classAPowerSourceActor_af2cac76619ba70a606113418bb78ca3b}{APower\+Source\+Actor}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{ElectricalElement_8h}{Electrical\+Element.\+h}}\end{DoxyCompactItemize}

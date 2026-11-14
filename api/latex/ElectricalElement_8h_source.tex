@@ -1,0 +1,31 @@
+\doxysection{Electrical\+Element.\+h}
+\hypertarget{ElectricalElement_8h_source}{}\label{ElectricalElement_8h_source}\index{visualizer/Source/IoTwin/Electrical/ElectricalElement.h@{visualizer/Source/IoTwin/Electrical/ElectricalElement.h}}
+\mbox{\hyperlink{ElectricalElement_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ interface\ of\ scene\ objects\ that\ take\ part\ in\ the\ electrical\ simulation.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}UObject/Interface.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}ElectricalElement.generated.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFElectricalModelBuilder}{FElectricalModelBuilder}};}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIoTwinElectricalSubsystem}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ UINTERFACE(MinimalAPI,\ meta=(CannotImplementInterfaceInBlueprint))}
+\DoxyCodeLine{00013\ class\ \mbox{\hyperlink{classUElectricalElement}{UElectricalElement}}\ :\ public\ UInterface}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00016\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }IOTWIN\_API\ \mbox{\hyperlink{classIElectricalElement}{IElectricalElement}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIElectricalElement_a105c29291eb0200efd15d0b67c6e69ce}{DescribeElectrical}}(\mbox{\hyperlink{classFElectricalModelBuilder}{FElectricalModelBuilder}}\&\ Builder)\ =\ 0;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIElectricalElement_a6bab038e29705a8fdac3960d7d2c229d}{ApplyElectrical}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIoTwinElectricalSubsystem}}\&\ Simulation)\ \{\}}
+\DoxyCodeLine{00038\ \};}
+
+\end{DoxyCode}

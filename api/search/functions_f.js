@@ -3,6 +3,7 @@ var searchData=
   ['recordframe_0',['RecordFrame',['../classUIoTwinSchematicSubsystem.html#ae7355f2f9e649ef09870a29d907fbf2b',1,'UIoTwinSchematicSubsystem']]],
   ['refreshcable_1',['RefreshCable',['../classAElectricalCableActor.html#afa3c0bc685f87a3732b09d34f97f99ca',1,'AElectricalCableActor']]],
   ['reset_5fhandler_2',['Reset_Handler',['../startup_8c.html#ae7ee340978f5c25f52f0cad1457c6616',1,'startup.c']]],
-  ['resolvepath_3',['ResolvePath',['../classFSystemDescription.html#ab25c34371ae1023dec5d3148aad44f42',1,'FSystemDescription']]],
-  ['run_4',['Run',['../classFIoTwinBusConnection.html#a80b5f9af5ae40f56f0c0861c793a0c95',1,'FIoTwinBusConnection']]]
+  ['resetprotection_3',['ResetProtection',['../classUIoTwinElectricalSubsystem.html#aa0152c5e1669db01fa251f061bfbe5d3',1,'UIoTwinElectricalSubsystem']]],
+  ['resolvepath_4',['ResolvePath',['../classFSystemDescription.html#ab25c34371ae1023dec5d3148aad44f42',1,'FSystemDescription']]],
+  ['run_5',['Run',['../classFIoTwinBusConnection.html#a80b5f9af5ae40f56f0c0861c793a0c95',1,'FIoTwinBusConnection::Run()'],['../classFElectricalSimulationThread.html#ae9511825429b91610e8a011831761e47',1,'FElectricalSimulationThread::Run()']]]
 ];

@@ -1,0 +1,31 @@
+\doxysection{el\+\_\+atomic.\+h}
+\hypertarget{el__atomic_8h_source}{}\label{el__atomic_8h_source}\index{libs/elsim/el\_atomic.h@{libs/elsim/el\_atomic.h}}
+\mbox{\hyperlink{el__atomic_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_EL\_ATOMIC\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_EL\_ATOMIC\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Minimal\ atomics\ for\ the\ lock-\/free\ queues\ of\ el\_session.c,\ usable\ from\ C}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ with\ GCC,\ Clang\ and\ MSVC\ (MSVC's\ C\ mode\ has\ no\ <stdatomic.h>\ by\ default).}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ Loads\ acquire,\ stores\ release,\ exchange\ is\ a\ full\ barrier.\ Internal\ header.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ \&\&\ !defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <intrin.h>}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{static}\ \_\_inline\ \textcolor{keywordtype}{long}\ el\_atomic\_load(\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}*\ a)\ \{\ \textcolor{keywordflow}{return}\ \_InterlockedOr(a,\ 0);\ \}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{static}\ \_\_inline\ \textcolor{keywordtype}{void}\ el\_atomic\_store(\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}*\ a,\ \textcolor{keywordtype}{long}\ value)\ \{\ \_InterlockedExchange(a,\ value);\ \}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{static}\ \_\_inline\ \textcolor{keywordtype}{long}\ el\_atomic\_exchange(\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}*\ a,\ \textcolor{keywordtype}{long}\ value)\ \{\ \textcolor{keywordflow}{return}\ \_InterlockedExchange(a,\ value);\ \}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{long}\ el\_atomic\_load(\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}*\ a)\ \{\ \textcolor{keywordflow}{return}\ \_\_atomic\_load\_n(a,\ \_\_ATOMIC\_ACQUIRE);\ \}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ el\_atomic\_store(\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}*\ a,\ \textcolor{keywordtype}{long}\ value)\ \{\ \_\_atomic\_store\_n(a,\ value,\ \_\_ATOMIC\_RELEASE);\ \}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{long}\ el\_atomic\_exchange(\mbox{\hyperlink{el__atomic_8h_ab564a92383517046377bc93209bed492}{ElAtomic}}*\ a,\ \textcolor{keywordtype}{long}\ value)\ \{}
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordflow}{return}\ \_\_atomic\_exchange\_n(a,\ value,\ \_\_ATOMIC\_ACQ\_REL);}
+\DoxyCodeLine{00022\ \}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_EL\_ATOMIC\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

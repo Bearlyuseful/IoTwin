@@ -15,7 +15,8 @@ var searchData=
   ['nmi_5fhandler_12',['NMI_Handler',['../startup_8c.html#a6ad7a5e3ee69cb6db6a6b9111ba898bc',1,'startup.c']]],
   ['nodeof_13',['NodeOf',['../structFSystemLink.html#aa482e2f48780316040a34fd9edb5a934',1,'FSystemLink']]],
   ['notifyhitboxclick_14',['NotifyHitBoxClick',['../classAIoTwinHUD.html#a646c77983ad193dca9038df31ff07c94',1,'AIoTwinHUD']]],
-  ['nrcname_15',['NrcName',['../structFUdsText.html#a14439db1f3ed81dceb802699b579fea1',1,'FUdsText']]],
-  ['num_16',['Num',['../classFComponentCatalog.html#a8ac8ae234bbaaf2c9f82283061e56ebb',1,'FComponentCatalog']]],
-  ['nummessages_17',['NumMessages',['../classFCanDatabase.html#a923f31dc13caf9d9631c87a14cb7873b',1,'FCanDatabase']]]
+  ['notifytopologychanged_15',['NotifyTopologyChanged',['../classUIoTwinElectricalSubsystem.html#a65f7391664368aeefda62389c9227f44',1,'UIoTwinElectricalSubsystem']]],
+  ['nrcname_16',['NrcName',['../structFUdsText.html#a14439db1f3ed81dceb802699b579fea1',1,'FUdsText']]],
+  ['num_17',['Num',['../classFComponentCatalog.html#a8ac8ae234bbaaf2c9f82283061e56ebb',1,'FComponentCatalog']]],
+  ['nummessages_18',['NumMessages',['../classFCanDatabase.html#a923f31dc13caf9d9631c87a14cb7873b',1,'FCanDatabase']]]
 ];

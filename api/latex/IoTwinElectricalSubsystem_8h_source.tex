@@ -1,0 +1,140 @@
+\doxysection{Io\+Twin\+Electrical\+Subsystem.\+h}
+\hypertarget{IoTwinElectricalSubsystem_8h_source}{}\label{IoTwinElectricalSubsystem_8h_source}\index{visualizer/Source/IoTwin/Electrical/IoTwinElectricalSubsystem.h@{visualizer/Source/IoTwin/Electrical/IoTwinElectricalSubsystem.h}}
+\mbox{\hyperlink{IoTwinElectricalSubsystem_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ IoTwin\ -\/\ electrical\ simulation\ of\ the\ scene\ (in-\/process\ adapter,\ ADR\ 0008).}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Subsystems/WorldSubsystem.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{el__session_8h}{el\_session.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}IoTwinElectricalSubsystem.generated.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFElectricalSimulationThread}{FElectricalSimulationThread}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIElectricalElement}{IElectricalElement}};}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }UElectricalPortComponent;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ USTRUCT(BlueprintType)}
+\DoxyCodeLine{00018\ struct\ \mbox{\hyperlink{structFIoTwinElectricalState}{FIoTwinElectricalState}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00024\ \ \ \ \ float\ \mbox{\hyperlink{structFIoTwinElectricalState_acf9debd0082db7162310f92404808754}{Voltage}}\ =\ 0.0f;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structFIoTwinElectricalState_a68ab49f4b6caa9bf524865440caefd90}{Current}}\ =\ 0.0f;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structFIoTwinElectricalState_aed0a91951b3a83cabd36cb1f68142e51}{Power}}\ =\ 0.0f;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structFIoTwinElectricalState_a51b0383b5af79783704652c0c6e60548}{ResidualCurrent}}\ =\ 0.0f;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structFIoTwinElectricalState_a2b57934f51e2d7916251475efac2ece1}{Level}}\ =\ 1.0f;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFIoTwinElectricalState_af1d0ff74a1a65013acc096ca4a071f07}{bOn}}\ =\ false;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFIoTwinElectricalState_a0ed975c6e16abb7ae74f5ea0b9168ddc}{bTripped}}\ =\ false;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \ \ UPROPERTY(BlueprintReadOnly,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFIoTwinElectricalState_a3458f9132fbff0d9161e09e75e5f0a73}{bPowered}}\ =\ false;}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \mbox{\hyperlink{CanSignalComponent_8h_acb26abc9d42d256490f8da28873239b7}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnElectricalEvent,\ const\ FString\&,\ Text);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00070\ UCLASS()}
+\DoxyCodeLine{00071\ class\ IOTWIN\_API\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIoTwinElectricalSubsystem}}\ :\ public\ UTickableWorldSubsystem}
+\DoxyCodeLine{00072\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a5c02e4fa465ecef1ec46079a9d6870f9}{Initialize}}(FSubsystemCollectionBase\&\ Collection)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_af3830254ce6875161f121cd629352401}{Deinitialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a10262752ca4df549343ad50903b15e6c}{Tick}}(\textcolor{keywordtype}{float}\ DeltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{virtual}\ TStatId\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a83c09af05dbc588787fcf9e7017833fb}{GetStatId}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem}{UIoTwinElectricalSubsystem}}*\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a2912b84a98a9bc88cc8b24fe39aad06a}{Get}}(\textcolor{keyword}{const}\ UObject*\ WorldContextObject);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a65f7391664368aeefda62389c9227f44}{NotifyTopologyChanged}}()\ \{\ bTopologyDirty\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ SendCommand(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElCommand}{ElCommand}}\&\ Command);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ GetDeviceState(\textcolor{keyword}{const}\ FString\&\ DeviceId,\ \mbox{\hyperlink{structFIoTwinElectricalState}{FIoTwinElectricalState}}\&\ OutState)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{float}\ GetPortVoltage(\textcolor{keyword}{const}\ UElectricalPortComponent*\ Port)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00096\ \ \ \ \ bool\ SetDeviceOn(const\ FString\&\ DeviceId,\ \textcolor{keywordtype}{bool}\ bOn);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ SetDimmerLevel(const\ FString\&\ DeviceId,\ \textcolor{keywordtype}{float}\ Level);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00102\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ AddFault(const\ FString\&\ TerminalA,\ const\ FString\&\ TerminalB,\ \textcolor{keywordtype}{float}\ Ohm\ =\ 0.0f);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ ClearFaults();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00109\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ ToggleShortCircuit(UElectricalPortComponent*\ Port);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a544f58e800fc9bdd8cd08030a1f6b27a}{HasShortCircuit}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bShortCircuit;\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00116\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00117\ \ \ \ \ int32\ ResetProtection();}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00120\ \ \ \ \ FString\ GetPortDeviceId(const\ UElectricalPortComponent*\ Port)\ const;}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a691a4460cc2c81fd7481dcfc81509315}{IsRunning}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ Session\ !=\ \textcolor{keyword}{nullptr};\ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00126\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00127\ \ \ \ \ double\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_af53623d642f3e547f1445e3efa666e0e}{GetSimulatedTime}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ SimulatedTime;\ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00130\ \ \ \ \ UFUNCTION(BlueprintPure,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00131\ \ \ \ \ float\ GetLastStepMicroseconds()\ const;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ int32\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a5cc3de216d99848b109be2ceea4cd02a}{GetDeviceCount}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ DeviceIds.Num();\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{const}\ TArray<FString>\&\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a8e971060f75228ce932fee5b78b07d2d}{GetRecentEvents}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ RecentEvents;\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ UPROPERTY(BlueprintAssignable,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00139\ \ \ \ \ FOnElectricalEvent\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_a566e2e2ac221fad378b713740b35ba56}{OnElectricalEvent}};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00142\ \ \ \ \ UPROPERTY(EditAnywhere,\ Category=\textcolor{stringliteral}{"{}IoTwin|Electrical"{}})}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_aedad85f175a4c0f5f6aac7bd27d41fcb}{StepSeconds}}\ =\ 0.01f;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ protected:}
+\DoxyCodeLine{00146\ \ \ \ \ virtual\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUIoTwinElectricalSubsystem_ace327255aede39712421587ea8682d71}{DoesSupportWorldType}}(const\ EWorldType::Type\ WorldType)\ const\ override;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ private:}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ Rebuild();}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ Stop();}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ ApplySnapshot();}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \mbox{\hyperlink{structElSession}{ElSession}}*\ Session\ =\ \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classFElectricalSimulationThread}{FElectricalSimulationThread}}*\ Runner\ =\ \textcolor{keywordtype}{nullptr};}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{bool}\ bTopologyDirty\ =\ true;}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{bool}\ bEnabled\ =\ true;}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{bool}\ bShortCircuit\ =\ false;}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{double}\ SimulatedTime\ =\ 0.0;}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{double}\ ShortCircuitAfter\ =\ -\/1.0;}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{double}\ StartTime\ =\ 0.0;}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00163\ \ \ \ \ TMap<FString,\ int32>\ DeviceIds;}
+\DoxyCodeLine{00164\ \ \ \ \ TArray<\mbox{\hyperlink{structFIoTwinElectricalState}{FIoTwinElectricalState}}>\ States;}
+\DoxyCodeLine{00165\ \ \ \ \ TMap<TWeakObjectPtr<const\ UElectricalPortComponent>,\ FString>\ PortIds;}
+\DoxyCodeLine{00166\ \ \ \ \ TArray<TWeakObjectPtr<UObject>>\ Elements;}
+\DoxyCodeLine{00167\ \ \ \ \ TArray<FString>\ RecentEvents;}
+\DoxyCodeLine{00168\ \};}
+
+\end{DoxyCode}

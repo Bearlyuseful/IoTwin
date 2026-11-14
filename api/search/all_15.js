@@ -91,12 +91,14 @@ var searchData=
   ['udssession_88',['UdsSession',['../uds_8h.html#a14c292a934c57255f398625b3498b8e5',1,'uds.h']]],
   ['udstext_2ecpp_89',['UdsText.cpp',['../UdsText_8cpp.html',1,'']]],
   ['udstext_2eh_90',['UdsText.h',['../UdsText_8h.html',1,'']]],
-  ['ufunction_91',['UFUNCTION',['../classUCanFrameLibrary.html#af6e8400f94a36a7437110802c6e949ca',1,'UCanFrameLibrary']]],
-  ['uiotwinbussubsystem_92',['UIoTwinBusSubsystem',['../classUIoTwinBusSubsystem.html',1,'']]],
-  ['uiotwinschematicsubsystem_93',['UIoTwinSchematicSubsystem',['../classUIoTwinSchematicSubsystem.html',1,'']]],
-  ['unique_5fid_94',['unique_id',['../structGatewayIo.html#a5dda457906e8444de07286a6d1b0a32d',1,'GatewayIo']]],
-  ['unit_95',['Unit',['../structFCanSignalDef.html#ad3ec92635ebd3657889c2307c9bcf30e',1,'FCanSignalDef']]],
-  ['unit_96',['unit',['../structDbcSignal.html#a80ea9c9466304107709b030ed5fe727e',1,'DbcSignal::unit'],['../structDidInfo.html#ab7a16b4a2f2d0f556a6d5d78e327144b',1,'DidInfo::unit']]],
-  ['upowerinterface_97',['UPowerInterface',['../classUPowerInterface.html',1,'']]],
-  ['usart2_5flpuart2_5firqhandler_98',['USART2_LPUART2_IRQHandler',['../uart_8c.html#ad81f8f5f4eeb37afbe93e95d0727bb73',1,'uart.c']]]
+  ['uelectricalelement_91',['UElectricalElement',['../classUElectricalElement.html',1,'']]],
+  ['ufunction_92',['UFUNCTION',['../classUCanFrameLibrary.html#af6e8400f94a36a7437110802c6e949ca',1,'UCanFrameLibrary']]],
+  ['uiotwinbussubsystem_93',['UIoTwinBusSubsystem',['../classUIoTwinBusSubsystem.html',1,'']]],
+  ['uiotwinelectricalsubsystem_94',['UIoTwinElectricalSubsystem',['../classUIoTwinElectricalSubsystem.html',1,'']]],
+  ['uiotwinschematicsubsystem_95',['UIoTwinSchematicSubsystem',['../classUIoTwinSchematicSubsystem.html',1,'']]],
+  ['unique_5fid_96',['unique_id',['../structGatewayIo.html#a5dda457906e8444de07286a6d1b0a32d',1,'GatewayIo']]],
+  ['unit_97',['Unit',['../structFCanSignalDef.html#ad3ec92635ebd3657889c2307c9bcf30e',1,'FCanSignalDef']]],
+  ['unit_98',['unit',['../structDbcSignal.html#a80ea9c9466304107709b030ed5fe727e',1,'DbcSignal::unit'],['../structDidInfo.html#ab7a16b4a2f2d0f556a6d5d78e327144b',1,'DidInfo::unit']]],
+  ['upowerinterface_99',['UPowerInterface',['../classUPowerInterface.html',1,'']]],
+  ['usart2_5flpuart2_5firqhandler_100',['USART2_LPUART2_IRQHandler',['../uart_8c.html#ad81f8f5f4eeb37afbe93e95d0727bb73',1,'uart.c']]]
 ];

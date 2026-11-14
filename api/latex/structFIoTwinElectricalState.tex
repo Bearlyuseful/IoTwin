@@ -1,0 +1,86 @@
+\doxysection{FIo\+Twin\+Electrical\+State Struct Reference}
+\hypertarget{structFIoTwinElectricalState}{}\label{structFIoTwinElectricalState}\index{FIoTwinElectricalState@{FIoTwinElectricalState}}
+
+
+{\ttfamily \#include $<$Io\+Twin\+Electrical\+Subsystem.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{structFIoTwinElectricalState_acf9debd0082db7162310f92404808754}{Voltage}} = 0.\+0f
+\item 
+float \mbox{\hyperlink{structFIoTwinElectricalState_a68ab49f4b6caa9bf524865440caefd90}{Current}} = 0.\+0f
+\item 
+float \mbox{\hyperlink{structFIoTwinElectricalState_aed0a91951b3a83cabd36cb1f68142e51}{Power}} = 0.\+0f
+\item 
+float \mbox{\hyperlink{structFIoTwinElectricalState_a51b0383b5af79783704652c0c6e60548}{Residual\+Current}} = 0.\+0f
+\item 
+float \mbox{\hyperlink{structFIoTwinElectricalState_a2b57934f51e2d7916251475efac2ece1}{Level}} = 1.\+0f
+\item 
+bool \mbox{\hyperlink{structFIoTwinElectricalState_af1d0ff74a1a65013acc096ca4a071f07}{b\+On}} = false
+\item 
+bool \mbox{\hyperlink{structFIoTwinElectricalState_a0ed975c6e16abb7ae74f5ea0b9168ddc}{b\+Tripped}} = false
+\item 
+bool \mbox{\hyperlink{structFIoTwinElectricalState_a3458f9132fbff0d9161e09e75e5f0a73}{b\+Powered}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Electrical state of one simulated device, as Blueprints see it. 
+
+\label{doc-variable-members}
+\Hypertarget{structFIoTwinElectricalState_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structFIoTwinElectricalState_af1d0ff74a1a65013acc096ca4a071f07}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!bOn@{bOn}}
+\index{bOn@{bOn}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{bOn}{bOn}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_af1d0ff74a1a65013acc096ca4a071f07} 
+bool FIo\+Twin\+Electrical\+State\+::b\+On = false}
+
+\Hypertarget{structFIoTwinElectricalState_a3458f9132fbff0d9161e09e75e5f0a73}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!bPowered@{bPowered}}
+\index{bPowered@{bPowered}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{bPowered}{bPowered}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_a3458f9132fbff0d9161e09e75e5f0a73} 
+bool FIo\+Twin\+Electrical\+State\+::b\+Powered = false}
+
+Load supplied. \Hypertarget{structFIoTwinElectricalState_a0ed975c6e16abb7ae74f5ea0b9168ddc}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!bTripped@{bTripped}}
+\index{bTripped@{bTripped}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{bTripped}{bTripped}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_a0ed975c6e16abb7ae74f5ea0b9168ddc} 
+bool FIo\+Twin\+Electrical\+State\+::b\+Tripped = false}
+
+Breaker/\+RCD tripped, fuse blown. \Hypertarget{structFIoTwinElectricalState_a68ab49f4b6caa9bf524865440caefd90}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!Current@{Current}}
+\index{Current@{Current}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{Current}{Current}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_a68ab49f4b6caa9bf524865440caefd90} 
+float FIo\+Twin\+Electrical\+State\+::\+Current = 0.\+0f}
+
+\Hypertarget{structFIoTwinElectricalState_a2b57934f51e2d7916251475efac2ece1}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!Level@{Level}}
+\index{Level@{Level}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{Level}{Level}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_a2b57934f51e2d7916251475efac2ece1} 
+float FIo\+Twin\+Electrical\+State\+::\+Level = 1.\+0f}
+
+Dimmer\+: 0..1. \Hypertarget{structFIoTwinElectricalState_aed0a91951b3a83cabd36cb1f68142e51}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!Power@{Power}}
+\index{Power@{Power}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{Power}{Power}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_aed0a91951b3a83cabd36cb1f68142e51} 
+float FIo\+Twin\+Electrical\+State\+::\+Power = 0.\+0f}
+
+Load\+: active power in W. \Hypertarget{structFIoTwinElectricalState_a51b0383b5af79783704652c0c6e60548}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!ResidualCurrent@{ResidualCurrent}}
+\index{ResidualCurrent@{ResidualCurrent}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{ResidualCurrent}{ResidualCurrent}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_a51b0383b5af79783704652c0c6e60548} 
+float FIo\+Twin\+Electrical\+State\+::\+Residual\+Current = 0.\+0f}
+
+RCD\+: residual current in A. \Hypertarget{structFIoTwinElectricalState_acf9debd0082db7162310f92404808754}\index{FIoTwinElectricalState@{FIoTwinElectricalState}!Voltage@{Voltage}}
+\index{Voltage@{Voltage}!FIoTwinElectricalState@{FIoTwinElectricalState}}
+\doxysubsubsection{\texorpdfstring{Voltage}{Voltage}}
+{\footnotesize\ttfamily \label{structFIoTwinElectricalState_acf9debd0082db7162310f92404808754} 
+float FIo\+Twin\+Electrical\+State\+::\+Voltage = 0.\+0f}
+
+Load, socket, junction (port)\+: voltage L-\/N in V. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{IoTwinElectricalSubsystem_8h}{Io\+Twin\+Electrical\+Subsystem.\+h}}\end{DoxyCompactItemize}

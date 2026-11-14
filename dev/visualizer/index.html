@@ -721,6 +721,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#electrical-simulation-sourceiotwinelectrical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electrical simulation (Source/IoTwin/Electrical)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#electrical-model-sourceiotwinsystems" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1266,6 +1277,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0008-simulation-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0008 Simulation Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1406,20 +1445,46 @@ root (<code>visualizer/..</code>) and the package root. Command line:
 <h2 id="dimming-and-power">Dimming and power<a class="headerlink" href="#dimming-and-power" title="Permanent link">&para;</a></h2>
 <p>The <strong>mouse wheel</strong> dims the lamp: the visualizer sends <code>DIMMER_CMD</code> (0x201)
 in 10 % steps, starting from the brightness in the last <code>LAMP_CMD</code>. The power
-source reads that brightness from <code>LAMP_CMD</code> byte 1 (<code>LevelByteIndex</code>), its
-port carries it as <code>SupplyLevel</code>, and the lamp's light intensity and bulb
-colour follow <code>UElectricalDeviceComponent::PowerLevel</code>. The HUD shows the
-brightness and the ECU's measured current and supply voltage from
-<code>LAMP_STATUS</code> (0x101), plus fuse, overcurrent or short circuit.</p>
+source reads that brightness from <code>LAMP_CMD</code> byte 1 (<code>LevelByteIndex</code>) and
+sets its relay output - a dimmer in the electrical simulation - to that
+level. The lamp's light intensity and bulb colour follow
+<code>UElectricalDeviceComponent::PowerLevel</code>, the share of its rated power the
+simulation computes. The HUD shows the lamp's power, the ECU's measured
+current and supply voltage from <code>LAMP_STATUS</code> (0x101) with fuse, overcurrent
+or short circuit, and the values of the 230 V simulation.</p>
+<h2 id="electrical-simulation-sourceiotwinelectrical">Electrical simulation (<code>Source/IoTwin/Electrical</code>)<a class="headerlink" href="#electrical-simulation-sourceiotwinelectrical" title="Permanent link">&para;</a></h2>
+<p>The electrical simulation core (<code>libs/elsim</code>, <a href="../electrical/">Electrical Simulation</a>)
+is compiled into the visualizer and owns every electrical value
+(<a href="../../adr/0008-simulation-interface/">ADR 0008</a>):</p>
+<ul>
+<li><code>UIoTwinElectricalSubsystem</code> (world subsystem) builds the model from the
+  scene, runs it in the thread <code>IoTwinElectrical</code> with a fixed 10 ms step,
+  and hands the newest snapshot and the events to the scene every frame.
+  Changing the wiring rebuilds the model (the electrical state starts fresh).</li>
+<li><code>Electrical/Core/*.c</code> include the C sources of <code>libs/elsim</code>; the include
+  path and C17 are set in <code>IoTwin.Build.cs</code>.</li>
+<li><code>IElectricalElement</code>: actors and components that describe themselves to
+  the model (<code>DescribeElectrical</code>) and receive results (<code>ApplyElectrical</code>).
+  <code>FElectricalModelBuilder</code> gives them ids (<code>&lt;actor&gt;.&lt;part&gt;</code>), devices,
+  cables and conductors.</li>
+<li>Keys: <strong>F</strong> puts a short circuit L-N on the lamp (again: removes it),
+  <strong>R</strong> resets tripped breakers.</li>
+</ul>
 <h2 id="electrical-model-sourceiotwinsystems">Electrical model (<code>Source/IoTwin/Systems</code>)<a class="headerlink" href="#electrical-model-sourceiotwinsystems" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>UElectricalPortComponent</code>: wiring is a symmetric list of ports stored on
-  both ends (saved with the level). <code>HasPower()</code> searches the wiring graph for
-  a supplying port; cycles are handled.</li>
-<li><code>APowerSourceActor</code>: supply with an output relay. With <em>Controlled By Can</em>
-  the relay follows its <code>RelayControl</code> signal (default <code>0x100</code> byte 0 bit 0).</li>
-<li><code>AElectricalCableActor</code>: two conducting ends, drawn with <code>CableComponent</code>;
+  both ends (saved with the level). In the simulation every port is a
+  junction (L, N, PE) and a wire carries all three conductors; <code>HasPower()</code>
+  and <code>GetVoltage()</code> report the simulated voltage.</li>
+<li><code>APowerSourceActor</code>: house connection (230 V TN-S, Ze 0.35 Ω) → breaker
+  F1 (B10) → relay output (a dimmer) → port. With <em>Controlled By Can</em> the
+  relay follows its <code>RelayControl</code> signal (default <code>0x100</code> byte 0 bit 0).
+  The housing turns amber when F1 trips.</li>
+<li><code>AElectricalCableActor</code>: a three-core copper cable (default 1.5 mm²)
+  between its ends, length = distance × slack; drawn with <code>CableComponent</code>,
   <code>ConnectBetween(A, B)</code> positions and wires it.</li>
+<li><code>UElectricalDeviceComponent</code>: a resistive load (<code>RatedPower</code>, default 60 W)
+  on its input port; voltage, current and power come from the simulation.</li>
 <li><code>ALampActor</code>: port → <code>UElectricalDeviceComponent</code> → <code>ULightEmitterComponent</code>
   and a bulb that changes colour.</li>
 <li><code>AWallSwitchActor</code>: clickable switch that transmits its position (<code>0x200</code>).</li>
@@ -1433,7 +1498,8 @@ your own scene, create a Blueprint subclass of <code>GM_Simulation</code>, untic
 <em>Spawn Demo Scene</em> (the relay and switch ids are configurable there as well)
 and select it as <em>GameMode Override</em> in the map's World Settings.</p>
 <h2 id="tests-and-smoke-runs">Tests and smoke runs<a class="headerlink" href="#tests-and-smoke-runs" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c"># Automation tests (CAN codec, DBC, system description, component database)</span>
+<div class="highlight"><pre><span></span><code><span class="c"># Automation tests (CAN codec, DBC, system description, component database,</span>
+<span class="c"># electrical simulation compiled with MSVC)</span>
 <span class="n">UnrealEditor-Cmd</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-ExecCmds</span><span class="p">=</span><span class="s2">"Automation RunTests IoTwin;Quit"</span> <span class="n">-unattended</span> <span class="n">-nullrhi</span>
 
 <span class="c"># Unattended game run: screenshot after 10 s, quit after 15 s</span>
@@ -1442,7 +1508,10 @@ and select it as <em>GameMode Override</em> in the map's World Settings.</p>
 <span class="c"># Same in the schematic view with the gateway selected</span>
 <span class="n">UnrealEditor</span><span class="p">.</span><span class="n">exe</span> <span class="n">visualizer</span><span class="p">/</span><span class="n">IoTwin</span><span class="p">.</span><span class="n">uproject</span> <span class="n">-game</span> <span class="n">-IoTwinView</span><span class="p">=</span><span class="n">Schematic</span> <span class="n">-IoTwinSelectNode</span><span class="p">=</span><span class="n">gateway</span> <span class="n">-IoTwinScreenshot</span><span class="p">=</span><span class="n">10</span> <span class="n">-IoTwinQuitAfter</span><span class="p">=</span><span class="n">15</span>
 </code></pre></div>
-<p>The screenshot is written to <code>Saved/Screenshots/IoTwinDemo.png</code>.</p>
+<p>The screenshot is written to <code>Saved/Screenshots/IoTwinDemo.png</code>.
+<code>-IoTwinShortCircuitAfter=&lt;s&gt;</code> puts a short circuit on the demo lamp after
+s seconds (F1 trips, the lamp goes dark), <code>-IoTwinElectricalDisabled</code> turns
+the electrical simulation off.</p>
 
 
 

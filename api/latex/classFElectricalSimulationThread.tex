@@ -1,0 +1,85 @@
+\doxysection{FElectrical\+Simulation\+Thread Class Reference}
+\hypertarget{classFElectricalSimulationThread}{}\label{classFElectricalSimulationThread}\index{FElectricalSimulationThread@{FElectricalSimulationThread}}
+Inheritance diagram for FElectrical\+Simulation\+Thread\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFElectricalSimulationThread}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFElectricalSimulationThread_a3d8f109bf0cc2c27128d8ae0bf0c82cf}{FElectrical\+Simulation\+Thread}} (\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}In\+Session, double In\+Step)
+\item 
+virtual \mbox{\hyperlink{classFElectricalSimulationThread_a81c88438c97407f22e721f1926a1580a}{\texorpdfstring{$\sim$}{\string~}\+FElectrical\+Simulation\+Thread}} () override
+\item 
+virtual uint32 \mbox{\hyperlink{classFElectricalSimulationThread_ae9511825429b91610e8a011831761e47}{Run}} () override
+\item 
+virtual void \mbox{\hyperlink{classFElectricalSimulationThread_a8d2dade3d2ec4498d13993b3840d176a}{Stop}} () override
+\item 
+bool \mbox{\hyperlink{classFElectricalSimulationThread_aae7e36edf0995944b56c89b2b9c9761b}{Is\+Valid}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ int64 $>$ \mbox{\hyperlink{classFElectricalSimulationThread_a023e480a20e6505b10ae49382a178d9c}{Last\+Step\+Nanoseconds}} \{0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simulation thread\+: steps the session with a fixed time step in real time. It only touches the session (lock-\/free towards the game thread) and never waits for a frame. After a hitch (debugger, loading) it does not try to catch up in a burst. 
+
+\label{doc-constructors}
+\Hypertarget{classFElectricalSimulationThread_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFElectricalSimulationThread_a3d8f109bf0cc2c27128d8ae0bf0c82cf}\index{FElectricalSimulationThread@{FElectricalSimulationThread}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\index{FElectricalSimulationThread@{FElectricalSimulationThread}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\doxysubsubsection{\texorpdfstring{FElectricalSimulationThread()}{FElectricalSimulationThread()}}
+{\footnotesize\ttfamily \label{classFElectricalSimulationThread_a3d8f109bf0cc2c27128d8ae0bf0c82cf} 
+FElectrical\+Simulation\+Thread\+::\+FElectrical\+Simulation\+Thread (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSession}{El\+Session}} \texorpdfstring{$\ast$}{*}}]{In\+Session}{, }\item[{double}]{In\+Step}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classFElectricalSimulationThread_a81c88438c97407f22e721f1926a1580a}\index{FElectricalSimulationThread@{FElectricalSimulationThread}!````~FElectricalSimulationThread@{\texorpdfstring{$\sim$}{\string~}FElectricalSimulationThread}}
+\index{````~FElectricalSimulationThread@{\texorpdfstring{$\sim$}{\string~}FElectricalSimulationThread}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}FElectricalSimulationThread()}{\string~FElectricalSimulationThread()}}
+{\footnotesize\ttfamily \label{classFElectricalSimulationThread_a81c88438c97407f22e721f1926a1580a} 
+virtual FElectrical\+Simulation\+Thread\+::\texorpdfstring{$\sim$}{\string~}\+FElectrical\+Simulation\+Thread (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classFElectricalSimulationThread_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFElectricalSimulationThread_aae7e36edf0995944b56c89b2b9c9761b}\index{FElectricalSimulationThread@{FElectricalSimulationThread}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{classFElectricalSimulationThread_aae7e36edf0995944b56c89b2b9c9761b} 
+bool FElectrical\+Simulation\+Thread\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classFElectricalSimulationThread_ae9511825429b91610e8a011831761e47}\index{FElectricalSimulationThread@{FElectricalSimulationThread}!Run@{Run}}
+\index{Run@{Run}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{classFElectricalSimulationThread_ae9511825429b91610e8a011831761e47} 
+virtual uint32 FElectrical\+Simulation\+Thread\+::\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\Hypertarget{classFElectricalSimulationThread_a8d2dade3d2ec4498d13993b3840d176a}\index{FElectricalSimulationThread@{FElectricalSimulationThread}!Stop@{Stop}}
+\index{Stop@{Stop}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classFElectricalSimulationThread_a8d2dade3d2ec4498d13993b3840d176a} 
+virtual void FElectrical\+Simulation\+Thread\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classFElectricalSimulationThread_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classFElectricalSimulationThread_a023e480a20e6505b10ae49382a178d9c}\index{FElectricalSimulationThread@{FElectricalSimulationThread}!LastStepNanoseconds@{LastStepNanoseconds}}
+\index{LastStepNanoseconds@{LastStepNanoseconds}!FElectricalSimulationThread@{FElectricalSimulationThread}}
+\doxysubsubsection{\texorpdfstring{LastStepNanoseconds}{LastStepNanoseconds}}
+{\footnotesize\ttfamily \label{classFElectricalSimulationThread_a023e480a20e6505b10ae49382a178d9c} 
+std\+::atomic$<$int64$>$ FElectrical\+Simulation\+Thread\+::\+Last\+Step\+Nanoseconds \{0\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+visualizer/\+Source/\+Io\+Twin/\+Electrical/\mbox{\hyperlink{IoTwinElectricalSubsystem_8cpp}{Io\+Twin\+Electrical\+Subsystem.\+cpp}}\end{DoxyCompactItemize}

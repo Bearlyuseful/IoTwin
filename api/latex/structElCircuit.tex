@@ -15,9 +15,15 @@ size\+\_\+t \mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{
 \item 
 size\+\_\+t \mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}
 \item 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}
 \item 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\+\_\+currents}}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\+\_\+currents}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElCircuit_a63cba923586aef88ccf7cb9e652507df}{result\+\_\+capacity}}
+\item 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElCircuit_a066a8f721f1bb99cc08c917cf0c3110b}{matrix\+\_\+capacity}}
 \item 
 bool \mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}
 \end{DoxyCompactItemize}
@@ -44,13 +50,31 @@ size\+\_\+t El\+Circuit\+::count}
 {\footnotesize\ttfamily \label{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166} 
 \mbox{\hyperlink{structElElement}{El\+Element}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::elements}
 
+\Hypertarget{structElCircuit_ac79685419c1910bcc752b7595f13158a}\index{ElCircuit@{ElCircuit}!matrix@{matrix}}
+\index{matrix@{matrix}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{matrix}{matrix}}
+{\footnotesize\ttfamily \label{structElCircuit_ac79685419c1910bcc752b7595f13158a} 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::matrix}
+
+Work matrix, reused between solutions. \Hypertarget{structElCircuit_a066a8f721f1bb99cc08c917cf0c3110b}\index{ElCircuit@{ElCircuit}!matrix\_capacity@{matrix\_capacity}}
+\index{matrix\_capacity@{matrix\_capacity}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{matrix\_capacity}{matrix\_capacity}}
+{\footnotesize\ttfamily \label{structElCircuit_a066a8f721f1bb99cc08c917cf0c3110b} 
+size\+\_\+t El\+Circuit\+::matrix\+\_\+capacity}
+
 \Hypertarget{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}\index{ElCircuit@{ElCircuit}!nodes@{nodes}}
 \index{nodes@{nodes}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{nodes}{nodes}}
 {\footnotesize\ttfamily \label{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e} 
 int El\+Circuit\+::nodes}
 
-Including node 0 (earth). \Hypertarget{structElCircuit_a7e1524d621eb13750e50d479d72927c5}\index{ElCircuit@{ElCircuit}!solved@{solved}}
+Including node 0 (earth). \Hypertarget{structElCircuit_a63cba923586aef88ccf7cb9e652507df}\index{ElCircuit@{ElCircuit}!result\_capacity@{result\_capacity}}
+\index{result\_capacity@{result\_capacity}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{result\_capacity}{result\_capacity}}
+{\footnotesize\ttfamily \label{structElCircuit_a63cba923586aef88ccf7cb9e652507df} 
+size\+\_\+t El\+Circuit\+::result\+\_\+capacity}
+
+Size of source\+\_\+currents. \Hypertarget{structElCircuit_a7e1524d621eb13750e50d479d72927c5}\index{ElCircuit@{ElCircuit}!solved@{solved}}
 \index{solved@{solved}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{solved}{solved}}
 {\footnotesize\ttfamily \label{structElCircuit_a7e1524d621eb13750e50d479d72927c5} 
@@ -60,13 +84,13 @@ bool El\+Circuit\+::solved}
 \index{source\_currents@{source\_currents}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{source\_currents}{source\_currents}}
 {\footnotesize\ttfamily \label{structElCircuit_ad056e072d14b92e676662096d0302afa} 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::source\+\_\+currents}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::source\+\_\+currents}
 
 Result per element (only voltage sources use it). \Hypertarget{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}\index{ElCircuit@{ElCircuit}!voltages@{voltages}}
 \index{voltages@{voltages}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{voltages}{voltages}}
 {\footnotesize\ttfamily \label{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f} 
-\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::voltages}
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::voltages}
 
 Result per node (voltages\mbox{[}0\mbox{]} = 0). 
 

@@ -1,6 +1,9 @@
 var elsim_8c =
 [
     [ "BREAKER_COOLING", "elsim_8c.html#aac27b7a66a902a08bae3e791dae14a33", null ],
+    [ "DIMMER_FULL_LEVEL", "elsim_8c.html#ad79de2b7a0b3478b13f91d08647f4e0d", null ],
+    [ "DIMMER_MAX_REACTANCE", "elsim_8c.html#a9fa3a2691d158f872f8f2eb65f1cc8ea", null ],
+    [ "DIMMER_OFF_LEVEL", "elsim_8c.html#ab1d32844a9d6a4929fa257bb56c176c7", null ],
     [ "MAX_TRIP_ITERATIONS", "elsim_8c.html#aa6094c815d6c61ae1c5d183ddd905a13", null ],
     [ "PLUG_CONTACT_OHM", "elsim_8c.html#a154305d13ec00aa82c8bc60fb5556ab8", null ],
     [ "RCD_TEST_MULTIPLE", "elsim_8c.html#ac846b16facc48c49c6547e31b3160d08", null ],
@@ -26,9 +29,11 @@ var elsim_8c =
     [ "el_model_press_test", "elsim_8c.html#af3a6854fc33f6f01f735fb65831cb8d6", null ],
     [ "el_model_reset", "elsim_8c.html#a7d6e6daed5801cde90d825cedde34fde", null ],
     [ "el_model_set_connection_open", "elsim_8c.html#a158f6aa26b17484ae9b4c9637ca0b43e", null ],
+    [ "el_model_set_level", "elsim_8c.html#a044c0f55a5338ccc11fc271eb0e23a9a", null ],
     [ "el_model_set_on", "elsim_8c.html#ae877b07c9479efb60cf47f091ccd89a1", null ],
     [ "el_model_step", "elsim_8c.html#aab5e45876d1ab22015c30e1e4609ffe1", null ],
     [ "el_model_terminal_node", "elsim_8c.html#a0ec2b9e8c89f95bd820968e3cf7bc27d", null ],
+    [ "el_model_touch", "elsim_8c.html#a32f31f16a4deaeac4fa6d0d289266957", null ],
     [ "el_terminal_count", "elsim_8c.html#a401986eb56f38c799cb740e2e8a71c87", null ],
     [ "el_terminal_name", "elsim_8c.html#a04f97b62bc5a7684db889c63af4f5683", null ]
 ];
