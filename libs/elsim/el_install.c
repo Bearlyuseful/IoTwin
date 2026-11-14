@@ -103,6 +103,7 @@ static void apply(ElDevice* d, const JsonValue* component, const JsonValue* devi
       {"rated_power", &d->rated_power_w},
       {"rated_voltage", &d->voltage_v},
       {"contact_resistance", &d->contact_ohm},
+      {"level", &d->level},
       {"voltage", &d->voltage_v},
       {"frequency", &d->frequency_hz},
       {"loop_impedance", &d->loop_impedance_ohm},

@@ -97,7 +97,7 @@ TEST_CASE("Circuit solver: divider, current source and three-phase star", "[elsi
   const int neutral = el_circuit_add_impedance(&c, 4, 0, el_phasor(0.1, 0));
   REQUIRE(el_circuit_solve(&c, 0.0));
   CHECK(el_abs(el_circuit_current(&c, neutral)) < 1e-6);
-  CHECK(el_abs(el_circuit_voltage(&c, 1) - el_circuit_voltage(&c, 2)) == Approx(398.4).margin(0.1));  // 400 V
+  CHECK(el_abs(el_sub(el_circuit_voltage(&c, 1), el_circuit_voltage(&c, 2))) == Approx(398.4).margin(0.1));  // 400 V
   el_circuit_free(&c);
 }
 

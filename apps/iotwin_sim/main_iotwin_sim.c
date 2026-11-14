@@ -34,6 +34,7 @@ static void print_help(void) {
          "  on <id> | off <id>          switch, breaker or RCD handle, appliance switch\n"
          "  reset <id>                  re-arm a breaker/RCD, replace a fuse\n"
          "  test <rcd>                  press the RCD test button\n"
+         "  level <dimmer> <percent>    dimmer level 0..100 %%\n"
          "  fault <a> <b> [ohm]         impedance between two terminals (default 0 = short circuit)\n"
          "  open <conn> | close <conn>  interrupt / restore a conductor\n"
          "  clear                       remove all faults\n"
@@ -76,6 +77,8 @@ static const char* state_text(const ElDevice* d) {
       return d->tripped ? "BLOWN" : "ok";
     case EL_SWITCH:
       return d->on ? "on" : "off";
+    case EL_DIMMER:
+      return d->on ? "on" : "off";
     default:
       return "";
   }
@@ -91,6 +94,9 @@ static void print_state(Sim* sim) {
     char current[16] = "";
     char power[16] = "";
     char note[96] = "";
+    if (d->type == EL_SOCKET || d->type == EL_JUNCTION) {
+      snprintf(u, sizeof(u), "%.1f", d->voltage_v_measured);
+    }
     if (d->type == EL_LOAD) {
       snprintf(u, sizeof(u), "%.1f", d->voltage_v_measured);
       snprintf(power, sizeof(power), "%.1f", d->power_w);
@@ -98,13 +104,15 @@ static void print_state(Sim* sim) {
         snprintf(note, sizeof(note), "plugged into %s", m->devices[d->plugged_into].id);
       }
     }
-    if (d->type != EL_SOCKET) {
+    if (d->type != EL_SOCKET && d->type != EL_JUNCTION) {
       snprintf(current, sizeof(current), "%.2f", d->current_a);
     }
     if (d->type == EL_RCD) {
       snprintf(note, sizeof(note), "residual %.1f mA", d->residual_a * 1000.0);
     } else if ((d->type == EL_BREAKER || d->type == EL_FUSE) && d->heat > 0.0) {
       snprintf(note, sizeof(note), "thermal %.0f %%", 100.0 * d->heat / d->thermal_limit);
+    } else if (d->type == EL_DIMMER) {
+      snprintf(note, sizeof(note), "level %.0f %%", d->level * 100.0);
     } else if (d->type == EL_SUPPLY) {
       snprintf(note, sizeof(note), "%s, Ze %.2f Ohm", d->earthing == EL_TT ? "TT" : d->earthing == EL_TN_C_S ? "TN-C-S" : "TN-S",
                d->loop_impedance_ohm);
@@ -200,6 +208,11 @@ static bool handle(Sim* sim, char* line) {
     print_state(sim);
   } else if ((strcmp(cmd, "on") == 0 || strcmp(cmd, "off") == 0) && argc == 2) {
     ok = el_model_set_on(m, argv[1], cmd[1] == 'n');
+    if (ok) {
+      run(sim, SETTLE_S);
+    }
+  } else if (strcmp(cmd, "level") == 0 && argc == 3) {
+    ok = el_model_set_level(m, argv[1], atof(argv[2]) / 100.0);
     if (ok) {
       run(sim, SETTLE_S);
     }

@@ -79,7 +79,9 @@
               "rcd",
               "switch",
               "load",
-              "socket"
+              "socket",
+              "junction",
+              "dimmer"
             ]
           },
           "component": {
@@ -148,6 +150,12 @@
           },
           "contact_resistance": {
             "type": "number"
+          },
+          "level": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "dimmer: level 0..1"
           }
         },
         "additionalProperties": false

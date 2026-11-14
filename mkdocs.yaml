@@ -57,3 +57,4 @@ nav:
       - ADR 0005 Repository Layout: adr/0005-repository-layout.md
       - ADR 0006 One Core, Three Products: adr/0006-one-core-three-products.md
       - ADR 0007 Electrical Simulation: adr/0007-electrical-simulation-core.md
+      - ADR 0008 Simulation Interface: adr/0008-simulation-interface.md

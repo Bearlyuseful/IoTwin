@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "ElectricalPortComponent.h"
 #include "Bus/CanFrame.h"
+#include "Electrical/ElectricalElement.h"
+#include "Electrical/IoTwinElectricalSubsystem.h"
 #include "PowerSourceActor.generated.h"
 
 class UCanSignalComponent;
@@ -15,8 +17,13 @@ class UStaticMeshComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRelayChanged, bool, bClosed);
 
+/**
+ * In the electrical simulation: house connection (230 V, TN-S, loop impedance
+ * Ze) -> circuit breaker F1 -> relay output (a dimmer: on/off and level from
+ * LAMP_CMD) -> the port.
+ */
 UCLASS()
-class IOTWIN_API APowerSourceActor : public AActor
+class IOTWIN_API APowerSourceActor : public AActor, public IElectricalElement
 {
 	GENERATED_BODY()
 
@@ -64,6 +71,24 @@ public:
 	UFUNCTION(BlueprintPure, Category="Power")
 	float GetOutputLevel() const { return Port ? Port->SupplyLevel : 1.0f; }
 
+	/** Rated current of the circuit breaker F1 (characteristic B). */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Power|Simulation", meta=(ClampMin=0.5))
+	float BreakerRatedCurrent = 10.0f;
+
+	/** External loop impedance Ze of the house connection in Ohm. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Power|Simulation", meta=(ClampMin=0.01))
+	float LoopImpedance = 0.35f;
+
+	/** State of F1 and the relay output according to the simulation. */
+	UFUNCTION(BlueprintPure, Category="Power|Simulation")
+	bool IsBreakerTripped() const { return Breaker.bTripped; }
+
+	const FIoTwinElectricalState& GetBreakerState() const { return Breaker; }
+	const FString& GetBreakerId() const { return BreakerId; }
+
+	virtual void DescribeElectrical(FElectricalModelBuilder& Builder) override;
+	virtual void ApplyElectrical(const UIoTwinElectricalSubsystem& Simulation) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -78,6 +103,10 @@ private:
 	int32 RelayFrameId = -1;
 
 	void UpdateHousing();
+
+	FString RelayId;
+	FString BreakerId;
+	FIoTwinElectricalState Breaker;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UMaterialInstanceDynamic> HousingMaterial;

@@ -29,6 +29,7 @@ add_executable(iotwin_tests
     test_power_path.cpp
     test_json.cpp
     test_elsim.cpp
+    test_elsim_session.cpp
     test_cycle_timer.cpp
     test_bus_server.cpp
     test_gateway.cpp

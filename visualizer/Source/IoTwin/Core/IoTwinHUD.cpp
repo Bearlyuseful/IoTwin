@@ -4,6 +4,7 @@
 
 #include "Bus/IoTwinBusSubsystem.h"
 #include "Core/GM_Simulation.h"
+#include "Electrical/IoTwinElectricalSubsystem.h"
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "Engine/Font.h"
@@ -104,6 +105,8 @@ void AIoTwinHUD::NotifyHitBoxClick(FName BoxName)
 void AIoTwinHUD::DrawSimulationPanel()
 {
 	const UIoTwinBusSubsystem* Bus = UIoTwinBusSubsystem::Get(this);
+	const UIoTwinElectricalSubsystem* Electrical = UIoTwinElectricalSubsystem::Get(this);
+	const bool bElectrical = Electrical && Electrical->IsRunning();
 	APowerSourceActor* Source = nullptr;
 	ALampActor* Lamp = nullptr;
 	AWallSwitchActor* Switch = nullptr;
@@ -115,8 +118,9 @@ void AIoTwinHUD::DrawSimulationPanel()
 	// LAMP_STATUS (0x101) of the light ECU: current, supply voltage, duty, flags.
 	FCanFrame Status;
 	const bool bHaveStatus = Bus && Bus->GetLastFrame(0x101, false, Status) && Status.Data.Num() >= 6;
-	const float PanelHeight = LineHeight * (9.5f + (bHaveStatus ? 1.0f : 0.0f) + TrafficLines) + 24.0f;
-	DrawRect(FLinearColor(0.0f, 0.0f, 0.0f, 0.72f), Left, 20.0f, 255.0f, PanelHeight);
+	const int32 ElectricalLines = bElectrical ? 3 + Electrical->GetRecentEvents().Num() : 0;
+	const float PanelHeight = LineHeight * (9.5f + (bHaveStatus ? 1.0f : 0.0f) + TrafficLines + ElectricalLines) + 24.0f;
+	DrawRect(FLinearColor(0.0f, 0.0f, 0.0f, 0.72f), Left, 20.0f, bElectrical ? 380.0f : 255.0f, PanelHeight);
 
 	float Y = 30.0f;
 	DrawLine(TEXT("IoTwin  -  Light Demo"), TextColor, Y, 1.2f);
@@ -141,7 +145,8 @@ void AIoTwinHUD::DrawSimulationPanel()
 	}
 	if (Lamp)
 	{
-		DrawLine(Lamp->IsOn() ? FString::Printf(TEXT("Lamp:  ON  %d %%"), FMath::RoundToInt(Lamp->Device->PowerLevel * 100.0f))
+		DrawLine(Lamp->IsOn() ? FString::Printf(TEXT("Lamp:  ON  %.0f W  (%d %%)"), Lamp->Device->Power,
+		                                        FMath::RoundToInt(Lamp->Device->PowerLevel * 100.0f))
 		                      : FString(TEXT("Lamp:  OFF")),
 			Lamp->IsOn() ? GoodColor : DimColor, Y);
 	}
@@ -169,8 +174,35 @@ void AIoTwinHUD::DrawSimulationPanel()
 		}
 		DrawLine(Power, (Flags != 0) ? BadColor : TextColor, Y);
 	}
+	if (bElectrical)
+	{
+		// Values of the electrical simulation (libs/elsim, in its own thread).
+		if (Source)
+		{
+			const FIoTwinElectricalState& F1 = Source->GetBreakerState();
+			DrawLine(F1.bTripped ? FString(TEXT("230 V: F1 TRIPPED"))
+			                     : FString::Printf(TEXT("230 V: F1 on  %.2f A"), F1.Current),
+				F1.bTripped ? BadColor : TextColor, Y);
+		}
+		if (Lamp)
+		{
+			DrawLine(FString::Printf(TEXT("Lamp: %.1f V  %.3f A"), Lamp->Device->Voltage, Lamp->Device->Current), TextColor, Y);
+		}
+		DrawLine(FString::Printf(TEXT("Simulator: %.1f s, step %.0f us"), Electrical->GetSimulatedTime(),
+			Electrical->GetLastStepMicroseconds()), DimColor, Y);
+		for (const FString& Event : Electrical->GetRecentEvents())
+		{
+			DrawLine(Event, BadColor, Y, 0.8f);
+		}
+	}
 	DrawLine(TEXT("Click the wall switch or press SPACE"), DimColor, Y);
 	DrawLine(TEXT("Mouse wheel dims the lamp"), DimColor, Y);
+	if (bElectrical)
+	{
+		DrawLine(Electrical->HasShortCircuit() ? TEXT("F: remove the short circuit,  R: reset F1")
+		                                       : TEXT("F: short circuit at the lamp,  R: reset F1"),
+			DimColor, Y);
+	}
 	if (UIoTwinSchematicSubsystem::Get(this))
 	{
 		AddHitBox(FVector2D(Left, Y), FVector2D(255.0f, LineHeight), SchematicButton, /*bConsumesInput=*/true, 10);
