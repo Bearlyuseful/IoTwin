@@ -1,13 +1,27 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 - 2026-11-14
+
+The electrical simulation of the installation: a core shared by the three
+planned products, running inside the visualizer and fast enough for a whole
+house within a 10 ms real-time step.
+
+### Compatibility
+- Visualizer: whether a device has power now comes from the electrical
+  simulation. `UElectricalPortComponent::HasPower()` and `GetSupplyLevel()`
+  report simulated values instead of searching the wiring; `SetSupplying()`
+  only marks a supply output. A lamp stays dark when its breaker trips, even
+  though the CAN relay is closed.
+- `UElectricalDeviceComponent` no longer ticks: it is a load with
+  `RatedPower` (default 60 W) and receives voltage, current and power.
+- The release package contains `bin\iotwin-sim` and `data\installations`.
 
 ### Electrical simulation core
 - ADR 0006: one core for three products (test platform, renovation game,
   electrician training); ADR 0007: the electrical simulation owns all
   electrical results, Unreal displays them.
 - `libs/elsim`: installation model with devices, terminals, conductors and
-  cables; network solver with complex phasors (modified nodal analysis);
+  cables; network solver with complex phasors;
   supply in TN-S, TN-C-S and TT; circuit breakers (magnetic and thermal),
   fuses (I²t) and RCDs incl. test button; faults (impedance between any two
   terminals, interrupted conductors); measurements of voltage, loop
