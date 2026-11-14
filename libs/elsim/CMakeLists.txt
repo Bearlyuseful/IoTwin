@@ -4,6 +4,8 @@ add_library(iotwin_elsim STATIC
     elsim.c elsim.h
     el_install.c el_install.h
     el_session.c el_session.h el_atomic.h
+    el_sparse.c el_sparse.h
+    el_generate.c el_generate.h
 )
 target_include_directories(iotwin_elsim PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(iotwin_elsim PUBLIC iotwin_json PRIVATE iotwin_compile_options)

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define SUPPLY_INTERNAL_NODES 4 /* star point S and three source nodes E1..E3 */
+#define SUPPLY_INTERNAL_NODES 1 /* star point S of the transformer */
 #define RCD_TRIP_FRACTION 0.8   /* trips between 0.5 and 1.0 x I delta n, here at 0.8 */
 #define RCD_TEST_MULTIPLE 2.0   /* test button draws about twice I delta n */
 #define PLUG_CONTACT_OHM 0.005
@@ -425,6 +425,20 @@ void el_model_clear_faults(ElModel* model) {
 
 static bool conducting(const ElDevice* d) { return d->on && !d->tripped; }
 
+/*
+ * A contact that can open (switch, breaker, fuse, RCD pole, dimmer, load,
+ * interrupted conductor) is always part of the network: closed with its
+ * resistance, open as a zero admittance. The topology - and with it the
+ * ordering of the sparse solver - then does not change when something
+ * switches; only the values do. The current of an open contact is exactly 0.
+ */
+static int add_contact(ElCircuit* c, int a, int b, bool closed, double ohm) {
+  return closed ? el_circuit_add_resistance(c, a, b, ohm) : el_circuit_add_admittance(c, a, b, el_phasor(0.0, 0.0));
+}
+
+/* Half of the external loop impedance: in the line and in N (or PE) each. */
+static double supply_half_ohm(const ElDevice* d) { return fmax(d->loop_impedance_ohm / 2.0, 1e-6); }
+
 static double load_ohm(const ElDevice* d) {
   return d->rated_power_w > 0.0 ? d->voltage_v * d->voltage_v / d->rated_power_w : 1e12;
 }
@@ -433,19 +447,21 @@ static double load_ohm(const ElDevice* d) {
  * Builds the network of the present state. With zero_sources all voltage
  * sources are 0 V (for Thevenin measurements); inject_a/inject_b >= 0 add a
  * 1 A test current that enters node a and leaves node b. The device with
- * index exclude (>= 0) is left out (a dimmer measuring its surroundings).
+ * index exclude (>= 0) is left open (a dimmer measuring its surroundings).
  */
 static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int inject_b, int exclude) {
   ElCircuit* c = &model->circuit;
   if (c->nodes != model->node_count) {
+    const ElSolver solver = c->solver; /* a setting, kept when the network grows */
     el_circuit_free(c);
     el_circuit_init(c, model->node_count);
+    c->solver = solver;
   }
   el_circuit_clear(c);
 
   for (size_t i = 0; i < model->connection_count; i++) {
     ElConnection* k = &model->connections[i];
-    k->element = k->open ? -1 : el_circuit_add_resistance(c, k->a, k->b, k->resistance_ohm);
+    k->element = add_contact(c, k->a, k->b, !k->open, k->resistance_ohm);
   }
   for (size_t i = 0; i < model->fault_count; i++) {
     ElFault* f = &model->faults[i];
@@ -456,18 +472,20 @@ static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int
     ElDevice* d = &model->devices[i];
     const int t = d->first_node;
     d->element[0] = d->element[1] = d->element[2] = -1;
-    if ((int)i == exclude) {
-      continue;
-    }
+    const bool closed = conducting(d) && (int)i != exclude;
     switch (d->type) {
       case EL_SUPPLY: {
+        /* Each phase: source voltage behind half of Ze, as its Norton equivalent
+           (current U / Zh into the terminal, Zh in parallel to the star point).
+           Without ideal voltage sources the network is solved sparse. */
         const int star = d->internal_node;
-        const double half = d->loop_impedance_ohm / 2.0;
+        const double half = supply_half_ohm(d);
         for (int phase = 0; phase < 3; phase++) {
-          const int source = d->internal_node + 1 + phase;
-          const ElPhasor u = zero_sources ? el_phasor(0.0, 0.0) : el_polar(d->voltage_v, -120.0 * phase);
-          el_circuit_add_voltage_source(c, source, star, u);
-          const int element = el_circuit_add_resistance(c, source, t + SUPPLY_L1 + phase, half);
+          const int terminal = t + SUPPLY_L1 + phase;
+          if (!zero_sources) {
+            el_circuit_add_current_source(c, star, terminal, el_scale(el_polar(d->voltage_v, -120.0 * phase), 1.0 / half));
+          }
+          const int element = el_circuit_add_resistance(c, terminal, star, half);
           if (phase == 0) {
             d->element[0] = element;
           }
@@ -484,21 +502,17 @@ static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int
       case EL_BREAKER:
       case EL_FUSE:
       case EL_SWITCH:
-        if (conducting(d)) {
-          d->element[0] = el_circuit_add_resistance(c, t + TWO_IN, t + TWO_OUT, d->contact_ohm);
-        }
+        d->element[0] = add_contact(c, t + TWO_IN, t + TWO_OUT, closed, d->contact_ohm);
         break;
-      case EL_RCD:
-        if (conducting(d)) {
-          d->element[0] = el_circuit_add_resistance(c, t + RCD_L_IN, t + RCD_L_OUT, d->contact_ohm);
-          d->element[1] = el_circuit_add_resistance(c, t + RCD_N_IN, t + RCD_N_OUT, d->contact_ohm);
-          if (d->test_pressed && d->residual_rated_a > 0.0) {
-            /* The test circuit bypasses the N pole, so its current is residual current. */
-            const double ohm = 230.0 / (RCD_TEST_MULTIPLE * d->residual_rated_a);
-            el_circuit_add_resistance(c, t + RCD_L_OUT, t + RCD_N_IN, ohm);
-          }
-        }
+      case EL_RCD: {
+        d->element[0] = add_contact(c, t + RCD_L_IN, t + RCD_L_OUT, closed, d->contact_ohm);
+        d->element[1] = add_contact(c, t + RCD_N_IN, t + RCD_N_OUT, closed, d->contact_ohm);
+        /* The test circuit bypasses the N pole, so its current is residual current. */
+        const bool testing = closed && d->test_pressed && d->residual_rated_a > 0.0;
+        const double test_ohm = 230.0 / (RCD_TEST_MULTIPLE * (d->residual_rated_a > 0.0 ? d->residual_rated_a : 0.03));
+        add_contact(c, t + RCD_L_OUT, t + RCD_N_IN, testing, test_ohm);
         break;
+      }
       case EL_LOAD:
         if (d->plugged_into >= 0) {
           const int s = model->devices[d->plugged_into].first_node;
@@ -506,14 +520,14 @@ static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int
             el_circuit_add_resistance(c, t + k, s + k, PLUG_CONTACT_OHM);
           }
         }
-        if (d->on) {
-          d->element[0] = el_circuit_add_resistance(c, t + LOAD_L, t + LOAD_N, load_ohm(d));
-        }
+        d->element[0] = add_contact(c, t + LOAD_L, t + LOAD_N, d->on && (int)i != exclude, load_ohm(d));
         break;
       case EL_DIMMER:
-        if (conducting(d) && d->level > DIMMER_OFF_LEVEL) {
+        if (closed && d->level > DIMMER_OFF_LEVEL) {
           const double x = d->level >= DIMMER_FULL_LEVEL ? 0.0 : d->reactance_ohm;
           d->element[0] = el_circuit_add_impedance(c, t + TWO_IN, t + TWO_OUT, el_phasor(d->contact_ohm, x));
+        } else {
+          d->element[0] = add_contact(c, t + TWO_IN, t + TWO_OUT, false, 0.0);
         }
         break;
       case EL_SOCKET:
@@ -544,7 +558,11 @@ static void read_results(ElModel* model) {
     d->residual_a = 0.0;
     d->power_w = 0.0;
     d->voltage_v_measured = 0.0;
-    if (d->type == EL_RCD && d->element[0] >= 0) {
+    if (d->type == EL_SUPPLY && d->element[0] >= 0) {
+      /* L1 current delivered to the installation: source current minus the Norton shunt */
+      const ElPhasor source = el_scale(el_polar(d->voltage_v, 0.0), 1.0 / supply_half_ohm(d));
+      d->current_a = el_abs(el_sub(source, el_circuit_current(c, d->element[0])));
+    } else if (d->type == EL_RCD && d->element[0] >= 0) {
       d->residual_a = el_abs(el_add(el_circuit_current(c, d->element[0]), el_circuit_current(c, d->element[1])));
     } else if (d->type == EL_LOAD || d->type == EL_SOCKET || d->type == EL_JUNCTION) {
       const ElPhasor u = el_sub(el_circuit_voltage(c, d->first_node + LOAD_L), el_circuit_voltage(c, d->first_node + LOAD_N));

@@ -1,0 +1,2 @@
+add_executable(elsim_bench main_elsim_bench.c)
+target_link_libraries(elsim_bench PRIVATE iotwin_elsim iotwin_compile_options)

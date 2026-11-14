@@ -64,7 +64,8 @@ Facts that decide it:
   variable-length arrays); the Unreal build compiles it as C17.
 - Rebuilding the model on a wiring change resets the electrical state
   (breakers, faults). Incremental topology changes are a later optimisation.
-- The dense solver is fine for a flat (about 30 µs per step in the demo);
-  whole houses need a sparse LU solver - the next performance step,
-  independent of the interface.
+- The dense solver was fine for a flat but not for a house; the sparse
+  nodal solver (minimum-degree LDLᵀ, factorization reused while values do
+  not change) followed: about 40 µs per step for a house of 1200 nodes
+  ([Electrical Simulation](../dev/electrical.md#solver)).
 - Supersedes the open point "Interface to Unreal" of ADR 0007.

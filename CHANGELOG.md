@@ -36,6 +36,18 @@
 - Keys F (short circuit at the lamp) and R (reset breakers); smoke-test
   options `-IoTwinShortCircuitAfter=<s>` and `-IoTwinElectricalDisabled`.
 
+### Sparse solver for whole houses
+- Nodal analysis with a sparse LDLᵀ factorization (`el_sparse`): minimum-degree
+  ordering once per topology, numeric factorization only when values change,
+  otherwise only a substitution per step; no memory allocation after the first
+  solution. Dense modified nodal analysis stays as the reference.
+- Supplies as Norton equivalents (no ideal voltage sources); open contacts
+  stay in the network as zero admittances, so switching keeps the topology.
+- `el_generate`: reproducible synthetic houses (three-phase, RCD groups,
+  lighting and socket circuits); `elsim_bench` times them.
+- House with 1202 nodes: steady step about 40 µs (dense: 21 ms), a light
+  switched 70 µs, short circuit with trip 0.7 ms.
+
 ## 0.3.0 - 2026-11-13
 
 Next phase, features A-E: component database, 2D schematic view, UDS

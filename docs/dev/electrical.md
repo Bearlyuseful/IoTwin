@@ -18,10 +18,11 @@ sim> z socket_kitchen:L socket_kitchen:PE
 
 | Part | Where |
 |------|-------|
-| Network solver (modified nodal analysis, complex phasors) | `libs/elsim/el_circuit.*` |
+| Network solver (nodal analysis, complex phasors) | `libs/elsim/el_circuit.*`, sparse LDLᵀ in `el_sparse.*` |
 | Installation model, protection, faults, measurements | `libs/elsim/elsim.*` |
 | Loading installations and components from `data/` | `libs/elsim/el_install.*` |
 | Session: commands in, snapshots and events out, lock-free between threads | `libs/elsim/el_session.*` |
+| Generated houses for benchmarks and tests, benchmark tool | `libs/elsim/el_generate.*`, `apps/elsim_bench` |
 | In the visualizer (compiled in, own thread) | `visualizer/Source/IoTwin/Electrical` ([Visualizer](visualizer.md#electrical-simulation-sourceiotwinelectrical)) |
 | JSON reader | `libs/json` |
 | Command line simulator | `apps/iotwin_sim` (`iotwin-sim`) |
@@ -71,12 +72,13 @@ components and sockets (CTest `data_validation`).
 
 ## Physics
 
-- **Steady state per time step** (10 ms), complex phasors at 50 Hz,
-  modified nodal analysis with dense Gaussian elimination. All elements are
+- **Steady state per time step** (10 ms), complex phasors at 50 Hz, nodal
+  analysis with a sparse solver (see [Solver](#solver)). All elements are
   linear; loads are resistive (`R = U² / P`).
 - **Supply:** three sources 230 V at 0°, −120°, +120° behind half of the
   loop impedance Ze per conductor (L1-L3, N, PE), so L-N and L-PE loops both
-  see Ze. **TN-S / TN-C-S:** PE connects to the transformer star point.
+  see Ze. The sources enter the network as Norton equivalents (current
+  U / (Ze/2) with Ze/2 in parallel), so there are no ideal voltage sources. **TN-S / TN-C-S:** PE connects to the transformer star point.
   **TT:** PE goes to the house earth electrode (`earth_electrode`, default 30 Ω),
   the star point to its own earth (`source_earth`, 1 Ω).
 - Every node has 1 GΩ to earth, so open breakers and loose terminals stay
@@ -88,6 +90,9 @@ components and sockets (CTest `data_validation`).
   when the network changes (`ElModel.revision`). The supply sees reactive
   power instead of the distortion power of a real dimmer.
 - A load counts as **powered** when it gets at least 1 % of its rated power.
+- Contacts that can open (switches, breakers, fuses, RCD poles, dimmers,
+  loads, interrupted conductors) stay in the network as zero admittances when
+  open, so switching changes values, not the topology.
 - Portable C99: phasors are a small struct (`ElPhasor`) instead of C99 complex
   numbers, so MSVC compiles the core (inside Unreal); after the first solution
   of a network the solver does not allocate memory.
@@ -143,6 +148,47 @@ iotwin-sim [--data DIR] [--script FILE] [installation.json]
 
 With `--script` the exit code is 1 if an `expect` fails (CTest `electrical_demo`).
 
+## Solver
+
+Without ideal voltage sources the nodal admittance matrix Y of the network is
+complex symmetric, and its real part (the conductances, plus 1 GΩ from every
+node to earth) is positive definite. Such a matrix has an LDLᵀ factorization
+for every symmetric ordering without pivoting, so the ordering is chosen for
+sparsity alone (`el_sparse.c`):
+
+| Phase | When | Cost |
+|-------|------|------|
+| Minimum-degree ordering, pattern of L | topology changes (a fault, plugging in) | once, cached (4 topologies) |
+| Numeric factorization LDLᵀ | values change (switching, a trip, dimming) | proportional to the fill of L |
+| Forward/back substitution | every solution | proportional to the fill of L |
+
+A step of an unchanged network is therefore only a substitution. After the
+first solution of a topology the solver does not allocate memory. Dense
+modified nodal analysis with partial pivoting remains for networks with
+voltage sources and as the reference (`EL_SOLVER_DENSE`, used by the tests).
+
+`elsim_bench` measures it on a generated house (three-phase supply, RCD
+groups, lighting and socket circuits with junction boxes, lamps, switches and
+appliances):
+
+```bash
+elsim_bench                      # 24 circuits x 6 boxes, about 1200 nodes
+elsim_bench --circuits 96 --boxes 8 --dense
+```
+
+| 24 circuits x 6 boxes, 1202 nodes | Windows (MinGW) | Linux (WSL) |
+|---|---|---|
+| steady step (mean / worst) | 42 / 65 µs | 48 / 136 µs |
+| light switched (refactorization) | 70 µs | 129 µs |
+| short circuit (new element), breaker trips | 0.66 ms | 0.64 ms |
+| first step (ordering + factorization) | 0.56 ms | 0.73 ms |
+| dense modified nodal analysis, one step | 21 ms | 34 ms |
+
+With 96 circuits x 8 boxes (6317 nodes) a steady step takes about 0.2 ms, a
+switch 0.37 ms and a short circuit 3.5 ms - all within the 10 ms step.
+Sparse and dense results agree to about 3·10⁻¹⁰ (CTest `electrical_bench_smoke`
+checks it).
+
 ## Session interface
 
 `el_session.h` is what every frontend uses ([ADR 0008](../adr/0008-simulation-interface.md)):
@@ -167,8 +213,8 @@ come back as events ("command rejected: ...").
 - Resistive loads only; reactive loads (motors, power factor) and three-phase
   devices need only new element types, the solver already uses complex numbers.
 - Simplified trip curves and no conductor heating.
-- Dense solver: about 30 µs per step for the demo scene; whole houses
-  (about 1000 nodes) need a sparse LU solver.
+- A new fault or plugging in changes the topology (a new ordering, under
+  1 ms for a house); a fault generator could reserve elements to avoid that.
 - Out-of-process adapter (Zenoh, shared memory) with a FlatBuffers schema for
   a simulator on a separate (real-time) machine and several clients.
 - Fault generator and rule checks for the electrician training build on the

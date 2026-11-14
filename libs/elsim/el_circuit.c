@@ -4,7 +4,275 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "el_sparse.h"
+
 #define EL_PI 3.14159265358979323846
+
+/* ------------------------------------------------------------------------- */
+/* Cache of sparse orderings and factorizations                              */
+/* ------------------------------------------------------------------------- */
+
+/*
+ * A few topologies are in use at the same time (the network itself, a dimmer
+ * measuring its surroundings, a measurement), so several analyses are kept.
+ * An entry is identified by its admittance elements (nodes in order); it
+ * keeps the values of its last factorization to skip refactorizing.
+ */
+#define SPARSE_CACHE_ENTRIES 4
+
+typedef struct {
+  size_t count;     /* admittance elements */
+  int* nodes;       /* a, b per admittance element */
+  int* pair;        /* pair index per admittance element, -1 = no off-diagonal entry */
+  ElPhasor* values; /* values of the last factorization */
+  double gmin;
+  bool factored;
+  ElSparse* sparse;
+  unsigned long used;
+} SparseEntry;
+
+typedef struct {
+  SparseEntry entries[SPARSE_CACHE_ENTRIES];
+  unsigned long clock;
+  ElPhasor* rhs;
+  size_t rhs_capacity;
+} SparseCache;
+
+typedef struct {
+  int lo;
+  int hi;
+  int element; /* index among the admittance elements */
+} PairKey;
+
+static void entry_free(SparseEntry* e) {
+  free(e->nodes);
+  free(e->pair);
+  free(e->values);
+  el_sparse_free(e->sparse);
+  memset(e, 0, sizeof(*e));
+}
+
+static void cache_free(ElCircuit* circuit) {
+  SparseCache* cache = (SparseCache*)circuit->sparse_cache;
+  if (cache == NULL) {
+    return;
+  }
+  for (int i = 0; i < SPARSE_CACHE_ENTRIES; i++) {
+    entry_free(&cache->entries[i]);
+  }
+  free(cache->rhs);
+  free(cache);
+  circuit->sparse_cache = NULL;
+}
+
+static int compare_pair(const void* a, const void* b) {
+  const PairKey* x = (const PairKey*)a;
+  const PairKey* y = (const PairKey*)b;
+  if (x->lo != y->lo) {
+    return (x->lo > y->lo) - (x->lo < y->lo);
+  }
+  return (x->hi > y->hi) - (x->hi < y->hi);
+}
+
+static bool same_topology(const SparseEntry* e, const ElCircuit* circuit, size_t admittances) {
+  if (e->sparse == NULL || e->count != admittances) {
+    return false;
+  }
+  size_t j = 0;
+  for (size_t i = 0; i < circuit->count; i++) {
+    const ElElement* element = &circuit->elements[i];
+    if (element->kind != EL_ADMITTANCE) {
+      continue;
+    }
+    if (e->nodes[2 * j] != element->a || e->nodes[2 * j + 1] != element->b) {
+      return false;
+    }
+    j++;
+  }
+  return true;
+}
+
+/* New ordering for the topology of the circuit (allocates; only on topology changes). */
+static bool entry_build(SparseEntry* e, const ElCircuit* circuit, size_t admittances) {
+  entry_free(e);
+  const int n = circuit->nodes - 1;
+  const size_t count = admittances ? admittances : 1;
+  e->nodes = (int*)malloc(2 * count * sizeof(int));
+  e->pair = (int*)malloc(count * sizeof(int));
+  e->values = (ElPhasor*)malloc(count * sizeof(ElPhasor));
+  PairKey* keys = (PairKey*)malloc(count * sizeof(PairKey));
+  int* pair_a = (int*)malloc(count * sizeof(int));
+  int* pair_b = (int*)malloc(count * sizeof(int));
+  bool ok = e->nodes && e->pair && e->values && keys && pair_a && pair_b;
+  size_t key_count = 0;
+  size_t j = 0;
+  for (size_t i = 0; ok && i < circuit->count; i++) {
+    const ElElement* element = &circuit->elements[i];
+    if (element->kind != EL_ADMITTANCE) {
+      continue;
+    }
+    e->nodes[2 * j] = element->a;
+    e->nodes[2 * j + 1] = element->b;
+    e->pair[j] = -1;
+    if (element->a > 0 && element->b > 0 && element->a != element->b) {
+      const int a = element->a - 1;
+      const int b = element->b - 1;
+      keys[key_count].lo = a < b ? a : b;
+      keys[key_count].hi = a < b ? b : a;
+      keys[key_count].element = (int)j;
+      key_count++;
+    }
+    j++;
+  }
+  size_t pairs = 0;
+  if (ok) {
+    qsort(keys, key_count, sizeof(PairKey), compare_pair);
+    for (size_t k = 0; k < key_count; k++) {
+      if (pairs == 0 || keys[k].lo != pair_a[pairs - 1] || keys[k].hi != pair_b[pairs - 1]) {
+        pair_a[pairs] = keys[k].lo;
+        pair_b[pairs] = keys[k].hi;
+        pairs++;
+      }
+      e->pair[keys[k].element] = (int)pairs - 1;
+    }
+    e->sparse = el_sparse_analyze(n, pair_a, pair_b, pairs);
+    ok = e->sparse != NULL;
+  }
+  free(keys);
+  free(pair_a);
+  free(pair_b);
+  if (!ok) {
+    entry_free(e);
+    return false;
+  }
+  e->count = admittances;
+  return true;
+}
+
+static bool values_unchanged(const SparseEntry* e, const ElCircuit* circuit, double gmin) {
+  if (!e->factored || e->gmin != gmin) {
+    return false;
+  }
+  size_t j = 0;
+  for (size_t i = 0; i < circuit->count; i++) {
+    const ElElement* element = &circuit->elements[i];
+    if (element->kind != EL_ADMITTANCE) {
+      continue;
+    }
+    if (e->values[j].re != element->value.re || e->values[j].im != element->value.im) {
+      return false;
+    }
+    j++;
+  }
+  return true;
+}
+
+static bool entry_factor(SparseEntry* e, ElCircuit* circuit, double gmin) {
+  ElSparse* s = e->sparse;
+  el_sparse_clear(s);
+  for (int k = 0; k < s->n; k++) {
+    el_sparse_add_diagonal(s, k, el_phasor(gmin, 0.0));
+  }
+  size_t j = 0;
+  for (size_t i = 0; i < circuit->count; i++) {
+    const ElElement* element = &circuit->elements[i];
+    if (element->kind != EL_ADMITTANCE) {
+      continue;
+    }
+    const ElPhasor y = element->value;
+    e->values[j] = y;
+    j++;
+    if (element->a == element->b) {
+      continue; /* from a node to itself: no effect */
+    }
+    if (element->a > 0) {
+      el_sparse_add_diagonal(s, element->a - 1, y);
+    }
+    if (element->b > 0) {
+      el_sparse_add_diagonal(s, element->b - 1, y);
+    }
+    if (e->pair[j - 1] >= 0) {
+      el_sparse_add_pair(s, (size_t)e->pair[j - 1], el_scale(y, -1.0));
+    }
+  }
+  e->gmin = gmin;
+  e->factored = el_sparse_factor(s, gmin > 0.0 ? gmin : 1e-12);
+  circuit->factorizations++;
+  circuit->perturbed_pivots = s->perturbed;
+  return e->factored;
+}
+
+/* Nodal analysis with the sparse solver; false if it cannot be used (the caller falls back to dense). */
+static bool solve_sparse(ElCircuit* circuit, double gmin) {
+  const int n = circuit->nodes - 1;
+  SparseCache* cache = (SparseCache*)circuit->sparse_cache;
+  if (cache == NULL) {
+    cache = (SparseCache*)calloc(1, sizeof(SparseCache));
+    if (cache == NULL) {
+      return false;
+    }
+    circuit->sparse_cache = cache;
+  }
+  size_t admittances = 0;
+  for (size_t i = 0; i < circuit->count; i++) {
+    admittances += circuit->elements[i].kind == EL_ADMITTANCE;
+  }
+
+  SparseEntry* e = NULL;
+  SparseEntry* oldest = &cache->entries[0];
+  for (int i = 0; i < SPARSE_CACHE_ENTRIES; i++) {
+    SparseEntry* candidate = &cache->entries[i];
+    if (same_topology(candidate, circuit, admittances)) {
+      e = candidate;
+      break;
+    }
+    if (candidate->used < oldest->used) {
+      oldest = candidate;
+    }
+  }
+  if (e == NULL) {
+    e = oldest;
+    if (!entry_build(e, circuit, admittances)) {
+      return false;
+    }
+    circuit->analyses++;
+  }
+  e->used = ++cache->clock;
+  if (!values_unchanged(e, circuit, gmin) && !entry_factor(e, circuit, gmin)) {
+    return false;
+  }
+
+  const size_t size = (size_t)(n > 0 ? n : 1);
+  if (size > cache->rhs_capacity || cache->rhs == NULL) {
+    ElPhasor* grown = (ElPhasor*)realloc(cache->rhs, size * sizeof(ElPhasor));
+    if (grown == NULL) {
+      return false;
+    }
+    cache->rhs = grown;
+    cache->rhs_capacity = size;
+  }
+  ElPhasor* x = cache->rhs;
+  memset(x, 0, size * sizeof(ElPhasor));
+  for (size_t i = 0; i < circuit->count; i++) {
+    const ElElement* element = &circuit->elements[i];
+    if (element->kind == EL_CURRENT_SOURCE) {
+      /* value leaves node a and enters node b */
+      if (element->a > 0) {
+        x[element->a - 1] = el_sub(x[element->a - 1], element->value);
+      }
+      if (element->b > 0) {
+        x[element->b - 1] = el_add(x[element->b - 1], element->value);
+      }
+    }
+  }
+  el_sparse_solve(e->sparse, x);
+  for (int k = 0; k < n; k++) {
+    circuit->voltages[k + 1] = x[k];
+  }
+  circuit->fill = el_sparse_nonzeros(e->sparse);
+  circuit->sparse_solutions++;
+  return true;
+}
 
 void el_circuit_init(ElCircuit* circuit, int nodes) {
   memset(circuit, 0, sizeof(*circuit));
@@ -12,6 +280,7 @@ void el_circuit_init(ElCircuit* circuit, int nodes) {
 }
 
 void el_circuit_free(ElCircuit* circuit) {
+  cache_free(circuit);
   free(circuit->elements);
   free(circuit->voltages);
   free(circuit->source_currents);
@@ -116,8 +385,13 @@ bool el_circuit_solve(ElCircuit* circuit, double gmin) {
     circuit->solved = true;
     return true;
   }
+  if (sources == 0 && circuit->solver == EL_SOLVER_AUTO && solve_sparse(circuit, gmin)) {
+    circuit->solved = true;
+    return true;
+  }
+  circuit->dense_solutions++;
 
-  /* Augmented matrix n x (n + 1), row-major. */
+  /* Dense modified nodal analysis. Augmented matrix n x (n + 1), row-major. */
   const size_t width = (size_t)n + 1;
   if (!reserve(&circuit->matrix, &circuit->matrix_capacity, (size_t)n * width)) {
     return false;
