@@ -1,6 +1,7 @@
 # Roadmap
 
-Status: November 2026 - v0.1.0 released, steps 0-3 implemented and verified on a NUCLEO-G0B1RE
+Status: November 2026 - v0.4.0: electrical simulation of the installation, running inside the
+visualizer; steps 0-3 implemented and verified on a NUCLEO-G0B1RE
 
 This roadmap merges the two earlier plans - the MVP plan of October 2025 and the
 post-MVP plan of March 2026 (virtual CAN bus → serial bridge → STM32 CAN
@@ -47,7 +48,8 @@ Order of work:
 | F | **Real bus and real time** | transceiver + second node, PREEMPT_RT measurements (needs hardware) |
 
 Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup (all done).
-Release 0.3.0 contains features A-E.
+Release 0.3.0 contains features A-E. Release 0.4.0 contains the electrical
+simulation core, its integration into the visualizer and the sparse solver.
 
 ## Product line (agreed November 2026)
 

@@ -17,7 +17,7 @@
 param(
     # Engine folder of the Unreal installation (contains Build\BatchFiles\RunUAT.bat).
     [string]$EngineDir = $env:UE_ENGINE_DIR,
-    [string]$Version = "0.3.0",
+    [string]$Version = "0.4.0",
     [ValidateSet("Development", "Shipping")]
     [string]$Configuration = "Development",
     # Reuse an existing cooked visualizer from a previous run.

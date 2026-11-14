@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 
 # Bare-metal firmware for the NUCLEO-G0B1RE. Separate CMake project with its own
 # toolchain (see ADR 0004); configure with: cmake --preset nucleo-g0b1re
-project(IoTwinFirmware VERSION 0.3.0 LANGUAGES C)
+project(IoTwinFirmware VERSION 0.4.0 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)

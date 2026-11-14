@@ -24,6 +24,13 @@ and USB link of the system with every message decoded at its sender. Click a
 node for details, including the characteristics from the component database
 (data\components). The system itself is described in data\systems\light-demo.json.
 
+The lamp hangs in a simulated 230 V circuit: house connection, circuit
+breaker F1 (B10), the relay as a dimmer, a copper cable and the 60 W lamp.
+Whether it lights, how bright, and the voltage, current and power in the HUD
+come from the electrical simulation, which runs in its own thread every 10 ms.
+Press F for a short circuit at the lamp: F1 trips, the relay housing turns
+amber and the lamp stays dark even though the relay is closed. R resets F1.
+
 Commands in the CAN-Sim window:
 
   lamp on | lamp off | lamp toggle
