@@ -165,4 +165,6 @@ private:
 	TMap<TWeakObjectPtr<const UElectricalPortComponent>, FString> PortIds;
 	TArray<TWeakObjectPtr<UObject>> Elements;
 	TArray<FString> RecentEvents;
+	/** Label per device id, for readable events. */
+	TMap<FString, FString> DisplayNames;
 };

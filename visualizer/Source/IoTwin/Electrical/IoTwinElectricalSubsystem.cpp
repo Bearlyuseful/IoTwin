@@ -122,6 +122,7 @@ void UIoTwinElectricalSubsystem::Stop()
 	States.Reset();
 	PortIds.Reset();
 	Elements.Reset();
+	DisplayNames.Reset();
 	bShortCircuit = false;
 }
 
@@ -210,6 +211,14 @@ void UIoTwinElectricalSubsystem::Rebuild()
 
 	const size_t DeviceCount = Model.device_count;
 	const size_t ConnectionCount = Model.connection_count;
+	// Events name devices by id ("PowerSourceActor_0.F1"); the HUD shows their labels ("F1 B10").
+	for (size_t i = 0; i < DeviceCount; ++i)
+	{
+		if (Model.devices[i].label[0] != '\0')
+		{
+			DisplayNames.Add(UTF8_TO_TCHAR(Model.devices[i].id), UTF8_TO_TCHAR(Model.devices[i].label));
+		}
+	}
 	Session = el_session_create(&Model);
 	if (Session == nullptr)
 	{
@@ -286,8 +295,18 @@ void UIoTwinElectricalSubsystem::ApplySnapshot()
 	ElEvent Event;
 	while (el_session_next_event(Session, &Event))
 	{
-		const FString Text = FString::Printf(TEXT("%.2f s  %s"), Event.time_s, UTF8_TO_TCHAR(Event.text));
-		UE_LOG(LogIoTwin, Log, TEXT("Electrical: %s"), *Text);
+		FString Message = UTF8_TO_TCHAR(Event.text);
+		UE_LOG(LogIoTwin, Log, TEXT("Electrical: %.2f s  %s"), Event.time_s, *Message);
+		FString Device;
+		FString Rest;
+		if (Message.Split(TEXT(" "), &Device, &Rest))
+		{
+			if (const FString* Label = DisplayNames.Find(Device))
+			{
+				Message = *Label + TEXT(" ") + Rest;
+			}
+		}
+		const FString Text = FString::Printf(TEXT("%.2f s  %s"), Event.time_s, *Message);
 		RecentEvents.Add(Text);
 		if (RecentEvents.Num() > 5)
 		{
