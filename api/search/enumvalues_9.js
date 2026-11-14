@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['receive_0',['Receive',['../CanSignalComponent_8h.html#a4c933bb48cd6507bbbe3faad1187d601a5639d3df5aea3d9e78027b843ee3cbb2',1,'CanSignalComponent.h']]],
-  ['rx_5fidle_1',['RX_IDLE',['../isotp_8c.html#abfa6969f7336f0ec64cebd162c33a44aa740fbdaf585834ac2d3bbaf0d17bb074',1,'isotp.c']]],
-  ['rx_5freceiving_2',['RX_RECEIVING',['../isotp_8c.html#abfa6969f7336f0ec64cebd162c33a44aa2354afeeaa95ec3de8456724acd59be9',1,'isotp.c']]]
+  ['mode_5falternate_0',['MODE_ALTERNATE',['../board_8c.html#ad0cd2db2b828b5cde7e4059b16aa3f65a8a1a484071ee61d6f20ce802f9c2e204',1,'board.c']]],
+  ['mode_5finput_1',['MODE_INPUT',['../board_8c.html#ad0cd2db2b828b5cde7e4059b16aa3f65a4f139294c29235db806091c9383a3ba1',1,'board.c']]],
+  ['mode_5foutput_2',['MODE_OUTPUT',['../board_8c.html#ad0cd2db2b828b5cde7e4059b16aa3f65a3bc21d107b4e0b5a7387181360485a34',1,'board.c']]]
 ];

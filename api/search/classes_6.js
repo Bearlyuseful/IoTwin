@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['inputqueue_0',['InputQueue',['../structInputQueue.html',1,'']]],
-  ['iotwin_1',['IoTwin',['../classIoTwin.html',1,'']]],
-  ['ipowerinterface_2',['IPowerInterface',['../classIPowerInterface.html',1,'']]],
-  ['isotpconfig_3',['IsoTpConfig',['../structIsoTpConfig.html',1,'']]],
-  ['isotplink_4',['IsoTpLink',['../structIsoTpLink.html',1,'']]]
+  ['gateway_0',['Gateway',['../structGateway.html',1,'']]],
+  ['gatewaycanstatus_1',['GatewayCanStatus',['../structGatewayCanStatus.html',1,'']]],
+  ['gatewayio_2',['GatewayIo',['../structGatewayIo.html',1,'']]]
 ];

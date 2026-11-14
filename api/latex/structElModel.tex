@@ -1,0 +1,147 @@
+\doxysection{El\+Model Struct Reference}
+\hypertarget{structElModel}{}\label{structElModel}\index{ElModel@{ElModel}}
+
+
+{\ttfamily \#include $<$elsim.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{structElModel_ade705d0860566984eae3f6a1f3941620}{id}} \mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}
+\item 
+char \mbox{\hyperlink{structElModel_adb139da1deeb8a453dcc4f19d35bda78}{name}} \mbox{[}\mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}{EL\+\_\+\+TEXT\+\_\+\+MAX}}\mbox{]}
+\item 
+\mbox{\hyperlink{structElDevice}{El\+Device}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElModel_ac90530245178bdf007c4833c049629c5}{devices}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElModel_a4beacf0a5e70e54487fe539deef066c8}{device\+\_\+count}}
+\item 
+\mbox{\hyperlink{structElCable}{El\+Cable}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElModel_a383681a9008e097491a3a725109e56f2}{cables}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElModel_aeb3662d9b11d7f7238af1f13ce673243}{cable\+\_\+count}}
+\item 
+\mbox{\hyperlink{structElConnection}{El\+Connection}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}{connections}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}{connection\+\_\+count}}
+\item 
+\mbox{\hyperlink{structElFault}{El\+Fault}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElModel_a39a26ae9a001afca12107e9390c3c106}{faults}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElModel_a3bb02b034962b2833aea0759097022ea}{fault\+\_\+count}}
+\item 
+int \mbox{\hyperlink{structElModel_aa743b299f44fabd5d08a438317e4034f}{node\+\_\+count}}
+\item 
+double \mbox{\hyperlink{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}{time\+\_\+s}}
+\item 
+\mbox{\hyperlink{structElCircuit}{El\+Circuit}} \mbox{\hyperlink{structElModel_a3b02943745674bf379c49d29fd19666c}{circuit}}
+\item 
+\mbox{\hyperlink{structElEvent}{El\+Event}} \mbox{\hyperlink{structElModel_a8903037c40f2563b322e0e888ae37de0}{events}} \mbox{[}\mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\+\_\+\+MAX\+\_\+\+EVENTS}}\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElModel_a0e738da033477999b0bf8a8af47b39bd}{event\+\_\+head}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}{event\+\_\+count}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structElModel_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structElModel_aeb3662d9b11d7f7238af1f13ce673243}\index{ElModel@{ElModel}!cable\_count@{cable\_count}}
+\index{cable\_count@{cable\_count}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{cable\_count}{cable\_count}}
+{\footnotesize\ttfamily \label{structElModel_aeb3662d9b11d7f7238af1f13ce673243} 
+size\+\_\+t El\+Model\+::cable\+\_\+count}
+
+\Hypertarget{structElModel_a383681a9008e097491a3a725109e56f2}\index{ElModel@{ElModel}!cables@{cables}}
+\index{cables@{cables}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{cables}{cables}}
+{\footnotesize\ttfamily \label{structElModel_a383681a9008e097491a3a725109e56f2} 
+\mbox{\hyperlink{structElCable}{El\+Cable}}\texorpdfstring{$\ast$}{*} El\+Model\+::cables}
+
+\Hypertarget{structElModel_a3b02943745674bf379c49d29fd19666c}\index{ElModel@{ElModel}!circuit@{circuit}}
+\index{circuit@{circuit}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{circuit}{circuit}}
+{\footnotesize\ttfamily \label{structElModel_a3b02943745674bf379c49d29fd19666c} 
+\mbox{\hyperlink{structElCircuit}{El\+Circuit}} El\+Model\+::circuit}
+
+\Hypertarget{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8}\index{ElModel@{ElModel}!connection\_count@{connection\_count}}
+\index{connection\_count@{connection\_count}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{connection\_count}{connection\_count}}
+{\footnotesize\ttfamily \label{structElModel_a97976d759bc3b4c5ddb70a167b38a8a8} 
+size\+\_\+t El\+Model\+::connection\+\_\+count}
+
+\Hypertarget{structElModel_a6f39a1b9998776274aa393d6d7ba5c65}\index{ElModel@{ElModel}!connections@{connections}}
+\index{connections@{connections}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{connections}{connections}}
+{\footnotesize\ttfamily \label{structElModel_a6f39a1b9998776274aa393d6d7ba5c65} 
+\mbox{\hyperlink{structElConnection}{El\+Connection}}\texorpdfstring{$\ast$}{*} El\+Model\+::connections}
+
+\Hypertarget{structElModel_a4beacf0a5e70e54487fe539deef066c8}\index{ElModel@{ElModel}!device\_count@{device\_count}}
+\index{device\_count@{device\_count}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{device\_count}{device\_count}}
+{\footnotesize\ttfamily \label{structElModel_a4beacf0a5e70e54487fe539deef066c8} 
+size\+\_\+t El\+Model\+::device\+\_\+count}
+
+\Hypertarget{structElModel_ac90530245178bdf007c4833c049629c5}\index{ElModel@{ElModel}!devices@{devices}}
+\index{devices@{devices}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{devices}{devices}}
+{\footnotesize\ttfamily \label{structElModel_ac90530245178bdf007c4833c049629c5} 
+\mbox{\hyperlink{structElDevice}{El\+Device}}\texorpdfstring{$\ast$}{*} El\+Model\+::devices}
+
+\Hypertarget{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f}\index{ElModel@{ElModel}!event\_count@{event\_count}}
+\index{event\_count@{event\_count}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{event\_count}{event\_count}}
+{\footnotesize\ttfamily \label{structElModel_ad229d7ee42ede16b13e5e0c6ededad4f} 
+size\+\_\+t El\+Model\+::event\+\_\+count}
+
+\Hypertarget{structElModel_a0e738da033477999b0bf8a8af47b39bd}\index{ElModel@{ElModel}!event\_head@{event\_head}}
+\index{event\_head@{event\_head}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{event\_head}{event\_head}}
+{\footnotesize\ttfamily \label{structElModel_a0e738da033477999b0bf8a8af47b39bd} 
+size\+\_\+t El\+Model\+::event\+\_\+head}
+
+\Hypertarget{structElModel_a8903037c40f2563b322e0e888ae37de0}\index{ElModel@{ElModel}!events@{events}}
+\index{events@{events}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{events}{events}}
+{\footnotesize\ttfamily \label{structElModel_a8903037c40f2563b322e0e888ae37de0} 
+\mbox{\hyperlink{structElEvent}{El\+Event}} El\+Model\+::events\mbox{[}\mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\+\_\+\+MAX\+\_\+\+EVENTS}}\mbox{]}}
+
+\Hypertarget{structElModel_a3bb02b034962b2833aea0759097022ea}\index{ElModel@{ElModel}!fault\_count@{fault\_count}}
+\index{fault\_count@{fault\_count}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{fault\_count}{fault\_count}}
+{\footnotesize\ttfamily \label{structElModel_a3bb02b034962b2833aea0759097022ea} 
+size\+\_\+t El\+Model\+::fault\+\_\+count}
+
+\Hypertarget{structElModel_a39a26ae9a001afca12107e9390c3c106}\index{ElModel@{ElModel}!faults@{faults}}
+\index{faults@{faults}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{faults}{faults}}
+{\footnotesize\ttfamily \label{structElModel_a39a26ae9a001afca12107e9390c3c106} 
+\mbox{\hyperlink{structElFault}{El\+Fault}}\texorpdfstring{$\ast$}{*} El\+Model\+::faults}
+
+\Hypertarget{structElModel_ade705d0860566984eae3f6a1f3941620}\index{ElModel@{ElModel}!id@{id}}
+\index{id@{id}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{structElModel_ade705d0860566984eae3f6a1f3941620} 
+char El\+Model\+::id\mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}}
+
+\Hypertarget{structElModel_adb139da1deeb8a453dcc4f19d35bda78}\index{ElModel@{ElModel}!name@{name}}
+\index{name@{name}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{structElModel_adb139da1deeb8a453dcc4f19d35bda78} 
+char El\+Model\+::name\mbox{[}\mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}{EL\+\_\+\+TEXT\+\_\+\+MAX}}\mbox{]}}
+
+\Hypertarget{structElModel_aa743b299f44fabd5d08a438317e4034f}\index{ElModel@{ElModel}!node\_count@{node\_count}}
+\index{node\_count@{node\_count}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{node\_count}{node\_count}}
+{\footnotesize\ttfamily \label{structElModel_aa743b299f44fabd5d08a438317e4034f} 
+int El\+Model\+::node\+\_\+count}
+
+incl. node 0 (earth) \Hypertarget{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934}\index{ElModel@{ElModel}!time\_s@{time\_s}}
+\index{time\_s@{time\_s}!ElModel@{ElModel}}
+\doxysubsubsection{\texorpdfstring{time\_s}{time\_s}}
+{\footnotesize\ttfamily \label{structElModel_a1fa4c2bbcc8ecb7cbce923845b740934} 
+double El\+Model\+::time\+\_\+s}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/elsim/\mbox{\hyperlink{elsim_8h}{elsim.\+h}}\end{DoxyCompactItemize}

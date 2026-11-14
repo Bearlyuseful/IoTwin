@@ -1,0 +1,55 @@
+\doxysection{libs/elsim/el\+\_\+install.h File Reference}
+\hypertarget{el__install_8h}{}\label{el__install_8h}\index{libs/elsim/el\_install.h@{libs/elsim/el\_install.h}}
+
+
+Loads an installation (a JSON file in data/installations) into an \doxylink{structElModel}{El\+Model}.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include "{}elsim.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{el__install_8h_a71f8e9863db066332a0142978e67cfc2}{el\+\_\+load\+\_\+installation}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}components\+\_\+dir, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\item 
+bool \mbox{\hyperlink{el__install_8h_a2e5cf7aef82d54c582f40b33008d3d90}{el\+\_\+load\+\_\+installation\+\_\+text}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}text, const char \texorpdfstring{$\ast$}{*}components\+\_\+dir, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Same from a JSON text (tests); components as above. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Loads an installation (a JSON file in data/installations) into an \doxylink{structElModel}{El\+Model}. 
+
+Parameters of a device come from, in this order\+: the defaults of its type, the component it refers to (data/components, by id), and fields of the device itself. Parameter names are the ones of the component database\+:
+
+rated\+\_\+current, magnetic\+\_\+trip\+\_\+multiple, thermal\+\_\+limit (breaker), melting\+\_\+i2t (fuse), rated\+\_\+residual\+\_\+current (rcd), rated\+\_\+power, rated\+\_\+voltage (load), contact\+\_\+resistance; supply\+: system (TN-\/S, TN-\/\+C-\/S, TT), voltage, frequency, loop\+\_\+impedance, earth\+\_\+electrode, source\+\_\+earth.
+
+A breaker component may give its tripping characteristic as property "{}characteristic"{}\+: B (5 x In), C (10 x In) or D (20 x In). 
+
+\label{doc-func-members}
+\Hypertarget{el__install_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{el__install_8h_a71f8e9863db066332a0142978e67cfc2}\index{el\_install.h@{el\_install.h}!el\_load\_installation@{el\_load\_installation}}
+\index{el\_load\_installation@{el\_load\_installation}!el\_install.h@{el\_install.h}}
+\doxysubsubsection{\texorpdfstring{el\_load\_installation()}{el\_load\_installation()}}
+{\footnotesize\ttfamily \label{el__install_8h_a71f8e9863db066332a0142978e67cfc2} 
+bool el\+\_\+load\+\_\+installation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{components\+\_\+dir}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em components\+\_\+dir} & Directory searched recursively for component files, may be NULL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false with a message in {\ttfamily error} (file, device or connection that is wrong). 
+\end{DoxyReturn}
+\Hypertarget{el__install_8h_a2e5cf7aef82d54c582f40b33008d3d90}\index{el\_install.h@{el\_install.h}!el\_load\_installation\_text@{el\_load\_installation\_text}}
+\index{el\_load\_installation\_text@{el\_load\_installation\_text}!el\_install.h@{el\_install.h}}
+\doxysubsubsection{\texorpdfstring{el\_load\_installation\_text()}{el\_load\_installation\_text()}}
+{\footnotesize\ttfamily \label{el__install_8h_a2e5cf7aef82d54c582f40b33008d3d90} 
+bool el\+\_\+load\+\_\+installation\+\_\+text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{components\+\_\+dir}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Same from a JSON text (tests); components as above. 
+

@@ -1,0 +1,208 @@
+\doxysection{libs/json/json.h File Reference}
+\hypertarget{json_8h}{}\label{json_8h}\index{libs/json/json.h@{libs/json/json.h}}
+
+
+Small JSON reader (RFC 8259) for the engineering data in data/.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structJsonValue}{Json\+Value}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{json_8h_a4bd2561c045448ddc6ac6a266da885ca}{JSON\+\_\+\+MAX\+\_\+\+DEPTH}}~64
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Json\+Value \mbox{\hyperlink{json_8h_a7973a7202ee5bd7d21be9ebe80f3c726}{Json\+Value}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decc}{Json\+Type}} \{ \newline
+\mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca03ddcc4e2eef955020a01e10c11bfe48}{JSON\+\_\+\+NULL}}
+, \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63deccafc3a60886010e5b0f57d7aa30d0277b0}{JSON\+\_\+\+BOOL}}
+, \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca6670b3c9b7ba8ab3976a7521edcc7f97}{JSON\+\_\+\+NUMBER}}
+, \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca02bfd03b07e5b9ecd6ee0d257dc37daf}{JSON\+\_\+\+STRING}}
+, \newline
+\mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca97462341a4eba4320d62d49597eabb6a}{JSON\+\_\+\+ARRAY}}
+, \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca7750125a86a953cfd57b3a4e1fa67bff}{JSON\+\_\+\+OBJECT}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{json_8h_aebe8a3866333f035696efc8ea0ccb06c}{json\+\_\+parse}} (const char \texorpdfstring{$\ast$}{*}text, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Parses {\ttfamily text} (NUL terminated). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{json_8h_a1c75e470ce18e052a070bac9f0fdc6c0}{json\+\_\+parse\+\_\+file}} (const char \texorpdfstring{$\ast$}{*}path, char \texorpdfstring{$\ast$}{*}error, size\+\_\+t error\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Reads and parses a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{json_8h_af47d73c25cf8ed96010356e9761e1d9b}{json\+\_\+free}} (\mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}value)
+\item 
+const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{json_8h_a7e162918ff62d6dca3f4bd3cc7439981}{json\+\_\+get}} (const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}key)
+\begin{DoxyCompactList}\small\item\em Member of an object, NULL if missing or {\ttfamily object} is not an object. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{json_8h_a6778c15f77cf8de55d76e1887861420d}{json\+\_\+at}} (const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}array, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Element of an array, NULL if out of range. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{json_8h_aef235eeaaec205cef29bbf1753ed1d3f}{json\+\_\+size}} (const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Number of elements (array) or members (object), 0 otherwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Typed member access with fallback}\par
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{json_8h_a46fc96164568fdf7bfaa3521919f7b3c}{json\+\_\+get\+\_\+string}} (const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}key, const char \texorpdfstring{$\ast$}{*}fallback)
+\item 
+double \mbox{\hyperlink{json_8h_a1ce2a72720593f8023d8fefa8c0c821c}{json\+\_\+get\+\_\+number}} (const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}key, double fallback)
+\item 
+bool \mbox{\hyperlink{json_8h_a0e63d049a6968a8e74a98476579c95c5}{json\+\_\+get\+\_\+bool}} (const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}key, bool fallback)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+Small JSON reader (RFC 8259) for the engineering data in data/. 
+
+Parses a whole document into a tree. Objects keep the order of their members; duplicate keys are kept (json\+\_\+get returns the first). Strings are UTF-\/8, \textbackslash{}u escapes incl. surrogate pairs are decoded. Nesting is limited to JSON\+\_\+\+MAX\+\_\+\+DEPTH. Host only (uses the heap). 
+
+\label{doc-define-members}
+\Hypertarget{json_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{json_8h_a4bd2561c045448ddc6ac6a266da885ca}\index{json.h@{json.h}!JSON\_MAX\_DEPTH@{JSON\_MAX\_DEPTH}}
+\index{JSON\_MAX\_DEPTH@{JSON\_MAX\_DEPTH}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{JSON\_MAX\_DEPTH}{JSON\_MAX\_DEPTH}}
+{\footnotesize\ttfamily \label{json_8h_a4bd2561c045448ddc6ac6a266da885ca} 
+\#define JSON\+\_\+\+MAX\+\_\+\+DEPTH~64}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{json_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{json_8h_a7973a7202ee5bd7d21be9ebe80f3c726}\index{json.h@{json.h}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{JsonValue}{JsonValue}}
+{\footnotesize\ttfamily \label{json_8h_a7973a7202ee5bd7d21be9ebe80f3c726} 
+typedef struct Json\+Value Json\+Value}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{json_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63decc}\index{json.h@{json.h}!JsonType@{JsonType}}
+\index{JsonType@{JsonType}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{JsonType}{JsonType}}
+{\footnotesize\ttfamily \label{json_8h_a749cb5137f6266520a9329b48a63decc} 
+enum \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decc}{Json\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JSON\_NULL@{JSON\_NULL}!json.h@{json.h}}\index{json.h@{json.h}!JSON\_NULL@{JSON\_NULL}}}\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63decca03ddcc4e2eef955020a01e10c11bfe48}\label{json_8h_a749cb5137f6266520a9329b48a63decca03ddcc4e2eef955020a01e10c11bfe48} 
+JSON\+\_\+\+NULL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JSON\_BOOL@{JSON\_BOOL}!json.h@{json.h}}\index{json.h@{json.h}!JSON\_BOOL@{JSON\_BOOL}}}\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63deccafc3a60886010e5b0f57d7aa30d0277b0}\label{json_8h_a749cb5137f6266520a9329b48a63deccafc3a60886010e5b0f57d7aa30d0277b0} 
+JSON\+\_\+\+BOOL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JSON\_NUMBER@{JSON\_NUMBER}!json.h@{json.h}}\index{json.h@{json.h}!JSON\_NUMBER@{JSON\_NUMBER}}}\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63decca6670b3c9b7ba8ab3976a7521edcc7f97}\label{json_8h_a749cb5137f6266520a9329b48a63decca6670b3c9b7ba8ab3976a7521edcc7f97} 
+JSON\+\_\+\+NUMBER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JSON\_STRING@{JSON\_STRING}!json.h@{json.h}}\index{json.h@{json.h}!JSON\_STRING@{JSON\_STRING}}}\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63decca02bfd03b07e5b9ecd6ee0d257dc37daf}\label{json_8h_a749cb5137f6266520a9329b48a63decca02bfd03b07e5b9ecd6ee0d257dc37daf} 
+JSON\+\_\+\+STRING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JSON\_ARRAY@{JSON\_ARRAY}!json.h@{json.h}}\index{json.h@{json.h}!JSON\_ARRAY@{JSON\_ARRAY}}}\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63decca97462341a4eba4320d62d49597eabb6a}\label{json_8h_a749cb5137f6266520a9329b48a63decca97462341a4eba4320d62d49597eabb6a} 
+JSON\+\_\+\+ARRAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JSON\_OBJECT@{JSON\_OBJECT}!json.h@{json.h}}\index{json.h@{json.h}!JSON\_OBJECT@{JSON\_OBJECT}}}\Hypertarget{json_8h_a749cb5137f6266520a9329b48a63decca7750125a86a953cfd57b3a4e1fa67bff}\label{json_8h_a749cb5137f6266520a9329b48a63decca7750125a86a953cfd57b3a4e1fa67bff} 
+JSON\+\_\+\+OBJECT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{json_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{json_8h_a6778c15f77cf8de55d76e1887861420d}\index{json.h@{json.h}!json\_at@{json\_at}}
+\index{json\_at@{json\_at}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_at()}{json\_at()}}
+{\footnotesize\ttfamily \label{json_8h_a6778c15f77cf8de55d76e1887861420d} 
+const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} json\+\_\+at (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{array}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Element of an array, NULL if out of range. 
+
+\Hypertarget{json_8h_af47d73c25cf8ed96010356e9761e1d9b}\index{json.h@{json.h}!json\_free@{json\_free}}
+\index{json\_free@{json\_free}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_free()}{json\_free()}}
+{\footnotesize\ttfamily \label{json_8h_af47d73c25cf8ed96010356e9761e1d9b} 
+void json\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{json_8h_a7e162918ff62d6dca3f4bd3cc7439981}\index{json.h@{json.h}!json\_get@{json\_get}}
+\index{json\_get@{json\_get}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_get()}{json\_get()}}
+{\footnotesize\ttfamily \label{json_8h_a7e162918ff62d6dca3f4bd3cc7439981} 
+const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} json\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Member of an object, NULL if missing or {\ttfamily object} is not an object. 
+
+\Hypertarget{json_8h_a0e63d049a6968a8e74a98476579c95c5}\index{json.h@{json.h}!json\_get\_bool@{json\_get\_bool}}
+\index{json\_get\_bool@{json\_get\_bool}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_get\_bool()}{json\_get\_bool()}}
+{\footnotesize\ttfamily \label{json_8h_a0e63d049a6968a8e74a98476579c95c5} 
+bool json\+\_\+get\+\_\+bool (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{bool}]{fallback}{}\end{DoxyParamCaption})}
+
+\Hypertarget{json_8h_a1ce2a72720593f8023d8fefa8c0c821c}\index{json.h@{json.h}!json\_get\_number@{json\_get\_number}}
+\index{json\_get\_number@{json\_get\_number}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_get\_number()}{json\_get\_number()}}
+{\footnotesize\ttfamily \label{json_8h_a1ce2a72720593f8023d8fefa8c0c821c} 
+double json\+\_\+get\+\_\+number (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{double}]{fallback}{}\end{DoxyParamCaption})}
+
+\Hypertarget{json_8h_a46fc96164568fdf7bfaa3521919f7b3c}\index{json.h@{json.h}!json\_get\_string@{json\_get\_string}}
+\index{json\_get\_string@{json\_get\_string}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_get\_string()}{json\_get\_string()}}
+{\footnotesize\ttfamily \label{json_8h_a46fc96164568fdf7bfaa3521919f7b3c} 
+const char \texorpdfstring{$\ast$}{*} json\+\_\+get\+\_\+string (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{fallback}{}\end{DoxyParamCaption})}
+
+\Hypertarget{json_8h_aebe8a3866333f035696efc8ea0ccb06c}\index{json.h@{json.h}!json\_parse@{json\_parse}}
+\index{json\_parse@{json\_parse}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_parse()}{json\_parse()}}
+{\footnotesize\ttfamily \label{json_8h_aebe8a3866333f035696efc8ea0ccb06c} 
+\mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} json\+\_\+parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Parses {\ttfamily text} (NUL terminated). 
+
+\begin{DoxyReturn}{Returns}
+The root value (free with json\+\_\+free), or NULL with a message "{}line L, column C\+: ..."{} in {\ttfamily error}. 
+\end{DoxyReturn}
+\Hypertarget{json_8h_a1c75e470ce18e052a070bac9f0fdc6c0}\index{json.h@{json.h}!json\_parse\_file@{json\_parse\_file}}
+\index{json\_parse\_file@{json\_parse\_file}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_parse\_file()}{json\_parse\_file()}}
+{\footnotesize\ttfamily \label{json_8h_a1c75e470ce18e052a070bac9f0fdc6c0} 
+\mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*} json\+\_\+parse\+\_\+file (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{error}{, }\item[{size\+\_\+t}]{error\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Reads and parses a file. 
+
+\Hypertarget{json_8h_aef235eeaaec205cef29bbf1753ed1d3f}\index{json.h@{json.h}!json\_size@{json\_size}}
+\index{json\_size@{json\_size}!json.h@{json.h}}
+\doxysubsubsection{\texorpdfstring{json\_size()}{json\_size()}}
+{\footnotesize\ttfamily \label{json_8h_aef235eeaaec205cef29bbf1753ed1d3f} 
+size\+\_\+t json\+\_\+size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structJsonValue}{Json\+Value}} \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Number of elements (array) or members (object), 0 otherwise. 
+

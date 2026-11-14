@@ -1,0 +1,473 @@
+\doxysection{libs/elsim/elsim.h File Reference}
+\hypertarget{elsim_8h}{}\label{elsim_8h}\index{libs/elsim/elsim.h@{libs/elsim/elsim.h}}
+
+
+Electrical installation of a house\+: model, time steps, protection, measurements.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include "{}el\+\_\+circuit.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structElDevice}{El\+Device}}
+\item 
+struct \mbox{\hyperlink{structElCable}{El\+Cable}}
+\item 
+struct \mbox{\hyperlink{structElConnection}{El\+Connection}}
+\item 
+struct \mbox{\hyperlink{structElFault}{El\+Fault}}
+\item 
+struct \mbox{\hyperlink{structElEvent}{El\+Event}}
+\item 
+struct \mbox{\hyperlink{structElModel}{El\+Model}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}~48
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}{EL\+\_\+\+TEXT\+\_\+\+MAX}}~112
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}{EL\+\_\+\+MAX\+\_\+\+EVENTS}}~64
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a4b3fb4becf42f710a135bf09e183b5c3}{EL\+\_\+\+MAX\+\_\+\+TERMINALS}}~5
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a4e2a20b4f87a060dd28cf448b33c9efe}{EL\+\_\+\+COPPER\+\_\+\+RESISTIVITY}}~0.\+0178
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a7529c34344def98d3678bc09b3d39b6c}{EL\+\_\+\+LINK\+\_\+\+OHM}}~0.\+001
+\item 
+\#define \mbox{\hyperlink{elsim_8h_a993e60cb377b29b2e0dbd9a7ae646796}{EL\+\_\+\+SAFE\+\_\+\+VOLTAGE}}~50.\+0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} \{ \newline
+\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73}{EL\+\_\+\+SUPPLY}}
+, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}{EL\+\_\+\+BREAKER}}
+, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}{EL\+\_\+\+FUSE}}
+, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}{EL\+\_\+\+RCD}}
+, \newline
+\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91}{EL\+\_\+\+SWITCH}}
+, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}{EL\+\_\+\+LOAD}}
+, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}{EL\+\_\+\+SOCKET}}
+, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}{EL\+\_\+\+DEVICE\+\_\+\+TYPES}}
+ \}
+\item 
+enum \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064}{El\+Earthing}} \{ \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a9641e879371007213d23afbd171c353c}{EL\+\_\+\+TN\+\_\+S}}
+, \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a5f54d1734849495d7f6888ce3d54d4db}{EL\+\_\+\+TN\+\_\+\+C\+\_\+S}}
+, \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064ad108dd3d3320d2237f2113d78a027dff}{EL\+\_\+\+TT}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{elsim_8h_a444ac75de223acfbc26478ca6055a9df}{el\+\_\+model\+\_\+init}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
+\item 
+void \mbox{\hyperlink{elsim_8h_a74283f8847141cdcd0990f7ebc9fff6c}{el\+\_\+model\+\_\+free}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
+\item 
+bool \mbox{\hyperlink{elsim_8h_aab5e45876d1ab22015c30e1e4609ffe1}{el\+\_\+model\+\_\+step}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, double dt\+\_\+s)
+\begin{DoxyCompactList}\small\item\em Advances the time by {\ttfamily dt\+\_\+s\+:} solve, protection, results, events. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{elsim_8h_a273f6c26a5e91b2ecf9342503878e345}{el\+\_\+model\+\_\+next\+\_\+event}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, \mbox{\hyperlink{structElEvent}{El\+Event}} \texorpdfstring{$\ast$}{*}event)
+\begin{DoxyCompactList}\small\item\em Oldest unread event, false if there is none. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Building an installation}\par
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{elsim_8h_aadd58facde02955b37e96d98e7c7534c}{el\+\_\+model\+\_\+add\+\_\+device}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} type)
+\item 
+int \mbox{\hyperlink{elsim_8h_a113e7cd11459fa12bd8deba61e29ad9a}{el\+\_\+model\+\_\+add\+\_\+cable}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, const char \texorpdfstring{$\ast$}{*}type, double cross\+\_\+section\+\_\+mm2, double length\+\_\+m)
+\item 
+int \mbox{\hyperlink{elsim_8h_a190981392692c3b3f0dfa781370fa8b9}{el\+\_\+model\+\_\+connect}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, const char \texorpdfstring{$\ast$}{*}from, const char \texorpdfstring{$\ast$}{*}to, const char \texorpdfstring{$\ast$}{*}role, const char \texorpdfstring{$\ast$}{*}cable)
+\item 
+bool \mbox{\hyperlink{elsim_8h_a0e89def0283c91ed424ec20868089c9c}{el\+\_\+model\+\_\+plug}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}load, const char \texorpdfstring{$\ast$}{*}socket)
+\begin{DoxyCompactList}\small\item\em Plugs a load into a socket (NULL socket = unplug). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Lookup}\par
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{elsim_8h_ac77d510ad80ba9a8888bffa71867c43d}{el\+\_\+model\+\_\+find\+\_\+device}} (const \mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id)
+\item 
+int \mbox{\hyperlink{elsim_8h_a9ddfd8e555c19c67486620e2113aa4ae}{el\+\_\+model\+\_\+find\+\_\+connection}} (const \mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id)
+\item 
+int \mbox{\hyperlink{elsim_8h_a0ec2b9e8c89f95bd820968e3cf7bc27d}{el\+\_\+model\+\_\+terminal\+\_\+node}} (const \mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}reference)
+\begin{DoxyCompactList}\small\item\em Node of "{}device\+:terminal"{}, -\/1 if unknown. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{elsim_8h_a6fea83409d3639e52103c3cdb4055e26}{el\+\_\+device\+\_\+type\+\_\+name}} (\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} type)
+\item 
+bool \mbox{\hyperlink{elsim_8h_af48408bad4050f77ffd7853f775389c4}{el\+\_\+device\+\_\+type\+\_\+from\+\_\+name}} (const char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} \texorpdfstring{$\ast$}{*}type)
+\item 
+int \mbox{\hyperlink{elsim_8h_a401986eb56f38c799cb740e2e8a71c87}{el\+\_\+terminal\+\_\+count}} (\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} type)
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{elsim_8h_a04f97b62bc5a7684db889c63af4f5683}{el\+\_\+terminal\+\_\+name}} (\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} type, int terminal)
+\item 
+bool \mbox{\hyperlink{elsim_8h_a41e7669610c3deeaa75fbea913a91e41}{el\+\_\+device\+\_\+powered}} (const \mbox{\hyperlink{structElDevice}{El\+Device}} \texorpdfstring{$\ast$}{*}device)
+\begin{DoxyCompactList}\small\item\em Load is supplied\+: at least half its rated voltage across L-\/N. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Operating the installation (takes effect in the next step)}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{elsim_8h_ae877b07c9479efb60cf47f091ccd89a1}{el\+\_\+model\+\_\+set\+\_\+on}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, bool on)
+\begin{DoxyCompactList}\small\item\em Switch, breaker or RCD handle, a load\textquotesingle{}s own switch. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{elsim_8h_a7d6e6daed5801cde90d825cedde34fde}{el\+\_\+model\+\_\+reset}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id)
+\begin{DoxyCompactList}\small\item\em Re-\/arms a tripped breaker/\+RCD (handle on) or replaces a blown fuse. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{elsim_8h_af3a6854fc33f6f01f735fb65831cb8d6}{el\+\_\+model\+\_\+press\+\_\+test}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id)
+\begin{DoxyCompactList}\small\item\em Presses the test button of an RCD for one step. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{elsim_8h_a4716a4011b8c83134128e711975c56ec}{el\+\_\+model\+\_\+add\+\_\+fault}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, double resistance\+\_\+ohm, const char \texorpdfstring{$\ast$}{*}description)
+\item 
+bool \mbox{\hyperlink{elsim_8h_a158f6aa26b17484ae9b4c9637ca0b43e}{el\+\_\+model\+\_\+set\+\_\+connection\+\_\+open}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}id, bool open)
+\begin{DoxyCompactList}\small\item\em Interrupts (or restores) a conductor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{elsim_8h_a77ba76faa9ceda6dc982462de7b089a3}{el\+\_\+model\+\_\+clear\+\_\+faults}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Measurements (no time passes)}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{elsim_8h_a69822dfb463ef5dd0f7801d636118c8b}{el\+\_\+model\+\_\+measure\+\_\+voltage}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}voltage)
+\begin{DoxyCompactList}\small\item\em Voltage V(a) -\/ V(b) of the present state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{elsim_8h_a2c8c0828d3e64648482e7d14b298c0c4}{el\+\_\+model\+\_\+measure\+\_\+impedance}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, \mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}impedance)
+\begin{DoxyCompactList}\small\item\em Impedance seen between a and b (loop impedance, continuity), sources as in the network. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{elsim_8h_aeccf98c941e94923c407172da97f9f6a}{el\+\_\+model\+\_\+measure\+\_\+insulation}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const char \texorpdfstring{$\ast$}{*}a, const char \texorpdfstring{$\ast$}{*}b, double \texorpdfstring{$\ast$}{*}ohm)
+\begin{DoxyCompactList}\small\item\em Insulation resistance between a and b. Like a real tester it refuses (returns false) while a voltage above EL\+\_\+\+SAFE\+\_\+\+VOLTAGE is present. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+Electrical installation of a house\+: model, time steps, protection, measurements. 
+
+See docs/adr/0007-\/electrical-\/simulation-\/core.\+md and docs/dev/electrical.\+md.
+
+
+\begin{DoxyItemize}
+\item A {\bfseries{device}} has typed {\bfseries{terminals}}, referred to as "{}device\+:terminal"{} (e.\+g. "{}lamp\+\_\+living\+:\+L"{}). Every terminal is a node of the network.
+\item A {\bfseries{connection}} is one conductor between two terminals (role L, N or PE); its resistance comes from its {\bfseries{cable}} (copper, length, cross-\/section) or is a short internal link.
+\item \doxylink{elsim_8h_aab5e45876d1ab22015c30e1e4609ffe1}{el\+\_\+model\+\_\+step()} solves the network (complex phasors, 50 Hz), evaluates breakers, fuses and RCDs, re-\/solves after a trip and records events.
+\item Measurements see the same network\+: voltage and Thevenin impedance between two terminals (loop impedance, continuity, insulation).
+\end{DoxyItemize}
+
+Terminals per type\+: supply L1 L2 L3 N PE breaker, fuse, switch in out rcd L\+\_\+in N\+\_\+in L\+\_\+out N\+\_\+out load L N PE socket L N PE 
+
+\label{doc-define-members}
+\Hypertarget{elsim_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{elsim_8h_a4e2a20b4f87a060dd28cf448b33c9efe}\index{elsim.h@{elsim.h}!EL\_COPPER\_RESISTIVITY@{EL\_COPPER\_RESISTIVITY}}
+\index{EL\_COPPER\_RESISTIVITY@{EL\_COPPER\_RESISTIVITY}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_COPPER\_RESISTIVITY}{EL\_COPPER\_RESISTIVITY}}
+{\footnotesize\ttfamily \label{elsim_8h_a4e2a20b4f87a060dd28cf448b33c9efe} 
+\#define EL\+\_\+\+COPPER\+\_\+\+RESISTIVITY~0.\+0178}
+
+Copper at 20 °C in Ohm mm\texorpdfstring{$^\wedge$}{\string^}2 / m. \Hypertarget{elsim_8h_a713bc251729b43fd9922d91fff8009c8}\index{elsim.h@{elsim.h}!EL\_ID\_MAX@{EL\_ID\_MAX}}
+\index{EL\_ID\_MAX@{EL\_ID\_MAX}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_ID\_MAX}{EL\_ID\_MAX}}
+{\footnotesize\ttfamily \label{elsim_8h_a713bc251729b43fd9922d91fff8009c8} 
+\#define EL\+\_\+\+ID\+\_\+\+MAX~48}
+
+\Hypertarget{elsim_8h_a7529c34344def98d3678bc09b3d39b6c}\index{elsim.h@{elsim.h}!EL\_LINK\_OHM@{EL\_LINK\_OHM}}
+\index{EL\_LINK\_OHM@{EL\_LINK\_OHM}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_LINK\_OHM}{EL\_LINK\_OHM}}
+{\footnotesize\ttfamily \label{elsim_8h_a7529c34344def98d3678bc09b3d39b6c} 
+\#define EL\+\_\+\+LINK\+\_\+\+OHM~0.\+001}
+
+Resistance of a short internal link (busbar, jumper) without a cable. \Hypertarget{elsim_8h_a1c57264ca5a0f5f57668147517a038b7}\index{elsim.h@{elsim.h}!EL\_MAX\_EVENTS@{EL\_MAX\_EVENTS}}
+\index{EL\_MAX\_EVENTS@{EL\_MAX\_EVENTS}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_MAX\_EVENTS}{EL\_MAX\_EVENTS}}
+{\footnotesize\ttfamily \label{elsim_8h_a1c57264ca5a0f5f57668147517a038b7} 
+\#define EL\+\_\+\+MAX\+\_\+\+EVENTS~64}
+
+\Hypertarget{elsim_8h_a4b3fb4becf42f710a135bf09e183b5c3}\index{elsim.h@{elsim.h}!EL\_MAX\_TERMINALS@{EL\_MAX\_TERMINALS}}
+\index{EL\_MAX\_TERMINALS@{EL\_MAX\_TERMINALS}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_MAX\_TERMINALS}{EL\_MAX\_TERMINALS}}
+{\footnotesize\ttfamily \label{elsim_8h_a4b3fb4becf42f710a135bf09e183b5c3} 
+\#define EL\+\_\+\+MAX\+\_\+\+TERMINALS~5}
+
+\Hypertarget{elsim_8h_a993e60cb377b29b2e0dbd9a7ae646796}\index{elsim.h@{elsim.h}!EL\_SAFE\_VOLTAGE@{EL\_SAFE\_VOLTAGE}}
+\index{EL\_SAFE\_VOLTAGE@{EL\_SAFE\_VOLTAGE}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_SAFE\_VOLTAGE}{EL\_SAFE\_VOLTAGE}}
+{\footnotesize\ttfamily \label{elsim_8h_a993e60cb377b29b2e0dbd9a7ae646796} 
+\#define EL\+\_\+\+SAFE\+\_\+\+VOLTAGE~50.\+0}
+
+A voltage below this counts as "{}no voltage"{} for safety checks (V). \Hypertarget{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}\index{elsim.h@{elsim.h}!EL\_TEXT\_MAX@{EL\_TEXT\_MAX}}
+\index{EL\_TEXT\_MAX@{EL\_TEXT\_MAX}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{EL\_TEXT\_MAX}{EL\_TEXT\_MAX}}
+{\footnotesize\ttfamily \label{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8} 
+\#define EL\+\_\+\+TEXT\+\_\+\+MAX~112}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{elsim_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}\index{elsim.h@{elsim.h}!ElDeviceType@{ElDeviceType}}
+\index{ElDeviceType@{ElDeviceType}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{ElDeviceType}{ElDeviceType}}
+{\footnotesize\ttfamily \label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0} 
+enum \mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_SUPPLY@{EL\_SUPPLY}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_SUPPLY@{EL\_SUPPLY}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73} 
+EL\+\_\+\+SUPPLY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_BREAKER@{EL\_BREAKER}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_BREAKER@{EL\_BREAKER}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a5c08f8a6faf9cd13d761ce6fa400b7d9} 
+EL\+\_\+\+BREAKER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_FUSE@{EL\_FUSE}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_FUSE@{EL\_FUSE}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a7426ebf500473c089e4c3511704ec7a6} 
+EL\+\_\+\+FUSE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_RCD@{EL\_RCD}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_RCD@{EL\_RCD}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc} 
+EL\+\_\+\+RCD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_SWITCH@{EL\_SWITCH}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_SWITCH@{EL\_SWITCH}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91} 
+EL\+\_\+\+SWITCH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_LOAD@{EL\_LOAD}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_LOAD@{EL\_LOAD}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d} 
+EL\+\_\+\+LOAD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_SOCKET@{EL\_SOCKET}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_SOCKET@{EL\_SOCKET}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3} 
+EL\+\_\+\+SOCKET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_DEVICE\_TYPES@{EL\_DEVICE\_TYPES}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_DEVICE\_TYPES@{EL\_DEVICE\_TYPES}}}\Hypertarget{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55}\label{elsim_8h_a80059183db089c9f33dcabaf5cb941d0ad5473966b131aa89a72ba0cb4bc67b55} 
+EL\+\_\+\+DEVICE\+\_\+\+TYPES&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{elsim_8h_a3de5758270d1a8a2bd617fb14a377064}\index{elsim.h@{elsim.h}!ElEarthing@{ElEarthing}}
+\index{ElEarthing@{ElEarthing}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{ElEarthing}{ElEarthing}}
+{\footnotesize\ttfamily \label{elsim_8h_a3de5758270d1a8a2bd617fb14a377064} 
+enum \mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064}{El\+Earthing}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_TN\_S@{EL\_TN\_S}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_TN\_S@{EL\_TN\_S}}}\Hypertarget{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a9641e879371007213d23afbd171c353c}\label{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a9641e879371007213d23afbd171c353c} 
+EL\+\_\+\+TN\+\_\+S&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_TN\_C\_S@{EL\_TN\_C\_S}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_TN\_C\_S@{EL\_TN\_C\_S}}}\Hypertarget{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a5f54d1734849495d7f6888ce3d54d4db}\label{elsim_8h_a3de5758270d1a8a2bd617fb14a377064a5f54d1734849495d7f6888ce3d54d4db} 
+EL\+\_\+\+TN\+\_\+\+C\+\_\+S&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_TT@{EL\_TT}!elsim.h@{elsim.h}}\index{elsim.h@{elsim.h}!EL\_TT@{EL\_TT}}}\Hypertarget{elsim_8h_a3de5758270d1a8a2bd617fb14a377064ad108dd3d3320d2237f2113d78a027dff}\label{elsim_8h_a3de5758270d1a8a2bd617fb14a377064ad108dd3d3320d2237f2113d78a027dff} 
+EL\+\_\+\+TT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{elsim_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{elsim_8h_a41e7669610c3deeaa75fbea913a91e41}\index{elsim.h@{elsim.h}!el\_device\_powered@{el\_device\_powered}}
+\index{el\_device\_powered@{el\_device\_powered}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_device\_powered()}{el\_device\_powered()}}
+{\footnotesize\ttfamily \label{elsim_8h_a41e7669610c3deeaa75fbea913a91e41} 
+bool el\+\_\+device\+\_\+powered (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElDevice}{El\+Device}} \texorpdfstring{$\ast$}{*}}]{device}{}\end{DoxyParamCaption})}
+
+
+
+Load is supplied\+: at least half its rated voltage across L-\/N. 
+
+\Hypertarget{elsim_8h_af48408bad4050f77ffd7853f775389c4}\index{elsim.h@{elsim.h}!el\_device\_type\_from\_name@{el\_device\_type\_from\_name}}
+\index{el\_device\_type\_from\_name@{el\_device\_type\_from\_name}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_device\_type\_from\_name()}{el\_device\_type\_from\_name()}}
+{\footnotesize\ttfamily \label{elsim_8h_af48408bad4050f77ffd7853f775389c4} 
+bool el\+\_\+device\+\_\+type\+\_\+from\+\_\+name (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} \texorpdfstring{$\ast$}{*}}]{type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a6fea83409d3639e52103c3cdb4055e26}\index{elsim.h@{elsim.h}!el\_device\_type\_name@{el\_device\_type\_name}}
+\index{el\_device\_type\_name@{el\_device\_type\_name}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_device\_type\_name()}{el\_device\_type\_name()}}
+{\footnotesize\ttfamily \label{elsim_8h_a6fea83409d3639e52103c3cdb4055e26} 
+const char \texorpdfstring{$\ast$}{*} el\+\_\+device\+\_\+type\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}}}]{type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a113e7cd11459fa12bd8deba61e29ad9a}\index{elsim.h@{elsim.h}!el\_model\_add\_cable@{el\_model\_add\_cable}}
+\index{el\_model\_add\_cable@{el\_model\_add\_cable}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_add\_cable()}{el\_model\_add\_cable()}}
+{\footnotesize\ttfamily \label{elsim_8h_a113e7cd11459fa12bd8deba61e29ad9a} 
+int el\+\_\+model\+\_\+add\+\_\+cable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{type}{, }\item[{double}]{cross\+\_\+section\+\_\+mm2}{, }\item[{double}]{length\+\_\+m}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_aadd58facde02955b37e96d98e7c7534c}\index{elsim.h@{elsim.h}!el\_model\_add\_device@{el\_model\_add\_device}}
+\index{el\_model\_add\_device@{el\_model\_add\_device}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_add\_device()}{el\_model\_add\_device()}}
+{\footnotesize\ttfamily \label{elsim_8h_aadd58facde02955b37e96d98e7c7534c} 
+int el\+\_\+model\+\_\+add\+\_\+device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}}}]{type}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Device index, -\/1 if the id exists or memory runs out. Parameters get type defaults. 
+\end{DoxyReturn}
+\Hypertarget{elsim_8h_a4716a4011b8c83134128e711975c56ec}\index{elsim.h@{elsim.h}!el\_model\_add\_fault@{el\_model\_add\_fault}}
+\index{el\_model\_add\_fault@{el\_model\_add\_fault}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_add\_fault()}{el\_model\_add\_fault()}}
+{\footnotesize\ttfamily \label{elsim_8h_a4716a4011b8c83134128e711975c56ec} 
+int el\+\_\+model\+\_\+add\+\_\+fault (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{double}]{resistance\+\_\+ohm}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{description}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Fault index\+: an impedance between two terminals (short circuit, insulation or earth fault). 
+\end{DoxyReturn}
+\Hypertarget{elsim_8h_a77ba76faa9ceda6dc982462de7b089a3}\index{elsim.h@{elsim.h}!el\_model\_clear\_faults@{el\_model\_clear\_faults}}
+\index{el\_model\_clear\_faults@{el\_model\_clear\_faults}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_clear\_faults()}{el\_model\_clear\_faults()}}
+{\footnotesize\ttfamily \label{elsim_8h_a77ba76faa9ceda6dc982462de7b089a3} 
+void el\+\_\+model\+\_\+clear\+\_\+faults (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a190981392692c3b3f0dfa781370fa8b9}\index{elsim.h@{elsim.h}!el\_model\_connect@{el\_model\_connect}}
+\index{el\_model\_connect@{el\_model\_connect}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_connect()}{el\_model\_connect()}}
+{\footnotesize\ttfamily \label{elsim_8h_a190981392692c3b3f0dfa781370fa8b9} 
+int el\+\_\+model\+\_\+connect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{from}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{to}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{role}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{cable}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Connection index, -\/1 on unknown terminals. {\ttfamily cable} may be NULL. 
+\end{DoxyReturn}
+\Hypertarget{elsim_8h_a9ddfd8e555c19c67486620e2113aa4ae}\index{elsim.h@{elsim.h}!el\_model\_find\_connection@{el\_model\_find\_connection}}
+\index{el\_model\_find\_connection@{el\_model\_find\_connection}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_find\_connection()}{el\_model\_find\_connection()}}
+{\footnotesize\ttfamily \label{elsim_8h_a9ddfd8e555c19c67486620e2113aa4ae} 
+int el\+\_\+model\+\_\+find\+\_\+connection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_ac77d510ad80ba9a8888bffa71867c43d}\index{elsim.h@{elsim.h}!el\_model\_find\_device@{el\_model\_find\_device}}
+\index{el\_model\_find\_device@{el\_model\_find\_device}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_find\_device()}{el\_model\_find\_device()}}
+{\footnotesize\ttfamily \label{elsim_8h_ac77d510ad80ba9a8888bffa71867c43d} 
+int el\+\_\+model\+\_\+find\+\_\+device (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a74283f8847141cdcd0990f7ebc9fff6c}\index{elsim.h@{elsim.h}!el\_model\_free@{el\_model\_free}}
+\index{el\_model\_free@{el\_model\_free}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_free()}{el\_model\_free()}}
+{\footnotesize\ttfamily \label{elsim_8h_a74283f8847141cdcd0990f7ebc9fff6c} 
+void el\+\_\+model\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a444ac75de223acfbc26478ca6055a9df}\index{elsim.h@{elsim.h}!el\_model\_init@{el\_model\_init}}
+\index{el\_model\_init@{el\_model\_init}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_init()}{el\_model\_init()}}
+{\footnotesize\ttfamily \label{elsim_8h_a444ac75de223acfbc26478ca6055a9df} 
+void el\+\_\+model\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a2c8c0828d3e64648482e7d14b298c0c4}\index{elsim.h@{elsim.h}!el\_model\_measure\_impedance@{el\_model\_measure\_impedance}}
+\index{el\_model\_measure\_impedance@{el\_model\_measure\_impedance}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_measure\_impedance()}{el\_model\_measure\_impedance()}}
+{\footnotesize\ttfamily \label{elsim_8h_a2c8c0828d3e64648482e7d14b298c0c4} 
+bool el\+\_\+model\+\_\+measure\+\_\+impedance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{impedance}{}\end{DoxyParamCaption})}
+
+
+
+Impedance seen between a and b (loop impedance, continuity), sources as in the network. 
+
+\Hypertarget{elsim_8h_aeccf98c941e94923c407172da97f9f6a}\index{elsim.h@{elsim.h}!el\_model\_measure\_insulation@{el\_model\_measure\_insulation}}
+\index{el\_model\_measure\_insulation@{el\_model\_measure\_insulation}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_measure\_insulation()}{el\_model\_measure\_insulation()}}
+{\footnotesize\ttfamily \label{elsim_8h_aeccf98c941e94923c407172da97f9f6a} 
+bool el\+\_\+model\+\_\+measure\+\_\+insulation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{double \texorpdfstring{$\ast$}{*}}]{ohm}{}\end{DoxyParamCaption})}
+
+
+
+Insulation resistance between a and b. Like a real tester it refuses (returns false) while a voltage above EL\+\_\+\+SAFE\+\_\+\+VOLTAGE is present. 
+
+\Hypertarget{elsim_8h_a69822dfb463ef5dd0f7801d636118c8b}\index{elsim.h@{elsim.h}!el\_model\_measure\_voltage@{el\_model\_measure\_voltage}}
+\index{el\_model\_measure\_voltage@{el\_model\_measure\_voltage}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_measure\_voltage()}{el\_model\_measure\_voltage()}}
+{\footnotesize\ttfamily \label{elsim_8h_a69822dfb463ef5dd0f7801d636118c8b} 
+bool el\+\_\+model\+\_\+measure\+\_\+voltage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{voltage}{}\end{DoxyParamCaption})}
+
+
+
+Voltage V(a) -\/ V(b) of the present state. 
+
+\Hypertarget{elsim_8h_a273f6c26a5e91b2ecf9342503878e345}\index{elsim.h@{elsim.h}!el\_model\_next\_event@{el\_model\_next\_event}}
+\index{el\_model\_next\_event@{el\_model\_next\_event}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_next\_event()}{el\_model\_next\_event()}}
+{\footnotesize\ttfamily \label{elsim_8h_a273f6c26a5e91b2ecf9342503878e345} 
+bool el\+\_\+model\+\_\+next\+\_\+event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{\mbox{\hyperlink{structElEvent}{El\+Event}} \texorpdfstring{$\ast$}{*}}]{event}{}\end{DoxyParamCaption})}
+
+
+
+Oldest unread event, false if there is none. 
+
+\Hypertarget{elsim_8h_a0e89def0283c91ed424ec20868089c9c}\index{elsim.h@{elsim.h}!el\_model\_plug@{el\_model\_plug}}
+\index{el\_model\_plug@{el\_model\_plug}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_plug()}{el\_model\_plug()}}
+{\footnotesize\ttfamily \label{elsim_8h_a0e89def0283c91ed424ec20868089c9c} 
+bool el\+\_\+model\+\_\+plug (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{load}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{socket}{}\end{DoxyParamCaption})}
+
+
+
+Plugs a load into a socket (NULL socket = unplug). 
+
+\Hypertarget{elsim_8h_af3a6854fc33f6f01f735fb65831cb8d6}\index{elsim.h@{elsim.h}!el\_model\_press\_test@{el\_model\_press\_test}}
+\index{el\_model\_press\_test@{el\_model\_press\_test}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_press\_test()}{el\_model\_press\_test()}}
+{\footnotesize\ttfamily \label{elsim_8h_af3a6854fc33f6f01f735fb65831cb8d6} 
+bool el\+\_\+model\+\_\+press\+\_\+test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Presses the test button of an RCD for one step. 
+
+\Hypertarget{elsim_8h_a7d6e6daed5801cde90d825cedde34fde}\index{elsim.h@{elsim.h}!el\_model\_reset@{el\_model\_reset}}
+\index{el\_model\_reset@{el\_model\_reset}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_reset()}{el\_model\_reset()}}
+{\footnotesize\ttfamily \label{elsim_8h_a7d6e6daed5801cde90d825cedde34fde} 
+bool el\+\_\+model\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Re-\/arms a tripped breaker/\+RCD (handle on) or replaces a blown fuse. 
+
+\Hypertarget{elsim_8h_a158f6aa26b17484ae9b4c9637ca0b43e}\index{elsim.h@{elsim.h}!el\_model\_set\_connection\_open@{el\_model\_set\_connection\_open}}
+\index{el\_model\_set\_connection\_open@{el\_model\_set\_connection\_open}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_set\_connection\_open()}{el\_model\_set\_connection\_open()}}
+{\footnotesize\ttfamily \label{elsim_8h_a158f6aa26b17484ae9b4c9637ca0b43e} 
+bool el\+\_\+model\+\_\+set\+\_\+connection\+\_\+open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{bool}]{open}{}\end{DoxyParamCaption})}
+
+
+
+Interrupts (or restores) a conductor. 
+
+\Hypertarget{elsim_8h_ae877b07c9479efb60cf47f091ccd89a1}\index{elsim.h@{elsim.h}!el\_model\_set\_on@{el\_model\_set\_on}}
+\index{el\_model\_set\_on@{el\_model\_set\_on}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_set\_on()}{el\_model\_set\_on()}}
+{\footnotesize\ttfamily \label{elsim_8h_ae877b07c9479efb60cf47f091ccd89a1} 
+bool el\+\_\+model\+\_\+set\+\_\+on (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{id}{, }\item[{bool}]{on}{}\end{DoxyParamCaption})}
+
+
+
+Switch, breaker or RCD handle, a load\textquotesingle{}s own switch. 
+
+\Hypertarget{elsim_8h_aab5e45876d1ab22015c30e1e4609ffe1}\index{elsim.h@{elsim.h}!el\_model\_step@{el\_model\_step}}
+\index{el\_model\_step@{el\_model\_step}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_step()}{el\_model\_step()}}
+{\footnotesize\ttfamily \label{elsim_8h_aab5e45876d1ab22015c30e1e4609ffe1} 
+bool el\+\_\+model\+\_\+step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{double}]{dt\+\_\+s}{}\end{DoxyParamCaption})}
+
+
+
+Advances the time by {\ttfamily dt\+\_\+s\+:} solve, protection, results, events. 
+
+\begin{DoxyReturn}{Returns}
+false if the network cannot be solved. 
+\end{DoxyReturn}
+\Hypertarget{elsim_8h_a0ec2b9e8c89f95bd820968e3cf7bc27d}\index{elsim.h@{elsim.h}!el\_model\_terminal\_node@{el\_model\_terminal\_node}}
+\index{el\_model\_terminal\_node@{el\_model\_terminal\_node}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_model\_terminal\_node()}{el\_model\_terminal\_node()}}
+{\footnotesize\ttfamily \label{elsim_8h_a0ec2b9e8c89f95bd820968e3cf7bc27d} 
+int el\+\_\+model\+\_\+terminal\+\_\+node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{reference}{}\end{DoxyParamCaption})}
+
+
+
+Node of "{}device\+:terminal"{}, -\/1 if unknown. 
+
+\Hypertarget{elsim_8h_a401986eb56f38c799cb740e2e8a71c87}\index{elsim.h@{elsim.h}!el\_terminal\_count@{el\_terminal\_count}}
+\index{el\_terminal\_count@{el\_terminal\_count}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_terminal\_count()}{el\_terminal\_count()}}
+{\footnotesize\ttfamily \label{elsim_8h_a401986eb56f38c799cb740e2e8a71c87} 
+int el\+\_\+terminal\+\_\+count (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}}}]{type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{elsim_8h_a04f97b62bc5a7684db889c63af4f5683}\index{elsim.h@{elsim.h}!el\_terminal\_name@{el\_terminal\_name}}
+\index{el\_terminal\_name@{el\_terminal\_name}!elsim.h@{elsim.h}}
+\doxysubsubsection{\texorpdfstring{el\_terminal\_name()}{el\_terminal\_name()}}
+{\footnotesize\ttfamily \label{elsim_8h_a04f97b62bc5a7684db889c63af4f5683} 
+const char \texorpdfstring{$\ast$}{*} el\+\_\+terminal\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}}}]{type}{, }\item[{int}]{terminal}{}\end{DoxyParamCaption})}
+

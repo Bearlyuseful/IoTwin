@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['scenariosteptype_0',['ScenarioStepType',['../scenario_8h.html#ad7939f1ea4c50395534d3ffdb919c60b',1,'scenario.h']]],
-  ['slcancommandtype_1',['SlcanCommandType',['../slcan_8h.html#af675eaffc6bacf8e26321e2cd58d49a2',1,'slcan.h']]]
+  ['lightecufault_0',['LightEcuFault',['../light__ecu__diag_8h.html#ac9e924745535c30929e38cd68d28c715',1,'light_ecu_diag.h']]],
+  ['loglevel_1',['LogLevel',['../log_8h.html#aca1fd1d8935433e6ba2e3918214e07f9',1,'log.h']]]
 ];

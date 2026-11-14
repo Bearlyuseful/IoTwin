@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['serialport_0',['SerialPort',['../serial__port_8h.html#ab164b4206a8d6e3e0e1bfe9351daa7cc',1,'serial_port.h']]],
-  ['slcanlinecallback_1',['SlcanLineCallback',['../slcan_8h.html#acbb851a13d7920cee8fecc418fe84d16',1,'slcan.h']]]
+  ['linereadercallback_0',['LineReaderCallback',['../line__reader_8h.html#adfa6ba7d6c7947474cb5313295c9e1a6',1,'line_reader.h']]]
 ];

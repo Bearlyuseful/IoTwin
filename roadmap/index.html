@@ -499,6 +499,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#product-line-agreed-november-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product line (agreed November 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#order-of-the-post-mvp-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -948,6 +959,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../dev/electrical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electrical Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../dev/component_database/" class="md-nav__link">
         
   
@@ -1221,6 +1260,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adr/0006-one-core-three-products/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0006 One Core, Three Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adr/0007-electrical-simulation-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0007 Electrical Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1284,7 +1379,7 @@ digital-twin features.</p>
 <tr>
 <td>Electrical / load simulation</td>
 <td>Oct 2025</td>
-<td>⚠️ on/off only, no load, current or fuse</td>
+<td>✅ core: installation as data, phasor network solver, breakers, fuses, RCDs, faults and measurements, <code>iotwin-sim</code> (<a href="../dev/electrical/">Electrical Simulation</a>); ⚠️ not yet connected to Unreal</td>
 </tr>
 <tr>
 <td>ADR: repository structure (mono vs multi repo)</td>
@@ -1377,6 +1472,21 @@ bus messages and status, and can switch from there into the <strong>3D</strong> 
 </table>
 <p>Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup (all done).
 Release 0.3.0 contains features A-E.</p>
+<h2 id="product-line-agreed-november-2026">Product line (agreed November 2026)<a class="headerlink" href="#product-line-agreed-november-2026" title="Permanent link">&para;</a></h2>
+<p>One core, three products (<a href="../adr/0006-one-core-three-products/">ADR 0006</a>):</p>
+<ol>
+<li><strong>IoTwin test platform</strong> - test faults and the behaviour of new devices
+   with the real communication of a smart home.</li>
+<li><strong>Technical renovation game</strong> - renovate houses with a focus on the
+   electrical installation.</li>
+<li><strong>Electrician training</strong> - randomly generated electrical problems that
+   have to be found and repaired according to the standards; rule engine
+   and fault generator.</li>
+</ol>
+<p>All three need an electrical simulation that owns the results, with Unreal
+only displaying them. Its core is done (<a href="../adr/0007-electrical-simulation-core/">ADR 0007</a>,
+<a href="../dev/electrical/">Electrical Simulation</a>); next are the interface to
+Unreal, reactive and three-phase loads, and the fault generator.</p>
 <h2 id="order-of-the-post-mvp-steps">Order of the post-MVP steps<a class="headerlink" href="#order-of-the-post-mvp-steps" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

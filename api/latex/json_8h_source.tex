@@ -1,0 +1,54 @@
+\doxysection{json.\+h}
+\hypertarget{json_8h_source}{}\label{json_8h_source}\index{libs/json/json.h@{libs/json/json.h}}
+\mbox{\hyperlink{json_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_JSON\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_JSON\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ JSON\_MAX\_DEPTH\ 64}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca03ddcc4e2eef955020a01e10c11bfe48}{JSON\_NULL}},\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63deccafc3a60886010e5b0f57d7aa30d0277b0}{JSON\_BOOL}},\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca6670b3c9b7ba8ab3976a7521edcc7f97}{JSON\_NUMBER}},\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca02bfd03b07e5b9ecd6ee0d257dc37daf}{JSON\_STRING}},\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca97462341a4eba4320d62d49597eabb6a}{JSON\_ARRAY}},\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decca7750125a86a953cfd57b3a4e1fa67bff}{JSON\_OBJECT}}\ \}\ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decc}{JsonType}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structJsonValue}{JsonValue}}\ \mbox{\hyperlink{structJsonValue}{JsonValue}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structJsonValue}{JsonValue}}\ \{}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{json_8h_a749cb5137f6266520a9329b48a63decc}{JsonType}}\ \mbox{\hyperlink{structJsonValue_ace74c36ddcc0b069bb322b4e2011feda}{type}};}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structJsonValue_a12d050e9b4992a4e95a874639f8abd90}{boolean}};}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structJsonValue_ab0a53783bb5e5841b072ae1949d3b5c3}{number}};}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structJsonValue_abfc034211c14bf442394b50cd9bd25c3}{string}};\ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \mbox{\hyperlink{structJsonValue_ab8c2b7fe6da9b53d0ad0a093b4bfc1ef}{items}};\ \ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{char}**\ \mbox{\hyperlink{structJsonValue_a28836989e1107a69b0ec1148415956ce}{keys}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structJsonValue_aa6cf1fbd00852627e5dec3253e50a066}{count}};}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \mbox{\hyperlink{json_8h_aebe8a3866333f035696efc8ea0ccb06c}{json\_parse}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ text,\ \textcolor{keywordtype}{char}*\ error,\ \textcolor{keywordtype}{size\_t}\ error\_size);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \mbox{\hyperlink{json_8h_a1c75e470ce18e052a070bac9f0fdc6c0}{json\_parse\_file}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path,\ \textcolor{keywordtype}{char}*\ error,\ \textcolor{keywordtype}{size\_t}\ error\_size);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{json_8h_af47d73c25cf8ed96010356e9761e1d9b}{json\_free}}(\mbox{\hyperlink{structJsonValue}{JsonValue}}*\ value);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \mbox{\hyperlink{json_8h_a7e162918ff62d6dca3f4bd3cc7439981}{json\_get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \textcolor{keywordtype}{object},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \mbox{\hyperlink{json_8h_a6778c15f77cf8de55d76e1887861420d}{json\_at}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ array,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{json_8h_aef235eeaaec205cef29bbf1753ed1d3f}{json\_size}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ value);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{json_8h_a46fc96164568fdf7bfaa3521919f7b3c}{json\_get\_string}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \textcolor{keywordtype}{object},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fallback);}
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{json_8h_a1ce2a72720593f8023d8fefa8c0c821c}{json\_get\_number}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \textcolor{keywordtype}{object},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keywordtype}{double}\ fallback);}
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{json_8h_a0e63d049a6968a8e74a98476579c95c5}{json\_get\_bool}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structJsonValue}{JsonValue}}*\ \textcolor{keywordtype}{object},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key,\ \textcolor{keywordtype}{bool}\ fallback);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_JSON\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

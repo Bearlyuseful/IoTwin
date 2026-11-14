@@ -1,0 +1,72 @@
+\doxysection{apps/iotwin\+\_\+sim/main\+\_\+iotwin\+\_\+sim.c File Reference}
+\hypertarget{main__iotwin__sim_8c}{}\label{main__iotwin__sim_8c}\index{apps/iotwin\_sim/main\_iotwin\_sim.c@{apps/iotwin\_sim/main\_iotwin\_sim.c}}
+
+
+iotwin-\/sim\+: electrical simulation of a house installation (ADR 0007).  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}el\+\_\+install.\+h"{}}\newline
+{\ttfamily \#include "{}elsim.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structSim}{Sim}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main__iotwin__sim_8c_ab29b955fa1a176b1881e68ed4442978a}{STEP\+\_\+S}}~0.\+01
+\item 
+\#define \mbox{\hyperlink{main__iotwin__sim_8c_a7c28da77cd5669728384b44608a0c7de}{SETTLE\+\_\+S}}~0.\+2
+\item 
+\#define \mbox{\hyperlink{main__iotwin__sim_8c_a29b7451465deac204c5f7cb1f9c6e1fc}{MAX\+\_\+\+ARGS}}~8
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main__iotwin__sim_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+iotwin-\/sim\+: electrical simulation of a house installation (ADR 0007). 
+
+iotwin-\/sim demo flat, interactive iotwin-\/sim data/installations/demo-\/flat.\+json iotwin-\/sim --script tests/elsim/demo-\/flat.\+sim commands from a file, \textquotesingle{}expect\textquotesingle{} checks
+
+Every command that changes the installation lets 200 ms pass, so breakers, fuses and RCDs can react; their events are printed. 
+
+\label{doc-define-members}
+\Hypertarget{main__iotwin__sim_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main__iotwin__sim_8c_a29b7451465deac204c5f7cb1f9c6e1fc}\index{main\_iotwin\_sim.c@{main\_iotwin\_sim.c}!MAX\_ARGS@{MAX\_ARGS}}
+\index{MAX\_ARGS@{MAX\_ARGS}!main\_iotwin\_sim.c@{main\_iotwin\_sim.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_ARGS}{MAX\_ARGS}}
+{\footnotesize\ttfamily \label{main__iotwin__sim_8c_a29b7451465deac204c5f7cb1f9c6e1fc} 
+\#define MAX\+\_\+\+ARGS~8}
+
+\Hypertarget{main__iotwin__sim_8c_a7c28da77cd5669728384b44608a0c7de}\index{main\_iotwin\_sim.c@{main\_iotwin\_sim.c}!SETTLE\_S@{SETTLE\_S}}
+\index{SETTLE\_S@{SETTLE\_S}!main\_iotwin\_sim.c@{main\_iotwin\_sim.c}}
+\doxysubsubsection{\texorpdfstring{SETTLE\_S}{SETTLE\_S}}
+{\footnotesize\ttfamily \label{main__iotwin__sim_8c_a7c28da77cd5669728384b44608a0c7de} 
+\#define SETTLE\+\_\+S~0.\+2}
+
+\Hypertarget{main__iotwin__sim_8c_ab29b955fa1a176b1881e68ed4442978a}\index{main\_iotwin\_sim.c@{main\_iotwin\_sim.c}!STEP\_S@{STEP\_S}}
+\index{STEP\_S@{STEP\_S}!main\_iotwin\_sim.c@{main\_iotwin\_sim.c}}
+\doxysubsubsection{\texorpdfstring{STEP\_S}{STEP\_S}}
+{\footnotesize\ttfamily \label{main__iotwin__sim_8c_ab29b955fa1a176b1881e68ed4442978a} 
+\#define STEP\+\_\+S~0.\+01}
+
+
+
+\label{doc-func-members}
+\Hypertarget{main__iotwin__sim_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main__iotwin__sim_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{main\_iotwin\_sim.c@{main\_iotwin\_sim.c}!main@{main}}
+\index{main@{main}!main\_iotwin\_sim.c@{main\_iotwin\_sim.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main__iotwin__sim_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+

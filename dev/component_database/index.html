@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../power/">
+        <link rel="prev" href="../electrical/">
       
       
         <link rel="next" href="../packaging/">
@@ -776,6 +776,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../electrical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electrical Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1149,6 +1177,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0006-one-core-three-products/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0006 One Core, Three Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0007-electrical-simulation-core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR 0007 Electrical Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1204,7 +1288,7 @@ checks everything including cross references and runs as CTest
 </tr>
 <tr>
 <td><code>category</code></td>
-<td>microcontroller, board, transceiver, sensor, actuator, lamp, relay, switch, power-supply, ...</td>
+<td>microcontroller, board, transceiver, sensor, actuator, lamp, relay, switch, power-supply, protection, appliance, ...</td>
 </tr>
 <tr>
 <td><code>sources</code></td>
@@ -1243,7 +1327,7 @@ checks everything including cross references and runs as CTest
 </code></pre></div>
 <p><code>verified: false</code> marks values that still have to be confirmed or filled in -
 the database never pretends to know more than its sources say. Units: <code>V</code>, <code>A</code>,
-<code>W</code>, <code>Hz</code>, <code>B</code>, <code>bit/s</code>, <code>°C</code>, <code>s</code>, <code>Ω</code>, <code>F</code>, <code>H</code>, <code>lm</code>, <code>%</code>, <code>1</code>.</p>
+<code>W</code>, <code>Hz</code>, <code>B</code>, <code>bit/s</code>, <code>°C</code>, <code>s</code>, <code>Ω</code>, <code>F</code>, <code>H</code>, <code>lm</code>, <code>%</code>, <code>1</code>, <code>A²s</code>.</p>
 <h3 id="current-entries">Current entries<a class="headerlink" href="#current-entries" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1260,6 +1344,22 @@ the database never pretends to know more than its sources say. Units: <code>V</c
 <tr>
 <td><code>st.nucleo-g0b1re</code></td>
 <td>supply inputs, ST-LINK interfaces (VCP, mass storage), LD4/B1/FDCAN pins; open: measured board current, CN10 pin numbers</td>
+</tr>
+<tr>
+<td><code>generic.mcb-b10</code>, <code>generic.mcb-b16</code></td>
+<td>circuit breakers B10/B16 for the <a href="../electrical/">electrical simulation</a>: trip multiples from IEC 60898-1, simplified thermal limit</td>
+</tr>
+<tr>
+<td><code>generic.rcd-40a-30ma</code></td>
+<td>RCD 40 A / 30 mA (IEC 61008-1)</td>
+</tr>
+<tr>
+<td><code>generic.fuse-gg-16a</code></td>
+<td>fuse gG 16 A, simplified melting I²t</td>
+</tr>
+<tr>
+<td><code>generic.lamp-60w</code>, <code>generic.kettle-2000w</code></td>
+<td>resistive loads from the nameplate</td>
 </tr>
 </tbody>
 </table>

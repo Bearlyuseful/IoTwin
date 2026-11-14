@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['ram_5frx_5ffifo0_0',['RAM_RX_FIFO0',['../fdcan_8c.html#a1398c0b2eb80d9e5bae4a93c7819553a',1,'fdcan.c']]],
-  ['ram_5fsize_1',['RAM_SIZE',['../fdcan_8c.html#ab82dd208a7e716e09a3f8c229bfe78d7',1,'fdcan.c']]],
-  ['ram_5ftx_5fbuffers_2',['RAM_TX_BUFFERS',['../fdcan_8c.html#a3084170fe79aa36c03252348a8a9c868',1,'fdcan.c']]],
-  ['recent_5fframes_3',['RECENT_FRAMES',['../main__can__scenario_8c.html#ab9357b353e4d63406d593a7ca8dc25cd',1,'main_can_scenario.c']]],
-  ['reconnect_5finterval_5fms_4',['RECONNECT_INTERVAL_MS',['../main__can__sim_8c.html#a14445f86300d5faa6a4ebad02e496c09',1,'main_can_sim.c']]],
-  ['retry_5finterval_5fms_5',['RETRY_INTERVAL_MS',['../main__serial__bridge_8c.html#a2a7a0b5f8a93ef53544dd65a1392c693',1,'RETRY_INTERVAL_MS:&#160;main_serial_bridge.c'],['../main__socketcan__bridge_8c.html#a2a7a0b5f8a93ef53544dd65a1392c693',1,'RETRY_INTERVAL_MS:&#160;main_socketcan_bridge.c']]],
-  ['rx_5fqueue_5fsize_6',['RX_QUEUE_SIZE',['../fdcan_8c.html#a0616225f8714515d1139d62323d2fb60',1,'fdcan.c']]],
-  ['rx_5fsize_7',['RX_SIZE',['../uart_8c.html#aaa981e599aa044183d4c19a576cdc8a9',1,'uart.c']]]
+  ['pal_5fns_5fper_5fms_0',['PAL_NS_PER_MS',['../pal__time_8h.html#ae594119f01261f993570723459cbca73',1,'pal_time.h']]],
+  ['pal_5fns_5fper_5fsec_1',['PAL_NS_PER_SEC',['../pal__time_8h.html#aaa104b0955ffbc88d9dc31e3b96bdfbb',1,'pal_time.h']]],
+  ['plug_5fcontact_5fohm_2',['PLUG_CONTACT_OHM',['../elsim_8c.html#a154305d13ec00aa82c8bc60fb5556ab8',1,'elsim.c']]]
 ];

@@ -1,0 +1,251 @@
+\doxysection{El\+Device Struct Reference}
+\hypertarget{structElDevice}{}\label{structElDevice}\index{ElDevice@{ElDevice}}
+
+
+{\ttfamily \#include $<$elsim.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{structElDevice_a665dad3064540fc8d5599ff0283cd39a}{id}} \mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}
+\item 
+\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} \mbox{\hyperlink{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}{type}}
+\item 
+char \mbox{\hyperlink{structElDevice_a7a5984e29c4cdcf29b57d1968e27ef5f}{component}} \mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}
+\item 
+char \mbox{\hyperlink{structElDevice_aa0ffc1d6c46d9cd29d8780c3494a3d70}{label}} \mbox{[}\mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}{EL\+\_\+\+TEXT\+\_\+\+MAX}}\mbox{]}
+\item 
+char \mbox{\hyperlink{structElDevice_a76812b1dc8f518ea027de508340ec33d}{room}} \mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}
+\item 
+int \mbox{\hyperlink{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}{first\+\_\+node}}
+\item 
+int \mbox{\hyperlink{structElDevice_a6b739f7d9220892b08d8dfd52ef59601}{internal\+\_\+node}}
+\item 
+double \mbox{\hyperlink{structElDevice_adea2229359d9a62d83165e45b653c9ec}{voltage\+\_\+v}}
+\item 
+double \mbox{\hyperlink{structElDevice_af642e972b19693986ba8ae72e6c6e124}{frequency\+\_\+hz}}
+\item 
+double \mbox{\hyperlink{structElDevice_ae2897da05192d04fae0b924f62918cdf}{loop\+\_\+impedance\+\_\+ohm}}
+\item 
+\mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064}{El\+Earthing}} \mbox{\hyperlink{structElDevice_a5eb85454a397b4caa2b2a9a80af6facf}{earthing}}
+\item 
+double \mbox{\hyperlink{structElDevice_a6915669443ac49a322475df985576423}{earth\+\_\+electrode\+\_\+ohm}}
+\item 
+double \mbox{\hyperlink{structElDevice_a094c949d71181d8de09b7bffc7e58f16}{source\+\_\+earth\+\_\+ohm}}
+\item 
+double \mbox{\hyperlink{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}{rated\+\_\+current\+\_\+a}}
+\item 
+double \mbox{\hyperlink{structElDevice_a2467e609f2233d995e6025cec114d8e0}{magnetic\+\_\+multiple}}
+\item 
+double \mbox{\hyperlink{structElDevice_a7e481940b5ef3b3051670ed35c5421dc}{thermal\+\_\+limit}}
+\item 
+double \mbox{\hyperlink{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a}{residual\+\_\+rated\+\_\+a}}
+\item 
+double \mbox{\hyperlink{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}{rated\+\_\+power\+\_\+w}}
+\item 
+double \mbox{\hyperlink{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}{contact\+\_\+ohm}}
+\item 
+int \mbox{\hyperlink{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}{plugged\+\_\+into}}
+\item 
+bool \mbox{\hyperlink{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}{on}}
+\item 
+bool \mbox{\hyperlink{structElDevice_a1189886881016a360fd7eaae3b9f9b09}{tripped}}
+\item 
+double \mbox{\hyperlink{structElDevice_a479ff6e380b72aabec74a2a53531c312}{heat}}
+\item 
+bool \mbox{\hyperlink{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}{test\+\_\+pressed}}
+\item 
+double \mbox{\hyperlink{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}{current\+\_\+a}}
+\item 
+double \mbox{\hyperlink{structElDevice_af48f5fc69b08624ba187d2568d35dc23}{residual\+\_\+a}}
+\item 
+double \mbox{\hyperlink{structElDevice_a30eaf7fe381171a6e313e598fccb9813}{voltage\+\_\+v\+\_\+measured}}
+\item 
+double \mbox{\hyperlink{structElDevice_ab0eeef3989fbeade232ab0e06563adef}{power\+\_\+w}}
+\item 
+int \mbox{\hyperlink{structElDevice_a6d6b47efc57de282de226946ffea640e}{element}} \mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structElDevice_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structElDevice_a7a5984e29c4cdcf29b57d1968e27ef5f}\index{ElDevice@{ElDevice}!component@{component}}
+\index{component@{component}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{component}{component}}
+{\footnotesize\ttfamily \label{structElDevice_a7a5984e29c4cdcf29b57d1968e27ef5f} 
+char El\+Device\+::component\mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}}
+
+\Hypertarget{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4}\index{ElDevice@{ElDevice}!contact\_ohm@{contact\_ohm}}
+\index{contact\_ohm@{contact\_ohm}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{contact\_ohm}{contact\_ohm}}
+{\footnotesize\ttfamily \label{structElDevice_a32b0d8674ed0bdbe7300c44bed3abfa4} 
+double El\+Device\+::contact\+\_\+ohm}
+
+breaker, fuse, rcd pole, switch contact \Hypertarget{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e}\index{ElDevice@{ElDevice}!current\_a@{current\_a}}
+\index{current\_a@{current\_a}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{current\_a}{current\_a}}
+{\footnotesize\ttfamily \label{structElDevice_a0cd3da77e1c33f912be92b3231e4d76e} 
+double El\+Device\+::current\+\_\+a}
+
+load, breaker, fuse, switch; rcd\+: line pole; supply\+: L1 \Hypertarget{structElDevice_a6915669443ac49a322475df985576423}\index{ElDevice@{ElDevice}!earth\_electrode\_ohm@{earth\_electrode\_ohm}}
+\index{earth\_electrode\_ohm@{earth\_electrode\_ohm}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{earth\_electrode\_ohm}{earth\_electrode\_ohm}}
+{\footnotesize\ttfamily \label{structElDevice_a6915669443ac49a322475df985576423} 
+double El\+Device\+::earth\+\_\+electrode\+\_\+ohm}
+
+supply, TT\+: earth electrode of the house (R\+\_\+A) \Hypertarget{structElDevice_a5eb85454a397b4caa2b2a9a80af6facf}\index{ElDevice@{ElDevice}!earthing@{earthing}}
+\index{earthing@{earthing}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{earthing}{earthing}}
+{\footnotesize\ttfamily \label{structElDevice_a5eb85454a397b4caa2b2a9a80af6facf} 
+\mbox{\hyperlink{elsim_8h_a3de5758270d1a8a2bd617fb14a377064}{El\+Earthing}} El\+Device\+::earthing}
+
+supply \Hypertarget{structElDevice_a6d6b47efc57de282de226946ffea640e}\index{ElDevice@{ElDevice}!element@{element}}
+\index{element@{element}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{element}{element}}
+{\footnotesize\ttfamily \label{structElDevice_a6d6b47efc57de282de226946ffea640e} 
+int El\+Device\+::element\mbox{[}3\mbox{]}}
+
+circuit elements of the last solution, -\/1 if not present \Hypertarget{structElDevice_a03fdde6f91a10771f3fd82b25ae49877}\index{ElDevice@{ElDevice}!first\_node@{first\_node}}
+\index{first\_node@{first\_node}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{first\_node}{first\_node}}
+{\footnotesize\ttfamily \label{structElDevice_a03fdde6f91a10771f3fd82b25ae49877} 
+int El\+Device\+::first\+\_\+node}
+
+Node of terminal 0; terminal i is first\+\_\+node + i. \Hypertarget{structElDevice_af642e972b19693986ba8ae72e6c6e124}\index{ElDevice@{ElDevice}!frequency\_hz@{frequency\_hz}}
+\index{frequency\_hz@{frequency\_hz}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{frequency\_hz}{frequency\_hz}}
+{\footnotesize\ttfamily \label{structElDevice_af642e972b19693986ba8ae72e6c6e124} 
+double El\+Device\+::frequency\+\_\+hz}
+
+supply \Hypertarget{structElDevice_a479ff6e380b72aabec74a2a53531c312}\index{ElDevice@{ElDevice}!heat@{heat}}
+\index{heat@{heat}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{heat}{heat}}
+{\footnotesize\ttfamily \label{structElDevice_a479ff6e380b72aabec74a2a53531c312} 
+double El\+Device\+::heat}
+
+thermal state of breaker/fuse \Hypertarget{structElDevice_a665dad3064540fc8d5599ff0283cd39a}\index{ElDevice@{ElDevice}!id@{id}}
+\index{id@{id}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{structElDevice_a665dad3064540fc8d5599ff0283cd39a} 
+char El\+Device\+::id\mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}}
+
+\Hypertarget{structElDevice_a6b739f7d9220892b08d8dfd52ef59601}\index{ElDevice@{ElDevice}!internal\_node@{internal\_node}}
+\index{internal\_node@{internal\_node}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{internal\_node}{internal\_node}}
+{\footnotesize\ttfamily \label{structElDevice_a6b739f7d9220892b08d8dfd52ef59601} 
+int El\+Device\+::internal\+\_\+node}
+
+First internal node (supply only). \Hypertarget{structElDevice_aa0ffc1d6c46d9cd29d8780c3494a3d70}\index{ElDevice@{ElDevice}!label@{label}}
+\index{label@{label}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{label}{label}}
+{\footnotesize\ttfamily \label{structElDevice_aa0ffc1d6c46d9cd29d8780c3494a3d70} 
+char El\+Device\+::label\mbox{[}\mbox{\hyperlink{elsim_8h_a3b4741695aa2b335c2c550d2f10d5ba8}{EL\+\_\+\+TEXT\+\_\+\+MAX}}\mbox{]}}
+
+\Hypertarget{structElDevice_ae2897da05192d04fae0b924f62918cdf}\index{ElDevice@{ElDevice}!loop\_impedance\_ohm@{loop\_impedance\_ohm}}
+\index{loop\_impedance\_ohm@{loop\_impedance\_ohm}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{loop\_impedance\_ohm}{loop\_impedance\_ohm}}
+{\footnotesize\ttfamily \label{structElDevice_ae2897da05192d04fae0b924f62918cdf} 
+double El\+Device\+::loop\+\_\+impedance\+\_\+ohm}
+
+supply\+: external loop impedance Ze (L-\/N and L-\/\+PE) \Hypertarget{structElDevice_a2467e609f2233d995e6025cec114d8e0}\index{ElDevice@{ElDevice}!magnetic\_multiple@{magnetic\_multiple}}
+\index{magnetic\_multiple@{magnetic\_multiple}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{magnetic\_multiple}{magnetic\_multiple}}
+{\footnotesize\ttfamily \label{structElDevice_a2467e609f2233d995e6025cec114d8e0} 
+double El\+Device\+::magnetic\+\_\+multiple}
+
+breaker\+: instantaneous trip at this multiple of In \Hypertarget{structElDevice_ae20dae4f8c4d84ca955202beeac6a668}\index{ElDevice@{ElDevice}!on@{on}}
+\index{on@{on}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{on}{on}}
+{\footnotesize\ttfamily \label{structElDevice_ae20dae4f8c4d84ca955202beeac6a668} 
+bool El\+Device\+::on}
+
+handle of switch/breaker/rcd, a load\textquotesingle{}s own switch \Hypertarget{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a}\index{ElDevice@{ElDevice}!plugged\_into@{plugged\_into}}
+\index{plugged\_into@{plugged\_into}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{plugged\_into}{plugged\_into}}
+{\footnotesize\ttfamily \label{structElDevice_ade1f2c5e2bd6a4536bab6331e369fe8a} 
+int El\+Device\+::plugged\+\_\+into}
+
+load\+: index of the socket it is plugged into, -\/1 = fixed wiring \Hypertarget{structElDevice_ab0eeef3989fbeade232ab0e06563adef}\index{ElDevice@{ElDevice}!power\_w@{power\_w}}
+\index{power\_w@{power\_w}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{power\_w}{power\_w}}
+{\footnotesize\ttfamily \label{structElDevice_ab0eeef3989fbeade232ab0e06563adef} 
+double El\+Device\+::power\+\_\+w}
+
+load \Hypertarget{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0}\index{ElDevice@{ElDevice}!rated\_current\_a@{rated\_current\_a}}
+\index{rated\_current\_a@{rated\_current\_a}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{rated\_current\_a}{rated\_current\_a}}
+{\footnotesize\ttfamily \label{structElDevice_adf6d00b7ad4c832e3ea4b5bb161c2fa0} 
+double El\+Device\+::rated\+\_\+current\+\_\+a}
+
+breaker, fuse, rcd \Hypertarget{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce}\index{ElDevice@{ElDevice}!rated\_power\_w@{rated\_power\_w}}
+\index{rated\_power\_w@{rated\_power\_w}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{rated\_power\_w}{rated\_power\_w}}
+{\footnotesize\ttfamily \label{structElDevice_a5f2c334c96f0d7e74b902525c1a7d2ce} 
+double El\+Device\+::rated\+\_\+power\+\_\+w}
+
+load \Hypertarget{structElDevice_af48f5fc69b08624ba187d2568d35dc23}\index{ElDevice@{ElDevice}!residual\_a@{residual\_a}}
+\index{residual\_a@{residual\_a}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{residual\_a}{residual\_a}}
+{\footnotesize\ttfamily \label{structElDevice_af48f5fc69b08624ba187d2568d35dc23} 
+double El\+Device\+::residual\+\_\+a}
+
+rcd \Hypertarget{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a}\index{ElDevice@{ElDevice}!residual\_rated\_a@{residual\_rated\_a}}
+\index{residual\_rated\_a@{residual\_rated\_a}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{residual\_rated\_a}{residual\_rated\_a}}
+{\footnotesize\ttfamily \label{structElDevice_a40cf51f98d118c7e8ae9e65fc6292e5a} 
+double El\+Device\+::residual\+\_\+rated\+\_\+a}
+
+rcd\+: rated residual current (I delta n) \Hypertarget{structElDevice_a76812b1dc8f518ea027de508340ec33d}\index{ElDevice@{ElDevice}!room@{room}}
+\index{room@{room}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{room}{room}}
+{\footnotesize\ttfamily \label{structElDevice_a76812b1dc8f518ea027de508340ec33d} 
+char El\+Device\+::room\mbox{[}\mbox{\hyperlink{elsim_8h_a713bc251729b43fd9922d91fff8009c8}{EL\+\_\+\+ID\+\_\+\+MAX}}\mbox{]}}
+
+\Hypertarget{structElDevice_a094c949d71181d8de09b7bffc7e58f16}\index{ElDevice@{ElDevice}!source\_earth\_ohm@{source\_earth\_ohm}}
+\index{source\_earth\_ohm@{source\_earth\_ohm}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{source\_earth\_ohm}{source\_earth\_ohm}}
+{\footnotesize\ttfamily \label{structElDevice_a094c949d71181d8de09b7bffc7e58f16} 
+double El\+Device\+::source\+\_\+earth\+\_\+ohm}
+
+supply\+: earthing of the transformer star point (R\+\_\+B) \Hypertarget{structElDevice_ae9c30d4f70cb9938c874db5329d3309d}\index{ElDevice@{ElDevice}!test\_pressed@{test\_pressed}}
+\index{test\_pressed@{test\_pressed}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{test\_pressed}{test\_pressed}}
+{\footnotesize\ttfamily \label{structElDevice_ae9c30d4f70cb9938c874db5329d3309d} 
+bool El\+Device\+::test\+\_\+pressed}
+
+rcd test button, for the next step \Hypertarget{structElDevice_a7e481940b5ef3b3051670ed35c5421dc}\index{ElDevice@{ElDevice}!thermal\_limit@{thermal\_limit}}
+\index{thermal\_limit@{thermal\_limit}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{thermal\_limit}{thermal\_limit}}
+{\footnotesize\ttfamily \label{structElDevice_a7e481940b5ef3b3051670ed35c5421dc} 
+double El\+Device\+::thermal\+\_\+limit}
+
+breaker\+: integral of ((I/\+In)\texorpdfstring{$^\wedge$}{\string^}2 -\/ 1) dt in s; fuse\+: melting I\texorpdfstring{$^\wedge$}{\string^}2 t in A\texorpdfstring{$^\wedge$}{\string^}2 s \Hypertarget{structElDevice_a1189886881016a360fd7eaae3b9f9b09}\index{ElDevice@{ElDevice}!tripped@{tripped}}
+\index{tripped@{tripped}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{tripped}{tripped}}
+{\footnotesize\ttfamily \label{structElDevice_a1189886881016a360fd7eaae3b9f9b09} 
+bool El\+Device\+::tripped}
+
+breaker/rcd tripped, fuse blown \Hypertarget{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0}\index{ElDevice@{ElDevice}!type@{type}}
+\index{type@{type}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{structElDevice_a2efc8fe715abeb615c5f37e1dc5628b0} 
+\mbox{\hyperlink{elsim_8h_a80059183db089c9f33dcabaf5cb941d0}{El\+Device\+Type}} El\+Device\+::type}
+
+\Hypertarget{structElDevice_adea2229359d9a62d83165e45b653c9ec}\index{ElDevice@{ElDevice}!voltage\_v@{voltage\_v}}
+\index{voltage\_v@{voltage\_v}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{voltage\_v}{voltage\_v}}
+{\footnotesize\ttfamily \label{structElDevice_adea2229359d9a62d83165e45b653c9ec} 
+double El\+Device\+::voltage\+\_\+v}
+
+supply\+: phase voltage; load\+: rated voltage \Hypertarget{structElDevice_a30eaf7fe381171a6e313e598fccb9813}\index{ElDevice@{ElDevice}!voltage\_v\_measured@{voltage\_v\_measured}}
+\index{voltage\_v\_measured@{voltage\_v\_measured}!ElDevice@{ElDevice}}
+\doxysubsubsection{\texorpdfstring{voltage\_v\_measured}{voltage\_v\_measured}}
+{\footnotesize\ttfamily \label{structElDevice_a30eaf7fe381171a6e313e598fccb9813} 
+double El\+Device\+::voltage\+\_\+v\+\_\+measured}
+
+load\+: across L-\/N 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/elsim/\mbox{\hyperlink{elsim_8h}{elsim.\+h}}\end{DoxyCompactItemize}

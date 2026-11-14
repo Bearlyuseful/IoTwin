@@ -1,0 +1,75 @@
+\doxysection{El\+Circuit Struct Reference}
+\hypertarget{structElCircuit}{}\label{structElCircuit}\index{ElCircuit@{ElCircuit}}
+
+
+{\ttfamily \#include $<$el\+\_\+circuit.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}
+\item 
+\mbox{\hyperlink{structElElement}{El\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}
+\item 
+\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}
+\item 
+\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\+\_\+currents}}
+\item 
+bool \mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structElCircuit_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structElCircuit_ad2995199a0ed196640e298abbca791ad}\index{ElCircuit@{ElCircuit}!capacity@{capacity}}
+\index{capacity@{capacity}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{capacity}{capacity}}
+{\footnotesize\ttfamily \label{structElCircuit_ad2995199a0ed196640e298abbca791ad} 
+size\+\_\+t El\+Circuit\+::capacity}
+
+\Hypertarget{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}\index{ElCircuit@{ElCircuit}!count@{count}}
+\index{count@{count}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{count}{count}}
+{\footnotesize\ttfamily \label{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0} 
+size\+\_\+t El\+Circuit\+::count}
+
+\Hypertarget{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}\index{ElCircuit@{ElCircuit}!elements@{elements}}
+\index{elements@{elements}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{elements}{elements}}
+{\footnotesize\ttfamily \label{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166} 
+\mbox{\hyperlink{structElElement}{El\+Element}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::elements}
+
+\Hypertarget{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}\index{ElCircuit@{ElCircuit}!nodes@{nodes}}
+\index{nodes@{nodes}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{nodes}{nodes}}
+{\footnotesize\ttfamily \label{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e} 
+int El\+Circuit\+::nodes}
+
+Including node 0 (earth). \Hypertarget{structElCircuit_a7e1524d621eb13750e50d479d72927c5}\index{ElCircuit@{ElCircuit}!solved@{solved}}
+\index{solved@{solved}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{solved}{solved}}
+{\footnotesize\ttfamily \label{structElCircuit_a7e1524d621eb13750e50d479d72927c5} 
+bool El\+Circuit\+::solved}
+
+\Hypertarget{structElCircuit_ad056e072d14b92e676662096d0302afa}\index{ElCircuit@{ElCircuit}!source\_currents@{source\_currents}}
+\index{source\_currents@{source\_currents}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{source\_currents}{source\_currents}}
+{\footnotesize\ttfamily \label{structElCircuit_ad056e072d14b92e676662096d0302afa} 
+\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::source\+\_\+currents}
+
+Result per element (only voltage sources use it). \Hypertarget{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}\index{ElCircuit@{ElCircuit}!voltages@{voltages}}
+\index{voltages@{voltages}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{voltages}{voltages}}
+{\footnotesize\ttfamily \label{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f} 
+\mbox{\hyperlink{el__circuit_8h_ab48e1d2afddb8a3f0154ca23a36c2281}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::voltages}
+
+Result per node (voltages\mbox{[}0\mbox{]} = 0). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/elsim/\mbox{\hyperlink{el__circuit_8h}{el\+\_\+circuit.\+h}}\end{DoxyCompactItemize}

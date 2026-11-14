@@ -47,7 +47,7 @@ var NAVTREE =
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ]
   ] ]
@@ -57,11 +57,12 @@ var NAVTREEINDEX =
 [
 "BusStatus_8cpp.html",
 "classAElectricalCableActor.html#ac17cf8b2d87dff21de85c0bb74b62447",
-"fdcan_8h.html#a2207f43131408ec105e86b22da7d3477a5b6b40e2abd361ee7fa494fd2e57f274",
-"light__ecu__diag_8h.html#ad6a77c1d0746bb3cf60dd367edd7a833",
-"socketcan_8c.html#a7639fa365e598eb7b4d120392225f072",
-"structFSchematicNodeActivity.html#abdb2af4d303bcf3dc1172163b63c1638",
-"structScenarioStep.html#ae50e0f7171787ab38ccd4d9e801025f2"
+"el__circuit_8h.html#a00eb846edc75b9940b3ce2837012fefd",
+"globals_defs_p.html",
+"main__serial__bridge_8c.html",
+"structBusLink.html#a2482511c5819119379bca56dcc78761b",
+"structFComponentParameter.html#ac595f961e0ab2f0c53c4138fab9880b2",
+"structPowerPath.html#aa430f57a087774d88d7dd9b85c9387b0"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
