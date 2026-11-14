@@ -17,7 +17,7 @@ digital-twin features.
 | Virtual CAN bus (TCP software bus, `iotwin-bus`, `can_sim`) | Mar 2026, phase 1 | ✅ done in v0.1.0 |
 | Communication layer (gRPC idea) | Oct 2025 | replaced by the TCP text protocol ([ADR 0002](adr/0002-bus-server-and-text-protocol.md)) |
 | Unreal integration, status display | Oct 2025 | ✅ as module code (bus subsystem, lamp, switch); not yet a standalone plugin |
-| Electrical / load simulation | Oct 2025 | ⚠️ on/off only, no load, current or fuse |
+| Electrical / load simulation | Oct 2025 | ✅ core: installation as data, phasor network solver, breakers, fuses, RCDs, faults and measurements, `iotwin-sim` ([Electrical Simulation](dev/electrical.md)); ⚠️ not yet connected to Unreal |
 | ADR: repository structure (mono vs multi repo) | Oct 2025 | ✅ [ADR 0004](adr/0004-firmware-in-mono-repo-bare-metal.md) |
 | Git tag for the MVP | Oct 2025 | ✅ `v0.1.0` |
 | Serial bridge PC ↔ MCU | Mar 2026, phase 2 | ✅ `serial_bridge` + SLCAN firmware ([Firmware](dev/firmware.md)) |
@@ -47,6 +47,23 @@ Order of work:
 
 Housekeeping: clearer repository structure, release 0.2.0, Git LFS, branch cleanup (all done).
 Release 0.3.0 contains features A-E.
+
+## Product line (agreed November 2026)
+
+One core, three products ([ADR 0006](adr/0006-one-core-three-products.md)):
+
+1. **IoTwin test platform** - test faults and the behaviour of new devices
+   with the real communication of a smart home.
+2. **Technical renovation game** - renovate houses with a focus on the
+   electrical installation.
+3. **Electrician training** - randomly generated electrical problems that
+   have to be found and repaired according to the standards; rule engine
+   and fault generator.
+
+All three need an electrical simulation that owns the results, with Unreal
+only displaying them. Its core is done ([ADR 0007](adr/0007-electrical-simulation-core.md),
+[Electrical Simulation](dev/electrical.md)); next are the interface to
+Unreal, reactive and three-phase loads, and the fault generator.
 
 ## Order of the post-MVP steps
 

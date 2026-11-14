@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "generic.rcd-40a-30ma",
+  "name": "Residual current device 40 A / 30 mA",
+  "category": "protection",
+  "description": "Generic 2-pole RCCB type A, rated current 40 A, rated residual current 30 mA.",
+  "properties": {
+    "poles": "2",
+    "type": "A"
+  },
+  "parameters": {
+    "rated_current": {
+      "value": 40,
+      "unit": "A",
+      "source": "iec-61008-1",
+      "verified": true
+    },
+    "rated_residual_current": {
+      "value": 0.03,
+      "unit": "A",
+      "source": "iec-61008-1",
+      "verified": true
+    },
+    "contact_resistance": {
+      "value": 0.002,
+      "unit": "Ω",
+      "source": "iotwin-model",
+      "verified": false
+    }
+  },
+  "sources": [
+    {
+      "id": "iec-61008-1",
+      "title": "IEC 61008-1 - residual current operated circuit-breakers (RCCB): must trip at the rated residual current, may trip from 0.5 x of it"
+    },
+    {
+      "id": "iotwin-model",
+      "title": "IoTwin simulation parameter of the simplified model (see docs/dev/electrical.md)",
+      "url": "../../../docs/dev/electrical.md"
+    }
+  ]
+}

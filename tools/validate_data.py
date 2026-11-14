@@ -17,8 +17,9 @@ from pathlib import Path
 
 ID_PATTERN = re.compile(r"^[a-z0-9]+(\.[a-z0-9][a-z0-9-]*)+$")
 NAME_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
-UNITS = {"V", "A", "W", "Hz", "B", "bit/s", "°C", "s", "Ω", "F", "H", "lm", "%", "1"}
+UNITS = {"V", "A", "W", "Hz", "B", "bit/s", "°C", "s", "Ω", "F", "H", "lm", "%", "1", "A²s"}
 CATEGORIES = {"microcontroller", "board", "transceiver", "sensor", "actuator", "lamp", "relay", "switch",
+              "protection", "appliance",
               "power-supply", "cable", "connector", "ecu", "passive", "other"}
 
 
@@ -161,6 +162,101 @@ def check_system(path: Path, data: dict, components: dict, report: Report) -> No
                     report.error(path, f"message {message.get('name')}: unknown {role[:-1]} {node_id!r}")
 
 
+# Terminals per device type - must match libs/elsim/elsim.c.
+TERMINALS = {
+    "supply": {"L1", "L2", "L3", "N", "PE"},
+    "breaker": {"in", "out"},
+    "fuse": {"in", "out"},
+    "rcd": {"L_in", "N_in", "L_out", "N_out"},
+    "switch": {"in", "out"},
+    "load": {"L", "N", "PE"},
+    "socket": {"L", "N", "PE"},
+}
+# Component categories that fit a device type.
+TYPE_CATEGORIES = {
+    "breaker": {"protection"},
+    "fuse": {"protection"},
+    "rcd": {"protection"},
+    "switch": {"switch"},
+    "load": {"lamp", "appliance", "actuator", "other"},
+    "socket": {"connector", "other"},
+    "supply": {"power-supply", "other"},
+}
+EARTHING = {"TN-S", "TN-C-S", "TT"}
+
+
+def check_installation(path: Path, data: dict, components: dict, report: Report) -> None:
+    for field in ("id", "name", "devices", "connections"):
+        if field not in data:
+            report.error(path, f"missing field '{field}'")
+    cables = {}
+    for cable in data.get("cables", []):
+        cid = cable.get("id")
+        if cid in cables:
+            report.error(path, f"duplicate cable id {cid!r}")
+        cables[cid] = cable
+        if not isinstance(cable.get("cross_section"), (int, float)) or cable["cross_section"] <= 0:
+            report.error(path, f"cable {cid!r}: cross_section must be > 0 (mm^2)")
+        if not isinstance(cable.get("length"), (int, float)) or cable["length"] < 0:
+            report.error(path, f"cable {cid!r}: length must be >= 0 (m)")
+
+    devices = {}
+    for device in data.get("devices", []):
+        did, dtype = device.get("id"), device.get("type")
+        if not did or ":" in did or " " in did:
+            report.error(path, f"device id {did!r} must be set and contain no ':' or spaces")
+        if did in devices:
+            report.error(path, f"duplicate device id {did!r}")
+        devices[did] = device
+        if dtype not in TERMINALS:
+            report.error(path, f"device {did!r}: unknown type {dtype!r} ({', '.join(sorted(TERMINALS))})")
+            continue
+        component_id = device.get("component")
+        if component_id is not None:
+            component = components.get(component_id)
+            if component is None:
+                report.error(path, f"device {did!r}: unknown component {component_id!r}")
+            elif component.get("category") not in TYPE_CATEGORIES.get(dtype, set()):
+                report.error(path, f"device {did!r}: component {component_id!r} ({component.get('category')}) "
+                                   f"does not fit type {dtype}")
+        if dtype == "supply" and device.get("system", "TN-S") not in EARTHING:
+            report.error(path, f"device {did!r}: system must be one of {sorted(EARTHING)}")
+    if not any(d.get("type") == "supply" for d in devices.values()):
+        report.error(path, "no supply device")
+    for did, device in devices.items():
+        socket = device.get("plugged_into")
+        if socket is not None:
+            if device.get("type") != "load":
+                report.error(path, f"device {did!r}: only loads can be plugged in")
+            if devices.get(socket, {}).get("type") != "socket":
+                report.error(path, f"device {did!r}: plugged_into {socket!r} is not a socket")
+
+    def check_terminal(where: str, reference) -> None:
+        device_id, _, terminal = str(reference).partition(":")
+        device = devices.get(device_id)
+        if device is None:
+            report.error(path, f"{where}: unknown device in {reference!r}")
+        elif terminal not in TERMINALS.get(device.get("type"), set()):
+            report.error(path, f"{where}: {device.get('type')} {device_id!r} has no terminal {terminal!r}")
+
+    connection_ids = set()
+    for index, connection in enumerate(data.get("connections", [])):
+        where = f"connections[{index}]"
+        cid = connection.get("id")
+        if cid is not None:
+            if cid in connection_ids:
+                report.error(path, f"{where}: duplicate id {cid!r}")
+            connection_ids.add(cid)
+        check_terminal(where, connection.get("from"))
+        check_terminal(where, connection.get("to"))
+        if connection.get("from") == connection.get("to"):
+            report.error(path, f"{where}: connects a terminal to itself")
+        if connection.get("role", "") not in ("L", "N", "PE", ""):
+            report.error(path, f"{where}: role must be L, N or PE")
+        if "cable" in connection and connection["cable"] not in cables:
+            report.error(path, f"{where}: unknown cable {connection['cable']!r}")
+
+
 def main() -> int:
     # Units like "Ω" and "°C" appear in messages; Windows consoles default to cp1252.
     if hasattr(sys.stdout, "reconfigure"):
@@ -189,9 +285,16 @@ def main() -> int:
         if data is not None:
             check_system(path, data, components, report)
 
+    installation_files = sorted((data_dir / "installations").rglob("*.json"))
+    for path in installation_files:
+        data = load_json(path, report)
+        if data is not None:
+            check_installation(path, data, components, report)
+
     for line in report.errors:
         print(f"ERROR {line}")
-    print(f"{len(component_files)} components, {len(system_files)} systems, {len(report.errors)} errors")
+    print(f"{len(component_files)} components, {len(system_files)} systems, "
+          f"{len(installation_files)} installations, {len(report.errors)} errors")
     return 1 if report.errors else 0
 
 

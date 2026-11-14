@@ -45,6 +45,7 @@ nav:
       - Diagnostics (UDS): dev/diagnostics.md
       - Scenarios and Faults: dev/scenarios.md
       - Power and Dimming: dev/power.md
+      - Electrical Simulation: dev/electrical.md
       - Component Database: dev/component_database.md
       - Packaging: dev/packaging.md
   - API Reference: api/index.html
@@ -54,3 +55,5 @@ nav:
       - ADR 0003 Platforms: adr/0003-linux-rt-target-windows-best-effort.md
       - ADR 0004 Firmware: adr/0004-firmware-in-mono-repo-bare-metal.md
       - ADR 0005 Repository Layout: adr/0005-repository-layout.md
+      - ADR 0006 One Core, Three Products: adr/0006-one-core-three-products.md
+      - ADR 0007 Electrical Simulation: adr/0007-electrical-simulation-core.md

@@ -17,7 +17,7 @@
     "category": {
       "type": "string",
       "enum": ["microcontroller", "board", "transceiver", "sensor", "actuator", "lamp", "relay", "switch",
-               "power-supply", "cable", "connector", "ecu", "passive", "other"]
+               "power-supply", "cable", "connector", "ecu", "passive", "protection", "appliance", "other"]
     },
     "manufacturer": { "type": "string" },
     "description": { "type": "string" },
@@ -103,7 +103,7 @@
         "min": { "type": ["number", "null"] },
         "typ": { "type": ["number", "null"] },
         "max": { "type": ["number", "null"] },
-        "unit": { "type": "string", "enum": ["V", "A", "W", "Hz", "B", "bit/s", "°C", "s", "Ω", "F", "H", "lm", "%", "1"] },
+        "unit": { "type": "string", "enum": ["V", "A", "W", "Hz", "B", "bit/s", "°C", "s", "Ω", "F", "H", "lm", "%", "1", "A²s"] },
         "source": { "type": "string", "description": "id of an entry in sources" },
         "verified": { "type": "boolean", "description": "false = to be confirmed or still to be filled in" },
         "note": { "type": "string" }

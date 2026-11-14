@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema/installation.schema.json",
+  "id": "demo-flat",
+  "name": "Demo flat: lighting and kitchen socket",
+  "description": "TN-S supply, one RCD 40 A / 30 mA for two circuits: F1 B10 for the living room light (switch and lamp), F2 B16 for a kitchen socket with a kettle.",
+  "cables": [
+    {
+      "id": "w-light-feed",
+      "type": "NYM-J 3x1.5",
+      "cross_section": 1.5,
+      "length": 12
+    },
+    {
+      "id": "w-light-drop",
+      "type": "NYM-J 3x1.5",
+      "cross_section": 1.5,
+      "length": 3
+    },
+    {
+      "id": "w-kitchen",
+      "type": "NYM-J 3x2.5",
+      "cross_section": 2.5,
+      "length": 15
+    }
+  ],
+  "devices": [
+    {
+      "id": "intake",
+      "type": "supply",
+      "label": "House connection",
+      "system": "TN-S",
+      "voltage": 230,
+      "frequency": 50,
+      "loop_impedance": 0.35
+    },
+    {
+      "id": "rcd",
+      "type": "rcd",
+      "component": "generic.rcd-40a-30ma",
+      "label": "Q1 RCD",
+      "room": "hall"
+    },
+    {
+      "id": "f1",
+      "type": "breaker",
+      "component": "generic.mcb-b10",
+      "label": "F1 lighting",
+      "room": "hall"
+    },
+    {
+      "id": "f2",
+      "type": "breaker",
+      "component": "generic.mcb-b16",
+      "label": "F2 kitchen sockets",
+      "room": "hall"
+    },
+    {
+      "id": "s1",
+      "type": "switch",
+      "label": "Light switch",
+      "room": "living",
+      "on": true
+    },
+    {
+      "id": "lamp",
+      "type": "load",
+      "component": "generic.lamp-60w",
+      "label": "Ceiling lamp",
+      "room": "living"
+    },
+    {
+      "id": "socket_kitchen",
+      "type": "socket",
+      "label": "Socket",
+      "room": "kitchen"
+    },
+    {
+      "id": "kettle",
+      "type": "load",
+      "component": "generic.kettle-2000w",
+      "label": "Kettle",
+      "room": "kitchen",
+      "plugged_into": "socket_kitchen"
+    }
+  ],
+  "connections": [
+    {
+      "id": "board-l",
+      "from": "intake:L1",
+      "to": "rcd:L_in",
+      "role": "L"
+    },
+    {
+      "id": "board-n",
+      "from": "intake:N",
+      "to": "rcd:N_in",
+      "role": "N"
+    },
+    {
+      "id": "board-f1",
+      "from": "rcd:L_out",
+      "to": "f1:in",
+      "role": "L"
+    },
+    {
+      "id": "board-f2",
+      "from": "rcd:L_out",
+      "to": "f2:in",
+      "role": "L"
+    },
+    {
+      "id": "light-l",
+      "from": "f1:out",
+      "to": "s1:in",
+      "role": "L",
+      "cable": "w-light-feed"
+    },
+    {
+      "id": "light-sw",
+      "from": "s1:out",
+      "to": "lamp:L",
+      "role": "L",
+      "cable": "w-light-drop"
+    },
+    {
+      "id": "light-n",
+      "from": "rcd:N_out",
+      "to": "lamp:N",
+      "role": "N",
+      "cable": "w-light-feed"
+    },
+    {
+      "id": "light-pe",
+      "from": "intake:PE",
+      "to": "lamp:PE",
+      "role": "PE",
+      "cable": "w-light-feed"
+    },
+    {
+      "id": "kitchen-l",
+      "from": "f2:out",
+      "to": "socket_kitchen:L",
+      "role": "L",
+      "cable": "w-kitchen"
+    },
+    {
+      "id": "kitchen-n",
+      "from": "rcd:N_out",
+      "to": "socket_kitchen:N",
+      "role": "N",
+      "cable": "w-kitchen"
+    },
+    {
+      "id": "kitchen-pe",
+      "from": "intake:PE",
+      "to": "socket_kitchen:PE",
+      "role": "PE",
+      "cable": "w-kitchen"
+    }
+  ]
+}

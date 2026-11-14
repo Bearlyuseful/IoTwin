@@ -1,0 +1,27 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "generic.kettle-2000w",
+  "name": "Kettle 2000 W",
+  "category": "appliance",
+  "description": "Generic electric kettle 2000 W / 230 V, purely resistive, protection class I.",
+  "parameters": {
+    "rated_power": {
+      "value": 2000,
+      "unit": "W",
+      "source": "nameplate",
+      "verified": true
+    },
+    "rated_voltage": {
+      "value": 230,
+      "unit": "V",
+      "source": "nameplate",
+      "verified": true
+    }
+  },
+  "sources": [
+    {
+      "id": "nameplate",
+      "title": "Typical rating of such a device (generic part, no specific product)"
+    }
+  ]
+}

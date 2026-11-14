@@ -1,0 +1,195 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Bearlyuseful/IoTwin/data/schema/installation.schema.json",
+  "title": "IoTwin electrical installation",
+  "description": "The wiring of a house for the electrical simulation (docs/dev/electrical.md): devices with terminals, cables, and connections (one conductor each).",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "devices",
+    "connections"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "cables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "cross_section",
+          "length"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "e.g. NYM-J 3x1.5"
+          },
+          "cross_section": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "mm^2 per conductor"
+          },
+          "length": {
+            "type": "number",
+            "minimum": 0,
+            "description": "m"
+          }
+        }
+      }
+    },
+    "devices": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "supply",
+              "breaker",
+              "fuse",
+              "rcd",
+              "switch",
+              "load",
+              "socket"
+            ]
+          },
+          "component": {
+            "type": "string",
+            "description": "id in data/components"
+          },
+          "label": {
+            "type": "string"
+          },
+          "room": {
+            "type": "string"
+          },
+          "on": {
+            "type": "boolean",
+            "description": "initial state (switches start off)"
+          },
+          "plugged_into": {
+            "type": "string",
+            "description": "load: id of a socket"
+          },
+          "system": {
+            "type": "string",
+            "enum": [
+              "TN-S",
+              "TN-C-S",
+              "TT"
+            ]
+          },
+          "voltage": {
+            "type": "number"
+          },
+          "frequency": {
+            "type": "number"
+          },
+          "loop_impedance": {
+            "type": "number",
+            "description": "supply: external loop impedance Ze in Ohm"
+          },
+          "earth_electrode": {
+            "type": "number",
+            "description": "supply, TT: earth electrode in Ohm"
+          },
+          "source_earth": {
+            "type": "number"
+          },
+          "rated_current": {
+            "type": "number"
+          },
+          "magnetic_trip_multiple": {
+            "type": "number"
+          },
+          "thermal_limit": {
+            "type": "number"
+          },
+          "melting_i2t": {
+            "type": "number"
+          },
+          "rated_residual_current": {
+            "type": "number"
+          },
+          "rated_power": {
+            "type": "number"
+          },
+          "rated_voltage": {
+            "type": "number"
+          },
+          "contact_resistance": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+:[A-Za-z0-9_]+$",
+            "description": "device:terminal, e.g. lamp:L"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+:[A-Za-z0-9_]+$",
+            "description": "device:terminal, e.g. lamp:L"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "L",
+              "N",
+              "PE"
+            ]
+          },
+          "cable": {
+            "type": "string",
+            "description": "id of a cable; without: short internal link"
+          }
+        }
+      }
+    }
+  }
+}

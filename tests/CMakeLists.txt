@@ -27,6 +27,8 @@ add_executable(iotwin_tests
     test_light_ecu.cpp
     test_light_ecu_diag.cpp
     test_power_path.cpp
+    test_json.cpp
+    test_elsim.cpp
     test_cycle_timer.cpp
     test_bus_server.cpp
     test_gateway.cpp
@@ -40,6 +42,8 @@ target_link_libraries(iotwin_tests PRIVATE
     iotwin_bus_server
     iotwin_light_ecu
     iotwin_scenario
+    iotwin_json
+    iotwin_elsim
     iotwin_gateway_logic
     iotwin_bridge_core
     iotwin_serial
@@ -56,10 +60,15 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     target_compile_definitions(iotwin_tests PRIVATE SOCKETCAN_BRIDGE_PATH="$<TARGET_FILE:socketcan_bridge>")
 endif()
 # The end-to-end test starts the real serial_bridge executable.
-add_dependencies(iotwin_tests serial_bridge iotwin-bus can_sim can_scenario)
+add_dependencies(iotwin_tests serial_bridge iotwin-bus can_sim can_scenario iotwin-sim)
+
+# Electrical simulation: the demo installation driven by a command script.
+add_test(NAME electrical_demo
+         COMMAND iotwin-sim --data ${PROJECT_SOURCE_DIR}/data --script ${CMAKE_CURRENT_SOURCE_DIR}/elsim/demo-flat.sim)
 target_compile_definitions(iotwin_tests PRIVATE
     SERIAL_BRIDGE_PATH="$<TARGET_FILE:serial_bridge>"
     IOTWIN_DBC_PATH="${PROJECT_SOURCE_DIR}/data/dbc/iotwin.dbc"
+    IOTWIN_DATA_DIR="${PROJECT_SOURCE_DIR}/data"
 )
 
 # Engineering data (data/components, data/systems) must stay consistent.
