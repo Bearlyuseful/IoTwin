@@ -13,8 +13,15 @@
  *
  * A small conductance gmin from every node to earth keeps floating parts of
  * the network (open breakers, unconnected terminals) solvable; it also models
- * a very high insulation resistance. Dense Gaussian elimination with partial
- * pivoting.
+ * a very high insulation resistance.
+ *
+ * Solvers: networks without ideal voltage sources (supplies as Norton
+ * equivalents, as libs/elsim builds them) are solved by nodal analysis with
+ * a sparse LDL^T factorization (el_sparse.h). The ordering is computed once
+ * per topology and the factorization reused as long as no value changes, so
+ * a step of an unchanged network is only a forward/back substitution. With
+ * voltage sources (or EL_SOLVER_DENSE) modified nodal analysis with dense
+ * Gaussian elimination and partial pivoting is used.
  *
  * Portable C99 without C99 complex numbers (MSVC has no complex arithmetic),
  * so the same sources compile with GCC, Clang and MSVC, also inside the
@@ -81,6 +88,11 @@ typedef struct {
   ElPhasor value;
 } ElElement;
 
+typedef enum {
+  EL_SOLVER_AUTO,  /**< sparse nodal analysis when there are no voltage sources, else dense */
+  EL_SOLVER_DENSE  /**< always dense modified nodal analysis (reference, comparisons) */
+} ElSolver;
+
 typedef struct {
   int nodes;              /**< Including node 0 (earth). */
   ElElement* elements;
@@ -92,6 +104,15 @@ typedef struct {
   ElPhasor* matrix;       /**< Work matrix, reused between solutions. */
   size_t matrix_capacity;
   bool solved;
+  ElSolver solver;
+  void* sparse_cache;     /**< cached orderings and factorizations (el_circuit.c) */
+  /* statistics */
+  unsigned long analyses;       /**< sparse orderings computed (topology changes) */
+  unsigned long factorizations; /**< sparse numeric factorizations (value changes) */
+  unsigned long sparse_solutions;
+  unsigned long dense_solutions;
+  size_t fill;                  /**< non-zeros of L of the last sparse solution */
+  size_t perturbed_pivots;      /**< pivots replaced in the last factorization */
 } ElCircuit;
 
 #define EL_GMIN 1e-9 /**< Siemens from every node to earth (1 GOhm). */
