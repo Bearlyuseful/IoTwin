@@ -1287,9 +1287,10 @@
 <div class="highlight"><pre><span></span><code>dist/IoTwin-&lt;version&gt;-win64/
   bin/                      static MinGW builds, no runtime DLLs needed:
                             iotwin-bus, can_sim, serial_bridge, can_monitor,
-                            uds_client, can_replay, can_scenario
+                            uds_client, can_replay, can_scenario, iotwin-sim
   firmware/                 NUCLEO-G0B1RE gateway (.bin, .hex)
-  data/                     DBC, component database, systems, scenarios
+  data/                     DBC, component database, systems, installations,
+                            scenarios
   Visualizer/IoTwin.exe     cooked Unreal build (Win64)
   start-demo.bat            starts bus, ECU and visualizer
   start-demo-hardware.bat   the same plus the NUCLEO gateway (COM port)
@@ -1320,7 +1321,7 @@ dist/IoTwin-&lt;version&gt;-win64.zip
 </tr>
 <tr>
 <td><code>-Version</code></td>
-<td><code>0.3.0</code></td>
+<td><code>0.4.0</code></td>
 <td>used in the package name</td>
 </tr>
 <tr>
