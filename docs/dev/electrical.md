@@ -4,7 +4,8 @@ The electrical simulation core computes how the wiring of a house behaves:
 voltages, currents and power, circuit breakers, fuses and RCDs, faults, and
 the measurements an electrician makes. It is the shared core of the three
 products ([ADR 0006](../adr/0006-one-core-three-products.md)); its design is
-in [ADR 0007](../adr/0007-electrical-simulation-core.md).
+in [ADR 0007](../adr/0007-electrical-simulation-core.md), its interface to
+Unreal and other frontends in [ADR 0008](../adr/0008-simulation-interface.md).
 
 ```bash
 iotwin-sim                       # demo flat, interactive
@@ -20,6 +21,8 @@ sim> z socket_kitchen:L socket_kitchen:PE
 | Network solver (modified nodal analysis, complex phasors) | `libs/elsim/el_circuit.*` |
 | Installation model, protection, faults, measurements | `libs/elsim/elsim.*` |
 | Loading installations and components from `data/` | `libs/elsim/el_install.*` |
+| Session: commands in, snapshots and events out, lock-free between threads | `libs/elsim/el_session.*` |
+| In the visualizer (compiled in, own thread) | `visualizer/Source/IoTwin/Electrical` ([Visualizer](visualizer.md#electrical-simulation-sourceiotwinelectrical)) |
 | JSON reader | `libs/json` |
 | Command line simulator | `apps/iotwin_sim` (`iotwin-sim`) |
 | Installations | `data/installations/*.json`, schema `data/schema/installation.schema.json` |
@@ -56,6 +59,8 @@ written `device:terminal`:
 | `switch` | `in out` | `contact_resistance`; starts **off** unless `"on": true` |
 | `load` | `L N PE` | `rated_power`, `rated_voltage`; `plugged_into` a socket |
 | `socket` | `L N PE` | – |
+| `junction` | `L N PE` | – (junction box, terminal block; a port in Unreal) |
+| `dimmer` | `in out` | `level` 0..1, `contact_resistance`; starts **off** unless `"on": true` |
 
 Parameters are taken from the type defaults, then from the referenced
 component in `data/components` (e.g. `generic.mcb-b16`), then from the device
@@ -76,6 +81,16 @@ components and sockets (CTest `data_validation`).
   the star point to its own earth (`source_earth`, 1 Ω).
 - Every node has 1 GΩ to earth, so open breakers and loose terminals stay
   solvable; it also limits insulation readings (two floating nodes read 500 MΩ).
+- **Dimmer:** an ideal (lossless) series reactance X chosen so that the RMS
+  current is √level and the power of a resistive load level × the full value,
+  as with a phase-cut or PWM dimmer. X follows from the Thevenin impedance
+  Z = A + jB the dimmer sees: |Z + jX| = |Z| / √level. It is recomputed only
+  when the network changes (`ElModel.revision`). The supply sees reactive
+  power instead of the distortion power of a real dimmer.
+- A load counts as **powered** when it gets at least 1 % of its rated power.
+- Portable C99: phasors are a small struct (`ElPhasor`) instead of C99 complex
+  numbers, so MSVC compiles the core (inside Unreal); after the first solution
+  of a network the solver does not allocate memory.
 
 ## Protection
 
@@ -119,6 +134,7 @@ iotwin-sim [--data DIR] [--script FILE] [installation.json]
 |---------|--|
 | `state` | all devices with state, voltage, current, power |
 | `on/off <id>`, `reset <id>`, `test <rcd>` | operate switches, breakers, RCDs, appliances |
+| `level <dimmer> <percent>` | dimmer level |
 | `fault <a> <b> [ohm]`, `open/close <conn>`, `clear` | faults |
 | `plug <load> <socket>`, `unplug <load>` | appliances |
 | `u`, `z`, `riso <a> <b>` | measurements |
@@ -127,13 +143,33 @@ iotwin-sim [--data DIR] [--script FILE] [installation.json]
 
 With `--script` the exit code is 1 if an `expect` fails (CTest `electrical_demo`).
 
-## Limits of the first version and next steps
+## Session interface
+
+`el_session.h` is what every frontend uses ([ADR 0008](../adr/0008-simulation-interface.md)):
+
+```c
+ElSession* s = el_session_create(&model);                 /* takes over the model */
+ElCommand c = el_command(EL_CMD_SET_LEVEL, "relay", NULL, 0.3);
+el_session_send(s, &c);                                   /* command thread */
+el_session_step(s, 0.01);                                 /* simulation thread, every 10 ms */
+const ElSnapshot* snap = el_session_snapshot(s);          /* reader: newest complete state */
+ElEvent e;
+while (el_session_next_event(s, &e)) { /* "F1 tripped (short circuit, 503 A = 50.3 x In)" */ }
+```
+
+One thread sends commands, one steps, one reads (sender and reader may be
+the same). Queues and the snapshot exchange are lock-free and wait-free, so a
+real-time simulation thread never waits for a slow reader. Rejected commands
+come back as events ("command rejected: ...").
+
+## Limits and next steps
 
 - Resistive loads only; reactive loads (motors, power factor) and three-phase
   devices need only new element types, the solver already uses complex numbers.
 - Simplified trip curves and no conductor heating.
-- No connection to Unreal yet: the interface (gRPC or JSON/protobuf over TCP)
-  is the next decision (ADR 0007). Unreal then shows what the simulator
-  computes instead of deciding "powered" itself.
+- Dense solver: about 30 µs per step for the demo scene; whole houses
+  (about 1000 nodes) need a sparse LU solver.
+- Out-of-process adapter (Zenoh, shared memory) with a FlatBuffers schema for
+  a simulator on a separate (real-time) machine and several clients.
 - Fault generator and rule checks for the electrician training build on the
   fault and measurement functions.

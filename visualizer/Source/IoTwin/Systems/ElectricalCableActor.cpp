@@ -3,6 +3,7 @@
 #include "ElectricalCableActor.h"
 
 #include "CableComponent.h"
+#include "Electrical/ElectricalModelBuilder.h"
 
 AElectricalCableActor::AElectricalCableActor()
 {
@@ -51,6 +52,36 @@ void AElectricalCableActor::ConnectBetween(UElectricalPortComponent* A, UElectri
 	IPowerInterface::Execute_ConnectTo(EndB, B);
 	IPowerInterface::Execute_ConnectTo(EndB, EndA);
 	RefreshCable();
+}
+
+float AElectricalCableActor::GetLengthMeters() const
+{
+	if (EndA == nullptr || EndB == nullptr)
+	{
+		return 0.0f;
+	}
+	// Unreal units are centimetres.
+	return FMath::Max(0.1f, FVector::Distance(EndA->GetComponentLocation(), EndB->GetComponentLocation()) * Slack / 100.0f);
+}
+
+void AElectricalCableActor::DescribeElectrical(FElectricalModelBuilder& Builder)
+{
+	const FString A = Builder.PortId(EndA);
+	const FString B = Builder.PortId(EndB);
+	if (A.IsEmpty() || B.IsEmpty())
+	{
+		return;
+	}
+	const FString Cable = Builder.AddCable(Builder.MakeId(this, TEXT("cable")), CrossSection, GetLengthMeters());
+	if (Cable.IsEmpty())
+	{
+		return;
+	}
+	for (const TCHAR* Terminal : {TEXT("L"), TEXT("N"), TEXT("PE")})
+	{
+		Builder.Connect(A + TEXT(":") + Terminal, B + TEXT(":") + Terminal, Terminal, Cable);
+	}
+	Builder.ClaimWire(EndA, EndB);
 }
 
 void AElectricalCableActor::RefreshCable()

@@ -19,6 +19,23 @@
 - `iotwin-sim`: command line simulator, interactive or as a script with
   `expect` checks (CTest `electrical_demo`); included in the release package.
 
+### Electrical simulation in the visualizer
+- ADR 0008: transport-independent session interface (commands in, snapshots
+  and events out), adapters per product - in-process first, Zenoh next.
+- `libs/elsim/el_session`: lock-free, wait-free queues and triple-buffered
+  snapshots between the simulation thread and the reader.
+- The core is portable C99 (own phasor type instead of C99 complex numbers)
+  and compiles with MSVC; the solver no longer allocates per step.
+- New device types `junction` and `dimmer` (lossless series reactance: RMS
+  current and power of a dimmed resistive load).
+- Unreal: the core is compiled into the visualizer and runs in its own
+  thread with 10 ms steps. Ports, power sources, cables and loads describe
+  themselves to the model; the lamp, its brightness and the HUD show the
+  simulated values (voltage, current, power, breaker F1). Unreal no longer
+  decides "powered" itself.
+- Keys F (short circuit at the lamp) and R (reset breakers); smoke-test
+  options `-IoTwinShortCircuitAfter=<s>` and `-IoTwinElectricalDisabled`.
+
 ## 0.3.0 - 2026-11-13
 
 Next phase, features A-E: component database, 2D schematic view, UDS

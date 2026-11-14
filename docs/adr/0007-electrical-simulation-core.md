@@ -1,7 +1,7 @@
 # ADR 0007: Electrical Simulation Core
 
 **Date:** 2026-11-14
-**Status:** Accepted (interface to Unreal: open, see below)
+**Status:** Accepted (interface to Unreal: decided in [ADR 0008](0008-simulation-interface.md))
 
 **Context:**
 The original concept puts the electrical behaviour of the house into a
@@ -40,15 +40,15 @@ electrician makes.
 6. **Faults** are changes to the network: an impedance between two terminals
    (short circuit, insulation fault, earth fault) or an open connection.
 
-**Interface to Unreal (open):** the first version is a C library plus the
-command line simulator `iotwin-sim`. How Unreal talks to it - gRPC as
-considered in the original concept, or JSON/protobuf over the existing TCP
-transport - is decided before the Unreal integration.
+**Interface to Unreal:** the first version is a C library plus the
+command line simulator `iotwin-sim`. The interface to Unreal and other
+frontends is decided in [ADR 0008](0008-simulation-interface.md): a
+transport-independent session API, first used in-process in Unreal.
 
 **Consequences:**
 
 - `libs/elsim` is tested without Unreal; the installation files are
   validated in CI like the other engineering data.
-- Unreal's own "powered" search is replaced once the interface exists.
+- Unreal's own "powered" search is replaced by the simulator (ADR 0008).
 - `libs/power` (the light ECU's DC output) stays as a small special case
   until the ECU itself is placed into an installation.

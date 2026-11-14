@@ -18,9 +18,13 @@
  *   between two terminals (loop impedance, continuity, insulation).
  *
  * Terminals per type:
- *   supply  L1 L2 L3 N PE       breaker, fuse, switch  in out
+ *   supply  L1 L2 L3 N PE       breaker, fuse, switch, dimmer  in out
  *   rcd     L_in N_in L_out N_out
- *   load    L N PE              socket  L N PE
+ *   load    L N PE              socket, junction  L N PE
+ *
+ * Change the state only through the el_model_* functions: they mark the
+ * network as changed (ElModel.revision), which dimmers need.
+ * For running the model in its own (real-time) thread see el_session.h.
  */
 
 #include <stdbool.h>
@@ -44,7 +48,18 @@ extern "C" {
 /** A voltage below this counts as "no voltage" for safety checks (V). */
 #define EL_SAFE_VOLTAGE 50.0
 
-typedef enum { EL_SUPPLY, EL_BREAKER, EL_FUSE, EL_RCD, EL_SWITCH, EL_LOAD, EL_SOCKET, EL_DEVICE_TYPES } ElDeviceType;
+typedef enum {
+  EL_SUPPLY,
+  EL_BREAKER,
+  EL_FUSE,
+  EL_RCD,
+  EL_SWITCH,
+  EL_LOAD,
+  EL_SOCKET,
+  EL_JUNCTION, /**< junction box / terminal block: L N PE, no internal elements */
+  EL_DIMMER,   /**< series dimmer in/out with a level 0..1 */
+  EL_DEVICE_TYPES
+} ElDeviceType;
 
 typedef enum { EL_TN_S, EL_TN_C_S, EL_TT } ElEarthing;
 
@@ -69,7 +84,7 @@ typedef struct {
   double thermal_limit;       /**< breaker: integral of ((I/In)^2 - 1) dt in s; fuse: melting I^2 t in A^2 s */
   double residual_rated_a;    /**< rcd: rated residual current (I delta n) */
   double rated_power_w;       /**< load */
-  double contact_ohm;         /**< breaker, fuse, rcd pole, switch contact */
+  double contact_ohm;         /**< breaker, fuse, rcd pole, switch/dimmer contact */
   int plugged_into;           /**< load: index of the socket it is plugged into, -1 = fixed wiring */
 
   /* state */
@@ -77,11 +92,13 @@ typedef struct {
   bool tripped;      /**< breaker/rcd tripped, fuse blown */
   double heat;       /**< thermal state of breaker/fuse */
   bool test_pressed; /**< rcd test button, for the next step */
+  double level;      /**< dimmer: 0..1 (share of the full power of its load) */
+  double reactance_ohm; /**< dimmer: series reactance that sets the level (computed) */
 
   /* results of the last step */
   double current_a;  /**< load, breaker, fuse, switch; rcd: line pole; supply: L1 */
   double residual_a; /**< rcd */
-  double voltage_v_measured; /**< load: across L-N */
+  double voltage_v_measured; /**< load, socket, junction: across L-N */
   double power_w;    /**< load */
   int element[3];    /**< circuit elements of the last solution, -1 if not present */
 } ElDevice;
@@ -136,6 +153,8 @@ typedef struct {
   ElEvent events[EL_MAX_EVENTS];
   size_t event_head;
   size_t event_count;
+  unsigned revision;        /**< incremented by every change of the network */
+  unsigned dimmer_revision; /**< revision the dimmer reactances were computed for */
 } ElModel;
 
 void el_model_init(ElModel* model);
@@ -163,7 +182,7 @@ const char* el_device_type_name(ElDeviceType type);
 bool el_device_type_from_name(const char* name, ElDeviceType* type);
 int el_terminal_count(ElDeviceType type);
 const char* el_terminal_name(ElDeviceType type, int terminal);
-/** @brief Load is supplied: at least half its rated voltage across L-N. */
+/** @brief Load is supplied: switched on and at least 1 % of its rated power (dimmed loads count). */
 bool el_device_powered(const ElDevice* device);
 /**@}*/
 
@@ -175,6 +194,10 @@ bool el_model_set_on(ElModel* model, const char* id, bool on);
 bool el_model_reset(ElModel* model, const char* id);
 /** @brief Presses the test button of an RCD for one step. */
 bool el_model_press_test(ElModel* model, const char* id);
+/** @brief Level of a dimmer, 0..1 (clamped). */
+bool el_model_set_level(ElModel* model, const char* id, double level);
+/** @brief Marks the network as changed after writing device fields directly. */
+void el_model_touch(ElModel* model);
 /** @return Fault index: an impedance between two terminals (short circuit, insulation or earth fault). */
 int el_model_add_fault(ElModel* model, const char* a, const char* b, double resistance_ohm, const char* description);
 /** @brief Interrupts (or restores) a conductor. */

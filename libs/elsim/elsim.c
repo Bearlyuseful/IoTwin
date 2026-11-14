@@ -1,6 +1,5 @@
 #include "elsim.h"
 
-#include <complex.h>
 #include <math.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -13,8 +12,13 @@
 #define PLUG_CONTACT_OHM 0.005
 #define BREAKER_COOLING 1.0     /* normalised heat units per second below In */
 #define MAX_TRIP_ITERATIONS 8
+#define DIMMER_OFF_LEVEL 0.001  /* below: open */
+#define DIMMER_FULL_LEVEL 0.999 /* above: fully on, contact only */
+#define DIMMER_MAX_REACTANCE 1e9
 
-static const char* const kTypeNames[EL_DEVICE_TYPES] = {"supply", "breaker", "fuse", "rcd", "switch", "load", "socket"};
+static const char* const kTypeNames[EL_DEVICE_TYPES] = {"supply", "breaker", "fuse",     "rcd",
+                                                        "switch", "load",    "socket", "junction",
+                                                        "dimmer"};
 
 static const char* const kTerminals[EL_DEVICE_TYPES][EL_MAX_TERMINALS] = {
     {"L1", "L2", "L3", "N", "PE"},
@@ -24,8 +28,10 @@ static const char* const kTerminals[EL_DEVICE_TYPES][EL_MAX_TERMINALS] = {
     {"in", "out"},
     {"L", "N", "PE"},
     {"L", "N", "PE"},
+    {"L", "N", "PE"},
+    {"in", "out"},
 };
-static const int kTerminalCount[EL_DEVICE_TYPES] = {5, 2, 2, 4, 2, 3, 3};
+static const int kTerminalCount[EL_DEVICE_TYPES] = {5, 2, 2, 4, 2, 3, 3, 3, 2};
 
 enum { SUPPLY_L1, SUPPLY_L2, SUPPLY_L3, SUPPLY_N, SUPPLY_PE };
 enum { TWO_IN, TWO_OUT };
@@ -53,7 +59,8 @@ const char* el_terminal_name(ElDeviceType type, int terminal) {
 }
 
 bool el_device_powered(const ElDevice* device) {
-  return device->type == EL_LOAD && device->voltage_v_measured >= 0.5 * device->voltage_v;
+  return device->type == EL_LOAD && device->on && device->rated_power_w > 0.0 &&
+         device->power_w >= 0.01 * device->rated_power_w;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -63,6 +70,7 @@ bool el_device_powered(const ElDevice* device) {
 void el_model_init(ElModel* model) {
   memset(model, 0, sizeof(*model));
   model->node_count = 1; /* node 0 = earth */
+  model->dimmer_revision = ~0u; /* computed in the first step */
   el_circuit_init(&model->circuit, 1);
 }
 
@@ -119,7 +127,8 @@ static int find_cable(const ElModel* model, const char* id) {
 
 static void set_defaults(ElDevice* d) {
   d->plugged_into = -1;
-  d->on = d->type != EL_SWITCH; /* switches start open, everything else switched on */
+  d->on = d->type != EL_SWITCH && d->type != EL_DIMMER; /* switches start open, the rest is on */
+  d->level = 1.0;
   for (int i = 0; i < 3; i++) {
     d->element[i] = -1;
   }
@@ -156,7 +165,12 @@ static void set_defaults(ElDevice* d) {
       d->voltage_v = 230.0;
       d->rated_power_w = 100.0;
       break;
+    case EL_DIMMER:
+      d->rated_current_a = 2.0;
+      d->contact_ohm = 0.01;
+      break;
     case EL_SOCKET:
+    case EL_JUNCTION:
     case EL_DEVICE_TYPES:
       break;
   }
@@ -180,6 +194,7 @@ int el_model_add_device(ElModel* model, const char* id, ElDeviceType type) {
     model->node_count += SUPPLY_INTERNAL_NODES;
   }
   set_defaults(d);
+  model->revision++;
   return (int)model->device_count - 1;
 }
 
@@ -255,6 +270,7 @@ int el_model_connect(ElModel* model, const char* id, const char* from, const cha
   } else {
     c->resistance_ohm = EL_LINK_OHM;
   }
+  model->revision++;
   return (int)model->connection_count - 1;
 }
 
@@ -263,6 +279,7 @@ bool el_model_plug(ElModel* model, const char* load, const char* socket) {
   if (l < 0 || model->devices[l].type != EL_LOAD) {
     return false;
   }
+  model->revision++;
   if (socket == NULL) {
     model->devices[l].plugged_into = -1;
     return true;
@@ -316,6 +333,7 @@ bool el_model_set_on(ElModel* model, const char* id, bool on) {
     return false; /* a blown fuse has to be replaced */
   }
   d->on = on;
+  model->revision++;
   if (on && (d->type == EL_BREAKER || d->type == EL_RCD)) {
     d->tripped = false; /* switching the handle back on re-arms it */
   }
@@ -334,6 +352,7 @@ bool el_model_reset(ElModel* model, const char* id) {
   d->tripped = false;
   d->heat = 0.0;
   d->on = true;
+  model->revision++;
   return true;
 }
 
@@ -343,8 +362,21 @@ bool el_model_press_test(ElModel* model, const char* id) {
     return false;
   }
   model->devices[index].test_pressed = true;
+  model->revision++;
   return true;
 }
+
+bool el_model_set_level(ElModel* model, const char* id, double level) {
+  const int index = el_model_find_device(model, id);
+  if (index < 0 || model->devices[index].type != EL_DIMMER || level != level) {
+    return false;
+  }
+  model->devices[index].level = level < 0.0 ? 0.0 : level > 1.0 ? 1.0 : level;
+  model->revision++;
+  return true;
+}
+
+void el_model_touch(ElModel* model) { model->revision++; }
 
 int el_model_add_fault(ElModel* model, const char* a, const char* b, double resistance_ohm, const char* description) {
   const int na = el_model_terminal_node(model, a);
@@ -365,6 +397,7 @@ int el_model_add_fault(ElModel* model, const char* a, const char* b, double resi
   } else {
     snprintf(f->description, sizeof(f->description), "%s - %s, %g Ohm", a, b, resistance_ohm);
   }
+  model->revision++;
   return (int)model->fault_count - 1;
 }
 
@@ -374,6 +407,7 @@ bool el_model_set_connection_open(ElModel* model, const char* id, bool open) {
     return false;
   }
   model->connections[index].open = open;
+  model->revision++;
   return true;
 }
 
@@ -382,6 +416,7 @@ void el_model_clear_faults(ElModel* model) {
   for (size_t i = 0; i < model->connection_count; i++) {
     model->connections[i].open = false;
   }
+  model->revision++;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -397,9 +432,10 @@ static double load_ohm(const ElDevice* d) {
 /*
  * Builds the network of the present state. With zero_sources all voltage
  * sources are 0 V (for Thevenin measurements); inject_a/inject_b >= 0 add a
- * 1 A test current that enters node a and leaves node b.
+ * 1 A test current that enters node a and leaves node b. The device with
+ * index exclude (>= 0) is left out (a dimmer measuring its surroundings).
  */
-static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int inject_b) {
+static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int inject_b, int exclude) {
   ElCircuit* c = &model->circuit;
   if (c->nodes != model->node_count) {
     el_circuit_free(c);
@@ -409,36 +445,39 @@ static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int
 
   for (size_t i = 0; i < model->connection_count; i++) {
     ElConnection* k = &model->connections[i];
-    k->element = k->open ? -1 : el_circuit_add_impedance(c, k->a, k->b, k->resistance_ohm);
+    k->element = k->open ? -1 : el_circuit_add_resistance(c, k->a, k->b, k->resistance_ohm);
   }
   for (size_t i = 0; i < model->fault_count; i++) {
     ElFault* f = &model->faults[i];
-    f->element = el_circuit_add_impedance(c, f->a, f->b, f->resistance_ohm);
+    f->element = el_circuit_add_resistance(c, f->a, f->b, f->resistance_ohm);
   }
 
   for (size_t i = 0; i < model->device_count; i++) {
     ElDevice* d = &model->devices[i];
     const int t = d->first_node;
     d->element[0] = d->element[1] = d->element[2] = -1;
+    if ((int)i == exclude) {
+      continue;
+    }
     switch (d->type) {
       case EL_SUPPLY: {
         const int star = d->internal_node;
         const double half = d->loop_impedance_ohm / 2.0;
         for (int phase = 0; phase < 3; phase++) {
           const int source = d->internal_node + 1 + phase;
-          const ElPhasor u = zero_sources ? 0 : el_polar(d->voltage_v, -120.0 * phase);
+          const ElPhasor u = zero_sources ? el_phasor(0.0, 0.0) : el_polar(d->voltage_v, -120.0 * phase);
           el_circuit_add_voltage_source(c, source, star, u);
-          const int element = el_circuit_add_impedance(c, source, t + SUPPLY_L1 + phase, half);
+          const int element = el_circuit_add_resistance(c, source, t + SUPPLY_L1 + phase, half);
           if (phase == 0) {
             d->element[0] = element;
           }
         }
-        d->element[1] = el_circuit_add_impedance(c, t + SUPPLY_N, star, half);
-        el_circuit_add_impedance(c, star, 0, d->source_earth_ohm);
+        d->element[1] = el_circuit_add_resistance(c, t + SUPPLY_N, star, half);
+        el_circuit_add_resistance(c, star, 0, d->source_earth_ohm);
         if (d->earthing == EL_TT) {
-          d->element[2] = el_circuit_add_impedance(c, t + SUPPLY_PE, 0, d->earth_electrode_ohm);
+          d->element[2] = el_circuit_add_resistance(c, t + SUPPLY_PE, 0, d->earth_electrode_ohm);
         } else {
-          d->element[2] = el_circuit_add_impedance(c, t + SUPPLY_PE, star, half);
+          d->element[2] = el_circuit_add_resistance(c, t + SUPPLY_PE, star, half);
         }
         break;
       }
@@ -446,17 +485,17 @@ static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int
       case EL_FUSE:
       case EL_SWITCH:
         if (conducting(d)) {
-          d->element[0] = el_circuit_add_impedance(c, t + TWO_IN, t + TWO_OUT, d->contact_ohm);
+          d->element[0] = el_circuit_add_resistance(c, t + TWO_IN, t + TWO_OUT, d->contact_ohm);
         }
         break;
       case EL_RCD:
         if (conducting(d)) {
-          d->element[0] = el_circuit_add_impedance(c, t + RCD_L_IN, t + RCD_L_OUT, d->contact_ohm);
-          d->element[1] = el_circuit_add_impedance(c, t + RCD_N_IN, t + RCD_N_OUT, d->contact_ohm);
+          d->element[0] = el_circuit_add_resistance(c, t + RCD_L_IN, t + RCD_L_OUT, d->contact_ohm);
+          d->element[1] = el_circuit_add_resistance(c, t + RCD_N_IN, t + RCD_N_OUT, d->contact_ohm);
           if (d->test_pressed && d->residual_rated_a > 0.0) {
             /* The test circuit bypasses the N pole, so its current is residual current. */
             const double ohm = 230.0 / (RCD_TEST_MULTIPLE * d->residual_rated_a);
-            el_circuit_add_impedance(c, t + RCD_L_OUT, t + RCD_N_IN, ohm);
+            el_circuit_add_resistance(c, t + RCD_L_OUT, t + RCD_N_IN, ohm);
           }
         }
         break;
@@ -464,21 +503,28 @@ static bool build_and_solve(ElModel* model, bool zero_sources, int inject_a, int
         if (d->plugged_into >= 0) {
           const int s = model->devices[d->plugged_into].first_node;
           for (int k = 0; k < 3; k++) {
-            el_circuit_add_impedance(c, t + k, s + k, PLUG_CONTACT_OHM);
+            el_circuit_add_resistance(c, t + k, s + k, PLUG_CONTACT_OHM);
           }
         }
         if (d->on) {
-          d->element[0] = el_circuit_add_impedance(c, t + LOAD_L, t + LOAD_N, load_ohm(d));
+          d->element[0] = el_circuit_add_resistance(c, t + LOAD_L, t + LOAD_N, load_ohm(d));
+        }
+        break;
+      case EL_DIMMER:
+        if (conducting(d) && d->level > DIMMER_OFF_LEVEL) {
+          const double x = d->level >= DIMMER_FULL_LEVEL ? 0.0 : d->reactance_ohm;
+          d->element[0] = el_circuit_add_impedance(c, t + TWO_IN, t + TWO_OUT, el_phasor(d->contact_ohm, x));
         }
         break;
       case EL_SOCKET:
+      case EL_JUNCTION:
       case EL_DEVICE_TYPES:
         break;
     }
   }
 
   if (inject_a >= 0 && inject_b >= 0) {
-    el_circuit_add_current_source(c, inject_b, inject_a, 1.0);
+    el_circuit_add_current_source(c, inject_b, inject_a, el_phasor(1.0, 0.0));
   }
   return el_circuit_solve(c, EL_GMIN);
 }
@@ -487,25 +533,25 @@ static void read_results(ElModel* model) {
   const ElCircuit* c = &model->circuit;
   for (size_t i = 0; i < model->connection_count; i++) {
     ElConnection* k = &model->connections[i];
-    k->current_a = k->element >= 0 ? cabs(el_circuit_current(c, k->element)) : 0.0;
+    k->current_a = k->element >= 0 ? el_abs(el_circuit_current(c, k->element)) : 0.0;
   }
   for (size_t i = 0; i < model->fault_count; i++) {
-    model->faults[i].current_a = cabs(el_circuit_current(c, model->faults[i].element));
+    model->faults[i].current_a = el_abs(el_circuit_current(c, model->faults[i].element));
   }
   for (size_t i = 0; i < model->device_count; i++) {
     ElDevice* d = &model->devices[i];
-    d->current_a = d->element[0] >= 0 ? cabs(el_circuit_current(c, d->element[0])) : 0.0;
+    d->current_a = d->element[0] >= 0 ? el_abs(el_circuit_current(c, d->element[0])) : 0.0;
     d->residual_a = 0.0;
     d->power_w = 0.0;
     d->voltage_v_measured = 0.0;
     if (d->type == EL_RCD && d->element[0] >= 0) {
-      d->residual_a = cabs(el_circuit_current(c, d->element[0]) + el_circuit_current(c, d->element[1]));
-    } else if (d->type == EL_LOAD) {
-      const ElPhasor u = el_circuit_voltage(c, d->first_node + LOAD_L) - el_circuit_voltage(c, d->first_node + LOAD_N);
-      d->voltage_v_measured = cabs(u);
-      if (d->element[0] >= 0) {
+      d->residual_a = el_abs(el_add(el_circuit_current(c, d->element[0]), el_circuit_current(c, d->element[1])));
+    } else if (d->type == EL_LOAD || d->type == EL_SOCKET || d->type == EL_JUNCTION) {
+      const ElPhasor u = el_sub(el_circuit_voltage(c, d->first_node + LOAD_L), el_circuit_voltage(c, d->first_node + LOAD_N));
+      d->voltage_v_measured = el_abs(u);
+      if (d->type == EL_LOAD && d->element[0] >= 0) {
         const ElPhasor current = el_circuit_current(c, d->element[0]);
-        d->power_w = creal(u * conj(current));
+        d->power_w = el_real(el_mul(u, el_conj(current)));
       }
     }
   }
@@ -558,15 +604,48 @@ static bool check_protection(ElModel* model) {
                    d->test_pressed ? ", test button" : "");
       }
     }
-    any = any || d->tripped;
+    if (d->tripped) {
+      model->revision++;
+      any = true;
+    }
   }
   return any;
+}
+
+/*
+ * Dimmer: an ideal (lossless) series reactance X chosen so that the current
+ * is sqrt(level) and the power of a resistive load level x the full value -
+ * the RMS values of a phase-cut or PWM dimmer. With the Thevenin impedance
+ * Z = A + jB the dimmer sees (contact included), |Z + jX| = |Z| / sqrt(level).
+ * Recomputed only when the network changed.
+ */
+static void update_dimmers(ElModel* model) {
+  for (size_t i = 0; i < model->device_count; i++) {
+    ElDevice* d = &model->devices[i];
+    if (d->type != EL_DIMMER || !conducting(d) || d->level <= DIMMER_OFF_LEVEL || d->level >= DIMMER_FULL_LEVEL) {
+      continue;
+    }
+    const int in = d->first_node + TWO_IN;
+    const int out = d->first_node + TWO_OUT;
+    if (!build_and_solve(model, true, in, out, (int)i)) {
+      continue;
+    }
+    const ElPhasor z = el_sub(el_circuit_voltage(&model->circuit, in), el_circuit_voltage(&model->circuit, out));
+    const double a = z.re + d->contact_ohm;
+    const double b = z.im;
+    const double x = -b + sqrt(fmax(0.0, (a * a + b * b) / d->level - a * a));
+    d->reactance_ohm = fmin(fmax(x, 0.0), DIMMER_MAX_REACTANCE);
+  }
+  model->dimmer_revision = model->revision;
 }
 
 bool el_model_step(ElModel* model, double dt_s) {
   bool ok = true;
   for (int iteration = 0; iteration < MAX_TRIP_ITERATIONS; iteration++) {
-    if (!build_and_solve(model, false, -1, -1)) {
+    if (model->dimmer_revision != model->revision) {
+      update_dimmers(model);
+    }
+    if (!build_and_solve(model, false, -1, -1, -1)) {
       ok = false;
       break;
     }
@@ -579,7 +658,10 @@ bool el_model_step(ElModel* model, double dt_s) {
     }
   }
   for (size_t i = 0; i < model->device_count; i++) {
-    model->devices[i].test_pressed = false;
+    if (model->devices[i].test_pressed) {
+      model->devices[i].test_pressed = false;
+      model->revision++;
+    }
   }
   model->time_s += dt_s;
   return ok;
@@ -592,10 +674,10 @@ bool el_model_step(ElModel* model, double dt_s) {
 bool el_model_measure_voltage(ElModel* model, const char* a, const char* b, ElPhasor* voltage) {
   const int na = el_model_terminal_node(model, a);
   const int nb = el_model_terminal_node(model, b);
-  if (na < 0 || nb < 0 || !build_and_solve(model, false, -1, -1)) {
+  if (na < 0 || nb < 0 || !build_and_solve(model, false, -1, -1, -1)) {
     return false;
   }
-  *voltage = el_circuit_voltage(&model->circuit, na) - el_circuit_voltage(&model->circuit, nb);
+  *voltage = el_sub(el_circuit_voltage(&model->circuit, na), el_circuit_voltage(&model->circuit, nb));
   read_results(model);
   return true;
 }
@@ -607,25 +689,25 @@ bool el_model_measure_impedance(ElModel* model, const char* a, const char* b, El
     return false;
   }
   /* Linear network: the Thevenin impedance does not depend on the sources. */
-  const bool ok = build_and_solve(model, true, na, nb);
+  const bool ok = build_and_solve(model, true, na, nb, -1);
   if (ok) {
-    *impedance = el_circuit_voltage(&model->circuit, na) - el_circuit_voltage(&model->circuit, nb);
+    *impedance = el_sub(el_circuit_voltage(&model->circuit, na), el_circuit_voltage(&model->circuit, nb));
   }
   /* Restore the normal solution for later readings. */
-  build_and_solve(model, false, -1, -1);
+  build_and_solve(model, false, -1, -1, -1);
   read_results(model);
   return ok;
 }
 
 bool el_model_measure_insulation(ElModel* model, const char* a, const char* b, double* ohm) {
   ElPhasor voltage;
-  if (!el_model_measure_voltage(model, a, b, &voltage) || cabs(voltage) > EL_SAFE_VOLTAGE) {
+  if (!el_model_measure_voltage(model, a, b, &voltage) || el_abs(voltage) > EL_SAFE_VOLTAGE) {
     return false;
   }
   ElPhasor impedance;
   if (!el_model_measure_impedance(model, a, b, &impedance)) {
     return false;
   }
-  *ohm = cabs(impedance);
+  *ohm = el_abs(impedance);
   return true;
 }

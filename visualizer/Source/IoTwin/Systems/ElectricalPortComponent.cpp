@@ -2,6 +2,7 @@
 
 #include "ElectricalPortComponent.h"
 
+#include "Electrical/IoTwinElectricalSubsystem.h"
 #include "IoTwin.h"
 
 UElectricalPortComponent::UElectricalPortComponent()
@@ -23,54 +24,20 @@ void UElectricalPortComponent::OnRegister()
 
 bool UElectricalPortComponent::HasPower_Implementation() const
 {
-	TArray<const UElectricalPortComponent*, TInlineAllocator<16>> Pending;
-	TSet<const UElectricalPortComponent*, DefaultKeyFuncs<const UElectricalPortComponent*>, TInlineSetAllocator<16>> Visited;
-	Pending.Add(this);
-	Visited.Add(this);
-
-	while (Pending.Num() > 0)
-	{
-		const UElectricalPortComponent* Port = Pending.Pop(EAllowShrinking::No);
-		if (Port->bSupplying)
-		{
-			return true;
-		}
-		for (const TObjectPtr<UElectricalPortComponent>& Next : Port->Connections)
-		{
-			if (Next && !Visited.Contains(Next.Get()))
-			{
-				Visited.Add(Next.Get());
-				Pending.Add(Next.Get());
-			}
-		}
-	}
-	return false;
+	return SimulatedVoltage >= 0.5f * NominalVoltage;
 }
 
 float UElectricalPortComponent::GetSupplyLevel() const
 {
-	TArray<const UElectricalPortComponent*, TInlineAllocator<16>> Pending;
-	TSet<const UElectricalPortComponent*, DefaultKeyFuncs<const UElectricalPortComponent*>, TInlineSetAllocator<16>> Visited;
-	Pending.Add(this);
-	Visited.Add(this);
-	float Level = 0.0f;
-	while (Pending.Num() > 0)
+	return FMath::Clamp(FMath::Square(SimulatedVoltage / NominalVoltage), 0.0f, 1.0f);
+}
+
+void UElectricalPortComponent::NotifyTopologyChanged() const
+{
+	if (UIoTwinElectricalSubsystem* Simulation = UIoTwinElectricalSubsystem::Get(this))
 	{
-		const UElectricalPortComponent* Port = Pending.Pop(EAllowShrinking::No);
-		if (Port->bSupplying)
-		{
-			Level = FMath::Max(Level, FMath::Clamp(Port->SupplyLevel, 0.0f, 1.0f));
-		}
-		for (const TObjectPtr<UElectricalPortComponent>& Next : Port->Connections)
-		{
-			if (Next && !Visited.Contains(Next.Get()))
-			{
-				Visited.Add(Next.Get());
-				Pending.Add(Next.Get());
-			}
-		}
+		Simulation->NotifyTopologyChanged();
 	}
-	return Level;
 }
 
 void UElectricalPortComponent::ConnectTo_Implementation(const TScriptInterface<IPowerInterface>& other)
@@ -103,6 +70,7 @@ void UElectricalPortComponent::AddWire(UElectricalPortComponent* Other)
 	{
 		Other->ConnectedPort = this;
 	}
+	NotifyTopologyChanged();
 }
 
 void UElectricalPortComponent::DisconnectFrom(UElectricalPortComponent* Other)
@@ -123,6 +91,7 @@ void UElectricalPortComponent::DisconnectFrom(UElectricalPortComponent* Other)
 	{
 		Other->ConnectedPort = Other->Connections.Num() > 0 ? Other->Connections.Last() : nullptr;
 	}
+	NotifyTopologyChanged();
 }
 
 void UElectricalPortComponent::DisconnectAll()

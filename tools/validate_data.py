@@ -171,6 +171,8 @@ TERMINALS = {
     "switch": {"in", "out"},
     "load": {"L", "N", "PE"},
     "socket": {"L", "N", "PE"},
+    "junction": {"L", "N", "PE"},
+    "dimmer": {"in", "out"},
 }
 # Component categories that fit a device type.
 TYPE_CATEGORIES = {
@@ -181,6 +183,8 @@ TYPE_CATEGORIES = {
     "load": {"lamp", "appliance", "actuator", "other"},
     "socket": {"connector", "other"},
     "supply": {"power-supply", "other"},
+    "junction": {"connector", "other"},
+    "dimmer": {"switch", "actuator", "other"},
 }
 EARTHING = {"TN-S", "TN-C-S", "TT"}
 

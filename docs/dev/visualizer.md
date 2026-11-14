@@ -86,21 +86,48 @@ root (`visualizer/..`) and the package root. Command line:
 
 The **mouse wheel** dims the lamp: the visualizer sends `DIMMER_CMD` (0x201)
 in 10 % steps, starting from the brightness in the last `LAMP_CMD`. The power
-source reads that brightness from `LAMP_CMD` byte 1 (`LevelByteIndex`), its
-port carries it as `SupplyLevel`, and the lamp's light intensity and bulb
-colour follow `UElectricalDeviceComponent::PowerLevel`. The HUD shows the
-brightness and the ECU's measured current and supply voltage from
-`LAMP_STATUS` (0x101), plus fuse, overcurrent or short circuit.
+source reads that brightness from `LAMP_CMD` byte 1 (`LevelByteIndex`) and
+sets its relay output - a dimmer in the electrical simulation - to that
+level. The lamp's light intensity and bulb colour follow
+`UElectricalDeviceComponent::PowerLevel`, the share of its rated power the
+simulation computes. The HUD shows the lamp's power, the ECU's measured
+current and supply voltage from `LAMP_STATUS` (0x101) with fuse, overcurrent
+or short circuit, and the values of the 230 V simulation.
+
+## Electrical simulation (`Source/IoTwin/Electrical`)
+
+The electrical simulation core (`libs/elsim`, [Electrical Simulation](electrical.md))
+is compiled into the visualizer and owns every electrical value
+([ADR 0008](../adr/0008-simulation-interface.md)):
+
+- `UIoTwinElectricalSubsystem` (world subsystem) builds the model from the
+  scene, runs it in the thread `IoTwinElectrical` with a fixed 10 ms step,
+  and hands the newest snapshot and the events to the scene every frame.
+  Changing the wiring rebuilds the model (the electrical state starts fresh).
+- `Electrical/Core/*.c` include the C sources of `libs/elsim`; the include
+  path and C17 are set in `IoTwin.Build.cs`.
+- `IElectricalElement`: actors and components that describe themselves to
+  the model (`DescribeElectrical`) and receive results (`ApplyElectrical`).
+  `FElectricalModelBuilder` gives them ids (`<actor>.<part>`), devices,
+  cables and conductors.
+- Keys: **F** puts a short circuit L-N on the lamp (again: removes it),
+  **R** resets tripped breakers.
 
 ## Electrical model (`Source/IoTwin/Systems`)
 
 - `UElectricalPortComponent`: wiring is a symmetric list of ports stored on
-  both ends (saved with the level). `HasPower()` searches the wiring graph for
-  a supplying port; cycles are handled.
-- `APowerSourceActor`: supply with an output relay. With *Controlled By Can*
-  the relay follows its `RelayControl` signal (default `0x100` byte 0 bit 0).
-- `AElectricalCableActor`: two conducting ends, drawn with `CableComponent`;
+  both ends (saved with the level). In the simulation every port is a
+  junction (L, N, PE) and a wire carries all three conductors; `HasPower()`
+  and `GetVoltage()` report the simulated voltage.
+- `APowerSourceActor`: house connection (230 V TN-S, Ze 0.35 Ω) → breaker
+  F1 (B10) → relay output (a dimmer) → port. With *Controlled By Can* the
+  relay follows its `RelayControl` signal (default `0x100` byte 0 bit 0).
+  The housing turns amber when F1 trips.
+- `AElectricalCableActor`: a three-core copper cable (default 1.5 mm²)
+  between its ends, length = distance × slack; drawn with `CableComponent`,
   `ConnectBetween(A, B)` positions and wires it.
+- `UElectricalDeviceComponent`: a resistive load (`RatedPower`, default 60 W)
+  on its input port; voltage, current and power come from the simulation.
 - `ALampActor`: port → `UElectricalDeviceComponent` → `ULightEmitterComponent`
   and a bulb that changes colour.
 - `AWallSwitchActor`: clickable switch that transmits its position (`0x200`).
@@ -119,7 +146,8 @@ and select it as *GameMode Override* in the map's World Settings.
 ## Tests and smoke runs
 
 ```powershell
-# Automation tests (CAN codec, DBC, system description, component database)
+# Automation tests (CAN codec, DBC, system description, component database,
+# electrical simulation compiled with MSVC)
 UnrealEditor-Cmd.exe visualizer/IoTwin.uproject -ExecCmds="Automation RunTests IoTwin;Quit" -unattended -nullrhi
 
 # Unattended game run: screenshot after 10 s, quit after 15 s
@@ -130,3 +158,6 @@ UnrealEditor.exe visualizer/IoTwin.uproject -game -IoTwinView=Schematic -IoTwinS
 ```
 
 The screenshot is written to `Saved/Screenshots/IoTwinDemo.png`.
+`-IoTwinShortCircuitAfter=<s>` puts a short circuit on the demo lamp after
+s seconds (F1 trips, the lamp goes dark), `-IoTwinElectricalDisabled` turns
+the electrical simulation off.
