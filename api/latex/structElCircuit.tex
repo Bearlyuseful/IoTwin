@@ -26,13 +26,35 @@ size\+\_\+t \mbox{\hyperlink{structElCircuit_a63cba923586aef88ccf7cb9e652507df}{
 size\+\_\+t \mbox{\hyperlink{structElCircuit_a066a8f721f1bb99cc08c917cf0c3110b}{matrix\+\_\+capacity}}
 \item 
 bool \mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}
+\item 
+\mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622}{El\+Solver}} \mbox{\hyperlink{structElCircuit_af86d4a80f1786d83cfad52e233760f1d}{solver}}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElCircuit_a64fbc5edfdf8bfe1bb3f6755655b943c}{sparse\+\_\+cache}}
+\item 
+unsigned long \mbox{\hyperlink{structElCircuit_a9104f917c46ffa54e691f815d32e61c8}{analyses}}
+\item 
+unsigned long \mbox{\hyperlink{structElCircuit_ac7ebcf1cc1bc986eca6af1c286233c0a}{factorizations}}
+\item 
+unsigned long \mbox{\hyperlink{structElCircuit_a2702132c50b2831719c23bf4923b7ade}{sparse\+\_\+solutions}}
+\item 
+unsigned long \mbox{\hyperlink{structElCircuit_a65bdcf0d04ad5ac534ff2598b7971b5c}{dense\+\_\+solutions}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElCircuit_aa06835a5881f6fb7287c150563ff1e2e}{fill}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElCircuit_a15d8b380bdfa6ae82a6f8278a3b777dd}{perturbed\+\_\+pivots}}
 \end{DoxyCompactItemize}
 
 
 \label{doc-variable-members}
 \Hypertarget{structElCircuit_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{structElCircuit_ad2995199a0ed196640e298abbca791ad}\index{ElCircuit@{ElCircuit}!capacity@{capacity}}
+\Hypertarget{structElCircuit_a9104f917c46ffa54e691f815d32e61c8}\index{ElCircuit@{ElCircuit}!analyses@{analyses}}
+\index{analyses@{analyses}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{analyses}{analyses}}
+{\footnotesize\ttfamily \label{structElCircuit_a9104f917c46ffa54e691f815d32e61c8} 
+unsigned long El\+Circuit\+::analyses}
+
+sparse orderings computed (topology changes) \Hypertarget{structElCircuit_ad2995199a0ed196640e298abbca791ad}\index{ElCircuit@{ElCircuit}!capacity@{capacity}}
 \index{capacity@{capacity}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{capacity}{capacity}}
 {\footnotesize\ttfamily \label{structElCircuit_ad2995199a0ed196640e298abbca791ad} 
@@ -44,13 +66,31 @@ size\+\_\+t El\+Circuit\+::capacity}
 {\footnotesize\ttfamily \label{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0} 
 size\+\_\+t El\+Circuit\+::count}
 
+\Hypertarget{structElCircuit_a65bdcf0d04ad5ac534ff2598b7971b5c}\index{ElCircuit@{ElCircuit}!dense\_solutions@{dense\_solutions}}
+\index{dense\_solutions@{dense\_solutions}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{dense\_solutions}{dense\_solutions}}
+{\footnotesize\ttfamily \label{structElCircuit_a65bdcf0d04ad5ac534ff2598b7971b5c} 
+unsigned long El\+Circuit\+::dense\+\_\+solutions}
+
 \Hypertarget{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}\index{ElCircuit@{ElCircuit}!elements@{elements}}
 \index{elements@{elements}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{elements}{elements}}
 {\footnotesize\ttfamily \label{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166} 
 \mbox{\hyperlink{structElElement}{El\+Element}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::elements}
 
-\Hypertarget{structElCircuit_ac79685419c1910bcc752b7595f13158a}\index{ElCircuit@{ElCircuit}!matrix@{matrix}}
+\Hypertarget{structElCircuit_ac7ebcf1cc1bc986eca6af1c286233c0a}\index{ElCircuit@{ElCircuit}!factorizations@{factorizations}}
+\index{factorizations@{factorizations}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{factorizations}{factorizations}}
+{\footnotesize\ttfamily \label{structElCircuit_ac7ebcf1cc1bc986eca6af1c286233c0a} 
+unsigned long El\+Circuit\+::factorizations}
+
+sparse numeric factorizations (value changes) \Hypertarget{structElCircuit_aa06835a5881f6fb7287c150563ff1e2e}\index{ElCircuit@{ElCircuit}!fill@{fill}}
+\index{fill@{fill}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{fill}{fill}}
+{\footnotesize\ttfamily \label{structElCircuit_aa06835a5881f6fb7287c150563ff1e2e} 
+size\+\_\+t El\+Circuit\+::fill}
+
+non-\/zeros of L of the last sparse solution \Hypertarget{structElCircuit_ac79685419c1910bcc752b7595f13158a}\index{ElCircuit@{ElCircuit}!matrix@{matrix}}
 \index{matrix@{matrix}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{matrix}{matrix}}
 {\footnotesize\ttfamily \label{structElCircuit_ac79685419c1910bcc752b7595f13158a} 
@@ -68,7 +108,13 @@ size\+\_\+t El\+Circuit\+::matrix\+\_\+capacity}
 {\footnotesize\ttfamily \label{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e} 
 int El\+Circuit\+::nodes}
 
-Including node 0 (earth). \Hypertarget{structElCircuit_a63cba923586aef88ccf7cb9e652507df}\index{ElCircuit@{ElCircuit}!result\_capacity@{result\_capacity}}
+Including node 0 (earth). \Hypertarget{structElCircuit_a15d8b380bdfa6ae82a6f8278a3b777dd}\index{ElCircuit@{ElCircuit}!perturbed\_pivots@{perturbed\_pivots}}
+\index{perturbed\_pivots@{perturbed\_pivots}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{perturbed\_pivots}{perturbed\_pivots}}
+{\footnotesize\ttfamily \label{structElCircuit_a15d8b380bdfa6ae82a6f8278a3b777dd} 
+size\+\_\+t El\+Circuit\+::perturbed\+\_\+pivots}
+
+pivots replaced in the last factorization \Hypertarget{structElCircuit_a63cba923586aef88ccf7cb9e652507df}\index{ElCircuit@{ElCircuit}!result\_capacity@{result\_capacity}}
 \index{result\_capacity@{result\_capacity}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{result\_capacity}{result\_capacity}}
 {\footnotesize\ttfamily \label{structElCircuit_a63cba923586aef88ccf7cb9e652507df} 
@@ -80,13 +126,31 @@ Size of source\+\_\+currents. \Hypertarget{structElCircuit_a7e1524d621eb13750e50
 {\footnotesize\ttfamily \label{structElCircuit_a7e1524d621eb13750e50d479d72927c5} 
 bool El\+Circuit\+::solved}
 
+\Hypertarget{structElCircuit_af86d4a80f1786d83cfad52e233760f1d}\index{ElCircuit@{ElCircuit}!solver@{solver}}
+\index{solver@{solver}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{solver}{solver}}
+{\footnotesize\ttfamily \label{structElCircuit_af86d4a80f1786d83cfad52e233760f1d} 
+\mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622}{El\+Solver}} El\+Circuit\+::solver}
+
 \Hypertarget{structElCircuit_ad056e072d14b92e676662096d0302afa}\index{ElCircuit@{ElCircuit}!source\_currents@{source\_currents}}
 \index{source\_currents@{source\_currents}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{source\_currents}{source\_currents}}
 {\footnotesize\ttfamily \label{structElCircuit_ad056e072d14b92e676662096d0302afa} 
 \mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Circuit\+::source\+\_\+currents}
 
-Result per element (only voltage sources use it). \Hypertarget{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}\index{ElCircuit@{ElCircuit}!voltages@{voltages}}
+Result per element (only voltage sources use it). \Hypertarget{structElCircuit_a64fbc5edfdf8bfe1bb3f6755655b943c}\index{ElCircuit@{ElCircuit}!sparse\_cache@{sparse\_cache}}
+\index{sparse\_cache@{sparse\_cache}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{sparse\_cache}{sparse\_cache}}
+{\footnotesize\ttfamily \label{structElCircuit_a64fbc5edfdf8bfe1bb3f6755655b943c} 
+void\texorpdfstring{$\ast$}{*} El\+Circuit\+::sparse\+\_\+cache}
+
+cached orderings and factorizations (\doxylink{el__circuit_8c}{el\+\_\+circuit.\+c}) \Hypertarget{structElCircuit_a2702132c50b2831719c23bf4923b7ade}\index{ElCircuit@{ElCircuit}!sparse\_solutions@{sparse\_solutions}}
+\index{sparse\_solutions@{sparse\_solutions}!ElCircuit@{ElCircuit}}
+\doxysubsubsection{\texorpdfstring{sparse\_solutions}{sparse\_solutions}}
+{\footnotesize\ttfamily \label{structElCircuit_a2702132c50b2831719c23bf4923b7ade} 
+unsigned long El\+Circuit\+::sparse\+\_\+solutions}
+
+\Hypertarget{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}\index{ElCircuit@{ElCircuit}!voltages@{voltages}}
 \index{voltages@{voltages}!ElCircuit@{ElCircuit}}
 \doxysubsubsection{\texorpdfstring{voltages}{voltages}}
 {\footnotesize\ttfamily \label{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f} 

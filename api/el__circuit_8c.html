@@ -95,12 +95,20 @@ $(function(){initNavTree('el__circuit_8c.html','',''); });
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="el__sparse_8h_source.html">el_sparse.h</a>&quot;</code><br />
 </div>
 <p><a href="el__circuit_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:SparseEntry" id="r_SparseEntry"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSparseEntry.html">SparseEntry</a></td></tr>
+<tr class="memitem:SparseCache" id="r_SparseCache"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSparseCache.html">SparseCache</a></td></tr>
+<tr class="memitem:PairKey" id="r_PairKey"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPairKey.html">PairKey</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a3bfadf1e10676fd6f03770f9e8c00a87" id="r_a3bfadf1e10676fd6f03770f9e8c00a87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3bfadf1e10676fd6f03770f9e8c00a87">EL_PI</a>&#160;&#160;&#160;3.14159265358979323846</td></tr>
+<tr class="memitem:a40a8f8c033fd138ff32757b5239ad30f" id="r_a40a8f8c033fd138ff32757b5239ad30f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40a8f8c033fd138ff32757b5239ad30f">SPARSE_CACHE_ENTRIES</a>&#160;&#160;&#160;4</td></tr>
 <tr class="memitem:afbfd679a0c28bdb5356f0c0229da164f" id="r_afbfd679a0c28bdb5356f0c0229da164f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbfd679a0c28bdb5356f0c0229da164f">M</a>(r,  c)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
@@ -162,6 +170,20 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">m[(size_t)(r) * width + (size_t)(c)]</div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="a40a8f8c033fd138ff32757b5239ad30f" name="a40a8f8c033fd138ff32757b5239ad30f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a8f8c033fd138ff32757b5239ad30f">&#9670;&#160;</a></span>SPARSE_CACHE_ENTRIES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SPARSE_CACHE_ENTRIES&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>

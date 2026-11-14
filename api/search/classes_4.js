@@ -9,8 +9,10 @@ var searchData=
   ['elelement_6',['ElElement',['../structElElement.html',1,'']]],
   ['elevent_7',['ElEvent',['../structElEvent.html',1,'']]],
   ['elfault_8',['ElFault',['../structElFault.html',1,'']]],
-  ['elmodel_9',['ElModel',['../structElModel.html',1,'']]],
-  ['elphasor_10',['ElPhasor',['../structElPhasor.html',1,'']]],
-  ['elsession_11',['ElSession',['../structElSession.html',1,'']]],
-  ['elsnapshot_12',['ElSnapshot',['../structElSnapshot.html',1,'']]]
+  ['elhousespec_9',['ElHouseSpec',['../structElHouseSpec.html',1,'']]],
+  ['elmodel_10',['ElModel',['../structElModel.html',1,'']]],
+  ['elphasor_11',['ElPhasor',['../structElPhasor.html',1,'']]],
+  ['elsession_12',['ElSession',['../structElSession.html',1,'']]],
+  ['elsnapshot_13',['ElSnapshot',['../structElSnapshot.html',1,'']]],
+  ['elsparse_14',['ElSparse',['../structElSparse.html',1,'']]]
 ];

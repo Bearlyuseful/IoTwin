@@ -894,6 +894,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solver
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#session-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1338,8 +1349,8 @@ sim&gt;<span class="w"> </span>z<span class="w"> </span>socket_kitchen:L<span cl
 </thead>
 <tbody>
 <tr>
-<td>Network solver (modified nodal analysis, complex phasors)</td>
-<td><code>libs/elsim/el_circuit.*</code></td>
+<td>Network solver (nodal analysis, complex phasors)</td>
+<td><code>libs/elsim/el_circuit.*</code>, sparse LDLᵀ in <code>el_sparse.*</code></td>
 </tr>
 <tr>
 <td>Installation model, protection, faults, measurements</td>
@@ -1352,6 +1363,10 @@ sim&gt;<span class="w"> </span>z<span class="w"> </span>socket_kitchen:L<span cl
 <tr>
 <td>Session: commands in, snapshots and events out, lock-free between threads</td>
 <td><code>libs/elsim/el_session.*</code></td>
+</tr>
+<tr>
+<td>Generated houses for benchmarks and tests, benchmark tool</td>
+<td><code>libs/elsim/el_generate.*</code>, <code>apps/elsim_bench</code></td>
 </tr>
 <tr>
 <td>In the visualizer (compiled in, own thread)</td>
@@ -1454,12 +1469,13 @@ with a cable their resistance is <code>0.0178 Ω·mm²/m × length / cross-secti
 components and sockets (CTest <code>data_validation</code>).</p>
 <h2 id="physics">Physics<a class="headerlink" href="#physics" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Steady state per time step</strong> (10 ms), complex phasors at 50 Hz,
-  modified nodal analysis with dense Gaussian elimination. All elements are
+<li><strong>Steady state per time step</strong> (10 ms), complex phasors at 50 Hz, nodal
+  analysis with a sparse solver (see <a href="#solver">Solver</a>). All elements are
   linear; loads are resistive (<code>R = U² / P</code>).</li>
 <li><strong>Supply:</strong> three sources 230 V at 0°, −120°, +120° behind half of the
   loop impedance Ze per conductor (L1-L3, N, PE), so L-N and L-PE loops both
-  see Ze. <strong>TN-S / TN-C-S:</strong> PE connects to the transformer star point.
+  see Ze. The sources enter the network as Norton equivalents (current
+  U / (Ze/2) with Ze/2 in parallel), so there are no ideal voltage sources. <strong>TN-S / TN-C-S:</strong> PE connects to the transformer star point.
   <strong>TT:</strong> PE goes to the house earth electrode (<code>earth_electrode</code>, default 30 Ω),
   the star point to its own earth (<code>source_earth</code>, 1 Ω).</li>
 <li>Every node has 1 GΩ to earth, so open breakers and loose terminals stay
@@ -1471,6 +1487,9 @@ components and sockets (CTest <code>data_validation</code>).</p>
   when the network changes (<code>ElModel.revision</code>). The supply sees reactive
   power instead of the distortion power of a real dimmer.</li>
 <li>A load counts as <strong>powered</strong> when it gets at least 1 % of its rated power.</li>
+<li>Contacts that can open (switches, breakers, fuses, RCD poles, dimmers,
+  loads, interrupted conductors) stay in the network as zero admittances when
+  open, so switching changes values, not the topology.</li>
 <li>Portable C99: phasors are a small struct (<code>ElPhasor</code>) instead of C99 complex
   numbers, so MSVC compiles the core (inside Unreal); after the first solution
   of a network the solver does not allocate memory.</li>
@@ -1567,6 +1586,88 @@ the lessons a trainee should learn, for example:</p>
 </tbody>
 </table>
 <p>With <code>--script</code> the exit code is 1 if an <code>expect</code> fails (CTest <code>electrical_demo</code>).</p>
+<h2 id="solver">Solver<a class="headerlink" href="#solver" title="Permanent link">&para;</a></h2>
+<p>Without ideal voltage sources the nodal admittance matrix Y of the network is
+complex symmetric, and its real part (the conductances, plus 1 GΩ from every
+node to earth) is positive definite. Such a matrix has an LDLᵀ factorization
+for every symmetric ordering without pivoting, so the ordering is chosen for
+sparsity alone (<code>el_sparse.c</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>When</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minimum-degree ordering, pattern of L</td>
+<td>topology changes (a fault, plugging in)</td>
+<td>once, cached (4 topologies)</td>
+</tr>
+<tr>
+<td>Numeric factorization LDLᵀ</td>
+<td>values change (switching, a trip, dimming)</td>
+<td>proportional to the fill of L</td>
+</tr>
+<tr>
+<td>Forward/back substitution</td>
+<td>every solution</td>
+<td>proportional to the fill of L</td>
+</tr>
+</tbody>
+</table>
+<p>A step of an unchanged network is therefore only a substitution. After the
+first solution of a topology the solver does not allocate memory. Dense
+modified nodal analysis with partial pivoting remains for networks with
+voltage sources and as the reference (<code>EL_SOLVER_DENSE</code>, used by the tests).</p>
+<p><code>elsim_bench</code> measures it on a generated house (three-phase supply, RCD
+groups, lighting and socket circuits with junction boxes, lamps, switches and
+appliances):</p>
+<div class="highlight"><pre><span></span><code>elsim_bench<span class="w">                      </span><span class="c1"># 24 circuits x 6 boxes, about 1200 nodes</span>
+elsim_bench<span class="w"> </span>--circuits<span class="w"> </span><span class="m">96</span><span class="w"> </span>--boxes<span class="w"> </span><span class="m">8</span><span class="w"> </span>--dense
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>24 circuits x 6 boxes, 1202 nodes</th>
+<th>Windows (MinGW)</th>
+<th>Linux (WSL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>steady step (mean / worst)</td>
+<td>42 / 65 µs</td>
+<td>48 / 136 µs</td>
+</tr>
+<tr>
+<td>light switched (refactorization)</td>
+<td>70 µs</td>
+<td>129 µs</td>
+</tr>
+<tr>
+<td>short circuit (new element), breaker trips</td>
+<td>0.66 ms</td>
+<td>0.64 ms</td>
+</tr>
+<tr>
+<td>first step (ordering + factorization)</td>
+<td>0.56 ms</td>
+<td>0.73 ms</td>
+</tr>
+<tr>
+<td>dense modified nodal analysis, one step</td>
+<td>21 ms</td>
+<td>34 ms</td>
+</tr>
+</tbody>
+</table>
+<p>With 96 circuits x 8 boxes (6317 nodes) a steady step takes about 0.2 ms, a
+switch 0.37 ms and a short circuit 3.5 ms - all within the 10 ms step.
+Sparse and dense results agree to about 3·10⁻¹⁰ (CTest <code>electrical_bench_smoke</code>
+checks it).</p>
 <h2 id="session-interface">Session interface<a class="headerlink" href="#session-interface" title="Permanent link">&para;</a></h2>
 <p><code>el_session.h</code> is what every frontend uses (<a href="../../adr/0008-simulation-interface/">ADR 0008</a>):</p>
 <div class="highlight"><pre><span></span><code><span class="n">ElSession</span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">el_session_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">model</span><span class="p">);</span><span class="w">                 </span><span class="cm">/* takes over the model */</span>
@@ -1586,8 +1687,8 @@ come back as events ("command rejected: ...").</p>
 <li>Resistive loads only; reactive loads (motors, power factor) and three-phase
   devices need only new element types, the solver already uses complex numbers.</li>
 <li>Simplified trip curves and no conductor heating.</li>
-<li>Dense solver: about 30 µs per step for the demo scene; whole houses
-  (about 1000 nodes) need a sparse LU solver.</li>
+<li>A new fault or plugging in changes the topology (a new ordering, under
+  1 ms for a house); a fault generator could reserve elements to avoid that.</li>
 <li>Out-of-process adapter (Zenoh, shared memory) with a FlatBuffers schema for
   a simulator on a separate (real-time) machine and several clients.</li>
 <li>Fault generator and rule checks for the electrician training build on the

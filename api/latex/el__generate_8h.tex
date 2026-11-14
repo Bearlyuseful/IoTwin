@@ -1,0 +1,56 @@
+\doxysection{libs/elsim/el\+\_\+generate.h File Reference}
+\hypertarget{el__generate_8h}{}\label{el__generate_8h}\index{libs/elsim/el\_generate.h@{libs/elsim/el\_generate.h}}
+
+
+Synthetic installations of any size, for benchmarks and tests.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include "{}elsim.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} \mbox{\hyperlink{el__generate_8h_a87c7f4173aee7805b66ec02cbe278a2f}{el\+\_\+house\+\_\+spec\+\_\+default}} (void)
+\begin{DoxyCompactList}\small\item\em 24 circuits x 6 boxes, 6 circuits per RCD\+: about 1200 nodes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{el__generate_8h_a2d8ed13d014a1cf7fc28e1afc4ed6c5b}{el\+\_\+generate\+\_\+house}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}model, const \mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} \texorpdfstring{$\ast$}{*}spec)
+\begin{DoxyCompactList}\small\item\em Adds the house to an empty model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Synthetic installations of any size, for benchmarks and tests. 
+
+A house with a three-\/phase supply (TN-\/S), RCD groups spread over the three phases, final circuits with breakers (lighting B10 with 1.\+5 mm\texorpdfstring{$^\wedge$}{\string^}2, sockets B16 with 2.\+5 mm\texorpdfstring{$^\wedge$}{\string^}2) and a chain of junction boxes per circuit. Lighting boxes feed a switch and a lamp, socket boxes a socket with an appliance plugged in now and then. The same seed gives the same house.
+
+Ids\+: intake, q$<$g$>$ (RCD), f$<$c$>$ (breaker), c$<$c$>$b{\bfseries{ (box), s$<$c$>$b{\bfseries{ (switch), l$<$c$>$b{\bfseries{ (lamp), k$<$c$>$b{\bfseries{ (socket), a$<$c$>$b{\bfseries{ (appliance), cable w$<$c$>$b{\bfseries{. }}}}}}}}}}}}
+
+\label{doc-func-members}
+\Hypertarget{el__generate_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{el__generate_8h_a2d8ed13d014a1cf7fc28e1afc4ed6c5b}\index{el\_generate.h@{el\_generate.h}!el\_generate\_house@{el\_generate\_house}}
+\index{el\_generate\_house@{el\_generate\_house}!el\_generate.h@{el\_generate.h}}
+\doxysubsubsection{\texorpdfstring{el\_generate\_house()}{el\_generate\_house()}}
+{\footnotesize\ttfamily \label{el__generate_8h_a2d8ed13d014a1cf7fc28e1afc4ed6c5b} 
+bool el\+\_\+generate\+\_\+house (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const \mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} \texorpdfstring{$\ast$}{*}}]{spec}{}\end{DoxyParamCaption})}
+
+
+
+Adds the house to an empty model. 
+
+\begin{DoxyReturn}{Returns}
+false if a device cannot be added. 
+\end{DoxyReturn}
+\Hypertarget{el__generate_8h_a87c7f4173aee7805b66ec02cbe278a2f}\index{el\_generate.h@{el\_generate.h}!el\_house\_spec\_default@{el\_house\_spec\_default}}
+\index{el\_house\_spec\_default@{el\_house\_spec\_default}!el\_generate.h@{el\_generate.h}}
+\doxysubsubsection{\texorpdfstring{el\_house\_spec\_default()}{el\_house\_spec\_default()}}
+{\footnotesize\ttfamily \label{el__generate_8h_a87c7f4173aee7805b66ec02cbe278a2f} 
+\mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} el\+\_\+house\+\_\+spec\+\_\+default (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+24 circuits x 6 boxes, 6 circuits per RCD\+: about 1200 nodes. 
+

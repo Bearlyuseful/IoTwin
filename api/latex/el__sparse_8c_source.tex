@@ -1,0 +1,371 @@
+\doxysection{el\+\_\+sparse.\+c}
+\hypertarget{el__sparse_8c_source}{}\label{el__sparse_8c_source}\index{libs/elsim/el\_sparse.c@{libs/elsim/el\_sparse.c}}
+\mbox{\hyperlink{el__sparse_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{el__sparse_8h}{el\_sparse.h}}"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ Small\ growable\ int\ lists\ for\ the\ elimination\ graph\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}};}
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};}
+\DoxyCodeLine{00014\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structIntList_a92185aef426cb1f17b691b015eb3224f}{capacity}};}
+\DoxyCodeLine{00015\ \}\ \mbox{\hyperlink{structIntList}{IntList}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ list\_push(\mbox{\hyperlink{structIntList}{IntList}}*\ list,\ \textcolor{keywordtype}{int}\ value)\ \{}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordflow}{if}\ (list-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}}\ ==\ list-\/>\mbox{\hyperlink{structIntList_a92185aef426cb1f17b691b015eb3224f}{capacity}})\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ capacity\ =\ list-\/>\mbox{\hyperlink{structIntList_a92185aef426cb1f17b691b015eb3224f}{capacity}}\ ?\ list-\/>\mbox{\hyperlink{structIntList_a92185aef426cb1f17b691b015eb3224f}{capacity}}\ *\ 2\ :\ 4;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}*\ grown\ =\ (\textcolor{keywordtype}{int}*)realloc(list-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}},\ (\textcolor{keywordtype}{size\_t})capacity\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ list-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}\ =\ grown;}
+\DoxyCodeLine{00025\ \ \ \ \ list-\/>\mbox{\hyperlink{structIntList_a92185aef426cb1f17b691b015eb3224f}{capacity}}\ =\ capacity;}
+\DoxyCodeLine{00026\ \ \ \}}
+\DoxyCodeLine{00027\ \ \ list-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[list-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}}++]\ =\ value;}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00029\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ list\_remove(\mbox{\hyperlink{structIntList}{IntList}}*\ list,\ \textcolor{keywordtype}{int}\ value)\ \{}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ list-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};\ i++)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{if}\ (list-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[i]\ ==\ value)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ list-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[i]\ =\ list-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[-\/-\/list-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}}];}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{/*\ Binary\ min-\/heap\ of\ (degree,\ node)\ with\ lazy\ deletion:\ stale\ items\ are\ skipped\ when\ popped.\ */}}
+\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structHeapItem_a8663ad67174010d561142d43a076bb84}{degree}};}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structHeapItem_a51c13e9d9a0f575748b1b7832302b7b5}{node}};}
+\DoxyCodeLine{00044\ \}\ \mbox{\hyperlink{structHeapItem}{HeapItem}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{structHeapItem}{HeapItem}}*\ \mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}};}
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}};}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structHeap_ad7b8c59d8724c5795a31037459cd3a5e}{capacity}};}
+\DoxyCodeLine{00050\ \}\ \mbox{\hyperlink{structHeap}{Heap}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ heap\_less(\mbox{\hyperlink{structHeapItem}{HeapItem}}\ a,\ \mbox{\hyperlink{structHeapItem}{HeapItem}}\ b)\ \{\ \textcolor{keywordflow}{return}\ a.\mbox{\hyperlink{structHeapItem_a8663ad67174010d561142d43a076bb84}{degree}}\ <\ b.\mbox{\hyperlink{structHeapItem_a8663ad67174010d561142d43a076bb84}{degree}}\ ||\ (a.\mbox{\hyperlink{structHeapItem_a8663ad67174010d561142d43a076bb84}{degree}}\ ==\ b.\mbox{\hyperlink{structHeapItem_a8663ad67174010d561142d43a076bb84}{degree}}\ \&\&\ a.\mbox{\hyperlink{structHeapItem_a51c13e9d9a0f575748b1b7832302b7b5}{node}}\ <\ b.\mbox{\hyperlink{structHeapItem_a51c13e9d9a0f575748b1b7832302b7b5}{node}});\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ heap\_push(\mbox{\hyperlink{structHeap}{Heap}}*\ h,\ \textcolor{keywordtype}{int}\ degree,\ \textcolor{keywordtype}{int}\ node)\ \{}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordflow}{if}\ (h-\/>\mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}}\ ==\ h-\/>\mbox{\hyperlink{structHeap_ad7b8c59d8724c5795a31037459cd3a5e}{capacity}})\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ capacity\ =\ h-\/>\mbox{\hyperlink{structHeap_ad7b8c59d8724c5795a31037459cd3a5e}{capacity}}\ ?\ h-\/>\mbox{\hyperlink{structHeap_ad7b8c59d8724c5795a31037459cd3a5e}{capacity}}\ *\ 2\ :\ 64;}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{structHeapItem}{HeapItem}}*\ grown\ =\ (\mbox{\hyperlink{structHeapItem}{HeapItem}}*)realloc(h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}},\ capacity\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structHeapItem}{HeapItem}}));}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}\ =\ grown;}
+\DoxyCodeLine{00062\ \ \ \ \ h-\/>\mbox{\hyperlink{structHeap_ad7b8c59d8724c5795a31037459cd3a5e}{capacity}}\ =\ capacity;}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{size\_t}\ i\ =\ h-\/>\mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}}++;}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structHeapItem}{HeapItem}}\ item\ =\ \{degree,\ node\};}
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordflow}{while}\ (i\ >\ 0\ \&\&\ heap\_less(item,\ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[(i\ -\/\ 1)\ /\ 2]))\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[i]\ =\ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[(i\ -\/\ 1)\ /\ 2];}
+\DoxyCodeLine{00068\ \ \ \ \ i\ =\ (i\ -\/\ 1)\ /\ 2;}
+\DoxyCodeLine{00069\ \ \ \}}
+\DoxyCodeLine{00070\ \ \ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[i]\ =\ item;}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{static}\ \mbox{\hyperlink{structHeapItem}{HeapItem}}\ heap\_pop(\mbox{\hyperlink{structHeap}{Heap}}*\ h)\ \{}
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structHeapItem}{HeapItem}}\ top\ =\ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[0];}
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structHeapItem}{HeapItem}}\ last\ =\ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[-\/-\/h-\/>\mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}}];}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{size\_t}\ i\ =\ 0;}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordflow}{for}\ (;;)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ child\ =\ 2\ *\ i\ +\ 1;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (child\ >=\ h-\/>\mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}})\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (child\ +\ 1\ <\ h-\/>\mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}}\ \&\&\ heap\_less(h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[child\ +\ 1],\ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[child]))\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ child++;}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{if}\ (!heap\_less(h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[child],\ last))\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[i]\ =\ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[child];}
+\DoxyCodeLine{00090\ \ \ \ \ i\ =\ child;}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{if}\ (h-\/>\mbox{\hyperlink{structHeap_a159ef4622655b24a7363baf526e87e47}{count}}\ >\ 0)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ h-\/>\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}}[i]\ =\ last;}
+\DoxyCodeLine{00094\ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordflow}{return}\ top;}
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ compare\_int(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ b)\ \{}
+\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ x\ =\ *(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*)a;}
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ y\ =\ *(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*)b;}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordflow}{return}\ (x\ >\ y)\ -\/\ (x\ <\ y);}
+\DoxyCodeLine{00102\ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8c_aba7d091cb455c079ce1a66f70efd3776}{el\_sparse\_free}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ s)\ \{}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordflow}{if}\ (s\ ==\ NULL)\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00107\ \ \ \}}
+\DoxyCodeLine{00108\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}});}
+\DoxyCodeLine{00109\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}});}
+\DoxyCodeLine{00110\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}});}
+\DoxyCodeLine{00111\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}});}
+\DoxyCodeLine{00112\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}});}
+\DoxyCodeLine{00113\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}});}
+\DoxyCodeLine{00114\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}});}
+\DoxyCodeLine{00115\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\_entry}});}
+\DoxyCodeLine{00116\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\_col}});}
+\DoxyCodeLine{00117\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}});}
+\DoxyCodeLine{00118\ \ \ free(s-\/>\mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}});}
+\DoxyCodeLine{00119\ \ \ free(s);}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ *\ Minimum-\/degree\ ordering\ on\ the\ explicit\ elimination\ graph:\ eliminate\ the}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ *\ node\ with\ the\ fewest\ neighbours,\ connect\ its\ neighbours\ to\ each\ other\ (the}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ *\ fill)\ and\ record\ them\ as\ the\ pattern\ of\ its\ column\ of\ L.\ Networks\ of\ a}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ *\ house\ are\ close\ to\ trees,\ so\ the\ fill\ stays\ small.\ The\ node\ with\ the}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ *\ smallest\ degree\ comes\ from\ a\ heap\ (ties:\ lowest\ index,\ so\ the\ ordering\ is}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ *\ reproducible);\ done\ once\ per\ topology.}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00130\ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ \mbox{\hyperlink{el__sparse_8c_a69bb3d164136c18aea8eb5daaafae212}{el\_sparse\_analyze}}(\textcolor{keywordtype}{int}\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*\ pair\_a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*\ pair\_b,\ \textcolor{keywordtype}{size\_t}\ pairs)\ \{}
+\DoxyCodeLine{00131\ \ \ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ s\ =\ (\mbox{\hyperlink{structElSparse}{ElSparse}}*)calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElSparse}{ElSparse}}));}
+\DoxyCodeLine{00132\ \ \ \textcolor{keywordflow}{if}\ (s\ ==\ NULL)\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00134\ \ \ \}}
+\DoxyCodeLine{00135\ \ \ s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}}\ =\ n;}
+\DoxyCodeLine{00136\ \ \ s-\/>\mbox{\hyperlink{structElSparse_a0b0edcdb282abc7282d95d507beb5f76}{pairs}}\ =\ pairs;}
+\DoxyCodeLine{00137\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ un\ =\ (size\_t)(n\ >\ 0\ ?\ n\ :\ 1);}
+\DoxyCodeLine{00138\ \ \ \mbox{\hyperlink{structIntList}{IntList}}*\ adjacency\ =\ (\mbox{\hyperlink{structIntList}{IntList}}*)calloc(un,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structIntList}{IntList}}));}
+\DoxyCodeLine{00139\ \ \ \mbox{\hyperlink{structIntList}{IntList}}*\ columns\ =\ (\mbox{\hyperlink{structIntList}{IntList}}*)calloc(un,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structIntList}{IntList}}));\ \textcolor{comment}{/*\ original\ indices\ */}}
+\DoxyCodeLine{00140\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ eliminated\ =\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*)calloc(un,\ 1);}
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordtype}{int}*\ mark\ =\ (\textcolor{keywordtype}{int}*)malloc(un\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00142\ \ \ s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}\ =\ (\textcolor{keywordtype}{int}*)malloc(un\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00143\ \ \ s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}\ =\ (\textcolor{keywordtype}{int}*)malloc(un\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00144\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ adjacency\ \&\&\ columns\ \&\&\ eliminated\ \&\&\ mark\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ p\ =\ 0;\ ok\ \&\&\ p\ <\ pairs;\ p++)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ ok\ =\ list\_push(\&adjacency[pair\_a[p]],\ pair\_b[p])\ \&\&\ list\_push(\&adjacency[pair\_b[p]],\ pair\_a[p]);}
+\DoxyCodeLine{00148\ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \mbox{\hyperlink{structHeap}{Heap}}\ heap\ =\ \{NULL,\ 0,\ 0\};}
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ ok\ \&\&\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ mark[i]\ =\ -\/1;}
+\DoxyCodeLine{00152\ \ \ \ \ ok\ =\ heap\_push(\&heap,\ adjacency[i].count,\ i);}
+\DoxyCodeLine{00153\ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ ok\ \&\&\ k\ <\ n;\ k++)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{int}\ v\ =\ -\/1;}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{while}\ (v\ <\ 0\ \&\&\ heap.count\ >\ 0)\ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structHeapItem}{HeapItem}}\ item\ =\ heap\_pop(\&heap);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!eliminated[item.\mbox{\hyperlink{structHeapItem_a51c13e9d9a0f575748b1b7832302b7b5}{node}}]\ \&\&\ item.\mbox{\hyperlink{structHeapItem_a8663ad67174010d561142d43a076bb84}{degree}}\ ==\ adjacency[item.\mbox{\hyperlink{structHeapItem_a51c13e9d9a0f575748b1b7832302b7b5}{node}}].\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}})\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ v\ =\ item.\mbox{\hyperlink{structHeapItem_a51c13e9d9a0f575748b1b7832302b7b5}{node}};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{if}\ (v\ <\ 0)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ eliminated[v]\ =\ 1;}
+\DoxyCodeLine{00167\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}[k]\ =\ v;}
+\DoxyCodeLine{00168\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}[v]\ =\ k;}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structIntList}{IntList}}*\ neighbours\ =\ \&adjacency[v];}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ a\ =\ 0;\ ok\ \&\&\ a\ <\ neighbours-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};\ a++)\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ u\ =\ neighbours-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[a];}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ ok\ =\ list\_push(\&columns[v],\ u);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ list\_remove(\&adjacency[u],\ v);}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \textcolor{comment}{/*\ u\ gets\ every\ other\ neighbour\ of\ v\ (fill)\ */}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ b\ =\ 0;\ b\ <\ adjacency[u].\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};\ b++)\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ mark[adjacency[u].\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[b]]\ =\ u;}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ b\ =\ 0;\ ok\ \&\&\ b\ <\ neighbours-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};\ b++)\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ w\ =\ neighbours-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[b];}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (w\ !=\ u\ \&\&\ mark[w]\ !=\ u)\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ mark[w]\ =\ u;}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ ok\ =\ list\_push(\&adjacency[u],\ w);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ ok\ =\ ok\ \&\&\ heap\_push(\&heap,\ adjacency[u].count,\ u);\ \textcolor{comment}{/*\ its\ degree\ changed\ */}}
+\DoxyCodeLine{00186\ \ \ \ \ \}}
+\DoxyCodeLine{00187\ \ \ \ \ free(adjacency[v].items);}
+\DoxyCodeLine{00188\ \ \ \ \ memset(\&adjacency[v],\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structIntList}{IntList}}));}
+\DoxyCodeLine{00189\ \ \ \}}
+\DoxyCodeLine{00190\ \ \ free(heap.\mbox{\hyperlink{structHeap_ab5657e3a75ea433cd48813e48b1f339c}{items}});}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \textcolor{comment}{/*\ Column\ pattern\ in\ permuted\ numbering,\ rows\ ascending.\ */}}
+\DoxyCodeLine{00193\ \ \ \textcolor{keywordtype}{size\_t}\ nonzeros\ =\ 0;}
+\DoxyCodeLine{00194\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ ok\ \&\&\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ nonzeros\ +=\ (size\_t)columns[i].count;}
+\DoxyCodeLine{00196\ \ \ \}}
+\DoxyCodeLine{00197\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ unz\ =\ nonzeros\ ?\ nonzeros\ :\ 1;}
+\DoxyCodeLine{00198\ \ \ \textcolor{keywordflow}{if}\ (ok)\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}\ =\ (\textcolor{keywordtype}{int}*)malloc((un\ +\ 1)\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00200\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}\ =\ (\textcolor{keywordtype}{int}*)malloc(unz\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00201\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)calloc(unz,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00202\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)calloc(un,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00203\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}}\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)calloc(un,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00204\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}\ =\ (\textcolor{keywordtype}{int}*)calloc(un\ +\ 1,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00205\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\_entry}}\ =\ (\textcolor{keywordtype}{int}*)malloc(unz\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00206\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\_col}}\ =\ (\textcolor{keywordtype}{int}*)malloc(unz\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00207\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}}\ =\ (\textcolor{keywordtype}{int}*)malloc((pairs\ ?\ pairs\ :\ 1)\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00208\ \ \ \ \ ok\ =\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\_entry}}\ \&\&}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\_col}}\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}};}
+\DoxyCodeLine{00210\ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \textcolor{keywordflow}{if}\ (ok)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{int}\ position\ =\ 0;}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structIntList}{IntList}}*\ column\ =\ \&columns[s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}[k]];}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[k]\ =\ position;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ e\ =\ 0;\ e\ <\ column-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};\ e++)\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[position\ +\ e]\ =\ s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}[column-\/>\mbox{\hyperlink{structIntList_ad5cc235f0f278f464ba15ef2a662bdf8}{items}}[e]];}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ qsort(s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}\ +\ position,\ (\textcolor{keywordtype}{size\_t})column-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}},\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}),\ compare\_int);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ position\ +=\ column-\/>\mbox{\hyperlink{structIntList_ab71ff94e8af256f0f6e72d6ec7cb0875}{count}};}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[n]\ =\ position;}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{/*\ Row\ lists:\ for\ row\ j\ the\ entries\ L(j,k),\ k\ <\ j\ (columns\ in\ ascending\ order).\ */}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ 0;\ p\ <\ position;\ p++)\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}[s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p]\ +\ 1]++;}
+\DoxyCodeLine{00227\ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ j++)\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}[j\ +\ 1]\ +=\ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}[j];}
+\DoxyCodeLine{00230\ \ \ \ \ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ j++)\ \{}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ mark[j]\ =\ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}[j];}
+\DoxyCodeLine{00233\ \ \ \ \ \}}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[k];\ p\ <\ s-\/>col\_start[k\ +\ 1];\ p++)\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ j\ =\ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p];}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\_entry}}[mark[j]]\ =\ p;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\_col}}[mark[j]]\ =\ k;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ mark[j]++;}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00241\ \ \ \ \ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{/*\ Where\ every\ input\ pair\ lands\ in\ L.\ */}}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ p\ =\ 0;\ p\ <\ pairs;\ p++)\ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ia\ =\ s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}[pair\_a[p]];}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ib\ =\ s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}[pair\_b[p]];}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ column\ =\ ia\ <\ ib\ ?\ ia\ :\ ib;}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ row\ =\ ia\ <\ ib\ ?\ ib\ :\ ia;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*\ first\ =\ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}\ +\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[column];}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*\ found\ =\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*)bsearch(\&row,\ first,\ (\textcolor{keywordtype}{size\_t})(s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[column\ +\ 1]\ -\/\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[column]),}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}),\ compare\_int);}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}}[p]\ =\ found\ ?\ (int)(found\ -\/\ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}})\ :\ -\/1;\ \textcolor{comment}{/*\ always\ found:\ A\ is\ part\ of\ L's\ pattern\ */}}
+\DoxyCodeLine{00253\ \ \ \ \ \}}
+\DoxyCodeLine{00254\ \ \ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ adjacency\ \&\&\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ free(adjacency[i].items);}
+\DoxyCodeLine{00258\ \ \ \}}
+\DoxyCodeLine{00259\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ columns\ \&\&\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ free(columns[i].items);}
+\DoxyCodeLine{00261\ \ \ \}}
+\DoxyCodeLine{00262\ \ \ free(adjacency);}
+\DoxyCodeLine{00263\ \ \ free(columns);}
+\DoxyCodeLine{00264\ \ \ free(eliminated);}
+\DoxyCodeLine{00265\ \ \ free(mark);}
+\DoxyCodeLine{00266\ \ \ \textcolor{keywordflow}{if}\ (!ok)\ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \mbox{\hyperlink{el__sparse_8c_aba7d091cb455c079ce1a66f70efd3776}{el\_sparse\_free}}(s);}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00269\ \ \ \}}
+\DoxyCodeLine{00270\ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00271\ \}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8c_a2beb6ffc4b11b53b12e321cd5f370da0}{el\_sparse\_clear}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ s)\ \{}
+\DoxyCodeLine{00274\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ nonzeros\ =\ \mbox{\hyperlink{el__sparse_8c_ab491ecd08c1b1bfa064f024670dca2c0}{el\_sparse\_nonzeros}}(s);}
+\DoxyCodeLine{00275\ \ \ memset(s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}},\ 0,\ (nonzeros\ ?\ nonzeros\ :\ 1)\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00276\ \ \ memset(s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}},\ 0,\ (\textcolor{keywordtype}{size\_t})(s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}}\ >\ 0\ ?\ s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}}\ :\ 1)\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00277\ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8c_ab3a772576d6b46995d591c4fa21233bc}{el\_sparse\_add\_diagonal}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ s,\ \textcolor{keywordtype}{int}\ i,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{}
+\DoxyCodeLine{00280\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ d\ =\ \&s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}[s-\/>\mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}[i]];}
+\DoxyCodeLine{00281\ \ \ *d\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(*d,\ value);}
+\DoxyCodeLine{00282\ \}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8c_ac828c9294e57254165430f97fc4ff729}{el\_sparse\_add\_pair}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ s,\ \textcolor{keywordtype}{size\_t}\ p,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{}
+\DoxyCodeLine{00285\ \ \ \textcolor{keywordflow}{if}\ (p\ <\ s-\/>pairs\ \&\&\ s-\/>\mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}}[p]\ >=\ 0)\ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ v\ =\ \&s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[s-\/>\mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}}[p]];}
+\DoxyCodeLine{00287\ \ \ \ \ *v\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(*v,\ value);}
+\DoxyCodeLine{00288\ \ \ \}}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{el__sparse_8c_ab491ecd08c1b1bfa064f024670dca2c0}{el\_sparse\_nonzeros}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ s)\ \{\ \textcolor{keywordflow}{return}\ s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}}\ >\ 0\ ?\ (size\_t)s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}}]\ :\ 0;\ \}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ *\ Left-\/looking\ LDL\string^T\ in\ place:\ column\ j\ is\ gathered\ into\ the\ dense\ work}}
+\DoxyCodeLine{00295\ \textcolor{comment}{\ *\ vector,\ updated\ with\ every\ earlier\ column\ k\ that\ has\ an\ entry\ in\ row\ j}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ *\ (w\ -\/=\ L(:,k)\ L(j,k)\ D(k)),\ then\ divided\ by\ its\ pivot\ D(j).\ The\ filled}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ *\ pattern\ guarantees\ that\ every\ updated\ row\ is\ part\ of\ column\ j.}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00299\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__sparse_8c_ae1e7cef7d6d5295eb6bed7f6c67567ad}{el\_sparse\_factor}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ s,\ \textcolor{keywordtype}{double}\ min\_pivot)\ \{}
+\DoxyCodeLine{00300\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ w\ =\ s-\/>\mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}};}
+\DoxyCodeLine{00301\ \ \ s-\/>\mbox{\hyperlink{structElSparse_ab1336582ed57d52950018ee4d8c08948}{perturbed}}\ =\ 0;}
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}};\ j++)\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ w[j]\ =\ s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}[j];}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[j];\ p\ <\ s-\/>col\_start[j\ +\ 1];\ p++)\ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ w[s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p]]\ =\ s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[p];}
+\DoxyCodeLine{00306\ \ \ \ \ \}}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ q\ =\ s-\/>\mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}}[j];\ q\ <\ s-\/>row\_start[j\ +\ 1];\ q++)\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ k\ =\ s-\/>\mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\_col}}[q];}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ entry\ =\ s-\/>\mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\_entry}}[q];\ \textcolor{comment}{/*\ L(j,k);\ the\ rows\ after\ it\ in\ column\ k\ are\ >\ j\ */}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ factor\ =\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[entry],\ s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}[k]);}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ entry;\ p\ <\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[k\ +\ 1];\ p++)\ \{}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ target\ =\ \&w[s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p]];}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ *target\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(*target,\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[p],\ factor));}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ \}}
+\DoxyCodeLine{00316\ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ pivot\ =\ w[j];}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordflow}{if}\ (!isfinite(pivot.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}})\ ||\ !isfinite(pivot.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}}))\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00319\ \ \ \ \ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (!(pivot.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ >\ 0.0))\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ pivot\ =\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(min\_pivot,\ 0.0);}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_ab1336582ed57d52950018ee4d8c08948}{perturbed}}++;}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}[j]\ =\ pivot;}
+\DoxyCodeLine{00325\ \ \ \ \ w[j]\ =\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[j];\ p\ <\ s-\/>col\_start[j\ +\ 1];\ p++)\ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ i\ =\ s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p];}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[p]\ =\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(w[i],\ pivot);}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ w[i]\ =\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
+\DoxyCodeLine{00330\ \ \ \ \ \}}
+\DoxyCodeLine{00331\ \ \ \}}
+\DoxyCodeLine{00332\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00333\ \}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8c_a6b8805597b6bd4fd29cb16fd469e4c2e}{el\_sparse\_solve}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ s,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ x)\ \{}
+\DoxyCodeLine{00336\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ y\ =\ s-\/>\mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}};}
+\DoxyCodeLine{00337\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n\ =\ s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}};}
+\DoxyCodeLine{00338\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{}
+\DoxyCodeLine{00339\ \ \ \ \ y[k]\ =\ x[s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}[k]];}
+\DoxyCodeLine{00340\ \ \ \}}
+\DoxyCodeLine{00341\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{\ \textcolor{comment}{/*\ L\ z\ =\ b\ */}}
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ yk\ =\ y[k];}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordflow}{if}\ (yk.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ ==\ 0.0\ \&\&\ yk.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}}\ ==\ 0.0)\ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00345\ \ \ \ \ \}}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[k];\ p\ <\ s-\/>col\_start[k\ +\ 1];\ p++)\ \{}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ target\ =\ \&y[s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p]];}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ *target\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(*target,\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[p],\ yk));}
+\DoxyCodeLine{00349\ \ \ \ \ \}}
+\DoxyCodeLine{00350\ \ \ \}}
+\DoxyCodeLine{00351\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{\ \textcolor{comment}{/*\ D\ */}}
+\DoxyCodeLine{00352\ \ \ \ \ y[k]\ =\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(y[k],\ s-\/>\mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}[k]);}
+\DoxyCodeLine{00353\ \ \ \}}
+\DoxyCodeLine{00354\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ n\ -\/\ 1;\ k\ >=\ 0;\ k-\/-\/)\ \{\ \textcolor{comment}{/*\ L\string^T\ x\ =\ y\ */}}
+\DoxyCodeLine{00355\ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ sum\ =\ y[k];}
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ p\ =\ s-\/>\mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}}[k];\ p\ <\ s-\/>col\_start[k\ +\ 1];\ p++)\ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ sum\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(sum,\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(s-\/>\mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}[p],\ y[s-\/>\mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}}[p]]));}
+\DoxyCodeLine{00358\ \ \ \ \ \}}
+\DoxyCodeLine{00359\ \ \ \ \ y[k]\ =\ sum;}
+\DoxyCodeLine{00360\ \ \ \}}
+\DoxyCodeLine{00361\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ x[s-\/>\mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}[k]]\ =\ y[k];}
+\DoxyCodeLine{00363\ \ \ \ \ y[k]\ =\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);\ \textcolor{comment}{/*\ the\ work\ vector\ is\ zero\ between\ uses\ */}}
+\DoxyCodeLine{00364\ \ \ \}}
+\DoxyCodeLine{00365\ \}}
+
+\end{DoxyCode}

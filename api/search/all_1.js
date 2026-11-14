@@ -14,11 +14,12 @@ var searchData=
   ['aiotwinhud_11',['AIoTwinHUD',['../classAIoTwinHUD.html',1,'']]],
   ['aiotwinplayercontroller_12',['AIoTwinPlayerController',['../classAIoTwinPlayerController.html',1,'AIoTwinPlayerController'],['../classAIoTwinPlayerController.html#a58d07d123513319df8b1b57e55fd9b22',1,'AIoTwinPlayerController::AIoTwinPlayerController()']]],
   ['alampactor_13',['ALampActor',['../classALampActor.html',1,'ALampActor'],['../classALampActor.html#a403cd3b0a75faacfcf1daee0ee5495bb',1,'ALampActor::ALampActor()']]],
-  ['answer_14',['answer',['../structBusLink.html#a2482511c5819119379bca56dcc78761b',1,'BusLink']]],
-  ['answer_5fsize_15',['answer_size',['../structBusLink.html#ad62a5aab8c80449ac46c60425fd1c00f',1,'BusLink']]],
-  ['answered_16',['answered',['../structBusLink.html#a1b5c66438934c464aba622d5b4e0ff82',1,'BusLink']]],
-  ['any_5fpayload_17',['any_payload',['../structFramePattern.html#a0f6a22b11f2fd701827c16667a9b3593',1,'FramePattern']]],
-  ['apowersourceactor_18',['APowerSourceActor',['../classAPowerSourceActor.html',1,'APowerSourceActor'],['../classAPowerSourceActor.html#a3f6f8ae7c44cc508d9455343deb13448',1,'APowerSourceActor::APowerSourceActor()']]],
-  ['applyelectrical_19',['ApplyElectrical',['../classIElectricalElement.html#a6bab038e29705a8fdac3960d7d2c229d',1,'IElectricalElement::ApplyElectrical()'],['../classAPowerSourceActor.html#ae8f9d1dbb1082c72ed8394fe8eb7f6a2',1,'APowerSourceActor::ApplyElectrical()']]],
-  ['awallswitchactor_20',['AWallSwitchActor',['../classAWallSwitchActor.html',1,'AWallSwitchActor'],['../classAWallSwitchActor.html#ae7bf8bdf7613a85b298ee7a54d8e6731',1,'AWallSwitchActor::AWallSwitchActor()']]]
+  ['analyses_14',['analyses',['../structElCircuit.html#a9104f917c46ffa54e691f815d32e61c8',1,'ElCircuit']]],
+  ['answer_15',['answer',['../structBusLink.html#a2482511c5819119379bca56dcc78761b',1,'BusLink']]],
+  ['answer_5fsize_16',['answer_size',['../structBusLink.html#ad62a5aab8c80449ac46c60425fd1c00f',1,'BusLink']]],
+  ['answered_17',['answered',['../structBusLink.html#a1b5c66438934c464aba622d5b4e0ff82',1,'BusLink']]],
+  ['any_5fpayload_18',['any_payload',['../structFramePattern.html#a0f6a22b11f2fd701827c16667a9b3593',1,'FramePattern']]],
+  ['apowersourceactor_19',['APowerSourceActor',['../classAPowerSourceActor.html',1,'APowerSourceActor'],['../classAPowerSourceActor.html#a3f6f8ae7c44cc508d9455343deb13448',1,'APowerSourceActor::APowerSourceActor()']]],
+  ['applyelectrical_20',['ApplyElectrical',['../classIElectricalElement.html#a6bab038e29705a8fdac3960d7d2c229d',1,'IElectricalElement::ApplyElectrical()'],['../classAPowerSourceActor.html#ae8f9d1dbb1082c72ed8394fe8eb7f6a2',1,'APowerSourceActor::ApplyElectrical()']]],
+  ['awallswitchactor_21',['AWallSwitchActor',['../classAWallSwitchActor.html',1,'AWallSwitchActor'],['../classAWallSwitchActor.html#ae7bf8bdf7613a85b298ee7a54d8e6731',1,'AWallSwitchActor::AWallSwitchActor()']]]
 ];

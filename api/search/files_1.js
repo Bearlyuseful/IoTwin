@@ -23,7 +23,8 @@ var searchData=
   ['componentcatalog_2eh_20',['ComponentCatalog.h',['../ComponentCatalog_8h.html',1,'']]],
   ['core_5fel_5fcircuit_2ec_21',['Core_el_circuit.c',['../Core__el__circuit_8c.html',1,'']]],
   ['core_5fel_5fsession_2ec_22',['Core_el_session.c',['../Core__el__session_8c.html',1,'']]],
-  ['core_5felsim_2ec_23',['Core_elsim.c',['../Core__elsim_8c.html',1,'']]],
-  ['cycle_5ftimer_2ec_24',['cycle_timer.c',['../cycle__timer_8c.html',1,'']]],
-  ['cycle_5ftimer_2eh_25',['cycle_timer.h',['../cycle__timer_8h.html',1,'']]]
+  ['core_5fel_5fsparse_2ec_23',['Core_el_sparse.c',['../Core__el__sparse_8c.html',1,'']]],
+  ['core_5felsim_2ec_24',['Core_elsim.c',['../Core__elsim_8c.html',1,'']]],
+  ['cycle_5ftimer_2ec_25',['cycle_timer.c',['../cycle__timer_8c.html',1,'']]],
+  ['cycle_5ftimer_2eh_26',['cycle_timer.h',['../cycle__timer_8h.html',1,'']]]
 ];

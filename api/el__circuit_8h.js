@@ -10,6 +10,10 @@ var el__circuit_8h =
       [ "EL_VOLTAGE_SOURCE", "el__circuit_8h.html#a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95", null ],
       [ "EL_CURRENT_SOURCE", "el__circuit_8h.html#a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93", null ]
     ] ],
+    [ "ElSolver", "el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622", [
+      [ "EL_SOLVER_AUTO", "el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf", null ],
+      [ "EL_SOLVER_DENSE", "el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5", null ]
+    ] ],
     [ "el_abs", "el__circuit_8h.html#a2b708d8e154ccd8a1b91a2e3a3c16d9d", null ],
     [ "el_abs2", "el__circuit_8h.html#a5c5ae96c5ade6e6996d5b3c65bd8812b", null ],
     [ "el_add", "el__circuit_8h.html#a1bd8255d9a221a6918122ad3d625a48a", null ],

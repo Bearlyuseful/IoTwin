@@ -1,0 +1,148 @@
+\doxysection{libs/elsim/el\+\_\+sparse.h File Reference}
+\hypertarget{el__sparse_8h}{}\label{el__sparse_8h}\index{libs/elsim/el\_sparse.h@{libs/elsim/el\_sparse.h}}
+
+
+Sparse LDL\texorpdfstring{$^\wedge$}{\string^}T factorization of complex symmetric matrices (nodal admittance matrices).  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include "{}el\+\_\+circuit.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structElSparse}{El\+Sparse}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{el__sparse_8h_a69bb3d164136c18aea8eb5daaafae212}{el\+\_\+sparse\+\_\+analyze}} (int n, const int \texorpdfstring{$\ast$}{*}pair\+\_\+a, const int \texorpdfstring{$\ast$}{*}pair\+\_\+b, size\+\_\+t pairs)
+\begin{DoxyCompactList}\small\item\em Orders the unknowns and computes the pattern of L. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{el__sparse_8h_aea6e35243a82a695283a20ec858e8892}{el\+\_\+sparse\+\_\+free}} (\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse)
+\item 
+void \mbox{\hyperlink{el__sparse_8h_aaa94c9dbb0aaf4b91423e072ad99948e}{el\+\_\+sparse\+\_\+clear}} (\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse)
+\begin{DoxyCompactList}\small\item\em Clears the values before a new matrix is entered. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{el__sparse_8h_a1db73f3aa86296819a2cf04a43b23500}{el\+\_\+sparse\+\_\+add\+\_\+diagonal}} (\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse, int i, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} value)
+\begin{DoxyCompactList}\small\item\em Adds to the diagonal entry of unknown i. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{el__sparse_8h_a317ed614c5a015b2c49259d17d5979ca}{el\+\_\+sparse\+\_\+add\+\_\+pair}} (\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse, size\+\_\+t p, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} value)
+\begin{DoxyCompactList}\small\item\em Adds to the off-\/diagonal entry (both triangles) of input pair p. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{el__sparse_8h_ac166edb9a19e9629b30f55ee3c65ff07}{el\+\_\+sparse\+\_\+factor}} (\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse, double min\+\_\+pivot)
+\begin{DoxyCompactList}\small\item\em Factorizes the entered matrix in place. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{el__sparse_8h_af9265f5b1ba9de7bccb00179c2fbda67}{el\+\_\+sparse\+\_\+solve}} (\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse, \mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*}x)
+\begin{DoxyCompactList}\small\item\em Solves Y x = b; {\ttfamily x} holds b on entry (original numbering). \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{el__sparse_8h_a7b3d0e069777859ec8b6cf8b21a59dce}{el\+\_\+sparse\+\_\+nonzeros}} (const \mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}sparse)
+\begin{DoxyCompactList}\small\item\em Non-\/zeros of L (fill included). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Sparse LDL\texorpdfstring{$^\wedge$}{\string^}T factorization of complex symmetric matrices (nodal admittance matrices). 
+
+The nodal admittance matrix Y of a passive network (admittances between nodes, gmin to earth) is complex symmetric (Y = Y\texorpdfstring{$^\wedge$}{\string^}T) and its Hermitian part
+\begin{DoxyItemize}
+\item the conductance matrix -\/ is positive definite. Such a matrix has an LDL\texorpdfstring{$^\wedge$}{\string^}T factorization for every symmetric ordering without pivoting, so the ordering can be chosen for sparsity alone\+:
+\begin{DoxyEnumerate}
+\item \doxylink{el__sparse_8h_a69bb3d164136c18aea8eb5daaafae212}{el\+\_\+sparse\+\_\+analyze()}\+: minimum-\/degree ordering and the pattern of L (once per network topology),
+\item \doxylink{el__sparse_8h_ac166edb9a19e9629b30f55ee3c65ff07}{el\+\_\+sparse\+\_\+factor()}\+: numeric factorization (when values change),
+\item \doxylink{el__sparse_8h_af9265f5b1ba9de7bccb00179c2fbda67}{el\+\_\+sparse\+\_\+solve()}\+: forward/back substitution (every solution).
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+
+The effort grows with the fill of L, not with n\texorpdfstring{$^\wedge$}{\string^}3 as for dense elimination. Pivots whose real part is not positive (only possible through rounding in floating parts of the network, which are held by gmin alone) are replaced by a small positive value and counted. 
+
+\label{doc-func-members}
+\Hypertarget{el__sparse_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{el__sparse_8h_a1db73f3aa86296819a2cf04a43b23500}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_add\_diagonal@{el\_sparse\_add\_diagonal}}
+\index{el\_sparse\_add\_diagonal@{el\_sparse\_add\_diagonal}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_add\_diagonal()}{el\_sparse\_add\_diagonal()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_a1db73f3aa86296819a2cf04a43b23500} 
+void el\+\_\+sparse\+\_\+add\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{, }\item[{int}]{i}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Adds to the diagonal entry of unknown i. 
+
+\Hypertarget{el__sparse_8h_a317ed614c5a015b2c49259d17d5979ca}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_add\_pair@{el\_sparse\_add\_pair}}
+\index{el\_sparse\_add\_pair@{el\_sparse\_add\_pair}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_add\_pair()}{el\_sparse\_add\_pair()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_a317ed614c5a015b2c49259d17d5979ca} 
+void el\+\_\+sparse\+\_\+add\+\_\+pair (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{, }\item[{size\+\_\+t}]{p}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Adds to the off-\/diagonal entry (both triangles) of input pair p. 
+
+\Hypertarget{el__sparse_8h_a69bb3d164136c18aea8eb5daaafae212}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_analyze@{el\_sparse\_analyze}}
+\index{el\_sparse\_analyze@{el\_sparse\_analyze}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_analyze()}{el\_sparse\_analyze()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_a69bb3d164136c18aea8eb5daaafae212} 
+\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*} el\+\_\+sparse\+\_\+analyze (\begin{DoxyParamCaption}\item[{int}]{n}{, }\item[{const int \texorpdfstring{$\ast$}{*}}]{pair\+\_\+a}{, }\item[{const int \texorpdfstring{$\ast$}{*}}]{pair\+\_\+b}{, }\item[{size\+\_\+t}]{pairs}{}\end{DoxyParamCaption})}
+
+
+
+Orders the unknowns and computes the pattern of L. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of unknowns (0-\/based) \\
+\hline
+{\em pair\+\_\+a,pair\+\_\+b} & off-\/diagonal pattern\+: unique pairs with a \texorpdfstring{$<$}{<} b \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NULL if memory runs out. 
+\end{DoxyReturn}
+\Hypertarget{el__sparse_8h_aaa94c9dbb0aaf4b91423e072ad99948e}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_clear@{el\_sparse\_clear}}
+\index{el\_sparse\_clear@{el\_sparse\_clear}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_clear()}{el\_sparse\_clear()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_aaa94c9dbb0aaf4b91423e072ad99948e} 
+void el\+\_\+sparse\+\_\+clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{}\end{DoxyParamCaption})}
+
+
+
+Clears the values before a new matrix is entered. 
+
+\Hypertarget{el__sparse_8h_ac166edb9a19e9629b30f55ee3c65ff07}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_factor@{el\_sparse\_factor}}
+\index{el\_sparse\_factor@{el\_sparse\_factor}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_factor()}{el\_sparse\_factor()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_ac166edb9a19e9629b30f55ee3c65ff07} 
+bool el\+\_\+sparse\+\_\+factor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{, }\item[{double}]{min\+\_\+pivot}{}\end{DoxyParamCaption})}
+
+
+
+Factorizes the entered matrix in place. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min\+\_\+pivot} & positive real value that replaces non-\/positive pivots (e.\+g. gmin) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if a value is not finite. 
+\end{DoxyReturn}
+\Hypertarget{el__sparse_8h_aea6e35243a82a695283a20ec858e8892}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_free@{el\_sparse\_free}}
+\index{el\_sparse\_free@{el\_sparse\_free}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_free()}{el\_sparse\_free()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_aea6e35243a82a695283a20ec858e8892} 
+void el\+\_\+sparse\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{}\end{DoxyParamCaption})}
+
+\Hypertarget{el__sparse_8h_a7b3d0e069777859ec8b6cf8b21a59dce}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_nonzeros@{el\_sparse\_nonzeros}}
+\index{el\_sparse\_nonzeros@{el\_sparse\_nonzeros}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_nonzeros()}{el\_sparse\_nonzeros()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_a7b3d0e069777859ec8b6cf8b21a59dce} 
+size\+\_\+t el\+\_\+sparse\+\_\+nonzeros (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{}\end{DoxyParamCaption})}
+
+
+
+Non-\/zeros of L (fill included). 
+
+\Hypertarget{el__sparse_8h_af9265f5b1ba9de7bccb00179c2fbda67}\index{el\_sparse.h@{el\_sparse.h}!el\_sparse\_solve@{el\_sparse\_solve}}
+\index{el\_sparse\_solve@{el\_sparse\_solve}!el\_sparse.h@{el\_sparse.h}}
+\doxysubsubsection{\texorpdfstring{el\_sparse\_solve()}{el\_sparse\_solve()}}
+{\footnotesize\ttfamily \label{el__sparse_8h_af9265f5b1ba9de7bccb00179c2fbda67} 
+void el\+\_\+sparse\+\_\+solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElSparse}{El\+Sparse}} \texorpdfstring{$\ast$}{*}}]{sparse}{, }\item[{\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*}}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Solves Y x = b; {\ttfamily x} holds b on entry (original numbering). 
+

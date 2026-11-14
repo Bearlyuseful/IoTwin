@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['keys_0',['keys',['../structJsonValue.html#a28836989e1107a69b0ec1148415956ce',1,'JsonValue']]],
-  ['kind_1',['Kind',['../structFSystemNode.html#a91f4773e8febd8a372c454f290504358',1,'FSystemNode']]],
-  ['kind_2',['kind',['../structElElement.html#a27f107bf9e4c8955f1657d2d919f5297',1,'ElElement']]]
+  ['jitter_5fms_0',['jitter_ms',['../structBusFaults.html#a92ccb7cde1b7fcf5d66fc8bc7eddf074',1,'BusFaults']]],
+  ['jitterms_1',['JitterMs',['../structFIoTwinBusStatus.html#a6ee1f8c1997776199e079d3dffdeaad9',1,'FIoTwinBusStatus']]]
 ];

@@ -116,6 +116,9 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95">EL_VOLTAGE_SOURCE</a>
 , <a class="el" href="#a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93">EL_CURRENT_SOURCE</a>
  }</td></tr>
+<tr class="memitem:a304da4a03945cba5814ce44ab204f622" id="r_a304da4a03945cba5814ce44ab204f622"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a304da4a03945cba5814ce44ab204f622">ElSolver</a> { <a class="el" href="#a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf">EL_SOLVER_AUTO</a>
+, <a class="el" href="#a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5">EL_SOLVER_DENSE</a>
+ }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -159,7 +162,8 @@ Functions</h2></td></tr>
 <li>ideal voltage source: V(a) - V(b) = value,</li>
 <li>ideal current source: value flows from node a to node b through the source. The current of every element is reported in the direction a -&gt; b.</li>
 </ul>
-<p>A small conductance gmin from every node to earth keeps floating parts of the network (open breakers, unconnected terminals) solvable; it also models a very high insulation resistance. Dense Gaussian elimination with partial pivoting.</p>
+<p>A small conductance gmin from every node to earth keeps floating parts of the network (open breakers, unconnected terminals) solvable; it also models a very high insulation resistance.</p>
+<p>Solvers: networks without ideal voltage sources (supplies as Norton equivalents, as libs/elsim builds them) are solved by nodal analysis with a sparse LDL^T factorization (<a class="el" href="el__sparse_8h.html" title="Sparse LDL^T factorization of complex symmetric matrices (nodal admittance matrices).">el_sparse.h</a>). The ordering is computed once per topology and the factorization reused as long as no value changes, so a step of an unchanged network is only a forward/back substitution. With voltage sources (or EL_SOLVER_DENSE) modified nodal analysis with dense Gaussian elimination and partial pivoting is used.</p>
 <p>Portable C99 without C99 complex numbers (MSVC has no complex arithmetic), so the same sources compile with GCC, Clang and MSVC, also inside the Unreal visualizer (ADR 0008). After the first solution of a network size the solver does not allocate memory any more. </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a3012e70fd0668c9eecf0289961243486" name="a3012e70fd0668c9eecf0289961243486"></a>
@@ -207,6 +211,26 @@ Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b" name="a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b"></a>EL_ADMITTANCE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95" name="a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95"></a>EL_VOLTAGE_SOURCE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93" name="a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93"></a>EL_CURRENT_SOURCE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a304da4a03945cba5814ce44ab204f622" name="a304da4a03945cba5814ce44ab204f622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a304da4a03945cba5814ce44ab204f622">&#9670;&#160;</a></span>ElSolver</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a304da4a03945cba5814ce44ab204f622">ElSolver</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf" name="a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf"></a>EL_SOLVER_AUTO&#160;</td><td class="fielddoc"><p>sparse nodal analysis when there are no voltage sources, else dense </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5" name="a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5"></a>EL_SOLVER_DENSE&#160;</td><td class="fielddoc"><p>always dense modified nodal analysis (reference, comparisons) </p>
+</td></tr>
 </table>
 
 </div>

@@ -30,6 +30,10 @@ enum \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6}{El\+Elem
 , \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\+\_\+\+VOLTAGE\+\_\+\+SOURCE}}
 , \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\+\_\+\+CURRENT\+\_\+\+SOURCE}}
  \}
+\item 
+enum \mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622}{El\+Solver}} \{ \mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf}{EL\+\_\+\+SOLVER\+\_\+\+AUTO}}
+, \mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5}{EL\+\_\+\+SOLVER\+\_\+\+DENSE}}
+ \}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -98,7 +102,9 @@ Node 0 is the reference (earth). Elements\+:
 \item ideal current source\+: value flows from node a to node b through the source. The current of every element is reported in the direction a -\/\texorpdfstring{$>$}{>} b.
 \end{DoxyItemize}
 
-A small conductance gmin from every node to earth keeps floating parts of the network (open breakers, unconnected terminals) solvable; it also models a very high insulation resistance. Dense Gaussian elimination with partial pivoting.
+A small conductance gmin from every node to earth keeps floating parts of the network (open breakers, unconnected terminals) solvable; it also models a very high insulation resistance.
+
+Solvers\+: networks without ideal voltage sources (supplies as Norton equivalents, as libs/elsim builds them) are solved by nodal analysis with a sparse LDL\texorpdfstring{$^\wedge$}{\string^}T factorization (\doxylink{el__sparse_8h}{el\+\_\+sparse.\+h}). The ordering is computed once per topology and the factorization reused as long as no value changes, so a step of an unchanged network is only a forward/back substitution. With voltage sources (or EL\+\_\+\+SOLVER\+\_\+\+DENSE) modified nodal analysis with dense Gaussian elimination and partial pivoting is used.
 
 Portable C99 without C99 complex numbers (MSVC has no complex arithmetic), so the same sources compile with GCC, Clang and MSVC, also inside the Unreal visualizer (ADR 0008). After the first solution of a network size the solver does not allocate memory any more. 
 
@@ -139,6 +145,22 @@ EL\+\_\+\+VOLTAGE\+\_\+\+SOURCE&\\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_CURRENT\_SOURCE@{EL\_CURRENT\_SOURCE}!el\_circuit.h@{el\_circuit.h}}\index{el\_circuit.h@{el\_circuit.h}!EL\_CURRENT\_SOURCE@{EL\_CURRENT\_SOURCE}}}\Hypertarget{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}\label{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93} 
 EL\+\_\+\+CURRENT\+\_\+\+SOURCE&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{el__circuit_8h_a304da4a03945cba5814ce44ab204f622}\index{el\_circuit.h@{el\_circuit.h}!ElSolver@{ElSolver}}
+\index{ElSolver@{ElSolver}!el\_circuit.h@{el\_circuit.h}}
+\doxysubsubsection{\texorpdfstring{ElSolver}{ElSolver}}
+{\footnotesize\ttfamily \label{el__circuit_8h_a304da4a03945cba5814ce44ab204f622} 
+enum \mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622}{El\+Solver}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_SOLVER\_AUTO@{EL\_SOLVER\_AUTO}!el\_circuit.h@{el\_circuit.h}}\index{el\_circuit.h@{el\_circuit.h}!EL\_SOLVER\_AUTO@{EL\_SOLVER\_AUTO}}}\Hypertarget{el__circuit_8h_a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf}\label{el__circuit_8h_a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf} 
+EL\+\_\+\+SOLVER\+\_\+\+AUTO&sparse nodal analysis when there are no voltage sources, else dense \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EL\_SOLVER\_DENSE@{EL\_SOLVER\_DENSE}!el\_circuit.h@{el\_circuit.h}}\index{el\_circuit.h@{el\_circuit.h}!EL\_SOLVER\_DENSE@{EL\_SOLVER\_DENSE}}}\Hypertarget{el__circuit_8h_a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5}\label{el__circuit_8h_a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5} 
+EL\+\_\+\+SOLVER\+\_\+\+DENSE&always dense modified nodal analysis (reference, comparisons) \\
 \hline
 
 \end{DoxyEnumFields}

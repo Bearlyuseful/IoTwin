@@ -8,254 +8,528 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string.h>}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ EL\_PI\ 3.14159265358979323846}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{el__sparse_8h}{el\_sparse.h}}"{}}}
 \DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__circuit_8c_a62c7a6f47abdcce85724b320c45b4a50}{el\_circuit\_init}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ nodes)\ \{}
-\DoxyCodeLine{00010\ \ \ memset(circuit,\ 0,\ \textcolor{keyword}{sizeof}(*circuit));}
-\DoxyCodeLine{00011\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ =\ nodes\ >\ 1\ ?\ nodes\ :\ 1;}
-\DoxyCodeLine{00012\ \}}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__circuit_8c_a00eb846edc75b9940b3ce2837012fefd}{el\_circuit\_free}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit)\ \{}
-\DoxyCodeLine{00015\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}});}
-\DoxyCodeLine{00016\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}});}
-\DoxyCodeLine{00017\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}});}
-\DoxyCodeLine{00018\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}});}
-\DoxyCodeLine{00019\ \ \ memset(circuit,\ 0,\ \textcolor{keyword}{sizeof}(*circuit));}
-\DoxyCodeLine{00020\ \}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__circuit_8c_a768a15ac6aad2f8ce889490fd5c24b9d}{el\_circuit\_clear}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit)\ \{}
-\DoxyCodeLine{00023\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ =\ 0;}
-\DoxyCodeLine{00024\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00025\ \}}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{\ \textcolor{keywordflow}{return}\ hypot(value.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}},\ value.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}});\ \}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{el__circuit_8c_a304ba7a951f2d06a166a2a18b5a6e1eb}{el\_angle\_deg}}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{\ \textcolor{keywordflow}{return}\ atan2(value.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}},\ value.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}})\ *\ 180.0\ /\ \mbox{\hyperlink{el__circuit_8c_a3bfadf1e10676fd6f03770f9e8c00a87}{EL\_PI}};\ \}}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ \mbox{\hyperlink{el__circuit_8c_a677ff6b008cbe1b748037cd3a19c2ab0}{el\_polar}}(\textcolor{keywordtype}{double}\ magnitude,\ \textcolor{keywordtype}{double}\ degrees)\ \{}
-\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ radians\ =\ degrees\ *\ \mbox{\hyperlink{el__circuit_8c_a3bfadf1e10676fd6f03770f9e8c00a87}{EL\_PI}}\ /\ 180.0;}
-\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(magnitude\ *\ cos(radians),\ magnitude\ *\ sin(radians));}
-\DoxyCodeLine{00034\ \}}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ add(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6}{ElElementKind}}\ kind,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{}
-\DoxyCodeLine{00037\ \ \ \textcolor{keywordflow}{if}\ (a\ <\ 0\ ||\ b\ <\ 0\ ||\ a\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ ||\ b\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}})\ \{}
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00039\ \ \ \}}
-\DoxyCodeLine{00040\ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ ==\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}})\ \{}
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ capacity\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}\ ?\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}\ *\ 2\ :\ 64;}
-\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{structElElement}{ElElement}}*\ grown\ =\ (\mbox{\hyperlink{structElElement}{ElElement}}*)realloc(circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}},\ capacity\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElElement}{ElElement}}));}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
-\DoxyCodeLine{00045\ \ \ \ \ \}}
-\DoxyCodeLine{00046\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}\ =\ grown;}
-\DoxyCodeLine{00047\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}\ =\ capacity;}
-\DoxyCodeLine{00048\ \ \ \}}
-\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{structElElement}{ElElement}}*\ e\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}];}
-\DoxyCodeLine{00050\ \ \ e-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ =\ kind;}
-\DoxyCodeLine{00051\ \ \ e-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ =\ a;}
-\DoxyCodeLine{00052\ \ \ e-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ =\ b;}
-\DoxyCodeLine{00053\ \ \ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}}\ =\ value;}
-\DoxyCodeLine{00054\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00055\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}++;}
-\DoxyCodeLine{00056\ \}}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_a7c61493953820dc19b26f13d76142dc5}{el\_circuit\_add\_admittance}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ admittance)\ \{}
-\DoxyCodeLine{00059\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}},\ a,\ b,\ admittance);}
-\DoxyCodeLine{00060\ \}}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_a45adc8ec37724e3c0bbd6857034e7095}{el\_circuit\_add\_impedance}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ impedance)\ \{}
-\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ A\ zero\ impedance\ would\ be\ infinite\ admittance:\ clamp\ to\ 1\ micro-\/ohm.\ */}}
-\DoxyCodeLine{00064\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(impedance)\ <\ 1e-\/6)\ \{}
-\DoxyCodeLine{00065\ \ \ \ \ impedance\ =\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(1e-\/6,\ 0.0);}
-\DoxyCodeLine{00066\ \ \ \}}
-\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}},\ a,\ b,\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(\mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(1.0,\ 0.0),\ impedance));}
-\DoxyCodeLine{00068\ \}}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \textcolor{keywordtype}{double}\ ohm)\ \{}
-\DoxyCodeLine{00071\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8c_a45adc8ec37724e3c0bbd6857034e7095}{el\_circuit\_add\_impedance}}(circuit,\ a,\ b,\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(ohm,\ 0.0));}
-\DoxyCodeLine{00072\ \}}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_ae4feaeaff528a4b65be07f77810fff69}{el\_circuit\_add\_voltage\_source}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ voltage)\ \{}
-\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}},\ a,\ b,\ voltage);}
-\DoxyCodeLine{00076\ \}}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_a4c47c7c49005ad928a0cbf1ed8a07337}{el\_circuit\_add\_current\_source}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ current)\ \{}
-\DoxyCodeLine{00079\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}},\ a,\ b,\ current);}
-\DoxyCodeLine{00080\ \}}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \textcolor{comment}{/*\ Makes\ sure\ *buffer\ holds\ at\ least\ count\ phasors;\ keeps\ the\ memory\ between\ solutions.\ */}}
-\DoxyCodeLine{00083\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ reserve(\mbox{\hyperlink{structElPhasor}{ElPhasor}}**\ buffer,\ \textcolor{keywordtype}{size\_t}*\ capacity,\ \textcolor{keywordtype}{size\_t}\ count)\ \{}
-\DoxyCodeLine{00084\ \ \ \textcolor{keywordflow}{if}\ (count\ <=\ *capacity\ \&\&\ *buffer\ !=\ NULL)\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00086\ \ \ \}}
-\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ grown\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)realloc(*buffer,\ count\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
-\DoxyCodeLine{00088\ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00090\ \ \ \}}
-\DoxyCodeLine{00091\ \ \ *buffer\ =\ grown;}
-\DoxyCodeLine{00092\ \ \ *capacity\ =\ count;}
-\DoxyCodeLine{00093\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00094\ \}}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__circuit_8c_a70d6c19633c7e5d90345a6cad44f00dd}{el\_circuit\_solve}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{double}\ gmin)\ \{}
-\DoxyCodeLine{00097\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nodes\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ -\/\ 1;\ \textcolor{comment}{/*\ unknown\ node\ voltages\ (without\ earth)\ */}}
-\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{int}\ sources\ =\ 0;}
-\DoxyCodeLine{00100\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
-\DoxyCodeLine{00101\ \ \ \ \ sources\ +=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i].\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}};}
-\DoxyCodeLine{00102\ \ \ \}}
-\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n\ =\ nodes\ +\ sources;}
-\DoxyCodeLine{00104\ }
-\DoxyCodeLine{00105\ \ \ \textcolor{comment}{/*\ Node\ voltages:\ allocated\ once\ per\ node\ count\ (nodes\ never\ change\ between\ solutions).\ */}}
-\DoxyCodeLine{00106\ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}\ ==\ NULL)\ \{}
-\DoxyCodeLine{00107\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)calloc((\textcolor{keywordtype}{size\_t})circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
-\DoxyCodeLine{00108\ \ \ \}}
-\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ elements\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ ?\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ :\ 1;}
-\DoxyCodeLine{00110\ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}\ ==\ NULL\ ||\ !reserve(\&circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}},\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a63cba923586aef88ccf7cb9e652507df}{result\_capacity}},\ elements))\ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00112\ \ \ \}}
-\DoxyCodeLine{00113\ \ \ memset(circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}},\ 0,\ (\textcolor{keywordtype}{size\_t})circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
-\DoxyCodeLine{00114\ \ \ memset(circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}},\ 0,\ elements\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
-\DoxyCodeLine{00115\ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)\ \{}
-\DoxyCodeLine{00116\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00118\ \ \ \}}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00120\ \ \ \textcolor{comment}{/*\ Augmented\ matrix\ n\ x\ (n\ +\ 1),\ row-\/major.\ */}}
-\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ width\ =\ (size\_t)n\ +\ 1;}
-\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}\ (!reserve(\&circuit-\/>\mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}},\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a066a8f721f1bb99cc08c917cf0c3110b}{matrix\_capacity}},\ (\textcolor{keywordtype}{size\_t})n\ *\ width))\ \{}
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00124\ \ \ \}}
-\DoxyCodeLine{00125\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ m\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}};}
-\DoxyCodeLine{00126\ \ \ memset(m,\ 0,\ (\textcolor{keywordtype}{size\_t})n\ *\ width\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
-\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ M(r,\ c)\ m[(size\_t)(r)\ *\ width\ +\ (size\_t)(c)]}}
-\DoxyCodeLine{00128\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ nodes;\ k++)\ \{}
-\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(k,\ k).re\ +=\ gmin;}
-\DoxyCodeLine{00130\ \ \ \}}
-\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{int}\ source\_row\ =\ nodes;}
-\DoxyCodeLine{00132\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
-\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ e\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
-\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ a\ =\ e-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ -\/\ 1;\ \textcolor{comment}{/*\ -\/1\ =\ earth\ */}}
-\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ b\ =\ e-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ -\/\ 1;}
-\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{switch}\ (e-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}})\ \{}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}}:}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0)\ \{}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ a)\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ a),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >=\ 0)\ \{}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ b)\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ b),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0\ \&\&\ b\ >=\ 0)\ \{}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ b)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ b),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ a)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ a),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}}:}
-\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ value\ leaves\ node\ a\ and\ enters\ node\ b\ */}}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0)\ \{}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ n)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ n),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >=\ 0)\ \{}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ n)\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ n),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}}:\ \{}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ r\ =\ source\_row++;}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ KCL:\ the\ source\ current\ j\ (a\ -\/>\ b)\ leaves\ node\ a\ and\ enters\ node\ b\ */}}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0)\ \{}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ r).re\ +=\ 1.0;}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ a).re\ +=\ 1.0;}
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >=\ 0)\ \{}
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ r).re\ -\/=\ 1.0;}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ b).re\ -\/=\ 1.0;}
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ n)\ =\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}};}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00172\ \ \ \ \ \}}
-\DoxyCodeLine{00173\ \ \ \}}
-\DoxyCodeLine{00174\ }
-\DoxyCodeLine{00175\ \ \ \textcolor{comment}{/*\ Gaussian\ elimination\ with\ partial\ pivoting.\ */}}
-\DoxyCodeLine{00176\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ n\ \&\&\ ok;\ col++)\ \{}
-\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{int}\ pivot\ =\ col;}
-\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{double}\ best\ =\ \mbox{\hyperlink{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b}{el\_abs2}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ col));}
-\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ r\ =\ col\ +\ 1;\ r\ <\ n;\ r++)\ \{}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ magnitude\ =\ \mbox{\hyperlink{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b}{el\_abs2}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ col));}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (magnitude\ >\ best)\ \{}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ best\ =\ magnitude;}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ pivot\ =\ r;}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00186\ \ \ \ \ \}}
-\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{if}\ (best\ <\ 1e-\/36)\ \{}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ ok\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ EL\_PI\ 3.14159265358979323846}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ Cache\ of\ sparse\ orderings\ and\ factorizations\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ A\ few\ topologies\ are\ in\ use\ at\ the\ same\ time\ (the\ network\ itself,\ a\ dimmer}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ measuring\ its\ surroundings,\ a\ measurement),\ so\ several\ analyses\ are\ kept.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ An\ entry\ is\ identified\ by\ its\ admittance\ elements\ (nodes\ in\ order);\ it}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ keeps\ the\ values\ of\ its\ last\ factorization\ to\ skip\ refactorizing.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ SPARSE\_CACHE\_ENTRIES\ 4}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structSparseEntry_a90c9cc5f520bef304fefbb152b640de3}{count}};\ \ \ \ \ \textcolor{comment}{/*\ admittance\ elements\ */}}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}};\ \ \ \ \ \ \ \textcolor{comment}{/*\ a,\ b\ per\ admittance\ element\ */}}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}};\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ pair\ index\ per\ admittance\ element,\ -\/1\ =\ no\ off-\/diagonal\ entry\ */}}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ \mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}};\ \textcolor{comment}{/*\ values\ of\ the\ last\ factorization\ */}}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structSparseEntry_a4b7229c1b6e18e2600150ea2bb87ed77}{gmin}};}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structSparseEntry_a554dd34117e813584205b9bede1b89ad}{factored}};}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ \mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}};}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structSparseEntry_a0974859c8fef43ea3e412327b10b18dc}{used}};}
+\DoxyCodeLine{00032\ \}\ \mbox{\hyperlink{structSparseEntry}{SparseEntry}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{structSparseEntry}{SparseEntry}}\ \mbox{\hyperlink{structSparseCache_a863698618954c1393325dfe0f0221719}{entries}}[\mbox{\hyperlink{el__circuit_8c_a40a8f8c033fd138ff32757b5239ad30f}{SPARSE\_CACHE\_ENTRIES}}];}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structSparseCache_a1d1cd354ce7f2047c323cdfc41b7aa7c}{clock}};}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ \mbox{\hyperlink{structSparseCache_a87091876e68b33fc079583b1b5454b59}{rhs}};}
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structSparseCache_adb0f42e33f77af950491a6f36f65fc5d}{rhs\_capacity}};}
+\DoxyCodeLine{00039\ \}\ \mbox{\hyperlink{structSparseCache}{SparseCache}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}};}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}};}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPairKey_a8a74ac3b6be167b223b5648350bc9cc0}{element}};\ \textcolor{comment}{/*\ index\ among\ the\ admittance\ elements\ */}}
+\DoxyCodeLine{00045\ \}\ \mbox{\hyperlink{structPairKey}{PairKey}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ entry\_free(\mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ e)\ \{}
+\DoxyCodeLine{00048\ \ \ free(e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}});}
+\DoxyCodeLine{00049\ \ \ free(e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}});}
+\DoxyCodeLine{00050\ \ \ free(e-\/>\mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}});}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{el__sparse_8c_aba7d091cb455c079ce1a66f70efd3776}{el\_sparse\_free}}(e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}});}
+\DoxyCodeLine{00052\ \ \ memset(e,\ 0,\ \textcolor{keyword}{sizeof}(*e));}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ cache\_free(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit)\ \{}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{structSparseCache}{SparseCache}}*\ cache\ =\ (\mbox{\hyperlink{structSparseCache}{SparseCache}}*)circuit-\/>\mbox{\hyperlink{structElCircuit_a64fbc5edfdf8bfe1bb3f6755655b943c}{sparse\_cache}};}
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{if}\ (cache\ ==\ NULL)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00059\ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{el__circuit_8c_a40a8f8c033fd138ff32757b5239ad30f}{SPARSE\_CACHE\_ENTRIES}};\ i++)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ entry\_free(\&cache-\/>entries[i]);}
+\DoxyCodeLine{00062\ \ \ \}}
+\DoxyCodeLine{00063\ \ \ free(cache-\/>rhs);}
+\DoxyCodeLine{00064\ \ \ free(cache);}
+\DoxyCodeLine{00065\ \ \ circuit-\/>sparse\_cache\ =\ NULL;}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ compare\_pair(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ b)\ \{}
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structPairKey}{PairKey}}*\ x\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structPairKey}{PairKey}}*)a;}
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structPairKey}{PairKey}}*\ y\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structPairKey}{PairKey}}*)b;}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordflow}{if}\ (x-\/>\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}}\ !=\ y-\/>\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}})\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ (x-\/>\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}}\ >\ y-\/>\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}})\ -\/\ (x-\/>\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}}\ <\ y-\/>\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}});}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordflow}{return}\ (x-\/>\mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}}\ >\ y-\/>\mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}})\ -\/\ (x-\/>\mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}}\ <\ y-\/>\mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}});}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ same\_topology(\textcolor{keyword}{const}\ \mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ e,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{size\_t}\ admittances)\ \{}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordflow}{if}\ (e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}}\ ==\ NULL\ ||\ e-\/>\mbox{\hyperlink{structSparseEntry_a90c9cc5f520bef304fefbb152b640de3}{count}}\ !=\ admittances)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00080\ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{size\_t}\ j\ =\ 0;}
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ element\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ !=\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}})\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}}[2\ *\ j]\ !=\ element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ ||\ e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}}[2\ *\ j\ +\ 1]\ !=\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}})\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ j++;}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{/*\ New\ ordering\ for\ the\ topology\ of\ the\ circuit\ (allocates;\ only\ on\ topology\ changes).\ */}}
+\DoxyCodeLine{00096\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ entry\_build(\mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ e,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{size\_t}\ admittances)\ \{}
+\DoxyCodeLine{00097\ \ \ entry\_free(e);}
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ -\/\ 1;}
+\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ count\ =\ admittances\ ?\ admittances\ :\ 1;}
+\DoxyCodeLine{00100\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}}\ =\ (\textcolor{keywordtype}{int}*)malloc(2\ *\ count\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00101\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}}\ =\ (\textcolor{keywordtype}{int}*)malloc(count\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00102\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}}\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)malloc(count\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00103\ \ \ \mbox{\hyperlink{structPairKey}{PairKey}}*\ keys\ =\ (\mbox{\hyperlink{structPairKey}{PairKey}}*)malloc(count\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structPairKey}{PairKey}}));}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{int}*\ pair\_a\ =\ (\textcolor{keywordtype}{int}*)malloc(count\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{int}*\ pair\_b\ =\ (\textcolor{keywordtype}{int}*)malloc(count\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}}\ \&\&\ e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}}\ \&\&\ e-\/>\mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}}\ \&\&\ keys\ \&\&\ pair\_a\ \&\&\ pair\_b;}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{size\_t}\ key\_count\ =\ 0;}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{size\_t}\ j\ =\ 0;}
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ ok\ \&\&\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ element\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ !=\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}})\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}}[2\ *\ j]\ =\ element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}};}
+\DoxyCodeLine{00115\ \ \ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a075a1414c074ad663586d6171f5da42f}{nodes}}[2\ *\ j\ +\ 1]\ =\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}};}
+\DoxyCodeLine{00116\ \ \ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}}[j]\ =\ -\/1;}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ >\ 0\ \&\&\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ >\ 0\ \&\&\ element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ !=\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}})\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ a\ =\ element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ -\/\ 1;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ b\ =\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ -\/\ 1;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ keys[key\_count].\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}}\ =\ a\ <\ b\ ?\ a\ :\ b;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ keys[key\_count].\mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}}\ =\ a\ <\ b\ ?\ b\ :\ a;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ keys[key\_count].\mbox{\hyperlink{structPairKey_a8a74ac3b6be167b223b5648350bc9cc0}{element}}\ =\ (int)j;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ key\_count++;}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ j++;}
+\DoxyCodeLine{00126\ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordtype}{size\_t}\ pairs\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordflow}{if}\ (ok)\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ qsort(keys,\ key\_count,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structPairKey}{PairKey}}),\ compare\_pair);}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ key\_count;\ k++)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pairs\ ==\ 0\ ||\ keys[k].lo\ !=\ pair\_a[pairs\ -\/\ 1]\ ||\ keys[k].hi\ !=\ pair\_b[pairs\ -\/\ 1])\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ pair\_a[pairs]\ =\ keys[k].\mbox{\hyperlink{structPairKey_aa3355275767c1e57a8b9d3f4ec336d1b}{lo}};}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ pair\_b[pairs]\ =\ keys[k].\mbox{\hyperlink{structPairKey_af8e29d3893880126b68f59cbee05ad81}{hi}};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ pairs++;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}}[keys[k].\mbox{\hyperlink{structPairKey_a8a74ac3b6be167b223b5648350bc9cc0}{element}}]\ =\ (int)pairs\ -\/\ 1;}
+\DoxyCodeLine{00137\ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}}\ =\ \mbox{\hyperlink{el__sparse_8c_a69bb3d164136c18aea8eb5daaafae212}{el\_sparse\_analyze}}(n,\ pair\_a,\ pair\_b,\ pairs);}
+\DoxyCodeLine{00139\ \ \ \ \ ok\ =\ e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}}\ !=\ NULL;}
+\DoxyCodeLine{00140\ \ \ \}}
+\DoxyCodeLine{00141\ \ \ free(keys);}
+\DoxyCodeLine{00142\ \ \ free(pair\_a);}
+\DoxyCodeLine{00143\ \ \ free(pair\_b);}
+\DoxyCodeLine{00144\ \ \ \textcolor{keywordflow}{if}\ (!ok)\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ entry\_free(e);}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00147\ \ \ \}}
+\DoxyCodeLine{00148\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a90c9cc5f520bef304fefbb152b640de3}{count}}\ =\ admittances;}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ values\_unchanged(\textcolor{keyword}{const}\ \mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ e,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{double}\ gmin)\ \{}
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordflow}{if}\ (!e-\/>\mbox{\hyperlink{structSparseEntry_a554dd34117e813584205b9bede1b89ad}{factored}}\ ||\ e-\/>\mbox{\hyperlink{structSparseEntry_a4b7229c1b6e18e2600150ea2bb87ed77}{gmin}}\ !=\ gmin)\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00155\ \ \ \}}
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordtype}{size\_t}\ j\ =\ 0;}
+\DoxyCodeLine{00157\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ element\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ !=\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}})\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{if}\ (e-\/>\mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}}[j].\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ !=\ element-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}}.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ ||\ e-\/>\mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}}[j].\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}}\ !=\ element-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}}.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}})\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ j++;}
+\DoxyCodeLine{00166\ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00168\ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ entry\_factor(\mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ e,\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{double}\ gmin)\ \{}
+\DoxyCodeLine{00171\ \ \ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ s\ =\ e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}};}
+\DoxyCodeLine{00172\ \ \ \mbox{\hyperlink{el__sparse_8c_a2beb6ffc4b11b53b12e321cd5f370da0}{el\_sparse\_clear}}(s);}
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ s-\/>\mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}};\ k++)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{el__sparse_8c_ab3a772576d6b46995d591c4fa21233bc}{el\_sparse\_add\_diagonal}}(s,\ k,\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(gmin,\ 0.0));}
+\DoxyCodeLine{00175\ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \textcolor{keywordtype}{size\_t}\ j\ =\ 0;}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ element\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ !=\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}})\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00181\ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ y\ =\ element-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}};}
+\DoxyCodeLine{00183\ \ \ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a2908942eb7a7d083d54f6d173db4ec25}{values}}[j]\ =\ y;}
+\DoxyCodeLine{00184\ \ \ \ \ j++;}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ ==\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}})\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ \textcolor{comment}{/*\ from\ a\ node\ to\ itself:\ no\ effect\ */}}
+\DoxyCodeLine{00187\ \ \ \ \ \}}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ >\ 0)\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \mbox{\hyperlink{el__sparse_8c_ab3a772576d6b46995d591c4fa21233bc}{el\_sparse\_add\_diagonal}}(s,\ element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ -\/\ 1,\ y);}
 \DoxyCodeLine{00190\ \ \ \ \ \}}
-\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{if}\ (pivot\ !=\ col)\ \{}
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ col;\ c\ <=\ n;\ c++)\ \{}
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ t\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ c);}
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ c)\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(pivot,\ c);}
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(pivot,\ c)\ =\ t;}
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00197\ \ \ \ \ \}}
-\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ diagonal\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ col);}
-\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ r\ =\ col\ +\ 1;\ r\ <\ n;\ r++)\ \{}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ below\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ col);}
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (below.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ ==\ 0.0\ \&\&\ below.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}}\ ==\ 0.0)\ \{}
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ factor\ =\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(below,\ diagonal);}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ col;\ c\ <=\ n;\ c++)\ \{}
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ c)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ c),\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(factor,\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ c)));}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00208\ \ \ \ \ \}}
-\DoxyCodeLine{00209\ \ \ \}}
-\DoxyCodeLine{00210\ \ \ \textcolor{keywordflow}{if}\ (ok)\ \{}
-\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ r\ =\ n\ -\/\ 1;\ r\ >=\ 0;\ r-\/-\/)\ \{}
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ sum\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ n);}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ r\ +\ 1;\ c\ <\ n;\ c++)\ \{}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ sum\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(sum,\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ c),\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(c,\ n)));\ \textcolor{comment}{/*\ M(c,\ n)\ holds\ the\ solution\ of\ row\ c\ */}}
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ n)\ =\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(sum,\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ r));}
-\DoxyCodeLine{00217\ \ \ \ \ \}}
-\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ nodes;\ k++)\ \{}
-\DoxyCodeLine{00219\ \ \ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}[k\ +\ 1]\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(k,\ n);}
-\DoxyCodeLine{00220\ \ \ \ \ \}}
-\DoxyCodeLine{00221\ \ \ \ \ source\_row\ =\ nodes;}
-\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i].\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}})\ \{}
-\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}}[i]\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(source\_row,\ n);}
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ source\_row++;}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00227\ \ \ \ \ \}}
-\DoxyCodeLine{00228\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00229\ \ \ \}}
-\DoxyCodeLine{00230\ \textcolor{preprocessor}{\#undef\ M}}
-\DoxyCodeLine{00231\ \ \ \textcolor{keywordflow}{return}\ ok;}
-\DoxyCodeLine{00232\ \}}
-\DoxyCodeLine{00233\ }
-\DoxyCodeLine{00234\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ node)\ \{}
-\DoxyCodeLine{00235\ \ \ \textcolor{keywordflow}{if}\ (!circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ ||\ node\ <=\ 0\ ||\ node\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}})\ \{}
-\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
-\DoxyCodeLine{00237\ \ \ \}}
-\DoxyCodeLine{00238\ \ \ \textcolor{keywordflow}{return}\ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}[node];}
-\DoxyCodeLine{00239\ \}}
-\DoxyCodeLine{00240\ }
-\DoxyCodeLine{00241\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ \mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ element)\ \{}
-\DoxyCodeLine{00242\ \ \ \textcolor{keywordflow}{if}\ (!circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ ||\ element\ <\ 0\ ||\ (\textcolor{keywordtype}{size\_t})element\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}})\ \{}
-\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
-\DoxyCodeLine{00244\ \ \ \}}
-\DoxyCodeLine{00245\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ e\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[element];}
-\DoxyCodeLine{00246\ \ \ \textcolor{keywordflow}{switch}\ (e-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}})\ \{}
-\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}}:}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}},\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(circuit,\ e-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}),\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(circuit,\ e-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}})));}
-\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}}:}
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}};}
-\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}}:}
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}}[element];}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ >\ 0)\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \mbox{\hyperlink{el__sparse_8c_ab3a772576d6b46995d591c4fa21233bc}{el\_sparse\_add\_diagonal}}(s,\ element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ -\/\ 1,\ y);}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{if}\ (e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}}[j\ -\/\ 1]\ >=\ 0)\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \mbox{\hyperlink{el__sparse_8c_ac828c9294e57254165430f97fc4ff729}{el\_sparse\_add\_pair}}(s,\ (\textcolor{keywordtype}{size\_t})e-\/>\mbox{\hyperlink{structSparseEntry_af72eb7164f0a6c246b012b00ce06da41}{pair}}[j\ -\/\ 1],\ \mbox{\hyperlink{el__circuit_8h_acbd894f65d806fda72d76be8273696d2}{el\_scale}}(y,\ -\/1.0));}
+\DoxyCodeLine{00196\ \ \ \ \ \}}
+\DoxyCodeLine{00197\ \ \ \}}
+\DoxyCodeLine{00198\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a4b7229c1b6e18e2600150ea2bb87ed77}{gmin}}\ =\ gmin;}
+\DoxyCodeLine{00199\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a554dd34117e813584205b9bede1b89ad}{factored}}\ =\ \mbox{\hyperlink{el__sparse_8c_ae1e7cef7d6d5295eb6bed7f6c67567ad}{el\_sparse\_factor}}(s,\ gmin\ >\ 0.0\ ?\ gmin\ :\ 1e-\/12);}
+\DoxyCodeLine{00200\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_ac7ebcf1cc1bc986eca6af1c286233c0a}{factorizations}}++;}
+\DoxyCodeLine{00201\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a15d8b380bdfa6ae82a6f8278a3b777dd}{perturbed\_pivots}}\ =\ s-\/>\mbox{\hyperlink{structElSparse_ab1336582ed57d52950018ee4d8c08948}{perturbed}};}
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordflow}{return}\ e-\/>\mbox{\hyperlink{structSparseEntry_a554dd34117e813584205b9bede1b89ad}{factored}};}
+\DoxyCodeLine{00203\ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{comment}{/*\ Nodal\ analysis\ with\ the\ sparse\ solver;\ false\ if\ it\ cannot\ be\ used\ (the\ caller\ falls\ back\ to\ dense).\ */}}
+\DoxyCodeLine{00206\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ solve\_sparse(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{double}\ gmin)\ \{}
+\DoxyCodeLine{00207\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ -\/\ 1;}
+\DoxyCodeLine{00208\ \ \ \mbox{\hyperlink{structSparseCache}{SparseCache}}*\ cache\ =\ (\mbox{\hyperlink{structSparseCache}{SparseCache}}*)circuit-\/>\mbox{\hyperlink{structElCircuit_a64fbc5edfdf8bfe1bb3f6755655b943c}{sparse\_cache}};}
+\DoxyCodeLine{00209\ \ \ \textcolor{keywordflow}{if}\ (cache\ ==\ NULL)\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ cache\ =\ (\mbox{\hyperlink{structSparseCache}{SparseCache}}*)calloc(1,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structSparseCache}{SparseCache}}));}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{if}\ (cache\ ==\ NULL)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a64fbc5edfdf8bfe1bb3f6755655b943c}{sparse\_cache}}\ =\ cache;}
+\DoxyCodeLine{00215\ \ \ \}}
+\DoxyCodeLine{00216\ \ \ \textcolor{keywordtype}{size\_t}\ admittances\ =\ 0;}
+\DoxyCodeLine{00217\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00218\ \ \ \ \ admittances\ +=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i].\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}};}
+\DoxyCodeLine{00219\ \ \ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ e\ =\ NULL;}
+\DoxyCodeLine{00222\ \ \ \mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ oldest\ =\ \&cache-\/>entries[0];}
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{el__circuit_8c_a40a8f8c033fd138ff32757b5239ad30f}{SPARSE\_CACHE\_ENTRIES}};\ i++)\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{structSparseEntry}{SparseEntry}}*\ candidate\ =\ \&cache-\/>entries[i];}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordflow}{if}\ (same\_topology(candidate,\ circuit,\ admittances))\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ e\ =\ candidate;}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{if}\ (candidate-\/>\mbox{\hyperlink{structSparseEntry_a0974859c8fef43ea3e412327b10b18dc}{used}}\ <\ oldest-\/>\mbox{\hyperlink{structSparseEntry_a0974859c8fef43ea3e412327b10b18dc}{used}})\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ oldest\ =\ candidate;}
+\DoxyCodeLine{00231\ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \}}
+\DoxyCodeLine{00233\ \ \ \textcolor{keywordflow}{if}\ (e\ ==\ NULL)\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ e\ =\ oldest;}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordflow}{if}\ (!entry\_build(e,\ circuit,\ admittances))\ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00237\ \ \ \ \ \}}
+\DoxyCodeLine{00238\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a9104f917c46ffa54e691f815d32e61c8}{analyses}}++;}
+\DoxyCodeLine{00239\ \ \ \}}
+\DoxyCodeLine{00240\ \ \ e-\/>\mbox{\hyperlink{structSparseEntry_a0974859c8fef43ea3e412327b10b18dc}{used}}\ =\ ++cache-\/>clock;}
+\DoxyCodeLine{00241\ \ \ \textcolor{keywordflow}{if}\ (!values\_unchanged(e,\ circuit,\ gmin)\ \&\&\ !entry\_factor(e,\ circuit,\ gmin))\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00243\ \ \ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ size\ =\ (size\_t)(n\ >\ 0\ ?\ n\ :\ 1);}
+\DoxyCodeLine{00246\ \ \ \textcolor{keywordflow}{if}\ (size\ >\ cache-\/>rhs\_capacity\ ||\ cache-\/>rhs\ ==\ NULL)\ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ grown\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)realloc(cache-\/>rhs,\ size\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00250\ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \ \ cache-\/>rhs\ =\ grown;}
+\DoxyCodeLine{00252\ \ \ \ \ cache-\/>rhs\_capacity\ =\ size;}
 \DoxyCodeLine{00253\ \ \ \}}
-\DoxyCodeLine{00254\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
-\DoxyCodeLine{00255\ \}}
+\DoxyCodeLine{00254\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ x\ =\ cache-\/>rhs;}
+\DoxyCodeLine{00255\ \ \ memset(x,\ 0,\ size\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00256\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ element\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}})\ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \textcolor{comment}{/*\ value\ leaves\ node\ a\ and\ enters\ node\ b\ */}}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ >\ 0)\ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ x[element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ -\/\ 1]\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(x[element-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ -\/\ 1],\ element-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ >\ 0)\ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ x[element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ -\/\ 1]\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(x[element-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ -\/\ 1],\ element-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \}}
+\DoxyCodeLine{00268\ \ \ \mbox{\hyperlink{el__sparse_8c_a6b8805597b6bd4fd29cb16fd469e4c2e}{el\_sparse\_solve}}(e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}},\ x);}
+\DoxyCodeLine{00269\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ n;\ k++)\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}[k\ +\ 1]\ =\ x[k];}
+\DoxyCodeLine{00271\ \ \ \}}
+\DoxyCodeLine{00272\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_aa06835a5881f6fb7287c150563ff1e2e}{fill}}\ =\ \mbox{\hyperlink{el__sparse_8c_ab491ecd08c1b1bfa064f024670dca2c0}{el\_sparse\_nonzeros}}(e-\/>\mbox{\hyperlink{structSparseEntry_a21b9eb02bb491092695053875f7c2e9f}{sparse}});}
+\DoxyCodeLine{00273\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a2702132c50b2831719c23bf4923b7ade}{sparse\_solutions}}++;}
+\DoxyCodeLine{00274\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00275\ \}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__circuit_8c_a62c7a6f47abdcce85724b320c45b4a50}{el\_circuit\_init}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ nodes)\ \{}
+\DoxyCodeLine{00278\ \ \ memset(circuit,\ 0,\ \textcolor{keyword}{sizeof}(*circuit));}
+\DoxyCodeLine{00279\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ =\ nodes\ >\ 1\ ?\ nodes\ :\ 1;}
+\DoxyCodeLine{00280\ \}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__circuit_8c_a00eb846edc75b9940b3ce2837012fefd}{el\_circuit\_free}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit)\ \{}
+\DoxyCodeLine{00283\ \ \ cache\_free(circuit);}
+\DoxyCodeLine{00284\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}});}
+\DoxyCodeLine{00285\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}});}
+\DoxyCodeLine{00286\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}});}
+\DoxyCodeLine{00287\ \ \ free(circuit-\/>\mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}});}
+\DoxyCodeLine{00288\ \ \ memset(circuit,\ 0,\ \textcolor{keyword}{sizeof}(*circuit));}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__circuit_8c_a768a15ac6aad2f8ce889490fd5c24b9d}{el\_circuit\_clear}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit)\ \{}
+\DoxyCodeLine{00292\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ =\ 0;}
+\DoxyCodeLine{00293\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00294\ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{\ \textcolor{keywordflow}{return}\ hypot(value.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}},\ value.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}});\ \}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{el__circuit_8c_a304ba7a951f2d06a166a2a18b5a6e1eb}{el\_angle\_deg}}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{\ \textcolor{keywordflow}{return}\ atan2(value.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}},\ value.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}})\ *\ 180.0\ /\ \mbox{\hyperlink{el__circuit_8c_a3bfadf1e10676fd6f03770f9e8c00a87}{EL\_PI}};\ \}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ \mbox{\hyperlink{el__circuit_8c_a677ff6b008cbe1b748037cd3a19c2ab0}{el\_polar}}(\textcolor{keywordtype}{double}\ magnitude,\ \textcolor{keywordtype}{double}\ degrees)\ \{}
+\DoxyCodeLine{00301\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ radians\ =\ degrees\ *\ \mbox{\hyperlink{el__circuit_8c_a3bfadf1e10676fd6f03770f9e8c00a87}{EL\_PI}}\ /\ 180.0;}
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(magnitude\ *\ cos(radians),\ magnitude\ *\ sin(radians));}
+\DoxyCodeLine{00303\ \}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ add(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6}{ElElementKind}}\ kind,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value)\ \{}
+\DoxyCodeLine{00306\ \ \ \textcolor{keywordflow}{if}\ (a\ <\ 0\ ||\ b\ <\ 0\ ||\ a\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ ||\ b\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}})\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00308\ \ \ \}}
+\DoxyCodeLine{00309\ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ ==\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}})\ \{}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ capacity\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}\ ?\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}\ *\ 2\ :\ 64;}
+\DoxyCodeLine{00311\ \ \ \ \ \mbox{\hyperlink{structElElement}{ElElement}}*\ grown\ =\ (\mbox{\hyperlink{structElElement}{ElElement}}*)realloc(circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}},\ capacity\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElElement}{ElElement}}));}
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00314\ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}\ =\ grown;}
+\DoxyCodeLine{00316\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_ad2995199a0ed196640e298abbca791ad}{capacity}}\ =\ capacity;}
+\DoxyCodeLine{00317\ \ \ \}}
+\DoxyCodeLine{00318\ \ \ \mbox{\hyperlink{structElElement}{ElElement}}*\ e\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}];}
+\DoxyCodeLine{00319\ \ \ e-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ =\ kind;}
+\DoxyCodeLine{00320\ \ \ e-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ =\ a;}
+\DoxyCodeLine{00321\ \ \ e-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ =\ b;}
+\DoxyCodeLine{00322\ \ \ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}}\ =\ value;}
+\DoxyCodeLine{00323\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00324\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}++;}
+\DoxyCodeLine{00325\ \}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_a7c61493953820dc19b26f13d76142dc5}{el\_circuit\_add\_admittance}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ admittance)\ \{}
+\DoxyCodeLine{00328\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}},\ a,\ b,\ admittance);}
+\DoxyCodeLine{00329\ \}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_a45adc8ec37724e3c0bbd6857034e7095}{el\_circuit\_add\_impedance}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ impedance)\ \{}
+\DoxyCodeLine{00332\ \ \ \textcolor{comment}{/*\ A\ zero\ impedance\ would\ be\ infinite\ admittance:\ clamp\ to\ 1\ micro-\/ohm.\ */}}
+\DoxyCodeLine{00333\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{el__circuit_8c_a2b708d8e154ccd8a1b91a2e3a3c16d9d}{el\_abs}}(impedance)\ <\ 1e-\/6)\ \{}
+\DoxyCodeLine{00334\ \ \ \ \ impedance\ =\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(1e-\/6,\ 0.0);}
+\DoxyCodeLine{00335\ \ \ \}}
+\DoxyCodeLine{00336\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}},\ a,\ b,\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(\mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(1.0,\ 0.0),\ impedance));}
+\DoxyCodeLine{00337\ \}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_aa856fcc86775dd59fd4109040cddb331}{el\_circuit\_add\_resistance}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \textcolor{keywordtype}{double}\ ohm)\ \{}
+\DoxyCodeLine{00340\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8c_a45adc8ec37724e3c0bbd6857034e7095}{el\_circuit\_add\_impedance}}(circuit,\ a,\ b,\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(ohm,\ 0.0));}
+\DoxyCodeLine{00341\ \}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_ae4feaeaff528a4b65be07f77810fff69}{el\_circuit\_add\_voltage\_source}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ voltage)\ \{}
+\DoxyCodeLine{00344\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}},\ a,\ b,\ voltage);}
+\DoxyCodeLine{00345\ \}}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{el__circuit_8c_a4c47c7c49005ad928a0cbf1ed8a07337}{el\_circuit\_add\_current\_source}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ current)\ \{}
+\DoxyCodeLine{00348\ \ \ \textcolor{keywordflow}{return}\ add(circuit,\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}},\ a,\ b,\ current);}
+\DoxyCodeLine{00349\ \}}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \textcolor{comment}{/*\ Makes\ sure\ *buffer\ holds\ at\ least\ count\ phasors;\ keeps\ the\ memory\ between\ solutions.\ */}}
+\DoxyCodeLine{00352\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ reserve(\mbox{\hyperlink{structElPhasor}{ElPhasor}}**\ buffer,\ \textcolor{keywordtype}{size\_t}*\ capacity,\ \textcolor{keywordtype}{size\_t}\ count)\ \{}
+\DoxyCodeLine{00353\ \ \ \textcolor{keywordflow}{if}\ (count\ <=\ *capacity\ \&\&\ *buffer\ !=\ NULL)\ \{}
+\DoxyCodeLine{00354\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00355\ \ \ \}}
+\DoxyCodeLine{00356\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ grown\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)realloc(*buffer,\ count\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00357\ \ \ \textcolor{keywordflow}{if}\ (grown\ ==\ NULL)\ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00359\ \ \ \}}
+\DoxyCodeLine{00360\ \ \ *buffer\ =\ grown;}
+\DoxyCodeLine{00361\ \ \ *capacity\ =\ count;}
+\DoxyCodeLine{00362\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00363\ \}}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__circuit_8c_a70d6c19633c7e5d90345a6cad44f00dd}{el\_circuit\_solve}}(\mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{double}\ gmin)\ \{}
+\DoxyCodeLine{00366\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00367\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nodes\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ -\/\ 1;\ \textcolor{comment}{/*\ unknown\ node\ voltages\ (without\ earth)\ */}}
+\DoxyCodeLine{00368\ \ \ \textcolor{keywordtype}{int}\ sources\ =\ 0;}
+\DoxyCodeLine{00369\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ sources\ +=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i].\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}};}
+\DoxyCodeLine{00371\ \ \ \}}
+\DoxyCodeLine{00372\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n\ =\ nodes\ +\ sources;}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \ \ \textcolor{comment}{/*\ Node\ voltages:\ allocated\ once\ per\ node\ count\ (nodes\ never\ change\ between\ solutions).\ */}}
+\DoxyCodeLine{00375\ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}\ ==\ NULL)\ \{}
+\DoxyCodeLine{00376\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}\ =\ (\mbox{\hyperlink{structElPhasor}{ElPhasor}}*)calloc((\textcolor{keywordtype}{size\_t})circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}},\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00377\ \ \ \}}
+\DoxyCodeLine{00378\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ elements\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ ?\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}}\ :\ 1;}
+\DoxyCodeLine{00379\ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}\ ==\ NULL\ ||\ !reserve(\&circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}},\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a63cba923586aef88ccf7cb9e652507df}{result\_capacity}},\ elements))\ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00381\ \ \ \}}
+\DoxyCodeLine{00382\ \ \ memset(circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}},\ 0,\ (\textcolor{keywordtype}{size\_t})circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}}\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00383\ \ \ memset(circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}},\ 0,\ elements\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00384\ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)\ \{}
+\DoxyCodeLine{00385\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00387\ \ \ \}}
+\DoxyCodeLine{00388\ \ \ \textcolor{keywordflow}{if}\ (sources\ ==\ 0\ \&\&\ circuit-\/>\mbox{\hyperlink{structElCircuit_af86d4a80f1786d83cfad52e233760f1d}{solver}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf}{EL\_SOLVER\_AUTO}}\ \&\&\ solve\_sparse(circuit,\ gmin))\ \{}
+\DoxyCodeLine{00389\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00391\ \ \ \}}
+\DoxyCodeLine{00392\ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a65bdcf0d04ad5ac534ff2598b7971b5c}{dense\_solutions}}++;}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \textcolor{comment}{/*\ Dense\ modified\ nodal\ analysis.\ Augmented\ matrix\ n\ x\ (n\ +\ 1),\ row-\/major.\ */}}
+\DoxyCodeLine{00395\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ width\ =\ (size\_t)n\ +\ 1;}
+\DoxyCodeLine{00396\ \ \ \textcolor{keywordflow}{if}\ (!reserve(\&circuit-\/>\mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}},\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a066a8f721f1bb99cc08c917cf0c3110b}{matrix\_capacity}},\ (\textcolor{keywordtype}{size\_t})n\ *\ width))\ \{}
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00398\ \ \ \}}
+\DoxyCodeLine{00399\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ m\ =\ circuit-\/>\mbox{\hyperlink{structElCircuit_ac79685419c1910bcc752b7595f13158a}{matrix}};}
+\DoxyCodeLine{00400\ \ \ memset(m,\ 0,\ (\textcolor{keywordtype}{size\_t})n\ *\ width\ *\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structElPhasor}{ElPhasor}}));}
+\DoxyCodeLine{00401\ \textcolor{preprocessor}{\#define\ M(r,\ c)\ m[(size\_t)(r)\ *\ width\ +\ (size\_t)(c)]}}
+\DoxyCodeLine{00402\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ nodes;\ k++)\ \{}
+\DoxyCodeLine{00403\ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(k,\ k).re\ +=\ gmin;}
+\DoxyCodeLine{00404\ \ \ \}}
+\DoxyCodeLine{00405\ \ \ \textcolor{keywordtype}{int}\ source\_row\ =\ nodes;}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ e\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i];}
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ a\ =\ e-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}\ -\/\ 1;\ \textcolor{comment}{/*\ -\/1\ =\ earth\ */}}
+\DoxyCodeLine{00409\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ b\ =\ e-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}}\ -\/\ 1;}
+\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keywordflow}{switch}\ (e-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}})\ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}}:}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0)\ \{}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ a)\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ a),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >=\ 0)\ \{}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ b)\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ b),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0\ \&\&\ b\ >=\ 0)\ \{}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ b)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ b),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ a)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ a),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}}:}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ value\ leaves\ node\ a\ and\ enters\ node\ b\ */}}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0)\ \{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ n)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ n),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >=\ 0)\ \{}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ n)\ =\ \mbox{\hyperlink{el__circuit_8h_a1bd8255d9a221a6918122ad3d625a48a}{el\_add}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ n),\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}});}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}}:\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ r\ =\ source\_row++;}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ KCL:\ the\ source\ current\ j\ (a\ -\/>\ b)\ leaves\ node\ a\ and\ enters\ node\ b\ */}}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a\ >=\ 0)\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(a,\ r).re\ +=\ 1.0;}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ a).re\ +=\ 1.0;}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (b\ >=\ 0)\ \{}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(b,\ r).re\ -\/=\ 1.0;}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ b).re\ -\/=\ 1.0;}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ n)\ =\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}};}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00446\ \ \ \ \ \}}
+\DoxyCodeLine{00447\ \ \ \}}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00449\ \ \ \textcolor{comment}{/*\ Gaussian\ elimination\ with\ partial\ pivoting.\ */}}
+\DoxyCodeLine{00450\ \ \ \textcolor{keywordtype}{bool}\ ok\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00451\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ n\ \&\&\ ok;\ col++)\ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \textcolor{keywordtype}{int}\ pivot\ =\ col;}
+\DoxyCodeLine{00453\ \ \ \ \ \textcolor{keywordtype}{double}\ best\ =\ \mbox{\hyperlink{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b}{el\_abs2}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ col));}
+\DoxyCodeLine{00454\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ r\ =\ col\ +\ 1;\ r\ <\ n;\ r++)\ \{}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ magnitude\ =\ \mbox{\hyperlink{el__circuit_8h_a5c5ae96c5ade6e6996d5b3c65bd8812b}{el\_abs2}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ col));}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (magnitude\ >\ best)\ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ best\ =\ magnitude;}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ pivot\ =\ r;}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00460\ \ \ \ \ \}}
+\DoxyCodeLine{00461\ \ \ \ \ \textcolor{keywordflow}{if}\ (best\ <\ 1e-\/36)\ \{}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ ok\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00464\ \ \ \ \ \}}
+\DoxyCodeLine{00465\ \ \ \ \ \textcolor{keywordflow}{if}\ (pivot\ !=\ col)\ \{}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ col;\ c\ <=\ n;\ c++)\ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ t\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ c);}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ c)\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(pivot,\ c);}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(pivot,\ c)\ =\ t;}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00471\ \ \ \ \ \}}
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ diagonal\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ col);}
+\DoxyCodeLine{00473\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ r\ =\ col\ +\ 1;\ r\ <\ n;\ r++)\ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ below\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ col);}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (below.\mbox{\hyperlink{structElPhasor_ac8edc6b813dc119c7faa39fd88eceb25}{re}}\ ==\ 0.0\ \&\&\ below.\mbox{\hyperlink{structElPhasor_a6055ee06e467ad7ddf1b34263e657636}{im}}\ ==\ 0.0)\ \{}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ factor\ =\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(below,\ diagonal);}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ col;\ c\ <=\ n;\ c++)\ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ c)\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ c),\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(factor,\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(col,\ c)));}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \ \ \ \ \}}
+\DoxyCodeLine{00483\ \ \ \}}
+\DoxyCodeLine{00484\ \ \ \textcolor{keywordflow}{if}\ (ok)\ \{}
+\DoxyCodeLine{00485\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ r\ =\ n\ -\/\ 1;\ r\ >=\ 0;\ r-\/-\/)\ \{}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ sum\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ n);}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ r\ +\ 1;\ c\ <\ n;\ c++)\ \{}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ sum\ =\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(sum,\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(\mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ c),\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(c,\ n)));\ \textcolor{comment}{/*\ M(c,\ n)\ holds\ the\ solution\ of\ row\ c\ */}}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ n)\ =\ \mbox{\hyperlink{el__circuit_8h_a7ad86b01a813e19f581ac23255a6145d}{el\_div}}(sum,\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,\ r));}
+\DoxyCodeLine{00491\ \ \ \ \ \}}
+\DoxyCodeLine{00492\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ nodes;\ k++)\ \{}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}[k\ +\ 1]\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(k,\ n);}
+\DoxyCodeLine{00494\ \ \ \ \ \}}
+\DoxyCodeLine{00495\ \ \ \ \ source\_row\ =\ nodes;}
+\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}};\ i++)\ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[i].\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}}\ ==\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}})\ \{}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}}[i]\ =\ \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(source\_row,\ n);}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ source\_row++;}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00501\ \ \ \ \ \}}
+\DoxyCodeLine{00502\ \ \ \ \ circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00503\ \ \ \}}
+\DoxyCodeLine{00504\ \textcolor{preprocessor}{\#undef\ M}}
+\DoxyCodeLine{00505\ \ \ \textcolor{keywordflow}{return}\ ok;}
+\DoxyCodeLine{00506\ \}}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ node)\ \{}
+\DoxyCodeLine{00509\ \ \ \textcolor{keywordflow}{if}\ (!circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ ||\ node\ <=\ 0\ ||\ node\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a3e8c7b22a83d3af2bdd9cd9f04df212e}{nodes}})\ \{}
+\DoxyCodeLine{00510\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
+\DoxyCodeLine{00511\ \ \ \}}
+\DoxyCodeLine{00512\ \ \ \textcolor{keywordflow}{return}\ circuit-\/>\mbox{\hyperlink{structElCircuit_a0d572044cdf19d3f9e94a7fb789ecd1f}{voltages}}[node];}
+\DoxyCodeLine{00513\ \}}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ \mbox{\hyperlink{el__circuit_8c_ad1a2590e3f0e6970b6b0d6fec3cbf839}{el\_circuit\_current}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElCircuit}{ElCircuit}}*\ circuit,\ \textcolor{keywordtype}{int}\ element)\ \{}
+\DoxyCodeLine{00516\ \ \ \textcolor{keywordflow}{if}\ (!circuit-\/>\mbox{\hyperlink{structElCircuit_a7e1524d621eb13750e50d479d72927c5}{solved}}\ ||\ element\ <\ 0\ ||\ (\textcolor{keywordtype}{size\_t})element\ >=\ circuit-\/>\mbox{\hyperlink{structElCircuit_a9dd0c25a8fe9548427095ec7690d6bd0}{count}})\ \{}
+\DoxyCodeLine{00517\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
+\DoxyCodeLine{00518\ \ \ \}}
+\DoxyCodeLine{00519\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structElElement}{ElElement}}*\ e\ =\ \&circuit-\/>\mbox{\hyperlink{structElCircuit_a0a99ea5e7d12da8d3ddb8f4c62f88166}{elements}}[element];}
+\DoxyCodeLine{00520\ \ \ \textcolor{keywordflow}{switch}\ (e-\/>\mbox{\hyperlink{structElElement_a27f107bf9e4c8955f1657d2d919f5297}{kind}})\ \{}
+\DoxyCodeLine{00521\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a7ff49cffbbe6a882ca521c67e174fe0b}{EL\_ADMITTANCE}}:}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_a3cb295ae2ca20b84cbf55e9d05e2c45c}{el\_mul}}(e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}},\ \mbox{\hyperlink{el__circuit_8h_af0593f8464b78ec3eeb6e32449758e41}{el\_sub}}(\mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(circuit,\ e-\/>\mbox{\hyperlink{structElElement_ace3436a5e8f0c4a368cd70d5027556e8}{a}}),\ \mbox{\hyperlink{el__circuit_8c_ace9acacd9f3a6ed71f5d57953d3d7bad}{el\_circuit\_voltage}}(circuit,\ e-\/>\mbox{\hyperlink{structElElement_a598f37f20a37c292b8a66ba5aed0e8da}{b}})));}
+\DoxyCodeLine{00523\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6a9446a1c8a85668cae469635055347f93}{EL\_CURRENT\_SOURCE}}:}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ e-\/>\mbox{\hyperlink{structElElement_a46f8cfa92176023a7ab393a398fa9e2e}{value}};}
+\DoxyCodeLine{00525\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{el__circuit_8h_a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95}{EL\_VOLTAGE\_SOURCE}}:}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ circuit-\/>\mbox{\hyperlink{structElCircuit_ad056e072d14b92e676662096d0302afa}{source\_currents}}[element];}
+\DoxyCodeLine{00527\ \ \ \}}
+\DoxyCodeLine{00528\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{el__circuit_8h_ad44c91dc2439e4af39a40ef822a9173e}{el\_phasor}}(0.0,\ 0.0);}
+\DoxyCodeLine{00529\ \}}
 
 \end{DoxyCode}

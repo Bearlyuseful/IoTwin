@@ -1,0 +1,131 @@
+\doxysection{El\+Sparse Struct Reference}
+\hypertarget{structElSparse}{}\label{structElSparse}\index{ElSparse@{ElSparse}}
+
+
+{\ttfamily \#include $<$el\+\_\+sparse.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\+\_\+start}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\+\_\+index}}
+\item 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}}
+\item 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\+\_\+start}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\+\_\+entry}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\+\_\+col}}
+\item 
+int \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\+\_\+pos}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElSparse_a0b0edcdb282abc7282d95d507beb5f76}{pairs}}
+\item 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structElSparse_ab1336582ed57d52950018ee4d8c08948}{perturbed}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structElSparse_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structElSparse_a661587806b77dcd61daa45c2cfd0b816}\index{ElSparse@{ElSparse}!col\_start@{col\_start}}
+\index{col\_start@{col\_start}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{col\_start}{col\_start}}
+{\footnotesize\ttfamily \label{structElSparse_a661587806b77dcd61daa45c2cfd0b816} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::col\+\_\+start}
+
+n + 1\+: strictly lower L, column-\/wise, permuted numbering \Hypertarget{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}\index{ElSparse@{ElSparse}!diag@{diag}}
+\index{diag@{diag}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{diag}{diag}}
+{\footnotesize\ttfamily \label{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f} 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Sparse\+::diag}
+
+D (input\+: diagonal of the permuted matrix) \Hypertarget{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}\index{ElSparse@{ElSparse}!iperm@{iperm}}
+\index{iperm@{iperm}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{iperm}{iperm}}
+{\footnotesize\ttfamily \label{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::iperm}
+
+iperm\mbox{[}i\mbox{]} = step in which unknown i is eliminated \Hypertarget{structElSparse_a361a03948e5d8ee35de13c63d4690f95}\index{ElSparse@{ElSparse}!n@{n}}
+\index{n@{n}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily \label{structElSparse_a361a03948e5d8ee35de13c63d4690f95} 
+int El\+Sparse\+::n}
+
+unknowns \Hypertarget{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}\index{ElSparse@{ElSparse}!pair\_pos@{pair\_pos}}
+\index{pair\_pos@{pair\_pos}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{pair\_pos}{pair\_pos}}
+{\footnotesize\ttfamily \label{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::pair\+\_\+pos}
+
+per input pair\+: index of its entry in values \Hypertarget{structElSparse_a0b0edcdb282abc7282d95d507beb5f76}\index{ElSparse@{ElSparse}!pairs@{pairs}}
+\index{pairs@{pairs}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{pairs}{pairs}}
+{\footnotesize\ttfamily \label{structElSparse_a0b0edcdb282abc7282d95d507beb5f76} 
+size\+\_\+t El\+Sparse\+::pairs}
+
+\Hypertarget{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}\index{ElSparse@{ElSparse}!perm@{perm}}
+\index{perm@{perm}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{perm}{perm}}
+{\footnotesize\ttfamily \label{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::perm}
+
+perm\mbox{[}k\mbox{]} = unknown eliminated in step k \Hypertarget{structElSparse_ab1336582ed57d52950018ee4d8c08948}\index{ElSparse@{ElSparse}!perturbed@{perturbed}}
+\index{perturbed@{perturbed}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{perturbed}{perturbed}}
+{\footnotesize\ttfamily \label{structElSparse_ab1336582ed57d52950018ee4d8c08948} 
+size\+\_\+t El\+Sparse\+::perturbed}
+
+pivots replaced in the last factorization \Hypertarget{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}\index{ElSparse@{ElSparse}!row\_col@{row\_col}}
+\index{row\_col@{row\_col}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{row\_col}{row\_col}}
+{\footnotesize\ttfamily \label{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::row\+\_\+col}
+
+column k \Hypertarget{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}\index{ElSparse@{ElSparse}!row\_entry@{row\_entry}}
+\index{row\_entry@{row\_entry}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{row\_entry}{row\_entry}}
+{\footnotesize\ttfamily \label{structElSparse_ad5d961a41950d0fddb97e3e0780edf55} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::row\+\_\+entry}
+
+index of L(j,k) in values \Hypertarget{structElSparse_a618b74fddf671016e967b5c5557c2334}\index{ElSparse@{ElSparse}!row\_index@{row\_index}}
+\index{row\_index@{row\_index}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{row\_index}{row\_index}}
+{\footnotesize\ttfamily \label{structElSparse_a618b74fddf671016e967b5c5557c2334} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::row\+\_\+index}
+
+rows of L, ascending per column \Hypertarget{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}\index{ElSparse@{ElSparse}!row\_start@{row\_start}}
+\index{row\_start@{row\_start}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{row\_start}{row\_start}}
+{\footnotesize\ttfamily \label{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c} 
+int\texorpdfstring{$\ast$}{*} El\+Sparse\+::row\+\_\+start}
+
+n + 1\+: for each row j the columns k \texorpdfstring{$<$}{<} j with L(j,k) != 0 \Hypertarget{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}\index{ElSparse@{ElSparse}!values@{values}}
+\index{values@{values}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{values}{values}}
+{\footnotesize\ttfamily \label{structElSparse_a7a128e448ed35d28ba6b7c183f185b04} 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Sparse\+::values}
+
+L (input\+: strictly lower part of the permuted matrix) \Hypertarget{structElSparse_a402ad0958e0c7106c458841b235ef3aa}\index{ElSparse@{ElSparse}!work@{work}}
+\index{work@{work}!ElSparse@{ElSparse}}
+\doxysubsubsection{\texorpdfstring{work}{work}}
+{\footnotesize\ttfamily \label{structElSparse_a402ad0958e0c7106c458841b235ef3aa} 
+\mbox{\hyperlink{structElPhasor}{El\+Phasor}}\texorpdfstring{$\ast$}{*} El\+Sparse\+::work}
+
+n 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/elsim/\mbox{\hyperlink{el__sparse_8h}{el\+\_\+sparse.\+h}}\end{DoxyCompactItemize}

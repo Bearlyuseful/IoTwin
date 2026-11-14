@@ -18,10 +18,12 @@ var searchData=
   ['el_5fload_15',['EL_LOAD',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a34885e8cefb32d6fcc4052d14357021d',1,'elsim.h']]],
   ['el_5frcd_16',['EL_RCD',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a0623beddcd792281b76785e0844b29cc',1,'elsim.h']]],
   ['el_5fsocket_17',['EL_SOCKET',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a8bc782042f5488aa09376cc82e3bd0f3',1,'elsim.h']]],
-  ['el_5fsupply_18',['EL_SUPPLY',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73',1,'elsim.h']]],
-  ['el_5fswitch_19',['EL_SWITCH',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91',1,'elsim.h']]],
-  ['el_5ftn_5fc_5fs_20',['EL_TN_C_S',['../elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064a5f54d1734849495d7f6888ce3d54d4db',1,'elsim.h']]],
-  ['el_5ftn_5fs_21',['EL_TN_S',['../elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064a9641e879371007213d23afbd171c353c',1,'elsim.h']]],
-  ['el_5ftt_22',['EL_TT',['../elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064ad108dd3d3320d2237f2113d78a027dff',1,'elsim.h']]],
-  ['el_5fvoltage_5fsource_23',['EL_VOLTAGE_SOURCE',['../el__circuit_8h.html#a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95',1,'el_circuit.h']]]
+  ['el_5fsolver_5fauto_18',['EL_SOLVER_AUTO',['../el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622ae05e41c23b69e8bda5a41ccdc013fddf',1,'el_circuit.h']]],
+  ['el_5fsolver_5fdense_19',['EL_SOLVER_DENSE',['../el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622a704d352a811ac7f7f5c9451644bd8fe5',1,'el_circuit.h']]],
+  ['el_5fsupply_20',['EL_SUPPLY',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0a26c3081fc5fd4974475d6c602440ee73',1,'elsim.h']]],
+  ['el_5fswitch_21',['EL_SWITCH',['../elsim_8h.html#a80059183db089c9f33dcabaf5cb941d0acf271f3d73e947594a2c5346d336cd91',1,'elsim.h']]],
+  ['el_5ftn_5fc_5fs_22',['EL_TN_C_S',['../elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064a5f54d1734849495d7f6888ce3d54d4db',1,'elsim.h']]],
+  ['el_5ftn_5fs_23',['EL_TN_S',['../elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064a9641e879371007213d23afbd171c353c',1,'elsim.h']]],
+  ['el_5ftt_24',['EL_TT',['../elsim_8h.html#a3de5758270d1a8a2bd617fb14a377064ad108dd3d3320d2237f2113d78a027dff',1,'elsim.h']]],
+  ['el_5fvoltage_5fsource_25',['EL_VOLTAGE_SOURCE',['../el__circuit_8h.html#a3f6c5860d3cddeb93bc3c480d47036e6ae6d14230277448fcc1ca76b693f46f95',1,'el_circuit.h']]]
 ];

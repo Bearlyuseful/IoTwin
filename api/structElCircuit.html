@@ -106,8 +106,31 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac79685419c1910bcc752b7595f13158a" id="r_ac79685419c1910bcc752b7595f13158a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structElPhasor.html">ElPhasor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac79685419c1910bcc752b7595f13158a">matrix</a></td></tr>
 <tr class="memitem:a066a8f721f1bb99cc08c917cf0c3110b" id="r_a066a8f721f1bb99cc08c917cf0c3110b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a066a8f721f1bb99cc08c917cf0c3110b">matrix_capacity</a></td></tr>
 <tr class="memitem:a7e1524d621eb13750e50d479d72927c5" id="r_a7e1524d621eb13750e50d479d72927c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e1524d621eb13750e50d479d72927c5">solved</a></td></tr>
+<tr class="memitem:af86d4a80f1786d83cfad52e233760f1d" id="r_af86d4a80f1786d83cfad52e233760f1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622">ElSolver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af86d4a80f1786d83cfad52e233760f1d">solver</a></td></tr>
+<tr class="memitem:a64fbc5edfdf8bfe1bb3f6755655b943c" id="r_a64fbc5edfdf8bfe1bb3f6755655b943c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64fbc5edfdf8bfe1bb3f6755655b943c">sparse_cache</a></td></tr>
+<tr class="memitem:a9104f917c46ffa54e691f815d32e61c8" id="r_a9104f917c46ffa54e691f815d32e61c8"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9104f917c46ffa54e691f815d32e61c8">analyses</a></td></tr>
+<tr class="memitem:ac7ebcf1cc1bc986eca6af1c286233c0a" id="r_ac7ebcf1cc1bc986eca6af1c286233c0a"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7ebcf1cc1bc986eca6af1c286233c0a">factorizations</a></td></tr>
+<tr class="memitem:a2702132c50b2831719c23bf4923b7ade" id="r_a2702132c50b2831719c23bf4923b7ade"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2702132c50b2831719c23bf4923b7ade">sparse_solutions</a></td></tr>
+<tr class="memitem:a65bdcf0d04ad5ac534ff2598b7971b5c" id="r_a65bdcf0d04ad5ac534ff2598b7971b5c"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65bdcf0d04ad5ac534ff2598b7971b5c">dense_solutions</a></td></tr>
+<tr class="memitem:aa06835a5881f6fb7287c150563ff1e2e" id="r_aa06835a5881f6fb7287c150563ff1e2e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa06835a5881f6fb7287c150563ff1e2e">fill</a></td></tr>
+<tr class="memitem:a15d8b380bdfa6ae82a6f8278a3b777dd" id="r_a15d8b380bdfa6ae82a6f8278a3b777dd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15d8b380bdfa6ae82a6f8278a3b777dd">perturbed_pivots</a></td></tr>
 </table>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a9104f917c46ffa54e691f815d32e61c8" name="a9104f917c46ffa54e691f815d32e61c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9104f917c46ffa54e691f815d32e61c8">&#9670;&#160;</a></span>analyses</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long ElCircuit::analyses</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>sparse orderings computed (topology changes) </p>
+
+</div>
+</div>
 <a id="ad2995199a0ed196640e298abbca791ad" name="ad2995199a0ed196640e298abbca791ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2995199a0ed196640e298abbca791ad">&#9670;&#160;</a></span>capacity</h2>
 
@@ -136,6 +159,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a65bdcf0d04ad5ac534ff2598b7971b5c" name="a65bdcf0d04ad5ac534ff2598b7971b5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65bdcf0d04ad5ac534ff2598b7971b5c">&#9670;&#160;</a></span>dense_solutions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long ElCircuit::dense_solutions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0a99ea5e7d12da8d3ddb8f4c62f88166" name="a0a99ea5e7d12da8d3ddb8f4c62f88166"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a99ea5e7d12da8d3ddb8f4c62f88166">&#9670;&#160;</a></span>elements</h2>
 
@@ -147,6 +184,36 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7ebcf1cc1bc986eca6af1c286233c0a" name="ac7ebcf1cc1bc986eca6af1c286233c0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ebcf1cc1bc986eca6af1c286233c0a">&#9670;&#160;</a></span>factorizations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long ElCircuit::factorizations</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>sparse numeric factorizations (value changes) </p>
+
+</div>
+</div>
+<a id="aa06835a5881f6fb7287c150563ff1e2e" name="aa06835a5881f6fb7287c150563ff1e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa06835a5881f6fb7287c150563ff1e2e">&#9670;&#160;</a></span>fill</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ElCircuit::fill</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>non-zeros of L of the last sparse solution </p>
 
 </div>
 </div>
@@ -194,6 +261,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a15d8b380bdfa6ae82a6f8278a3b777dd" name="a15d8b380bdfa6ae82a6f8278a3b777dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d8b380bdfa6ae82a6f8278a3b777dd">&#9670;&#160;</a></span>perturbed_pivots</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ElCircuit::perturbed_pivots</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pivots replaced in the last factorization </p>
+
+</div>
+</div>
 <a id="a63cba923586aef88ccf7cb9e652507df" name="a63cba923586aef88ccf7cb9e652507df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a63cba923586aef88ccf7cb9e652507df">&#9670;&#160;</a></span>result_capacity</h2>
 
@@ -223,6 +305,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af86d4a80f1786d83cfad52e233760f1d" name="af86d4a80f1786d83cfad52e233760f1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af86d4a80f1786d83cfad52e233760f1d">&#9670;&#160;</a></span>solver</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="el__circuit_8h.html#a304da4a03945cba5814ce44ab204f622">ElSolver</a> ElCircuit::solver</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad056e072d14b92e676662096d0302afa" name="ad056e072d14b92e676662096d0302afa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad056e072d14b92e676662096d0302afa">&#9670;&#160;</a></span>source_currents</h2>
 
@@ -235,6 +331,35 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Result per element (only voltage sources use it). </p>
+
+</div>
+</div>
+<a id="a64fbc5edfdf8bfe1bb3f6755655b943c" name="a64fbc5edfdf8bfe1bb3f6755655b943c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64fbc5edfdf8bfe1bb3f6755655b943c">&#9670;&#160;</a></span>sparse_cache</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* ElCircuit::sparse_cache</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>cached orderings and factorizations (<a class="el" href="el__circuit_8c.html">el_circuit.c</a>) </p>
+
+</div>
+</div>
+<a id="a2702132c50b2831719c23bf4923b7ade" name="a2702132c50b2831719c23bf4923b7ade"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2702132c50b2831719c23bf4923b7ade">&#9670;&#160;</a></span>sparse_solutions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long ElCircuit::sparse_solutions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

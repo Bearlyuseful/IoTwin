@@ -1,0 +1,39 @@
+\doxysection{libs/elsim/el\+\_\+generate.c File Reference}
+\hypertarget{el__generate_8c}{}\label{el__generate_8c}\index{libs/elsim/el\_generate.c@{libs/elsim/el\_generate.c}}
+{\ttfamily \#include "{}el\+\_\+generate.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} \mbox{\hyperlink{el__generate_8c_a87c7f4173aee7805b66ec02cbe278a2f}{el\+\_\+house\+\_\+spec\+\_\+default}} (void)
+\begin{DoxyCompactList}\small\item\em 24 circuits x 6 boxes, 6 circuits per RCD\+: about 1200 nodes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{el__generate_8c_ae8f79536935c1fca687a921a6bab4642}{el\+\_\+generate\+\_\+house}} (\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}m, const \mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} \texorpdfstring{$\ast$}{*}spec)
+\begin{DoxyCompactList}\small\item\em Adds the house to an empty model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{el__generate_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{el__generate_8c_ae8f79536935c1fca687a921a6bab4642}\index{el\_generate.c@{el\_generate.c}!el\_generate\_house@{el\_generate\_house}}
+\index{el\_generate\_house@{el\_generate\_house}!el\_generate.c@{el\_generate.c}}
+\doxysubsubsection{\texorpdfstring{el\_generate\_house()}{el\_generate\_house()}}
+{\footnotesize\ttfamily \label{el__generate_8c_ae8f79536935c1fca687a921a6bab4642} 
+bool el\+\_\+generate\+\_\+house (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structElModel}{El\+Model}} \texorpdfstring{$\ast$}{*}}]{model}{, }\item[{const \mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} \texorpdfstring{$\ast$}{*}}]{spec}{}\end{DoxyParamCaption})}
+
+
+
+Adds the house to an empty model. 
+
+\begin{DoxyReturn}{Returns}
+false if a device cannot be added. 
+\end{DoxyReturn}
+\Hypertarget{el__generate_8c_a87c7f4173aee7805b66ec02cbe278a2f}\index{el\_generate.c@{el\_generate.c}!el\_house\_spec\_default@{el\_house\_spec\_default}}
+\index{el\_house\_spec\_default@{el\_house\_spec\_default}!el\_generate.c@{el\_generate.c}}
+\doxysubsubsection{\texorpdfstring{el\_house\_spec\_default()}{el\_house\_spec\_default()}}
+{\footnotesize\ttfamily \label{el__generate_8c_a87c7f4173aee7805b66ec02cbe278a2f} 
+\mbox{\hyperlink{structElHouseSpec}{El\+House\+Spec}} el\+\_\+house\+\_\+spec\+\_\+default (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+24 circuits x 6 boxes, 6 circuits per RCD\+: about 1200 nodes. 
+

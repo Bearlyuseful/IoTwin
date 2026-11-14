@@ -4,10 +4,22 @@
 {\ttfamily \#include $<$math.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}el\+\_\+sparse.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structSparseEntry}{Sparse\+Entry}}
+\item 
+struct \mbox{\hyperlink{structSparseCache}{Sparse\+Cache}}
+\item 
+struct \mbox{\hyperlink{structPairKey}{Pair\+Key}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{el__circuit_8c_a3bfadf1e10676fd6f03770f9e8c00a87}{EL\+\_\+\+PI}}~3.\+14159265358979323846
+\item 
+\#define \mbox{\hyperlink{el__circuit_8c_a40a8f8c033fd138ff32757b5239ad30f}{SPARSE\+\_\+\+CACHE\+\_\+\+ENTRIES}}~4
 \item 
 \#define \mbox{\hyperlink{el__circuit_8c_afbfd679a0c28bdb5356f0c0229da164f}{M}}(r,  c)
 \end{DoxyCompactItemize}
@@ -64,6 +76,12 @@ bool \mbox{\hyperlink{el__circuit_8c_a70d6c19633c7e5d90345a6cad44f00dd}{el\+\_\+
 \DoxyCodeLine{m[(size\_t)(r)\ *\ width\ +\ (size\_t)(c)]}
 
 \end{DoxyCode}
+\Hypertarget{el__circuit_8c_a40a8f8c033fd138ff32757b5239ad30f}\index{el\_circuit.c@{el\_circuit.c}!SPARSE\_CACHE\_ENTRIES@{SPARSE\_CACHE\_ENTRIES}}
+\index{SPARSE\_CACHE\_ENTRIES@{SPARSE\_CACHE\_ENTRIES}!el\_circuit.c@{el\_circuit.c}}
+\doxysubsubsection{\texorpdfstring{SPARSE\_CACHE\_ENTRIES}{SPARSE\_CACHE\_ENTRIES}}
+{\footnotesize\ttfamily \label{el__circuit_8c_a40a8f8c033fd138ff32757b5239ad30f} 
+\#define SPARSE\+\_\+\+CACHE\+\_\+\+ENTRIES~4}
+
 
 
 \label{doc-func-members}

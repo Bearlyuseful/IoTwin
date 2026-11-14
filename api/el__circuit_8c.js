@@ -1,7 +1,11 @@
 var el__circuit_8c =
 [
+    [ "SparseEntry", "structSparseEntry.html", "structSparseEntry" ],
+    [ "SparseCache", "structSparseCache.html", "structSparseCache" ],
+    [ "PairKey", "structPairKey.html", "structPairKey" ],
     [ "EL_PI", "el__circuit_8c.html#a3bfadf1e10676fd6f03770f9e8c00a87", null ],
     [ "M", "el__circuit_8c.html#afbfd679a0c28bdb5356f0c0229da164f", null ],
+    [ "SPARSE_CACHE_ENTRIES", "el__circuit_8c.html#a40a8f8c033fd138ff32757b5239ad30f", null ],
     [ "el_abs", "el__circuit_8c.html#a2b708d8e154ccd8a1b91a2e3a3c16d9d", null ],
     [ "el_angle_deg", "el__circuit_8c.html#a304ba7a951f2d06a166a2a18b5a6e1eb", null ],
     [ "el_circuit_add_admittance", "el__circuit_8c.html#a7c61493953820dc19b26f13d76142dc5", null ],

@@ -100,5 +100,6 @@ var searchData=
   ['unit_97',['Unit',['../structFCanSignalDef.html#ad3ec92635ebd3657889c2307c9bcf30e',1,'FCanSignalDef']]],
   ['unit_98',['unit',['../structDbcSignal.html#a80ea9c9466304107709b030ed5fe727e',1,'DbcSignal::unit'],['../structDidInfo.html#ab7a16b4a2f2d0f556a6d5d78e327144b',1,'DidInfo::unit']]],
   ['upowerinterface_99',['UPowerInterface',['../classUPowerInterface.html',1,'']]],
-  ['usart2_5flpuart2_5firqhandler_100',['USART2_LPUART2_IRQHandler',['../uart_8c.html#ad81f8f5f4eeb37afbe93e95d0727bb73',1,'uart.c']]]
+  ['usart2_5flpuart2_5firqhandler_100',['USART2_LPUART2_IRQHandler',['../uart_8c.html#ad81f8f5f4eeb37afbe93e95d0727bb73',1,'uart.c']]],
+  ['used_101',['used',['../structSparseEntry.html#a0974859c8fef43ea3e412327b10b18dc',1,'SparseEntry']]]
 ];

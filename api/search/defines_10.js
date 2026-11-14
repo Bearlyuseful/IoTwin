@@ -14,6 +14,7 @@ var searchData=
   ['slcan_5fmax_5fline_11',['SLCAN_MAX_LINE',['../slcan_8h.html#a8b72da6e1892fae75e12f923b2495eaa',1,'slcan.h']]],
   ['slcan_5fok_12',['SLCAN_OK',['../slcan_8h.html#a26b7c07524761c6415f985f43dea3973',1,'slcan.h']]],
   ['spare_5fpart_5fnumber_13',['SPARE_PART_NUMBER',['../light__ecu__diag_8c.html#ab78bcb0e192f08716e20bf15882aa749',1,'SPARE_PART_NUMBER:&#160;light_ecu_diag.c'],['../gateway_8c.html#ab78bcb0e192f08716e20bf15882aa749',1,'SPARE_PART_NUMBER:&#160;gateway.c']]],
-  ['step_5fs_14',['STEP_S',['../main__iotwin__sim_8c.html#ab29b955fa1a176b1881e68ed4442978a',1,'main_iotwin_sim.c']]],
-  ['supply_5finternal_5fnodes_15',['SUPPLY_INTERNAL_NODES',['../elsim_8c.html#a960696fcc5f8f6d616034d0f1134e268',1,'elsim.c']]]
+  ['sparse_5fcache_5fentries_14',['SPARSE_CACHE_ENTRIES',['../el__circuit_8c.html#a40a8f8c033fd138ff32757b5239ad30f',1,'el_circuit.c']]],
+  ['step_5fs_15',['STEP_S',['../main__iotwin__sim_8c.html#ab29b955fa1a176b1881e68ed4442978a',1,'main_iotwin_sim.c']]],
+  ['supply_5finternal_5fnodes_16',['SUPPLY_INTERNAL_NODES',['../elsim_8c.html#a960696fcc5f8f6d616034d0f1134e268',1,'elsim.c']]]
 ];

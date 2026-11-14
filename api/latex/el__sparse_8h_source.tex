@@ -1,0 +1,54 @@
+\doxysection{el\+\_\+sparse.\+h}
+\hypertarget{el__sparse_8h_source}{}\label{el__sparse_8h_source}\index{libs/elsim/el\_sparse.h@{libs/elsim/el\_sparse.h}}
+\mbox{\hyperlink{el__sparse_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IOTWIN\_EL\_SPARSE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IOTWIN\_EL\_SPARSE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{el__circuit_8h}{el\_circuit.h}}"{}}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structElSparse_a361a03948e5d8ee35de13c63d4690f95}{n}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_a6e3a8c2b785de64ff0bd5616f4f51061}{perm}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_ac8bc3e45c61de2fcc41b417c194dcf0e}{iperm}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_a661587806b77dcd61daa45c2cfd0b816}{col\_start}};\ \ \ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_a618b74fddf671016e967b5c5557c2334}{row\_index}};\ \ \ }
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ \mbox{\hyperlink{structElSparse_a7a128e448ed35d28ba6b7c183f185b04}{values}};\ }
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ \mbox{\hyperlink{structElSparse_a2c4306b094cdf5c0ee824135e5e3ad1f}{diag}};\ \ \ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_a0ea714c36229e6bd85ed72fb501d6d4c}{row\_start}};\ \ \ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_ad5d961a41950d0fddb97e3e0780edf55}{row\_entry}};\ \ \ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_a3f40c19b04c162df670e6dd0fdb5fac6}{row\_col}};\ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structElSparse_a5e1e65f7fc65a24d26157e765dc4c0a7}{pair\_pos}};\ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structElSparse_a0b0edcdb282abc7282d95d507beb5f76}{pairs}};}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ \mbox{\hyperlink{structElSparse_a402ad0958e0c7106c458841b235ef3aa}{work}};\ \ \ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structElSparse_ab1336582ed57d52950018ee4d8c08948}{perturbed}};\ }
+\DoxyCodeLine{00049\ \}\ \mbox{\hyperlink{structElSparse}{ElSparse}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ \mbox{\hyperlink{el__sparse_8h_a69bb3d164136c18aea8eb5daaafae212}{el\_sparse\_analyze}}(\textcolor{keywordtype}{int}\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*\ pair\_a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}*\ pair\_b,\ \textcolor{keywordtype}{size\_t}\ pairs);}
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8h_aea6e35243a82a695283a20ec858e8892}{el\_sparse\_free}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8h_aaa94c9dbb0aaf4b91423e072ad99948e}{el\_sparse\_clear}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse);}
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8h_a1db73f3aa86296819a2cf04a43b23500}{el\_sparse\_add\_diagonal}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse,\ \textcolor{keywordtype}{int}\ i,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value);}
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8h_a317ed614c5a015b2c49259d17d5979ca}{el\_sparse\_add\_pair}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse,\ \textcolor{keywordtype}{size\_t}\ p,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}\ value);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{el__sparse_8h_ac166edb9a19e9629b30f55ee3c65ff07}{el\_sparse\_factor}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse,\ \textcolor{keywordtype}{double}\ min\_pivot);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{el__sparse_8h_af9265f5b1ba9de7bccb00179c2fbda67}{el\_sparse\_solve}}(\mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse,\ \mbox{\hyperlink{structElPhasor}{ElPhasor}}*\ x);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{el__sparse_8h_a7b3d0e069777859ec8b6cf8b21a59dce}{el\_sparse\_nonzeros}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structElSparse}{ElSparse}}*\ sparse);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IOTWIN\_EL\_SPARSE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
